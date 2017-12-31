@@ -1,0 +1,107 @@
+# /* ex: set ft=sql: */
+
+# https://www.sqlite.org/lang_corefunc.html
+
+select strftime('%Y.%m.%d %H:%M:%S', datetime(datecre / 1000, 'unixepoch')), * from mytable order by mycol desc;
+select strftime('%Y.%m.%d %H:%M:%S', last_modified), * from qc order by last_modified desc;
+
+select * from mytable where length(mycol) >= 100;
+select length(mycol), * from mytable where length(mycol) >= 80 order by 1 desc;
+
+create index myindex on mytable(mycol);
+
+
+SELECT replace(mycol1, 'prefix..', '.') AS mycol2, 
+strftime('%Y-%m-%d', datetime(datecre / 1000, 'unixepoch')) as txcreation,
+strftime('%Y-%m-%d %H:%M:%S', datetime(datecre / 1000, 'unixepoch')) as txcreationfull,
+datecre AS datec, 
+'TALEND' AS myref, 
+TXSTATUS
+FROM mytable  
+WHERE datetime(datecre / 1000, 'unixepoch') BETWEEN  date(CURRENT_DATE, '-1 day')  AND CURRENT_DATE AND TXSTATUS <> 'replaymanuel'
+and mycol in (5068783, 5008783);
+
+select CURRENT_DATE, CURRENT_TIME, CURRENT_TIMESTAMP;
+select date(CURRENT_DATE, '-10 day'
+
+SELECT date('now'); -- Compute the current date.
+
+SELECT date('now','start of month','+1 month','-1 day'); -- Compute the last day of the current month.
+
+SELECT datetime(1092941466, 'unixepoch'); -- Compute the date and time given a unix timestamp 1092941466.
+
+SELECT datetime(1092941466, 'unixepoch', 'localtime'); -- Compute the date and time given a unix timestamp 1092941466, and compensate for your local timezone.
+
+SELECT strftime('%s','now'); -- Compute the current unix timestamp.
+
+SELECT julianday('now') - julianday('1776-07-04'); -- Compute the number of days since the signing of the US Declaration of Independence.
+
+SELECT strftime('%s','now') - strftime('%s','2004-01-01 02:34:56'); -- Compute the number of seconds since a particular moment in 2004:
+
+SELECT date('now','start of year','+9 months','weekday 2'); -- Compute the date of the first Tuesday in October for the current year.
+
+SELECT (julianday('now') - 2440587.5)*86400.0; -- Compute the time since the unix epoch in seconds (like strftime('%s','now') except includes fractional part):
+
+
+rowid
+
+select owner, detected_by as detected, id, status, case when Livraison_cible is null then '' when Livraison_cible like '% SR %' then Livraison_cible else 'a' || Livraison_cible end as 'L.Cible', last_modified, name from qc
+where
+(      owner in('rutom','butryj','datessid','prettm','cavatera','trossart','spantonm') or
+detected_by  in('rutom','butryj','datessid','prettm','cavatera','trossart','spantonm'))
+and status not in ('Closed', 'Refused')
+and detected_by not in ('penvent')
+order by 
+case when Livraison_cible is null then 'b' when Livraison_cible like '% SR %' then Livraison_cible else 'a' || Livraison_cible end,
+id
+;
+
+
+select ref, count(1) from mytable where total_count is not null group by ref
+bip	9806
+bip	582
+
+
+
+
+select jour, ref, total_count, count(1) from (
+select strftime('%Y.%m.%d', datetime(datecre / 1000, 'unixepoch')) as jour, ref, total_count  from mytable where mycol > 5200000
+) group by jour, ref, total_count
+order by jour, ref
+2014.11.12 	 bip 	 <null> 	 901
+2014.11.12 	 bip 	 <null> 	 382
+2014.11.12 	 bip 	 2      	 35
+2014.11.12 	 bip 	 <null> 	 171
+2014.11.12 	 bip 	 <null> 	 1409
+2014.11.12 	 bip 	 <null> 	 235
+2014.11.12 	 bip 	 <null> 	 1780
+2014.11.12 	 bip 	 <null> 	 27805
+2014.11.13 	 bip 	 <null> 	 687
+2014.11.13 	 bip 	 <null> 	 2248
+2014.11.13 	 bip 	 2      	 74
+2014.11.13 	 bip 	 <null> 	 942
+2014.11.13 	 bip 	 <null> 	 6059
+2014.11.13 	 bip 	 <null> 	 207
+2014.11.13 	 bip 	 <null> 	 26
+2014.11.13 	 bip 	 <null> 	 4899
+2014.11.13 	 bip 	 <null> 	 4135
+2014.11.14 	 bip 	 <null> 	 1573
+2014.11.14 	 bip 	 <null> 	 2274
+2014.11.14 	 bip 	 2      	 107
+2014.11.14 	 bip 	 <null> 	 1607
+2014.11.14 	 bip 	 <null> 	 3839
+2014.11.14 	 bip 	 <null> 	 335
+2014.11.14 	 bip 	 <null> 	 24
+2014.11.14 	 bip 	 <null> 	 4580
+2014.11.14 	 bip 	 <null> 	 25243
+2014.11.15 	 bip 	 <null> 	 2
+2014.11.16 	 bip 	 <null> 	 830
+2014.11.16 	 bip 	 <null> 	 2531
+2014.11.16 	 bip 	 2      	 72
+2014.11.16 	 bip 	 <null> 	 2419
+2014.11.16 	 bip 	 <null> 	 4872
+2014.11.16 	 bip 	 <null> 	 223
+2014.11.16 	 bip 	 <null> 	 2
+2014.11.16 	 bip 	 <null> 	 3509
+2014.11.16 	 bip 	 <null> 	 9580
+2014.11.17 	 bip 	 2      	 6

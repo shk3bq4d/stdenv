@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+set -eu
+usage() {
+	echo "
+$(basename $0)                                                           # dump keys from ssh-add into ~/.ssh/authorized_keys
+$(basename $0) \"ssh-rsa AAAAB3[...]oIY\"                                  # dump content into ~/.ssh/authorized_keys
+$(basename $0) \"ssh-rsa AAAAB3[...]oIY\" /home/sdiop/.ssh/authorized_keys # dump content into /home/sdiop/.ssh/authorized_keys
+"
+}
+
+DEST=~/.ssh/authorized_keys
+case $# in \
+0)
+	KEYS=$(ssh-add -L)
+	if [[ -z "$KEYS" ]]; then
+		echo "FATAL no keys in SSH agent"
+		usage
+		exit 1
+	fi
+	;;
+1)
+	if [[ $1 == -* ]]; then
+		usage
+		exit 0
+	fi
+	KEYS="$1"
+	;;
+2)
+	if [[ $1 == -* ]] || [[ $2 == -* ]]; then
+		usage
+		exit 0
+	fi
+	DEST="$2"
+	KEYS="$1"
+	;;
+3)
+	KEYS="$@"
+	;;
+*)
+	echo "FATAL: unsupported number of arguments $#"
+	exit 1
+	;;
+esac
+if hash ssh-keygen 2>/dev/null; then 
+	echo "$KEYS" | while read key; do
+		[[ -z "$key" ]] &&  continue
+		if ! echo "$key" | ssh-keygen -l -f - &>/dev/null; then
+			a=$(mktemp)
+			#echo "$key" > $a # some old version of ssh-keygen dont support stdin
+			if ! ssh-keygen -l -f $a &>/dev/null; then #
+			#set -x
+			#if ! ssh-keygen -l -f $a; then #
+				echo "FATAL: not a public key $key"
+				rm -f $a
+				#set +x
+				exit 1
+			fi
+			rm -f $a
+		fi
+	done
+else
+	echo "WARNING: bypassing key validation as ssh-keygen is not present"
+fi
+if [[ ! -f "$DEST" ]]; then
+	echo "FATAL not a file $DEST. Would you like to create it as well as one level parent directory?"
+	read -r yes_or_no
+	case "${yes_or_no}" in *y*|*Y*)
+		parentdir="$(dirname "$DEST")"
+		if [[ ! -d "${parentdir}" ]]; then
+			grandparentdir="$(dirname "$parentdir")"
+			if [[ ! -d "${grandparentdir}" ]]; then
+				echo "FATAL: not a dir $grandparentdir"
+				exit 1
+			fi
+			owner=$(ls -ld "$grandparentdir" | awk '{print $3}')
+			if ! mkdir "$parentdir"; then
+				echo "FATAL: couldn't mkdir $parentdir"
+				exit 1
+			fi
+			if ! chown "$owner" "$parentdir"; then
+				echo "FATAL: couldn't chown \"$owner\" \"$parentdir\""
+				exit 1
+			fi
+			if ! chmod 0700 "$parentdir"; then
+				echo "FATAL: couldn't chmod 0700 \"$parentdir\""
+				exit 1
+			fi
+		fi
+		if ! touch "$DEST"; then
+			echo "FATAL: couldn't touch $DEST"
+			exit 1
+		fi
+		owner=$(ls -ld "$parentdir" | awk '{print $3}')
+		if ! chown "$owner" "$DEST"; then
+			echo "FATAL: couldn't chown \"$owner\" \"$DEST\""
+			exit 1
+		fi
+		if ! chmod 0600 "$DEST"; then
+			echo "FATAL: couldn't chmod 0600 \"$DEST\""
+			exit 1
+		fi
+		;;
+	esac
+fi
+echo "$KEYS" | while read key; do
+	[[ -z "$key" ]] &&  continue
+	if grep -q "$key" "$DEST"; then
+		echo "skipping already existing $key"
+	else
+		echo "$key" >> "$DEST"
+		echo "added $key"
+	fi
+done
+echo "OK"
+echo 0
+

@@ -1,0 +1,1 @@
+ssh -F $SSHHOME/.sshrc.d/ssh_config "$@"

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+
+function usage()
+{	echo $(basename $0) PROG
+	echo $(basename $0) PROG grepargs
+}
+
+function mr_cmd()
+{
+	case "$1" in
+	*)
+		echo "$1" --help
+	esac
+}
+function mr_less()
+{
+	cmd=$(mr_cmd "$1")
+	exec $cmd 2>&1 | less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init
+}
+function mr_grep()
+{
+	cmd=$(mr_cmd "$1")
+	shift
+	exec $cmd 2>&1 | grep --colour=always -E "^|$@" | less -rp "$@"
+}
+
+case $# in
+	0)
+	usage
+	exit 1
+	;;
+	1)
+	mr_less $1
+	;;
+	*)
+	mr_grep $*
+	;;
+esac

@@ -1,0 +1,116 @@
+if [[ -h ~/.bashrc ]] && [[ -f ~/bin/stdhome-install.sh ]]; then
+	exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
+	return
+fi
+if [[ -z $SSHHOME ]]; then
+	export SSHHOME=$( dirname "${BASH_SOURCE[0]}" )
+fi 
+export RCD=$SSHHOME/.sshrc.d
+. $RCD/.bashrc
+[[ "$HOSTNAME" == *kafka* ]] && kafka_mr
+export VIMINIT='so $RCD/.vim/.vimrc'
+if ! type sudomr &>/dev/null ; then
+	function sudomr() {
+		local f
+		f=$SSHHOME/.sshrc
+		echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $f
+		sudo -i bash --rcfile $f
+	}
+fi
+
+
+. $RCD/.rcproxy
+scptome() {
+#scp -i $SSHHOME/.sshrc.d/scp  -P 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no "$@" scp@127.0.0.1:chroot/data/ 
+	scp -P 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no "$@" scp@127.0.0.1:chroot/data/ 
+}
+export _MR_SSH_OPTIONS="-p 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no -l scp" 
+_rsync_rsh() {
+	export RSYNC_RSH="ssh $_MR_SSH_OPTIONS"
+}
+_rsync_rsh_restore() {
+	export RSYNC_RSH="" 
+}
+tome() {
+#rsync -avr --chmod=o+rw -e "ssh -i $SSHHOME/.sshrc.d/scp  -p 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no -l scp" "$@" scp@127.0.0.1:chroot/data/ 
+	_rsync_rsh
+	rsync -avvrh --stats --progress --chmod=o+rw "$@" scp@127.0.0.1:chroot/data/ 
+	_rsync_rsh_restore
+}
+fromme() {
+
+	_rsync_rsh
+	for var in "$@"; do
+		_fromme "$var" || return 1
+	done
+	_rsync_rsh_restore
+}
+_fromme() {
+	local rsyncflags
+	rsyncflags="-vvrh --stats --progress"
+	rsync -n $rsyncflags "scp@127.0.0.1:$@" . 
+	# confirmation
+	read -p "Continue (y/N)? " confirm
+	if [ "$confirm" != "y" ]; then
+		echo "Aborting"
+		return 1
+	fi
+	rsync $rsyncflags "scp@127.0.0.1:$@" . 
+}
+sshme_user() {
+	ssh-add -l | head -1 | cut -d / -f 4
+}
+httpproxy-me() {
+	PORT=60124
+	DURATION=1800
+	ssh $_MR_SSH_OPTIONS -f -o ExitOnForwardFailure=yes -L $PORT:127.0.0.1:3128 $(sshme_user)@127.0.0.1 sleep $DURATION 
+	export http_proxy=http://127.0.0.1:$PORT
+	export https_proxy=$http_proxy
+	echo http_proxy=$http_proxy for $DURATION seconds
+
+}
+sshme() {
+	/usr/bin/ssh -p 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no  "$@" $(sshme_user)@127.0.0.1 
+}
+history_all() {
+	{ sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history*' | xargs sudo ls -latr 
+	  sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history' | xargs sudo ls -1tr | xargs sudo grep --color=always -E '^'
+	  history
+	} | less -R
+}
+alias   ssh-me-proxy="ssh -F $RCD/ssh_config-proxy"
+[[ -f $SSHHOME/sshrc ]] && alias ssh="$SSHHOME/sshrc -F $RCD/ssh_config"
+alias scp="scp -F $RCD/ssh_config"
+export RSYNC_RSH="ssh -F $RCD/ssh_config"
+export GIT_SSH_COMMAND="ssh -F $RCD/ssh_config"
+export GIT_SSH=$RCD/git_ssh
+[[ -d $RCD/completion ]] && for i in $RCD/completion/*; do . $i; done
+
+#[[ -n $SSH_TTY ]] && command last | head
+
+if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null; then
+	CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
+	#echo "cmdargs is $CMDARGS"
+	[[ -z $CMDARGS ]] && command last -daxFn 20
+fi
+function sshrc_ln() {
+	target=/tmp/me
+	if ln -sf $SSHHOME $target; then
+		echo "target is $target"
+	else
+		echo "target failure $SSHHOME"
+	fi
+}
+
+if ! type is_zsh &>/dev/null; then
+	is_zsh() {
+		test -n "${ZSH_VERSION:-}"
+	}
+fi
+
+is_zsh && setopt null_glob
+for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
+	[ -f $f ] && source $f
+done
+is_zsh && unsetopt null_glob
+# /* ex: set filetype=sh: */

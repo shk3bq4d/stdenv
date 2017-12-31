@@ -1,0 +1,34 @@
+#!/usr/bin/env bash                                            
+# ex: set filetype=sh :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+##
+
+set -euo pipefail
+
+DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+#FILES_PATTERN='\.(js|coffee)(\..+)?$'
+FILES_PATTERN='.'
+ret=0
+export GREP_COLOR='4;5;37;41' 
+while read f; do
+	[[ ! -e "$f" ]] && continue
+	f="$(readlink -f "$f")"
+	$DIR/pre-commit-greper.sh "$f" && ret=1 || true
+done < <( git diff --cached --name-only | \
+    grep -E $FILES_PATTERN )
+
+{ echo -n "Commit author: "; git var GIT_AUTHOR_IDENT; } | $DIR/pre-commit-greper.sh && ret=1 || true
+if (( $ret )); then 
+	source ~/bin/dot.bashcolors
+	w=override
+	echo -ne "\n\n\n${BOLD}${RED}COMMIT REJECTED${OFF}\n\nby $(readlink -f "${BASH_SOURCE[0]}") due to content. Although inadvisable you can:\n - bypass this rejection now by typing '$w' without any quotes,\n - add --no-verify to a separate git commit,\n> "
+	read a </dev/tty
+	[[ "$a" != "$w" ]] && exit 1
+fi
+exit 0
+

@@ -1,0 +1,9 @@
+# ex: set filetype=sh: #
+
+[ ${sudomr_hooks+x} ] && sudomr_hooks=()
+sudomrenv() {
+	case "$HOSTNAME" in \
+		stdenv) echo "dummy message";;
+	esac
+}
+sudomr_hooks+=('sudomrenv')

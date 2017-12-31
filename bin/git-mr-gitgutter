@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+RET=1
+LOG=/tmp/mrgit
+LOG1=/tmp/mrgit1
+LOG2=/tmp/mrgit2
+LOG3=/tmp/mrgit3
+LOG4=/tmp/mrgit4
+echo "" >> $LOG
+echo "$(date)" >> $LOG
+echo "git $@" >> $LOG
+echo "GIT_WORK_TREE is $GIT_WORK_TREE" >> $LOG
+echo "GIT_DIR       is $GIT_DIR" >> $LOG
+if [[ -z $GIT_WORK_TREE ]]; then
+	echo "empty GIT_WORK_TREE" >> $LOG
+	git "$@" | tee -a $LOG1
+	RET=${PIPESTATUS[0]}
+elif [[ "$@" == *\ diff\ * ]]; then
+	last="${@: -1}"
+	blast="${@: -2:1}"
+	if [[ $last == /tmp/* ]] && [[ $blast == /tmp/* ]] && [[ -f $last ]] && [[ -f $blast ]]; then
+		echo "unsetting vars" >> $LOG
+		unset GIT_WORK_TREE
+		unset GIT_DIR
+		git "$@" | tee -a $LOG4
+		RET=${PIPESTATUS[0]}
+	else
+		echo "not edited mode" >> $LOG
+		git "$@" | tee -a $LOG2
+		RET=${PIPESTATUS[0]}
+	fi
+else
+	echo "not a diff" >> $LOG
+	git "$@" | tee -a $LOG3
+	RET=$?
+	RET=${PIPESTATUS[0]}
+fi
+
+
+#git "$@" | tee -a /tmp/mrgit
+echo "returning $RET" >> $LOG
+exit $RET

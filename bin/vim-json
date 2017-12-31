@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+b=$(basename $0 .sh)
+b=${b//vim-/}
+b=${b//vi-/}
+
+PIPE="cat -"
+command -v prettify-json &>/dev/null && PIPE=prettify-json
+$PIPE | vim -c "set ft=$b buftype=nofile" -

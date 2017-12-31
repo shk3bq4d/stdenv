@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+f=~/.ssh/config
+if command -v vim &>/dev/null
+then
+	vim $f
+else
+	vi $f
+fi

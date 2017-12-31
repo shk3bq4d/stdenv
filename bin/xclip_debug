@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#for selection in primary secondary clipboard; do
+for selection in primary           clipboard; do
+	printf "%-12s %s\n\n" "${selection}:" "$(xclip -o -selection $selection 2>&1 | sed '2,$s/^/             /')"
+done

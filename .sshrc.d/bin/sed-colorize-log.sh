@@ -1,0 +1,1 @@
+../../bin/sed-colorize-log.sh

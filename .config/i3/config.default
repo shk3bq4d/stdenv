@@ -1,0 +1,20 @@
+# /* ex: set filetype=sh: */
+export STDHOME_MOD="Mod4"
+export STDHOME_FIRSTBAR_POSITION="top"
+export STDHOME_OUTPUTS='
+set $ol default
+set $oc default
+set $or default
+exec xrandr --output "$oc" --primary
+'
+
+export STDHOME_TOGGLE='
+# bip bip
+#bindsym --release $mod+v split toggle
+'
+
+export STDHOME_FONT='
+font pango:Monospace Regular 18
+'
+export STDHOME_DMENU_ARGS='-i -b -l 40 -fn  "DejaVuSansMono-28"'
+export STDHOME_TAIL=''

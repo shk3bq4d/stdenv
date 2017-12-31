@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+#
+
+use strict;
+use warnings;
+ 
+sub on_start
+{
+}
+sub on_user_command
+{	
+
+	my ($self, $cmd) = @_;
+	system($ENV{"HOME"} . '/bin/mrurxvt-background-random.sh');
+	();
+}
+sub mr
+{
+	#if (1) {return;}
+	my ($mrargs) = @_;
+	my $filename = '/tmp/report.txt';
+	open(my $fh, '>>', $filename) or die "Could not open file '$filename' $!";
+	print $fh $mrargs;
+	close $fh;
+	return;
+}
+mr("loading file\n");

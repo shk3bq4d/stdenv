@@ -1,0 +1,24 @@
+# /* ex: set filetype=sh: */
+export STDHOME_OUTPUTS='
+set $ol LVDS1
+set $oc LVDS1
+set $or LVDS1
+exec xrandr --output "$oc" --primary
+'
+
+export STDHOME_TOGGLE='
+# bip bip
+bindsym --release $mod+v split toggle
+'
+
+export STDHOME_FONT='
+font pango:Monospace Regular 10
+'
+
+#export STDHOME_DMENU_ARGS=' -l 20 -fn "Monospace Regular-14" '
+export STDHOME_DMENU_ARGS='-i -b -l 20 -fn  "DejaVuSansMono-14"'
+
+export STDHOME_TAIL='
+exec --no-startup-id nm-applet
+exec --no-startup-id x11vnc -display :0 -shared -forever
+'

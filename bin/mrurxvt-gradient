@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# http://www.imagemagick.org/Usage/canvas/#gradient
+# man background
+
+f=/tmp/grad.jpg
+
+if false; then
+	convert -size 100x100 gradient:yellow-blue \
+			          \( gradient:black-lime -rotate -90 \) \
+					            -compose CopyGreen -composite  $f
+fi
+if false; then 
+	convert -size 100x100  plasma:red-blue          $f
+fi
+if true; then
+	#convert -size 600x60 xc: -sparse-color barycentric '0,0 skyblue  -%w,%h skyblue  %w,%h black' $f
+	source ~/bin/mrurxvt-colors
+
+	randomcolor
+	a=$_MRCOLOR
+	randomcolor
+	b=$_MRCOLOR
+	randomcolor
+	c=$_MRCOLOR
+	echo $a
+	echo $b
+	echo $c
+	convert -size 600x60 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" $f
+fi
+if false; then 
+
+	f=/tmp/ripples_flux_anim.gif
+	r=/usr/share/gnome/help/gnumeric/C/figures/analysistools-random.png
+	for i in `seq 0 10 359`; do
+		j=`expr $i \* 5`
+		convert $r -channel G \
+				-function Sinusoid 1,${i} \
+				-virtual-pixel tile -blur 0x8 -auto-level \
+				-function Sinusoid 2.5,${j} \
+				-separate +channel miff:-
+	  done |
+		convert miff:- -set delay 15 -loop 0 $f
+fi
+urxvt --background-expr "scale keep { load \"$f\" }"

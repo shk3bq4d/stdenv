@@ -1,0 +1,332 @@
+#!/usr/bin/env python
+#
+# Simple script showing how to read a mitmproxy dump file
+#
+
+from mitmproxy import flow
+from lxml import etree 
+import pprint
+import sys
+import os
+
+try:
+    fp = sys.argv[1]
+except:
+    fp = os.environ['HOME'] + "/sshfs/mitmproxy/transparent_proxy'
+
+
+def print_request(f):
+    print("""
+{r.method} {r.scheme}://{r.host}{r.path} {r.http_version}""".format(r=f.request))
+    for h,v in f.request.headers.iteritems():
+        print('{:<20s} {}'.format(h + ':', v))
+
+    print_content(f.request)
+
+def print_response(f):
+    print("""
+{r.status_code} {r.reason}""".format(r=f.response))
+
+    for h,v in f.response.headers.iteritems():
+        print('{:<20s} {}'.format(h + ':', v))
+
+    print_content(f.response)
+
+def print_content(i):
+    content_printed = False
+    content = i.content
+    if len(content) == 0:
+        return
+    print("")
+    try:
+        content_type = f.response.headers['Content-Type']
+    except:
+        content_type = ''
+    if 'xml' in content_type:
+        try:
+            print(etree.tostring(etree.fromstring(content), pretty_print=True))
+            content_printed = True
+        except:
+            pass
+
+    if not  content_printed:
+        print(content)
+
+print('# /* ex: set filetype=xml: */')
+
+with open(fp, "rb") as logfile:
+    freader = flow.FlowReader(logfile)
+    pp = pprint.PrettyPrinter(indent=4)
+    try:
+        for f in freader.stream():
+            print_request(f)
+            print_response(f)
+            #q = f.request
+            #help(q)
+            #break
+            #pp.pprint(q)
+            #print(f.request.host)
+            #pp.pprint(f.get_state())
+            #print("")
+    except BaseException, e:
+        print("Flow file corrupted: {}".format(e))
+
+
+
+sys.exit(0)
+
+"""
+Help on HTTPRequest in module mitmproxy.models.http object:
+
+class HTTPRequest(MessageMixin, netlib.http.request.Request)
+ |  An HTTP request.
+ |  
+ |  Exposes the following attributes:
+ |  
+ |      method: HTTP method
+ |  
+ |      scheme: URL scheme (http/https)
+ |  
+ |      host: Target hostname of the request. This is not neccessarily the
+ |      directy upstream server (which could be another proxy), but it's always
+ |      the target server we want to reach at the end. This attribute is either
+ |      inferred from the request itself (absolute-form, authority-form) or from
+ |      the connection metadata (e.g. the host in reverse proxy mode).
+ |  
+ |      port: Destination port
+ |  
+ |      path: Path portion of the URL (not present in authority-form)
+ |  
+ |      http_version: HTTP version, e.g. "HTTP/1.1"
+ |  
+ |      headers: Headers object
+ |  
+ |      content: Content of the request, the value is None if there is content
+ |      associated, but not present.
+ |  
+ |      first_line_format: The request form. The following values are possible:
+ |  
+ |           - relative (GET /index.html, OPTIONS *) (origin form or asterisk form)
+ |           - absolute (GET http://example.com:80/index.html)
+ |           - authority-form (CONNECT example.com:443)
+ |           Details: http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-25#section-5.3
+ |  
+ |      timestamp_start: Timestamp indicating when request transmission started
+ |  
+ |      timestamp_end: Timestamp indicating when request transmission ended
+ |  
+ |  Method resolution order:
+ |      HTTPRequest
+ |      MessageMixin
+ |      netlib.http.request.Request
+ |      netlib.http.message.Message
+ |      netlib.utils.Serializable
+ |      __builtin__.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __hash__(self)
+ |  
+ |  __init__(self, first_line_format, method, scheme, host, port, path, http_version, headers, content, timestamp_start=None, timestamp_end=None, is_replay=False, stickycookie=False, stickyauth=False)
+ |  
+ |  get_state(self)
+ |  
+ |  set_state(self, state)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |  
+ |  wrap(self, request) from abc.ABCMeta
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __abstractmethods__ = frozenset([])
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from MessageMixin:
+ |  
+ |  get_decoded_content(self)
+ |      Returns the decoded content based on the current Content-Encoding
+ |      header.
+ |      Doesn't change the message iteself or its headers.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from MessageMixin:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  __weakref__
+ |      list of weak references to the object (if defined)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from netlib.http.request.Request:
+ |  
+ |  __repr__(self)
+ |  
+ |  anticache(self)
+ |      Modifies this request to remove headers that might produce a cached
+ |      response. That is, we remove ETags and If-Modified-Since headers.
+ |  
+ |  anticomp(self)
+ |      Modifies this request to remove headers that will compress the
+ |      resource's data.
+ |  
+ |  constrain_encoding(self)
+ |      Limits the permissible Accept-Encoding values, based on what we can
+ |      decode appropriately.
+ |  
+ |  get_cookies(self)
+ |  
+ |  get_form_multipart(self)
+ |  
+ |  get_form_urlencoded(self)
+ |  
+ |  get_path_components(self)
+ |  
+ |  get_query(self)
+ |  
+ |  replace(self, pattern, repl, flags=0)
+ |      Replaces a regular expression pattern with repl in the headers, the
+ |      request path and the body of the request. Encoded content will be
+ |      decoded before replacement, and re-encoded afterwards.
+ |      
+ |      Returns:
+ |          The number of replacements made.
+ |  
+ |  set_cookies(self, odict)
+ |  
+ |  set_form_urlencoded(self, odict)
+ |  
+ |  set_path_components(self, lst)
+ |  
+ |  set_query(self, odict)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from netlib.http.request.Request:
+ |  
+ |  cookies
+ |      The request cookies.
+ |      An empty :py:class:`ODict` object if the cookie monster ate them all.
+ |  
+ |  first_line_format
+ |      HTTP request form as defined in `RFC7230 <https://tools.ietf.org/html/rfc7230#section-5.3>`_.
+ |      
+ |      origin-form and asterisk-form are subsumed as "relative".
+ |  
+ |  host
+ |      Target host. This may be parsed from the raw request
+ |      (e.g. from a ``GET http://example.com/ HTTP/1.1`` request line)
+ |      or inferred from the proxy mode (e.g. an IP in transparent mode).
+ |      
+ |      Setting the host attribute also updates the host header, if present.
+ |  
+ |  method
+ |      HTTP request method, e.g. "GET".
+ |  
+ |  multipart_form
+ |      The multipart form data as an :py:class:`ODict` object.
+ |      None if there is no data or the content-type indicates non-form data.
+ |  
+ |  path
+ |      HTTP request path, e.g. "/index.html".
+ |      Guaranteed to start with a slash.
+ |  
+ |  path_components
+ |      The URL's path components as a list of strings.
+ |      Components are unquoted.
+ |  
+ |  port
+ |      Target port
+ |  
+ |  pretty_host
+ |      Similar to :py:attr:`host`, but using the Host headers as an additional preferred data source.
+ |      This is useful in transparent mode where :py:attr:`host` is only an IP address,
+ |      but may not reflect the actual destination as the Host header could be spoofed.
+ |  
+ |  pretty_url
+ |      Like :py:attr:`url`, but using :py:attr:`pretty_host` instead of :py:attr:`host`.
+ |  
+ |  query
+ |      The request query string as an :py:class:`ODict` object.
+ |      None, if there is no query.
+ |  
+ |  scheme
+ |      HTTP request scheme, which should be "http" or "https".
+ |  
+ |  url
+ |      The URL string, constructed from the request's URL components
+ |  
+ |  urlencoded_form
+ |      The URL-encoded form data as an :py:class:`ODict` object.
+ |      None if there is no data or the content-type indicates non-form data.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from netlib.http.message.Message:
+ |  
+ |  __eq__(self, other)
+ |  
+ |  __ne__(self, other)
+ |  
+ |  decode(self)
+ |      Decodes body based on the current Content-Encoding header, then
+ |      removes the header. If there is no Content-Encoding header, no
+ |      action is taken.
+ |      
+ |      Returns:
+ |          True, if decoding succeeded.
+ |          False, otherwise.
+ |  
+ |  encode(self, e)
+ |      Encodes body with the encoding e, where e is "gzip", "deflate" or "identity".
+ |      
+ |      Returns:
+ |          True, if decoding succeeded.
+ |          False, otherwise.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Class methods inherited from netlib.http.message.Message:
+ |  
+ |  from_state(cls, state) from abc.ABCMeta
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from netlib.http.message.Message:
+ |  
+ |  body
+ |  
+ |  content
+ |      The raw (encoded) HTTP message body
+ |      
+ |      See also: :py:attr:`text`
+ |  
+ |  headers
+ |      Message headers object
+ |      
+ |      Returns:
+ |          netlib.http.Headers
+ |  
+ |  http_version
+ |      Version string, e.g. "HTTP/1.1"
+ |  
+ |  text
+ |      The decoded HTTP message body.
+ |      Decoded contents are not cached, so accessing this attribute repeatedly is relatively expensive.
+ |      
+ |      .. note::
+ |          This is not implemented yet.
+ |      
+ |      See also: :py:attr:`content`, :py:class:`decoded`
+ |  
+ |  timestamp_end
+ |      Last byte timestamp
+ |  
+ |  timestamp_start
+ |      First byte timestamp
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from netlib.utils.Serializable:
+ |  
+ |  copy(self)
+
+"""

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+grep --color=always "$@" ~/.config/i3/config

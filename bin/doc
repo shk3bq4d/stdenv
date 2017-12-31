@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+# so jly200 works better
+unset GIT_DIR
+unset GIT_WORK_TREE
+
+DOCDIR=~/doc
+KANBANDIR=~/kanban
+#VIMOPTS='-c "set nonumber"'
+VIM_C_ARGS="set nonumber"
+ARG1=$1
+ARG2=$2
+if hash ack-grep &>/dev/null; then
+    ACK=ack-grep
+elif hash ack &>/dev/null; then
+    ACK=ack
+else
+    ACK=grep
+fi
+
+UNAME=$(uname)
+UNAME=${UNAME,,}
+
+case $UNAME in \
+freebsd)
+	XARGS=xargs
+	;;
+*)
+	XARGS="xargs --no-run-if-empty"
+	;;
+esac
+
+filelist() {
+    find -L $DOCDIR -maxdepth 1 -name "*$1*.md" -print0 | sort -z
+    [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/doc.md" -print0 | sort -z
+}
+filelistcount() {
+    filelist "$@" | tr -cd '\0' | wc -c
+}
+
+if [[ -z "$ARG1" ]]; then
+    if [[ -e $KANBANDIR ]]; then
+        ls -thor $DOCDIR/*.md $KANBANDIR/*/doc.md
+    else
+        ls -thor $DOCDIR/*.md
+    fi
+    exit 0
+fi
+if [[ -z "$(filelist $1)" ]] 2>/dev/null; then
+        if [[ -z "$ARG2" ]]; then
+                vim -c "set nonumber" $DOCDIR/$(basename $ARG1).md
+        else
+                echo "can't find $DOCDIR/*$ARG1*"
+                exit 1
+        fi
+elif [[ "$ARG2" == "cat" ]]
+then
+    filelist $1 | $XARGS -0 cat
+elif [[ ! -z "$ARG2" ]]
+then
+        #grep -i $ARG2 $3 $4 $5 $6 $7 $8 $9 $DOCDIR/*$ARG1*
+    filelist $1 | $XARGS -0 $ACK \
+        --with-filename \
+           --ignore-case \
+        "$ARG2" # $3 $4 $5 $6 $7 $8 $9"
+
+elif [[ $(filelistcount "$1") -eq 1 ]]; then
+    filelist "$1" | vi_$XARGS -c "$VIM_C_ARGS"
+else
+    echo "Pick a file number:"
+    k=0
+    ARRAY=()
+    while IFS= read -r -d '' line; do
+        printf "%2d %s\n" "$k" "$line"
+        ARRAY+=($line)
+        k=$(( $k + 1 ))
+    done < <(filelist "$1")
+
+    while :; do
+        read -p "Pick a number: " c
+        case $c in \
+        [0-9]|[1-9][0-9]|[1-9][0-9][0-9]|[1-9][0-9][0-9][0-9])
+            if [[ $c -lt $k ]]; then # k is (max + 1) so we use lt< instead of le<=
+                vim -c "$VIM_C_ARGS" "${ARRAY[$c]}"
+                break
+            fi
+            ;;
+        esac
+        echo "wrong choice"
+    done
+    #echo "${ARRAY[3]}"
+
+    #filelistcount "$1" 
+    #filelist "$1" 
+    #filelist "$1" | vi_$XARGS -c "set nonumber"
+fi
+

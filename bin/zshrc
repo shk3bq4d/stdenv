@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+f=~/.zshrc
+if command -v vim &>/dev/null
+then
+	command  vim $f
+else
+	command vi $f
+fi

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+case $(hostname -f) in \
+	$WORK_PC1F)
+		ROOT=/mnt/local/00-1to
+		;;
+	*)
+		ROOT=$HOME
+		;;
+esac
+# del old empty dir
+for i in ${ROOT}/tmpp/*; do
+        if [[ -d $i ]]; then
+                if find $i -maxdepth 0 -empty | read; then
+                        rmdir $i
+                fi
+        fi
+done
+
+newdir="${ROOT}/tmpp/$(date +'%Y%m%d')"
+[[ ! -d $newdir ]] && mkdir -p $newdir
+[[ -L ~/tmp ]] && rm ~/tmp
+ln -s $newdir ~/tmp

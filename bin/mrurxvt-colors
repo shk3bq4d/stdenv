@@ -1,0 +1,42 @@
+randomcolor() {
+	BG_COLOURS=(
+				ffeeee ffdddd ffcccc ffbbbb
+				eeffee ddffdd ccffcc bbffbb
+				eeeeff ddddff ccccff bbbbff
+				ffffee ffffdd ffffcc ffffbb
+				ffeeff ffddff ffccff ffbbff
+				eeffff ddffff ccffff bbffff
+				f0f0f0 d9d9d9
+				deebf7 c6dbef
+				edf8b1 c7e9b4
+				e0f3db ccebc5
+				ece7f2 d0d1e6
+				e5f5f9 ccece6
+				f7fcb9 d9f0a3
+				e5f5e0 c7e9c0
+				ece2f0 d0d1e6
+				e0ecf4 bfd3e6
+				efedf5 dadaeb
+				fde0dd fcc5c0
+				e7e1ef d4b9da
+				fee6ce  
+				fff7bc fee391
+				fee0d2 
+				fee8c8 
+				ffeda0 fed976
+
+		)
+
+	NUM=${#BG_COLOURS[@]}
+
+	if [[ -z $1 ]]; then
+		ELEM=$(($RANDOM % $NUM))
+	else
+		ELEM=$1
+	fi
+
+
+	export _MRCOLOR=${BG_COLOURS[$ELEM]}
+	export MRCOLOR=${ELEM}-$_MRCOLOR
+
+}

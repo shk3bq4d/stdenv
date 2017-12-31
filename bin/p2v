@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+
+
+#vi=vim
+#[[ ! -t 1 ]] && vi=gvim
+
+
+echo "start \$TERMINAL is $TERMINAL"
+[[ -z "$TERMINAL" ]] && TERMINAL=xterm
+
+file=$(mktemp -t "$O.XXXXXXXXXXX")
+if false; then
+	xclip -o -selection clipboard | $TERMINAL -e "vim -" &
+
+else
+	echo "file is ${file}"
+	xclip -o -selection clipboard >$file
+	cat $file
+	#$vi -- $file &
+	$TERMINAL -e vim -- $file &
+fi

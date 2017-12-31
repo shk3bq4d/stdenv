@@ -1,0 +1,135 @@
+function mr_prompt() {
+	local EXITSTATUS="$?"
+	local NONE="\[\033[0m\]"    # unsets color to term's fg color
+	local BOLD="\[\033[1m\]"
+
+
+# regular colors
+	local BLACK="\[\033[0;30m\]"    # black
+	local RED="\[\033[0;31m\]"    # red
+	local GREEN="\[\033[0;32m\]"    # green
+	local YELLOW="\[\033[0;33m\]"    # yellow
+	local BLUE="\[\033[0;34m\]"    # blue
+	local MAGENTA="\[\033[0;35m\]"    # magenta
+	local CYAN="\[\033[0;36m\]"    # cyan
+	local WHITE="\[\033[0;37m\]"    # white
+
+# empahsized (bolded) colors
+	local EMBLACK="\[\033[1;30m\]"
+	local EMRED="\[\033[1;31m\]"
+	local EMGREEN="\[\033[1;32m\]"
+	local EMYELLOW="\[\033[1;33m\]"
+	local EMBLUE="\[\033[1;34m\]"
+	local EMMAGENTA="\[\033[1;35m\]"
+	local EMCYAN="\[\033[1;36m\]"
+	local EMWHITE="\[\033[1;37m\]"
+
+# background colors
+	local BGBLACK="\[\033[40m\]"
+	local BGRED="\[\033[41m\]"
+	local BGGREEN="\[\033[42m\]"
+	local BGYELLOW="\[\033[43m\]"
+	local BGBLUE="\[\033[44m\]"
+	local BGMAGENTA="\[\033[45m\]"
+	local BGCYAN="\[\033[46m\]"
+	local BGWHITE="\[\033[47m\]"
+
+	local OFF="\[\033[m\]"
+
+	local UC=$WHITE                 # user's color
+	[ $UID -eq "0" ] && UC=$RED   # root's color
+
+	local HOST="${HOSTNAMEF:0:40}"
+	local USER="\u"
+	local DIR="\w"
+	[[ $UID -eq 0 ]] && [[ $PWD == $HOME ]] && DIR=$HOME
+	local NEWLINE="\n"
+	local DATE="\d"
+	local TIME
+	case "${HOSTNAME}" in
+	'srvpaps01' | 'srveaps01' | 'srvtaps01')
+# AIX BUG causing 100% after for example topas
+		TIME="$(date +'%H:%M:%S')"
+		;;
+	*)
+		TIME='\t'
+		;;
+	esac
+
+	local HISTORY_NUMBER="\!"
+
+
+	PROMPT="${NEWLINE}"
+
+	if [ "${EXITSTATUS}" -eq 0 ]
+	then
+		PROMPT="${PROMPT}${GREEN}"
+	else
+		PROMPT="${PROMPT}${RED}"
+	fi
+	PROMPT="${PROMPT}${TIME} ${HISTORY_NUMBER} "
+
+	if [[ -n $MR_LAST_START ]]; then
+		MR_RUNTIME_SECONDS=$(( $SECONDS - $MR_LAST_START ))
+		if [[ $MR_RUNTIME_SECONDS -gt 0 ]]; then
+			# display runtime seconds as days, hours, minutes, and seconds
+			(( $MR_RUNTIME_SECONDS >= 86400 )) && PROMPT="${PROMPT}$(($MR_RUNTIME_SECONDS / 86400))d"
+			(( $MR_RUNTIME_SECONDS >= 3600 )) && PROMPT="${PROMPT}$(($MR_RUNTIME_SECONDS % 86400 / 3600))h"
+			(( $MR_RUNTIME_SECONDS >= 60 )) && PROMPT="${PROMPT}$(($MR_RUNTIME_SECONDS % 3600 / 60))'"
+			PROMPT="${PROMPT}$(($MR_RUNTIME_SECONDS % 60))\" "
+		fi
+		MR_LAST_START=
+	fi
+	PROMPT="${PROMPT}${OFF}"
+
+	if [[ -n "${VIRTUAL_ENV+1}" ]]; then
+		PROMPT="${PROMPT}($(mrbasename $VIRTUAL_ENV)) "
+	fi
+	if type cwd_gitted &>/dev/null && cwd_gitted; then
+		GITBRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+		if [[ -n "${GITBRANCH+1}" ]]; then
+			PROMPT="${PROMPT}($(mrbasename $GITBRANCH)) "
+		fi
+	fi
+
+
+	if [[ $UID -eq "0" ]]; then
+		PROMPT="${PROMPT}${BOLD}"
+	fi
+
+	case "${LOGNAME}" in
+	$ME|ubuntu|vagrant)
+		;;
+	'dbprod')
+		PROMPT="${PROMPT}${RED}"
+		;;
+	db*)
+		PROMPT="${PROMPT}${CYAN}"
+		;;
+	*)
+		PROMPT="${PROMPT}${RED}"
+		;;
+	esac
+	PROMPT="${PROMPT}${USER}${OFF}@"
+
+	case "${HOSTNAME}" in
+	$WORK_PC1|$WORK_PC2|apr16* )
+		;;
+	vbox*)
+		PROMPT="${PROMPT}${BLUE}"
+		;;
+	*)
+		PROMPT="${PROMPT}${RED}"
+		;;
+	esac
+	PROMPT="${PROMPT}${HOST}${OFF}"
+	PROMPT="${PROMPT}:${DIR}${NEWLINE}\$ "
+
+
+	PS1="${PROMPT}"
+
+	PS2="${BOLD}>${OFF} "
+	history -a
+
+}
+export PROMPT_COMMAND=mr_prompt

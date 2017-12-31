@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: SketchAPI 4.1.465 <https://api.sketch.io/> -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketchjs="https://sketch.io/dtd/" sketchjs:metadata="eyJ0aXRsZSI6IkRyYXdpbmciLCJkZXNjcmlwdGlvbiI6Im1hZGUgd2l0aCBTa2V0Y2hwYWQgLSBodHRwczovL3NrZXRjaC5pby9za2V0Y2hwYWQiLCJtZXRhZGF0YSI6e30sImNsaXAiOnsiZW5hYmxlZCI6dHJ1ZSwic3R5bGUiOnsic3Ryb2tlU3R5bGUiOiJibGFjayIsInNoYWRvd0NvbG9yIjoicmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIsInNoYWRvd0JsdXIiOjEsImxpbmVXaWR0aCI6Mn19LCJleHBvcnREUEkiOjcyLCJleHBvcnRGb3JtYXQiOiJza2V0Y2hwYWQiLCJleHBvcnRRdWFsaXR5IjowLjk1LCJ1bml0cyI6IiUiLCJ3aWR0aCI6MTAwLCJoZWlnaHQiOjEwMCwic2NhbGUiOjEsInBhZ2VzIjp7Imxlbmd0aCI6MSwiZGF0YSI6W3sid2lkdGgiOjEwMCwiaGVpZ2h0IjoxMDB9XX19" sketchjs:version="4.1.465">
+<g sketchjs:tool="rectangle" style="fill: none; mix-blend-mode: source-over; opacity: NaN;">
+	<path id="f4737890_x2dd0c6_x2d4a3f_x2db71e_x2dd3dc26c9c000" style="vector-effect: non-scaling-stroke;" d="M0 -843 L3615 -843 3615 2772 0 2772 z"/>
+	<use xlink:href="#f4737890_x2dd0c6_x2d4a3f_x2db71e_x2dd3dc26c9c000"/>
+	<use xlink:href="#f4737890_x2dd0c6_x2d4a3f_x2db71e_x2dd3dc26c9c000" style="fill: white; fill-opacity: 1;"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,461,166)">
+	<polyline id="85391506_x2d3976_x2d4e3b_x2db8d2_x2d5c3e8a82054d" style="vector-effect: non-scaling-stroke;" points="1,0 0,166 1492,165 1506,1096"/>
+	<use xlink:href="#85391506_x2d3976_x2d4e3b_x2db8d2_x2d5c3e8a82054d" style="stroke: #074dff; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#85391506_x2d3976_x2d4e3b_x2db8d2_x2d5c3e8a82054d"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,474,54)">
+	<polyline id="245a02b0_x2dd0bc_x2d4654_x2d8ff0_x2d1017c5e6a06f" style="vector-effect: non-scaling-stroke;" points="2,0 0,260 1499,259 1512,1205"/>
+	<use xlink:href="#245a02b0_x2dd0bc_x2d4654_x2d8ff0_x2d1017c5e6a06f" style="stroke: #eea300; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#245a02b0_x2dd0bc_x2d4654_x2d8ff0_x2d1017c5e6a06f"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1.0041589648798517,0,0,1.0041589648798517,335,291)">
+	<polyline id="de1256df_x2da92c_x2d4108_x2da7ed_x2d461e08d8d21a" style="vector-effect: non-scaling-stroke;" points="0,5 2155,0 2164,264 2134,263"/>
+	<use xlink:href="#de1256df_x2da92c_x2d4108_x2da7ed_x2d461e08d8d21a" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#de1256df_x2da92c_x2d4108_x2da7ed_x2d461e08d8d21a"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,1999,303)">
+	<polyline id="01f7fd5e_x2d7666_x2d4050_x2da5cd_x2d93fd49b7fcb0" style="vector-effect: non-scaling-stroke;" points="478,232 499,232 490,2 0,0 5,834 193,838 192,798"/>
+	<use xlink:href="#01f7fd5e_x2d7666_x2d4050_x2da5cd_x2d93fd49b7fcb0" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#01f7fd5e_x2d7666_x2d4050_x2da5cd_x2d93fd49b7fcb0"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,333,137)">
+	<polyline id="f197d1da_x2d8c15_x2d4002_x2d915a_x2de719142872ed" style="vector-effect: non-scaling-stroke;" points="0,137 115,137 115,0"/>
+	<use xlink:href="#f197d1da_x2d8c15_x2d4002_x2d915a_x2de719142872ed" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#f197d1da_x2d8c15_x2d4002_x2d915a_x2de719142872ed"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,444,52)">
+	<polyline id="5ce158a9_x2deea8_x2d4fb5_x2d9fbb_x2d2af91c7e0b55" style="vector-effect: non-scaling-stroke;" points="0,58 1,0"/>
+	<use xlink:href="#5ce158a9_x2deea8_x2d4fb5_x2d9fbb_x2d2af91c7e0b55" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#5ce158a9_x2deea8_x2d4fb5_x2d9fbb_x2d2af91c7e0b55"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,338,355)">
+	<polyline id="c3688bef_x2d682f_x2d4c9b_x2d9cb6_x2d3e32b24b76d9" style="vector-effect: non-scaling-stroke;" points="0,1 506,0 504,666"/>
+	<use xlink:href="#c3688bef_x2d682f_x2d4c9b_x2d9cb6_x2d3e32b24b76d9" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#c3688bef_x2d682f_x2d4c9b_x2d9cb6_x2d3e32b24b76d9"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,344,1003)">
+	<polyline id="484a6cd2_x2d6fae_x2d4426_x2dae85_x2dfb276fe592d7" style="vector-effect: non-scaling-stroke;" points="0,0 478,3"/>
+	<use xlink:href="#484a6cd2_x2d6fae_x2d4426_x2dae85_x2dfb276fe592d7" style="stroke: #ff1b1b; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#484a6cd2_x2d6fae_x2d4426_x2dae85_x2dfb276fe592d7"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,494,106)">
+	<polyline id="4c6c18fb_x2d67db_x2d4226_x2db838_x2d7bcb7690f6bb" style="vector-effect: non-scaling-stroke;" points="370,1019 366,168 1,169 0,0"/>
+	<use xlink:href="#4c6c18fb_x2d67db_x2d4226_x2db838_x2d7bcb7690f6bb" style="stroke: #9dd241; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#4c6c18fb_x2d67db_x2d4226_x2db838_x2d7bcb7690f6bb"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,345,1030)">
+	<polyline id="3bed9cd2_x2de4be_x2d47e8_x2d9483_x2d901957feb250" style="vector-effect: non-scaling-stroke;" points="504,95 503,5 0,0"/>
+	<use xlink:href="#3bed9cd2_x2de4be_x2d47e8_x2d9483_x2d901957feb250" style="stroke: #9dd241; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#3bed9cd2_x2de4be_x2d47e8_x2d9483_x2d901957feb250"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,335,274)">
+	<polyline id="ceab212e_x2dddc5_x2d41a1_x2db21d_x2deacfcd2a94bd" style="vector-effect: non-scaling-stroke;" points="0,712 549,712 543,0 1821,0 1821,103"/>
+	<use xlink:href="#ceab212e_x2dddc5_x2d41a1_x2db21d_x2deacfcd2a94bd" style="stroke: #9dd241; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#ceab212e_x2dddc5_x2d41a1_x2db21d_x2deacfcd2a94bd"/>
+</g>
+<g sketchjs:tool="polyline" style="fill: none; mix-blend-mode: source-over;" transform="matrix(1,0,0,1,344,250)">
+	<polyline id="faed7fdd_x2dc25c_x2d4e59_x2d9a80_x2d26b2e6f40f70" style="vector-effect: non-scaling-stroke;" points="0,708 570,709 561,0 1678,2 1673,932 2140,938"/>
+	<use xlink:href="#faed7fdd_x2dc25c_x2d4e59_x2d9a80_x2d26b2e6f40f70" style="stroke: #9dd241; stroke-dasharray: none; stroke-dashoffset: 0; stroke-linecap: butt; stroke-linejoin: round; stroke-miterlimit: 4; stroke-opacity: 1; stroke-width: 3.82;"/>
+	<use xlink:href="#faed7fdd_x2dc25c_x2d4e59_x2d9a80_x2d26b2e6f40f70"/>
+</g>
+</svg>

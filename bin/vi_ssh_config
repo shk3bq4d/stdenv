@@ -1,0 +1,8 @@
+#!/usr/bin/env bash 
+
+set -e
+if which vim &>/dev/null; then
+	vim ~/.ssh/config
+else
+	vi ~/.ssh/config
+fi

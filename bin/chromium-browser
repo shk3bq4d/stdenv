@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+case $(timeout 2 hostname -f) in *.ly.lan)
+	PROXYPAC="http://10.1.1.92/websupport/proxy.pac.ly.py"
+	;;
+	*)
+	PROXYPAC="http://127.0.0.1/websupport/proxy.ks.pac.py"
+	#PROXYPAC="file://$HOME/proxy.pac"
+	;;
+*)
+	;;
+esac
+
+/usr/bin/chromium-browser --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &

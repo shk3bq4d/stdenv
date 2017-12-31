@@ -1,0 +1,3 @@
+curl ifconfig.co # 185.35.61.174
+
+dig @resolver2.opendns.com myip.opendns.com # blocked on socle network

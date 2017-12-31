@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+timeout=4
+mycurl() {
+	local URL=$1
+	if command -v curl &>/dev/null; then
+		output=$(curl -s -m $timeout $URL 2>/dev/null)
+		[[ $? -ne 0 ]] && return 1
+		echo $output
+		return 0
+	fi
+	if command -v wget &>/dev/null; then
+		output=$(wget -O- --timeout $timeout $URL 2>/dev/null)
+		[[ $? -ne 0 ]] && return 1
+		echo $output
+		return 0
+	fi
+	return 1
+}
+
+case $(uname) in \
+CYGWIN*)
+	ipconfig /all 2>&1 | sed -n -r -e '/IPv4 Address/s/.*Address[^0-9]+([0-9.]+).*/\1/ p'
+	;;
+*)	
+	if command -v ip &>/dev/null; then
+		ip a | grep -Po 'inet [0-9.]+|(?<=^\d: )[^:]+|(?<=^\d\d: )[^:]+' | grep -EB1 '^inet ' | grep -v '^--$' | awk 'NR%2{printf "%s ",$0;next;}1' | sed -r -e 's/ inet / /' | xargs -r printf "%-10s %s\n"
+	fi
+	;;
+esac
+
+timeout_bin=
+command -v timeout &>/dev/null && timeout_bin="timeout $timeout "
+printf "%-11s" internet
+for x in 1; do
+	mycurl http://whatismyip.akamai.com/ && break
+	mycurl https://4.ifcfg.me/ && break
+	mycurl http://canhazip.com && break
+	command -v dig &>/dev/null && $timeout_bin dig +time=$timeout +short myip.opendns.com @resolver1.opendns.com
+	echo ""
+done

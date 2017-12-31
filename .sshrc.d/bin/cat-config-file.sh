@@ -1,0 +1,1 @@
+../../bin/cat-config-file.sh

@@ -1,0 +1,466 @@
+# ${STDHOME_GENERATED_TIME}
+
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# xev
+# xmodmap
+#cat /usr/share/lightdm/lightdm.conf.d/50-xserver-command.conf
+#[Seat:*]
+# Dump core
+# xserver-command=X -core -dpi 75
+
+#bindsym  Print #PrintScreen
+#bindcode  78 #Scroll_Lock
+#bindcode  127 #Pause-Break
+
+#exec xmodmap -e "remove mod4 = Super_L"
+#exec xmodmap -e "remove mod4 = Super_R"
+#exec xmodmap -e "clear mod4"
+#exec xmodmap -e "add mod4 = 66"
+set $mod ${STDHOME_MOD}
+# set $mod Mod4
+#set $ws0 "0 vim"
+set $ws0 "0   $   "
+set $ws1 "1   &amp;   "
+set $ws2 "2   7   "
+set $ws3 "3   5   "
+set $ws4 "4   3   "
+set $ws5 "5   1   "
+set $ws6 "6   9   "
+set $ws7 "7   0   "
+set $ws8 "8   2   "
+set $ws9 "9   4   "
+set $ws10 "10   6   "
+set $ws11 "11   8   "
+set $ws12 "12   !   "
+
+#fake-outputs 1000x768+0+0,366x768+1000+0
+#set $ol fake-0
+#set $oc fake-1
+#set $or fake-1
+$STDHOME_OUTPUTS
+
+#set $ol DP-2
+#set $oc DP-3
+#set $or DP-4
+
+#exec xrandr --output "$ol" --left-of "$or" --left-of "$oc"
+#exec xrandr --output "$oc" --primary
+#set $or VGA-0
+
+#set $or HDMI2
+#set $ol DP2
+#set $ol HDMI-0
+#set $ol DVI-I-1
+#set $or DVI-I-2
+#set $or DFP-1
+#set $ol xinerama-1
+#set $or xinerama-0
+
+# class                 border  backgr. text    indicator
+#default:
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4
+#client.focused_inactive #333333 #5f676a #ffffff #484e50
+#client.unfocused        #333333 #222222 #888888 #292d2e
+#client.urgent           #2f343a #900000 #ffffff #900000
+#client.focused          #ff8888 #ff0000 #ffffff #9900ff
+client.focused          #4c7899 #4c7899 #ffffff #ffff00
+client.focused_inactive #555555 #000000 #ffffff #484e50
+client.unfocused        #dddddd #aaaaaa #000000 #484e50
+client.urgent           #0000cc #0000ff #ffffff #0000CC
+
+#hide_edge_borders both
+
+
+# font for window titles. ISO 10646 = Unicode
+# xfontse
+#font -misc-fixed-medium-r-normal--33-120-75-75-C-70-iso10646-1
+#font -misc-*-*-*-*-*-*-100-*-*-*-*-*-*
+$STDHOME_FONT
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym  $mod+Return exec i3-sensible-terminal
+bindsym  Print         exec mr-shutter.sh
+#bindsym  Shift+Print   exec shutter --remove_cursor --window
+#bindsym  Control+Print exec shutter --remove_cursor --window
+#bindsym  $mod+Return exec konsole
+#bindsym  Mod1+Print exec touch /tmp/mod1print
+#bindsym  Mod2+Print exec touch /tmp/mod2print
+#bindsym  Mod3+Print exec touch /tmp/mod3print
+#bindsym  Mod4+Print exec touch /tmp/mod4print
+##bindsym  Mod5+Print exec touch /tmp/mod5print
+#bindsym  Mod6+Print exec touch /tmp/mod6print
+#bindsym  Mod7+Print exec touch /tmp/mod7print
+#bindsym  Mod8+Print exec touch /tmp/mod8print
+#bindsym  Mod9+Print exec touch /tmp/mod9print
+#bindsym  Control+Print exec touch /tmp/controlprint
+#bindcode  78 exec shutter --select
+#bindcode  127 exec i3-sensible-terminal
+#bindsym  Alt+Print exec i3-sensible-terminal
+
+
+# kill focused window
+# code:24 => sym: 0x71, symbol:q
+bindcode $mod+Shift+53  kill
+
+# start dmenu (a program launcher)
+# code:40 => sym: 0x64, symbol:d
+bindcode $mod+43  exec dmenu_run $STDHOME_DMENU_ARGS
+
+# change focus
+# code:43 => sym: 0x68, symbol:h
+bindcode $mod+44  focus left
+# code:44 => sym: 0x6a, symbol:j
+bindcode $mod+54  focus down
+# code:45 => sym: 0x6b, symbol:k
+bindcode $mod+55  focus up
+# code:46 => sym: 0x6c, symbol:l
+bindcode $mod+33  focus right
+
+# alternatively, you can use the cursor keys:
+#bindsym  $mod+Left focus left
+#bindsym  $mod+Down focus down
+#bindsym  $mod+Up focus up
+#bindsym  $mod+Right focus right
+
+# move focused window
+# code:43 => sym: 0x68, symbol:h
+bindcode $mod+Shift+44  move left
+# code:44 => sym: 0x6a, symbol:j
+bindcode $mod+Shift+54  move down
+# code:45 => sym: 0x6b, symbol:k
+bindcode $mod+Shift+55  move up
+# code:46 => sym: 0x6c, symbol:l
+bindcode $mod+Shift+33  move right
+
+# alternatively, you can use the cursor keys:
+bindsym  $mod+Shift+Left move left
+bindsym  $mod+Shift+Down move down
+bindsym  $mod+Shift+Up move up
+bindsym  $mod+Shift+Right move right
+
+# code:55 => sym: 0x76, symbol:v
+bindcode --release $mod+60  exec mri3-toggle-orientation.py # <= 4.11-1
+# code:42 => sym: 0x67, symbol:g
+bindcode --release $mod+30  exec mri3-toggle-border.py # <= 4.11-1
+#bindsym --release $mod+v split toggle # new since 4.12 # but doesn't have fancy resize border like I do
+
+# enter fullscreen mode for the focused container
+# code:41 => sym: 0x66, symbol:f
+bindcode $mod+29  fullscreen
+# code:41 => sym: 0x66, symbol:f
+bindcode $mod+Shift+29  fullscreen global
+#bindsym  $mod+Tab exec winmenu.py
+
+# change container layout (stacked, tabbed, default)
+# code:39 => sym: 0x73, symbol:s
+bindcode $mod+47  layout stacking
+# code:25 => sym: 0x77, symbol:w
+bindcode $mod+59  layout tabbed
+# code:26 => sym: 0x65, symbol:e
+bindcode $mod+40  layout default
+
+# toggle tiling / floating
+bindsym  $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym  $mod+space focus mode_toggle
+
+# focus the parent container
+# code:38 => sym: 0x61, symbol:a
+bindcode $mod+38  focus parent; exec mri3-flash-border.py
+
+
+# code:24 => sym: 0x71, symbol:q
+bindcode $mod+53  sticky toggle
+
+
+# focus the child container
+#bindcode  $mod+d focus child
+#bindcode  $mod+d focus child
+# code:58 => sym: 0x6d, symbol:m
+bindcode $mod+58  exec mri3lock
+# code:31 => sym: 0x69, symbol:i
+bindcode $mod+42 exec python3 ~/bin/i3-container-commander.py
+
+# switch to workspace
+# code:49 => sym: 0x60, symbol: grave
+bindcode  $mod+49 workspace number $ws0; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:10 => sym: 0x31, symbol: 1
+bindcode  $mod+10 workspace number $ws1; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:11 => sym: 0x32, symbol: 2
+bindcode  $mod+11 workspace number $ws2; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:12 => sym: 0x33, symbol: 3
+bindcode  $mod+12 workspace number $ws3; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:13 => sym: 0x34, symbol: 4
+bindcode  $mod+13 workspace number $ws4; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:14 => sym: 0x35, symbol: 5
+bindcode  $mod+14 workspace number $ws5; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:15 => sym: 0x36, symbol: 6
+bindcode  $mod+15 workspace number $ws6; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:16 => sym: 0x37, symbol: 7
+bindcode  $mod+16 workspace number $ws7; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:17 => sym: 0x38, symbol: 8
+bindcode  $mod+17 workspace number $ws8; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:18 => sym: 0x39, symbol: 9
+bindcode  $mod+18 workspace number $ws9; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:19 => sym: 0x30, symbol: 0
+bindcode  $mod+19 workspace number $ws10; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:20 => sym: 0x2d, symbol: minus
+bindcode  $mod+20 workspace number $ws11; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:21 => sym: 0x3d, symbol: equal
+bindcode  $mod+21 workspace number $ws12; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+22 workspace number $ws13; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:22 => sym: 0xff08, symbol: BackSpace
+bindcode  $mod+22      exec ~/bin/i3_new_workspace.py
+#bindcode  $mod+Shif+22 exec ~/bin/i3_new_workspace.py move window
+# code:22 => sym: 0xff08, symbol: BackSpace
+bindcode  $mod+Shift+22 exec ~/bin/i3_window_to_new_workspace.sh
+
+#bindsym  $mod+Control+h workspace prev
+#bindsym  $mod+Control+l workspace next
+# code:43 => sym: 0x68, symbol:h
+bindcode $mod+Control+44  exec i3-move-container-left.py
+# code:46 => sym: 0x6c, symbol:l
+bindcode $mod+Control+33  exec i3-move-container-right.py
+
+# move focused container to workspace
+# code:49 => sym: 0x60, symbol: grave
+bindcode  $mod+Shift+49 move workspace number $ws0;	workspace number $ws0; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:10 => sym: 0x31, symbol: 1
+bindcode  $mod+Shift+10 move workspace number $ws1;	workspace number $ws1; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:11 => sym: 0x32, symbol: 2
+bindcode  $mod+Shift+11 move workspace number $ws2;	workspace number $ws2; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:12 => sym: 0x33, symbol: 3
+bindcode  $mod+Shift+12 move workspace number $ws3;	workspace number $ws3; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:13 => sym: 0x34, symbol: 4
+bindcode  $mod+Shift+13 move workspace number $ws4;	workspace number $ws4; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:14 => sym: 0x35, symbol: 5
+bindcode  $mod+Shift+14 move workspace number $ws5;	workspace number $ws5; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:15 => sym: 0x36, symbol: 6
+bindcode  $mod+Shift+15 move workspace number $ws6;	workspace number $ws6; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:16 => sym: 0x37, symbol: 7
+bindcode  $mod+Shift+16 move workspace number $ws7;	workspace number $ws7; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:17 => sym: 0x38, symbol: 8
+bindcode  $mod+Shift+17 move workspace number $ws8;	workspace number $ws8; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:18 => sym: 0x39, symbol: 9
+bindcode  $mod+Shift+18 move workspace number $ws9;	workspace number $ws9; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:19 => sym: 0x30, symbol: 0
+bindcode  $mod+Shift+19 move workspace number $ws10;	workspace number $ws10; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:20 => sym: 0x2d, symbol: minus
+bindcode  $mod+Shift+20 move workspace number $ws11;	workspace number $ws11; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+# code:21 => sym: 0x3d, symbol: equal
+bindcode  $mod+Shift+21 move workspace number $ws12;	workspace number $ws12; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+Shift+22 move workspace number $ws13;	workspace number $ws13; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+
+# reload the configuration file
+# code:54 => sym: 0x63, symbol:c
+bindcode $mod+Shift+31  reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# code:27 => sym: 0x72, symbol:r
+bindcode $mod+Shift+32  restart
+# exit i3 (logs you out of your X session)
+#bindsym  $mod+Shift+E exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # They resize the border in the direction you pressed, e.g.
+        # when pressing left, the window is resized so that it has
+        # more space on its left
+
+# code:44 => sym: 0x6a, symbol:j
+bindcode 54  resize shrink left 10 px or 10 ppt
+# code:44 => sym: 0x6a, symbol:j
+bindcode Shift+54  resize grow   left 10 px or 10 ppt
+
+# code:45 => sym: 0x6b, symbol:k
+bindcode 55  resize shrink down 10 px or 10 ppt
+# code:45 => sym: 0x6b, symbol:k
+bindcode Shift+55  resize grow   down 10 px or 10 ppt
+
+# code:46 => sym: 0x6c, symbol:l
+bindcode 33  resize shrink up 10 px or 10 ppt
+# code:46 => sym: 0x6c, symbol:l
+bindcode Shift+33  resize grow   up 10 px or 10 ppt
+
+# code:47 => sym: 0x3b, symbol:semicolon
+#bindcode 47  resize shrink right 10 px or 10 ppt
+# code:47 => sym: 0x3b, symbol:semicolon
+#bindcode Shift+47  resize grow   right 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+bindsym  Left resize shrink left 10 px or 10 ppt
+bindsym  Shift+Left resize grow   left 10 px or 10 ppt
+
+bindsym  Down resize shrink down 10 px or 10 ppt
+bindsym  Shift+Down resize grow   down 10 px or 10 ppt
+
+bindsym  Up resize shrink up 10 px or 10 ppt
+bindsym  Shift+Up resize grow   up 10 px or 10 ppt
+
+bindsym  Right resize shrink right 10 px or 10 ppt
+bindsym  Shift+Right resize grow   right 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+bindsym  Return mode "default"
+bindsym  Escape mode "default"
+}
+
+#bindsym  $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	id bar-left
+	strip_workspace_numbers yes
+	position $STDHOME_FIRSTBAR_POSITION
+#status_command i3status
+	#status_command i3status -c ~/.i3status-or.conf
+	#status_command i3status -c ~/.i3status-or.conf
+	status_command ~/.config/i3/mri3status-left.sh
+#status_command i3status
+	output $ol
+	tray_output $ol
+	#tray_output none
+    bindsym  button4 nop
+    bindsym  button5 nop
+#separator_symbol ":|:"
+	separator_symbol "-"
+	colors {
+		background #000000
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+#binding_mode       #2f343a #900000 #ffffff
+
+        binding_mode       #ff0000 #900000 #ffffff
+	}
+}
+
+workspace 0  output $ol
+workspace 1  output $ol
+workspace 2  output $ol
+workspace 3  output $ol
+workspace 4  output $ol
+workspace 5  output $ol
+workspace 6  output $ol
+workspace 7  output $oc
+workspace 8  output $oc
+workspace 9  output $oc
+workspace 10 output $oc
+workspace 11 output $oc
+workspace 12 output $oc
+workspace 13 output $oc
+
+
+#bindsym  $mod+o exec i3lock -p win -i ~/Pictures/migdesk.png
+# code:54 => sym: 0x63, symbol:c
+bindcode $mod+31  exec ~/bin/p2v
+# code:56 => sym: 0x62, symbol:b
+bindcode $mod+57  move scratchpad
+# code:57 => sym: 0x6e, symbol:n
+bindcode $mod+46  scratchpad show
+
+# code:39 => sym: 0x73, symbol:s
+bindcode $mod+Shift+47  move workspace to output right
+workspace_auto_back_and_forth yes
+#popup_during_fullscreen <ignore|leave_fullscreen>
+popup_during_fullscreen leave_fullscreen
+force_focus_wrapping no
+
+focus_follows_mouse yes
+# code:52 => sym: 0x7a, symbol: z
+# bindcode  $mod+52 exec ~/bin/mrswitch-kb.sh
+bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
+
+# code:32 => sym: 0x6f, symbol:o
+bindcode $mod+39  exec ~/bin/i3mod-plus-o.sh
+#assign [class="Krdc"] $ws2
+#assign [class="Firefox"] $ws7
+#assign [class="Eclipse"] $ws8
+#assign [class="Thunderbird"] $ws9
+#assign [class="oracle-ide-boot-Launcher"] $ws10 #sql developer, bug in startup
+#assign [class="Mysql-workbench-bin"] $ws10
+#assign [id="Talend"] $ws10
+#or_window [class="Navigator"] border 20pixel
+#for_window [class="Firefox"] border 1pixel
+#for_window [class="Eclipse"] border 1pixel
+#for_window [class="Eclipse"] floating enable
+#assign [class="tw-com-aten-ikvm-KVMMain" title="iKVM"] workspace $ws3
+#assign [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] workspace $ws3
+#for_window [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] floating enable
+#for_window [class="Talend"] border 1pixel
+#for_window [title="Talend"] border 1pixel
+#for_window [class="oracle"] border 1pixel
+#for_window [class="Thunderbird"] border 1pixel
+#for_window [class="Krdc"] border none
+
+#for_window [class="FreeRDP: 6.1.0.101"] resize set 2400 1800
+assign [class="tw-com-aten-ikvm-KVMMain"] '   12: vnc_ipmi  '
+for_window [class="tw-com-aten-ikvm-KVMMain" title="iKVM"] resize set 2400 1800
+for_window [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] floating enable
+for_window [title="mrtitlefloating"] floating enable
+for_window [class="xfreerdp"] border normal
+
+#for_window [class="Mattermost"] border 1pixel
+#for_window [title="Outlook Web App"] border 1pixel
+
+#for_window [title="bash"] border 4pixel
+#exec --no-startup-id  ~/bin/apr16/1screen.sh
+exec --no-startup-id  xset r rate 800 40
+#for_window [class="term"] border 1pixel
+#for_window [class="Rekonq"] border 1pixel
+#for_window [class="Krdc"] border 1pixel
+for_window [class="Vncviewer"] border normal
+for_window [class="VisualVM*"] border normal
+for_window [class="keepassxc"] border normal
+for_window [class="keepassxc"] floating enable
+
+exec --no-startup-id feh --bg-scale ~/Pictures/i3lock/boreal3.png
+exec --no-startup-id ~/bin/startup/mrredshift.sh
+exec --no-startup-id ~/bin/capslock-to-esc.sh
+#exec setxkbmap -option ctrl:escape
+#exec --no-startup-id krdc
+#exec --no-startup-id eclipse
+#exec --no-startup-id thunderbird
+#exec --no-startup-id firefox
+exec ~/bin/notinpath/mr-startup.sh
+
+#exec xmodmap -e "keycode 0x85 = 0x02"
+#exec --no-startup-id xmodmap -e "clear Lock"
+#exec --no-startup-id xmodmap -e "keycode 0x42 = Escape"
+exec --no-startup-id ~/bin/notinpath/mrxmodmap.sh
+
+exec parcellite
+#exec kmix
+#exec vlc
+#exec skype
+
+mode "pass-through" {
+# code:28 => sym: 0x74, symbol:t
+	        bindcode $mod+28  mode "default"
+}
+
+# code:28 => sym: 0x74, symbol:t
+bindcode $mod+28  mode "pass-through"
+new_window none
+# youpi mouais
+#exec --no-startup-id compton  -i 0.8 -c -r 22 -z -o 0.3 -l -30 -t -30 --inactive-dim 0.4 -f -C -G -z
+exec --no-startup-id compton  --dbus --config ~/.config/i3/compton.conf
+
+# code:33 => sym: 0x70, symbol:p
+bindcode $mod+27  exec --no-startup-id true
+# code:33 => sym: 0x70, symbol:p
+bindcode $mod+Shift+27  exec --no-startup-id true
+exec --no-startup-id ~/bin/mri3-server.py &>~/log/i3-config-mri3-server.log
+
+${STDHOME_TAIL}

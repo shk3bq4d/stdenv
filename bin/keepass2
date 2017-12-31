@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#cd /lvmr0/keepass/
+#/usr/bin/keepass2 mr.kdbx  -preselect:mr.key &>/dev/null </dev/null &
+#DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+DIR=~/bin
+if [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
+	export QT_SCALE_FACTOR=2
+	BIN=$DIR/KeePassXC-2.2.0-x86_64.AppImage
+	cd ~/.keepass
+	if [[ -f $PWD/mr.key ]]; then
+		$BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+	else
+		$BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+	fi
+else
+	cd ~/.keepass
+	BIN=/usr/bin/keepass2
+	$BIN mr.kdbx  &>/dev/null </dev/null &
+fi

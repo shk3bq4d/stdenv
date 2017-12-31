@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+command -v python &>/dev/null && python -m json.tool || cat -

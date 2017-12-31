@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+
+set -e
+set -u
+
+function usage()
+{   echo usage: $(basename $0) FILES
+}
+
+if [[ -z "$1" ]]; then
+    usage
+    exit 1
+fi
+
+if ! hash 7za 2>/dev/null; then
+	echo "FATAL: 7za not installed on system"
+	exit 1
+fi
+
+
+for i in "$@"; do
+	j="$(realpath "$i")"
+    case "$i" in
+    *.zip |\
+    *.apk |\
+    *.7z |\
+    *.kar |\
+    *.jar)
+        echo "zip file $i"
+        # check presence of a unique root
+        list=$(7za l "$j" | sed -n -e '/-------/,$p' | head -n-2 | awk '{print $6}' | awk 'BEGIN { FS=OFS="\\\\"}{print $1}' |sed -e '/^$/ d')
+        if  [[ $(wc -l <<<"$list") -eq 1 ]] ||
+            [[ $(sort -u  <<<"$list" | wc -l) -eq 1 ]]
+        then
+			7za x "$j" && echo "extracted in $(basename $PWD)"
+        else
+            dir="${i%.*}"
+            if ! mkdir "$dir"; then
+				echo ABORT
+				exit 1
+			fi
+            cd "$dir"
+            7za x "$j" && echo "extracted in $dir"
+        fi
+        ;;
+    *)
+        echo "unknown archive $i"
+        ;;
+    esac
+done

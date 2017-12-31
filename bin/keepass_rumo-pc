@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+set -x
+cd ~/.keepass/
+set +e
+/usr/bin/keepass2 mr.kdbx -preselect:mr.key &>/dev/null </dev/null 
+cd

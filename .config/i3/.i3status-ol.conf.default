@@ -1,0 +1,8 @@
+export STDHOME_DHCP_DASH=''
+export STDHOME_ETHERNET_DASH=''
+export STDHOME_ETHERNET='enp0s25'
+export STDHOME_BATTERY_DASH='#'
+export STDHOME_WLAN_DASH='#'
+export STDHOME_WLAN='wlan0'
+export STDHOME_ALIGN='left'
+

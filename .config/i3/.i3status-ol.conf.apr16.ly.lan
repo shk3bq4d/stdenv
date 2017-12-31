@@ -1,0 +1,7 @@
+export STDHOME_DHCP_DASH=''
+export STDHOME_ETHERNET_DASH=''
+export STDHOME_ETHERNET='eno1'
+export STDHOME_BATTERY_DASH='#'
+export STDHOME_WLAN_DASH='#'
+export STDHOME_WLAN='wlp2s0b1'
+

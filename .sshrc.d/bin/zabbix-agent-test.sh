@@ -1,0 +1,1 @@
+../../bin/zabbix-agent-test.sh

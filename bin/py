@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# /* ex: set filetype=python ts=4 sw=4 expandtab: */
+
+import os
+import sys
+from pprint import pprint
+
+
+
+def usage():
+    print("""
+Usage:
+{} NEW_SCRIPT_FILENAME
+saves default python script template to file specified as sole argument
+                                                                                                        """.format(os.path.basename(__file__)))
+
+
+if len(sys.argv) != 2:
+    usage()
+    sys.exit(1)
+
+fp = sys.argv[1]
+if not fp.endswith('.py'):
+    fp = fp + '.py'
+if os.path.isfile(fp):
+    print('FATAL, file {} already exists'.format(sys.argv[1]))
+    sys.exit(1)
+
+with open(fp, 'wb') as f:
+    f.write("""#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# /* ex: set filetype=python ts=4 sw=4 expandtab: */
+
+import os
+import sys
+import re
+import argparse
+import logging
+
+from pprint import pprint, pformat
+
+logger = logging.getLogger(__name__)
+
+def logging_conf(
+        level='INFO', # DEBUG
+        use='stdout' # "stdout syslog" "stdout syslog file"
+        ):
+    import logging.config
+    script_directory, script_name = os.path.split(__file__)
+    logging.config.dictConfig({'version':1,'disable_existing_loggers':False,
+       'formatters':{
+           'standard':{'format':'%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s'},
+           'syslogf': {'format':'%(filename)s[%(process)d]: %(levelname)-5s %(funcName)s(): %(message)s'},
+           #'graylogf':{"format":"%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s"},
+           },
+       'handlers':{
+           'stdout':   {'level':level,'formatter': 'standard','class':'logging.StreamHandler',         'stream': 'ext://sys.stdout'},
+           'file':     {'level':level,'formatter': 'standard','class':'logging.FileHandler',           'filename': '/tmp/{}.log'.format(os.path.splitext(script_name)[0])}, #
+           'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
+           #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
+       }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
+
+def go(args):
+    # https://docs.python.org/2/library/argparse.html
+    logger.info(__file__)
+    logger.debug(__file__)
+    parser = argparse.ArgumentParser(description="This is the description of what I do")
+    parser.add_argument("FILENAME", type=str, nargs='+', help="file to process")
+    parser.add_argument("-i", "--in-place", help="saves output in place", action="store_true")
+    script_directory, script_name = os.path.split(__file__)
+    script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
+    print(script_txt)
+    ar = parser.parse_args(args)
+    pprint(ar)
+
+if __name__ == '__main__':
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
+    logging_conf()
+    try:
+        go(sys.argv[1:])
+    except BaseException as e:
+        logging.exception('oups')
+        raise e
+
+""".replace('___', '"""'))
+    os.chmod(fp, 0740)
+    print(fp)
+
+if False:
+    """ doesn't work, just use alias in .bashrc """
+    import pbs
+    vi = pbs.Command(r'D:\cygwin64\bin\vim.exe')
+    vi(sys.argv[1])
+

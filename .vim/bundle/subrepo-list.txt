@@ -1,0 +1,13 @@
+Align/               https://github.com/vim-scripts/Align.git
+AnsiEsc/             https://github.com/vim-scripts/AnsiEsc.vim.git
+AutoComplPop/        https://github.com/vim-scripts/AutoComplPop.git
+bufexplorer/         https://github.com/jlanzarotta/bufexplorer.git
+colorschemes/        https://github.com/flazz/vim-colorschemes.git
+ingo-library/        https://github.com/vim-scripts/ingo-library.git
+puppet/              https://github.com/rodjek/vim-puppet.git
+SyntaxRange/         https://github.com/vim-scripts/SyntaxRange.git
+tabular/             https://github.com/godlygeek/tabular.git
+vim-fugitive/        https://github.com/tpope/vim-fugitive.git
+vim-gitgutter/       https://github.com/airblade/vim-gitgutter.git
+vim-indentwise/      https://github.com/jeetsukumaran/vim-indentwise
+youcompleteme/       https://github.com/Valloric/YouCompleteMe.git

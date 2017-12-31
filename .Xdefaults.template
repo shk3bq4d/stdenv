@@ -1,0 +1,173 @@
+! $STDHOME_GENERATED_TIME
+! xrdb -merge ~/.Xdefaults
+! https://wiki.archlinux.org/index.php/rxvt-unicode#Changing_font_size_on_the_fly
+! https://wiki.archlinux.org/index.php/rxvt-unicode#Colors
+! https://wiki.archlinux.org/index.php/rxvt-unicode#Cut_and_paste
+! https://wiki.archlinux.org/index.php/rxvt-unicode#My_numerical_keypad_acts_weird_and_generates_differing_output.3F_.28e.g._in_vim.29
+
+URxvt.scrollBar: False
+!URxvt.font: xft:Monospace:pixelsize=18
+
+! LiberationMono-Bold
+! DejaVuSansMono
+! UbuntuMono-B
+!urxvt*font: xft:DejaVuSansMono:size=12:antialias=true
+$STDHOME_FONT
+!URxvt.font: -jis-fixed-medium-r-normal--24-170-100-100-c-240-jisx0208.1983-0
+!URxvt.perl-lib:$HOME/.urxvt/ext/
+!URxvt.font:     xft:bitstream vera sans mono:size=14:antialias=true
+!urxvt*font: xft:DejaVu Sans Mono:size=15:antialias=true:style=Book
+!URxvt.boldFont: xft:bitstream vera sans mono:bold:size=11:antialias=true
+!
+!		9x15,\
+!                          -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1, \
+!                          [codeset=JISX0208]xft:Kochi Gothic:antialias=false, \
+!                          xft:Code2000:antialias=false
+
+! /usr/lib/urxvt/perl/
+!URxvt.perl-ext:
+!space between fonts
+URxvt.letterSpace: -2
+URxvt*foreground: rgb:44/44/44
+!URxvt*color12: rgb:5c/5c/ff
+!URxvt.perl-ext-common: clipboard-osc,font-size,vim-scrollback
+!URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
+URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default
+!URxvt.perl-ext: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
+URxvt.url-launcher: chromium-browser
+URxvt.matcher.button: 1
+URxvt.clipboard.autocopy: True
+!,digital-clock
+URxvt.keysym.C-Left:   perl:randombackground:all
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+!URxvt*termName: rxvt-unicode-256color
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-n: perl:keyboard-select:activate
+! The following line overwrites the default Meta-s binding and allows to
+! activate keyboard-select directly in backward search mode:
+URxvt.keysym.M-s: perl:keyboard-select:search
+
+! Normal
+! color0    black
+! color1    red
+! color2    green
+! color3    yellow
+! color4    blue
+! color5    purple
+! color6    cyan
+! color7    white
+
+!urxvt*color0:    #6c6c6c
+!urxvt*color1:    #e9897c
+!urxvt*color2:    #b6e77d
+!urxvt*color3:    #848400
+!urxvt*color4:    #a9cdeb
+!urxvt*color5:    #ea96eb
+!urxvt*color6:    #c9caec
+!urxvt*color7:    #f2f2f2
+
+! Light
+! color8    black
+! color9    red
+! color10    green
+! color11    yellow
+! color12    blue
+! color13    purple
+! color14    cyan
+! color15    white
+
+!urxvt*color8:    #747474
+!urxvt*color9:    #f99286
+!urxvt*color10:    #c3f786
+!urxvt*color11:    #fcfbcc
+!urxvt*color12:    #b6defb
+!urxvt*color13:    #fba1fb
+!urxvt*color14:    #d7d9fc
+!urxvt*color15:    #e2e2e2
+
+!URxvt*skipBuiltinGlyphs:    true
+!urxvt*depth: 32
+!urxvt*transparent: true
+!urxvt*shading: 30
+!URxvt.print-pipe: cat > $(TMPDIR=$HOME/tmp/ mktemp urxvt.XXXXXX)
+URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
+! /* ex: set filetype=xdefaults : */
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+!#define S_green         #859900
+#define S_green         #00aa00
+
+
+! Dark
+
+! #define S_base03        #002b36
+! #define S_base02        #073642
+! #define S_base01        #586e75
+! #define S_base00        #657b83
+! #define S_base0         #839496
+! #define S_base1         #93a1a1
+! #define S_base2         #eee8d5
+! #define S_base3         #fdf6e3
+
+
+! Light
+
+#define S_base03        #fdf6e3
+#define S_base02        #eee8d5
+#define S_base01        #93a1a1
+#define S_base00        #839496
+#define S_base0         #657b83
+#define S_base1         #586e75
+#define S_base2         #073642
+#define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            S_base03
+
+*background:              S_base03
+*foreground:              S_base0
+*fading:                  40
+*fadeColor:               S_base03
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1
+
+*color0:                  S_base02
+*color1:                  S_red
+*color2:                  S_green
+*color3:                  S_yellow
+*color4:                  S_blue
+*color5:                  S_magenta
+*color6:                  S_cyan
+*color7:                  S_base2
+*color9:                  S_orange
+*color8:                  S_base03
+*color10:                 S_base01
+*color11:                 S_base00
+*color12:                 S_base0
+*color13:                 S_violet
+*color14:                 S_base1
+*color15:                 S_base3
+
+! /* ex: set filetype=xdefaults: */

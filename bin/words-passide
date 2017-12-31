@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh :
+
+b=$(basename $0 .sh)
+b=${b//words-/}
+
+cat ~/.words/$b | tr -d '\r\n'
+
