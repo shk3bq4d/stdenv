@@ -344,3 +344,5 @@ gitk # graph gui
 
 # https://help.github.com/articles/removing-sensitive-data-from-a-repository/
 # https://rtyley.github.io/bfg-repo-cleaner/
+
+git rev-parse --abbrev-ref HEAD # current branch
