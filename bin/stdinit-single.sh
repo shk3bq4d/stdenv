@@ -13,7 +13,11 @@ set -euxo pipefail
 unset GIT_DIR
 unset GIT_WORK_TREE
 
-worktree=$(git rev-parse --show-toplevel)
+while :; do
+	worktree=$(git rev-parse --show-toplevel)
+	[[ -n $worktree ]] && break
+	cd ..
+done
 gitdir="$(readlink -f "$(git rev-parse --git-dir)")"
 curbranch=$(git rev-parse --abbrev-ref HEAD)
 mrgit_dir=$worktree/.mrgit/$curbranch
