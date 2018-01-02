@@ -27,6 +27,7 @@ if [[ -d $mrgit_dir ]]; then
 		</dev/tty ln -fs $mrgit_dir/${f:2} $gitdir/${f:2}
 	done
 fi
+if false; then
 module_file=$worktree/.mrgit/${curbranch}.modules
 if [[ -f $module_file ]]; then
 	cd $worktree
@@ -35,9 +36,11 @@ if [[ -f $module_file ]]; then
 		do
 			url_key=$(echo $path_key | sed 's/\.path/.url/')
 			url=$(git config -f $module_file --get "$url_key")
-			git --git-dir=$gitdir status $path &>/dev/null || git --git-dir=$gitdir submodule add $url $path
+			git --git-dir=$gitdir submodule status $path &>/dev/null || \
+				git --git-dir=$gitdir submodule add $url $path
 		done
 	[[ -f $worktree/.gitmodules ]] && git --git-dir=$gitdir rm --force $worktree/.gitmodules
+fi
 fi
 	
 
