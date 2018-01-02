@@ -71,6 +71,11 @@ setxkbmap -layout us -variant dvp # dvorak programmer
 * apt install dvorak7min && dvorak7min
 * npm install dvorak-programmers-tutorial && nodejs ~/node_modules/dvorak-programmers-tutorial/index.js -k 01
 * http://play.typeracer.com/
+ * http://play.typeracer.com/?universe=code
+ * http://play.typeracer.com/?universe=easytexts
+ * http://play.typeracer.com/?universe=indonesian2
+ * http://play.typeracer.com/?universe=worthless_impossible_stupid
+ * http://play.typeracer.com/?universe=championship
 * https://learn.dvorak.nl/?lesson=5
 * sudo apt install florence
 
