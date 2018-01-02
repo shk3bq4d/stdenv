@@ -27,6 +27,17 @@ if [[ -d $mrgit_dir ]]; then
 		</dev/tty ln -fs $mrgit_dir/${f:2} $gitdir/${f:2}
 	done
 fi
+module_file=$worktree/.mrgit/${curbranch}.modules
+if [[ -f $module_file ]]; then
+	git config -f $module_file --get-regexp '^submodule\..*\.path$' |
+		while read path_key path
+		do
+			url_key=$(echo $path_key | sed 's/\.path/.url/')
+			url=$(git config -f $module_file --get "$url_key")
+			git --git-dir=$gitdir submodule add $url $path
+		done
+	[[ -f .gitmodules ]] && git rm $worktree/.gitmodules
+fi
 	
 
 echo EOF
