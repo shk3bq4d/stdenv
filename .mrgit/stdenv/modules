@@ -1,0 +1,36 @@
+[submodule ".vim/bundle/Align"]
+	path = .vim/bundle/Align
+	url = https://github.com/vim-scripts/Align.git
+[submodule ".vim/bundle/AutoComplPop"]
+	path = .vim/bundle/AutoComplPop
+	url = https://github.com/vim-scripts/AutoComplPop.git
+[submodule ".vim/bundle/colorschemes"]
+	path = .vim/bundle/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule ".vim/bundle/puppet"]
+	path = .vim/bundle/puppet
+	url = https://github.com/rodjek/vim-puppet.git
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+[submodule ".vim/bundle/AnsiEsc"]
+	path = .vim/bundle/AnsiEsc
+	url = https://github.com/vim-scripts/AnsiEsc.vim.git
+[submodule ".vim/bundle/SyntaxRange"]
+	path = .vim/bundle/SyntaxRange
+	url = https://github.com/vim-scripts/SyntaxRange.git
+[submodule ".vim/bundle/bufexplorer"]
+	path = .vim/bundle/bufexplorer
+	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule ".vim/bundle/ingo-library"]
+	path = .vim/bundle/ingo-library
+	url = https://github.com/vim-scripts/ingo-library.git
+[submodule ".vim/bundle/Dockerfile"]
+	path = .vim/bundle/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim
+[submodule ".vim/colorschemes"]
+	path = .vim/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule ".vim/bundle/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
