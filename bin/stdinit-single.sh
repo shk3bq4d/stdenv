@@ -13,14 +13,14 @@ set -euxo pipefail
 unset GIT_DIR
 unset GIT_WORK_TREE
 
-c=$(git rev-parse --show-toplevel)
-g=$(git rev-parse --git-dir)
+worktree=$(git rev-parse --show-toplevel)
+gitdir="$(readlink -f "$(git rev-parse --git-dir)")"
 curbranch=$(git rev-parse --abbrev-ref HEAD)
-d=$c/.mrgit/$curbranch
-if [[ -d $d ]]; then
-	cd $d
+mrgit_dir=$worktree/.mrgit/$curbranch
+if [[ -d $mrgit_dir ]]; then
+	cd $mrgit_dir
 	find . -type f | while read f; do
-		ln -is $d/${f:2} $g/${f:2}
+		</dev/tty ln -fs $mrgit_dir/${f:2} $gitdir/${f:2}
 	done
 fi
 	
