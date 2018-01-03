@@ -18,8 +18,12 @@ while :; do
 	[[ -n $worktree ]] && break
 	cd ..
 done
-gitdir="$(readlink -f "$(git rev-parse --git-dir)")"
+if ! git rev-parse --abbrev-ref HEAD &>/dev/null; then
+	echo "ABORTING with exit code 0 as repo likely has no revision due to impossibly to have fetched remote?"
+	exit 0
+fi
 curbranch=$(git rev-parse --abbrev-ref HEAD)
+gitdir="$(readlink -f "$(git rev-parse --git-dir)")"
 mrgit_dir=$worktree/.mrgit/$curbranch
 if [[ -d $mrgit_dir ]]; then
 	cd $mrgit_dir
