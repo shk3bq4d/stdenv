@@ -3,6 +3,7 @@ AnsiEsc/             https://github.com/vim-scripts/AnsiEsc.vim.git
 AutoComplPop/        https://github.com/vim-scripts/AutoComplPop.git
 bufexplorer/         https://github.com/jlanzarotta/bufexplorer.git
 colorschemes/        https://github.com/flazz/vim-colorschemes.git
+dockerfile/			 https://github.com/ekalinin/Dockerfile.vim.git
 ingo-library/        https://github.com/vim-scripts/ingo-library.git
 puppet/              https://github.com/rodjek/vim-puppet.git
 SyntaxRange/         https://github.com/vim-scripts/SyntaxRange.git
