@@ -7,3 +7,4 @@ sudomrenv() {
 	esac
 }
 sudomr_hooks+=('sudomrenv')
+alias gitenv='git --git-dir=$STDHOME_DIRNAME/../stdenv/.git'
