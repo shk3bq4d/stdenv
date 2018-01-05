@@ -57,7 +57,7 @@ process() {
 		return 0
 	fi
 	for g in $(stdothers.sh); do
-		if git --git-dir="$g/.git" log -1 --oneline "$f" | grep -q " " &>/dev/null; then
+		if git --git-dir="$g/.git" log -1 --oneline "$f" 2>/dev/null | grep -q " "; then
 			mrprint "$f" "$(basename "$g")"
 			return 0
 		fi
