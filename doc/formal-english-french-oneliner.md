@@ -9,4 +9,8 @@ leaving at precisely 11:34 for K0 cafetaria blitz lunch (< 15 min). One car seat
 # Git
 see parent commit(s) message(s) for more info about this tag
 
+# email
+You have been included in the communication because we believe that you are a likely consumer of this information and could base your operations or decisions on its results.
+
+# vocabulary
 obfuscation obfuscated # incorrect greppable list: obuscated obfucated
