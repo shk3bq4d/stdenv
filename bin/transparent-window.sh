@@ -26,8 +26,8 @@ set -euo pipefail
 # exec 2>&1
 #
 
-urxvt -name mrmagicstring_comptontransparent -e cat
+k=mrmagicstring_comptontransparent
+urxvt -title $k -e cat - &
 
-echo EOF
 exit 0
 
