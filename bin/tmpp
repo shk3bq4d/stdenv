@@ -19,5 +19,11 @@ done
 
 newdir="${ROOT}/tmpp/$(date +'%Y%m%d')"
 [[ ! -d $newdir ]] && mkdir -p $newdir
-[[ -L ~/tmp ]] && rm ~/tmp
-ln -s $newdir ~/tmp
+target=~/tmp
+if [[ "$(readlink -f "$newdir")" == "$(readlink -f "$target")" ]] && [[ -L $target ]]; then
+	exit 0
+fi
+[[ -L $target ]] && rm $target
+[[ -d $target ]] && rmdir $target
+[[ -e $target ]] && echo "FATAL: can't get rid of existing $target" && exit 1
+ln -s $newdir $target
