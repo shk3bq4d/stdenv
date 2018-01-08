@@ -35,10 +35,11 @@ fi
 repo_file=$worktree/.mrgit/${curbranch}-repo.txt
 if [[ -f $repo_file ]]; then
 	cat $repo_file | while read dir url; do
+		dir="$worktree/$dir"
 		[[ -d "$dir" ]] && continue
-		# parentdir="$(dirname "$dir")"
-		# [[ -d "$parentdir" ]] || mkdir -p "$parentdir"
-	    git clone $url "$parentdir"
+		parentdir="$(dirname "$dir")"
+		[[ -d "$parentdir" ]] || mkdir -p "$parentdir"
+	    git clone $url "$dir"
 	done
 fi
 	
