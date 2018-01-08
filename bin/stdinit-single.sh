@@ -31,6 +31,17 @@ if [[ -d $mrgit_dir ]]; then
 		</dev/tty ln -fs $mrgit_dir/${f:2} $gitdir/${f:2}
 	done
 fi
+
+repo_file=$worktree/.mrgit/${curbranch}-repo.txt
+if [[ -f $repo_file ]]; then
+	cat $repo_file | while read dir url; do
+		[[ -d "$dir" ]] && continue
+		# parentdir="$(dirname "$dir")"
+		# [[ -d "$parentdir" ]] || mkdir -p "$parentdir"
+	    git clone $url "$parentdir"
+	done
+fi
+	
 if false; then
 module_file=$worktree/.mrgit/${curbranch}.modules
 if [[ -f $module_file ]]; then
