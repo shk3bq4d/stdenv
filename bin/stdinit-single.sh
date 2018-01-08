@@ -39,7 +39,7 @@ if [[ -f $repo_file ]]; then
 		[[ -d "$dir" ]] && continue
 		parentdir="$(dirname "$dir")"
 		[[ -d "$parentdir" ]] || mkdir -p "$parentdir"
-	    git clone $url "$dir"
+	    git clone $url "$dir" || true
 	done
 fi
 	
