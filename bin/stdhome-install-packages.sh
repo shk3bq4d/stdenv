@@ -67,12 +67,16 @@ unset PYTHONPATH
 pip3=()
 pip3+=('i3ipc')
 pip3+=('requests')
+#pip3+=('procinfo') # installation seem to fail when done at the same time as psutil....
+pip3+=('psutil')
 pip3+=('sh')
 pip3 install --user ${pip3[@]}
 
 pip=()
 pip+=('i3ipc')
 pip+=('requests')
+# pip+=('procinfo') # installation seem to fail when done at the same time as psutil....
+pip+=('psutil')
 pip+=('kazoo')
 pip+=('websocket-client')
 pip+=('sh')
