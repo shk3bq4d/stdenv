@@ -893,6 +893,8 @@ out = '\n'.join(map(str.strip, s.communicate()))
 from ruamel import yaml; yaml.dump({})
 import yaml; yaml.dump({})
 import yaml; yaml.safe_dump({}, default_flow_style=False)
+from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""
+    """)))
 
 
 from dateutil import parser

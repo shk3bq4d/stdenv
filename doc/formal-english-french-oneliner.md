@@ -6,6 +6,10 @@ leaving at precisely 11:34 for K0 cafetaria blitz lunch (< 15 min). One car seat
 # Jira
 @reporter: (this is unrelated to this specific ticket. Could you please get rid of your signature when interacting with JIRA using the email interface as it make it hard for everybody to distinguish what is part of the signature and what is part of the content)
 
+As far as I am aware, there hasn't been any news on this subject. As to not clog the progress board, I mark this ticket as DONE. Please feel free to reopen it or create a new ticket should you feel otherwise.
+
+zabbix hostgroup creation request for global/emea/us customer pssigroup.com/iu.com
+
 # Git
 see parent commit(s) message(s) for more info about this tag
 
