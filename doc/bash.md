@@ -955,3 +955,5 @@ fi
 echo "s = ${s}"
 echo "p = ${p}"
 echo "rest = $@"
+
+echo 'scale =  3; 10829 / 1560'  | bc
