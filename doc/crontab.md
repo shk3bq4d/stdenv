@@ -35,5 +35,5 @@ SHELL="/bin/bash
 # escapes
 date +'\%Y\%m\%d'
 
-30 08 * * * env > /tmp/cronenv
-30 08 * * * env > ~/.tmp/cronenv
+30 08 * * * env | sort > /tmp/cronenv
+30 08 * * * env | sort > ~/.tmp/cronenv

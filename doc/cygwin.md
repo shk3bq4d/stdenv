@@ -57,3 +57,5 @@ apt-cyg update
 apt-cyg install php
 	
 http://babun.github.io/
+
+https://stackoverflow.com/questions/37243087/how-to-install-sshpass-on-windows-through-cygwin

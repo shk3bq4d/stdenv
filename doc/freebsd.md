@@ -1,4 +1,5 @@
 # when booted in single user, remount root file system as writable
+// https://github.com/gautamkrishnar/tcso/blob/master/javascript/tcso.js
 mount -uw /
 
 # ntpd keep time

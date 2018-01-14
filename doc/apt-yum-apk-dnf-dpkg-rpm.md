@@ -1,3 +1,4 @@
+# APT
 apt-get changelog pkgname
 sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
@@ -11,7 +12,7 @@ apt list --installed
 /etc/apt/sources.list.d/
 echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-httproxy
 
-
+# YUM
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x
 yum list installed 'http*'
@@ -22,7 +23,7 @@ apk: dig => bind-tools
 
 rpm -qa | grep rsyslog
 
-
+# APK
 # cat /etc/alpine-release
 3.3.3
 # echo 'http://dl-cdn.alpinelinux.org/alpine/v3.2/main' >> /etc/apk/repositories
@@ -48,7 +49,7 @@ apk update && apk add python2 py2-pip
 sudo yum install -y nmap-ncat
 sudo yum install -y which
 
-# Fedora
+# Fedora DNF
 dnf provides /bin/find
 dnf install neomutt offlineimap notmuch perl-Email-Sender perl-MailTools perl-Mail-Box -y 
 dnf copr enable flatcap/neomutt -y
@@ -66,3 +67,6 @@ npm install graylog-cli-dashboard@0.13
 iputils-ping: /bin/ping
 inetutils-ping: /bin/ping
 
+
+# FreeBSD PKG
+pkg info -D zoneminder
