@@ -5,6 +5,8 @@ SHELL=/usr/local/bin/bash
 PYTHONPATH=/home/myuser/py
 LANG=en_US.utf8
 LC_TIME=en_DK.utf
+HOSTNAME=bip
+HOSTNAMEF=bip.ly.lan
 
 MAILTO="a@b.com,b@b.com"
 When your cron jobs have output, or, more importantly, when they fail, cron will send the output e-mail these addresses.
@@ -35,5 +37,5 @@ SHELL="/bin/bash
 # escapes
 date +'\%Y\%m\%d'
 
-30 08 * * * env | sort > /tmp/cronenv
 30 08 * * * env | sort > ~/.tmp/cronenv
+30 08 * * * ~/bin/mrlsyncd.sh
