@@ -251,6 +251,7 @@ https://github.com/Valloric/YouCompleteMe#options
 # https://robots.thoughtbot.com/wrap-existing-text-at-80-characters-in-vim
 :set textwidth=80
 (optional in vimrc: ) au BufRead,BufNewFile *.md setlocal textwidth=80
-v
-gq
+v # select lines on which to apply
+gq # apply
 (optional :help gq)
+# or more symply using the C-j alias configured in .vimrc map <C-j> gq} '.

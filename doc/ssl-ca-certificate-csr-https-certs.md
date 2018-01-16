@@ -57,6 +57,8 @@ systemctl reload httpd
 cacert password -> changeit
 keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
+keytool -import -trustcacerts -file KS-CFC-Root_KS-CFC-Root.crt -alias KS-CFC-Root -keystore ks-cacerts2.jks -storepass HqBcm
+keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS-CFC-Issuing-01 -keystore ks-cacerts.jks -storepass HqBcm
 /e/me/global/java/FwBrowse/nbproject/build-impl.xml
 <signjar
           jar="${dist.jar}"
