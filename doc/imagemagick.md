@@ -37,6 +37,7 @@ pngcheck
 convert $i -fuzz 28% -fill black -opaque white -opaque "rgb(216,217,62)" $o && feh $o # convert colors white and rgb(216,217,62) to black
 convert kim-kardashian-celebrity-mask.jpg -fuzz 2% -transparent white  -resize 128x128 bip.png
 convert kim-kardashian-celebrity-mask.jpg -fuzz 2% -transparent white  -crop 500x500+130+50 -resize 128x128 bip.png && command feh bip.png
+convert awesome.png -fuzz 10% -transparent white  -resize '264x264!' -resize 128x128 bip.png && command feh bip.png # rezize likely distorted the image, true solution may have thumbnail of https://stackoverflow.com/questions/2130288/imagemagick-resize-image-to-square
 
 
 #f00                      #rgb
@@ -59,3 +60,9 @@ convert -bordercolor 'rgb(0,255,0)' -border 10 image.jpg image.png
 convert -bordercolor 'rgb(0,100%,0)' -border 10 image.jpg image.png
 
 # http://www.fmwconcepts.com/imagemagick/magicwand/
+
+
+convert -coalesce brocoli.gif out%05d.gif # convert -coalesce brocoli.gif out%05d.pgm
+magicwand 1,1 -t 10 -o 0 in.gif out.gif
+magicwand 0,0 -r outside -c red extracted00000.gif /var/www/html/out.gif
+convert -delay 0 -loop 0 -alpha set -dispose 2 extr*gif screencapture.gif

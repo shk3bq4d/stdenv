@@ -176,9 +176,10 @@ zX restore original folds (do it on both buffers)
 
 
 # fold
-zA # expands recursively
-za # expands 
-zC # closes recusriveley
+:{range}fo[ld] creat a fold for the lines in range
+zA # expands folds recursively 
+za # expands fold
+zC # closes  fold recusriveley
 zX # undo manual folds
 
 BASEDIR=~/.vim && mkdir -p $BASEDIR/autoload $BASEDIR/bundle && \

@@ -424,6 +424,11 @@ for_window [class="Vncviewer"] border normal
 for_window [class="VisualVM*"] border normal
 for_window [class="keepassxc"] border normal
 for_window [class="keepassxc"] floating enable
+for_window [class="Gitk"] fullscreen enable
+for_window [class="Gitk"] border normal
+# doesn't seem to work
+for_window [floating] border normal
+no_focus [window_role="pop-up"]
 
 exec --no-startup-id feh --bg-scale ~/Pictures/i3lock/boreal3.png
 exec --no-startup-id ~/bin/startup/mrredshift.sh

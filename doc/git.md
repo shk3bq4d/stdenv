@@ -18,6 +18,9 @@ git help -g
 # Don't do it if you have uncommitted work you want to keep.
 git reset --hard 0d1d7fc32
 
+git checkout -- <file> # revert reset discard unstaged change
+git checkout -- . # forget revert reset discard unstaged change
+
 git branch # list of branches
 git branch -a # list of branches including remote
 git remote show origin # list remote branches
@@ -206,7 +209,7 @@ RB=master; LB=master; R=origin; git fetch $R && git diff $LB $R/$RB # http://sta
 
 
 git branch -d bip # delete rm remove local branch
-git branch -dr bip # delete rm remove local branch as well as remote
+git push origin --delete bip # delete rm remove remote branch
 
 
 git ls-files --deleted -z | xargs -0 git rm # https://stackoverflow.com/questions/492558/removing-multiple-files-from-a-git-repo-that-have-already-been-deleted-from-disk git autoremove files no longer present
@@ -341,6 +344,9 @@ HEAD~
 d921970^2 means “the second parent of d921970" (only useful for commit with multiple parents such as merge commit)
 
 gitk # graph gui
+gitk --simplify-by-decoration --all
+gitk master origin/master origin/experiment
+gitk --all
 
 # https://help.github.com/articles/removing-sensitive-data-from-a-repository/
 # https://rtyley.github.io/bfg-repo-cleaner/

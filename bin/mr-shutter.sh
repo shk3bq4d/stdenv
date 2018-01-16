@@ -23,7 +23,7 @@ count() {
 	find $DIR -maxdepth 1 -type f | wc -l
 }
 
-count_compton=$(pgrep -c compton)
+count_compton=$(pgrep -c compton || true)
 if [[ $count_compton -gt 0 ]]; then
 	{
 		mv    ~/.config/i3/compton.conf{,2}
