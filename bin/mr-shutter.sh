@@ -17,9 +17,10 @@ function usage() { sed -r -n -e s/__SCRIPT__/$0/ -e '/^##/s/^..// p'   $0 ; }
 
 [[ $# -lt 0 || $# -gt 0 ]] && echo FATAL: incorrect number of args && usage && exit 1
 
+DIR=~/Pictures/shutter
+[[ ! -d $DIR ]] && mkdir -p $DIR
 #for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i && exit 1; done
 count() {
-	DIR=~/Pictures/shutter
 	find $DIR -maxdepth 1 -type f | wc -l
 }
 

@@ -33,6 +33,7 @@ os+=('i3')
 os+=('i3status')
 os+=('ipcalc')
 os+=('lsyncd')
+os+=('net-tools') # netstat
 os+=('parcellite')
 os+=('pavucontrol')
 os+=('python-pip')
