@@ -29,3 +29,12 @@ R     Retour: section reliant un interrupteur (et donc, de façon intermittente,
    celle entre le retour et le neutre est nulle.
  * si l'interrupteur est fermé la tension entre phase et retour est de 0 V et
    celle entre le retour et le neutre est de 230 V.
+
+
+BN Brown Marron
+BU Blue  bleu
+GN/YE Green/Yellow
+BK Black noir
+GY Gray gris
+
+https://worldstandards.eu/electricite.htm
