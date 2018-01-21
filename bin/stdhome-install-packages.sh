@@ -44,6 +44,7 @@ os+=('shutter')
 os+=('util-linux') # tailf
 os+=('vim-gtk')
 os+=('xclip')
+os+=('x11-utils') # xprop used in some i3.py mr scripts
 os+=('zsh')
 os+=('apt-transport-https') # docker-ce
 os+=('ca-certificates') # docker-ce
@@ -74,6 +75,7 @@ pip3+=('requests')
 #pip3+=('procinfo') # installation seem to fail when done at the same time as psutil....
 pip3+=('psutil')
 pip3+=('sh')
+pip3+=('sshuttle')
 pip3 install --user ${pip3[@]}
 
 pip=()
