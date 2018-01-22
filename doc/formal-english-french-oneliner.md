@@ -16,6 +16,22 @@ see parent commit(s) message(s) for more info about this tag
 # email
 You have been included in the communication because we believe that you are a likely consumer of this information and could base your operations or decisions on its results.
 
+# email consultant français
+Bonjour,
+
+Je vous remercie pour votre email et de l'intérêt que vous prêter à mon profil.
+
+Malheureusement, je ne suis pas en écoute active du marché en ce moment et ne souhaite donc pas donner suite à cette possibilité.
+
+Soyez assuré que je me permettrai de vous recontacter lorsque mes prédispositions auront évoluées.
+
+En vous priant de croire à l'expression de mes sentiments les plus sincères, je vous souhaite bonne suite dans vos recherches ainsi qu'une excellente journée.
+
+Cordialement,
+
+
 # vocabulary
 obfuscation obfuscated # incorrect greppable list: obuscated obfucated
 prioritize # priorize
+
+
