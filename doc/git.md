@@ -325,6 +325,10 @@ git checkout `git rev-list -n 1 --before="2009-07-27 13:37" master`
 git config -e
 [filter "ssh_config"]                                                                
     clean = "sed -r -e '/# ?(gitignore|sedkatello|sedvirtualbox)$/'d"
+config filter=ssh_config # part of WORKDIR/.gitattributes ~/.gitattributes or GIT_DIR/attributes
+
+
+git format-patch HEAD^ # see detailed diff changes (including file mode) # https://stackoverflow.com/questions/14564946/git-status-shows-changed-files-but-git-diff-doesnt
 
 git config --global branch.autosetuprebase always
 
