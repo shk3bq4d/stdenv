@@ -29,6 +29,14 @@ En vous priant de croire à l'expression de mes sentiments les plus sincères, j
 
 Cordialement,
 
+# email consultant français, suite connaissez-vous quelqu'un
+Bonjour,
+
+Malheureusement non.
+
+Cordialement,
+
+
 
 # vocabulary
 obfuscation obfuscated # incorrect greppable list: obuscated obfucated
