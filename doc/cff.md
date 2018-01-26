@@ -1,4 +1,14 @@
 
+De Vufflens-la-Ville, à Vevey
+Relation du sam., 27.01.2018
+1	Vufflens-la-Ville	dép.	21:06	57 min	2	S1, S5, IR90 Vevey arr.	22:03
+2	Vufflens-la-Ville	dép.	21:42	39 min	0	S2           Vevey arr.	22:21
+3	Vufflens-la-Ville	dép.	21:50	44 min	1	S1, IR90     Vevey arr.	22:34
+4	Vufflens-la-Ville	dép.	22:06	57 min	2	S1, S5, IR90 Vevey arr.	23:03
+5	Vufflens-la-Ville	dép.	22:42	39 min	0	S2           Vevey arr.	23:21
+
+
+
 De Vufflens-la-Ville, à Sion
 
 Vue d’ensemble
