@@ -34,7 +34,6 @@ if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
 	while :; do
 		echo -en "\nChoose your capsule [$last_capsule]: "
 		read response
-		echo "r:$response c:$choice"
 		if [[ -z $response ]]; then
 			if [[ -n $last_capsule ]]; then
 				capsule=$last_capsule
@@ -47,8 +46,9 @@ if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
 	done
 
 	echo -e "\ncapsule is $capsule\n"
-	puppet-file-to-capsule.sh $capsule $SCRIPT
-	echo -n $capsule > $last_capsule_fp
+	# optional PATH assignment to override version in ~/bin, to test work copy
+	export PATH=~/git/ksgitlab/cfc/ide-infra/scripts:$PATH
+	puppet-file-to-capsule.sh $capsule $SCRIPT && echo -n $capsule > $last_capsule_fp
 	
 	exit 0
 fi
