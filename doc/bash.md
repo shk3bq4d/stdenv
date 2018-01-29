@@ -369,7 +369,7 @@ unlock()            { _lock u; }   # drop a lock
  
 # Simplest example is avoiding running multiple instances of script.
 exlock_now || exit 1
-. /d/bin/lock_funcs.sh; exlock_now || exit 1
+. ~/bin/dot.lockfunctions; exlock_now || exit 1
  
 # Remember! Lock file is removed when one of the scripts exits and it is
 #           the only script holding the lock or lock is not acquired at all.

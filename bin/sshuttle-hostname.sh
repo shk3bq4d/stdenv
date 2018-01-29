@@ -47,7 +47,10 @@ LIST="$(sort -un <<<"$LIST")"
 # exec 2>&1
 #
 #
-echo sshuttle $JUMP $LIST
+sshuttle -v -r  $JUMP $LIST
+# sshuttle -l 0.0.0.0 -v -r  $JUMP $LIST # makes it available to docker containers
+# https://stackoverflow.com/questions/29838892/how-to-let-docker-container-work-with-sshuttle
+
 
 echo EOF
 exit 0
