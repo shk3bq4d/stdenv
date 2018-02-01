@@ -8,6 +8,7 @@ exec 2>&1
 
 # puppet module to capsule
 if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
+	last_host_fp=~/.tmp/vimf6-last_host
 	last_capsule_fp=~/.tmp/vimf6-last_capsule
 	all_capsule_fp=~/.tmp/vimf6-all_capsule
 
@@ -47,8 +48,30 @@ if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
 
 	echo -e "\ncapsule is $capsule\n"
 	# optional PATH assignment to override version in ~/bin, to test work copy
-	export PATH=~/git/ksgitlab/cfc/ide-infra/scripts:$PATH
+	# export PATH=~/git/ksgitlab/cfc/ide-infra/scripts:$PATH
 	puppet-file-to-capsule.sh $capsule $SCRIPT && echo -n $capsule > $last_capsule_fp
+	if [[ -f $last_host_fp ]]; then
+		last_host=$(<$last_host_fp)
+	else
+		last_host=""
+	fi
+	echo -en "\nWould you like to execute a puppet agent run [${last_host^^},y,n]: "
+	read response
+	case $response in \
+	n|N) exit 0 ;;
+	y|Y|"")
+		target=$last_host
+		ssh $target true || { echo "FATAL: not a (a) host $target"; exit 1; }
+		;;
+	*)
+		target=$response
+		ssh $target true && echo $target > $last_host_fp || { echo "FATAL: not a (b) host $target"; exit 1; }
+		;;
+	esac
+	echo # ex: set paste! wrap! number!=:
+	echo "ssh $target sudo /opt/puppetlabs/puppet/bin/puppet agent -t"
+	ssh $target sudo /opt/puppetlabs/puppet/bin/puppet agent -t
+	echo ":AnsiEsc/F3 is your friend to colorize input"
 	
 	exit 0
 fi

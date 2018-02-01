@@ -1,15 +1,17 @@
-sudo vi /etc/default/grub && sudo update-grub
+s=>udo vi /etc/default/grub && sudo update-grub
 
 #GRUB_CMDLINE_LINUX_DEFAULT="quiet splash int>
 GRUB_CMDLINE_LINUX_DEFAULT="intel_iommu=on"
 GRUB_CMDLINE_LINUX=""
 
 
-# ubuntu bash
+# ubuntu bash, also worked on centos
 select Ubuntu option
 e
 goto almost last line (one that starts with linux) and add init=/bin/bash
-<F10>
+<F10> or C-X
+mount -o rw,remount /
+
 
 # CentOS 7
 Click [View Console] to access the console and click the send CTRL+ALT+DEL button on the top right. Alternatively, you can also click [RESTART] to restart the server.

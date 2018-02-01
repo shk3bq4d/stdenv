@@ -18,7 +18,8 @@ yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questio
 yum list installed 'http*'
 yum info elasticsearch
 yum whatprovides ack
-yum whatprovides dig => bind-utils
+yum whatprovides dig    # bind-utils
+yum whatprovides locate # mlocate
 apk: dig => bind-tools
 
 rpm -qa | grep rsyslog
