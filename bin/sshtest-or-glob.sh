@@ -11,6 +11,9 @@
 
 set -euo pipefail
 
+exec > >(tee -a ~/.tmp/sshtest-or-glob.log)
+exec 2>&1
+
 ARG1="$1"
 shift
 #set -f # disable bash shell expansion
