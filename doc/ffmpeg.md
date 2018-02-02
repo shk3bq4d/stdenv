@@ -10,3 +10,6 @@ ffmpeg -i 20170318_100335.mp4  -filter:v "setpts=0.2*PTS"  -an out.mp4
 
 
 ffmpeg -i input.avi -vf scale=320:240 output.avi # resample scale image or video
+
+
+ffmpeg -i in.mp4 out.mp3 # extracts only sound
