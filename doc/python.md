@@ -459,6 +459,7 @@ a if test else b
 
 os.getcwd() # current working directory pwd 
 os.environ['HOME'] # environment variable
+os.path.expanduser("~/.ssh/config")
 os.sep # path separator
 
 
@@ -955,3 +956,4 @@ except sh.ErrorReturnCode_2:
 
 # https://amoffat.github.io/sh/
 sh.cat(_in="_in is stdin")
+sh.Command('ssh-keygen')
