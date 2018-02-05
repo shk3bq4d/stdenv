@@ -427,6 +427,7 @@ for_window [class="keepassxc"] border normal
 for_window [class="keepassxc"] floating enable
 for_window [class="Gitk"] fullscreen enable
 for_window [class="Gitk"] border normal
+for_window [class="Kodi"] fullscreen enable
 # doesn't seem to work
 for_window [floating] border normal
 no_focus [window_role="pop-up"]
