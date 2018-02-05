@@ -57,7 +57,7 @@ blockwise visual mode
 usually it's <C-v> (which doesn't work since y used it for system paste)
         or   <C-q> (which doesn't work for me in cygwin for reasons I can't understand)
 set virtualedit=all
-so in .vimrc i used :map <C-i> <C-q>
+so in .vimrc i used :map <C-i> <C-q> # vertical blockwise visual mod
 
 
 filter external command on every lines
