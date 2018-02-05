@@ -24,5 +24,5 @@ exec --no-startup-id nm-applet
 exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
-exec --no-startup-id kodi
+exec --no-startup-id sleep 20 && kodi
 '
