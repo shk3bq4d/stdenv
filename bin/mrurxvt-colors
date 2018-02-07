@@ -40,3 +40,25 @@ randomcolor() {
 	export MRCOLOR=${ELEM}-$_MRCOLOR
 
 }
+showcolors() {
+	f=/tmp/mrurxvt-colors.html
+	echo "<html><head><style type=\"text/css\">
+	div {
+		width: 50%;
+	    height: 60px;
+
+	}
+		
+	</style></head><body>" > $f
+
+	sed -r -n \
+		-e '/\<[0-9a-f]{6}\>/s/\<[0-9a-f]{6}\>/\0\n/g p' \
+		~/bin/mrurxvt-colors | \
+		tr -d '\t ' | \
+		sed \
+			-e '/^\s*$/ d' \
+			-e 's/.*/<div style="background-color: #\0;">\0<\/div>/' \
+		>> $f
+	echo "</body></html>" >> $f
+	firefox $f
+}
