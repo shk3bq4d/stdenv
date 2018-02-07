@@ -32,14 +32,14 @@ URxvt*foreground: rgb:44/44/44
 !URxvt*color12: rgb:5c/5c/ff
 !URxvt.perl-ext-common: clipboard-osc,font-size,vim-scrollback
 !URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
-#URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default
+!URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default
 URxvt.perl-ext-common: clipboard-osc,font-size,keyboard-select,default,url-select
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
 !URxvt.perl-ext: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
-#URxvt.url-launcher: chromium-browser
-#URxvt.matcher.button: 1
+!URxvt.url-launcher: chromium-browser
+!URxvt.matcher.button: 1
 URxvt.clipboard.autocopy: True
 !,digital-clock
 URxvt.keysym.C-Left:   perl:randombackground:all
@@ -151,8 +151,8 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 
 *background:              S_base03
 *foreground:              S_base0
-*fading:                  40
-*fadeColor:               S_base03
+!*fading:                  0
+!*fadeColor:               S_base03
 *cursorColor:             S_base1
 *pointerColorBackground:  S_base01
 *pointerColorForeground:  S_base1

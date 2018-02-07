@@ -36,4 +36,9 @@ elif [[ -f ${FILENAME} ]]; then
 fi
 cat ${FILENAME}.template | envsubst "$VARS" > ${FILENAME}
 chmod a-w ${FILENAME}
+case ${FILENAME} in \
+.Xdefaults)
+	xrdb -merge ~/.Xdefaults
+	;;
+esac
 #diff ${FILENAME}.template ${FILENAME}
