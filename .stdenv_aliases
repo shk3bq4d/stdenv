@@ -8,3 +8,4 @@ sudomrenv() {
 }
 sudomr_hooks+=('sudomrenv')
 alias gitenv='git --git-dir=$STDHOME_DIRNAME/../stdenv/.git'
+alias cdstdenv='cd $STDHOME_DIRNAME/../stdenv'
