@@ -40,6 +40,8 @@ convert kim-kardashian-celebrity-mask.jpg -fuzz 2% -transparent white  -crop 500
 convert awesome.png -fuzz 10% -transparent white  -resize '264x264!' -resize 128x128 bip.png && command feh bip.png # rezize likely distorted the image, true solution may have thumbnail of https://stackoverflow.com/questions/2130288/imagemagick-resize-image-to-square
 convert yoda-02.png -crop 170x170+50+0 -background transparent -vignette 20x65000 bip.png && command feh bip.png
 
+convert -resize 640x480 -depth 8 -colors 14 -background black -extent 640x480 ks3840x2160black.png grub.xpm # enlarge resample canvas
+
 #f00                      #rgb
 #ff0000                   #rrggbb
 #ff0000ff                 #rrggbbaa

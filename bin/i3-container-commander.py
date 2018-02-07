@@ -130,4 +130,5 @@ if len(containers):
     chosen_container = show_container_menu(containers)
 
     if chosen_container:
-        chosen_container.command(args.command)
+        for cmd in args.command.split('&&'):
+            chosen_container.command(cmd)
