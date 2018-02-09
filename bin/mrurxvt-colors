@@ -25,11 +25,6 @@ d191fd
 d0a6ee
 
 )
-	BG_COLOURS=(
-			1
-			2
-			3
-			4)
 		old="
 				ffdddd ffcccc ffbbbb
 				ddffdd ccffcc bbffbb
