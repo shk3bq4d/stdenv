@@ -17,6 +17,18 @@ randomcolor
 c=$_MRCOLOR
 OUTDIR=~/.tmp/mrurxvt/
 [[ ! -d $OUTDIR ]] && mkdir -p $OUTDIR
+methods=(
+swirl
+blending
+semiradial
+triangleresize
+2spot
+Shepards
+Inverse
+mean
+)
+len=${#methods[@]}
+idx=$(($RANDOM % $len))
 method=swirl
 method=blending
 method=semiradial
@@ -25,6 +37,7 @@ method=2spot
 method=Shepards
 method=Inverse
 method=mean
+method=${methods[$idx]}
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
 legacy)
@@ -111,7 +124,7 @@ triangleresize)
 	;;
 semiradial)
 	c=$(( ( RANDOM % 4 ) * 90 ))
-	f=$OUTDIR/${a}-${b}-${c}.jpg
+	f=$OUTDIR/$method-${a}-${b}-${c}.jpg
 	if [[ ! -f $f ]]; then
 		convert -size 32x32 gradient:"#$a-#$b" -distort Arc "180 $c 16 0" $f
 	fi

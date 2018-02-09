@@ -68,8 +68,7 @@ eeffff
 				[[ $ELEM -ne $PREVELEM2 ]] && \
 				[[ $ELEM -ne $PREVELEM3 ]] && \
 				[[ $ELEM -ne $PREVELEM4 ]] && \
-				true
-				; then
+				true ; then
 				PREVELEM4=$PREVELEM3
 				PREVELEM3=$PREVELEM2
 				PREVELEM2=$PREVELEM
