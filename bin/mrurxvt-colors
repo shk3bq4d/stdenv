@@ -81,8 +81,6 @@ eeffff
 		ELEM=$1
 	fi
 
-	echo ELEM is $ELEM
-
 	export _MRCOLOR=${BG_COLOURS[$ELEM]}
 
 	export MRCOLOR=${ELEM}-$_MRCOLOR
