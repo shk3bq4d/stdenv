@@ -32,11 +32,11 @@ idx=$(($RANDOM % $len))
 method=swirl
 method=blending
 method=semiradial
-method=triangleresize
 method=2spot
 method=Shepards
 method=Inverse
 method=mean
+method=triangleresize
 method=${methods[$idx]}
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
@@ -119,6 +119,7 @@ triangleresize)
 		convert \( "xc:#$a" "xc:#$b" +append \) \
 			  \( "xc:#$c" "xc:#$d" +append \) -append \
 			  -filter triangle -resize 32x32\! \
+			  -modulate 110\% \
 			  $f
 	fi
 	;;
