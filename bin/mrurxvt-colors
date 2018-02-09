@@ -1,7 +1,7 @@
-PREVELEM="a"
-PREVELEM2="x"
-PREVELEM3=""
-PREVELEM4=""
+randomcolorPREVELEM=""
+randomcolorPREVELEM2=""
+randomcolorPREVELEM3=""
+randomcolorPREVELEM4=""
 randomcolor() {
 	BG_COLOURS=(
 fc9392
@@ -62,27 +62,27 @@ eeffff
 
 	if [[ -z $1 ]]; then
 		while :; do
-			ELEM=$(($RANDOM % $NUM))
+			randomcolorELEM=$(($RANDOM % $NUM))
 			if \
-				[[ $ELEM -ne $PREVELEM ]] && \
-				[[ $ELEM -ne $PREVELEM2 ]] && \
-				[[ $ELEM -ne $PREVELEM3 ]] && \
-				[[ $ELEM -ne $PREVELEM4 ]] && \
+				[[ "$randomcolorELEM" != "$randomcolorPREVELEM" ]] && \
+				[[ "$randomcolorELEM" != "$randomcolorPREVELEM2" ]] && \
+				[[ "$randomcolorELEM" != "$randomcolorPREVELEM3" ]] && \
+				[[ "$randomcolorELEM" != "$randomcolorPREVELEM4" ]] && \
 				true ; then
-				PREVELEM4=$PREVELEM3
-				PREVELEM3=$PREVELEM2
-				PREVELEM2=$PREVELEM
-				PREVELEM=$ELEM
+				randomcolorPREVELEM4=$randomcolorPREVELEM3
+				randomcolorPREVELEM3=$randomcolorPREVELEM2
+				randomcolorPREVELEM2=$randomcolorPREVELEM
+				randomcolorPREVELEM=$randomcolorELEM
 				break
 			fi
 		done
 	else
-		ELEM=$1
+		randomcolorELEM=$1
 	fi
 
-	export _MRCOLOR=${BG_COLOURS[$ELEM]}
+	export _MRCOLOR=${BG_COLOURS[$randomcolorELEM]}
 
-	export MRCOLOR=${ELEM}-$_MRCOLOR
+	export MRCOLOR=${randomcolorELEM}-$_MRCOLOR
 
 }
 showcolors() {
