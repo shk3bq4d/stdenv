@@ -17,10 +17,130 @@ randomcolor
 c=$_MRCOLOR
 OUTDIR=~/.tmp/mrurxvt/
 [[ ! -d $OUTDIR ]] && mkdir -p $OUTDIR
-f=$OUTDIR/${a}-${b}-${c}.jpg
-if [[ ! -f $f ]]; then
-	convert -size 32x32 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" $f
-fi
+method=swirl
+method=blending
+method=semiradial
+method=triangleresize
+method=2spot
+method=Shepards
+method=Inverse
+method=mean
+f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+case $method in \
+legacy)
+	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+	if [[ ! -f $f ]]; then
+		convert -size 32x32 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" $f
+	fi
+	;;
+mean)
+	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+	if [[ ! -f $f ]]; then
+		s=256
+		p=$(( $s / 2 ))
+		q=$(( $s / 10 ))
+		r=$(( $s / 10 * 9 ))
+		t=$q
+		u=$(( $s / 10 * 7 ))
+		v=$r
+		convert -size ${s}x${s} xc: +size "xc:#$a" "xc:#$b" "xc:#$c" \
+          -colorspace HSB -channel R \
+          -fx "aa=u[1]*2*pi; ba=u[2]*2*pi; ca=u[3]*2*pi;
+               ar=1/max(1, hypot(i-$p,j-$t) );
+               br=1/max(1, hypot(i-$q,j-$u) );
+               cr=1/max(1, hypot(i-$r,j-$v) );
+               nr=ar+br+cr;
+               mod(atan2( ( sin(aa)*ar + sin(ba)*br + sin(ca)*cr )/nr,
+                         ( cos(aa)*ar + cos(ba)*br + cos(ca)*cr )/nr
+                       )/(2*pi)+1, 1)" \
+          -separate -background white -combine +channel \
+          -set colorspace HSB -colorspace sRGB  \
+		  -modulate 190\% \
+		  $f
+	fi
+	;;
+Shepards|Inverse)
+	d=${RANDOM:1:1}
+	e=${RANDOM:1:1}
+	g=${RANDOM:1:1}
+	h=${RANDOM:1:1}
+	i=${RANDOM:1:1}
+	j=${RANDOM:1:1}
+	f=$OUTDIR/${method}-${a}-${b}-${c}-$d$e$g$h$i$j.jpg
+	if [[ ! -f $f ]]; then
+		convert -size 100x100 xc: -colorspace RGB \
+			  -sparse-color  $method "${d}0,${e}0 #$a  ${g}0,${h}0 #$b  ${i}0,${j}0 #$c" \
+			  -colorspace sRGB  $f
+	fi
+	;;
+2spot)
+	c=${RANDOM:1:1}
+	d=${RANDOM:1:1}
+	e=${RANDOM:1:1}
+	g=${RANDOM:1:1}
+	f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
+	nbtry=4
+	if [[ ! -f $f ]]; then
+		while :; do
+			[[ $nbtry -le 0 ]] && break
+			nbtry=$(( $nbtry - 1 ))
+			c=${RANDOM:1:1}
+			d=${RANDOM:1:1}
+			e=${RANDOM:1:1}
+			g=${RANDOM:1:1}
+			f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
+			[[ -f $f ]] && break
+			convert -size 32x32 xc: +size "xc:#$a" "xc:#$b" -colorspace RGB \
+			  -fx "ar=hypot( i/w-.$c, j/h-.$d )*4;
+				   br=hypot( i/w-.$e, j/h-.$g )*4;
+				   u[1]*br/(ar+br) + u[2]*ar/(ar+br)" \
+			  -colorspace RGB $f && break
+		done
+	fi
+	;;
+triangleresize)
+	randomcolor
+	d=$_MRCOLOR
+	f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
+	if [[ ! -f $f ]]; then
+		convert \( "xc:#$a" "xc:#$b" +append \) \
+			  \( "xc:#$c" "xc:#$d" +append \) -append \
+			  -filter triangle -resize 32x32\! \
+			  $f
+	fi
+	;;
+semiradial)
+	c=$(( ( RANDOM % 4 ) * 90 ))
+	f=$OUTDIR/${a}-${b}-${c}.jpg
+	if [[ ! -f $f ]]; then
+		convert -size 32x32 gradient:"#$a-#$b" -distort Arc "180 $c 16 0" $f
+	fi
+	;;
+swirl)
+	c=$(( 120 + ${RANDOM:2:3} ))
+	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+	if [[ ! -f $f ]]; then
+		convert -size 32x32 gradient:"#$a-#$b" -swirl $c $f
+	fi
+	;;
+blending)
+	randomcolor
+	d=$_MRCOLOR
+	#a=ffbbbb
+	#b=bbffff
+	#c=bbbbff
+	#d=bbffbb
+	f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
+	if [[ ! -f $f ]]; then
+		convert -size 100x100 gradient:"#$a-#$b" \
+			  \( gradient:"#$c-#$d" -rotate -90 \) \
+			  -compose Multiply -composite  \
+			  -modulate 130\% \
+			  $f
+	fi
+	;;
+esac
+
 if false; then
 	convert -size 4096x4096 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" \
 	-fill none -stroke Blue  \

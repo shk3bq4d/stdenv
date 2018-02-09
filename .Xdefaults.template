@@ -33,7 +33,7 @@ URxvt*foreground: rgb:44/44/44
 !URxvt.perl-ext-common: clipboard-osc,font-size,vim-scrollback
 !URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
 !URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default
-URxvt.perl-ext-common: clipboard-osc,font-size,keyboard-select,default,url-select
+URxvt.perl-ext-common: clipboard-osc,font-size,keyboard-select,default
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true

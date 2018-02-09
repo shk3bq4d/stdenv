@@ -1,11 +1,48 @@
+PREVELEM="a"
+PREVELEM2="x"
+PREVELEM3=""
+PREVELEM4=""
 randomcolor() {
 	BG_COLOURS=(
-				ffeeee ffdddd ffcccc ffbbbb
-				eeffee ddffdd ccffcc bbffbb
-				eeeeff ddddff ccccff bbbbff
-				ffffee ffffdd ffffcc ffffbb
-				ffeeff ffddff ffccff ffbbff
-				eeffff ddffff ccffff bbffff
+fc9392
+eda8a7
+fbbf91
+fbea8f
+e1fb8e
+97f665
+bdeda5
+90fc99
+a6edac
+90fbc6
+90faf2
+a6ece6
+91d8fc
+93acfd
+a7b8ee
+a591fd
+b3a6ee
+d191fd
+d0a6ee
+
+)
+	BG_COLOURS=(
+			1
+			2
+			3
+			4)
+		old="
+				ffdddd ffcccc ffbbbb
+				ddffdd ccffcc bbffbb
+				ddddff ccccff bbbbff
+				ffffdd ffffcc ffffbb
+				ffddff ffccff ffbbff
+				ddffff ccffff bbffff
+ffeeee 
+eeffee 
+eeeeff 
+ffffee 
+ffeeff 
+eeffff 
 				f0f0f0 d9d9d9
 				deebf7 c6dbef
 				edf8b1 c7e9b4
@@ -24,24 +61,41 @@ randomcolor() {
 				fee0d2 
 				fee8c8 
 				ffeda0 fed976
-
-		)
+		"
 
 	NUM=${#BG_COLOURS[@]}
 
 	if [[ -z $1 ]]; then
-		ELEM=$(($RANDOM % $NUM))
+		while :; do
+			ELEM=$(($RANDOM % $NUM))
+			if \
+				[[ $ELEM -ne $PREVELEM ]] && \
+				[[ $ELEM -ne $PREVELEM2 ]] && \
+				[[ $ELEM -ne $PREVELEM3 ]] && \
+				[[ $ELEM -ne $PREVELEM4 ]] && \
+				true
+				; then
+				PREVELEM4=$PREVELEM3
+				PREVELEM3=$PREVELEM2
+				PREVELEM2=$PREVELEM
+				PREVELEM=$ELEM
+				break
+			fi
+		done
 	else
 		ELEM=$1
 	fi
 
+	echo ELEM is $ELEM
 
 	export _MRCOLOR=${BG_COLOURS[$ELEM]}
+
 	export MRCOLOR=${ELEM}-$_MRCOLOR
 
 }
 showcolors() {
 	f=/tmp/mrurxvt-colors.html
+	rm -f $f || true
 	echo "<html><head><style type=\"text/css\">
 	div {
 		width: 50%;
@@ -50,10 +104,11 @@ showcolors() {
 	}
 		
 	</style></head><body>" > $f
-
+	tail -n +2 ~/bin/mrurxvt-colors | \
+	sed -r -e '/\)/,$d' | \
 	sed -r -n \
-		-e '/\<[0-9a-f]{6}\>/s/\<[0-9a-f]{6}\>/\0\n/g p' \
-		~/bin/mrurxvt-colors | \
+		-e '/\<[0-9a-fA-F]{6}\>/s/\<[0-9a-fA-F]{6}\>/\0\n/g p' \
+		 | \
 		tr -d '\t ' | \
 		sed \
 			-e '/^\s*$/ d' \
