@@ -16,13 +16,15 @@ echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x
 yum list installed 'http*'
-yum info elasticsearch
+yum info elasticsearch # show version
 yum whatprovides ack
 yum whatprovides dig    # bind-utils
 yum whatprovides locate # mlocate
 apk: dig => bind-tools
 
 rpm -qa | grep rsyslog
+rpm -q kernel # list versions
+
 
 # APK
 # cat /etc/alpine-release

@@ -361,3 +361,10 @@ either
 or 
 /usr/lib/systemd/system/docker.service
 echo '{ "storage-driver": "btrfs" } > /etc/docker/daemon.json
+
+
+echo "
+FROM ubuntu
+RUN apt-get update
+PRN apt-get install -y xeyes
+" | docker build -f - .

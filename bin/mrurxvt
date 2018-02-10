@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
-if false; then
-	DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	source $DIR/mrurxvt-colors
-	randomcolor
-	urxvtcd -sl 65535 -bg "#${_MRCOLOR}" &
-fi
-
+#  http://www.imagemagick.org/Usage/canvas/#gradient
 
 source ~/bin/mrurxvt-colors
 randomcolor
@@ -26,6 +20,7 @@ triangleresize
 Shepards
 Inverse
 mean
+plasma
 )
 len=${#methods[@]}
 idx=$(($RANDOM % $len))
@@ -38,8 +33,18 @@ method=Inverse
 method=mean
 method=triangleresize
 method=${methods[$idx]}
+method=plasma
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
+plasma)
+	# http://www.imagemagick.org/Usage/canvas/#plasma_fractal
+	f=$OUTDIR/${method}.jpg
+	c=$(( 0 + ${RANDOM:2:3} ))
+	convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
+		  -contrast \
+		  -modulate 190\% \
+		  $f
+	;;
 legacy)
 	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 	if [[ ! -f $f ]]; then
