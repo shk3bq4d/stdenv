@@ -298,7 +298,7 @@ $ rm -rf ../temp
 $ git worktree prune
 
 # debug connection with wrapper. Watch out ssh stderr seems to be parsed by git parent process
-ssh_wrapper=/tmp/my-ssh-wrapper                                                
+ssh_wrapper=/tmp/my-ssh-wrapper
 cat > $ssh_wrapper << EOF
 #!/usr/bin/env bash
 echo -e "\n\$(date) \$0 \$@" >> /tmp/logfile.txt
