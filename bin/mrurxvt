@@ -21,6 +21,8 @@ Shepards
 Inverse
 mean
 plasma
+noise
+noisehue
 )
 len=${#methods[@]}
 idx=$(($RANDOM % $len))
@@ -32,18 +34,60 @@ method=Shepards
 method=Inverse
 method=mean
 method=triangleresize
-method=${methods[$idx]}
 method=plasma
+method=old
+method=noise
+method=dev
+method=noisehue
+method=${methods[$idx]}
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
+noise)
+	a=$(( ( RANDOM % 2 ) ))
+	convert -size 32x32 xc:   +noise Random -virtual-pixel tile  -blur 0x3 -auto-level \
+		 -implode $a \
+		  -brightness-contrast 50x-20 \
+		$f
+	;;
+noisehue)
+	d=( 2 4 8 16 32 64 128 256 )
+	e=$(( $RANDOM % ${#d[@]} ))
+	c=${d[$e]}
+	e=$(( $RANDOM % ${#d[@]} ))
+	g=${d[$e]}
+	convert -size ${c}x${g} xc:   +noise Random -virtual-pixel tile  -auto-level \
+		-set colorspace HSB \
+	  -channel GB -evaluate set 100% +channel \
+			-colorspace RGB \
+		  -brightness-contrast 50x-60 \
+			$f
+	;;
+dev)
+	convert -size 100x100 xc:none +antialias -fill none -strokewidth 0.5 \
+          -stroke Red    -draw "path 'M 26,0  A 55,61 0 0,1 26,100'" \
+          -stroke White  -draw "line 50,0  50,100" \
+txt:- |\
+	    sed '1d; / 0) /d; s/:.* /,/;' |\
+		      convert -size 100x100 xc: -sparse-color shepards '@-' \
+			  $f
+	;;
+old)
+	convert -size 4096x4096 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" \
+	-fill none -stroke Blue  \
+	-draw "stroke red  bezier 100,100 300,900   250,100 500,500 " \
+    -draw "stroke red  bezier 500,500 750,900   700,100 900,400 " \
+	-draw "image over 2000,2000 2000,2000 \"$HOME/tmp/bip.jpg\"" \
+	$f
+	;;
 plasma)
 	# http://www.imagemagick.org/Usage/canvas/#plasma_fractal
 	f=$OUTDIR/${method}.jpg
 	c=$(( 0 + ${RANDOM:2:3} ))
-	convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
-		  -contrast \
-		  -modulate 190\% \
+	#convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
+	convert -size 512x512  "plasma:#${a}-#${b}" -blur 0x2  -shave 20x20  \
+		  -modulate 114\% \
 		  $f
+		  #-contrast \
 	;;
 legacy)
 	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
@@ -136,7 +180,7 @@ semiradial)
 	fi
 	;;
 swirl)
-	c=$(( 120 + ${RANDOM:2:3} ))
+	c=$(( ${RANDOM:2:3} - 500 ))
 	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 	if [[ ! -f $f ]]; then
 		convert -size 32x32 gradient:"#$a-#$b" -swirl $c $f
@@ -160,15 +204,6 @@ blending)
 	;;
 esac
 
-if false; then
-	convert -size 4096x4096 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" \
-	-fill none -stroke Blue  \
-	-draw "stroke red  bezier 100,100 300,900   250,100 500,500 " \
-    -draw "stroke red  bezier 500,500 750,900   700,100 900,400 " \
-	-draw "image over 2000,2000 2000,2000 \"$HOME/tmp/bip.jpg\"" \
-	$f
-	#-fill DodgerBlue  -strokewidth 2 -draw "path 'M 50,30  m 0,25  a 1,1 0 0,0 0,-50  a 1,1 0 1,0 0,50'" \
-fi
 CD=$(mri3-focused-window-cwd.py)
 [[ -n $CD ]] && CD="-cd $CD"
 ~/bin/notinpath/mrxmodmap.sh &
