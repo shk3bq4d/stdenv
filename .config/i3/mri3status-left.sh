@@ -4,6 +4,10 @@ set -u
 set -e
 set -o pipefail
 case $(hostname -f) in \
+apr16.ly.lan)
+	i3blocks -c ~/.config/i3/i3blocks-$(hostname -f).conf
+	exit 0
+	;;
 dec17.ly.lan)
 	i3blocks -c ~/.config/i3/i3blocks-original.conf
 	exit 0
