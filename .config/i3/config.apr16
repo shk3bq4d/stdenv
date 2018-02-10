@@ -12,4 +12,7 @@ bindsym --release $mod+v exec mri3-toggle-orientation.py # <= 4.11-1
 '
 export STDHOME_TAIL='
 exec --no-startup-id  x11vnc -display :0 -shared -forever
+gaps outer 5
+gaps inner 10
+for_window [class="^.*"] border pixel 0
 '
