@@ -27,12 +27,15 @@ os+=('cmake') # youcompleteme vim plugin build depedencies
 os+=('compton')
 os+=('curl')
 os+=('dos2unix')
+os+=('fonts-font-awesome')
+os+=('fonts-powerline')
 os+=('mplayer')
 os+=('feh')
+os+=('gawk')
 os+=('git')
 os+=('gitk')
-os+=('i3')
-os+=('i3status')
+#os+=('i3') # replaced by i3-gaps
+#os+=('i3status')
 os+=('ipcalc')
 os+=('lsyncd')
 os+=('net-tools') # netstat
@@ -109,7 +112,7 @@ fi
 git="""
 .oh-my-zsh/custom/plugins/zsh-autosuggestions git://github.com/zsh-users/zsh-autosuggestions
 """
-need_powerlinefonts && git="$(echo -e "$git\ngit/powerline-fonts https://github.com/powerline/fonts.git\n")"
+#need_powerlinefonts && git="$(echo -e "$git\ngit/powerline-fonts https://github.com/powerline/fonts.git\n")"
 echo "$git" | while read d r; do
 	[[ -z "$d" ]] && continue
 	[[ -d $d ]] && continue
@@ -118,7 +121,7 @@ echo "$git" | while read d r; do
 	cd $HOME
 	git clone $r $d
 done
-need_powerlinefonts && ~/git/powerline-fonts/install.sh
+#need_powerlinefonts && ~/git/powerline-fonts/install.sh
 
 exit 0
 

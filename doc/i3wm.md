@@ -17,3 +17,13 @@ i3 '[id="94475176160464"] focus'
 i3 '[id="127926281"] fullscreen'
 i3 '[id="127926281"] floating enable'
 ~/bin/i3-get-window-criteria.sh
+
+
+# i3 blocks install
+git clone git://github.com/vivien/i3blocks
+cd i3blocks
+make clean debug # or make clean all
+sudo make install
+
+# i3 blocks
+https://extendedreality.wordpress.com/2016/12/04/blocks-of-i3blocks-stuff-that-rocks/

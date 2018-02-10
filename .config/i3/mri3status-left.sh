@@ -3,6 +3,12 @@
 set -u
 set -e
 set -o pipefail
+case $(hostname -f) in \
+dec17.ly.lan)
+	i3blocks -c ~/.config/i3/i3blocks-original.conf
+	exit 0
+	;;
+esac
 
 # Send the header so that i3bar knows we want to use JSON:
 echo '{ "version": 1 }'
