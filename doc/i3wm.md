@@ -28,3 +28,12 @@ sudo make install
 
 # i3 blocks
 https://extendedreality.wordpress.com/2016/12/04/blocks-of-i3blocks-stuff-that-rocks/
+i3 gaps outer all set 70
+
+pkill -RTMIN+10 i3blocks
+[mri3server]
+command=$HOME/.config/i3/blocklet/mri3server-receiver.sh
+color=#E5E5E5
+interval=once
+signal=10
+markup=pango
