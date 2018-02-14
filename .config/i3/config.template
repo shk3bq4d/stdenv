@@ -319,7 +319,9 @@ bindsym  Escape mode "default"
 bar {
 	id bar-left
 	strip_workspace_numbers yes
+	i3bar_command i3bar -t
 	position $STDHOME_FIRSTBAR_POSITION
+	height 100
 #status_command i3status
 	#status_command i3status -c ~/.i3status-or.conf
 	#status_command i3status -c ~/.i3status-or.conf
@@ -332,14 +334,18 @@ bar {
     bindsym  button5 nop
 #separator_symbol ":|:"
 	separator_symbol "-"
+#height 50
+#border_bottom 0
 	colors {
-		background #000000
+		background #00000000
         statusline #ffffff
         separator #666666
+#border_left 0
+#border_right 0
 
-        focused_workspace  #4c7899 #285577 #ffffff
+        focused_workspace  #4c7899 #28557700 #ffffff
         active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
+        inactive_workspace #33333300 #22222200 #888888
         urgent_workspace   #2f343a #900000 #ffffff
 #binding_mode       #2f343a #900000 #ffffff
 
@@ -469,5 +475,44 @@ bindcode $mod+27  exec --no-startup-id true
 # code:33 => sym: 0x70, symbol:p
 bindcode $mod+Shift+27  exec --no-startup-id true
 exec --no-startup-id ~/bin/mri3-server.py &>~/log/i3-config-mri3-server.log
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+smart_gaps on
+smart_borders on
 
 ${STDHOME_TAIL}

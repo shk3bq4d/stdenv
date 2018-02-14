@@ -957,3 +957,5 @@ except sh.ErrorReturnCode_2:
 # https://amoffat.github.io/sh/
 sh.cat(_in="_in is stdin")
 sh.Command('ssh-keygen')
+
+mydict[new_key] = mydict.pop(old_key) # rename key in a regular dict # https://stackoverflow.com/questions/16475384/rename-a-dictionary-key

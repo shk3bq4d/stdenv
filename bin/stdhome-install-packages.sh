@@ -20,13 +20,15 @@ need_powerlinefonts() {
 
 os=()
 
+os+=('apt-transport-https') # docker ppa
 os+=('ascii')
 os+=('acpi')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
+os+=('ca-certificates') # docker ppa
 os+=('chromium-browser')
 os+=('cmake') # youcompleteme vim plugin build depedencies
 os+=('compton')
-os+=('curl')
+os+=('curl') # docker ppa
 os+=('dos2unix')
 os+=('fonts-font-awesome')
 os+=('fonts-powerline')
@@ -46,6 +48,7 @@ os+=('python-pip')
 os+=('python3-pip')
 os+=('python2.7')
 os+=('rxvt-unicode-256color')
+os+=('software-properties-common') #docker ppa
 os+=('shutter')
 os+=('sysstat')
 os+=('util-linux') # tailf

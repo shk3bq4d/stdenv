@@ -20,10 +20,20 @@ i3 '[id="127926281"] floating enable'
 
 
 # i3 blocks install
-git clone git://github.com/vivien/i3blocks
+#git clone git://github.com/vivien/i3blocks
+git clone -b mr https://github.com/shK3Bq4d/i3blocks.git
 cd i3blocks
 make clean debug # or make clean all
 sudo make install
 
 # i3 blocks
 https://extendedreality.wordpress.com/2016/12/04/blocks-of-i3blocks-stuff-that-rocks/
+i3 gaps outer all set 70
+
+pkill -RTMIN+10 i3blocks
+[mri3server]
+command=$HOME/.config/i3/blocklet/mri3server-receiver.sh
+color=#E5E5E5
+interval=once
+signal=10
+markup=pango

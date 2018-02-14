@@ -81,8 +81,8 @@ old)
 	;;
 plasma)
 	# http://www.imagemagick.org/Usage/canvas/#plasma_fractal
-	f=$OUTDIR/${method}.jpg
-	c=$(( 0 + ${RANDOM:2:3} ))
+	c=$(( 0 + ${RANDOM:0:3} ))
+	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 	#convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
 	convert -size 512x512  "plasma:#${a}-#${b}" -blur 0x2  -shave 20x20  \
 		  -modulate 114\% \
@@ -180,7 +180,7 @@ semiradial)
 	fi
 	;;
 swirl)
-	c=$(( ${RANDOM:2:3} - 500 ))
+	c=$(( ${RANDOM:0:3} - 500 ))
 	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 	if [[ ! -f $f ]]; then
 		convert -size 32x32 gradient:"#$a-#$b" -swirl $c $f
@@ -203,7 +203,10 @@ blending)
 	fi
 	;;
 esac
-
+if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
+	# see ~/bin/mrurxvt-generate-cache.sh for reference
+	exit 0
+fi
 CD=$(mri3-focused-window-cwd.py)
 [[ -n $CD ]] && CD="-cd $CD"
 ~/bin/notinpath/mrxmodmap.sh &

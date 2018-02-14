@@ -29,10 +29,6 @@ SHELL="/bin/bash
 @hourly touch /tmp/cron.hourly
 * * * * * touch /tmp/cron.touch
 
-@daily updatedb
-@reboot rm -f ~/.ssh/environment
-
-@hourly find ~/.tmp/vim/output -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \) -print -delete | logger -t cronvimdelete -p user.info
 
 # escapes
 date +'\%Y\%m\%d'
@@ -41,3 +37,10 @@ date +'\%Y\%m\%d'
 30 08 * * * ~/bin/mrlsyncd.sh
 
 0 0 * * * sleep ${RANDOM:0:3}; systemctl restart goferd
+
+# good ideads
+@daily updatedb
+@reboot rm -f ~/.ssh/environment
+
+@hourly find ~/.tmp/vim/{output,undodir} -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \) -print -delete | logger -t cronvimdelete -p user.info
+@hourly git=gitprivate; f=~/.tmp/crontab/$(hostname -f); mkdir -p ~/.tmp/crontab; crontab -l > $f; $git add $f; $git commit -m . $f
