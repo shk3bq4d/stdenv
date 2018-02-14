@@ -21,6 +21,7 @@ need_powerlinefonts() {
 os=()
 
 os+=('ascii')
+os+=('acpi')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
 os+=('chromium-browser')
 os+=('cmake') # youcompleteme vim plugin build depedencies
@@ -46,6 +47,7 @@ os+=('python3-pip')
 os+=('python2.7')
 os+=('rxvt-unicode-256color')
 os+=('shutter')
+os+=('sysstat')
 os+=('util-linux') # tailf
 os+=('vim-gtk')
 os+=('xclip')
