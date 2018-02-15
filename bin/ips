@@ -3,16 +3,14 @@
 timeout=4
 mycurl() {
 	local URL=$1
+	set -o pipefail
 	if command -v curl &>/dev/null; then
-		output=$(curl -s -m $timeout $URL 2>/dev/null)
-		[[ $? -ne 0 ]] && return 1
-		echo $output
-		return 0
+		output="$(curl -s -m $timeout $URL 2>/dev/null)"
+	elif command -v wget &>/dev/null; then
+		output="$(wget -O- --timeout $timeout $URL 2>/dev/null)"
 	fi
-	if command -v wget &>/dev/null; then
-		output=$(wget -O- --timeout $timeout $URL 2>/dev/null)
-		[[ $? -ne 0 ]] && return 1
-		echo $output
+	if [[ "$output" =~ ^[0-9]{,3}\.[0-9]{,3}\.[0-9]{,3}\.[0-9]{,3}$ ]]; then
+		echo "$output"
 		return 0
 	fi
 	return 1
@@ -24,14 +22,14 @@ CYGWIN*)
 	;;
 *)	
 	if command -v ip &>/dev/null; then
-		ip a | grep -Po 'inet [0-9.]+|(?<=^\d: )[^:]+|(?<=^\d\d: )[^:]+' | grep -EB1 '^inet ' | grep -v '^--$' | awk 'NR%2{printf "%s ",$0;next;}1' | sed -r -e 's/ inet / /' | xargs -r printf "%-10s %s\n"
+		ip a | grep -Po 'inet [0-9.]+|(?<=^\d: )[^:]+|(?<=^\d\d: )[^:]+' | grep -EB1 '^inet ' | grep -v '^--$' | awk 'NR%2{printf "%s ",$0;next;}1' | sed -r -e 's/ inet / /' | xargs -r printf "%-15s %s\n"
 	fi
 	;;
 esac
 
 timeout_bin=
 command -v timeout &>/dev/null && timeout_bin="timeout $timeout "
-printf "%-11s" internet
+printf "%-16s" internet
 for x in 1; do
 	mycurl http://whatismyip.akamai.com/ && break
 	mycurl https://4.ifcfg.me/ && break

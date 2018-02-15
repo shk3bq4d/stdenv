@@ -43,8 +43,10 @@ set -euo pipefail
 # DIR=\"\$( cd -P \"\$( dirname \"\$(readlink -f \"\${BASH_SOURCE[0]}\")\" )\" && pwd )\"
 
 # exec > >(tee -a ~/log/\$(basename \$0 .sh).log)
-# exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
+# exec > >(tee >(logger --id=\$\$ -t \"\$(basename \$0)\" -p user.info ))
 # exec 2>&1
+
+# test -z \"\${HOSTNAMEF:-}\" && HOSTNAMEF=\$(hostname -f)
 
 echo EOF
 exit 0
