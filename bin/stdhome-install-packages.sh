@@ -22,6 +22,7 @@ os=()
 
 os+=('apt-transport-https') # docker ppa
 os+=('ascii')
+os+=('acpi')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
 os+=('ca-certificates') # docker ppa
 os+=('chromium-browser')
@@ -49,6 +50,7 @@ os+=('python2.7')
 os+=('rxvt-unicode-256color')
 os+=('software-properties-common') #docker ppa
 os+=('shutter')
+os+=('sysstat')
 os+=('util-linux') # tailf
 os+=('vim-gtk')
 os+=('xclip')
