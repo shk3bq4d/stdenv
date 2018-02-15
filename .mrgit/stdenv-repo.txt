@@ -12,6 +12,7 @@
 .vim/bundle/vim-gitgutter/                               https://github.com/airblade/vim-gitgutter.git
 .vim/bundle/vim-indentwise/                              https://github.com/jeetsukumaran/vim-indentwise
 .vim/bundle/youcompleteme/                               https://github.com/Valloric/YouCompleteMe.git
+.vim/bundle/vim-airline									 https://github.com/vim-airline/vim-airline.git
 .oh-my-zsh/custom/plugins/zsh-autosuggestions            https://github.com/zsh-users/zsh-autosuggestions.git
 .oh-my-zsh/custom/plugins/zsh-syntax-highlighting        https://github.com/zsh-users/zsh-syntax-highlighting.git
 git/shK3Bq4d/i3-gaps-builder                             https://github.com/shK3Bq4d/i3-gaps-builder.git
