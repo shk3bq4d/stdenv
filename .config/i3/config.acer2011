@@ -24,5 +24,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
-exec --no-startup-id sleep 20 && kodi
+# disabling kodi auto start until a work around (dist upgrade is found around:
+# https://bugs.launchpad.net/ubuntu/+source/pyopenssl/+bug/1636573 )
+#exec --no-startup-id sleep 20 && kodi
+
+gaps outer 0
+gaps inner 10
+for_window [class="^.*"] border pixel 0
 '
