@@ -321,7 +321,7 @@ bar {
 	strip_workspace_numbers yes
 	i3bar_command i3bar -t
 	position $STDHOME_FIRSTBAR_POSITION
-	height 100
+#height 100
 #status_command i3status
 	#status_command i3status -c ~/.i3status-or.conf
 	#status_command i3status -c ~/.i3status-or.conf

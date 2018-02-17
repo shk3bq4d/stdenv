@@ -3118,3 +3118,6 @@ http://kodi.wiki/view/Add-on:Emby_for_Kodi
                                                           u'type': None}},
                                u'type': None}},
  u'version': 5}
+
+
+https://bugs.launchpad.net/ubuntu/+source/pyopenssl/+bug/1636573
