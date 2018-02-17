@@ -6,10 +6,12 @@ try:
     import cPickle as pickle
 except:
     import pickle
+import fontawesome
 import getpass
 import socket
 import signal
 import json
+import cgi
 import os
 import sys
 import re
@@ -41,6 +43,7 @@ def logging_conf(
 
 
 wA = None
+fa = fontawesome.icons
 
 def on_window(i3, e):
     logging.warn('on_window %s', e.change)
@@ -80,7 +83,9 @@ def blockpid():
             break
     return _lastpid
 
-_remove_user_at_host = r'{}@{}:?'.format(
+_remove_user_at_host = r'(( - )?{}@{}$|{}@{}:?)'.format(
+            getpass.getuser(),
+            socket.gethostname(),
             getpass.getuser(),
             socket.gethostname()
             )
@@ -100,30 +105,105 @@ def i3blocklet(event):
 
     pid = blockpid()
     if pid is None: return
-
+    border = '#000000'
+    border_bottom=0
+    border_width=3
+    short_text = None
     if 'urxvt' in name and re.match('^(\S{1,3}\s+)?urxvt', name):
         pre = post = ''
         if '\u2713' in name:
             pre = "{}green' weight='bold'>".format(spanc)
             post = spane
+            border = '#008800'
+            border_bottom = border_width
         elif '\u2718' in name:
             pre = "{}red' weight='bold'>".format(spanc)
+            border = '#ff0000'
+            border_bottom = border_width
             post = spane
-        name = re.sub(r'^(?:(\S{1,3})\s+)?urxvt\s+(?:-\s*)?(.*)', '{}\uf120{} \\2'.format(pre, post), name)
+        else:
+            border = '#ffffff'
+            border_bottom = border_width
+        short_text = '{}{}{}'.format(pre, fa['terminal'], post)
+        name = re.sub(r'^(?:(\S{1,3})\s+)?urxvt\s+(?:-\s*)?(.*)', '\\2', name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
+        full_text = '{} {}'.format(short_text, name)
+    elif name.startswith('\u231b'):
+        border_bottom = border_width
+        border = '#FFAF00'
+        short_text = "{}{}' weight='bold'>{} {}{}".format(spanc, border, '\u231b', fa['terminal'], spane)
+        name = name[1:].strip()
+        name = remove_user_at_host(name)
+        name = name.replace(os.path.expanduser('~'), '~')
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Stack Overflow - Chromium'):
+        border_bottom = border_width
+        border = '#F48021'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-overflow'], spane)
+        name = re.sub('(.*?) - Stack Overflow - Chromium$', '\\1', name)
+        name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Stack Exchange - Chromium'):
+        border_bottom = border_width
+        border = '#304F9A'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-exchange'], spane)
+        name = re.sub('(.*?) - Stack Exchange - Chromium$', '\\1', name)
+        name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Wikipedia - Chromium'):
+        border_bottom = border_width
+        border = '#717171'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['wikipedia-w'], spane)
+        name = cgi.escape(name)
+        name = re.sub('(.*?) - Wikipedia - Chromium$', '\\1', name)
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Google Search - Chromium'):
+        border_bottom = border_width
+        border = '#4483F3'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['google'], spane)
+        name = re.sub('(.*?) - Google Search - Chromium$', '\\1', name)
+        name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Chromium'):
+        border_bottom = border_width
+        border = '#679CF7'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['chrome'], spane)
+        name = re.sub('(.*?) - Chromium$', '\\1', name)
+        name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, name)
+    elif name.endswith(' - Mozilla Firefox'):
+        border_bottom = border_width
+        border = '#FE9400'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['firefox'], spane)
+        name = re.sub('(.*?) - Mozilla Firefox$', '\\1', name)
+        name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, name)
     elif name.startswith('vim'):
-        #name = re.sub('^vim - ', "{}gray' bgcolor='#00ff0055'>\uf27d{}  ".format(spanc, spane), name)
-        name = re.sub('^vim - ', "{}green'>\uf27d{}  ".format(spanc, spane), name)
+        border_bottom = border_width
+        border = '#0F9636'
+        short_text = "{}{}'>{}{}".format(spanc, border, fa['vimeo'], spane)
+        name = re.sub('^vim - ', "".format(spanc, spane), name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
+        name = cgi.escape(name)
+        full_text = '{}  {}'.format(short_text, name)
     else:
-        name = re.sub('(.*?) - Stack Overflow - Chromium$', '\uf16c  \\1', name)
-        name = re.sub('(.*?) - Stack Exchange - Chromium$', '\uf18d  \\1', name)
-        name = re.sub('(.*?) - Chromium$', '\uf268  \\1', name)
+        full_text = name
 
+    if short_text is None: short_text = full_text
+        #short_text=short_text.replace('"', "'"), # reader can't read espaced double quote
+    #full_text = full_text.replace(':', '')
+    #full_text = full_text.replace('&', '&amp;')
     j = dict(
-        full_text=name
+        full_text=full_text.replace('"', "'"), # reader can't read espaced double quote
+        markup='pango',
+        border=border,
+        border_bottom=border_bottom,
+        border_top=0,
+        border_left=0,
+        border_right=0,
+
         )
     # https://github.com/Airblader/i3
     # https://i3wm.org/docs/i3bar-protocol.html
@@ -143,7 +223,7 @@ def i3blocklet(event):
     # }
 
     with open(i3block_fp, 'w') as f:
-        json.dump(j, f, ensure_ascii=False)
+        json.dump(j, f, ensure_ascii=False) # reader can't read escaped unicode
         #json.dump(j, f)
         #f.write(name + '\n')
 

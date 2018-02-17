@@ -84,6 +84,7 @@ pip3+=('i3ipc')
 pip3+=('requests')
 #pip3+=('procinfo') # installation seem to fail when done at the same time as psutil....
 pip3+=('psutil')
+pip3+=('fontawesome')
 pip3+=('sh')
 pip3+=('sshuttle')
 pip3 install --user ${pip3[@]}
