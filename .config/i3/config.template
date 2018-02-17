@@ -321,7 +321,7 @@ bar {
 	strip_workspace_numbers yes
 	i3bar_command i3bar -t
 	position $STDHOME_FIRSTBAR_POSITION
-	height 100
+	height $bar_height
 #status_command i3status
 	#status_command i3status -c ~/.i3status-or.conf
 	#status_command i3status -c ~/.i3status-or.conf
@@ -479,7 +479,7 @@ exec --no-startup-id ~/bin/mri3-server.py &>~/log/i3-config-mri3-server.log
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#bindsym $mod+Shift+g mode "$mode_gaps"
+bindsym $mod+Shift+30 mode "$mode_gaps"
 
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
@@ -512,7 +512,10 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-smart_gaps on
-smart_borders on
+gaps outer ${gaps_outer}
+gaps inner ${gaps_inner}
+smart_gaps ${smart_gaps}
+smart_borders ${smart_borders}
+${gaps_forwindow_border}
 
 ${STDHOME_TAIL}
