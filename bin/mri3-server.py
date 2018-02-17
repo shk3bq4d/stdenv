@@ -83,12 +83,17 @@ def blockpid():
             break
     return _lastpid
 
-_remove_user_at_host = r'(( - )?{}@{}$|{}@{}:?)'.format(
+_machine = socket.gethostname()
+_remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(lan|local|net))?:?)'.format(
             getpass.getuser(),
-            socket.gethostname(),
+            _machine,
             getpass.getuser(),
-            socket.gethostname()
+            _machine
             )
+if _machine in ['dec17']:
+    border_width=1
+else:
+    border_width=3
 def remove_user_at_host(name):
     return re.sub(_remove_user_at_host, '', name)
 
@@ -107,7 +112,6 @@ def i3blocklet(event):
     if pid is None: return
     border = '#000000'
     border_bottom=0
-    border_width=3
     short_text = None
     if 'urxvt' in name and re.match('^(\S{1,3}\s+)?urxvt', name):
         pre = post = ''

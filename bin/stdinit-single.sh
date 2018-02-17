@@ -46,6 +46,7 @@ if [[ -f $repo_file ]]; then
 			ref="-b $ref"
 		fi
 	    git clone $ref $url "$dir" || true
+		github-set-push-ssh-url.sh
 	done
 fi
 	
