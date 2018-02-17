@@ -13,8 +13,16 @@ export STDHOME_TOGGLE='
 #bindsym --release $mod+v split toggle
 '
 
+# font pango:Monospace Regular, FontAwesome 18
 export STDHOME_FONT='
 font pango:Monospace Regular 18
 '
+
 export STDHOME_DMENU_ARGS='-i -b -l 40 -fn  "DejaVuSansMono-28"'
 export STDHOME_TAIL=''
+export bar_height=24
+export gaps_outer=0
+export gaps_inner=10
+export smart_gaps=on
+export smart_borders=on
+export gaps_forwindow_border='for_window [class="^.*"] border pixel 0'
