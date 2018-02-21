@@ -1,27 +1,20 @@
 # /* ex: set filetype=sh: */
 
-The following will print the line matching TERMINATE till the end of the file:
 
-sed -n -e '/TERMINATE/,$p'
 
-Explained: -n disables default behavior of sed of printing each line after executing its script on it, -e indicated a script to sed, /TERMINATE/,$ is an address (line) range selection meaning the first line matching the TERMINATE regular expression (like grep) to the end of the file ($), and p is the print command which prints the current line.
+sed -n -e '/TERMINATE/,$p' # will print the line matching TERMINATE till the end of the file: Explained: -n disables default behavior of sed of printing each line after executing its script on it, -e indicated a script to sed, /TERMINATE/,$ is an address (line) range selection meaning the first line matching the TERMINATE regular expression (like grep) to the end of the file ($), and p is the print command which prints the current line.
 
-The following will print from the following line matching TERMINATE till the end of the file:
 
-sed -e '1,/TERMINATE/d'
 
-Explained: 1,/TERMINATE/ is an address (line) range selection meaning the first line for the input to the 1st line matching the TERMINATE regular expression, and d is the delete command which delete the current line and skip to the next line. As sed default behavior is to print the lines, it will print the lines after TERMINATE to the end of input.
+sed -e '1,/TERMINATE/d' #will print from the following line matching TERMINATE till the end of the file: Explained: 1,/TERMINATE/ is an address (line) range selection meaning the first line for the input to the 1st line matching the TERMINATE regular expression, and d is the delete command which delete the current line and skip to the next line. As sed default behavior is to print the lines, it will print the lines after TERMINATE to the end of input.
 
-Edit:
 
-If you wand the lines before TERMINATE:
 
-sed -e '/TERMINATE/,$d'
+sed -e '/TERMINATE/,$d' # the lines before TERMINATE:
 
-And if you want both lines before and after TERMINATE in 2 different files in a single pass:
 
 sed -e '1,/TERMINATE/w before
-/TERMINATE/,$w after' file
+/TERMINATE/,$w after' file # if you want both lines before and after TERMINATE in 2 different files in a single pass:
 
 The before and after files will contain the line with terminate, so to process each you need to use:
 

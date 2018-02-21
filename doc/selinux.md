@@ -19,3 +19,6 @@ semodule -i zabbix_agent.pp
 systemctl start zabbix-agent.service
 
 getsebool -a # list all options
+
+
+semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
