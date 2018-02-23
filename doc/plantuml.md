@@ -1,5 +1,5 @@
 docker run -d -p 8081:8080 plantuml/plantuml-server:jetty
-http://http://localhost:8081
+http://localhost:8081
 http://plantuml.com/
 
 @startuml

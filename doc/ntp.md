@@ -1,3 +1,11 @@
+https://www.digitalocean.com/community/tutorials/how-to-set-up-time-synchronization-on-ubuntu-16-04
+timedatectl set-ntp no
+timedatectl set-ntp on
+sudo service ntp stop
+sudo ntpd -gq
+sudo service ntp start
+
+
 /etc/systemd/timesyncd.conf
 #  This file is part of systemd.
 #
