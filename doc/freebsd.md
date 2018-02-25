@@ -36,3 +36,5 @@ https://dan.langille.org/2015/01/18/failure-with-freebsd-update-how-not-to-upgra
 
 # exec as another user
 su -m www -c 'sh -c "whoami"'
+
+pw usermod tom -G ftpusers,wwwusers # add user tom to secondary groups ftpusers and wwwusers
