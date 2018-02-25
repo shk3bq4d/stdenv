@@ -7,6 +7,7 @@ try:
 except:
     import pickle
 import fontawesome
+import atexit
 import getpass
 import socket
 import signal
@@ -14,6 +15,7 @@ import json
 import cgi
 import os
 import sys
+import errno
 import re
 import argparse
 import logging
@@ -24,6 +26,35 @@ from sh import pkill
 from pprint import pprint, pformat
 
 logger = logging.getLogger(__name__)
+
+def pid_exists(pid):
+    """Check whether pid exists in the current process table.
+    https://stackoverflow.com/questions/568271/how-to-check-if-there-exists-a-process-with-a-given-pid-in-python
+    UNIX only.
+    """
+    if pid < 0:
+        return False
+    if pid == 0:
+        # According to "man 2 kill" PID 0 refers to every process
+        # in the process group of the calling process.
+        # On certain systems 0 is a valid PID but we have no way
+        # to know that in a portable fashion.
+        raise ValueError('invalid PID 0')
+    try:
+        os.kill(pid, 0)
+    except OSError as err:
+        if err.errno == errno.ESRCH:
+            # ESRCH == No such process
+            return False
+        elif err.errno == errno.EPERM:
+            # EPERM clearly means there's a process to deny access to
+            return True
+        else:
+            # According to "man 2 kill" possible error values are
+            # (EINVAL, EPERM, ESRCH)
+            raise
+    else:
+        return True
 
 def logging_conf(
         level='INFO', # DEBUG
@@ -109,7 +140,7 @@ def i3blocklet(event):
     if change not in ('focus', 'title'): return
 
     name = event.container.name
-    with open(i3blockraw_fp, 'w') as f:
+    with open(i3blockraw_fp, 'wb') as f:
         f.write(name)
 
     pid = blockpid()
@@ -230,7 +261,7 @@ def i3blocklet(event):
     #   "separator_block_width": 9
     # }
 
-    with open(i3block_fp, 'w') as f:
+    with open(i3block_fp, 'wb') as f:
         json.dump(j, f, ensure_ascii=False) # reader can't read escaped unicode
         #json.dump(j, f)
         #f.write(name + '\n')
@@ -332,15 +363,15 @@ def focus(i3, window_id):
     i3.command(cmd)
 
 
-fp = os.environ['HOME'] +  '/.tmp/mri3-server.pickle'
+pickle_fp = os.environ['HOME'] +  '/.tmp/mri3-server.pickle'
 def persist(bipA):
-    with open(fp, 'wb') as f:
+    with open(pickle_fp, 'wb') as f:
         pickle.dump(bipA, f)
 
 def load():
     global wA
     try:
-        with open(fp, 'rb') as f:
+        with open(pickle_fp, 'rb') as f:
             wA = pickle.load(f)
         logger.warn('successfully loaded')
     except:
@@ -350,12 +381,50 @@ def load():
 i3block_fp = os.path.expanduser('~/.tmp/mri3server-block.msg')
 i3blockraw_fp = os.path.expanduser('~/.tmp/mri3server-rawname')
 
-def check_concurrent_process():
+pid_fp = os.path.expanduser('~/.tmp/pid/mri3-server.pid')
+def pidfile_cleanup():
+    os.unlink(pid_fp)
+
+def handle_concurrent_process():
+    """ - if running in interactive mode, propose what to do:
+          (kill other instance or abort)
+        - else abort
+    """
+    if os.path.exists(pid_fp):
+        with open(pid_fp, 'rb') as f:
+            old_pid = f.read()
+        if pid_exists(old_pid):
+            if sys.stdin.isatty():
+                #sys.stdout.write
+                r = raw_input('An existing instance run with pid {}. Would you like to kill it (y) or abort'.format(old_pid))
+                if r.strip().lower() != 'y':
+                    return False
+                s = signal.SIGKILL
+                logger.info('sending signal %s to process %s', s, old_pid)
+                os.kill(old_pid, s)
+            else:
+                logger.info('Existing process with pid %s', old_pid)
+                return False
+        else:
+            logger.info('No running process with old pid %s', old_pid)
+    else:
+        logger.info('Not a file %s', pid_fp)
+
+
+    dp = os.dirname(pid_fp)
+    if not os.path.exists(dp):
+        os.mkdir(dp)
+    with open(pid_fp, 'wb') as f:
+        f.write(os.getpid())
+    atexit.register(pidfile_cleanup)
+    return True
+
 
 def go(args):
     logger.warn('go')
-    check_concurrent_process()
-    write_pid()
+    if not handle_concurrent_process():
+        logger.warn('/go aborting because of concurrent running process')
+        return
     i3 = i3ipc.Connection()
     load()
     i3.on('window', on_window)
