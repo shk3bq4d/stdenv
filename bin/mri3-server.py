@@ -94,7 +94,7 @@ _remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(la
             getpass.getuser(),
             _machine
             )
-if _machine in ['dec17']:
+if _machine in ['dec17', 'acer2011']:
     border_width=1
 else:
     border_width=3
