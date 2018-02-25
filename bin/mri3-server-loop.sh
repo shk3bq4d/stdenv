@@ -12,6 +12,7 @@
 set -euo pipefail
 
 while :; do
-	~/bin/mri3-server.py
+	~/bin/mri3-server.py && echo "exited with 0" || echo "exited with 1"
+	
 	sleep 10
 done

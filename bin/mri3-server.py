@@ -141,7 +141,7 @@ def i3blocklet(event):
 
     name = event.container.name
     with open(i3blockraw_fp, 'wb') as f:
-        f.write(name)
+        f.write(name.encode())
 
     pid = blockpid()
     if pid is None: return
@@ -261,7 +261,7 @@ def i3blocklet(event):
     #   "separator_block_width": 9
     # }
 
-    with open(i3block_fp, 'wb') as f:
+    with open(i3block_fp, 'w') as f:
         json.dump(j, f, ensure_ascii=False) # reader can't read escaped unicode
         #json.dump(j, f)
         #f.write(name + '\n')
@@ -392,30 +392,43 @@ def handle_concurrent_process():
     """
     if os.path.exists(pid_fp):
         with open(pid_fp, 'rb') as f:
-            old_pid = f.read()
-        if pid_exists(old_pid):
-            if sys.stdin.isatty():
-                #sys.stdout.write
-                r = raw_input('An existing instance run with pid {}. Would you like to kill it (y) or abort'.format(old_pid))
-                if r.strip().lower() != 'y':
+            content = f.read().decode()
+        if re.match(r'\d+', content):
+            old_pid = int(content)
+            if pid_exists(old_pid):
+                if sys.stdin.isatty():
+                    #sys.stdout.write
+                    r = input('An existing instance run with pid {}. Would you like to kill it (y) or abort: '.format(old_pid))
+                    logger.info('input was %s', r)
+                    if r.strip().lower() != 'y':
+                        return False
+                    s = signal.SIGKILL
+                    logger.info('sending signal %s to process %s', s, old_pid)
+                    try:
+                        os.kill(old_pid, s)
+                    except BaseException as e:
+                        logger.info('failed killing')
+                        time.sleep(2)
+                        if pid_exists(old_pid):
+                            logger.info('so raising')
+                            raise e
+                        logger.info('but process is no longer')
+                else:
+                    logger.info('Existing process with pid %s', old_pid)
                     return False
-                s = signal.SIGKILL
-                logger.info('sending signal %s to process %s', s, old_pid)
-                os.kill(old_pid, s)
             else:
-                logger.info('Existing process with pid %s', old_pid)
-                return False
+                logger.info('No running process with old pid %s', old_pid)
         else:
-            logger.info('No running process with old pid %s', old_pid)
+            logger.info('Didn\'t read a number ("%s") out of %s', content, pid_fp)
     else:
         logger.info('Not a file %s', pid_fp)
 
 
-    dp = os.dirname(pid_fp)
+    dp = os.path.dirname(pid_fp)
     if not os.path.exists(dp):
         os.mkdir(dp)
     with open(pid_fp, 'wb') as f:
-        f.write(os.getpid())
+        f.write(str(os.getpid()).encode())
     atexit.register(pidfile_cleanup)
     return True
 
