@@ -350,8 +350,12 @@ def load():
 i3block_fp = os.path.expanduser('~/.tmp/mri3server-block.msg')
 i3blockraw_fp = os.path.expanduser('~/.tmp/mri3server-rawname')
 
+def check_concurrent_process():
+
 def go(args):
     logger.warn('go')
+    check_concurrent_process()
+    write_pid()
     i3 = i3ipc.Connection()
     load()
     i3.on('window', on_window)
