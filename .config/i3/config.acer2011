@@ -2,9 +2,10 @@
 export STDHOME_OUTPUTS='
 #exec --no-startup-id xrandr --output LVDS1 --off --output HDMI1 --off --output VGA-1 --primary --mode 1920x1080
 exec --no-startup-id xrandr --output LVDS1 --off --output VGA1 --mode 1920x1080 --primary --output HDMI1 --auto --same-as VGA1
-set $ol VGA1
-set $oc VGA1
-set $or VGA1
+exec --no-startup-id xrandr --output LVDS1 --off --output VGA1 --off --output HDMI1 --auto --mode 1920x1080 --primary
+set $ol HDMI1
+set $oc HDMI1
+set $or HDMI1
 #exec xrandr --output "$oc" --primary
 '
 
