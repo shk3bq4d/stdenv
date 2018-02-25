@@ -78,7 +78,7 @@ fa = fontawesome.icons
 
 def on_window(i3, e):
     logging.warn('on_window %s', e.change)
-    i3blocklet(e)
+    i3blocklet(i3, e)
     if e.change == 'close':
         wid = e.container.window
         if wid in wA:
@@ -132,14 +132,35 @@ else:
 def remove_user_at_host(name):
     return re.sub(_remove_user_at_host, '', name)
 
+def focused_window_name(i3):
+    window = i3.get_tree().find_focused()
+    if window.type == 'workspace':
+        logger.info('bop %s', window.type)
+        name = ''
+    else:
+        logger.info('bip %s', window.type)
+        name = window.name if window else ''
+    return name
+
 spanc = '<span color=\''
 spane = '</span>'
-def i3blocklet(event):
+def i3blocklet(i3, event):
     change = event.change
+    if change in ('focus', 'title'):
+        name = event.container.name
+    elif change in ('close'):
+        name = focused_window_name(i3)
+    else:
+        return
+    i3blocklet_name(name)
 
-    if change not in ('focus', 'title'): return
-
-    name = event.container.name
+_prev = None
+def i3blocklet_name(name):
+    global _prev
+    if name == _prev:
+        return
+    name = name or ''
+    _prev = name
     with open(i3blockraw_fp, 'wb') as f:
         f.write(name.encode())
 
@@ -272,6 +293,7 @@ def i3blocklet(event):
 
 def on_workspace(i3, e):
     logging.warn('on_workspace %s', e.change)
+    i3blocklet_name(focused_window_name(i3))
     return
     print_separator()
     print('Got workspace event:')
