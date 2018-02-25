@@ -54,8 +54,8 @@ def on_window(i3, e):
             wA.remove(wid)
             persist(wA)
     elif e.change == 'focus':
-        #e.container.command('border pixel 6')
         #e.container.command('[class="[.]*"] border pixel 0')
+        #e.container.command('border pixel 6')
         #e.container.command('gaps inner current plus 40')
         #e.container.command('gaps outer current plus 40')
         wid = e.container.window
@@ -94,7 +94,7 @@ _remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(la
             getpass.getuser(),
             _machine
             )
-if _machine in ['dec17']:
+if _machine in ['dec17', 'acer2011']:
     border_width=1
 else:
     border_width=3
@@ -350,8 +350,12 @@ def load():
 i3block_fp = os.path.expanduser('~/.tmp/mri3server-block.msg')
 i3blockraw_fp = os.path.expanduser('~/.tmp/mri3server-rawname')
 
+def check_concurrent_process():
+
 def go(args):
     logger.warn('go')
+    check_concurrent_process()
+    write_pid()
     i3 = i3ipc.Connection()
     load()
     i3.on('window', on_window)

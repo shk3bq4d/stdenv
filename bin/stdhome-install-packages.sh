@@ -59,6 +59,15 @@ os+=('zsh')
 os+=('apt-transport-https') # docker-ce
 os+=('ca-certificates') # docker-ce
 os+=('software-properties-common') # docker-ce
+os+=('libxcb-xinerama0') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libxcb-cursor0') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libanyevent-i3-perl') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libanyevent-perl') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libasync-interrupt-perl') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libev-perl') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libev4') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libguard-perl') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
+os+=('libxcb-dpms0') # i3wm acer2011 2018-02-19 xenial 16.04 dependency
 
 SUDO=sudo
 command -v sudo 2>/dev/null || SUDO=""
