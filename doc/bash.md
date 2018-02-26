@@ -526,6 +526,7 @@ exec > >(tee >(logger  -i     -t "$(basename $0)" -p user.info )) # linux or fre
 exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info )) # linux as it sends ppid which is more robust
 exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info )) # linux as it sends ppid which is more robust
 exec 2>&1
+exec 1> >(logger -s -t "$(basename "$0")") 2>&1
 
 # play with filedescriptor
 exec 4>/tmp/out4 # redirect fd4 to file
