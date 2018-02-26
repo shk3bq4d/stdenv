@@ -9,9 +9,17 @@ echo "$(date) Startup $0 $@"
 d=~/.tmp/log/
 test -d $d || mkdir -p $d
 case $(hostname -f) in \
-dec17.ly.lan|apr16.ly.lan)
+dec17.ly.lan)
 	b=1:0.35
 	t=6500:3500
+	;;
+apr16.ly.lan)
+	b=1:0.75
+	t=6500:3500
+	;;
+acer2011.ly.lan)
+	echo disabled for your host
+	exit 1
 	;;
 *)
 	b=1:1
