@@ -88,6 +88,12 @@ fi
 $SUDO usermod -aG docker $(whoami)
 
 unset PYTHONPATH
+PIPFLAG=
+case $(hostname -f) in \
+$WORK_PC3F)
+	PIPFLAG="--trusted-host pypi.python.org"
+	;;
+esac
 
 pip3=()
 pip3+=('i3ipc')
@@ -97,7 +103,7 @@ pip3+=('psutil')
 pip3+=('fontawesome')
 pip3+=('sh')
 pip3+=('sshuttle')
-pip3 install --user ${pip3[@]}
+pip3 install $PIPFLAG --user ${pip3[@]}
 
 pip=()
 pip+=('i3ipc')
@@ -107,7 +113,7 @@ pip+=('psutil')
 pip+=('kazoo')
 pip+=('websocket-client')
 pip+=('sh')
-pip install --user ${pip[@]}
+pip install $PIPFLAG --user ${pip[@]}
 
 touch ~/.z
 cd $HOME
