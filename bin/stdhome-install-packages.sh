@@ -21,6 +21,7 @@ need_powerlinefonts() {
 os=()
 
 os+=('apt-transport-https') # docker ppa
+os+=('ack-grep')
 os+=('ascii')
 os+=('acpi')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
