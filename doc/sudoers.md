@@ -5,6 +5,7 @@
 %sudo   ALL=(ALL:ALL) NOPASSWD: ALL
 
 
+# sudo visudo -f /etc/sudoers.d/myuser
 myuser  ALL = (root) NOPASSWD: /bin/umount bip,/usr/sbin/pm-suspend
 
 sudo visudo -f /etc/sudoers.d/sshuttle

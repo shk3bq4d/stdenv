@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+[[ -z "$1" ]] && echo "Inception A" && exit 1
 SCRIPT="$1"
 LOG="$2"
 exec > >(tee "$LOG")
@@ -95,6 +96,10 @@ fi
 
 # by extension
 case "$SCRIPT" in \
+vimf6.sh)
+	echo "Inception B"
+	exit 0
+	;;
 *sh)  bash $SCRIPT;;
 *py)  python2 $SCRIPT;;
 *pl)  perl $SCRIPT;;
@@ -116,6 +121,19 @@ case "$SCRIPT" in \
 *txt)
 	echo "($(basename $0)): ignored for filetype $SCRIPT"
 	exit 0
+	;;
+*.plantuml)
+	f=~/.tmp/bip.svg
+	echo $f
+	date
+	cat $SCRIPT | docker run --rm -i think/plantuml > $f
+	chromium-browser --incognito --new-window --app=file://$f
+	date
+	exit 0
+	echo "please ensure to have run 
+docker run -d -p 8081:8080 plantuml/plantuml-server:jetty
+		"
+		echo wget -O/tmp/bip.svg "http://localhost:8081/svg/$(cat $SCRIPT | base64 | tr -d '\n')"
 	;;
 *)
 	echo "($(basename $0)): unimplemented case for script $SCRIPT"

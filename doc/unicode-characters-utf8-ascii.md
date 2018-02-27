@@ -148,7 +148,8 @@ U+00E7 U+00C7	&cedil;
 ℗ pr
 ™ trademark
 ❤️ # black heart
-☆ ✡ ✿ 🌠# stars star
+☆ ✡ ✿ 🌠# stars star white
+★ # black star
 🚻Men and Woman toilet sign
 🍆 Eggplant
 🍌 Banana

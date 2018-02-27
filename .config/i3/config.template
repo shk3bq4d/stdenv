@@ -474,7 +474,7 @@ exec --no-startup-id compton  --dbus --config ~/.config/i3/compton.conf
 bindcode $mod+27  exec --no-startup-id true
 # code:33 => sym: 0x70, symbol:p
 bindcode $mod+Shift+27  exec --no-startup-id true
-exec --no-startup-id ~/bin/mri3-server.py &>~/log/i3-config-mri3-server.log
+exec --no-startup-id ~/bin/mri3-server-loop.sh &>~/log/i3-config-mri3-server.log
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
