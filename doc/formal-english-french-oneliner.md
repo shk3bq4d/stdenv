@@ -14,7 +14,9 @@ zabbix hostgroup creation request for global/emea/us customer pssigroup.com/iu.c
 see parent commit(s) message(s) for more info about this tag
 
 # email
-You have been included in the communication because we believe that you are a likely consumer of this information and could base your operations or decisions on its results.
+You have been included in the communication because we believe that you may be a consumer of this information and could base your operations or decisions on its results.
+
+Let me know if you have any doubt
 
 # email consultant français
 Bonjour,
@@ -41,5 +43,6 @@ Cordialement,
 # vocabulary
 obfuscation obfuscated # incorrect greppable list: obuscated obfucated
 prioritize # priorize
+discrepancies # discranpancies
 
 

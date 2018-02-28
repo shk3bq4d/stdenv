@@ -280,3 +280,6 @@ loadkeys -d # restore keyboard to default
 loadkeys us-dvp
 
 https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1734147 # bios corruption laptop ubuntu 17.10
+
+
+http://repo.or.cz/w/retty.git Terminal attaching without screen
