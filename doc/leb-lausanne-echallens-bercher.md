@@ -1,11 +1,9 @@
-Merged
-┌
-│  ╔═══╗ Some Text  │▒
-│  ╚═╦═╝ in the box │▒
-╞═╤══╩══╤═══════════╡▒
-│ ├──┬──┤           │▒
-│ └──┴──┘           │▒
-└───────────────────┘▒
+http://www.leb.ch/espace-voyageur/horaires-personnalises.html
+https://www.t-l.ch/images/Web_LEB18_Horaire_regional.pdf
+http://www.t-l.ch/images/pdf/horaire/courant/LEB_a_BAL1_B.pdf
+http://www.t-l.ch/images/pdf/horaire/courant/LEB_r_BAL1_L.pdf
+https://www.google.ch/maps/@46.5784075,6.6056819,19z?hl=en
+Bel-Air LEB
 
 05:11
 05:41

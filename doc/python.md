@@ -745,6 +745,8 @@ except BaseException, e:
         except:
 	print sys.exc_info()
 
+
+from collections import namedtuple
 Point = namedtuple('Point', 'x y')
 
 # decorator https://wiki.python.org/moin/PythonDecoratorLibrary#Easy_Dump_of_Function_Arguments
