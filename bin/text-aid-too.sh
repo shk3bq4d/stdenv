@@ -32,7 +32,16 @@ set -euo pipefail
 export PATH=~/.npm-packages/bin/:$PATH
 export TEXT_AID_TOO_EDITOR="mrurxvt-vim.sh"
 export TEXT_AID_TOO_SECRET="my-secret-is-better-than-yours"
-# shortcut is The default is Ctrl-; ]
+if ! which text-aid-too &>/dev/null; then 
+	if ! which npm &>/dev/null; then 
+		echo "need to install npm binary"
+		sudo apt install npm
+	fi
+	echo "need to install npm packages"
+	sudo npm install -g coffee-script  text-aid-too
+fi
+echo "https://chrome.google.com/webstore/detail/text-aid-too/klbcooigafjpbiahdjccmajnaehomajc?hl=en-US"
+echo "shortcut is The default is Ctrl-; ]"
 text-aid-too --port 9299
 echo EOF
 exit 0
