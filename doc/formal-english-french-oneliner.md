@@ -46,3 +46,7 @@ prioritize # priorize
 discrepancies # discranpancies
 
 
+# annoying colleague on petty things https://workplace.stackexchange.com/a/107403 https://workplace.stackexchange.com/questions/107399/how-to-stop-a-coworker-from-constantly-nagging-about-joining-his-initiative
+1) to the annoying guy: ook, I understand that the teams are participating in this, but I don't feel comfortable, so I am not. Please let this matter drop, the rest of the team has.
+2) to the annoying guy: Look, we've already discussed this and I am not participating. If we need to get your supervisor involved, we can, but I would prefer not to.
+3) to the guy's manager: Hi, I'm sorry to bother you with what might seem a petty matter, but I've had several conversations with Joe about letting the matter with the curse jar drop, and he won't. This is making me a bit uncomfortable, could you please talk to him?
