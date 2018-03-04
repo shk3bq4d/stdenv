@@ -283,3 +283,10 @@ https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1734147 # bios corruption l
 
 
 http://repo.or.cz/w/retty.git Terminal attaching without screen
+
+
+# undelete
+https://linuxconfig.org/data-recovery-of-deleted-files-from-the-fat-filesystem
+https://unix.stackexchange.com/questions/80270/unix-linux-undelete-recover-deleted-files
+apt install testdisk
+testdisk /dev/mmcblk0
