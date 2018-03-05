@@ -412,6 +412,7 @@ line feed        \x0D 13 LF
 ♀ Female Sign
 ⚥ male + female sign
 🐍snake
+⚠ U+26A0 WARNING SIGN
 
 
 ° degree sign (U+00B0) celcius fahrenheit

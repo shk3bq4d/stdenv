@@ -74,7 +74,7 @@ jarsigner -keystore /e/me/certs/mykeystore.jks -tsa http://timestamp.digicert.co
 for i in *jar; do printf "%-30s %s\n" $i "$(jarsigner -verify $i)"; done
 
 # retrieve certifcate from server
-openssl s_client -connect {HOSTNAME}:{PORT} -h ${HOSTNAME} -showcerts # save certificate as file
+openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 
 # node.js
