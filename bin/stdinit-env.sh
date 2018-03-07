@@ -144,7 +144,8 @@ for i in \
 	fi
 done
 [[ ! -d $i ]] && mkdir -p $i
-git_init $i stdhome 0 
+git_init $i stdhome 1 && $i/stdhome/bin/stdhome-install.sh
+
 for r in env; do
 
 	n=std$r
