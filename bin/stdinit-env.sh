@@ -73,7 +73,7 @@ git_init() {
 
 	cd $i
 
-	if (( $m )); then
+	if (( $m )) && [[ $i != stdhome ]]; then
 		r=${n}noexternalcheckout
 	else
 		r=${n}
