@@ -28,7 +28,8 @@ set -euo pipefail
 git remote | while read name; do
 	git remote get-url $name | \
 		sed -n -r -e '/^https:\/\/github.com\//s/^https:\/\/(github.com)\/(.*)/git@\1:\2/ p' | 
-		xargs --no-run-if-empty git remote set-url --push $name
+		xargs -r git remote set-url --push $name
+		#xargs --no-run-if-empty git remote set-url --push $name # --no-run-if-empty is not freebsd
 done
 
 echo EOF
