@@ -144,6 +144,7 @@ for i in \
 	fi
 done
 [[ ! -d $i ]] && mkdir -p $i
+git_init $i stdhome 0 
 for r in env; do
 
 	n=std$r
