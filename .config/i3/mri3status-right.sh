@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+i3blocks -c ~/.config/i3/i3blocks-$(hostname -f)-right.conf
+exit 0
+
 set -u
 set -e
 set -o pipefail

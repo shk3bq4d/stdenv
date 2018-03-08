@@ -961,3 +961,12 @@ sh.cat(_in="_in is stdin")
 sh.Command('ssh-keygen')
 
 mydict[new_key] = mydict.pop(old_key) # rename key in a regular dict # https://stackoverflow.com/questions/16475384/rename-a-dictionary-key
+
+
+class MyException(Exception):
+    pass
+
+class ValidationError(Exception):
+    def __init__(self, message, errors):
+        super(ValidationError, self).__init__(message)
+        self.errors = errors

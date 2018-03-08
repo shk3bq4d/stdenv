@@ -4,7 +4,7 @@ set -u
 set -e
 set -o pipefail
 case $(hostname -f) in \
-apr16.ly.lan|dec17.ly.lan|acer2011.ly.lan)
+apr16.ly.lan|dec17.ly.lan|acer2011.ly.lan|rumojul16)
 	i3blocks -c ~/.config/i3/i3blocks-$(hostname -f).conf
 	exit 0
 	;;

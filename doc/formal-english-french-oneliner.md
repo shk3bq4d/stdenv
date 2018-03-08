@@ -50,3 +50,6 @@ discrepancies # discranpancies
 1) to the annoying guy: ook, I understand that the teams are participating in this, but I don't feel comfortable, so I am not. Please let this matter drop, the rest of the team has.
 2) to the annoying guy: Look, we've already discussed this and I am not participating. If we need to get your supervisor involved, we can, but I would prefer not to.
 3) to the guy's manager: Hi, I'm sorry to bother you with what might seem a petty matter, but I've had several conversations with Joe about letting the matter with the curse jar drop, and he won't. This is making me a bit uncomfortable, could you please talk to him?
+
+# code review disclaimer
+bq. _code review is like retrospective. Some points needs action. Some others are improvement suggestion for the future. This is a discussion with no absolute truth and not always completely fair in regard to the context. The reviewer himself may not be above all reproach either in his own work._
