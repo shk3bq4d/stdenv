@@ -44,9 +44,9 @@ sys.stdout.write('.')
 from lxml import html, etree
 doc = html.fromstring(t)
 doc = html.parse(fp)
-doc = lxml.etree.parse(filepath) # parser
-doc = lxml.etree.fromstring(string) # parse
-lxml.etree.tostring(doc, pretty_print=True) # parse
+doc = lxml.etree.parse(filepath) # parses parser
+doc = lxml.etree.fromstring(string) # parses parser
+lxml.etree.tostring(doc, pretty_print=True) # outputs
 doc.xpath('/*')
 
 # process stdin line by line:wq
