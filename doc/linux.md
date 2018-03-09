@@ -290,3 +290,5 @@ https://linuxconfig.org/data-recovery-of-deleted-files-from-the-fat-filesystem
 https://unix.stackexchange.com/questions/80270/unix-linux-undelete-recover-deleted-files
 apt install testdisk
 testdisk /dev/mmcblk0
+
+sudo locale | sudo tee /etc/default/locale                                                                                                      3ms
