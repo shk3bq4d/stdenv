@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
@@ -81,6 +80,8 @@ list_str = re.split(pattern, string, maxsplit=0, flags=0)
 str_ = re.sub(pattern, repl, string, count=0, flags=0)
 tuple = re.subn(pattern, repl, string, count=0, flags=0)
 pattern = re.template(pattern, flags=0)
+re.sub(r'(foo)', r'\g<1>123', 'foobar')
+re.sub(r'(foo)', r'\1hi', 'foobar')
 
 re.DOTALL
 re.I re.IGNORECASE
@@ -885,6 +886,14 @@ with open('/tmp/_mr2.pickle', 'wb') as f:
 import json; json.dumps(dict)
 
 import urllib; urllib.quote('/test', safe='') # escape uricomponent encode
+
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse # python3 
+url = 'https://stackoverflow.com/questions/5074803/retrieving-parameters-from-a-url?a=4&b=2'
+parsed = urlparse.urlparse(url)
+print urlparse.parse_qs(parsed.query)['def']
 
 import textwrap; textwrap.dedent(s) #un-indent block of text unindent unident un-ident
 
