@@ -356,3 +356,6 @@ gitk --all
 # https://rtyley.github.io/bfg-repo-cleaner/
 
 git rev-parse --abbrev-ref HEAD # current branch
+
+git stash # checkout current version and pushes local modification to the stash stack
+git stash pop # pulls at the top of the stash's stack

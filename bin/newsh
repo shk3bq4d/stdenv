@@ -1,4 +1,4 @@
-#!/usr/bin/env bash                                            
+#!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
 ##Usage:  __SCRIPT__ FILENAME
@@ -19,7 +19,7 @@ f="$1"
 touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
 
 echo \
-"#!/usr/bin/env bash                                            
+"#!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
 ##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
