@@ -225,4 +225,5 @@ esac
 CD=$(mri3-focused-window-cwd.py)
 [[ -n $CD ]] && CD="-cd $CD"
 ~/bin/notinpath/mrxmodmap.sh &
+#MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
 MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
