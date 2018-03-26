@@ -9,7 +9,6 @@
 ## Author: Jeff Malone, 24 Mar 2018
 ##
 
-set -euo pipefail
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
@@ -30,6 +29,8 @@ set -euo pipefail
 set -e
 
 if [ -z $1 ]; then
+		docker ps
+		echo ""
         echo Usage: docker-fs [short-id \| name]
         exit 1;
 fi
