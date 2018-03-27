@@ -1,0 +1,1 @@
+../../bin/openssl-cert-info.sh

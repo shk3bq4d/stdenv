@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##Usage:  __SCRIPT__ HOST [PORT [DNSSERVER]]
 ##configures whatever action with whatever config
 ##    REMOTEHOST: remote host where to ssh
 ##    REMOTEPORT: JMX port (default: 12345)
