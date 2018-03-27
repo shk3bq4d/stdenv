@@ -9,7 +9,7 @@ rm -f /tmp/ssh.out.*
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
 grep -E execve.*usr.bin.ssh /tmp/ssh.out.*
 
-sudo strace -s 255 -ffttTp $(pgrep lighttp | sed -r -e 's/.*/-p \0/') 2>&1 | grep zabbixweb
+sudo strace -s 255 -ffttT $(pgrep lighttp | sed -r -e 's/.*/-p \0/') 2>&1 | grep zabbixweb
 
 lastcomm -  print out information about previously executed commands.
 
