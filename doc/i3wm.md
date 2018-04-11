@@ -37,3 +37,8 @@ color=#E5E5E5
 interval=once
 signal=10
 markup=pango
+
+
+xprop
+xev # catches mouse and keyboard event
+xwininfo
