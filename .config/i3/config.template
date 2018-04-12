@@ -343,9 +343,9 @@ bar {
 #border_left 0
 #border_right 0
 
-        focused_workspace  #4c7899 #28557700 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #33333300 #22222200 #888888
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace  #333333 #28557700 #ffffff
+        inactive_workspace #33333300 #22222200 #ffffff
         urgent_workspace   #2f343a #900000 #ffffff
 #binding_mode       #2f343a #900000 #ffffff
 
