@@ -292,3 +292,7 @@ apt install testdisk
 testdisk /dev/mmcblk0
 
 sudo locale | sudo tee /etc/default/locale                                                                                                      3ms
+
+
+# upowerd full CPU
+unplug your iphone or trust the computer, https://askubuntu.com/questions/818965/upowerd-hogging-cpu
