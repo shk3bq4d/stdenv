@@ -416,3 +416,129 @@ line feed        \x0D 13 LF
 
 
 ° degree sign (U+00B0) celcius fahrenheit
+
+㎚ nanometer
+㎛ micrometer
+㎜ millimeter
+㎝ centimeter
+㎞ kilometer
+㏌ inch
+Area
+㎟
+㎠
+㎡
+㎢
+volume
+㎣
+㎤
+㎥
+㎦
+㎕
+㎖
+㎗
+㎘
+㏄
+1 cubic metre = 1000 litres
+1 litre = 10 cm × 10 cm × 10 cm
+cc = cubic centimeter = 1/1000 litre.
+Time
+㎰
+㎱
+㎲
+㎳
+Weight
+㎍
+㎎
+㎏
+Bytes
+㎅
+㎆ ?
+㎇
+Frequency: Hertz
+㎐
+㎑
+㎒
+㎓
+㎔
+Voltage
+㎴
+㎵
+㎶
+㎷
+㎸
+㎹
+Watts
+㎺
+㎻
+㎼
+㎽
+㎾
+㎿
+Electrical Resistance: Ohm
+㏀
+㏁
+Electric Current: Ampere
+㎀
+㎁
+㎂
+㎃
+㎄
+Ampere
+
+Misc
+Note: some of the following are not units.
+
+㎧
+㎨
+㎭
+㎮
+㎯
+㎩
+㎪
+㎫
+㎬
+㎈ Calorie
+㎉
+㍷
+㍸
+㍹
+㎙ frequency modulation
+㍱
+㍲
+㍳ Astronomical unit. ≈ distance of earth to sun.
+㍴
+㍵
+㍶
+㍺
+㎊
+㎋
+㎌
+㏃
+㏅
+㏆
+㏇
+㏈ Decibel
+㏉
+㏊
+㏋
+㏍
+㏎
+㏏
+㏐
+㏑
+㏒
+㏓
+㏔
+㏕ 1/1000, used for many things.
+㏖
+㏗
+㏚
+㏛
+㏜
+㏝
+㏞
+㏟
+㏿
+㏂
+㏘
+㏙

@@ -5,6 +5,8 @@
 .vim/bundle/colorschemes/                                https://github.com/flazz/vim-colorschemes.git
 .vim/bundle/dockerfile/                                  https://github.com/ekalinin/Dockerfile.vim.git
 .vim/bundle/ingo-library/                                https://github.com/vim-scripts/ingo-library.git
+.vim/bundle/lh-vim-lib                                   https://github.com/LucHermitte/lh-vim-lib.git
+.vim/bundle/local_vimrc                                  https://github.com/LucHermitte/local_vimrc.git
 .vim/bundle/puppet/                                      https://github.com/rodjek/vim-puppet.git
 .vim/bundle/SyntaxRange/                                 https://github.com/vim-scripts/SyntaxRange.git
 .vim/bundle/tabular/                                     https://github.com/godlygeek/tabular.git
