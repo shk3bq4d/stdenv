@@ -44,3 +44,5 @@ date +'\%Y\%m\%d'
 
 @hourly find ~/.tmp/vim/{output,undodir} -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \) -print -delete | logger -t cronvimdelete -p user.info
 @hourly git=gitprivate; f=~/.tmp/crontab/$(hostname -f); mkdir -p ~/.tmp/crontab; crontab -l > $f; $git add $f; $git commit -m . $f
+
+0	*	31,1-7 3,4 *	test $(date +\%Y) = 2018 && touch ~/.tmp/touch/stdhome-pull # short-circuit stdhome-pull while jexternalssh not available
