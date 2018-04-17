@@ -500,3 +500,53 @@ s│┏━━━━━┛░┃░░░░░░┗━━━━┓   Y
 
 * sur le filtre guidage retour, à un centimètre de l'arrivée,
   il y a un dé de réparation. Donc à la coordonnée Y3.
+
+
+## 19-20W Embranchement poirier
+  ┊             ┃                    ↑ cerisier
+↑ ┊ 20          ┃
+  ┊   ``--..    ┃             ╭━━━━━╮
+r ┊       49``--╏dé           ┃     ┃
+u ┊            /┗━━━━━━━━━━━━━┛     ┃
+e ┊           / ├──────193──────┤∘  ┃ poirier
+  ┊          /  ┏━━━━━━━━━━━━━┓     ┃
+↓ ┊         /   ╏entaille     ┃     ┃
+  m        /    ┃             ╰━━━━━╯
+  u     74/     ┃
+  r      /      ┃
+  e     /       ┃         N
+  t    /        ┃        W╋E
+  ┊   /         ┃         S
+  ┊ 19          ┃
+  ╵             ╹                    ↓ pommier
+  └──────77─────┘
+
+
+## Poirier dé
+
+
+
+         , - ~ ~ ~ - ,
+     , '               ' ,
+   ,                       ,
+  ,                         ,
+ ,                           ,
+ ,                           ,
+ ,                           ,
+  ,                         ,
+   ,                       ,
+     ,                  , '
+       ' - , _ _ _ ,  '
+
+
+         . -- ~~~ -- .
+    .-~               ~-.
+   /                     \
+  /                       \
+ |                         |
+ |                         |
+ |                         |
+  \                       /
+   \                     /
+    `-.               .-'
+        ~- . ___ . -~
