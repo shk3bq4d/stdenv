@@ -103,3 +103,6 @@ open jar file in JD GUI http://jd.benow.ca/
 
 FCM: fMMpukO7WmA:APA91bGhod_3f4h4mRj7ueRgDD6i-S701FCkcQ5Wk_RrU55fTcQTQxNAQqM91ADDjei6o_5Oj05UV8CvCj7HOWBf5GExo0yWpZ-j_14kHPMCOmi_euaablRxSjgF-73c-5AAmLOnGVkK
 https://console.firebase.google.com/project/mrr0-30688/settings/general/
+
+tablette samsung rose: port 22 /mnt/sdcard/extStorages/SdCard/movies
+tablette motorola: port 2222 /sdcard/Movies/

@@ -1,3 +1,4 @@
+# ex: set filetype=ascii :
 
 http://patorjk.com/software/taag/#p=display&f=Doh&t=Masked%0AKukumbr!
 
