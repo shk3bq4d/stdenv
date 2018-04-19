@@ -94,3 +94,15 @@ W		Move tab to new window
 # Miscellaneous
 ?		Show help
 gs		View page source
+
+
+# spell check
+:set spell spl=en
+:set spell
+:set spl=en
+:set spl=en
+
+z= suggestion
+]s move to next word
+[s mone te previous word
+
