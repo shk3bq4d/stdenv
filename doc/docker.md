@@ -368,3 +368,7 @@ FROM ubuntu
 RUN apt-get update
 PRN apt-get install -y xeyes
 " | docker build -f - .
+
+
+# rebuild all containers
+find ~/git/ksgitlab/cfc/ide-infra/docker/ -name tag.sh | while read i; do cd ~/git/ksgitlab/cfc/ide-infra/docker; cd $(dirname $i); [[ -f push.sh ]] || continue; pwd; ./build.sh && ./push.sh || break; done
