@@ -207,7 +207,7 @@ et dans le fichier il suffit de mettre par example:
 
 
 xset -dpms; xset s off; # removes energy saving
-
+xset dpms force on # forces turn off screen
 
 sysctl -w net.ipv4.ip_nonlocal_bind = 1 # bind on unassigned ip, useful in case of failover vip
 

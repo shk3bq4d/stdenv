@@ -33,6 +33,9 @@ SHELL="/bin/bash
 # escapes
 date +'\%Y\%m\%d'
 
+# one day in a lifetime
+* * * * * test $(date +'\%Y.\%m.\%d') = 2018.04.18 && touch /tmp/ab
+
 30 08 * * * env | sort > ~/.tmp/cronenv
 30 08 * * * ~/bin/mrlsyncd.sh
 
@@ -45,4 +48,11 @@ date +'\%Y\%m\%d'
 @hourly find ~/.tmp/vim/{output,undodir} -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \) -print -delete | logger -t cronvimdelete -p user.info
 @hourly git=gitprivate; f=~/.tmp/crontab/$(hostname -f); mkdir -p ~/.tmp/crontab; crontab -l > $f; $git add $f; $git commit -m . $f
 
+<<<<<<< HEAD
+# power saving at work during the night
+29 07 * * mon-thu DISPLAY=:0 xset -dpms && DISPLAY=:0 xset s off
+00 20 * * mon-thu DISPLAY=:0 xset +dpms && DISPLAY=:0 xset s on
+* 07 * * * test $(date +'\%Y.\%m.\%d') = 2018.04.18 && touch /tmp/ab && DISPLAY=:0 xset -dpms && DISPLAY=:0 xset s off && touch /tmp/abc
+=======
 0	*	31,1-7 3,4 *	test $(date +\%Y) = 2018 && touch ~/.tmp/touch/stdhome-pull # short-circuit stdhome-pull while jexternalssh not available
+>>>>>>> github/stdenv
