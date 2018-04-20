@@ -359,6 +359,8 @@ git rev-parse --abbrev-ref HEAD # current branch
 
 git stash # checkout current version and pushes local modification to the stash stack
 git stash pop # pulls at the top of the stash's stack
+
+git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
 [submodule ".vim/bundle/Align"]
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
