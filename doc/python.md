@@ -979,3 +979,7 @@ class ValidationError(Exception):
     def __init__(self, message, errors):
         super(ValidationError, self).__init__(message)
         self.errors = errors
+
+
+import platform; platform.node(); # hostname computer name
+import socket; socket.gethostname(); # hostname computer name
