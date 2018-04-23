@@ -16,3 +16,11 @@ cert = /home/fblaise/Downloads/kg_cabundle.pem
 #ne
 
 pip list # list installed packages existing
+
+# broken pip10 upgrade 20180423
+Traceback (most recent call last):
+  File "/usr/local/bin/pip", line 7, in <module>
+    from pip import main
+ImportError: cannot import name main
+https://github.com/pypa/pip/issues/5240
+~/.local/bin/pip install --upgrade pip==9.0.3
