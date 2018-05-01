@@ -8,6 +8,6 @@ sudomrenv() {
 }
 sudomr_hooks+=('sudomrenv')
 stdenvdir="$STDHOME_DIRNAME/../stdenv"
-alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=~"
-alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=~"
+alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
+alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"
 alias cdstdenv="cd $stdenvdir"
