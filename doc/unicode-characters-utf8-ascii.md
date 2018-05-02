@@ -546,3 +546,4 @@ Note: some of the following are not units.
 all fruits: 🍅 🍆 🍇 🍈 🍉 🍊 🍋 🍌 🍍 🍎 
 
 🍾 Bottle With Popping Cork
+🍺beer

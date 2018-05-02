@@ -257,4 +257,5 @@ gq # apply
 # or more symply using the C-j alias configured in .vimrc map <C-j> gq} '.
 
 
-gqip # reformat paragraph according to text-width. Support > for quotation
+gqip # reformat/reflow paragraph according to textwidth. Support > for quotation
+gql # reformat/reflow line      according to textwidth. Support > for quotation
