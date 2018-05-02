@@ -19,3 +19,6 @@ list_of_files=(*(N)) # solves zsh: no matches found: # Turn on the null_glob opt
 
 dolphin &!  # The &! (or equivalently, &|) is a zsh-specific shortcut to both background and disown the process, such that exiting the shell will leave it running.
 
+# z
+https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/z
+z -x # exclude current directory from index

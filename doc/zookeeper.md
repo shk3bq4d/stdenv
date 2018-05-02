@@ -87,3 +87,55 @@ ssh_jail.sh jzookeeper /usr/local/bin/zkCli.sh
 ls /
 get /neato/secret
 ssh_jail.sh jzookeeper /usr/local/bin/zkCli.sh get /neato/secret
+
+
+# strace init
+13:51:51 6 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminmru
+$ grep execve /tmp/strace.out.18*
+/tmp/strace.out.18871:13:50:08.982046 execve("/sbin/service", ["service", "zookeeper-server", "init"], [/* 58 vars */]) = 0 <0.000623>
+/tmp/strace.out.18873:13:50:09.000634 execve("/sbin/consoletype", ["/sbin/consoletype"], [/* 58 vars */]) = 0 <0.000208>
+/tmp/strace.out.18875:13:50:09.022204 execve("/bin/cat", ["cat", "/proc/cmdline"], [/* 58 vars */]) = 0 <0.000400>
+/tmp/strace.out.18876:13:50:09.033520 execve("/bin/basename", ["basename", "/sbin/service"], [/* 58 vars */]) = 0 <0.000352>
+/tmp/strace.out.18877:13:50:09.043189 execve("/bin/basename", ["basename", "/sbin/service"], [/* 58 vars */]) = 0 <0.000358>
+/tmp/strace.out.18878:13:50:09.056810 execve("/bin/env", ["env", "-i", "PATH=/sbin:/usr/sbin:/bin:/usr/bin", "TERM=xterm-256color", "SYSTEMCTL_IGNORE_DEPENDENCIES=", "SYSTEMCTL_SKIP_REDIRECT=", "/etc/init.d/zookeeper-server", "init"], [/* 59 vars */]) = 0 <0.000337>
+/tmp/strace.out.18878:13:50:09.060153 execve("/etc/init.d/zookeeper-server", ["/etc/init.d/zookeeper-server", "init"], [/* 4 vars */]) = 0 <0.004033>
+/tmp/strace.out.18880:13:50:09.095891 execve("/bin/ls", ["ls", "-rvd", "/usr/java/jdk1.7*"], [/* 7 vars */]) = 0 <0.000261>
+/tmp/strace.out.18882:13:50:09.110306 execve("/bin/ls", ["ls", "-rvd", "/usr/java/jre1.7*"], [/* 7 vars */]) = 0 <0.000337>
+/tmp/strace.out.18884:13:50:09.128222 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/j2sdk1.7-oracle*"], [/* 7 vars */]) = 0 <0.000419>
+/tmp/strace.out.18886:13:50:09.148241 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/j2sdk1.7-oracle/jre*"], [/* 7 vars */]) = 0 <0.000322>
+/tmp/strace.out.18888:13:50:09.165879 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/java-7-oracle*"], [/* 7 vars */]) = 0 <0.000337>
+/tmp/strace.out.18890:13:50:09.183064 execve("/bin/ls", ["ls", "-rvd", "/usr/java/jdk1.8*"], [/* 7 vars */]) = 0 <0.000297>
+/tmp/strace.out.18892:13:50:09.199611 execve("/bin/ls", ["ls", "-rvd", "/usr/java/jre1.8*"], [/* 7 vars */]) = 0 <0.000306>
+/tmp/strace.out.18894:13:50:09.215880 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/j2sdk1.8-oracle*"], [/* 7 vars */]) = 0 <0.000298>
+/tmp/strace.out.18896:13:50:09.231488 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/j2sdk1.8-oracle/jre*"], [/* 7 vars */]) = 0 <0.000273>
+/tmp/strace.out.18898:13:50:09.246610 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/java-8-oracle*"], [/* 7 vars */]) = 0 <0.000278>
+/tmp/strace.out.18900:13:50:09.261212 execve("/bin/ls", ["ls", "-rvd", "/Library/Java/Home*"], [/* 7 vars */]) = 0 <0.000310>
+/tmp/strace.out.18902:13:50:09.275862 execve("/bin/ls", ["ls", "-rvd", "/usr/java/default*"], [/* 7 vars */]) = 0 <0.000266>
+/tmp/strace.out.18904:13:50:09.290813 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/default-java*"], [/* 7 vars */]) = 0 <0.000291>
+/tmp/strace.out.18906:13:50:09.308083 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/java-openjdk*"], [/* 7 vars */]) = 0 <0.000351>
+/tmp/strace.out.18908:13:50:09.325183 execve("/bin/ls", ["ls", "-rvd", "/usr/lib/jvm/jre-openjdk"], [/* 7 vars */]) = 0 <0.000349>
+/tmp/strace.out.18909:13:50:09.343769 execve("/bin/install", ["install", "-d", "-m", "0755", "-o", "zookeeper", "-g", "zookeeper", "/var/run/zookeeper/"], [/* 8 vars */]) = 0 <0.000322>
+/tmp/strace.out.18911:13:50:09.365694 execve("/bin/cat", ["cat", "/var/run/zookeeper/zookeeper-server.pid"], [/* 8 vars */]) = 0 <0.000332>
+/tmp/strace.out.18912:13:50:09.374770 execve("/bin/su", ["su", "-s", "/bin/bash", "zookeeper", "-c", "zookeeper-server-initialize "], [/* 8 vars */]) = 0 <0.000327>
+/tmp/strace.out.18913:13:50:09.470301 execve("/bin/bash", ["bash", "-c", "zookeeper-server-initialize "], [/* 13 vars */]) = 0 <0.000543>
+/tmp/strace.out.18913:13:50:09.482779 execve("/bin/zookeeper-server-initialize", ["zookeeper-server-initialize"], [/* 13 vars */]) = 0 <0.000422>
+/tmp/strace.out.18914:13:50:09.502708 execve("/bin/env", ["env", "CLASSPATH=:/etc/zookeeper/conf:/usr/lib/zookeeper/*:/usr/lib/zookeeper/lib/*", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = 0 <0.000349>
+/tmp/strace.out.18914:13:50:09.505426 execve("/usr/lib/zookeeper/bin/zkServer-initialize.sh", ["/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = 0 <0.000416>
+/tmp/strace.out.18914:13:50:09.508303 execve("/usr/local/sbin/bash", ["bash", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = -1 ENOENT (No such file or directory) <0.000030>
+/tmp/strace.out.18914:13:50:09.508429 execve("/usr/local/bin/bash", ["bash", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = -1 ENOENT (No such file or directory) <0.000043>
+/tmp/strace.out.18914:13:50:09.508562 execve("/sbin/bash", ["bash", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = -1 ENOENT (No such file or directory) <0.000028>
+/tmp/strace.out.18914:13:50:09.508676 execve("/bin/bash", ["bash", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = 0 <0.000310>
+/tmp/strace.out.18915:13:50:09.525283 execve("/bin/dirname", ["dirname", "/usr/lib/zookeeper/bin/zkServer-initialize.sh"], [/* 22 vars */]) = 0 <0.000343>
+/tmp/strace.out.18918:13:50:09.549112 execve("/bin/uname", ["uname"], [/* 22 vars */]) = 0 <0.000317>
+/tmp/strace.out.18919:13:50:09.559641 execve("/bin/getopt", ["getopt", "-n", "/usr/lib/zookeeper/bin/zkServer-initialize.sh", "-o", "h", "-l", "help", "-l", "configfile:", "-l", "myid:", "-l", "force", "--"], [/* 22 vars */]) = 0 <0.000337>
+/tmp/strace.out.18921:13:50:09.574264 execve("/bin/grep", ["grep", "^[[:space:]]*dataDir", "/etc/zookeeper/conf/zoo.cfg"], [/* 22 vars */]) = 0 <0.000394>
+/tmp/strace.out.18922:13:50:09.574192 execve("/bin/sed", ["sed", "-e", "s/.*=//"], [/* 22 vars */]) = 0 <0.000435>
+/tmp/strace.out.18924:13:50:09.595770 execve("/bin/grep", ["grep", "^[[:space:]]*dataLogDir", "/etc/zookeeper/conf/zoo.cfg"], [/* 22 vars */]) = 0 <0.000348>
+/tmp/strace.out.18925:13:50:09.595559 execve("/bin/sed", ["sed", "-e", "s/.*=//"], [/* 22 vars */]) = 0 <0.000272>
+/tmp/strace.out.18926:13:50:09.613170 execve("/bin/rm", ["rm", "-rf", "/var/lib/zookeeper/myid"], [/* 22 vars */]) = 0 <0.000348>
+/tmp/strace.out.18927:13:50:09.619705 execve("/bin/rm", ["rm", "-rf", "/var/lib/zookeeper/version-2"], [/* 22 vars */]) = 0 <0.000315>
+/tmp/strace.out.18928:13:50:09.627574 execve("/bin/mkdir", ["mkdir", "-p", "/var/lib/zookeeper/version-2"], [/* 22 vars */]) = 0 <0.000334>
+
+13:51:57 7 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminmru
+$ strace -s 99999 -ffttTo /tmp/strace.out service zookeeper-server init
+

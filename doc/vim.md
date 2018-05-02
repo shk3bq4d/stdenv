@@ -255,3 +255,6 @@ v # select lines on which to apply
 gq # apply
 (optional :help gq)
 # or more symply using the C-j alias configured in .vimrc map <C-j> gq} '.
+
+
+gqip # reformat paragraph according to text-width. Support > for quotation
