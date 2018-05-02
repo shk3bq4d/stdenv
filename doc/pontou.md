@@ -1,12 +1,21 @@
-Date acquisition: 1er Avril 2015
-Tranche
- 0 2015  278 245'600 https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,278000,245600,2
- 4 2019  200 178'540 https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,478000,178540,2
- 6 2021  200 148'550 https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,678000,148550,5
+Hypotheque Date acquisition: 1er Avril 2015
+Tranche  montant de la tranche en 100k   salaire pour tenue des charges  lien avec montant dans l'URL
+ 0 2015  278                             245'600                         https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,278000,245600,2
+ 4 2019  200                             178'540                         https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,478000,178540,2
+ 6 2021  200                             148'550                         https://www.ubs.com/ch/fr/swissbank/clientele-privee/hypotheques/calculateur-hypotheques.html#1390000,678000,148550,5
 10 2025  712
  t 1390
 3aM      212.8
 3aI      221.4
+
+
+# tenue des charges
+fonds propre:         salaire pour atteindre 33% de tenue des charges (en tenant compte de l'obligation d'atteindre 30-35% de fonds propres)
+278k                  245'600
+478k                  178'540
+678k                  145'550
+778k                  132'900
+878k                  118'000
 
 
 purge chauffage en pontou 36 aclens 1123
