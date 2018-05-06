@@ -298,6 +298,7 @@ $ rm -rf ../temp
 $ git worktree prune
 
 # debug connection with wrapper. Watch out ssh stderr seems to be parsed by git parent process
+@begin=sh@
 ssh_wrapper=/tmp/my-ssh-wrapper
 cat > $ssh_wrapper << EOF
 #!/usr/bin/env bash
@@ -336,6 +337,7 @@ git log --all --full-history -- **/thefile.* # "grep" history filename
 git log --all --full-history -- <path-to-file> # "grep" history exact filepath
 git show <SHA> -- <path-to-file> # "cat raw file from history"
 git checkout <SHA>^ -- <path-to-file> # "restore specific file as it was from history
+@end=sh@
 
 
 # relative reference https://git-scm.com/book/en/v2/Git-Tools-Revision-Selectiohttps://git-scm.com/book/en/v2/Git-Tools-Revision-Selection
@@ -397,3 +399,8 @@ git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
 [submodule ".vim/bundle/vim-gitgutter"]
 	path = .vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+
+
+# interactive
+git add --interactive
+git reset -p # unstage
