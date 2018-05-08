@@ -54,3 +54,7 @@ discrepancies # discranpancies
 
 # code review disclaimer
 bq. _code review is like retrospective. Some points needs action. Some others are improvement suggestion for the future. This is a discussion with no absolute truth and not always completely fair in regard to the context. The reviewer himself may not be above all reproach either in his own work._
+
+
+# trump
+covfefe
