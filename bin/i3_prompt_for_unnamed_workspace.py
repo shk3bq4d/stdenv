@@ -114,13 +114,18 @@ def go(args=[]):
     else:
         #output = i3_input.go("w:")
         prompt = words[1] if len(words) > 1 else ws
-        proposals = [' ', 'comm','whatsapp','doc']
+        proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh'}
+        proposals = [' '] + sorted(proposalsH.keys())
         for i in range(6):
             proposals.append(' ')
         output = mrdmenu(prompt, proposals)
     logger.info('prompted value is {}'.format(output))
     if not debug_mode:
         i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=True, append_english=True, quotes=True))
+        if output in proposalsH:
+            i3.command('exec ' + proposalsH[output])
+            #from sh import bash
+            #bash('-c', proposalsH[output])
 
 def workspace_name(real_number, desired_name, append_english=False, prepend_real_number=False, quotes=False):
 
