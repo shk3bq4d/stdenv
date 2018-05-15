@@ -32,3 +32,4 @@ pvdisplay | grep -E "PE Size|Free PE"
 lvresize -l+512 -r /dev/vg_system/lv_opt
 
 lvresize --size +1G --resizefs /dev/VolGroup00/varlv
+lvresize --size +1G --resizefs /dev/vg_system/lv_var

@@ -42,6 +42,8 @@ openssl x509 -inform pem -in mycert.crt -noout -text | grep -E 'Subject:|Issuer:
 
 /usr/bin/openssl s_client -connect p-mon-zabbix-001:443 | head -n 20
 h=www.google.com; /usr/bin/openssl s_client -connect $h:443 -servername $h | head -n 20 # SNI Server Name Indication
+curl -k --resolve myaddress.com:443:186.1.250.3 https://myaddress.com
+
 
 #apache httpd
 SSLEngine on

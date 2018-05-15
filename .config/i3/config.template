@@ -182,7 +182,6 @@ bindcode $mod+53  sticky toggle
 #bindcode  $mod+d focus child
 #bindcode  $mod+d focus child
 # code:58 => sym: 0x6d, symbol:m
-bindcode $mod+58  exec mri3lock
 # code:31 => sym: 0x69, symbol:i
 bindcode $mod+42 exec python3 ~/bin/i3-container-commander.py
 bindcode $mod+Shift+42 exec python3 ~/bin/i3-container-commander.py --command "move to workspace current && focus"

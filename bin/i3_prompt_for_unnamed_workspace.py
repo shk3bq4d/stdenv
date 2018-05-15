@@ -114,7 +114,7 @@ def go(args=[]):
     else:
         #output = i3_input.go("w:")
         prompt = words[1] if len(words) > 1 else ws
-        proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh'}
+        proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh'}
         proposals = [' '] + sorted(proposalsH.keys())
         for i in range(6):
             proposals.append(' ')
