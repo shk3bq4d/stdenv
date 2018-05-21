@@ -261,7 +261,7 @@ bindcode  $mod+Shift+21 move workspace number $ws12;	workspace number $ws12; exe
 bindcode $mod+Shift+31  reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # code:27 => sym: 0x72, symbol:r
-bindcode $mod+Shift+32  restart
+bindcode $mod+Shift+32  exec sleep 6 && compton-i3-restart-reset-opacity.sh; restart
 # exit i3 (logs you out of your X session)
 #bindsym  $mod+Shift+E exit
 
@@ -514,7 +514,8 @@ mode "$mode_gaps_outer" {
 gaps outer ${gaps_outer}
 gaps inner ${gaps_inner}
 smart_gaps ${smart_gaps}
-smart_borders ${smart_borders}
+${smart_borders}
+hide_edge_borders ${hide_edge_borders}
 ${gaps_forwindow_border}
 
 ${STDHOME_TAIL}

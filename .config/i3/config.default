@@ -24,5 +24,7 @@ export bar_height=24
 export gaps_outer=0
 export gaps_inner=10
 export smart_gaps=on
-export smart_borders=on
+export smart_borders='smart_borders none' # '1', 'yes', 'true', 'on', 'enable', 'active', 'no_gaps'
+export smart_borders=''
+export hide_edge_borders=none # 'none', 'vertical', 'horizontal', 'both', 'smart_no_gaps', 'smart', '1', 'yes', 'true', 'on', 'enable', 'active'
 export gaps_forwindow_border='for_window [class="^.*"] border pixel 0'
