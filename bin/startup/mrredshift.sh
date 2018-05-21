@@ -31,8 +31,8 @@ exlock_now || { echo "$(date) can't start as flock'ed" && exit 1; }
 echo "$(date) Startup $0 $@"
 case $(hostname -f) in \
 dec17.ly.lan)
-	b=1:0.35
-	t=6500:3500
+	b=1:0.60
+	t=6000:3500
 	;;
 apr16.ly.lan)
 	b=1:0.75
