@@ -59,3 +59,8 @@ date +'\%Y\%m\%d'
 
 # think of the children!
 46  *   *      *   *    grep -E $'\x70\x6f\x72\x6e' ~/.bash_history ~/.zsh_history && sed -r -i -e  '/\x70\x6f\x72\x6e/ d' ~/.bash_history ~/.zsh_history
+
+
+# file cleanup
+5 5 * * * sleep ${RANDOM:0:2} && find ~/Downloads/ -maxdepth 1 -type f -mtime +2 -name 'zbx_export_templates*.xml' -delete
+

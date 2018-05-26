@@ -22,8 +22,10 @@ pvresize -v /dev/sda2
 lvcreate -l 10000 -n datalv  VolGroup00
 lvcreate -l 100   -n lv_data vg_system
 mkfs.xfs  /dev/VolGroup00/datalv
+
+lvcreate --size 20G  -n lv_data vg_system
 mkfs.ext4 /dev/vg_system/lv_data
-echo "/dev/mapper/vg_system-lv_data /data                    ext4    defaults,noexec        1 2" | sudo tee -a /etc/fstab && sudo mount /data
+sudo mkdir /data && echo "/dev/mapper/vg_system-lv_data /data                    ext4    defaults,noexec        1 2" | sudo tee -a /etc/fstab && sudo mount /data
 
 
 
