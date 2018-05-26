@@ -140,3 +140,8 @@ Ctrl-L # https://winaero.com/blog/how-to-enter-file-location-manually-in-gtk-3-o
 @begin=javascript@
 var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k = bA.length - 1; k >= 0; --k) {bA[k].checked = true;} // zabbix template import select all box
 @end=javascript@
+
+# notification
+Notification.requestPermission().then(function(result) {console.log('bip');})
+a = new Notification("Salut2")
+a.close();

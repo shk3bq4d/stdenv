@@ -58,3 +58,31 @@ bq. _code review is like retrospective. Some points needs action. Some others ar
 
 # trump
 covfefe
+
+# double standard over sexist comment from men -> women
+# nice disclaimer
+https://workplace.stackexchange.com/a/76583
+A male boss saying "darling" to a female employee
+The statements made by your male boss is a typical first step of a courtship ritual for a man. Any woman who has been the target of unwanted attention a couple of times will recognize it. It may look perfectly civilized on the surface, and it probably feels this way to the boss too. It is still a signal that the boss would very much like to create more intimacy. Even if he does not plan to act on that desire, it is still extremely uncomfortable for the targeted woman. It legitimately creeps her out.
+
+A very devious thing here is that men tend to overestimate the reciprocity of attraction. If he sends a mild signal of attraction and the woman does not immediately act with aversion but simply takes it with embarrassed silence, he sees this as acceptance enough to press a bit more if the situation presents itself. If the woman is too shy to openly rebuff him for whatever reason, this creates a very awkward situation. And the fewest people are brave enough to openly confront their boss, especially when it comes to personal matters.
+
+Woman -> man sexual harassment
+Now you are asking, what about the reverse situation? Well, if we have a woman boss signalling her sexual attraction to a male employee, then you are correct. This is as much of a sexism issue as the other way around. Maybe men are wired in a way that they are less likely to perceive attention from a woman as unwanted, but it still can happen. And when it happens, they are entitled to be taken seriously, and to receive support in dealing with it.
+
+A female boss calling a male employee "darling"
+Statements like "you have nice hair" or calling someone "darling" are not connected to sexual attraction for women the way they are for men. Women frequently use them with people to whom they are not attracted, and rarely make them part of their courtship ritual. While they are statements whose relationship aspect dominates their factual information aspect, they do not establish an admirer/pursued relationship when used by women. Conversely, you will not hear a straight man calling their male employee "darling", because that would imply such a relationship. Human language is complex like that.
+
+It is difficult to define what statements made by a woman would be equivalent to those made by your male boss. This is because women tend to use more nonverbal behavior at the early steps of the courtship ritual. If you were to notice that your female boss is wearing lipstick only on days when she has a meeting scheduled with you, this would be a comparable signal to a man's "you have nice hair".
+
+Is this an example of double standard?
+I am not denying that a double standard exists, with men having it hard to convince people that they can be the target of sexism. But the situation you describe is not an example of the double standard. It is a sensible policy which does take into account the intricacies of human communication. The words uttered may be the same, but the real signal behind them is quite different.
+
+The fine print - please read if you disagree with the above
+To preempt critics, because it's a rather sensitive topic: please do not try to draw too broad generalizations from this post. I am perfectly aware that there are courtship behaviors which men and women have in common. A woman patting a man's bum is just as inappropriate as a man patting a woman's bum. The post focuses on the exact kind of statement noted in the question.
+
+Also, I am aware that there are individual differences. There can be women who send early verbal signals of attraction, or men who manage to use "darling" without being sleazy. Still, the answer above covers the average situation pretty well. The policy exists to establish the standard operation procedure for the average situation, but in the individual case, it matters whether the target is creeped out or not.
+
+I am also sure that I will get comments saying that the differences I described above shouldn't exist, are not natural, describe a patriarchal norm, etc. A debate over nature vs. nurture would be irrelevant here. Fact is, we are living in a world in which the difference exists. Targets of sexual harassment should be given support based on the reality they live in and not on "if women behaved exactly as men and reacted to external stimuli exactly as men, the world would be simpler and we'd have real equality".
+
+Another topic I didn't touch on is that same-gender harassment also exists, that transgender harassment is different from harassment between cisgendered people, etc. I kept the answer heteronormative, because it is complex enough without me addressing issues with which I have little experience and which are not relevant for the concrete situation experienced by the OP.
