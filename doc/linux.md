@@ -239,6 +239,7 @@ sudo dd if=~/Downloads/DietPi_v148_RPi-armv6-\(Jessie\).img of=/dev/sde && sudo 
 http://www.computerworld.com/article/2693438/unix-how-to-the-linux-etc-inittab-file.html
 
 sudo mount -o loop path/to/iso/file/YOUR_ISO_FILE.ISO /media/iso # mount iso
+sudo mount -o rw,uid=$(id -u) /dev/sde1 /mnt/sde1  # mount sdcard as current user
 
 # setuid from python script
 # https://stackoverflow.com/questions/24541427/setuid-setgid-wrapper-for-python-script

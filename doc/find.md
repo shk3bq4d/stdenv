@@ -15,3 +15,6 @@ find blabal -print -quit #note that print is mandatory
 find [path] [conditions to prune] -prune -o [your usual conditions] [actions to perform]
 
 find ~/.tmp/vim/output -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \)
+
+find . -depth -type d -empty -print # list empty directory
+find . -depth -type d -empty -print -delete # delete empty directory
