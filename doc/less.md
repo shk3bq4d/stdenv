@@ -2,3 +2,5 @@
 -R or --RAW-CONTROL-CHARS
               Like  -r,  but  only ANSI "color" escape sequences are output in "raw" form.  Unlike -r, the screen appearance is maintained correctly in most cases.  ANSI
 			                "color" escape sequences are sequences of the form:
+
++G will jump/scroll to the end (+ run a command in each open file, G jumps to the end)
