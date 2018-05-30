@@ -6,6 +6,10 @@ tcpdump -i vtnet0 -X host 10.50.219.121 and not dst port 65530 and not dst port 
 wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
+# rsyslog
+tcpdump -i eth0 -X dst port 514
+
+
 
 
 #imap JP
