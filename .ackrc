@@ -1,8 +1,9 @@
 --pager=less -RSX
 --ignore-ack-defaults
---color-lineno=rgb414
---color-filename=rgb024
---color-match=rgb555 on_rgb500
+--color-lineno=rgb013
+--color-filename=rgb004 bold
+#--color-match=rgb555 on_rgb500
+--color-match=rgb400 bold
 # This is the default ackrc for ack version 2.14.
 
 # There are four different ways to match

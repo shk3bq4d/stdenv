@@ -61,7 +61,12 @@ names = [
 '!',
 '#']
 def mrdmenu(prompt, items):
-    from sh import dmenu
+    try:
+        from sh import rofi
+        #dmenu = rofi.bake('-dmenu').bake('-normal-window')
+        dmenu = rofi.bake('-dmenu')
+    except:
+        from sh import dmenu
     import socket
     small = socket.gethostname() in ['acer2011']
     monitor1 = socket.gethostname() in ['ru'+'mo-pc']

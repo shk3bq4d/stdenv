@@ -117,7 +117,8 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 #define S_blue          #268bd2
 #define S_cyan          #2aa198
 !#define S_green         #859900
-#define S_green         #00aa00
+!#define S_green         #00aa00
+#define S_green         #007700
 
 
 ! Dark
