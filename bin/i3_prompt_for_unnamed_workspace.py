@@ -61,11 +61,14 @@ names = [
 '!',
 '#']
 def mrdmenu(prompt, items):
-    try:
-        from sh import rofi
-        #dmenu = rofi.bake('-dmenu').bake('-normal-window')
-        dmenu = rofi.bake('-dmenu')
-    except:
+    if 0:
+        try:
+            from sh import rofi
+            #dmenu = rofi.bake('-dmenu').bake('-normal-window')
+            dmenu = rofi.bake('-dmenu')
+        except:
+            from sh import dmenu
+    else:
         from sh import dmenu
     import socket
     small = socket.gethostname() in ['acer2011']
