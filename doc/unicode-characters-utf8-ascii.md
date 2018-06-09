@@ -1,6 +1,7 @@
 é &eacute; e aigu &#233; &#xE9;
 è &egrave; e aigu
 = &#61; equal
+à
 
 ¦	- 0166	U+00A6	&brvbar;
 § (Section)	- 0167	U+00A7	&sect;

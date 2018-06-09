@@ -86,3 +86,5 @@ Also, I am aware that there are individual differences. There can be women who s
 I am also sure that I will get comments saying that the differences I described above shouldn't exist, are not natural, describe a patriarchal norm, etc. A debate over nature vs. nurture would be irrelevant here. Fact is, we are living in a world in which the difference exists. Targets of sexual harassment should be given support based on the reality they live in and not on "if women behaved exactly as men and reacted to external stimuli exactly as men, the world would be simpler and we'd have real equality".
 
 Another topic I didn't touch on is that same-gender harassment also exists, that transgender harassment is different from harassment between cisgendered people, etc. I kept the answer heteronormative, because it is complex enough without me addressing issues with which I have little experience and which are not relevant for the concrete situation experienced by the OP.
+
+https://www.quora.com/profile/Jacob-Wells-12 # very articulate psychopath

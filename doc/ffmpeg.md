@@ -13,3 +13,16 @@ ffmpeg -i input.avi -vf scale=320:240 output.avi # resample scale image or video
 
 
 ffmpeg -i in.mp4 out.mp3 # extracts only sound
+
+for i in $(seq 1 12); do
+	echo $i
+	if ls *ep\ $i\ *webm &>/dev/null; then
+		#echo *ep\ $i\ *webm
+		#echo *ep\ $i\ *mp4
+		ffmpeg -i *ep\ $i\ *mp4 -i *ep\ $i\ *webm -c copy $(printf 'miraculous-ladybug-season02-episode%02i.mkv' $i)
+	else
+		#echo *ep\ $i\ *m4a
+		#echo *ep\ $i\ *mp4
+		ffmpeg -i *ep\ $i\ *mp4 -i *ep\ $i\ *m4a -c copy $(printf 'miraculous-ladybug-season02-episode%02i.mkv' $i)
+	fi
+done
