@@ -1,6 +1,8 @@
 # scan sr network to find out vpn ips
 nmap -sn 10.11.12.0/24
 
+yum install -y nmap
+
 
 nmap -p1-65535 canon
 sudo nmap -PN ly158

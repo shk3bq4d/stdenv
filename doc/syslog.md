@@ -4,6 +4,7 @@ exec > >(logger --id=$$ -t "$(basename $0)" ) # linux as it sends ppid which is 
 exec 2>&1
 
 echo hehe | logger -p emerg # write to every console, with default config on Ubuntu xenial 16.04
+echo hehe | logger
 
 # /etc/rsyslog.d/50-default.conf
 ## writes to file and do not process further lines (the second line does the trick)

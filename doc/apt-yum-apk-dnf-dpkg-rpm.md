@@ -17,10 +17,12 @@ yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x
 yum list installed 'http*'
 yum info elasticsearch # show version
-yum whatprovides ack
-yum whatprovides dig    # bind-utils
-yum whatprovides locate # mlocate
+yum whatprovides ack    && yum clean all
+yum whatprovides dig    && yum clean all # bind-utils
+yum whatprovides locate && yum clean all # mlocate
+yum whatprovides snmpwalk && yum clean all # net-snmp-utils
 apk: dig => bind-tools
+yum clean all
 
 rpm -qa | grep rsyslog
 rpm -q kernel # list versions

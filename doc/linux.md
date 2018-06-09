@@ -297,3 +297,5 @@ sudo locale | sudo tee /etc/default/locale                                      
 
 # upowerd full CPU
 unplug your iphone or trust the computer, https://askubuntu.com/questions/818965/upowerd-hogging-cpu
+
+dd if=/dev/zero of=file.txt count=1024 bs=1048576 # create One 1Gb gigabyte file

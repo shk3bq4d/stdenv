@@ -1,4 +1,4 @@
-é &eacute; e aigu
+é &eacute; e aigu &#233; &#xE9;
 è &egrave; e aigu
 = &#61; equal
 

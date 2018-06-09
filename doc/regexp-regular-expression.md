@@ -130,3 +130,6 @@ Special constructs (non-capturing)
 (?<=X) 	X, via zero-width positive lookbehind
 (?<!X) 	X, via zero-width negative lookbehind
 (?>X) 	X, as an independent, non-capturing group
+
+re.search(r'\bmyword\b', mH['name']): # python word boundary
+

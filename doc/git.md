@@ -404,3 +404,14 @@ git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
 # interactive
 git add --interactive
 git reset -p # unstage
+
+# diff conveniency
+git diff --ignore-space-at-eol
+git log -b # --ignore-space-change # diff
+git log -w # --ignore-all-space    # diff
+git log --ignore-blank-lines # diff
+git log --inter-hunk-context= # diff with more lines of context like in grep -C -A -B
+git log -W # --function-context # diff
+
+
+
