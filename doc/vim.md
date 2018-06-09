@@ -259,3 +259,8 @@ gq # apply
 
 gqip # reformat/reflow paragraph according to textwidth. Support > for quotation
 gql # reformat/reflow line      according to textwidth. Support > for quotation
+
+# generator iterator
+:put =map(range(1,150), 'printf(''%04d'', v:val)')
+:for i in range(1,10) | put ='192.168.0.'.i | endfor
+
