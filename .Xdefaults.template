@@ -109,7 +109,8 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 
 ! Common
 
-#define S_yellow        #b58900
+!#define S_yellow        #b58900
+#define S_yellow        #955900
 #define S_orange        #cb4b16
 #define S_red           #dc322f
 #define S_magenta       #d33682
