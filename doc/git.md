@@ -18,6 +18,10 @@ git help -g
 # Don't do it if you have uncommitted work you want to keep.
 git reset --hard 0d1d7fc32
 
+git reset HEAD~  # undo last commit and put its change in the work tree
+git reset HEAD~1 # undo last commit and put its change in the work tree
+git reset HEAD~2 # undo last commit and put its change in the work tree
+
 git checkout -- <file> # revert reset discard unstaged change
 git checkout -- . # forget revert reset discard unstaged change
 
