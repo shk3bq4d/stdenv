@@ -27,7 +27,7 @@
                     <xs:attribute name="row" use="optional" type="xs:integer" />
 
 
-XML duration example
+# XML duration examples
 P1D
 PT10H5S
 PT6000M
@@ -45,3 +45,10 @@ PT360000S
 PT720000S
 P5Y11M
 P2M4DT10M5.23S
+
+# Xpath CLI tools
+xmllint --xpath '//element/@attribute' file.xml
+xmlstarlet sel -t -v "//element/@attribute" file.xml
+xpath -q -e '//element/@attribute' file.xml
+xidel -se '//element/@attribute' file.xml
+saxon-lint --xpath '//element/@attribute' file.xml

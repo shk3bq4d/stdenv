@@ -206,7 +206,7 @@ git push -u origin --tags
 
 
 git submodule update --init --recursive # first time
-git submodule update --recursive --remote # pull 
+git submodule update --recursive --remote # pull
 
 
 RB=master; LB=master; R=origin; git fetch $R && git diff $LB $R/$RB # http://stackoverflow.com/questions/5162800/git-diff-between-cloned-and-original-remote-repository
@@ -248,7 +248,7 @@ cd $DIR
 mkdir git/
 cd git
 git init
-git remote add -f origin git://github.com/rails/rails.git 
+git remote add -f origin git://github.com/rails/rails.git
 git config core.sparseCheckout true
 
 echo "
@@ -278,7 +278,7 @@ git subtree add --prefix=rails git://github.com/rails/rails.git master
 
 git ls-tree -r master --name-only # all files in master that git knows about
 git log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d' # all files that ever existed in git repo
- 
+
 
 # Creating Tags
 Git supports two types of tags: lightweight and annotated.
@@ -328,7 +328,7 @@ git checkout `git rev-list -n 1 --before="2009-07-27 13:37" master`
 
 
 git config -e
-[filter "ssh_config"]                                                                
+[filter "ssh_config"]
     clean = "sed -r -e '/# ?(gitignore|sedkatello|sedvirtualbox)$/'d"
 config filter=ssh_config # part of WORKDIR/.gitattributes ~/.gitattributes or GIT_DIR/attributes
 
@@ -350,7 +350,7 @@ HEAD@{5}
 HEAD^
 HEAD^^^
 HEAD~3
-HEAD~ 
+HEAD~
 d921970^2 means “the second parent of d921970" (only useful for commit with multiple parents such as merge commit)
 
 gitk # graph gui
@@ -368,41 +368,41 @@ git stash pop # pulls at the top of the stash's stack
 
 git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
 [submodule ".vim/bundle/Align"]
-	path = .vim/bundle/Align
-	url = https://github.com/vim-scripts/Align.git
+    path = .vim/bundle/Align
+    url = https://github.com/vim-scripts/Align.git
 [submodule ".vim/bundle/AutoComplPop"]
-	path = .vim/bundle/AutoComplPop
-	url = https://github.com/vim-scripts/AutoComplPop.git
+    path = .vim/bundle/AutoComplPop
+    url = https://github.com/vim-scripts/AutoComplPop.git
 [submodule ".vim/bundle/colorschemes"]
-	path = .vim/bundle/colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
+    path = .vim/bundle/colorschemes
+    url = https://github.com/flazz/vim-colorschemes.git
 [submodule ".vim/bundle/puppet"]
-	path = .vim/bundle/puppet
-	url = https://github.com/rodjek/vim-puppet.git
+    path = .vim/bundle/puppet
+    url = https://github.com/rodjek/vim-puppet.git
 [submodule ".vim/bundle/tabular"]
-	path = .vim/bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
+    path = .vim/bundle/tabular
+    url = https://github.com/godlygeek/tabular.git
 [submodule ".vim/bundle/AnsiEsc"]
-	path = .vim/bundle/AnsiEsc
-	url = https://github.com/vim-scripts/AnsiEsc.vim.git
+    path = .vim/bundle/AnsiEsc
+    url = https://github.com/vim-scripts/AnsiEsc.vim.git
 [submodule ".vim/bundle/SyntaxRange"]
-	path = .vim/bundle/SyntaxRange
-	url = https://github.com/vim-scripts/SyntaxRange.git
+    path = .vim/bundle/SyntaxRange
+    url = https://github.com/vim-scripts/SyntaxRange.git
 [submodule ".vim/bundle/bufexplorer"]
-	path = .vim/bundle/bufexplorer
-	url = https://github.com/jlanzarotta/bufexplorer.git
+    path = .vim/bundle/bufexplorer
+    url = https://github.com/jlanzarotta/bufexplorer.git
 [submodule ".vim/bundle/ingo-library"]
-	path = .vim/bundle/ingo-library
-	url = https://github.com/vim-scripts/ingo-library.git
+    path = .vim/bundle/ingo-library
+    url = https://github.com/vim-scripts/ingo-library.git
 [submodule ".vim/bundle/Dockerfile"]
-	path = .vim/bundle/Dockerfile
-	url = https://github.com/ekalinin/Dockerfile.vim
+    path = .vim/bundle/Dockerfile
+    url = https://github.com/ekalinin/Dockerfile.vim
 [submodule ".vim/colorschemes"]
-	path = .vim/colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
+    path = .vim/colorschemes
+    url = https://github.com/flazz/vim-colorschemes.git
 [submodule ".vim/bundle/vim-gitgutter"]
-	path = .vim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
+    path = .vim/bundle/vim-gitgutter
+    url = https://github.com/airblade/vim-gitgutter.git
 
 
 # interactive

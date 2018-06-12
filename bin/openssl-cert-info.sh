@@ -11,6 +11,12 @@
 
 set -euo pipefail
 
+
+
+RED=$(echo -e "\033[0;31m")    # red
+GREEN=$(echo -e "\033[0;32m")    # green
+OFF=$(echo -e "\033[m")
+
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
 [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
@@ -29,13 +35,17 @@ fi
 	echo "cat $NAME" >&2
 	cat $NAME
   else
-	echo "/usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME"  >&2
+	echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME 2>&1 | less"  >&2
 	echo '' | \
 		/usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME 2>/dev/null
   fi
 } |
-    /bin/sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
-    /usr/bin/openssl x509 -noout -text -extensions SAN -issuer -subject -alias -dates -email -checkhost $NAME 2>&1| \
-	grep -EA1 '^[^ ]|Subject Alternative Name' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g'
+    sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
+    openssl x509 -noout -text -extensions SAN -issuer -subject -alias -dates -email -checkhost $NAME 2>&1| \
+	grep -EA1 '^[^ ]|Subject Alternative Name' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
+	sed -r \
+		-e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
+		-e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/"
+
 exit 0
 
