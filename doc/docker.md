@@ -369,6 +369,12 @@ RUN apt-get update
 PRN apt-get install -y xeyes
 " | docker build -f - .
 
+# ubuntu DNS
+ExecStart=/usr/bin/dockerd --dns 10.36.211.20 --dns 10.36.211.21 --dns 8.8.8.8 --dns 8.8.4.4 -H fd://
+or edit freaking /etc/nsswitch.conf and have dns before mdns shit
+#hosts:          files mdns4_minimal [NOTFOUND=return] dns
+hosts:          files dns mdns4_minimal [NOTFOUND=return]
+
 
 # rebuild all containers
 find ~/git/ksgitlab/cfc/ide-infra/docker/ -name tag.sh | while read i; do cd ~/git/ksgitlab/cfc/ide-infra/docker; cd $(dirname $i); [[ -f push.sh ]] || continue; pwd; ./build.sh && ./push.sh || break; done
