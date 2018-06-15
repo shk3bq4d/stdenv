@@ -3,7 +3,11 @@
 unset PASSWORD
 unset CHARCOUNT
 
-echo -n "Enter password: " >&2
+TEXT="Enter password: "
+if [[ $# -gt 0 ]]; then
+	TEXT="$@"
+fi
+echo -n "$TEXT" >&2
 
 stty -echo
 
