@@ -1,3 +1,6 @@
+https://puppet.com/docs/puppet/5.0/lang_data_regexp.html 
+puppet sucks balls, use \A instead of ^ and \z instead of $
+
 ipadress (vim): \(\d\+\.\)\{3\}\d\{1,3\}
 
 if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surrou
