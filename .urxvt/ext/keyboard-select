@@ -514,7 +514,11 @@ sub deactivate {
 
 sub status_area {
 	my ($self, $extra) = @_;
-	my ($stat, $stat_len);
+	my ($stat, $stat_len, $mrextra);
+
+	$mrextra = sprintf(" %d/%d",
+					-$self->top_row + $self->view_start,
+					-$self->top_row );
 
 	if ($self->{search}) {
 		$stat_len = $self->ncol;
@@ -531,13 +535,12 @@ sub status_area {
 		} elsif ($self->view_start() == 0) {
 			$stat .= "Bot";
 		} else {
-			$stat .= sprintf("%2d%% %d/%d",
-					($self->top_row - $self->view_start) * 100 / $self->top_row,
-					$self->view_start,
-					$self->top_row );
+			$stat .= sprintf("%2d%%",
+					($self->top_row - $self->view_start) * 100 / $self->top_row);
 		}
 		
 		$stat = "$extra $stat" if $extra;
+		$stat = "$stat $mrextra" if $mrextra;
 		$stat_len = length($stat);
 	}
 
