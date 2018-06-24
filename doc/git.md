@@ -417,5 +417,9 @@ git log --ignore-blank-lines # diff
 git log --inter-hunk-context= # diff with more lines of context like in grep -C -A -B
 git log -W # --function-context # diff
 
+# https://stackoverflow.com/questions/1764380/how-to-push-to-a-non-bare-git-repository
+git config --local receive.denyCurrentBranch updateInstead
 
-
+# browse other revisions
+git ls-tree --long REV -- .
+git show REV:./myfile.tx # relative maybe useful as CWD is not respected otherwise

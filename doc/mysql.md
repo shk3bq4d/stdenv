@@ -1,3 +1,4 @@
+@begin=sql@
 show databases;
 use DATABASENAME;
 show tables;
@@ -16,6 +17,17 @@ create user 'mrowncloud'@'localhost' identified by 'habon123.';
 drop user mrowncloud;
 grant all on mrowncloud.* to mrowncloud;
 
-@begin=sql@
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass'; 
 @end=sql@
+
+
+
+# https://dev.mysql.com/doc/refman/5.5/en/old-client.html
+Client does not support authentication protocol requested by server
+@begin=sql@
+SET PASSWORD FOR 'some_user'@'some_host' = OLD_PASSWORD('new_password'); 
+ALTER USER 'fw'@'10.1.1.120' IDENTIFIED WITH mysql_native_password BY 'fwpass';
+@end=sql@
+

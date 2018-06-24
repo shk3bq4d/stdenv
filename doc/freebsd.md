@@ -5,6 +5,10 @@ mount -uw /
 # ntpd keep time
 sudo service ntpd onestart
 
+# change system date
+date $(date -v+2m "+%Y%m%d%H%M.%S") # adds two months to sytemdate
+
+
 
 
 # vnc desktop i3

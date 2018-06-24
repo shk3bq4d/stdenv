@@ -264,3 +264,4 @@ gql # reformat/reflow line      according to textwidth. Support > for quotation
 :put =map(range(1,150), 'printf(''%04d'', v:val)')
 :for i in range(1,10) | put ='192.168.0.'.i | endfor
 
+d]) # delete until next unmatched parenthesis, useful for nested function calls
