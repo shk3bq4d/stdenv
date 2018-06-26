@@ -9,7 +9,7 @@ update-ca-trust force-enable                 # Enable the dynamic CA configurati
 #cp foo.crt /etc/pki/ca-trust/source/anchors/ # Add it as a new file to /etc/pki/ca-trust/source/anchors/:
 cd /etc/pki/ca-trust/source/anchors/ 
 cat - > myca.crt
-update-ca-trust extract                      # activate
+update-ca-trust extract                      # activate (and also takes care of /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts)
 
 # alpine 
 apk update && apk add ca-certificates
@@ -56,6 +56,9 @@ systemctl reload httpd
 
 
 # java
+ls -la  /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts
+keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass changeit | grep -i engineer
+
 cacert password -> changeit
 keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
