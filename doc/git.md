@@ -423,3 +423,7 @@ git config --local receive.denyCurrentBranch updateInstead
 # browse other revisions
 git ls-tree --long REV -- .
 git show REV:./myfile.tx # relative maybe useful as CWD is not respected otherwise
+
+# change commit author
+export GIT_AUTHOR_NAME="Jeff Malone" GIT_AUTHOR_EMAIL="jeff@malone.com" GIT_COMMITTER_NAME="Jeff Malone" GIT_COMMITTER_EMAIL="jeff@malone.com"
+git commit --amend --reset-author

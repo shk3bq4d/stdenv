@@ -2,6 +2,7 @@ systemctl enable nginx.service   # Start nginx as system boot
 journalctl --no-tail -f -u nginx.service
 journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
+journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMPANY-GLOBAL' | less
 
 https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux
  vi /etc/systemd/system/SERVICENAME.service

@@ -8,7 +8,9 @@ sudo service ntpd onestart
 # change system date
 date $(date -v+2m "+%Y%m%d%H%M.%S") # adds two months to sytemdate
 
-
+# relative date
+date -v+1y # one year from now
+date -v-1y # one year ago
 
 
 # vnc desktop i3
@@ -42,3 +44,4 @@ https://dan.langille.org/2015/01/18/failure-with-freebsd-update-how-not-to-upgra
 su -m www -c 'sh -c "whoami"'
 
 pw usermod tom -G ftpusers,wwwusers # add user tom to secondary groups ftpusers and wwwusers
+
