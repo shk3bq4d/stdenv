@@ -16,6 +16,6 @@ f=$(mktemp)
 cat $out | sort -u > $f
 # out is a symbolic link, can't do rm or overwrite
 truncate -s 0 $out
-cat $f >> $out 
+cat $f >> $out
 rm -f $f
 echo "EOF"

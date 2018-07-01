@@ -265,3 +265,5 @@ gql # reformat/reflow line      according to textwidth. Support > for quotation
 :for i in range(1,10) | put ='192.168.0.'.i | endfor
 
 d]) # delete until next unmatched parenthesis, useful for nested function calls
+
+https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file
