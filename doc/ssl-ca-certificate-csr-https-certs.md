@@ -2,6 +2,7 @@
 save rootCA.pem in /usr/local/share/ca-certificates/
 sudo update-ca-certificates
 systemctl restart docker.service # optional for artifactory
+## cert will probably show up in /etc/ssl/certs
 
 #centos6 and 7
 yum install ca-certificates                  # Install the ca-certificates package:
