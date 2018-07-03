@@ -7,7 +7,7 @@ dec17.ly.lan)
 		ips | grep 'wlp58s0.*172.28'; then
 		PROXYPAC=""
 	else
-		PROXYPAC="http://10.1.1.92/websupport/proxy.pac.ly.py"
+		PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
 	fi
 	;;
 *.ly.lan)

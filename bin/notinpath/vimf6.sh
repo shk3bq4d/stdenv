@@ -147,6 +147,16 @@ $HOME/.config/i3/config.*)
 	{ sleep 6 && compton-i3-restart-reset-opacity.sh; } &
     echo "i3 restarted B"
     ;;
+*/Dockerfile)
+	DIR=$(dirname $SCRIPT)
+	if [[ -f $DIR/build.sh ]]; then
+		bash $DIR/build.sh
+	elif [[ -f $DIR/../build.sh ]]; then
+		bash $DIR/../build.sh
+	else
+		docker build -f $SCRIPT
+	fi
+	;;
 *)
     echo "($(basename $0)): unimplemented case for script $SCRIPT"
     exit 1
