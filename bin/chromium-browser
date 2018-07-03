@@ -3,7 +3,8 @@
 #source ~/.std*aliases
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
-	if pgrep forti &>/dev/null; then
+	if pgrep forti &>/dev/null || \
+		ips | grep 'wlp58s0.*172.28'; then
 		PROXYPAC=""
 	else
 		PROXYPAC="http://10.1.1.92/websupport/proxy.pac.ly.py"
