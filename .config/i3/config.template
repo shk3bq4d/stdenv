@@ -452,7 +452,7 @@ exec ~/bin/notinpath/mr-startup.sh
 #exec --no-startup-id xmodmap -e "keycode 0x42 = Escape"
 exec --no-startup-id ~/bin/notinpath/mrxmodmap.sh
 
-exec parcellite
+exec mrparcellite
 #exec kmix
 #exec vlc
 #exec skype

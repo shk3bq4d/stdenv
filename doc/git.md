@@ -427,3 +427,6 @@ git show REV:./myfile.tx # relative maybe useful as CWD is not respected otherwi
 # change commit author
 export GIT_AUTHOR_NAME="Jeff Malone" GIT_AUTHOR_EMAIL="jeff@malone.com" GIT_COMMITTER_NAME="Jeff Malone" GIT_COMMITTER_EMAIL="jeff@malone.com"
 git commit --amend --reset-author
+
+git config --local user.name "Jeff Malone"
+git config --local user.email "jeff.malone.com"
