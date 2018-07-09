@@ -24,9 +24,17 @@ hashlib.sha1("Nobody inspects the spammish repetition").hexdigest()
 hashlib.sha256("Nobody inspects the spammish repetition").hexdigest()
 
 
+# UTF-8 IO
+@begin=python@
+#this is bad:
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+# instead do
+# PYTHONIOENCODING="UTF-8"  
+# in your shell or read
+# https://stackoverflow.com/questions/3828723/why-should-we-not-use-sys-setdefaultencodingutf-8-in-a-py-script
+@end=python@
 
 
 if sys.platform == "win32":

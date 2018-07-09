@@ -74,8 +74,6 @@ def go(args):
     pprint(ar)
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
     logging_conf()
     try:

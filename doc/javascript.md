@@ -1,4 +1,4 @@
-/* ex: set filetype=javascript: */
+@begin=javascript@
 setTimeout(function() {alert(1);}, 10)
 
 
@@ -14,4 +14,18 @@ catch(e){
     window.open(xcb, '_blank');
 	// https://github.com/gautamkrishnar/tcso/blob/master/javascript/tcso.js
 }
+@end=javascript@
+
+
+# https://stackoverflow.com/questions/12977661/is-there-a-way-to-suppress-jshint-warning-for-one-given-line
+@begin=javascript@
+// Code here will be linted with JSHint.
+// /* jshint ignore:start */
+// // Code here will be ignored by JSHint.
+// /* jshint ignore:end */
+// // Code here will be linted with JSHint.
+// You can also ignore a single line with a trailing comment like this:
+//
+// ignoreThis(); // jshint ignore:line
+@end=javascript@
 

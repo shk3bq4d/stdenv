@@ -81,6 +81,8 @@ for i in *jar; do printf "%-30s %s\n" $i "$(jarsigner -verify $i)"; done
 
 # retrieve certifcate from server
 openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
+openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -starttls smtp -showcerts # -starttls for upgraded connection
+printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 
 # node.js
