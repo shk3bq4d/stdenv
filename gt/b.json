@@ -1,0 +1,11 @@
+{
+  "user": {
+    "login": "jane",
+    "full_name": "Jane Doe",
+    "roles": ["admin", "developer"],
+    "contact": {
+      "email": "jane@example.com",
+      "cellphone": "+49123456789"
+    }
+  }
+}
