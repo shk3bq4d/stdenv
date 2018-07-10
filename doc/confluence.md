@@ -2385,3 +2385,6 @@ showComments	false	true	Show comments-menu (the whole set: show, add, edit, dele
 locked	false	false	Dont allow any further voting. Show a lock Symbol to indicate that. Image for Survey will only be displayed if you have the title-flag also. (It is still shown on the vote-elements)
 Powered by Atlassian Confluence 3.0.2, the Enterprise Wiki. Bug/feature request – Atlassian news – Contact administrators
 Notation Guide - Confluence
+
+# Macro
+Content by label
