@@ -13,6 +13,39 @@ from collections import namedtuple
 from pprint import pprint, pformat
 
 logger = logging.getLogger(__name__)
+if sys.stdout.isatty():
+    NONE="\033[0m"    # unsets color to term's fg color
+    BOLD="\033[1m"
+    OFF="\033[m"
+    BLACK="\033[0;30m"    # black
+    RED="\033[0;31m"    # red
+    GREEN="\033[0;32m"    # green
+    YELLOW="\033[0;33m"    # yellow
+    BLUE="\033[0;34m"    # blue
+    MAGENTA="\033[0;35m"    # magenta
+    CYAN="\033[0;36m"    # cyan
+    WHITE="\033[0;37m"    # white
+    EMBLACK="\033[1;30m"
+    EMRED="\033[1;31m"
+    EMGREEN="\033[1;32m"
+    EMYELLOW="\033[1;33m"
+    EMBLUE="\033[1;34m"
+    EMMAGENTA="\033[1;35m"
+    EMCYAN="\033[1;36m"
+    EMWHITE="\033[1;37m"
+    BGBLACK="\033[40m"
+    BGRED="\033[41m"
+    BGGREEN="\033[42m"
+    BGYELLOW="\033[43m"
+    BGBLUE="\033[44m"
+    BGMAGENTA="\033[45m"
+    BGCYAN="\033[46m"
+    BGWHITE="\033[47m"
+else:
+    NONE=BOLD=OFF=BLACK=RED=GREEN=YELLOW=BLUE=MAGENTA=CYAN=\
+        WHITE=EMBLACK=EMRED=EMGREEN=EMYELLOW=EMBLUE=EMMAGENTA=\
+        EMCYAN=EMWHITE=BGBLACK=BGRED=BGGREEN=BGYELLOW=BGBLUE=\
+        BGMAGENTA=BGCYAN=BGWHITE=''
 
 def logging_conf(
         level='INFO', # DEBUG
@@ -145,7 +178,7 @@ def go(args):
             continue
 
         # ssh: Could not resolve hostname bip: Name or service not known
-        matcher = re.match(r'^ssh: Could not resolve hostname (.*): Name or service not known', line)
+        matcher = re.match(r'^ssh: ', line)
         if matcher is not None:
             errors.append(line)
             continue
@@ -162,22 +195,24 @@ def go(args):
 
 def dump(host, config_filelist, applied_options, errors):
     # SshOption = namedtuple('SshOption', 'Name Value SourceFile LineNumber Criteria')
-    f = '{LineNumberColon:<5s}{Name:<26s} {Value:<40s} <= {Criteria}'
-    f = '{LineNumberColon:<5s}{Name:<26s} {Value:<40s}'
+    f = '{LineNumberColon:<5s}{MAGENTA}{Name:<26s} {Value:<40s} <= {Criteria}'
+    f = '{LineNumberColon:<5s}{MAGENTA}{Name:<26s}{NONE} {Value:<40s}'
     current_file = None
-    print(host)
+    print(BLUE + host + NONE)
     if len(errors) > 0:
-        print('- ' + '\n- '.join(errors))
+        print(RED + '- ' + '\n- '.join(errors) + NONE)
     for i in sorted(applied_options.keys(), key=lambda x: (config_filelist.index(applied_options.get(x).SourceFile), applied_options.get(x).LineNumber)):
         v = applied_options.get(i)
         if v.SourceFile != current_file:
             current_file = v.SourceFile
-            print('\n{}:'.format(current_file))
-        print(f.format(
-            LineNumberColon='{}:'.format(v.LineNumber),
-            SourceFileNumber='{}:{}'.format(v.SourceFile, v.LineNumber),
-            **v._asdict()
-            ))
+            print('\n{}:'.format(GREEN + current_file + NONE))
+        args = v._asdict()
+        args['LineNumberColon'] ='{}:'.format(v.LineNumber)
+        args['SourceFileNumber'] ='{}:{}'.format(v.SourceFile, v.LineNumber)
+        #args['Name'] = MAGENTA + args['Name'] + NONE
+        args['MAGENTA'] = MAGENTA
+        args['NONE'] = NONE
+        print(f.format(**args))
 
 if __name__ == '__main__':
 
