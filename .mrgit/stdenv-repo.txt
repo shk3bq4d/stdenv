@@ -1,6 +1,5 @@
 .vim/bundle/Align/                                       https://github.com/vim-scripts/Align.git
 .vim/bundle/AnsiEsc/                                     https://github.com/vim-scripts/AnsiEsc.vim.git
-.vim/bundle/AutoComplPop/                                https://github.com/vim-scripts/AutoComplPop.git
 .vim/bundle/bufexplorer/                                 https://github.com/jlanzarotta/bufexplorer.git
 .vim/bundle/colorschemes/                                https://github.com/flazz/vim-colorschemes.git
 .vim/bundle/dockerfile/                                  https://github.com/ekalinin/Dockerfile.vim.git
