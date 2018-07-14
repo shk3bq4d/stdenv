@@ -175,6 +175,7 @@ def process(iterator, host=None):
     applied_options = {}
     config_filelist = []
     keysH = OrderedDict()
+    num_password = 0
     last_key = None
     errors = []
     port = None
@@ -270,6 +271,27 @@ def process(iterator, host=None):
                 keysH[last_key].Result = 'Offered'
             continue
 
+        #debug1: Authentication succeeded
+        matcher = re.match(r'^debug1: Authentication succeeded.*', line)
+        if matcher is not None:
+            if last_key in keysH:
+                keysH[last_key].Result = 'Accepted'
+            continue
+
+        #debug2: userauth_kbdint
+        matcher = re.match(r'^debug2: userauth_kbdint', line)
+        if matcher is not None:
+            last_key = 'Keyboard-interactive#{}'.format(num_password)
+            num_password = num_password + 1
+            s = SshKey(last_key, '', 'Offered')
+            keysH[last_key] = s
+            continue
+
+        # debug1: Entering interactive session.
+        matcher = re.match(r'^debug1: Entering interactive session.', line)
+        if matcher is not None:
+            break
+
         #debug3: receive packet: type 51
         matcher = re.match(r'^debug3: receive packet: type (\d+)', line)
         if matcher is not None:
@@ -280,9 +302,10 @@ def process(iterator, host=None):
                 if last_key is not None:
                     s = keysH.get(last_key, None)
                     if s is not None:
-                        s.Result = 'Rejected'
+                        s.Result = 'Rejected (Final)' if matcher.group(1) == '1' else 'Rejected'
                     last_key = None
                     continue
+
 
         #debug2: we did not send a packet, disable method
         matcher = re.match(r'^debug2: we did not send a packet, disable method', line)
@@ -319,7 +342,10 @@ def dump(host, ip, port, keysH, config_filelist, applied_options, errors):
     if len(keysH) > 0:
         print('\nAuth:')
     for k,v in keysH.iteritems():
-        print('{Result:<10s} {Source:<8s}: {Name}'.format(**v._asdict()))
+        v = copy.deepcopy(v._asdict())
+        v['Source'] = '' if v['Source'] == '' else '({})'.format(v['Source'])
+        v['Result'] += ':'
+        print('{Result:<18s} {Name:<34s} {Source}'.format(**v))
 
     for i in sorted(applied_options.keys(), key=lambda x: (config_filelist.index(applied_options.get(x).SourceFile), applied_options.get(x).LineNumber)):
         v = applied_options.get(i)
