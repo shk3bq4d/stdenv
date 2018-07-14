@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+from functools import partial
+import argparse
 import copy
 import os
 import sys
 import re
 import logging
 import subprocess
-from collections import namedtuple
+from collections import namedtuple, OrderedDict
 
 from pprint import pprint, pformat
 
@@ -80,6 +82,15 @@ def myrun(cmd):
         yield line
 
 SshOption = namedtuple('SshOption', 'Name Value SourceFile LineNumber Criteria')
+#SshKey = namedtuple('SshKey', 'Name Source Result')
+class SshKey:
+    def __init__(self, name, source, result):
+        self.Name = name
+        self.Source = source
+        self.Result = result
+    def _asdict(self):
+        r = vars(self)
+        return r
 
 def filereader(filename):
     linenumber = 0
@@ -117,19 +128,58 @@ def process_config_file(applied_options, config_filelist, filename, linenumber, 
     return rH, rA
 
 def go(args):
+    parser = argparse.ArgumentParser(description="Parses ssh -vvv output")
+    #parser.add_argument("SSH_ARGS", type=str, nargs='*', help="SSH options + host. If not set, you'll have to provide your debugged output on stdin")
+    script_directory, script_name = os.path.split(__file__)
+    script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
+    ar, unknown = parser.parse_known_args(args)
+    #pprint(unknown)
+    if len(unknown) > 0:
+        go_by_process(unknown)
+    else:
+        if sys.stdin.isatty():
+            print('Please paste your ssh -vvv output and hit Enter, then Control-D')
+            sys.stdout.flush()
+        process(stdin_iterator)
+
+def stdin_iterator():
+    import fileinput
+    for line in fileinput.input():
+        line = line.strip()
+        if line == '':
+            continue
+        yield line
+
+def go_by_process(args):
     host = args[-1]
+    args.insert(0, 'ControlMaster=no')
+    args.insert(0, '-o')
     args.insert(0, 'ConnectTimeout=5')
     args.insert(0, '-o')
     args.insert(0, '-vvv')
     args.insert(0, 'ssh')
     args.append('true')
+    iterator = partial(myrun, args)
+    applied_options = process(iterator, host=host)
+    if 'proxycommand' in applied_options:
+        cmd = applied_options['proxycommand'].Value
+        cmd = re.sub(r'^\s*ssh\s+', '', cmd) # removes leading ssh command
+        cmd = re.sub(r'\B-q\b', '', cmd) # removes quiet option
+        cmd = re.sub(r'\B-W\s+\S+\b', '', cmd) # removes -W %h:%p
+        print('\n====================')
+        go_by_process(cmd.split())
 
+def process(iterator, host=None):
     current_file = current_criteria = current_exec_linenumber = None
     # keys are the name of a valid SSH option, values are SshOption namedtuples
     applied_options = {}
     config_filelist = []
+    keysH = OrderedDict()
+    last_key = None
     errors = []
-    for line in myrun(args):
+    port = None
+    ip = None
+    for line in iterator():
 
         matcher = re.match(r'^debug1: Reading configuration data (.*)', line)
         if matcher is not None:
@@ -177,30 +227,100 @@ def go(args):
             current_criteria = current_exec_linenumber = None
             continue
 
-        # ssh: Could not resolve hostname bip: Name or service not known
-        matcher = re.match(r'^ssh: ', line)
+        # OpenSSH_7.5p1 Ubuntu-10ubuntu0.1, OpenSSL 1.0.2g  1 Mar 2016
+        matcher = re.match(r'^OpenSSH', line)
         if matcher is not None:
+            continue
+
+        # ssh: Could not resolve hostname bip: Name or service not known
+        matcher = re.match(r'^debug\d: ', line)
+        if matcher is None:
             errors.append(line)
             continue
 
-    dump(host, config_filelist, applied_options, errors)
+        # debug1: Connecting to myhost [myip] port 22.
+        matcher = re.match(r'^debug1: Connecting to (.*) \[(.*)\] port (.*)\.$', line)
+        if matcher is not None:
+            host, ip, port = matcher.groups()
+            continue
 
-    if 'proxycommand' in applied_options:
-        cmd = applied_options['proxycommand'].Value
-        cmd = re.sub(r'^\s*ssh\s+', '', cmd) # removes leading ssh command
-        cmd = re.sub(r'\B-q\b', '', cmd) # removes quiet option
-        cmd = re.sub(r'\B-W\s+\S+\b', '', cmd) # removes -W %h:%p
-        print('\n====================')
-        go(cmd.split())
+        # debug2: resolving "myhost" port 22
+        matcher = re.match(r'^debug2: resolving "(.*)" port (.*)$', line)
+        if matcher is not None:
+            host, port = matcher.groups()
+            continue
 
-def dump(host, config_filelist, applied_options, errors):
+        #debug2: key: /home/bob/.ssh/id_rsa (0x560ec35uef0), agent
+        matcher = re.match(r'^debug2: key: (.*) \((.*)\), (.*)', line)
+        if matcher is not None and matcher.group(2) != '(nil)':
+            s = keysH.get(matcher.group(1), SshKey(matcher.group(1), matcher.group(3), 'Unsent'))
+            s.Source = matcher.group(3)
+            s.Result = 'Unsent'
+            keysH[matcher.group(1)] = s
+            continue
+
+        #debug1: Offering RSA public key: /home/bob/.ssh/id_rsa
+        matcher = re.match(r'^debug1: Offering RSA public key: (.*)', line)
+        if matcher is not None:
+            last_key = matcher.group(1)
+            if last_key not in keysH:
+                s = SshKey(last_key, 'SourceUnknown', 'Offered')
+                keysH[last_key] = s
+            else:
+                keysH[last_key].Result = 'Offered'
+            continue
+
+        #debug3: receive packet: type 51
+        matcher = re.match(r'^debug3: receive packet: type (\d+)', line)
+        if matcher is not None:
+            if matcher.group(1) in [
+                '51', # authentication rejected, try next one
+                '1',  # authentication rejected, will not allow you any other try
+                ]:
+                if last_key is not None:
+                    s = keysH.get(last_key, None)
+                    if s is not None:
+                        s.Result = 'Rejected'
+                    last_key = None
+                    continue
+
+        #debug2: we did not send a packet, disable method
+        matcher = re.match(r'^debug2: we did not send a packet, disable method', line)
+        if matcher is not None:
+            last_key = None
+            continue
+
+        #print(line)
+
+    dump(host, ip, port, keysH, config_filelist, applied_options, errors)
+    return applied_options
+
+
+def dump(host, ip, port, keysH, config_filelist, applied_options, errors):
     # SshOption = namedtuple('SshOption', 'Name Value SourceFile LineNumber Criteria')
     f = '{LineNumberColon:<5s}{MAGENTA}{Name:<26s} {Value:<40s} <= {Criteria}'
     f = '{LineNumberColon:<5s}{MAGENTA}{Name:<26s}{NONE} {Value:<40s}'
     current_file = None
-    print(BLUE + host + NONE)
+    if port is None:
+        if 'port' in applied_options:
+            port = applied_options['port']
+        else:
+            port = 22
+    print('{BLUE}{host}{NONE}{toip}:{port}'.format(
+        BLUE=BLUE,
+        host=host,
+        NONE=NONE,
+        toip = '' if ip is None or ip == host else ' => {}'.format(ip),
+        port=port
+        ))
     if len(errors) > 0:
         print(RED + '- ' + '\n- '.join(errors) + NONE)
+
+    if len(keysH) > 0:
+        print('\nAuth:')
+    for k,v in keysH.iteritems():
+        print('{Result:<10s} {Source:<8s}: {Name}'.format(**v._asdict()))
+
     for i in sorted(applied_options.keys(), key=lambda x: (config_filelist.index(applied_options.get(x).SourceFile), applied_options.get(x).LineNumber)):
         v = applied_options.get(i)
         if v.SourceFile != current_file:
