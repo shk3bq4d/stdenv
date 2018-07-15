@@ -94,6 +94,9 @@ class SshKey:
 
 def filereader(filename):
     linenumber = 0
+    if not os.path.isfile(filename):
+        logger.warn('Ignoring unexisting file %s. Likely a ssh-vvv from another machine', filename)
+        return
     with open(filename, 'rb') as f:
         while True:
             linenumber = linenumber + 1
@@ -180,7 +183,9 @@ def process(iterator, host=None):
     errors = []
     port = None
     ip = None
+    no_longer_parsing = False
     for line in iterator():
+        if no_longer_parsing: continue # gotta consume iterator until EOF
 
         matcher = re.match(r'^debug1: Reading configuration data (.*)', line)
         if matcher is not None:
@@ -261,9 +266,9 @@ def process(iterator, host=None):
             continue
 
         #debug1: Offering RSA public key: /home/bob/.ssh/id_rsa
-        matcher = re.match(r'^debug1: Offering RSA public key: (.*)', line)
+        matcher = re.match(r'^debug1: Offering (\w+ )?public key: (.*)', line)
         if matcher is not None:
-            last_key = matcher.group(1)
+            last_key = matcher.group(2)
             if last_key not in keysH:
                 s = SshKey(last_key, 'SourceUnknown', 'Offered')
                 keysH[last_key] = s
@@ -290,7 +295,8 @@ def process(iterator, host=None):
         # debug1: Entering interactive session.
         matcher = re.match(r'^debug1: Entering interactive session.', line)
         if matcher is not None:
-            break
+            no_longer_parsing = True
+            continue
 
         #debug3: receive packet: type 51
         matcher = re.match(r'^debug3: receive packet: type (\d+)', line)
