@@ -37,6 +37,9 @@ https://wiki.mozilla.org/CA:AddRootToFirefox
 http://stackoverflow.com/questions/1435000/programmatically-install-certificate-into-mozilla
 2, Add the cert manually to firefox Options-->Advanced--Certificates-->Authorities-->Import
 
+# firefox cli
+check https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/Tools/certutil
+
 
 openssl x509 -inform pem -in "$F" -noout -text
 openssl x509 -inform pem -in mycert.crt -noout -text | grep -E 'Subject:|Issuer:'
