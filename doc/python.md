@@ -991,3 +991,7 @@ class ValidationError(Exception):
 
 import platform; platform.node(); # hostname computer name
 import socket; socket.gethostname(); # hostname computer name
+
+sys.stdin.isatty()
+sys.stdout.isatty()
+sys.stderr.isatty()
