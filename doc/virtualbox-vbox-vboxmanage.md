@@ -34,6 +34,7 @@ pass: 74863c2706e9c62ab7b70bd6
 default NAT port on host: 2222
 
 
+# port forwarding
 VM=foreman; IF=1; GUESTIP=10.0.2.15; GUESTPORT=443; HOSTIP=127.0.0.1; HOSTPORT=$(next_free_port.py); vboxmanage controlvm $VM savestate; vboxmanage modifyvm $VM --natpf$IF "host$HOSTPORT,tcp,$HOSTIP,$HOSTPORT,$GUESTIP,$GUESTPORT"; vboxmanage startvm $VM --type headless; vboxmanage showvminfo $VM | grep -E "^NIC...Rule"; echo $HOSTPORT
 
 # active host only dhcp client
