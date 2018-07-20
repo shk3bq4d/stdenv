@@ -13,11 +13,30 @@ unset HISTFILE
 # https://stackoverflow.com/questions/17767208/writing-a-zsh-autocomplete-function
 
 
-setopt null_glob # solves zsh: no matches found: 
+setopt null_glob # solves zsh: no matches found:
 
 list_of_files=(*(N)) # solves zsh: no matches found: # Turn on the null_glob option for your pattern with the N glob qualifier.
 
 dolphin &!  # The &! (or equivalently, &|) is a zsh-specific shortcut to both background and disown the process, such that exiting the shell will leave it running.
+
+# explodes spaces in variable so as not to pass as quoted ones (un-quote unquote) to split variables as $IFS
+either with ${=VARNAME} notation such as in:
+./kafka-topics.sh ${=ZK} --list
+or
+set -o SH_WORD_SPLIT
+exhibit:
+ZK="bip hehe"
+echo $ZK
+bip hehe
+set -x; echo $ZK; set +x
++zsh:8> echo bip hehe
+bip hehe
++zsh:8> set +x
+set +o SH_WORD_SPLIT
+set -x; echo $ZK; set +x
++zsh:10> echo 'bip hehe'
+bip hehe
++zsh:10> set +x
 
 # z
 https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/z
