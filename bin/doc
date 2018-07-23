@@ -18,6 +18,8 @@ else
     ACK=grep
 fi
 
+ARG1="$(echo -n "$ARG1" | sed -r -e 's/\.md$//')"
+
 UNAME=$(uname)
 UNAME=${UNAME,,}
 
