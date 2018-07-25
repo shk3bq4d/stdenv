@@ -22,3 +22,10 @@ getsebool -a # list all options
 
 
 semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
+
+
+# AVC Access Vector Cache
+SELinux decisions, such as allowing or disallowing access, are cached. This cache is known as the
+Access Vector Cache (AVC). Denial messages are logged when SELinux denies access.  These denials are
+also known as "AVC denials", and are logged to a different location, depending on which daemons are
+running:

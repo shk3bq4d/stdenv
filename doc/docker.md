@@ -50,7 +50,7 @@ docker run -dt mr/testimage:version2
 
 docker run --name squid -d --restart=always --publish 127.0.0.1:3128:3128 --volume /srv/docker/squid/cache:/var/spool/squid3 sameersbn/squid:3.3.8-19
 
-# run new container in interactive 
+# run new container in interactive
 docker run -it --rm mr/testimage:version2
 
 # add new shell to existing
@@ -67,7 +67,7 @@ docker ps -a | grep 'Exited' | awk '{print $1}' | xargs --no-run-if-empty docker
 docker rm $(docker ps -q -f status=exited)
 
 
-export http_proxy=http://6.1.0.159:3142 && apt-get -y install python 
+export http_proxy=http://6.1.0.159:3142 && apt-get -y install python
 docker ps -a | while read a b; do docker stop $a; docker rm -v $a; done
 
 
@@ -342,7 +342,7 @@ docker run -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH xeyes
 docker cp 2017-04-16.v0.7.4 database:/tmp/hehe
 
 
-docker run --cap-add SYS_PTRACE --security-opt seccomp:unconfined #strace 
+docker run --cap-add SYS_PTRACE --security-opt seccomp:unconfined #strace
 strace python -c "from zabbix_api import ZabbixAPI; ZabbixAPI('https://zabbix.url').login('ha', 'e');"
 
 docker run --rm -it mausch/docker-groovysh
@@ -356,9 +356,9 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # centos config
-either 
-/etc/sysconfig/docker 
-or 
+either
+/etc/sysconfig/docker
+or
 /usr/lib/systemd/system/docker.service
 echo '{ "storage-driver": "btrfs" } > /etc/docker/daemon.json
 
@@ -378,3 +378,9 @@ hosts:          files dns mdns4_minimal [NOTFOUND=return]
 
 # rebuild all containers
 find ~/git/ksgitlab/cfc/ide-infra/docker/ -name tag.sh | while read i; do cd ~/git/ksgitlab/cfc/ide-infra/docker; cd $(dirname $i); [[ -f push.sh ]] || continue; pwd; ./build.sh && ./push.sh || break; done
+
+# registry
+docker login registry.gitlab.com
+registry.gitlab.com/myteam/myproject:tag
+registry.gitlab.com/myteam/myproject/optional-image-name:tag
+registry.gitlab.com/myteam/myproject/optional-name/optional-image-name:tag
