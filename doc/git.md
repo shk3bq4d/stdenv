@@ -339,7 +339,7 @@ git config --global branch.autosetuprebase always
 
 git log --all --full-history -- **/thefile.* # "grep" history filename
 git log --all --full-history -- <path-to-file> # "grep" history exact filepath
-git show <SHA> -- <path-to-file> # "cat raw file from history"
+git show <SHA>:<path-to-file> # "cat raw file from history"
 git checkout <SHA>^ -- <path-to-file> # "restore specific file as it was from history
 @end=sh@
 
