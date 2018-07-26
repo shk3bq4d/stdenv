@@ -29,3 +29,6 @@ SELinux decisions, such as allowing or disallowing access, are cached. This cach
 Access Vector Cache (AVC). Denial messages are logged when SELinux denies access.  These denials are
 also known as "AVC denials", and are logged to a different location, depending on which daemons are
 running:
+
+date -d @1465016400 # unix epoch timestamp
+python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch timestamp
