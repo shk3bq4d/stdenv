@@ -996,3 +996,12 @@ import socket; socket.gethostname(); # hostname computer name
 sys.stdin.isatty()
 sys.stdout.isatty()
 sys.stderr.isatty()
+
+# read from prompt
+from sys import version_info
+py3 = version_info[0] > 2 #creates boolean value for test that Python major version > 2
+if py3:
+  response = input("Prompt: Please enter your name: ")
+else:
+  response = raw_input("Prompt: Please enter your name: ")
+P
