@@ -36,6 +36,7 @@ def logging_conf(
 FP = os.path.expanduser('~/.tmp/mrstack.txt')
 DT  = u'%Y.%m.%d %H:%M:%S'
 OUT = u'{:<3d} {:%a %b%d %H:%M} {}'
+OUT2 = '\n' + u' ' * 20 # multiline joiner
 IN  = u'{:%Y.%m.%d %H:%M:%S} {}\n'
 
 
@@ -71,16 +72,22 @@ def unescape(txt):
     r = json.loads(r)
     return r
 
-def write(txt):
+def write(txt, dt=datetime.datetime.now()):
     with open(FP, 'ab') as f:
         f.write(IN.format(
-            datetime.datetime.now(),
+            dt,
             escape(txt)
             ))
 
 def go_dump():
     for line in reader():
-        print(OUT.format(*line))
+        idx, dt, txt = line
+        #pprint(txt.splitlines())
+        txt = OUT2.join(txt.splitlines())
+        #pprint(txt)
+        #print(txt)
+        #sys.exit(0)
+        print(OUT.format(idx, dt, txt))
 
 def go_write(txtA):
     write(' '.join(txtA))
@@ -94,7 +101,6 @@ def go_delete(line_number):
     if response.strip().lower() != 'y':
         print('OK, aborting')
         return
-    print('proceed')
     
 
 def go(args):
