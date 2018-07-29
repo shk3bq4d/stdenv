@@ -360,8 +360,8 @@ os.path.realpath()
 os.path.abspath()
 os.path.realpath(os.path.abspath())
 lmod = datetime.datetime.fromtimestamp(os.path.getmtime(fp)) # last modified time of file fp
-datetime.datetime.fromtimestamp(1465016400) # equivalent of date -d @1465016400
-python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))"
+datetime.datetime.fromtimestamp(1465016400) # equivalent of date -d @1465016400 # unix epoch
+python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch
 os.name is 'posix', 'nt', 'os2', 'ce' or 'riscos'
 os.curdir is a string representing the current directory ('.' or ':')
 os.pardir is a string representing the parent directory ('..' or '::')

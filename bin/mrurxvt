@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#exec > >(tee /tmp/logfile.txt)
+#exec 2>&1
 
 #  http://www.imagemagick.org/Usage/canvas/#gradient
 
@@ -223,7 +225,12 @@ fi
 ;;
 esac
 CD=$(mri3-focused-window-cwd.py)
-[[ -n $CD ]] && CD="-cd $CD"
+echo $CD
+if [[ -d $CD ]] && $(cd $CD); then
+	CD="-cd $CD"
+else
+	CD=""
+fi
 ~/bin/notinpath/mrxmodmap.sh &
 #MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
 MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"

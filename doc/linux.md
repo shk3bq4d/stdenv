@@ -1,19 +1,19 @@
 To execute a script at startup of Ubuntu
     Edit /etc/rc.local and add your commands
-    The script must always end with exit 0 
+    The script must always end with exit 0
 
 To execute a script upon rebooting Ubuntu
     Put your script in /etc/rc0.d
     Make it executable (sudo chmod +x myscript)
-    Note: The scripts in this directory are executed in alphabetical order 
-	The name of your script must begin with K99 to run at the right time.
+    Note: The scripts in this directory are executed in alphabetical order
+    The name of your script must begin with K99 to run at the right time.
 
 
 To execute a script at shutdown
     Put your script in /etc/rc6.d
     Make it executable (sudo chmod +x myscript)
-    Note: The scripts in this directory are executed in alphabetical order 
-	The name of your script must begin with K99 to run at the right time. 
+    Note: The scripts in this directory are executed in alphabetical order
+    The name of your script must begin with K99 to run at the right time.
 
 
 # oneliners
@@ -26,7 +26,7 @@ id username # list group of existing user
 cut -d: -f1 /etc/passwd # list all users on system
 cut -d: -f1 /etc/group # list all groups on system
 (echo body text; uuencode ~/path_to_file.jpg attachment_name.jpg ) | mailx -s "email prive $i" -t 123r4p+doclinux87f90a32@gmail.com # email with attachment
-dhclient -r; sleep 10; dhclient # renew dhcp 
+dhclient -r; sleep 10; dhclient # renew dhcp
 dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge #no space left on device (/boot) on apt-get: here is how to clean
 ln -is TARGET LINKNAME
 sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child processes 3266
@@ -34,18 +34,18 @@ sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child
 
 
 Debian versions
-1.2 rex		1996-12-12
-1.3 bo		1997-06-05
-2.0 hamm	1998-07-24
-2.1 slink	1999-03-09
-2.2 potato	2000-08-15 
-3.0 woody	2002-07-19
-3.1 sarge	2005-06-06
-4.0 etch	2007-04-08 
-5.0 lenny	2009-02-15
-6.0 squeeze	2011-02-06
-7   wheezy	2013-05-04
-8   jessie	TBA
+1.2 rex        1996-12-12
+1.3 bo        1997-06-05
+2.0 hamm    1998-07-24
+2.1 slink    1999-03-09
+2.2 potato    2000-08-15
+3.0 woody    2002-07-19
+3.1 sarge    2005-06-06
+4.0 etch    2007-04-08
+5.0 lenny    2009-02-15
+6.0 squeeze    2011-02-06
+7   wheezy    2013-05-04
+8   jessie    TBA
 
 Ubuntu versions
 Version     Code name     Release date                                     Supported until
@@ -132,7 +132,7 @@ ip addr sh
 iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
 iptables -A FORWARD -i enp0s8 -j ACCEPT
 sysctl -w net.ipv4.ip_forward=1
-# on client 
+# on client
 route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103 metric 99
 
 # network config
@@ -166,13 +166,13 @@ GATEWAY=213.244.194.1
 vi /etc/network/interfaces #ubuntu14
 auto eth1
 iface eth1 inet static
-	address 10.3.28.2
-	gateway 10.3.28.1
-	netmask 255.255.255.0
-	network 10.3.28.0
-	broadcast 10.3.28.255
-	dns-search mydomain.local
-	dns-nameservers 10.3.28.13 6.1.0.33
+    address 10.3.28.2
+    gateway 10.3.28.1
+    netmask 255.255.255.0
+    network 10.3.28.0
+    broadcast 10.3.28.255
+    dns-search mydomain.local
+    dns-nameservers 10.3.28.13 6.1.0.33
 
 
 
@@ -187,21 +187,21 @@ yum whatprovides '*bin/dig'
 timeout 300;
 retry 60;
 interface "eth1" {
-    request subnet-mask, broadcast-address, time-offset, 
+    request subnet-mask, broadcast-address, time-offset,
         #routers,
                 domain-name,
         domain-name-servers,
         host-name;
 }
 interface "eth0" {
-    request subnet-mask, broadcast-address, time-offset, 
+    request subnet-mask, broadcast-address, time-offset,
         routers,
         domain-name,
         #domain-name-servers,
         host-name;
 }
 # red hat, centos static route
-Static route configuration can be stored per-interface in a /etc/sysconfig/network-scripts/route-interface file. For example, static routes for the eth0 interface would be stored in the /etc/sysconfig/network-scripts/route-eth0 file. 
+Static route configuration can be stored per-interface in a /etc/sysconfig/network-scripts/route-interface file. For example, static routes for the eth0 interface would be stored in the /etc/sysconfig/network-scripts/route-eth0 file.
 et dans le fichier il suffit de mettre par example:
 10.36.211.0/24 via 192.168.168.1 dev eth0
 
@@ -217,7 +217,7 @@ nmap -sT -O localhost
 lsof -i -P
 ss -l
 
-setxkbmap -option ctrl:nocaps   # Caps Lock as Ctrl 
+setxkbmap -option ctrl:nocaps   # Caps Lock as Ctrl
 setxkbmap -option caps:capslock # Caps Lock toggles normal capitalization of alphabetic characters
 caps:none             =       +capslock(none)
 caps:ctrl_modifier    =       +capslock(ctrl_modifier)
@@ -243,7 +243,7 @@ sudo mount -o rw,uid=$(id -u) /dev/sde1 /mnt/sde1  # mount sdcard as current use
 
 # setuid from python script
 # https://stackoverflow.com/questions/24541427/setuid-setgid-wrapper-for-python-script
-$ cat scriptwrap.c 
+$ cat scriptwrap.c
 @begin=c@
 #include <unistd.h>
 #include <sys/types.h>
@@ -254,7 +254,7 @@ int main(int argc, char *argv[]) {
     return execv("/home/user/tmp/bip.py", argv);
 }
 @end=sh@
-$ cat /home/user/tmp/bip.py 
+$ cat /home/user/tmp/bip.py
 #!/usr/bin/env python2
 import os
 
@@ -299,3 +299,5 @@ sudo locale | sudo tee /etc/default/locale                                      
 unplug your iphone or trust the computer, https://askubuntu.com/questions/818965/upowerd-hogging-cpu
 
 dd if=/dev/zero of=file.txt count=1024 bs=1048576 # create One 1Gb gigabyte file
+
+date -d @1532532080
