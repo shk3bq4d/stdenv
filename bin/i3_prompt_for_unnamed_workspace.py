@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 from pprint import pprint
+import mrstack
 import i3ipc
 import sys
 import os
@@ -18,6 +19,7 @@ def auto(
         use='stdout' # "stdout syslog" "stdout syslog file"
         ):
     import logging.config
+    script_directory, script_name = os.path.split(__file__)
     logging.config.dictConfig({'version':1,'disable_existing_loggers':False,
        'formatters':{
            'standard':{'format':'%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s'},
@@ -25,7 +27,7 @@ def auto(
            },
        'handlers':{
            'stdout': {'level':level,'formatter': 'standard','class':'logging.StreamHandler','stream': 'ext://sys.stdout'},
-           'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': '/tmp/zabbix-kg_maintenance.log'}, #
+           'file': {'level':level,'formatter': 'standard','class':'logging.FileHandler',           'filename': os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))}, #
            'syslog': {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
@@ -44,6 +46,7 @@ english = \
 '#': 'hash',
 '`': 'backquote',
 }
+mrstack_excludes = 'comm whatsapp bg vpn doc $ % & &amp; # `'.split()
 
 names = [
 '$',
@@ -117,19 +120,21 @@ def go(args=[]):
     ws_number = words[0]
     logger.info('ws_number is {}'.format(ws_number))
 
+    proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh'}
+    proposals = [' '] + sorted(proposalsH.keys())
     if debug_mode:
         output = ' '.join(args[1:])
     else:
         #output = i3_input.go("w:")
         prompt = words[1] if len(words) > 1 else ws
-        proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh'}
-        proposals = [' '] + sorted(proposalsH.keys())
         for i in range(6):
             proposals.append(' ')
         output = mrdmenu(prompt, proposals)
     logger.info('prompted value is {}'.format(output))
-    if not debug_mode:
+    if not debug_mode or True:
         i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=True, append_english=True, quotes=True))
+        if output.strip() and output not in mrstack_excludes:
+            mrstack.write(u'workspace: ' + unicode(output))
         if output in proposalsH:
             i3.command('exec ' + proposalsH[output])
             #from sh import bash
@@ -143,7 +148,7 @@ def workspace_name(real_number, desired_name, append_english=False, prepend_real
     except:
         converted_number = str(real_number)
         display_number = 'r' + str(real_number)
-    
+
     if append_english and (desired_name is None or len(desired_name.strip()) == 0):
         desired_name = 'noid {}'.format(display_number)
         desired_name = 'noid'
@@ -162,7 +167,7 @@ def workspace_name(real_number, desired_name, append_english=False, prepend_real
     if not prepend_real_number:
         real_number=''
 
-        
+
     #ws = ws.strip()
     q = '"' if quotes else ''
     new_name = '{q}{real_number}{left_padding}{new_name}{right_padding}{q}'.format(**locals())
@@ -170,5 +175,5 @@ def workspace_name(real_number, desired_name, append_english=False, prepend_real
     return new_name
 
 if __name__ ==  "__main__":
-    auto(use='stdout syslog')
+    auto(use='stdout file syslog')
     print(go(sys.argv[1:]))
