@@ -137,7 +137,7 @@ def go_hourly_print():
     # - last touch is from yesterday or older => print yesterday_business
     # - we are before 12                      => print yesterday_business
     #                                         => print today
-    
+
     now = datetime.datetime.now()
     today_noon = now.replace(hour=12, minute=0, second=0)
     dt = datetime.datetime.fromtimestamp(os.path.getmtime(HFP)) if os.path.isfile(HFP) else now
@@ -147,10 +147,10 @@ def go_hourly_print():
     elif now.date() != dt.date() or \
         now < today_noon:
         go_dump(readerbusinesstoday)
+        touch(HFP)
     else:
         go_dump(readertoday)
-
-    touch(HFP)
+        touch(HFP)
 
 def touch(fname, times=None):
     fhandle = open(fname, 'a')
