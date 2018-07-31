@@ -37,6 +37,13 @@ default NAT port on host: 2222
 # port forwarding
 VM=foreman; IF=1; GUESTIP=10.0.2.15; GUESTPORT=443; HOSTIP=127.0.0.1; HOSTPORT=$(next_free_port.py); vboxmanage controlvm $VM savestate; vboxmanage modifyvm $VM --natpf$IF "host$HOSTPORT,tcp,$HOSTIP,$HOSTPORT,$GUESTIP,$GUESTPORT"; vboxmanage startvm $VM --type headless; vboxmanage showvminfo $VM | grep -E "^NIC...Rule"; echo $HOSTPORT
 
+# minikube kafka
+vboxmanage controlvm minikube savestate
+vboxmanage modifyvm  minikube --natpf1 "kafka-minikube-0,tcp,127.0.0.1,31090,127.0.0.1,31090"
+vboxmanage modifyvm  minikube --natpf1 "kafka-minikube-1,tcp,127.0.0.1,31091,127.0.0.1,31091"
+vboxmanage modifyvm  minikube --natpf1 "kafka-minikube-2,tcp,127.0.0.1,31092,127.0.0.1,31092"
+vboxmanage startvm minikube --type headless
+
 # active host only dhcp client
 dhclient enp0s8
 

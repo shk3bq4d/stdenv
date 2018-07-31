@@ -638,11 +638,16 @@ echo $RANDOM
 $(( ( RANDOM % 10 )  + 1 ))
 
 
-echo << HERE_DOCUMENT
+cat << HERE_DOCUMENT
 do not forget the space between the << and the HERE_DOCUMENT identifier
+because HERE_DOCUMENT is unquoted $(echo this-will-be-evaluated)
 HERE_DOCUMENT
 
-echo << HERE_DOCUMENT >with_redirect
+cat << 'HERE_DOCUMENT'
+because HERE_DOCUMENT is quoted $(echo this-will-not-be-evaluated)
+HERE_DOCUMENT
+
+cat << HERE_DOCUMENT >with_redirect
 do not forget the space between the << and the HERE_DOCUMENT identifier
 HERE_DOCUMENT
 

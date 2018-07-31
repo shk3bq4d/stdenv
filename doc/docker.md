@@ -115,6 +115,8 @@ http://crosbymichael.com/advanced-docker-volumes.html
 docker cp foo.txt mycontainer:/foo.txt
 docker cp mycontainer:/foo.txt foo.txt
 
+docker run --net=host # run with network of host (think 127.0.0.1, localhost or other local interfaces like ppp, virtualbox)
+
 # running container metadata
 docker inspect apt-cacher-run  | less
 @begin=json@

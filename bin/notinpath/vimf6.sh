@@ -4,6 +4,7 @@
 [[ -z "$1" ]] && echo "Inception A" && exit 1
 SCRIPT="$1"
 LOG="$2"
+#exec > >(tr -d '\r' | tee "$LOG")
 exec > >(tee "$LOG")
 exec 2>&1
 
@@ -154,7 +155,7 @@ $HOME/.config/i3/config.*)
 	elif [[ -f $DIR/../build.sh ]]; then
 		bash $DIR/../build.sh
 	else
-		docker build -f $SCRIPT
+		docker build -f $SCRIPT $(dirname $SCRIPT)
 	fi
 	;;
 *)
