@@ -73,3 +73,23 @@ zfs destroy data/emea/bcv.ch/f5_hsv2000v@zfs-auto-snap_daily-2018-04-17-0000,zfs
 zfs destroy filesystem|volume@snap[%snap[,snap[%snap]]]... # delete snapshot
 
 zfs get all data/global/mayerbrown.com/chinwsa001.mayerbrown.com
+
+
+# dedup
+zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+data   583G   271G   311G         -    34%    46%  1.00x  ONLINE  -
+
+zfs get dedup data
+NAME      PROPERTY  VALUE          SOURCE
+datapool  dedup     on             local
+$ zfs get dedup datapool/emea
+NAME           PROPERTY  VALUE          SOURCE
+datapool/emea  dedup     on             inherited from datapool
+zfs get dedup data/global/mayerbrown.com/chinwsa001.mayerbrown.com
+NAME                                                  PROPERTY  VALUE          SOURCE
+data/global/mayerbrown.com/chinwsa001.mayerbrown.com  dedup     on             inherited from data
+
+zpool get dedupratio data
+
+https://constantin.glez.de/2011/07/27/zfs-to-dedupe-or-not-dedupe/
