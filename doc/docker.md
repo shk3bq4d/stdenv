@@ -386,3 +386,5 @@ docker login registry.gitlab.com
 registry.gitlab.com/myteam/myproject:tag
 registry.gitlab.com/myteam/myproject/optional-image-name:tag
 registry.gitlab.com/myteam/myproject/optional-name/optional-image-name:tag
+
+DinD docker ind docker

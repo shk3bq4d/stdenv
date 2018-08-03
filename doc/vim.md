@@ -268,3 +268,12 @@ gql # reformat/reflow line      according to textwidth. Support > for quotation
 d]) # delete until next unmatched parenthesis, useful for nested function calls
 
 https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file
+
+# spell check english orthograph language french francais fautes
+:set spell spl=en
+:set spell
+:set spl=en
+:set spl=en
+z= suggestion
+]s move to next word
+[s mone te previous word
