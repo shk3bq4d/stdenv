@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 #source ~/.std*aliases
+set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
 	if pgrep forti &>/dev/null || \
