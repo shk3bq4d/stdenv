@@ -100,6 +100,11 @@ chrome://webrtc-logs
 notifications are configured in
 chrome://settings/content
 
+# view cookies
+chrome://settings/cookies
+chrome://settings/content/cookies # Update (2017-08-08) [verified in 59.0.3071.115 (Official Build) (64-bit)
+chrome://settings/siteData # Update (2018-03-01) [Google Chrome 64.0.3282.167 (Official Build) (64-bit)] # view cookies
+
 # Jquery Injection
 @begin=javascript@
 var jq = document.createElement('script');

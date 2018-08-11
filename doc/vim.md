@@ -273,7 +273,7 @@ https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file
 :set spell spl=en
 :set spell
 :set spl=en
-:set spl=en
-z= suggestion
-]s move to next word
-[s mone te previous word
+:set spl=fr
+z= suggestion # spell
+]s move to next word # spell
+[s mone te previous word # spell
