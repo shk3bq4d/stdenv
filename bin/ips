@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+case $(uname) in \
+CYGWIN*)
+	ipconfig /all 2>&1 | sed -n -r -e '/IPv4 Address/s/.*Address[^0-9]+([0-9.]+).*/\1/ p'
+	;;
+*)	
+	if command -v ip &>/dev/null; then
+		ip a | grep -Po 'inet [0-9.]+|(?<=^\d: )[^:]+|(?<=^\d\d: )[^:]+' | grep -EB1 '^inet ' | grep -v '^--$' | awk 'NR%2{printf "%s ",$0;next;}1' | sed -r -e 's/ inet / /' | xargs -r printf "%-15s %s\n"
+	fi
+	;;
+esac
+
+[[ $# -ne 0 ]] && exit 0
 timeout=4
 mycurl() {
 	local URL=$1
@@ -15,17 +27,6 @@ mycurl() {
 	fi
 	return 1
 }
-
-case $(uname) in \
-CYGWIN*)
-	ipconfig /all 2>&1 | sed -n -r -e '/IPv4 Address/s/.*Address[^0-9]+([0-9.]+).*/\1/ p'
-	;;
-*)	
-	if command -v ip &>/dev/null; then
-		ip a | grep -Po 'inet [0-9.]+|(?<=^\d: )[^:]+|(?<=^\d\d: )[^:]+' | grep -EB1 '^inet ' | grep -v '^--$' | awk 'NR%2{printf "%s ",$0;next;}1' | sed -r -e 's/ inet / /' | xargs -r printf "%-15s %s\n"
-	fi
-	;;
-esac
 
 timeout_bin=
 command -v timeout &>/dev/null && timeout_bin="timeout $timeout "

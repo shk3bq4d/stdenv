@@ -5,7 +5,7 @@ set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
 	if pgrep forti &>/dev/null || \
-		ips | grep 'wlp58s0.*172.28'; then
+		ips --no-internet | grep 'wlp58s0.*172.28'; then
 		PROXYPAC=""
 	else
 		docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
