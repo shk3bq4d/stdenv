@@ -357,6 +357,10 @@ sudo usermod -a -G docker $(id -un)
 sudo systemctl enable docker
 sudo systemctl start docker
 
+# ubuntu config
+/lib/systemd/system/docker.service
+/etc/docker/daemon.json # may be non existing
+
 # centos config
 either
 /etc/sysconfig/docker
