@@ -46,7 +46,7 @@ english = \
 '#': 'hash',
 '`': 'backquote',
 }
-mrstack_excludes = 'comm whatsapp bg vpn doc $ % & &amp; # `'.split()
+mrstack_excludes = 'comm whatsapp bg kodi vpn doc $ % & &amp; # `'.split()
 
 names = [
 '$',
@@ -121,6 +121,10 @@ def go(args=[]):
     logger.info('ws_number is {}'.format(ws_number))
 
     proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh'}
+    # i3 isn't yet provided with those .bashrc env var
+    if True or \
+        os.environ.get('HOSTNAMEF', '') not in [os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC3F', '')]:
+        proposalsH['kodi'] = 'kodi'
     proposals = [' '] + sorted(proposalsH.keys())
     if debug_mode:
         output = ' '.join(args[1:])

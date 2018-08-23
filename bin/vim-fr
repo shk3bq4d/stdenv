@@ -4,6 +4,9 @@ b=$(basename $0 .sh)
 b=${b//vim-/}
 b=${b//vi-/}
 
-vim -c "set spell spl=$b textwidth=72 wrap noautoindent nosmartindent nocindent indentexpr= " "$@"
+vim -c "set spell spl=$b textwidth=72 wrap noautoindent nosmartindent nocindent indentexpr= " \
+	-c "autocmd CursorHold,CursorHoldI * update" \
+	"$@"
+
 exit $?
 nosmartindent

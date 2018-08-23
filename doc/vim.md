@@ -277,3 +277,6 @@ https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file
 z= suggestion # spell
 ]s move to next word # spell
 [s mone te previous word # spell
+
+# autosave https://vi.stackexchange.com/questions/74/is-it-possible-to-make-vim-auto-save-files
+autocmd CursorHold,CursorHoldI * update
