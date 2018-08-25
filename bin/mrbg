@@ -13,6 +13,5 @@ set -euo pipefail
 
 nohup "$@" &> /dev/null &
 
-echo EOF
 exit 0
 

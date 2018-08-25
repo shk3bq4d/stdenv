@@ -3,6 +3,15 @@
 #cd /lvmr0/keepass/
 #/usr/bin/keepass2 mr.kdbx  -preselect:mr.key &>/dev/null </dev/null &
 #DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+wids=$(xdotool search --class "keepass")
+for wid in $wids; do
+    name=$(xdotool getwindowname $wid)
+    if [[ $name == *"- KeePassXC" ]]; then
+		if xdotool windowactivate $wid; then
+			exit 0
+		fi
+    fi
+done
 DIR=~/bin
 if [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
 	export QT_SCALE_FACTOR=2

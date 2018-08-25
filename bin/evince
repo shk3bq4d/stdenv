@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 25 Aug 2018
+##
+
+set -euo pipefail
+
+# function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
+
+# [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
+
+# [[ $# -lt 1 || $# -gt 2 ]] && echo FATAL: incorrect number of args && usage && exit 1
+
+# for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i && exit 1; done
+
+THIS="$(readlink -f "${BASH_SOURCE[0]}")"
+BIN=$(
+which -a $(basename "${BASH_SOURCE[0]}") | while read f; do
+	test "$(readlink -f "$f")" == "$THIS" && continue
+	echo $f
+	break
+done
+)
+mrbg $BIN "$@"
+
+exit 0
