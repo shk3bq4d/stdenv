@@ -20,13 +20,14 @@ set -euo pipefail
 # for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i && exit 1; done
 
 THIS="$(readlink -f "${BASH_SOURCE[0]}")"
-BIN=$(
+BIN="$(
 which -a $(basename "${BASH_SOURCE[0]}") | while read f; do
 	test "$(readlink -f "$f")" == "$THIS" && continue
 	echo $f
 	break
 done
-)
+)"
+test -z "$BIN" && echo "FATAL: can't find command binary from $THIS" && exit 1
 mrbg $BIN "$@"
 
 exit 0
