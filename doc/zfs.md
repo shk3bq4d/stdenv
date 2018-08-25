@@ -93,3 +93,5 @@ data/global/mayerbrown.com/chinwsa001.mayerbrown.com  dedup     on             i
 zpool get dedupratio data
 
 https://constantin.glez.de/2011/07/27/zfs-to-dedupe-or-not-dedupe/
+
+https://brismuth.com/scheduling-automated-zfs-scrubs-9b2b452e08a4
