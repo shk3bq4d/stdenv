@@ -12,7 +12,7 @@
 set -exuo pipefail
 
 need_powerlinefonts() {
-	if find ~/.local/share/fonts -type f -iname '*powerline.ttf' -print -quit 2>/dev/null | grep -qE .; then
+	if find ~/.local/share/fonts -xdev -type f -iname '*powerline.ttf' -print -quit 2>/dev/null | grep -qE .; then
 		return 1
 	fi
 	return 0

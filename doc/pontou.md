@@ -10,12 +10,15 @@ Tranche  montant de la tranche en 100k   salaire pour tenue des charges  lien av
 
 
 # tenue des charges
-fonds propre:         salaire pour atteindre 33% de tenue des charges (en tenant compte de l'obligation d'atteindre 30-35% de fonds propres)
-278k                  245'600
-478k                  178'540
-678k                  145'550
-778k                  132'900
-878k                  118'000
+projected year: remboursement/year fonds propre: dette:  salaire pour atteindre 33% de tenue des charges (en tenant compte de l'obligation d'atteindre 30-35% de fonds propres)
+2015            n/a                278k          1112k   245'600
+2019            50k                478k           912k   178'540
+2021            100k               678k           712k   145'550
+2025a           25k                778k           612k   132'900
+2025b           50k                878k           512k   118'000
+2046 retirement Isabelle
+2047 retirement Marc
+question: how much revenue is projected at retirement?
 
 
 purge chauffage en pontou 36 aclens 1123

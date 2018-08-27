@@ -7,6 +7,7 @@ https://us-east-2.console.aws.amazon.com/cloudtrail/home?region=us-east-2#/event
 https://docs.gitlab.com/ee/user/project/integrations/prometheus_library/cloudwatch.html#configuring-prometheus-to-monitor-for-cloudwatch-metrics
 https://github.com/prometheus/cloudwatch_exporter
 https://forums.aws.amazon.com/thread.jspa?messageID=557913 # Check EC2 CPU Credit Balance Programatically?
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-unlimited.html
 
 
 
