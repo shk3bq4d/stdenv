@@ -622,3 +622,5 @@ e ┊     `.      ┃
             └──────────────────────────────────────────────────────────────────────────────────────────┘
                                  20+10=30                                              16+4=20
 		 
+# quartier
+http://www.geo.vd.ch/theme/cadastre_thm?map_x=529115.87149816&map_y=157562.75484458&map_zoom=11&tree_group_layers_cadastre_grp=cad_batiment%2Cmovd_cad_com_s%2Ccad_loc_adr_p_label&tree_group_layers_cad_couverture_sol_grp=
