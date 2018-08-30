@@ -16,9 +16,9 @@ module(load="omkafka")
 ruleset(name="sendtokafka") {
     action(
         type="omkafka"
-        broker=["192.168.168.118:9092",
-                "192.168.168.115:9092",
-                "192.168.168.109:9092"]
+        broker=["192.168.100.118:9092",
+                "192.168.100.115:9092",
+                "192.168.100.109:9092"]
         topic="log.gelf.fsp" confParam="compression.codec=snappy"
         queue.dequeuebatchsize="1"
         key="unique_key_per_machine_ksonar-usb-staging.no-need-for-identifiable"
@@ -49,7 +49,7 @@ input(type="imfile"
         )
 
 
-action(type="omfwd" Target="p-infra-graylog-001.kaesse.net" Port="5514" Protocol="tcp" Device="eth0" TCP_Framing="octet-counted")
+action(type="omfwd" Target="graylog-001.kaesse.net" Port="5514" Protocol="tcp" Device="eth0" TCP_Framing="octet-counted")
 module(load="imfile" PollingInterval="10")
 input(type="imfile"
         File="/var/log/jenkins/audit.log.0"
@@ -60,3 +60,6 @@ input(type="imfile"
         readMode="2"
         PersistStateInterval="0"
     )
+
+
+https://www.rsyslog.com/doc/v8-stable/configuration/modules/imfile.html

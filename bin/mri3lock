@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+
+LOGDIR=~/.tmp/i3lock
+
+function msg() {
+	echo "$(date +'%Y.%m.%d %H:%M:%S') $@" | tee -a $LOGDIR/events
+}
+msg lock
+#i3lock --debug -enf -i $(find ~/Pictures/i3lock/ -type f | shuf -n 1) >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+if false; then
+	i3lock --debug -enf -c 0000ff  $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+elif true; then
+	i3lock --tiling --debug -enf -i ~/Pictures/i3lock/ks3840x2160black.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+elif true; then
+	i3lock --debug -enf -i ~/Pictures/i3lock/cucumber-3840x2160.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+elif (( RANDOM % 2 )) && false;  then
+	i3lock --debug -enf -i ~/Pictures/i3lock/selected.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+else
+	~/bin/not_in_path/i3lock-pixelate.sh
+fi
+msg unlock
