@@ -1,3 +1,17 @@
+works with app password for me and usual password for mom
+
+https://hobo.house/2017/07/17/using-offlineimap-with-the-gmail-imap-api/
+
+
+# run
+it currently sucks as offlineimap is put in same docker image as mutt which starts
+automatically in the container. So:
+cd ~/docker/mutt-plus-tools
+./run.sh DIRECTORYWHERE_.offlineimaprc_IS
+docker-bash-last.sh
+offlineimap
+
+
 
 # .offlineimaprc
 @begin=ini@
