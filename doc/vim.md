@@ -108,6 +108,7 @@ xxd FILENAME | vi -
 
 # delete lines like bip
 :g/bip/ d
+:%g/todo/ s/o/a/g # applies replacement only on those lines
 
 # replaces spaces with tabs
 :set tabstop=2      " To match the sample file
