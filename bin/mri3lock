@@ -2,6 +2,7 @@
 
 
 LOGDIR=~/.tmp/i3lock
+test -d $LOGDIR/debug || mkdir -p $LOGDIR/debug
 
 function msg() {
 	echo "$(date +'%Y.%m.%d %H:%M:%S') $@" | tee -a $LOGDIR/events
