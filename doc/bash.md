@@ -924,6 +924,7 @@ ARRAY+=('bar')
 # tunnel                                                                                                                       
 mkfifo /tmp/myfifo
 while :; do nc -l -4 25 < /tmp/myfifo | tee -a /tmp/traffic | nc mail.mydomain.local 25 | tee -a /tmp/traffic > /tmp/myfifo; done
+while sleep 10; do true; done
 
 die() {
   local frame=0

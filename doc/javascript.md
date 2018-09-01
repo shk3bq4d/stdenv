@@ -5,6 +5,9 @@ setTimeout(function() {alert(1);}, 10)
 var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k = bA.length - 1; k >= 0; --k) {bA[k].checked = true;} // zabbix template import select all box
 
 
+"hehe".replace(/h/g, "_");
+"aaaaa_bbbbbc_ddddddeeeeee=ffffff".replace(/(.)[_=]/g, "__$1__");
+"hehe".replace(/h/g, function(matchstr, pos, fullstr) {return matchstr.toUpperCase();});
 
 try{
     // Try something wrong here
