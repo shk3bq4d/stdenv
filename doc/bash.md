@@ -727,6 +727,7 @@ There are two ways to three ways of searching history of commands: linear, incre
 # echo to stderr
 >&2 echo "error"
 echo This message goes to stderr >&2
+{ echo "This message goes to stderr" >&2; echo "This one to stdout"; }
 
 set -u # equivalent to "set -o nounset" will die if using unitiliazed variable
 
