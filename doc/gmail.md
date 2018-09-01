@@ -1,3 +1,13 @@
+# searches
+in:sent has:attachment larger:12MB older_than:2y
+has:attachment larger:10MB
+size:500000000 (when first supported in 2012, did not support unit, should be verified now)
+older_than:1y
+older_than:1w
+newer_than:1d
+newer_than:1m
+
+
 IP adresses: Details at bottom of pages
 
 
