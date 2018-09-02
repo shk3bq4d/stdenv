@@ -145,6 +145,8 @@ U+00E7 U+00C7	&cedil;
 » # fermeture guillemet
 💩 # pile of poo
 ✓ # check checked nike just do it ok vu
+☑ # checked box ballot box
+☐ # unchecked box ballot box
 © # copyright symbol (
 ℗ pr
 ™ trademark
