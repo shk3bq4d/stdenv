@@ -51,7 +51,8 @@ fetch http://dl-cdn.alpinelinux.org/alpine/v3.2/main/x86_64/APKINDEX.tar.gz
 
 apk update && apk add python2 py2-pip
 
-sudo yum install -y nmap-ncat
+sudo apt install -y netcat    #nc ncat
+sudo yum install -y nmap-ncat #nc netcat 
 sudo yum install -y which
 
 # Fedora DNF
