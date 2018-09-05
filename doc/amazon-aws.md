@@ -16,3 +16,10 @@ spot instance # launched at AWS convenience, Amazon EC2 Spot instances allow you
 on-demand # With On-Demand instances, you pay for compute capacity by per hour or per second depending on which instances you run. No longer-term commitments or upfront payments are needed.
 Reserved Instances # provide you with a significant discount (up to 75%) compared to On-Demand instance pricing. In addition, when Reserved Instances are assigned to a specific Availability Zone, they provide a capacity reservation, giving you additional confidence in your ability to launch instances when you need them. Best if you can commit to one year
 Dedicated Hosts # A Dedicated Host is a physical EC2 server dedicated for your use. Can be purchased On-Demand (hourly).  Can be purchased as a Reservation for up to 70% off the On-Demand price. Useful for compliance or license requirement
+
+# aws cli
+source ~/env/kops_grey_bravo
+venv.switch grey-ansible
+aws ec2  describe-instances --region us-east-2
+aws ec2  describe-instances --region us-east-2 --output text --query "Reservations[].Instances[].[PrivateIpAddress, Tags[?Key=='Name'].Value]"
+aws ec2  describe-instances --region us-east-2 --output text --query "Reservations[].Instances[].[PrivateIpAddress, Tags[?Key=='Name'].Value]" | sed 'N;s/\n/ /'
