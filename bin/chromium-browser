@@ -4,13 +4,14 @@
 set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
-	if pgrep forti &>/dev/null || \
-		ips --no-internet | grep 'wlp58s0.*172.28'; then
-		PROXYPAC=""
-	else
-		docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
-		PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
-	fi
+	PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
+	# if pgrep forti &>/dev/null || \
+	# 	ips --no-internet | grep 'wlp58s0.*172.28'; then
+	# 	PROXYPAC=""
+	# else
+	# 	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
+	# 	PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
+	# fi
 	;;
 *.ly.lan)
 	PROXYPAC="http://10.1.1.92/websupport/proxy.pac.ly.py"
