@@ -51,6 +51,8 @@ fetch http://dl-cdn.alpinelinux.org/alpine/v3.2/main/x86_64/APKINDEX.tar.gz
 
 apk update && apk add python2 py2-pip
 
+sudo apt install -y mlocate   # updatedb
+sudo yum install -y mlocate   # updatedb
 sudo apt install -y netcat    #nc ncat
 sudo yum install -y nmap-ncat #nc netcat 
 sudo yum install -y which
