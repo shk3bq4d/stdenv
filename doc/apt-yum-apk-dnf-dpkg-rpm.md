@@ -28,6 +28,9 @@ rpm -qa | grep rsyslog
 rpm -q kernel # list versions
 
 
+# snap
+snap install yq
+
 # APK
 # cat /etc/alpine-release
 3.3.3
