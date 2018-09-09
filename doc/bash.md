@@ -971,3 +971,6 @@ http://repo.or.cz/w/retty.git Terminal attaching without screen
 
 
 set -m  # Monitor mode.  Job control is enabled.  This option is on by default for interactive shells on systems that support it (see JOB CONTROL above). https://stackoverflow.com/questions/690266/why-cant-i-use-job-control-in-a-bash-script
+
+
+command 2>&1 >/dev/null # invert stdin and stderr https://stackoverflow.com/questions/2342826/how-to-pipe-stderr-and-not-stdout
