@@ -10,6 +10,8 @@ vboxmanage guestproperty get xpbase vrdeport
 vboxmanage guestproperty set xptest vrdeport 6040
 vboxmanage guestproperty set xptest vrdeport 6040
 vboxmanage discardstate projectlibre
+vboxmanage showvminfo
+vboxmanage showvminfo minikube G ssh
 
 
 # create a VM

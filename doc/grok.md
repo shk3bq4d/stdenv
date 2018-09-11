@@ -24,3 +24,7 @@ boolean  true, false          %{DATA:fieldname;boolean}
 string   Any UTF-8 string     %{DATA:fieldname;string}
 date     See SimpleDateFormat %{DATA:timestamp;date;dd/MMM/yyyy:HH:mm:ss Z}
 datetime Alias for date
+
+
+# date nanoseconds
+%{TIMESTAMP_ISO8601:timestamp;date;yyyy-MM-dd'T'HH:mm:ss.SSSSSS}\d{3}

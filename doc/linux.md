@@ -301,3 +301,5 @@ unplug your iphone or trust the computer, https://askubuntu.com/questions/818965
 dd if=/dev/zero of=file.txt count=1024 bs=1048576 # create One 1Gb gigabyte file
 
 date -d @1532532080
+
+echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement
