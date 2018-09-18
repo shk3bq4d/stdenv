@@ -3,6 +3,8 @@ exec > >(logger -i -t "$(basename $0)" )  # linux or freebsd, see next line
 exec > >(logger --id=$$ -t "$(basename $0)" ) # linux as it sends ppid which is more robust
 exec 2>&1
 
+echo bip > /dev/tcp/graylog-internal.greypay.net/1514
+
 echo hehe | logger -p emerg # write to every console, with default config on Ubuntu xenial 16.04
 echo hehe | logger
 
