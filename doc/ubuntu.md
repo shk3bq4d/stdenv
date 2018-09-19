@@ -33,3 +33,15 @@ dbus-monitor "interface='org.freedesktop.Notifications'"
 dbus-monitor "interface='org.freedesktop.Notifications'"    | grep --line-buffered  "member=Notify\|string"
 # desktop notification send
 notify-send message
+
+
+# https://askubuntu.com/questions/15520/how-can-i-tell-ubuntu-to-do-nothing-when-i-close-my-laptop-lid
+For 13.10 - 18.04:
+To make Ubuntu do nothing when laptop lid is closed:
+Open the /etc/systemd/logind.conf file in a text editor as root, for example,
+sudo -H gedit /etc/systemd/logind.conf
+Add a line HandleLidSwitch=ignore (make sure it's not commented out!),
+Restart the systemd daemon with this command:
+sudo restart systemd-logind
+or, from 15.04 onwards:
+sudo service systemd-logind restart
