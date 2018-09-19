@@ -974,3 +974,5 @@ set -m  # Monitor mode.  Job control is enabled.  This option is on by default f
 
 
 command 2>&1 >/dev/null # invert stdin and stderr https://stackoverflow.com/questions/2342826/how-to-pipe-stderr-and-not-stdout
+
+: # To avoid this you can use the no-op :, which evaluates its argument and then throws it away, rather than executing it.  https://stackoverflow.com/questions/7444504/explanation-of-colon-operator-in-foo-value
