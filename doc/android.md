@@ -104,5 +104,7 @@ open jar file in JD GUI http://jd.benow.ca/
 FCM: fMMpukO7WmA:APA91bGhod_3f4h4mRj7ueRgDD6i-S701FCkcQ5Wk_RrU55fTcQTQxNAQqM91ADDjei6o_5Oj05UV8CvCj7HOWBf5GExo0yWpZ-j_14kHPMCOmi_euaablRxSjgF-73c-5AAmLOnGVkK
 https://console.firebase.google.com/project/mrr0-30688/settings/general/
 
-tablette samsung rose: port 22 /mnt/sdcard/extStorages/SdCard/movies
+tablette samsung rose: ssh galaxytab port 22 /mnt/sdcard/extStorages/SdCard/movies
+rsync -e 'sshpass -f~/.words/galaxytab ssh' -vrtD --no-xattrs --no-chmod --no-owner --stats --human-readable --progress *mp4 galaxytab:/mnt/sdcard/extStorages/SdCard/movies/sisters/
+watch -n 120 'rsync -e "sshpass -f~/.words/galaxytab ssh" -vrtD --no-xattrs --no-chmod --no-owner --stats --human-readable --progress *mp4 galaxytab:/mnt/sdcard/extStorages/SdCard/movies/sisters/'
 tablette motorola: port 2222 /sdcard/Movies/
