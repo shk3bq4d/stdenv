@@ -4,6 +4,7 @@
 
 #  http://www.imagemagick.org/Usage/canvas/#gradient
 
+set -x
 OUTDIR=~/.tmp/mrurxvt/
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 

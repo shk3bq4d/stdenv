@@ -11,6 +11,8 @@ msg lock
 #i3lock --debug -enf -i $(find ~/Pictures/i3lock/ -type f | shuf -n 1) >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 if false; then
 	i3lock --debug -enf -c 0000ff  $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+elif [[ "$(hostname -f)" == dec17* ]]; then
+	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif true; then
 	i3lock --tiling --debug -enf -i ~/Pictures/i3lock/ks3840x2160black.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif true; then
