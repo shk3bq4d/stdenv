@@ -6,4 +6,4 @@ if [[ -z $HOSTNAMEF ]]; then
         export HOSTNAMEF=$(timeout 3 hostname -f)
     fi
 fi
-[[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/}
+[[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/} || true
