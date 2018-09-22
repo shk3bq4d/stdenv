@@ -22,9 +22,17 @@ with open('/tmp/mruxvt.log', 'wb') as f:
     #for child in children:
     #    f.write(pformat(child.as_dict()))
     for child in children:
-        cwd = children[0].cwd()
-        if cwd.startswith('/proc/'): continue # chromium continue
-        f.write('=> ' + cwd)
+        #cwd = children[0].cwd()
+        name = child.name()
+        f.write(name + '\n')
+        if name not in ['bash', 'zsh', 'vim', 'urxvt']:
+            f.write('continue not in\n')
+            continue
+        cwd = child.cwd()
+        if cwd.startswith('/proc/'):
+            f.write('continue /proc/\n')
+            continue # chromium continue
+        f.write('=> ' + cwd + '\n')
         print(cwd)
         sys.exit(0)
     f.write('EOL')
