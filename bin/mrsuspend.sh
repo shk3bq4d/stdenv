@@ -10,6 +10,8 @@
 ##
 
 set -euo pipefail
+#exec > >(tee /tmp/logfile.txt)
+#exec 2>&1
 
 wait_git() {
 	while :; do
@@ -22,17 +24,18 @@ wait_git() {
 		pgrep git || break
 	done
 }
-source ~/.std*_aliases
 source ~/bin/dot.hostname
+for i in ~/.std*_aliases; do
+	source  $i
+done
 case $HOSTNAMEF in \
-$WORK_PC1F)
+${WORK_PC1F:-uoeuoeau})
 	exit 1
 	;;
 dec17.ly.lan)
 	if at-work.sh; then
 		mri3lock &
 	fi
-	set -x
 	wait_git
 	sudo systemctl suspend
 	exit 0

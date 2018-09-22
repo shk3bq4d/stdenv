@@ -11,9 +11,10 @@
 
 set -euo pipefail
 
-set -x
-source ~/.std*_aliases
 source ~/bin/dot.hostname
+for i in ~/.std*_aliases; do
+	source  $i
+done
 case $HOSTNAMEF in \
 $WORK_PC1F)
 	exit 0
