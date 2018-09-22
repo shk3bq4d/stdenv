@@ -11,6 +11,17 @@
 
 set -euo pipefail
 
+wait_git() {
+	while :; do
+		pgrep git && sleep 1 && continue
+		sleep 0.1
+		pgrep git && sleep 1 && continue
+		sleep 0.1
+		pgrep git && sleep 1 && continue
+		sleep 0.1
+		pgrep git || break
+	done
+}
 source ~/.std*_aliases
 source ~/bin/dot.hostname
 case $HOSTNAMEF in \
@@ -21,6 +32,8 @@ dec17.ly.lan)
 	if at-work.sh; then
 		mri3lock &
 	fi
+	set -x
+	wait_git
 	sudo systemctl suspend
 	exit 0
 	;;
