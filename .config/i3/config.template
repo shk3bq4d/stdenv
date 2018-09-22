@@ -142,6 +142,8 @@ bindsym  $mod+Shift+Down move down
 bindsym  $mod+Shift+Up move up
 bindsym  $mod+Shift+Right move right
 
+# code: 24, qwerty: q dvorak: ;
+bindcode --release $mod+24  exec i3-resize-window.py
 # code:55 => sym: 0x76, symbol:v
 bindcode --release $mod+60  exec mri3-toggle-orientation.py # <= 4.11-1
 # code:42 => sym: 0x67, symbol:g
