@@ -1,0 +1,9 @@
+# /* ex: set filetype=sh fenc=utf-8 : */
+if [[ -z $HOSTNAMEF ]]; then
+    if [[ -L /usr/bin/timeout ]] && [[ $(readlink -f /usr/bin/timeout) == *busybox ]]; then
+        export HOSTNAMEF=$(timeout -t 3 hostname -f)
+    else
+        export HOSTNAMEF=$(timeout 3 hostname -f)
+    fi
+fi
+[[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/}
