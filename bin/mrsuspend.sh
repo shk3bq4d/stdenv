@@ -32,6 +32,10 @@ case $HOSTNAMEF in \
 ${WORK_PC1F:-uoeuoeau})
 	exit 1
 	;;
+apr16.ly.lan)
+	sleep-feedback.sh 60
+	sudo pm-suspend
+	;;
 dec17.ly.lan)
 	if at-work.sh; then
 		mri3lock &

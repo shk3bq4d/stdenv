@@ -36,8 +36,28 @@ def debug(e, recursive=True, indent=''):
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ')
 
+def mrinspect(foA, foO):
+    foA.append(foO)
+    if foO['focused']:
+        return True
+    for i in foO['nodes']:
+        if mrinspect(foA, i):
+            return True
+    foA.pop()
+    return False
+
+def mrFocusedStack():
+    """ returns a list of container in which the latest is the focused window """
+    import json
+    import subprocess
+    rA = []
+    bString = subprocess.check_output(["i3-msg", "-t", "get_tree"])
+    cO = json.loads(bString)
+    rA = []
+    mrinspect(rA, cO)
+    return rA
+
 if __name__ == '__main__':
     reload(sys)
     sys.setdefaultencoding('utf-8')
     go(sys.argv[1:])
-
