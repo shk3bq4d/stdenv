@@ -1,0 +1,11 @@
+# /* ex: set filetype=sh fenc=utf-8 : */
+test -n "$UNAME" && return 0
+is_zsh() {
+    test -n "${ZSH_VERSION:-}"
+}
+export UNAME="$(uname)"
+if is_zsh; then
+    UNAME="$UNAME:l"
+else
+    UNAME="${UNAME,,}"
+fi
