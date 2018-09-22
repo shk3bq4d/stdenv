@@ -1,12 +1,18 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import i3ipc
+import i3
 from pprint import pprint
 
-
-
-i3 = i3ipc.Connection()
+i3c = i3ipc.Connection()
+focused = i3c.get_tree().find_focused()
+#print(focused.parent.type)
+#pprint(vars(focused.parent))
+i3.debug(focused, recursive=False)
+#debug(focused.parent)
+#debug(focused.parent.nodes[0])
+sys.exit(0)
 
 def nb_screen():
     visible_workspaces = [x['current_workspace'] for x in i3.get_outputs() if x['active'] and x['current_workspace']]
