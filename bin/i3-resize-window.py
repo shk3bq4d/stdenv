@@ -2,14 +2,14 @@
 
 import sys
 import i3ipc
-import i3
+import mri3
 from pprint import pprint
 
 i3c = i3ipc.Connection()
 focused = i3c.get_tree().find_focused()
 #print(focused.parent.type)
 #pprint(vars(focused.parent))
-i3.debug(focused, recursive=False)
+mri3.debug(focused, recursive=False)
 #debug(focused.parent)
 #debug(focused.parent.nodes[0])
 sys.exit(0)
