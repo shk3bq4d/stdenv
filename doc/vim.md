@@ -281,3 +281,8 @@ z= suggestion # spell
 
 # autosave https://vi.stackexchange.com/questions/74/is-it-possible-to-make-vim-auto-save-files
 autocmd CursorHold,CursorHoldI * update
+
+%:p # current filepath
+:!ls -al %:p # current filepath
+:!chmod u+w %:p # current filepath
+:!chmod u+x %:p # current filepath

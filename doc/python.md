@@ -911,6 +911,7 @@ import subprocess
 s = subprocess.Popen('sudo netstat -tlnpe'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 out = '\n'.join(map(str.strip, s.communicate()))
 
+~/py/mryaml.py
 from ruamel import yaml; yaml.dump({})
 import yaml; yaml.dump({})
 import yaml; yaml.safe_dump({}, default_flow_style=False)
