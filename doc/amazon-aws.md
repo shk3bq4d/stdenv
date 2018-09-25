@@ -20,6 +20,8 @@ on-demand # With On-Demand instances, you pay for compute capacity by per hour o
 Reserved Instances # provide you with a significant discount (up to 75%) compared to On-Demand instance pricing. In addition, when Reserved Instances are assigned to a specific Availability Zone, they provide a capacity reservation, giving you additional confidence in your ability to launch instances when you need them. Best if you can commit to one year
 Dedicated Hosts # A Dedicated Host is a physical EC2 server dedicated for your use. Can be purchased On-Demand (hourly).  Can be purchased as a Reservation for up to 70% off the On-Demand price. Useful for compliance or license requirement
 
+EFS "Amazon EFS supports the NFS [...] protocol, so the applications [..] work seamlessly with Amazon EFS. Multiple Amazon EC2 instances can access an Amazon EFS file system at the same time, [...]", "Amazon EFS file systems store data and metadata across multiple Availability Zones in an AWS Region" https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
+
 # aws cli
 source ~/env/kops_grey_bravo
 venv.switch grey-ansible
