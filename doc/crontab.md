@@ -47,6 +47,9 @@ date +'\%Y\%m\%d'
 
 @hourly find ~/.tmp/vim/{output,undodir} -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and -size +100k \) -or \( -mtime +2 -and -size +10M \) \) -print -delete | logger -t cronvimdelete -p user.info
 @hourly git=gitprivate; f=~/.tmp/crontab/$(hostname -f); mkdir -p ~/.tmp/crontab; crontab -l > $f; $git add $f; $git commit -m . $f
+@daily            minikube completion zsh > ~/.zsh-aliases/minikube
+@daily            helm completion zsh > ~/.zsh-aliases/helm
+@daily            kubectl completion zsh > ~/.oh-my-zsh/cache/kubectl_completion
 
 # power saving at work during the night
 29 07 * * mon-thu DISPLAY=:0 xset -dpms && DISPLAY=:0 xset s off

@@ -65,3 +65,6 @@ up domain names based on an IP address.
 The record specifies core information about a DNS zone, including the primary name server, the
 email of the domain administrator, the domain serial number, and several timers relating to
 refreshing the zone.
+
+
+blablawhatever.192.168.1.1.nip.io # nip.io is free service to have a hostname for any IPv4

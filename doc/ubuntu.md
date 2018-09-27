@@ -45,3 +45,9 @@ Restart the systemd daemon with this command:
 sudo restart systemd-logind
 or, from 15.04 onwards:
 sudo service systemd-logind restart
+
+sudo update-alternatives --config x-www-browser # change browser
+ls -al /usr/bin/x-www-browser                                                                                                            11:17:04  14"420
+lrwxrwxrwx 1 root root 31 Dec 18  2017 /usr/bin/x-www-browser -> /etc/alternatives/x-www-browser
+ls -al /etc/alternatives/x-www-browser                                                                                                       11:18:14  12ms
+ lrwxrwxrwx 1 root root 25 Sep 26 11:16 /etc/alternatives/x-www-browser -> /usr/bin/chromium-browser

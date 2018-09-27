@@ -1,3 +1,7 @@
+@begin=sh@
+mysql  -u root --password=root # long  password with equal
+mysql  -u root -proot          # short password no equal
+@end=sh@
 @begin=sql@
 show databases;
 use DATABASENAME;

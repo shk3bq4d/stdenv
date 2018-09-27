@@ -431,3 +431,5 @@ git commit --amend --reset-author
 
 git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"
+
+git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra 
