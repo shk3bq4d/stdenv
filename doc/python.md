@@ -56,7 +56,7 @@ doc = lxml.etree.fromstring(string) # parses parser
 lxml.etree.tostring(doc, pretty_print=True) # outputs
 doc.xpath('/*')
 
-# process stdin line by line:wq
+# process stdin line by line
 """
 import fileinput
 
