@@ -33,8 +33,13 @@ ${WORK_PC1F:-uoeuoeau})
 	exit 1
 	;;
 apr16.ly.lan)
-	sleep-feedback.sh 60
-	sudo pm-suspend
+	if [[ -z "$SSH_CLIENT" ]]; then
+		sleep-feedback.sh 60
+		sudo pm-suspend
+	else
+		{ sleep 5; sudo pm-suspend; } &
+		echo "you came remotely and have 5 seconds to close your SSH session"
+	fi
 	;;
 dec17.ly.lan)
 	if at-work.sh; then
