@@ -6,7 +6,7 @@ https://pypi.python.org/pypi/cx_Oracle/5.1.3
 # http://sametmax.com/sept-petites-libs-qui-changent-la-vie-dun-dev-python/
 # ssh port forwarding https://stackoverflow.com/questions/11294919/port-forwarding-with-paramiko
 
-# error: Unable to find vcvarsall.bat 
+# error: Unable to find vcvarsall.bat
 # Microsoft Visual C++ Compiler for Python 2.7 -> http://www.microsoft.com/en-us/download/details.aspx?id=44266
 # and manually create many subdir to reach [HKEY_CURRENT_USER\Software\Wow6432Node\Microsoft\VisualStudio\9.0\Setup\VC]
 # and create a string named "ProductDir" with value "C:\\Users\\MyUser\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0"
@@ -31,7 +31,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 # instead do
-# PYTHONIOENCODING="UTF-8"  
+# PYTHONIOENCODING="UTF-8"
 # in your shell or read
 # https://stackoverflow.com/questions/3828723/why-should-we-not-use-sys-setdefaultencodingutf-8-in-a-py-script
 @end=python@
@@ -61,9 +61,9 @@ doc.xpath('/*')
 import fileinput
 
 for line in fileinput.input():
-	line = line.strip()
-	if line == '':
-		continue
+    line = line.strip()
+    if line == '':
+        continue
 
 # or in onliner
 for line in filter(lambda x: len(x) > 0, map(lambda x: x.strip(), fileinput.input(files=None))):
@@ -247,10 +247,10 @@ for k, v in dict_.iteritems():
 for k, v in sorted(rH.iteritems(), key=lambda x: x[0]):
 
 for i, v in enumerate(['tic', 'tac', 'toe']):
-	print i, v
-	      0  tic
-		  1  tac
-		  2  toe
+    print i, v
+          0  tic
+          1  tac
+          2  toe
 
 for i in reversed(xrange(1,10,2)):
 for f in sorted(set(basket)):
@@ -292,8 +292,8 @@ def lineno():
 
 if __name__ == '__main__':
     print "hello, this is line number", lineno()
-    print 
-    print 
+    print
+    print
     print "and this is line", lineno()
 #### current line ###
 
@@ -305,7 +305,7 @@ import logging
 import logging.config
 logger = logging.getLogger(__name__)
 logging.config.dictConfig({
-    'version': 1,              
+    'version': 1,
     'disable_existing_loggers': False,  # this fixes the problem
     'formatters': {
         'standard': {
@@ -314,16 +314,16 @@ logging.config.dictConfig({
     },
     'handlers': {
         'default': {
-            'level':'INFO',    
-			'formatter': 'standard',
+            'level':'INFO',
+            'formatter': 'standard',
             'class':'logging.StreamHandler',
-        },  
+        },
     },
     'loggers': {
-        '': {                  
-            'handlers': ['default'],        
-            'level': 'INFO',  
-            'propagate': True  
+        '': {
+            'handlers': ['default'],
+            'level': 'INFO',
+            'propagate': True
         }
     }
 })
@@ -335,7 +335,7 @@ def auto(level='INFO'): # DEBUG
         'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': '/tmp/zabbix-kg_maintenance.log'}, #
         'syslog': {'level':level,'formatter': 'standard','class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # local5, ...
         }, 'loggers':{'':{'handlers': 'stdout file syslog'.split(),'level': level,'propagate':True}}})
-    return 
+    return
 logger.error('Failed to open file', exc_info=True) # exc_info include traceback
 logger.exception(msg, *args) is equals to logger.error(msg, exc_info=True, *args).
 logger.error("Error reading file '%s' at offset %d", filename, offset, exc_info=1)
@@ -416,7 +416,7 @@ Example:
 >>> map(None, [1,2,3,4,5], [1,2,3])
 
 [(1, 1), (2, 2), (3, 3), (4, None), (5, None)]
-reduce 
+reduce
 
 reduce(function, sequence[, initial]) -> value
 
@@ -437,10 +437,10 @@ Return those items of sequence for which function(item) is true.  If
 function is None, return the items that are true.  If sequence is a tuple
 
 or string, return the same type, else return a list.
-Example: 
+Example:
 >>> filter(lambda d: d != 'a', 'abcd')　　＃ filter out letter 'a'。
 'bcd'
->>> def d(x):　＃ not using lambda function, instead using a predefined function 
+>>> def d(x):　＃ not using lambda function, instead using a predefined function
  　　　　　return True if x != 'a' else False
 >>> filter(d, 'abcd')
 'bcd'
@@ -454,8 +454,8 @@ from each of the argument sequences.  The returned list is truncated
 
 in length to the length of the shortest argument sequence.
 
-Example: 
->>> 
+Example:
+>>>
 zip( range(5), range(1,20,2) )
 
 [(0, 1), (1, 3), (2, 5), (3, 7), (4, 9)]
@@ -467,7 +467,7 @@ a if test else b
 >>> 'true' if False else 'false'
 'false'
 
-os.getcwd() # current working directory pwd 
+os.getcwd() # current working directory pwd
 os.environ['HOME'] # environment variable
 os.path.expanduser("~/.ssh/config")
 os.sep # path separator
@@ -484,8 +484,8 @@ datetime.strptime(date_string, format)
 %c                   09/09/14 07:05:20              Locale's appropriate date and time representation.
 %x                   09/09/14                       Locale's appropriate date representation.
 %X                   07:05:20                       Locale's appropriate time representation.
-%m/%b/%y %I:%M %p    09/Sep/14 07:05 AM             
-%Y.%m.%d             2014.09.09                     
+%m/%b/%y %I:%M %p    09/Sep/14 07:05 AM
+%Y.%m.%d             2014.09.09
 
 # year
 %y                   14                             Year without century as a decimal number [00,99].
@@ -646,10 +646,10 @@ __xor__
 
 
 with open('d:/cygwin64/home/myuser/bip', 'rb') as f:
-	p = f.read()
+    p = f.read()
 
 with open('d:/cygwin64/home/myuser/bip', 'wb') as f:
-	f.write(content)
+    f.write(content)
 
 str.str(object='')->string
 str.capitalize()
@@ -713,7 +713,7 @@ class A(object):
 
     @staticmethod
     def static_foo(x):
-        print "executing static_foo(%s)"%x    
+        print "executing static_foo(%s)"%x
 
 a=A()
 
@@ -742,18 +742,18 @@ def uncamelcase(name):
 list(set(li)) # remove duplicates in list li -- unique
 
 try:
-	scanocr_analysis()
+    scanocr_analysis()
 except KeyError, e:
-	print('keyerror')
+    print('keyerror')
 except BaseException, e:
-	import traceback
-	traceback.print_exc(e)
+    import traceback
+    traceback.print_exc(e)
 
 # A tester (fournis par Jean-Marc Vasquez)
   except Exception, e:
-	print e
+    print e
         except:
-	print sys.exc_info()
+    print sys.exc_info()
 
 
 from collections import namedtuple
@@ -766,7 +766,7 @@ def decorator(fn):
     def inner(n):
         return fn(n) + 1
     return inner
- 
+
 @decorator
 def f(n):
     return n + 1
@@ -871,7 +871,7 @@ def tracefunc(frame, event, arg, indent=[0]):
 import sys
 sys.settrace(tracefunc)
 
-os.getcwd() # pwd current working directory 
+os.getcwd() # pwd current working directory
 
 PYTHONDONTWRITEBYTECODE=True # no *.pyc or *.pyo
 python2 -B                   # no *.pyc or *.pyo
@@ -899,7 +899,7 @@ import urllib; urllib.quote('/test', safe='') # escape uricomponent encode
 try:
     import urlparse
 except:
-    import urllib.parse as urlparse # python3 
+    import urllib.parse as urlparse # python3
 url = 'https://stackoverflow.com/questions/5074803/retrieving-parameters-from-a-url?a=4&b=2'
 parsed = urlparse.urlparse(url)
 print urlparse.parse_qs(parsed.query)['def']
