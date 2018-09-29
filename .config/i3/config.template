@@ -82,7 +82,8 @@ $STDHOME_FONT
 floating_modifier $mod
 
 # start a terminal
-bindsym  $mod+Return exec i3-sensible-terminal
+bindsym  $mod+Return       exec ~/bin/mrurxvt
+bindsym  $mod+Shift+Return exec MRURXVT_SHIFT_RETURN=true ~/bin/mrurxvt
 bindsym  Print         exec mr-shutter.sh
 #bindsym  Shift+Print   exec shutter --remove_cursor --window
 #bindsym  Control+Print exec shutter --remove_cursor --window
