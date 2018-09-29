@@ -180,3 +180,7 @@ Typematic Rate set to 10.9 cps (delay = 250 ms)
 
 sudo kbdrate -r 10.9 -d 250
 xset r rate 250 60
+
+
+https://www.kaufmann.no/downloads/linux/ckbcomp.gz # scripts
+https://www.kaufmann.no/roland/dvorak/linux.html

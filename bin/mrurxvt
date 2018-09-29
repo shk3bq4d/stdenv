@@ -235,3 +235,13 @@ fi
 ~/bin/notinpath/mrxmodmap.sh &
 #MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
 MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+
+exit 0
+# Examples:
+mrurxvt -e bash --init-file <(echo "ls; pwd")
+mrurxvt -e bash -c 'echo coucou; sleep 2' # closes after two seconds
+mrurxvt -e bash -c 'echo coucou; read' # closes after enter
+mrurxvt -e bash -c 'echo coucou; read -s' # closes after enter but does not echo Other keys
+mrurxvt -t mrtitlefloating -e bash -c 'echo coucou; read -s' # closes after enter but does not echo Other keys
+mrurxvt -title "mrtitlefloating" -e bash -c 'head ~/doc/dvorak.md; read -s'
+
