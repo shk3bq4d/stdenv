@@ -27,5 +27,6 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-mrurxvt -title "mrtitlefloating" -e bash -c "cat ~/.config/i3/dvorak.md; read -s"
+#mrurxvt -title "mrtitlefloating" -e bash -c "cat ~/.config/i3/dvorak.md; read -s"
+mrurxvt -title "mrtitlefloating" -e bash -c "cat ~/.config/i3/dvorak.md; read" # I don't want no echo
 
