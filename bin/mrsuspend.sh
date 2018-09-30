@@ -37,7 +37,7 @@ apr16.ly.lan)
 		sleep-feedback.sh 60
 		sudo pm-suspend
 	else
-		{ sleep 5; sudo pm-suspend; } &
+		nohup sh -c "sleep 5; sudo pm-suspend;" </dev/null &>/dev/null &
 		echo "you came remotely and have 5 seconds to close your SSH session"
 	fi
 	;;
