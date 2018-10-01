@@ -9,7 +9,7 @@
 ## Author: Jeff Malone, 22 Sep 2018
 ##
 
-set -euo pipefail
+set -eo pipefail
 #exec > >(tee /tmp/logfile.txt)
 #exec 2>&1
 
