@@ -837,7 +837,7 @@ warnings.filterwarnings("ignore")
 or calling python with -W attribute (not verified)
 
 sys._getframe().f_code.co_name # current function name http://stackoverflow.com/questions/5067604/determine-function-name-from-within-that-function-without-using-traceback
-python -m json.tool
+python -m json.tool [FILENAME] # pretty print
 
 # http://stackoverflow.com/questions/2878084/sort-a-list-of-dicts-by-dict-values
 import operator

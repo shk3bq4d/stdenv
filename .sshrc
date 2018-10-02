@@ -100,7 +100,7 @@ export GIT_SSH=$RCD/git_ssh
 if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null; then
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
-    [[ -z $CMDARGS ]] && command last -daxFn 20
+    [[ -z $CMDARGS ]] && command last -daxFn 20 && ips --no-internet
 fi
 sshrc_ln() {
     target=/tmp/me
