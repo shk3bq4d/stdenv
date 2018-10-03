@@ -3,6 +3,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/ho
 SHELL=/bin/bash
 SHELL=/usr/local/bin/bash
 PYTHONPATH=/home/myuser/py
+PYTHONDONTWRITEBYTECODE=True
 LANG=en_US.utf8
 LC_TIME=en_DK.utf
 HOSTNAME=bip
