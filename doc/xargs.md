@@ -1,3 +1,4 @@
+-rn 1
 -rtn 1
 -n max-args  --max-args=max-args
 -t           --verbose            Print the command line on the standard error output before executing it.
