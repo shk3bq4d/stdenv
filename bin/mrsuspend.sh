@@ -9,7 +9,7 @@
 ## Author: Jeff Malone, 22 Sep 2018
 ##
 
-set -eo pipefail
+set -o pipefail
 #exec > >(tee /tmp/logfile.txt)
 #exec 2>&1
 
@@ -35,6 +35,8 @@ ${WORK_PC1F:-uoeuoeau})
 apr16.ly.lan)
 	if [[ -z "$SSH_CLIENT" ]]; then
 		sleep-feedback.sh 60
+		pkill -9 sshuttle
+		docker stop forticlientvpn
 		sudo pm-suspend
 	else
 		nohup sh -c "sleep 5; sudo pm-suspend;" </dev/null &>/dev/null &
@@ -46,6 +48,11 @@ dec17.ly.lan)
 		mri3lock &
 	fi
 	wait_git
+	if [[ -z "$SSH_CLIENT" ]]; then
+		pkill -9 sshuttle
+		docker stop forticlientvpn
+		#pkill -9 forticlientsslvpn_cli
+	fi
 	sudo systemctl suspend
 	exit 0
 	;;
