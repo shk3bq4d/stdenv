@@ -18,3 +18,5 @@ curl -v # see certificate, request headers, response headers
 openssl s_client -connect {HOSTNAME}:{PORT} -showcerts # certificate save as file
 UA="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 curl -A "$UA"
+
+curl -s -o './#1.yaml' 'https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/helloWorld/{configMap,deployment,kustomization,service}.yaml' # multidownload
