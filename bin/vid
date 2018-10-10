@@ -20,6 +20,6 @@ case $# in
 	exit $?
 	;;
 esac
-vim -dR "$A" "$B"
+vim -d "$A" "$B"
 
 	

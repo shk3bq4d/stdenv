@@ -20,6 +20,6 @@ case $# in
 	exit $?
 	;;
 esac
-vim -c 'set diffopt+=iwhite' -dR "$A" "$B"
+vim -c 'set diffopt+=iwhite' -d "$A" "$B"
 
 	
