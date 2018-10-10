@@ -1,3 +1,38 @@
+* https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+    - name: mongo_dev_fs_id
+      set_fact: fs_id='fs-d3ad0faa'
+      when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
+      tags:
+        - efs
+    - name: mongo_dev_fs_id
+      set_fact:
+        mr_hehe: "{{hihi[hostvars[inventory_hostname]['ec2_tag_Environment']]}}"
+      tags:
+        - mrdebug
+    - name: include_inline_efs_role
+      import_role:
+        name: efs
+      vars:
+        mount_point: "{{ mongo_backup_path }}"
+        fs_id: "{{ fs_id }}"
+      tags:
+        - efg
+    - name: include vars
+      include_vars: environment_vars_dev.yml
+      when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
+      tags:
+        - efse
+    - name: myshell
+      shell: "echo 'test'"
+      register: foo
+      tags:
+        - mrdebug
+    - name: myfoo
+      debug:
+          #msg: "the echo was {{ foo.stdout }}"
+        msg: "the echo was hihi {{ mr_hehe }}"
+      tags:
+
 ansible-playbook -h                                                                                        27' 41"
 Usage: ansible-playbook playbook.yml
 Options:

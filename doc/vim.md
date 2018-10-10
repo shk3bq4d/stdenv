@@ -174,6 +174,7 @@ do # or :diffget gets diff from other viewport
 dp # or :diffput push diff to the other viewpor
 :63diffget gets line 63 
 zX restore original folds (do it on both buffers)
+vimdiff -c 'set diffopt+=iwhite' # ignores whitespace
 
 
 # fold

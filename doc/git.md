@@ -412,6 +412,7 @@ git reset -p # unstage
 
 # diff conveniency
 git diff --ignore-space-at-eol
+git diff --color-words # https://stackoverflow.com/questions/28551556/git-remove-leading-plus-minus-from-lines-in-diff
 git log -b # --ignore-space-change # diff
 git log -w # --ignore-all-space    # diff
 git log --ignore-blank-lines # diff
@@ -433,3 +434,4 @@ git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"
 
 git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra 
+
