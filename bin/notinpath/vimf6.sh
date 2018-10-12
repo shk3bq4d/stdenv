@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
 
 [[ -z "$1" ]] && echo "Inception A" && exit 1
@@ -105,6 +106,61 @@ vimf6.sh)
 *py)  python2 $SCRIPT;;
 *pl)  perl $SCRIPT;;
 *php) php $SCRIPT;;
+*java)
+    D=$(dirname "$SCRIPT")
+    mrjava_cp() {
+        if [[ -d ../MrTools/ ]]; then
+            echo -n ':../MrTools/build/classes'
+        fi
+        if [[ -d ../jar ]]; then
+            echo -n ':../jar/*'
+        fi
+    }
+    ant_output() {
+        cat "$@" | sed -r -e '/^$/ d' | python -c "
+# @begin=python@
+# removes ant blocks that have no output
+import fileinput
+import re
+prev_line = ''
+for line in map(lambda x: x.rstrip(), fileinput.input('-')):
+    if line == '': continue
+    if re.match(r'^\\S+:', prev_line) and re.match(r'^\\S+:', line): pass
+    else: print(prev_line)
+    prev_line = line
+print(prev_line)
+# @end=python@
+"
+        }
+    while :; do
+        if [[ -f "$D/build.xml" ]]; then
+            C=$(mktemp)
+            cd $D
+            if ant compile &> $C; then
+                if cat $SCRIPT | sed -r -e 's/[[:blank:]]+/ /g' | tr '\n\r' '  ' | tr -s ' ' | grep -qE '\<void main ?\('; then
+                    rm -f $C
+                    package=$(sed -r -n -e 's/^[[:blank:]]*package[[:blank:]]+([[:graph:]]+)[[:blank:]]*;.*/\1/ p' "$SCRIPT")
+                    echo "Would you like to execute ? Press Ctrl-C to abord"
+                    echo java -cp "build/classes:$(mrjava_cp)" $package/$(basename $SCRIPT .java)
+                    read a
+                         java -cp "build/classes:$(mrjava_cp)" $package/$(basename $SCRIPT .java)
+                    exit 0
+               else
+                    ant_output $C
+                    exit 0
+                fi
+            else
+                ant_output $C
+                exit 1
+            fi
+        fi
+        D="$(readlink -f "$(dirname "$D")")"
+        if [[ -z $D || "$D" == "/" ]]; then
+            echo "Couldn't find a proper java compilation method"
+            exit 1
+        fi
+    done
+    ;;
 *md)
     f=~/.local/bin/grip
     if [[ ! -x "$f" ]]; then
@@ -145,19 +201,19 @@ $HOME/.config/i3/config.*)
     cd $HOME/.config/i3/
     ./stdhome-templating-config.sh
     i3 restart || true
-	{ sleep 6 && compton-i3-restart-reset-opacity.sh; } &
+    { sleep 6 && compton-i3-restart-reset-opacity.sh; } &
     echo "i3 restarted B"
     ;;
 */Dockerfile)
-	DIR=$(dirname $SCRIPT)
-	if [[ -f $DIR/build.sh ]]; then
-		bash $DIR/build.sh
-	elif [[ -f $DIR/../build.sh ]]; then
-		bash $DIR/../build.sh
-	else
-		docker build -f $SCRIPT $(dirname $SCRIPT)
-	fi
-	;;
+    DIR=$(dirname $SCRIPT)
+    if [[ -f $DIR/build.sh ]]; then
+        bash $DIR/build.sh
+    elif [[ -f $DIR/../build.sh ]]; then
+        bash $DIR/../build.sh
+    else
+        docker build -f $SCRIPT $(dirname $SCRIPT)
+    fi
+    ;;
 *)
     echo "($(basename $0)): unimplemented case for script $SCRIPT"
     exit 1
