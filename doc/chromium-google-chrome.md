@@ -150,3 +150,8 @@ var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k =
 Notification.requestPermission().then(function(result) {console.log('bip');})
 a = new Notification("Salut2")
 a.close();
+
+# history
+```sql
+echo "select url from downloads_url_chains urls limit 13;" | sqlite3 ~/.config/chromium/Default/History
+```
