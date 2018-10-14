@@ -14,7 +14,7 @@ rename the shortcut for the other ones, do not delete as they'll be readded when
 http://userscripts-mirror.org/scripts/source/78822.user.js # Better Outlook Web Access
 ublock origin
 cookie exporter
-tampermonkey 
+tampermonkey
 http://127.0.0.1:63435/websupport/tampermonkey/mr.js
 
 chrome://extensions/
@@ -152,6 +152,19 @@ a = new Notification("Salut2")
 a.close();
 
 # history
-```sql
-echo "select url from downloads_url_chains urls limit 13;" | sqlite3 ~/.config/chromium/Default/History
+```sh
+a=~/.config/chromium/Default/History; b=$(mktemp -u); cp $a $b; sqlite3 $b;
+a=~/.config/chromium/Default/History; b=$(mktemp -u); cp $a $b; echo "select url from downloads_url_chains urls limit 13;" | sqlite3 $b;
+```
+```python
+f = os.path.expanduser('~/.config/chromium/Default/History')
+d = mrtools.ephemeral_dir()
+nf = os.path.join(d, 'history')
+shutil.copy(f, nf)
+con = sqlite3.connect(nf)
+cur = con.cursor()
+q = "select url from downloads_url_chains urls where url like 'https://%' limit 13"
+cur.execute(q)
+for i in cur.fetchall():
+    pprint(i)
 ```
