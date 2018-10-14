@@ -1,0 +1,8 @@
+if __name__ == '__main__':
+    logging_conf()
+    try:
+        go(sys.argv[1:])
+    except BaseException as e:
+        logging.exception('oups')
+        raise e
+
