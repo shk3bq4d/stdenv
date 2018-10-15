@@ -1,4 +1,5 @@
-# /* ex: set filetype=sh: */
+# /* ex: set filetype=md: */
+```sh
 [ -a FILE ]	True if FILE exists.
 [ -b FILE ]	True if FILE exists and is a block-special file.
 [ -c FILE ]	True if FILE exists and is a character-special file.
@@ -36,7 +37,7 @@
 [ ARG1 OP ARG2 ]	"OP" is one of -eq, -ne, -lt, -le, -gt or -ge. These arithmetic binary operators return true if "ARG1" is equal to, not equal to, less than, less than or equal to, greater than, or greater than or equal to "ARG2", respectively. "ARG1" and "ARG2" are integers.
 
 nb nombre args argument count
-$# 
+$# # dollar hash, argument count
 
 if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surround with quotes!!
 
@@ -608,17 +609,17 @@ BASH_SUBSHELL
   Incremented by one each time a subshell or subshell
   environment is spawned.  The initial value is 0.
 
-$$ PID of bash process (possibly grand parent if subshell)
-$! PID of last started process example:
+$$ # dollar PID of bash process (possibly grand parent if subshell)
+$! # dollar exclamation mark PID of last started process example:
 PID warning use cygwin_pid_to_win_pid.sh to resolve to windows pid or use with tail -f --pid= # ps -W | sed -n -r -e "s/^\\s*$1\\s+[0-9]+\\s+[0-9]+\\s+([0-9]+).*/\\1/ p"
 some_program &
 some_pid=$!
 wait $some_pid
 
 # last command
-!!     # last command
-!$     # last word
-!#:3   # third word of last command as in curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755 !#:3
+!!     # exclamation mark: last command
+!$     # exclamation mark dollar: last word of last command
+!#:3   # exclamation mark hash: third word of last command as in curl http://beyondgrep.com/ack-2.14-single-file > ~/bin/ack && chmod 0755 !#:3
 
 # deactivate history
  unset HISTFILE
@@ -984,3 +985,23 @@ QUOTEDHEREDOCUMENT
 
 | awk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' # https://stackoverflow.com/questions/21564/is-there-a-unix-utility-to-prepend-timestamps-to-stdin
 ts # https://stackoverflow.com/questions/21564/is-there-a-unix-utility-to-prepend-timestamps-to-stdin
+
+```sh
+# connect from local to remote host
+random_local_port() {
+    python -c 'import socket; s = socket.socket(); s.bind(("127.0.0.1", 0)); print s.getsockname()[1]; s.close();'
+}
+PROD_HOST=hehe.burp.com
+LOCAL_PORT="$(random_local_port)"
+REMOTE_PORT=8000
+ssh -f \
+    -o ExitOnForwardFailure=yes \
+    -L "127.0.0.1:$LOCAL_PORT:127.0.0.1:$REMOTE_PORT" \
+    $PROD_HOST \
+    sleep 10
+nc 127.0.0.1 $LOCAL_PORT &
+NC_PID=$!
+sleep 20
+curl http://127.0.0.1:$LOCAL_PORT
+kill -9 $NC_PID
+```

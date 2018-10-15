@@ -24,3 +24,6 @@ Traceback (most recent call last):
 ImportError: cannot import name main
 https://github.com/pypa/pip/issues/5240
 ~/.local/bin/pip install --upgrade pip==9.0.3
+
+
+uninstall # remove delete

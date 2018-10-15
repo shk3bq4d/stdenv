@@ -1,4 +1,6 @@
+* https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
+```yaml
     - name: mongo_dev_fs_id
       set_fact: fs_id='fs-d3ad0faa'
       when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
@@ -32,6 +34,7 @@
           #msg: "the echo was {{ foo.stdout }}"
         msg: "the echo was hihi {{ mr_hehe }}"
       tags:
+```
 
 ansible-playbook -h                                                                                        27' 41"
 Usage: ansible-playbook playbook.yml

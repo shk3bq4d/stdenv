@@ -1042,3 +1042,5 @@ parser.add_argument('--sum', dest='accumulate', action='store_const', const=sum,
 args = parser.parse_args() # arg_parse
 print args.accumulate(args.integers) # arg_parse
 ```
+
+python -m SimpleHTTPServer 8000

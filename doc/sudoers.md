@@ -1,6 +1,7 @@
 sudo -u mongod whomai
 sudo -u mongod bash
 sudo -u mongod sh -c 'echo $HOME'
+ssh $h "sudo sed -r -i -e '/backup_mongo/ d' /etc/fstab"
 
 %wheel  ALL=(ALL)             ALL
 %wheel  ALL=(ALL)   NOPASSWD: ALL
