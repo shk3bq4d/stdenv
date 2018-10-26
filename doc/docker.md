@@ -391,4 +391,9 @@ registry.gitlab.com/myteam/myproject:tag
 registry.gitlab.com/myteam/myproject/optional-image-name:tag
 registry.gitlab.com/myteam/myproject/optional-name/optional-image-name:tag
 
+docker pull fluent/fluentd-kubernetes-daemonset:v1.2-debian-graylog@sha256:6ca7d80d3a898178d7176c955aa565fcc90c7e9b9ece4183686a50daca2bc05a
+docker images --digests G 6ca7d80d3
+docker image tag f13f5feecfa5 registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt262
+docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt262
+
 DinD docker ind docker
