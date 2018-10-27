@@ -20,8 +20,9 @@ need_powerlinefonts() {
 
 os=()
 
+os+=('p7zip-full' 'p7zip-rar')
 os+=('apt-transport-https') # docker ppa
-os+=('ack-grep')
+os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
 os+=('ascii')
 os+=('acpi')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
