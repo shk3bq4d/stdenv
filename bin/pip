@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 27 Oct 2018
+##
+
+set -euo pipefail
+
+if [[ -f ~/.local/bin/pip ]]; then
+	~/.local/bin/pip "$@"
+else
+	export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+	pip "$@"
+fi
