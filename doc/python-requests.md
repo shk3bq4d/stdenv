@@ -1,4 +1,6 @@
 # http://docs.python-requests.org/en/master/
+pydoc requests
+pydoc requests.sessions
 
 >>> r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
 >>> r.status_code

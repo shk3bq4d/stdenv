@@ -3,6 +3,7 @@ apt-get changelog pkgname
 sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides
+dpkg -L python # list files that were installed per package
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip                                                2" 360
 iproute2: /sbin/ip

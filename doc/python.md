@@ -1044,3 +1044,7 @@ print args.accumulate(args.integers) # arg_parse
 ```
 
 python -m SimpleHTTPServer 8000
+
+pydoc mypackage
+pydoc requests
+pydoc requests.sessions
