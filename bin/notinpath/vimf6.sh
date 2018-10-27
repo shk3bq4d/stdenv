@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
+export VIMF6=1
 
 [[ -z "$1" ]] && echo "Inception A" && exit 1
 SCRIPT="$1"
