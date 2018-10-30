@@ -56,6 +56,11 @@ URxvt.keysym.M-n: perl:keyboard-select:activate
 ! activate keyboard-select directly in backward search mode:
 URxvt.keysym.M-s: perl:keyboard-select:search
 
+! https://superuser.com/questions/581193/rxvt-how-to-clear-scrollback
+! reset clear
+! echo -ne '\033c'
+URxvt.keysym.Control-l: command:\033c
+
 ! Normal
 ! color0    black
 ! color1    red

@@ -60,3 +60,8 @@ urxvt \
 		;
 
 https://wiki.archlinux.org/index.php/rxvt-unicode#Clickable_URLs
+
+# https://superuser.com/questions/581193/rxvt-how-to-clear-scrollback
+reset # better than clear
+echo -ne '\033c' # reset clear
+URxvt.keysym.Control-l: command:\033c
