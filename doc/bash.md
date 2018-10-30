@@ -984,7 +984,7 @@ hehe
 QUOTEDHEREDOCUMENT
 
 | awk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' # https://stackoverflow.com/questions/21564/is-there-a-unix-utility-to-prepend-timestamps-to-stdin
-ts # https://stackoverflow.com/questions/21564/is-there-a-unix-utility-to-prepend-timestamps-to-stdin
+ts # https://stackoverflow.com/questions/21564/is-there-a-unix-utility-to-prepend-timestamps-to-stdin datestamp tail follow tail -f
 
 ```sh
 # connect from local to remote host
