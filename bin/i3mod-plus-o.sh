@@ -24,6 +24,9 @@ case "$CLIP" in \
 	*$'\x70\x6F\x72\x6E'*) # think of the children
 		URL=""
 		;;
+	*.jar|*.zip|*.exe|*.7z|*.rar) # don't want to download binaries
+		URL=""
+		;;
 	http*)
 		URL="$CLIP"
 		;;

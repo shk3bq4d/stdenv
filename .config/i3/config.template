@@ -394,7 +394,7 @@ focus_follows_mouse yes
 bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
 
 # code:32 => sym: 0x6f, symbol:o
-bindcode $mod+39  exec ~/bin/i3mod-plus-o.sh
+bindcode $mod+39  exec ~/bin/i3mod-plus-o.sh # chromium chrome +o
 #assign [class="Krdc"] $ws2
 #assign [class="Firefox"] $ws7
 #assign [class="Eclipse"] $ws8
