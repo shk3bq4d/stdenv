@@ -110,3 +110,4 @@ watch -n 120 'rsync -e "sshpass -f~/.words/galaxytab ssh" -vrtD --no-xattrs --no
 tablette motorola: port 2222 /sdcard/Movies/
 
 natel telephone isabelle galaxy-a3:/sdcard/Music
+natel telephone marc motog:/sdcard/Music
