@@ -996,8 +996,18 @@ except sh.ErrorReturnCode_2:
         print("directory doesn't exist")
 
 # https://amoffat.github.io/sh/
+# https://amoffat.github.io/sh/reference.html
 sh.cat(_in="_in is stdin")
+sh.cat(_in="_in is stdin", _out=None, )
 sh.Command('ssh-keygen')
+~/.local/lib/python2.7/site-packages/sh.py
+sh Controlling Output _out _err _err_to_out _encoding _decode_errors _tee
+sh Execution _fg _bg _bg_exc _env _timeout _timeout_signal _cwd _ok_code _new_session _uid _preexec_fn
+sh Communication _in _piped _iter _iter_noblock _with _done
+sh TTYs _tty_in _tty_out _tty_size
+sh Performance & Optimization _in_bufsize _out_bufsize _internal_bufsize _no_out _no_err _no_pipe
+sh Program Arguments _long_sep _long_prefix _arg_preprocess
+sh Misc _log_msg
 
 mydict[new_key] = mydict.pop(old_key) # rename key in a regular dict # https://stackoverflow.com/questions/16475384/rename-a-dictionary-key
 

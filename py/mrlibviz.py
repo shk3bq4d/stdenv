@@ -10,7 +10,8 @@ import copy
 import re
 import os
 import inspect
-import pbs
+#import pbs
+import sh
 import tempfile
 from pprint import pprint
 #from PIL import Image
@@ -40,8 +41,9 @@ def w(fn=None, g=None, format='raw'):
 		w(fn=tfp, g=g, format='raw')
 		binpath = 'c:/Program Files (x86)/Graphviz2.37/bin/dot.exe'
 		binpath = 'D:/graphviz-2.38/bin/dot.exe'
+		binpath = '/usr/bin/dot'
 		#binpath = 'D:/graphviz-2.38/bin/twopi.exe'
-		dot = pbs.Command(binpath)
+		from sh import dot
 		try:
 			dot('-Tsvg', '-o' + fn, '-v', tfp)
 		#except BaseException as e:
