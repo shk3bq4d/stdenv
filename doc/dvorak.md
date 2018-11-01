@@ -1,3 +1,4 @@
+$mod+Control+Return exec mrurxvt-dvorak.sh
 setxkbmap -layout us -variant dvp # dvorak programmer
 
 # lightweight print version
