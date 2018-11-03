@@ -18,6 +18,10 @@ git help -g
 # Don't do it if you have uncommitted work you want to keep.
 git reset --hard 0d1d7fc32
 
+# This will destroy any local untracked modifications
+git clean -n # review what is about to be deleted
+git clean -f # do the deletion
+
 git reset HEAD~  # undo last commit and put its change in the work tree
 git reset HEAD~1 # undo last commit and put its change in the work tree
 git reset HEAD~2 # undo last commit and put its change in the work tree
@@ -28,6 +32,7 @@ git checkout -- . # forget revert reset discard unstaged change
 git branch # list of branches
 git branch -a # list of branches including remote
 git remote show origin # list remote branches
+git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d # delete merged branches
 
 
 git show 8647ae93864cdf0a42da59c4f33b319ce6324366
