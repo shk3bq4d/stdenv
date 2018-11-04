@@ -242,6 +242,12 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
 	args="$(echo -n "$@" | sed -r -e 's/-(font|bg|fg) \S+//g')"
 	exec > >(tee /tmp/logfile.txt)
 	exec 2>&1
+	# https://stackoverflow.com/questions/402377/using-getopts-in-bash-shell-script-to-get-long-and-short-command-line-options
+	optsec=":-"
+	while getopts "$optspec" optchar; do
+		case "${optchar}" in
+			-)
+            case "${OPTARG}" in
 	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
 else
 	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
