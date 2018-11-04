@@ -287,3 +287,9 @@ autocmd CursorHold,CursorHoldI * update
 :!ls -al %:p # current filepath
 :!chmod u+w %:p # current filepath
 :!chmod u+x %:p # current filepath
+
+:set buftype=nofile # scratchpad no-save read-only-equivalent
+
+```sh
+:sav # https://stackoverflow.com/questions/31092505/how-to-save-a-file-with-a-new-name-in-vim-while-switching-to-that-new-buffer-an
+```

@@ -2,14 +2,14 @@ if [[ -t 1 ]]; then
 	NONE="\033[0m"    # unsets color to term's fg color
 	BOLD="\033[1m"
 	OFF="\033[m"
-	BLACK="\033[0;30m"    # black
+	BLACK="\033[0;30m"    # black (or more likely white if terminal in day mode)
 	RED="\033[0;31m"    # red
 	GREEN="\033[0;32m"    # green
 	YELLOW="\033[0;33m"    # yellow
 	BLUE="\033[0;34m"    # blue
 	MAGENTA="\033[0;35m"    # magenta
 	CYAN="\033[0;36m"    # cyan
-	WHITE="\033[0;37m"    # white
+	WHITE="\033[0;37m"    # white (or more likely black if terminal in day mode)
 	EMBLACK="\033[1;30m"
 	EMRED="\033[1;31m"
 	EMGREEN="\033[1;32m"

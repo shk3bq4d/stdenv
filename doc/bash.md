@@ -1005,3 +1005,27 @@ sleep 20
 curl http://127.0.0.1:$LOCAL_PORT
 kill -9 $NC_PID
 ```
+
+# comments in multiline piped
+# https://stackoverflow.com/questions/1455988/commenting-in-a-bash-script
+# https://stackoverflow.com/questions/9522631/how-to-put-a-line-comment-for-a-multi-line-command?noredirect=1&lq=1
+```sh
+tr "\n" "," | \
+# I hate phone numbers in my output
+sed -e 's/,\([0-9]*-[0-9]*-[0-9]*\)/\n\1/g' -e 's/,$//' | \
+# one more sed call and then send it to the CSV file
+sed -e 's/^/"/g' -e 's/$/"/g' -e 's/,/","/g' >> ${CSV}
+
+# OR
+echo abc        | # Normal comment OK here
+     tr a-z A-Z | # Another normal comment OK here
+     sort       | # The pipelines are automatically continued
+     uniq         # Final comment
+# it's rather good since multiple, intermediate commented out lines seems possible
+# such as in the following example
+echo abc        | # Normal comment OK here
+     #tr a-z A-Z | # Another normal comment OK here
+     #sort       | # The pipelines are automatically continued
+     uniq         # Final comment
+
+```

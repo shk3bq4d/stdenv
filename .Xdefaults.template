@@ -124,7 +124,7 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 #define S_cyan          #2aa198
 !#define S_green         #859900
 !#define S_green         #00aa00
-#define S_green         #007700
+#define S_green         #007400
 
 
 ! Dark
@@ -144,10 +144,12 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 #define S_base03        #fdf6e3
 #define S_base02        #eee8d5
 #define S_base01        #93a1a1
-#define S_base00        #839496
+!#define S_base00        #839496
+#define S_base00        #757575
 #define S_base0         #657b83
 #define S_base1         #586e75
-#define S_base2         #073642
+!#define S_base2         #073642
+#define S_base2        #000000
 #define S_base3         #002b36
 
 
@@ -160,10 +162,30 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 *foreground:              S_base0
 !*fading:                  0
 !*fadeColor:               S_base03
-*cursorColor:             S_base1
+!*cursorColor:             S_base1
+*cursorColor:             S_red
 *pointerColorBackground:  S_base01
 *pointerColorForeground:  S_base1
 
+!Color0 and Color8 set the specific color used for shell color 30 (eg "\e[30m" and "\e[30;1m")
+!Color1 and Color9 set shell color 31 (eg "\e[31m" and "\3[31;1m")
+!Color2 and Color10 set shell color 32, etc.
+! 0 black     \e[30m "\033[0;30m" or white if terminal in day mode
+! 1 red       \e[31m "\033[0;31m"
+! 2 green     \e[32m "\033[0;32m"
+! 3 yellow    \e[33m "\033[0;33m"
+! 4 blue      \e[34m "\033[0;34m"
+! 5 magenta   \e[35m "\033[0;35m"
+! 6 cyan      \e[36m "\033[0;36m"
+! 7 white     \e[37m "\033[0;37m" or black if terminal in day mode
+! 8 emblack   \e[30m "\033[1;30m" or white if terminal in day mode
+! 9 emred     \e[31m "\033[1;31m"
+!10 emgreen   \e[32m "\033[1;32m"
+!11 emyellow  \e[33m "\033[1;33m"
+!12 emblue    \e[32m "\033[1;34m"
+!13 emmagenta \e[30m "\033[1;35m"
+!14 emcyan    \e[30m "\033[1;36m"
+!15 emwhite   \e[30m "\033[1;37m" or black if terminal in day mode
 *color0:                  S_base02
 *color1:                  S_red
 *color2:                  S_green
