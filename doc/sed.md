@@ -15,6 +15,7 @@ sed -r -n -e '/./,$p'                 # delete leading empty lines
 sed -r -n -e '/\S/,$p'                # delete leading blank lines
 sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' # delete all trailing blank lines at end of file EOF
 
+sed -e "s/\b\(.\)/\u\1/g" # GUN: capitalize/uppercase first letter of each word
 
 
 sed -e '/TERMINATE/,$d' # the lines before TERMINATE:
