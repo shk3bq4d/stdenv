@@ -223,7 +223,8 @@ git push origin --delete bip # delete rm remove remote branch
 
 git ls-files --deleted -z | xargs -0 git rm # https://stackoverflow.com/questions/492558/removing-multiple-files-from-a-git-repo-that-have-already-been-deleted-from-disk git autoremove files no longer present
 
-git reset --hard commitHash # revert local merge (you should use the commit that you want to restart, eg. 44a587491e32eafa1638aca7738)
+git reset --hard commitHash # cancel / revert local, puts back HEAD to previous commit (you should use the commit that you want to restart, eg. 44a587491e32eafa1638aca7738)
+git revert REF # cancels out specified REF in a new commit with its inverted diff 
 
 
 
