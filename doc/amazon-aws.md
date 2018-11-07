@@ -28,3 +28,6 @@ venv.switch grey-ansible
 aws ec2  describe-instances --region us-east-2
 aws ec2  describe-instances --region us-east-2 --output text --query "Reservations[].Instances[].[PrivateIpAddress, Tags[?Key=='Name'].Value]"
 aws ec2  describe-instances --region us-east-2 --output text --query "Reservations[].Instances[].[PrivateIpAddress, Tags[?Key=='Name'].Value]" | sed 'N;s/\n/ /'
+
+# dynamodb
+https://us-east-2.console.aws.amazon.com/dynamodb/home?region=us-east-2#tables:selected=terraform-state-lock-dynamo;tab=items

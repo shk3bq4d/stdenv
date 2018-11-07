@@ -4,6 +4,9 @@ journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
 journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMPANY-GLOBAL' | less
 
+systemd_mr_unitfiles
+
+https://www.freedesktop.org/software/systemd/man/systemd.service.html # unit spec
 https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux
  vi /etc/systemd/system/SERVICENAME.service
   [Unit]

@@ -1,6 +1,8 @@
-* https://docs.ansible.com/ansible/2.6/modules/user_module.html
-* https://docs.ansible.com/ansible/2.5/modules/include_vars_module.html
-* https://docs.ansible.com/ansible/2.5/modules/get_url_module.html
+* https://docs.ansible.com/ansible/latest/modules/template_module.html
+* https://docs.ansible.com/ansible/latest/modules/include_vars_module.html
+* https://docs.ansible.com/ansible/latest/modules/get_url_module.html
+* https://docs.ansible.com/ansible/latest/modules/user_module.html
+*    https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
 ```yaml

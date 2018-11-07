@@ -1,4 +1,5 @@
 grep -l # only print matching files
+grep --line-buffered
 
 grep -text
 

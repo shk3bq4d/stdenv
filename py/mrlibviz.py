@@ -29,7 +29,7 @@ def dg(**kwargs):
 		default_graph = g
 	return g
 
-def w(fn=None, g=None, format='raw'):
+def w(fn=None, g=None, format='raw', engine='dot'):
 	if format == 'svg':
 		if fn is None:
 			frame,filename,line_number,function_name,lines,index=inspect.getouterframes(inspect.currentframe())[1]
@@ -39,13 +39,10 @@ def w(fn=None, g=None, format='raw'):
 		print(tfp)
 		
 		w(fn=tfp, g=g, format='raw')
-		binpath = 'c:/Program Files (x86)/Graphviz2.37/bin/dot.exe'
-		binpath = 'D:/graphviz-2.38/bin/dot.exe'
-		binpath = '/usr/bin/dot'
-		#binpath = 'D:/graphviz-2.38/bin/twopi.exe'
-		from sh import dot
+                cmd = sh.Command(engine)
 		try:
-			dot('-Tsvg', '-o' + fn, '-v', tfp)
+                    
+			cmd('-Tsvg', '-o' + fn, '-v', tfp)
 		#except BaseException as e:
 		except Exception as e:
 		#except pbs.ErrorReturnCode_1 as e:

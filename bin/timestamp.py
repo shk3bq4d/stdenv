@@ -31,8 +31,6 @@ def logging_conf(
 
 def go(args):
     # https://docs.python.org/2/library/argparse.html
-    logger.info(__file__)
-    logger.debug(__file__)
     parser = argparse.ArgumentParser(description="Try to human format a date")
     parser.add_argument("ts", type=str, nargs='+', help="timestampe")
     script_directory, script_name = os.path.split(__file__)
@@ -41,12 +39,14 @@ def go(args):
     do(' '.join(ar.ts))
 
 def do(bip):
-    print(bip)
     if re.match('^u\d+', bip): # $ timestamp.py u'1493354506'
         bip = bip[1:]
     try:
-        print(dt.fromtimestamp(int(bip)))
+        print('{} => {}'.format(bip, dt.fromtimestamp(int(bip))))
     except BaseException as e:
+        if ' ' in bip:
+            for i in bip.split():
+                do(i)
         pass
 
 if __name__ == '__main__':

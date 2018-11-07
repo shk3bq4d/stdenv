@@ -232,15 +232,15 @@ Nesting arguments and more complex examples:
    11     B    13  1011
 
 
-import types
-if type(a) is types.DictType:
+import types # isinstance ~instanceof~
+if type(a) is types.DictType: # isinstance ~instanceof~
     do_something()
-if type(b) in types.StringTypes:
+if type(b) in types.StringTypes: # isinstance ~instanceof~
     do_something_else()
 
-if isinstance(a, dict):
+if isinstance(a, dict): # types ~instanceof~
     do_something()
-if isinstance(b, str) or isinstance(b, unicode):
+if isinstance(b, str) or isinstance(b, unicode): # types ~instanceof~
     do_something_else()
 
 for k, v in dict_.iteritems():
