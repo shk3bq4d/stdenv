@@ -239,7 +239,7 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
 	#echo "args is $@"
 	# args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
 	# args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
-	args="$(echo -n "$@" | sed -r -e 's/-(font|bg|fg) \S+//g')"
+	# args="$(echo -n "$@" | sed -r -e 's/-(font|bg|fg) \S+//g')"
 	#exec > >(tee /tmp/logfile.txt)
 	#exec 2>&1
 	# https://stackoverflow.com/questions/402377/using-getopts-in-bash-shell-script-to-get-long-and-short-command-line-options
