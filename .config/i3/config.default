@@ -29,5 +29,5 @@ export smart_borders=''
 export hide_edge_borders=none # 'none', 'vertical', 'horizontal', 'both', 'smart_no_gaps', 'smart', '1', 'yes', 'true', 'on', 'enable', 'active'
 export gaps_forwindow_border='
 for_window [class="^.*"] border pixel 0
-for_window [instance="mrurxvtopaque"] border normal
+for_window [instance="mrclusterssh"] border normal
 '

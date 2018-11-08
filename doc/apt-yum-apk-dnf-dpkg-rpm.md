@@ -85,3 +85,6 @@ inetutils-ping: /bin/ping
 
 # FreeBSD PKG
 pkg info -D zoneminder
+
+apt install --reinstall docker-ce
+apt-cache madison docker-ce # list available version
