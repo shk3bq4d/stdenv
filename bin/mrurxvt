@@ -276,7 +276,7 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
 	echo "grep while intermediate_args is $intermediate_args"
 
 	#MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
-	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$intermediate_args" "$@"
+	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrurxvtopaque "$intermediate_args" "$@"
 else
 	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
 fi

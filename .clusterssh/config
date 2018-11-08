@@ -41,7 +41,7 @@
 #sftp=sftp
 #sftp_args=
 #show_history=0
-#ssh=ssh
+ssh=sshrc
 #ssh_args=
 #telnet=telnet
 #telnet_args=
@@ -59,7 +59,7 @@ terminal=mrurxvt
 #terminal_reserve_left=5
 #terminal_reserve_right=0
 #terminal_reserve_top=5
-#terminal_size=80x24
+terminal_size=180x60
 #terminal_title_opt=-T
 title=CLUSTERSSH
 #unmap_on_redraw=no

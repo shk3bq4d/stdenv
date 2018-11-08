@@ -176,6 +176,18 @@ print(prev_line)
     nohup ~/.local/bin/grip --quiet --title "$SCRIPT" -b $SCRIPT &>/dev/null &
     exit 0
     ;;
+*.viz|*.dot|*.neato|*.fdp)
+case $SCRIPT in \
+    *.fdp) engine=fdp ;;
+        *.neato) engine=neato ;;
+        *)
+            engine=dot
+            ;;
+    esac
+    svg=/tmp/$(basename $SCRIPT).svg
+    $engine -Tsvg -o$svg -v $SCRIPT
+    nohup firefox $svg
+    ;;
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
     exit 0

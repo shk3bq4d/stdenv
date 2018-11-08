@@ -29,13 +29,16 @@ def dg(**kwargs):
 		default_graph = g
 	return g
 
-def w(fn=None, g=None, format='raw', engine='dot'):
+def w(fn=None, g=None, format='raw', engine='dot', temp_fp=None):
 	if format == 'svg':
 		if fn is None:
 			frame,filename,line_number,function_name,lines,index=inspect.getouterframes(inspect.currentframe())[1]
 			fn = filename + '.svg'
-		fd, tfp =  tempfile.mkstemp()
-		print(fd)
+                fd = -1
+                if temp_fp:
+                    tfp =  temp_fp
+                else:
+                    fd, tfp =  tempfile.mkstemp()
 		print(tfp)
 		
 		w(fn=tfp, g=g, format='raw')
@@ -50,7 +53,8 @@ def w(fn=None, g=None, format='raw', engine='dot'):
 			print(e.stderr)
 			print('=============================================')
 			raise e
-		os.close(fd)
+                if fd >= 0:
+                    os.close(fd)
 		return fn
 
 	g = g or default_graph
@@ -101,6 +105,10 @@ def group(*args, **kwargs):
 	move(r, *args)
 	return r
 group.counter = 0
+
+def get_names(*args):
+    pprint(args)
+    return map(lambda x: x.get_name(), args)
 
 def align(edge_boolean, *args, **kwargs):
 	r = []
@@ -172,7 +180,7 @@ def e(*args, **kwargs):
 			if len(arg) > 1:
 				return e(*arg, **kwargs)
 			else:
-				raise BaseException('unexpected edge defintion {0}'.format(args[0]))
+				raise BaseException('unexpected edge definition {0}'.format(args[0]))
 		else:
 			return e(*arg, **kwargs)
 	else:
@@ -185,7 +193,7 @@ def e(*args, **kwargs):
 					ar = map(pydot.Node.get_name, ar)
 				ar = ','.join(ar)
 
-			if isnode(ar):
+			if isnode(ar) or isinstance(ar, pydot.Cluster):
 				ar = ar.get_name()
 			if pa:
 				for s1 in pa.split(','):
@@ -472,6 +480,8 @@ def get_all_graph(n):
 		n = get_node(name)
 		if n is None:
 			raise BaseException('couldnt find node with name {name}'.format(**locals()))
+        elif isinstance(n, pydot.Cluster):
+            pass
 	elif not isnode(n):
 		raise BaseException(n)
 	return get_all_graph_graph(n.get_parent_graph())
@@ -502,6 +512,8 @@ def move(new_sg, *nodes):
 			return
 		if isnode(node):
 			name = node.get_name()
+                elif isinstance(node, pydot.Cluster):
+                    pass
 		else:
 			print('node is {node}'.format(**locals()))
 			if ',' in node:
@@ -517,8 +529,17 @@ def move(new_sg, *nodes):
 			old_sg = get_parent(node)
 			if old_sg is None:
 				raise BaseException
-			old_sg.del_node(node)
-		new_sg.add_node(node)
+                        if isinstance(node, pydot.Cluster):
+                            #help(old_sg)
+                            #old_sg.set_parent_graph(new_sg)
+                            pass
+                        else:
+                            old_sg.del_node(node)
+                if isinstance(node, pydot.Cluster):
+                    new_sg.add_subgraph(node)
+                    pass
+                else:
+                    new_sg.add_node(node)
 
 def remove_edge_cardinal_point(e):
 	i = e.obj_dict['points']
