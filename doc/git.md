@@ -413,8 +413,9 @@ git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
 
 
 # interactive
-git add --interactive
-git reset -p # unstage
+git add --interactive # stages
+git add -p # stages interactively
+git reset -p # unstages interactively
 
 # diff conveniency
 git diff --ignore-space-at-eol
@@ -440,4 +441,3 @@ git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"
 
 git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra 
-

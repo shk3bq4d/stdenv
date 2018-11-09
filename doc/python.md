@@ -844,6 +844,8 @@ import operator
 L.sort(key=operator.itemgetter('title','title_url','id'))
 
 python -m unittest discover # recursively executes all test
+python -m unittest search   # run test of module search.py
+python -m unittest search.SearchTestCase.test_google_g # run test of module search.py class SearchTestCast funtion test_google_g
 # http://blog.aaronboman.com/programming/testing/2016/02/11/how-to-write-tests-in-python-project-structure/
 # http://blog.aaronboman.com/programming/testing/2016/03/07/how-to-write-tests-in-python-recipes-and-patterns/
 # http://fgimian.github.io/blog/2014/04/10/using-the-python-mock-library-to-fake-regular-functions-during-tests/
@@ -893,6 +895,7 @@ with open('/tmp/_mr2.pickle', 'wb') as f:
         pickle.dump(_cache, f)
 
 import json; json.dumps(dict)
+import json; json.dumps(dict, indent=2) # pretty-print prettyprint
 
 import urllib; urllib.quote('/test', safe='') # escape uricomponent encode
 
@@ -1058,3 +1061,13 @@ python -m SimpleHTTPServer 8000
 pydoc mypackage
 pydoc requests
 pydoc requests.sessions
+
+# reraise https://franklingu.github.io/programming/2016/06/30/properly-reraise-exception-in-python/
+```python
+try:
+	b = 5
+	b = 1 / 0
+except BaseException as e:
+	logger.error('mmmh %s', b)
+	raise type(e), type(e)(e), sys.exc_info()[2]
+```
