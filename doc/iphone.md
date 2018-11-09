@@ -6,4 +6,6 @@ sudo usbmuxd -f -v
 ifuse /media/iphone/
 sudo umount /media/iphone
 rsync -vtr --progress --human-readable --stats /media/iphone/DCIM/. thinkpade:/pictures/iphone/DCIM/.
+rsync -vtr --progress --human-readable --stats /media/iphone/DCIM/. thinkpadw:/pictures/iphone/DCIM/.
+                                                                            |
 
