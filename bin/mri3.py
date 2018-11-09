@@ -18,23 +18,46 @@ logger = logging.getLogger(__name__)
 
 def go(args):
     i3 = i3ipc.Connection()
-    help(i3)
-    help(i3.get_tree())
-    pprint(i3.get_tree())
+    if 0:
+        help(i3)
+        help(i3.get_tree())
+        pprint(i3.get_tree())
+    if 1:
+        remove_single_child_containers(i3.get_tree().find_focused().workspace())
+
 
 def debug(e, recursive=True, indent=''):
     if e.type == 'workspace':
-        print('{indent}{type}: "{name}"'.format(indent=indent, **vars(e)))
+        print(u'{indent}{type}: "{name}"'.format(indent=indent, **vars(e)))
         if recursive:
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ')
     elif len(e.nodes) == 0:
-        print('{indent}{type}-{window_class} "{name}"'.format(indent=indent, **vars(e)))
+        print(u'{indent}{type}-{window_class} "{name}"'.format(indent=indent, **vars(e)))
     else:
-        print('{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
+        print(u'{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
         if recursive:
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ')
+
+def remove_single_child_containers(c, recurse=True, _focus=True):
+    root = i3ipc.Connection().get_tree()
+    if c is None:
+        c = root
+    if _focus: current = root.find_focused()
+    #pprint(c)
+    #debug(c, recursive=False)
+    if c.type == 'root':
+        for w in c.workspaces():
+            remove_single_child_containers(w, recurse=recurse, _focus=False)
+    elif c.type == 'workspace' or len(c.nodes) != 1:
+        for n in c.nodes:
+            remove_single_child_containers(n, recurse=recurse, _focus=False)
+    else:
+        c.nodes[0].command('move {}'.format(
+            'up' if c.parent.orientation == 'vertical' else 'left'
+            ))
+    #if _focus: current.focus()
 
 def mrinspect(foA, foO):
     foA.append(foO)
