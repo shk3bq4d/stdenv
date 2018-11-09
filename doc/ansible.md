@@ -132,3 +132,5 @@ Options:
     --ask-su-pass       ask for su password (deprecated, use become)
     -K, --ask-become-pass
                         ask for privilege escalation password
+
+{% for host in hosts|sort(attribute='name') %}

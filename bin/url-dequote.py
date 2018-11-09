@@ -1,36 +1,8 @@
 #!/usr/bin/env python
-# /* ex: set filetype=python ts=4 sw=4 expandtab: */
-
-import os
-import sys
-from pprint import pprint
-
-
-
-def usage():
-    print("""
-Usage:
-{} NEW_SCRIPT_FILENAME
-saves default python script template to file specified as sole argument
-                                                                                                        """.format(os.path.basename(__file__)))
-
-
-if len(sys.argv) != 2:
-    usage()
-    sys.exit(1)
-
-fp = sys.argv[1]
-if not fp.endswith('.py'):
-    fp = fp + '.py'
-if os.path.isfile(fp):
-    print('FATAL, file {} already exists'.format(sys.argv[1]))
-    sys.exit(1)
-
-with open(fp, 'wb') as f:
-    f.write("""#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+import urllib
 import os
 import sys
 import re
@@ -64,14 +36,39 @@ def go(args):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
-    if 'VIMRUNTIME' in os.environ: args = ['HEHE', '-i']
-    parser = argparse.ArgumentParser(description="This is the description of what I do")
-    parser.add_argument("FILENAME", type=str, nargs='+', help="file to process")
-    parser.add_argument("-i", "--in-place", help="saves output in place", action="store_true")
-    script_directory, script_name = os.path.split(__file__)
-    script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
-    # print(script_txt)
+    if 'VIMRUNTIME' in os.environ: args = ['-y', 'https://www.google.com/search?biw=2194&bih=1152&tbs=itp%3Alineart%2Cic%3Agray%2Cisz%3Alt%2Cislt%3Axga&tbm=isch&sa=1&ei=IV7lW9_fDMWYlwS0vaCwDQ&q=unicorn+funky&oq=unicorn+funky&gs_l=img.3..0i8i30k1l3.52551.54719.0.54919.10.8.2.0.0.0.101.650.7j1.8.0....0...1c.1.64.img..0.10.648...0j0i67k1j0i5i30k1j0i24k1.0.vEufixEdfVw']
+    parser = argparse.ArgumentParser(description="Dequote URL to display in a human readable way")
+    parser.add_argument("URL", type=str, nargs='+', help="file to process")
+    parser.add_argument("-d", "--python-dict", help="outputs in python dict", action="store_true")
+    parser.add_argument("-y", "--yaml", help="outputs in yaml", action="store_true")
+    parser.add_argument("-j", "--json", help="outputs in json", action="store_true")
+    parser.add_argument("-J", "--json-not-pretty", help="outputs in json", action="store_true")
     ar = parser.parse_args(args)
+    p = not(ar.python_dict or ar.yaml or ar.json or ar.json_not_pretty)
+    rH = dict()
+    for k, url in enumerate(ar.URL):
+        if k > 0: print('\n\n')
+        print(url)
+        urlA = urllib.splitquery(url)
+        if p: print(urlA[0])
+        for q in urlA[1].split('&'):
+            k, v = q.split('=', 1)
+            v = urllib.unquote_plus(v)
+            rH[k] = v
+            if p: print('{}: {}'.format(k, v))
+
+    if ar.python_dict:
+        pprint(rH)
+    if ar.json:
+        import json
+        print(json.dumps(rH, indent=4))
+    if ar.json_not_pretty:
+        import json
+        print(json.dumps(rH))
+    if ar.yaml:
+        import yaml
+        print(yaml.safe_dump(dict(root=rH), default_flow_style=False))
+        
     # pprint(ar)
 
 if __name__ == '__main__':
@@ -83,14 +80,4 @@ if __name__ == '__main__':
         #logging.exception('oups for %s', sys.argv)
         logging.error('oups for %s', sys.argv)
         raise type(e), type(e)(e), sys.exc_info()[2]
-
-""".replace('___', '"""'))
-    os.chmod(fp, 0740)
-    print(fp)
-
-if False:
-    """ doesn't work, just use alias in .bashrc """
-    import pbs
-    vi = pbs.Command(r'D:\cygwin64\bin\vim.exe')
-    vi(sys.argv[1])
 
