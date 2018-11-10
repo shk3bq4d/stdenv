@@ -37,11 +37,15 @@ def logging_conf(
 
 def go(args):
     i3 = i3ipc.Connection()
-    if 0:
-        help(i3)
-        help(i3.get_tree())
-        pprint(i3.get_tree())
-        debug(i3.get_tree(), _print=True)
+    if 1: set_border_all()
+    if 1:
+        #help(i3)
+        #help(i3.get_tree())
+        #pprint(vars(i3.get_tree().nodes[0]))
+
+        #debug(i3.get_tree(), _print=True)
+        for w in i3.get_tree().workspaces():
+            debug(w, _print=True)
         return
     if 1:
         #remove_single_child_containers(i3.get_tree().find_focused().workspace())
@@ -53,13 +57,18 @@ def debug(e, recursive=True, indent='', _rA=None, _print=False):
         _rA = []
     if e == None:
         _rA.append(u'{indent}Python None'.format(indent=indent))
-    elif e.type == 'workspace':
-        _rA.append(u'{indent}{type}: "{name}"'.format(indent=indent, **vars(e)))
+    elif is_window(e):
+        _rA.append(u'{indent}w:{window_class} "{name}"'.format(indent=indent, **vars(e)))
+    elif e.type in ['workspace', 'root', 'output'] or True:
+        extra = ''
+        if e.type in ['workspace', 'con'] and e.layout is not None: extra = '{} {}'.format(extra, e.layout)
+        if e.type in ['workspace', 'con'] and e.orientation is not None: extra = '{} {}'.format(extra, e.orientation)
+        if e.name is not None and e.name.lower() != 'none': extra = '{} "{}"'.format(extra, e.name)
+        extra = extra.strip()
+        _rA.append(u'{indent}o:{type}: {extra}'.format(extra=extra, indent=indent, **vars(e)))
         if recursive:
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
-    elif len(e.nodes) == 0:
-        _rA.append(u'{indent}{type}-{window_class} "{name}"'.format(indent=indent, **vars(e)))
     else:
         _rA.append(u'{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
         if recursive:
@@ -72,6 +81,24 @@ def debug(e, recursive=True, indent='', _rA=None, _print=False):
 
 def is_window(w):
     return w.window is not None
+
+def traverse_all_elem():
+    rA = [i3ipc.Connection().get_tree()]
+    k = 0
+    while k < len(rA):
+        yield rA[k]
+        rA.extend(rA[k].nodes)
+        k = k + 1
+
+def set_border_all():
+    for e in traverse_all_elem():
+        if e.type == 'con':
+            e.command('border normal')
+
+def remove_border_all():
+    for e in traverse_all_elem():
+        if e.type == 'con':
+            e.command('border none')
 
 def remove_single_child_containers(c, recurse=True, _focus=True):
     root = i3ipc.Connection().get_tree()
