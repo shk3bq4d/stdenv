@@ -24,7 +24,7 @@ os=()
 
 os+=('p7zip-full' 'p7zip-rar')
 os+=('apt-transport-https') # docker ppa
-echo $UBUNTU_RELEASE'<'17 | bc -l && os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
+echo $UBUNTU_RELEASE'<'17 | bc -l || os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
 os+=('ascii')
 os+=('acpi')
 os+=('apt-file')
@@ -61,6 +61,7 @@ os+=('software-properties-common') #docker ppa
 os+=('shutter')
 os+=('sysstat')
 os+=('util-linux') # tailf
+os+=('tree')
 os+=('virtualenv')
 os+=('virtualenvwrapper')
 os+=('vim-gtk')

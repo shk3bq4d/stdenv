@@ -42,7 +42,7 @@ def go(args):
         for i in traverse_all_elem(only_visible=True):
             debug(i, recursive=False, _print=True)
         return
-    if 1:
+    if 0:
         #help(i3)
         #help(i3.get_tree())
         #pprint(vars(i3.get_tree().nodes[0]))
@@ -89,10 +89,12 @@ def is_window(w):
 def is_container(n):
     return n.type == 'con' and not is_window(n)
 
-def traverse_all_elem(only_visible=False):
+def traverse_all_elem(start_from=None, only_visible=False):
     rA = []
     root = get_root()
-    if only_visible:
+    if start_from:
+        rA.append(start_from)
+    elif only_visible:
         rA.extend(root.workspaces())
     else:
         rA.append(root)
@@ -116,15 +118,15 @@ def remove_border_all():
             e.command('border none')
 
 def remove_single_child_containers(c=None):
-    for n in traverse_all_elem(only_visible=True):
+    for n in traverse_all_elem(start_from=c, only_visible=True):
         if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
-            if n.orientation == 'vertical':
+            if n.parent.orientation == 'vertical':
                 direction = 'up'
             else:
                 direction = 'left'
             cmd = 'move {}'.format(direction)
             logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
-            # n.nodes[0].command(cmd)
+            n.nodes[0].command(cmd)
 
 def mrinspect(foA, foO):
     foA.append(foO)
