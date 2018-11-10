@@ -24,7 +24,7 @@ os=()
 
 os+=('p7zip-full' 'p7zip-rar')
 os+=('apt-transport-https') # docker ppa
-test $UBUNTU_RELEASE -lt 17 && os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
+echo $UBUNTU_RELEASE'<'17 | bc -l && os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
 os+=('ascii')
 os+=('acpi')
 os+=('apt-file')

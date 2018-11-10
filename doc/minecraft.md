@@ -1,5 +1,6 @@
 http://www.amloessb.com/images/keyboard-layout_minecraft-michellecv47.png
 https://www.digminecraft.com/getting_started/how_to_open_crafting_table.php
+https://fr.wikihow.com/apprivoiser-un-ocelot-dans-Minecraft # chat transformer osselot
 
 Left click	Attack/Destroy
 Middle click	Pick Block

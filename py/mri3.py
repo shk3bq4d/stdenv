@@ -45,7 +45,8 @@ def go(args):
         return
     if 1:
         #remove_single_child_containers(i3.get_tree().find_focused().workspace())
-        remove_single_child_containers(i3.get_tree().find_focused())
+        #remove_single_child_containers(i3.get_tree().find_focused())
+        remove_single_child_containers(None)
 
 def debug(e, recursive=True, indent='', _rA=None, _print=False):
     if _rA is None:
@@ -87,17 +88,20 @@ def remove_single_child_containers(c, recurse=True, _focus=True):
     elif is_window(c):
         # going up in the tree is rather week
         remove_single_child_containers(c.parent)
-    elif c.type == 'workspace' or len(c.nodes) != 1:
-        for n in c.nodes:
-            if is_window(n):
-                # since this functions goes up in the tree if called on one window
-                # we need to avoid going down is such cases to avoid infinite loop
-                continue
-            remove_single_child_containers(n, recurse=recurse, _focus=False)
-    elif len(c.nodes) == 1 and c.parent is not None:
-        c.nodes[0].command('move {}'.format(
+    #elif c.type == 'workspace' or len(c.nodes) != 1:
+    elif len(c.nodes) == 1 and c.parent is not None and c.type not in ['workspace', 'output'] and c.nodes[0].type not in ['workspace', 'output']:
+        cmd = 'move {}'.format(
             'up' if c.parent.orientation == 'vertical' else 'left'
-            ))
+            )
+        logger.info('sending cmd %s to %s', cmd, debug(c.nodes[0], recursive=False))
+        c.nodes[0].command(cmd)
+    for n in c.nodes:
+        if is_window(n):
+            # since this functions goes up in the tree if called on one window
+            # we need to avoid going down is such cases to avoid infinite loop
+            logger.info("Skipping %s", debug(n, recursive=False))
+            continue
+        remove_single_child_containers(n, recurse=recurse, _focus=False)
     #if _focus: current.focus()
 
 def mrinspect(foA, foO):
@@ -122,8 +126,8 @@ def mrFocusedStack():
     return rA
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
+    #reload(sys)
+    #sys.setdefaultencoding('utf-8')
     logging_conf()
     try:
         go(sys.argv[1:])

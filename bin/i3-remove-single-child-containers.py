@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -43,6 +43,5 @@ if __name__ == '__main__':
         go(sys.argv[1:])
     except BaseException as e:
         #logging.exception('oups for %s', sys.argv)
-        logging.error('oups for %s', sys.argv)
-        raise type(e), type(e)(e), sys.exc_info()[2]
+        logging.exception('oups for %s', sys.argv)
 

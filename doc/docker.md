@@ -397,3 +397,17 @@ docker image tag f13f5feecfa5 registry.gitlab.com/gr/infra/fluent/fluentd-kubern
 docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt262
 
 DinD docker ind docker
+
+# ubuntu docker 18.06.1 -> 18.09.0
+The following packages were automatically installed and are no longer required:
+libllvm4.0 libllvm5.0 libxcb-xrm0 runc ubuntu-fan
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+containerd.io docker-ce-cli
+The following packages will be REMOVED:
+containerd
+The following NEW packages will be installed:
+containerd.io docker-ce-cli
+The following packages will be upgraded:
+docker-ce
+1 upgraded, 2 newly installed, 1 to remove and 0 not upgraded.
