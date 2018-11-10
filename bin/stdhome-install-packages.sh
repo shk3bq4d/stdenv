@@ -18,13 +18,16 @@ need_powerlinefonts() {
 	return 0
 }
 
+UBUNTU_RELEASE=$(grep -Po '(?<=DISTRIB_RELEASE=).*' /etc/lsb-release)
+
 os=()
 
 os+=('p7zip-full' 'p7zip-rar')
 os+=('apt-transport-https') # docker ppa
-os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
+test $UBUNTU_RELEASE -lt 17 && os+=('ack-grep') # https://askubuntu.com/questions/972083/unable-to-find-ack-in-ubuntu-17-10-repositories
 os+=('ascii')
 os+=('acpi')
+os+=('apt-file')
 os+=('build-essential') # youcompleteme vim plugin build depedencies
 os+=('ca-certificates') # docker ppa
 os+=('chromium-browser')
@@ -35,6 +38,7 @@ os+=('dos2unix')
 os+=('fonts-font-awesome')
 os+=('fonts-powerline')
 os+=('mplayer')
+os+=('moreutils')
 os+=('feh')
 os+=('gawk')
 os+=('git')

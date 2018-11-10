@@ -6,15 +6,20 @@ try:
     import cPickle as pickle
 except:
     import pickle
+import sys
+import os
 import fontawesome
+try:
+    import mri3
+except:
+    sys.path.append(os.path.expanduser('~/py'))
+    import mri3
 import atexit
 import getpass
 import socket
 import signal
 import json
 import cgi
-import os
-import sys
 import errno
 import re
 import argparse
@@ -294,6 +299,7 @@ def i3blocklet_name(name):
 def on_workspace(i3, e):
     logging.warn('on_workspace %s', e.change)
     i3blocklet_name(focused_window_name(i3))
+    mri3.remove_single_child_containers(None)
     return
     print_separator()
     print('Got workspace event:')
