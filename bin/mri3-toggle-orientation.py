@@ -1,44 +1,32 @@
 #!/usr/bin/env python
 
 import sys
-import i3ipc
-import time
-from pprint import pprint
-
-i3 = i3ipc.Connection()
-
-focused = i3.get_tree().find_focused()
-i3.command('[id="{}"] split toggle'.format(focused.window))
-i3.command('[id="{}"] border pixel 10'.format(focused.window))
-time.sleep(5)
-i3.command('[id="{}"] border none'.format(focused.window))
-
-sys.exit(0)
-
-import subprocess
-
-import mri3
+import os
+try:
+    from mri3 import *
+except:
+    sys.path.append(os.path.expanduser('~/py'))
+    from mri3 import *
 import time
 
+def t(w, cmd):
+    w.command(cmd)
+    w.command('border pixel 10')
+    time.sleep(5)
+    w.command('border none')
 
-bA = mri3.mrFocusedStack()
-bA.reverse()
+w = get_root().find_focused()
+p = w.parent
 
-#for i in bA.reverse():
-for i in bA:
-	bString = i['orientation']
-	if bString == 'none':
-		continue
-	break
-cA = ['i3-msg', 'split']
-if bString == 'horizontal':
-	cA.append('v')
+if len(p.nodes) == 1:
+    if p.orientation is None or p.orientation == 'none':
+        t(w, 'split horizontal')
+    elif p.orientation == 'horizontal':
+        t(w, 'split vertical')
+    elif p.orientation == 'vertical':
+        w.command('border none')
+        remove_single_child_containers(p)
+    else:
+        pass
 else:
-	cA.append('h')
-	
-subprocess.check_output(cA)
-cA = ['i3-msg', 'border', 'pixel']
-subprocess.check_output(cA)
-time.sleep(5)
-cA = ['i3-msg', 'border', 'pixel']
-subprocess.check_output(cA)
+    t(w, 'split horizontal')

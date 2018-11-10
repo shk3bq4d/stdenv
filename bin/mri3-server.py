@@ -8,7 +8,6 @@ except:
     import pickle
 import sys
 import os
-import fontawesome
 try:
     import mri3
 except:
@@ -27,6 +26,7 @@ import logging
 import i3ipc
 import subprocess
 from sh import pkill
+import fontawesome
 
 from pprint import pprint, pformat
 
