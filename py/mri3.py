@@ -117,9 +117,20 @@ def remove_border_all():
         if e.type == 'con':
             e.command('border none')
 
+def focused():
+    return get_root().find_focused()
+
 def remove_single_child_containers(c=None):
+    current = focused()
     for n in traverse_all_elem(start_from=c, only_visible=True):
         if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
+            debug(n.nodes[0], recursive=False, _print=True)
+            n.parent.command('mark habon')
+            #cmd = 'move scratchpad'
+            #n.nodes[0].command(cmd)
+            n.nodes[0].command('move to mark habon')
+
+            continue
             if n.parent.orientation == 'vertical':
                 direction = 'up'
             else:
@@ -127,6 +138,8 @@ def remove_single_child_containers(c=None):
             cmd = 'move {}'.format(direction)
             logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
             n.nodes[0].command(cmd)
+    current.command('focus')
+    #c.command('focus')
 
 def mrinspect(foA, foO):
     foA.append(foO)
