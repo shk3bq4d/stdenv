@@ -34,6 +34,7 @@ set $ws10 "10   6   "
 set $ws11 "11   8   "
 set $ws12 "12   !   "
 
+show_marks yes
 #fake-outputs 1000x768+0+0,366x768+1000+0
 #set $ol fake-0
 #set $oc fake-1

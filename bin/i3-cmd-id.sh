@@ -30,5 +30,5 @@ set -euo pipefail
 ID=$1
 shift
 set -x
-i3 "[id=$ID]" "$@"
+i3 "[con_id=$ID]" "$*"
 

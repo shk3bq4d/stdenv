@@ -39,7 +39,7 @@ if debug: mri3.debug(ws)
 
 
 if len(p.nodes) == 1:
-    if p == ws:
+    if 0 and p == ws:
         if p.orientation is None or p.orientation == 'none':
             if debug: print(6)
             t(w, 'split horizontal')
@@ -56,9 +56,12 @@ if len(p.nodes) == 1:
         if debug: print(2)
         t(w, 'split vertical')
     elif p.orientation == 'vertical':
-        if debug: print(3)
-        w.command('border none')
-        mri3.remove_single_child_containers(p)
+        if mri3.remove_single_child_containers(p):
+            if debug: print(9)
+            w.command('border none')
+        else:
+            if debug: print(10)
+            t(w, 'split horizontal')
     else:
         if debug: print(4)
         pass

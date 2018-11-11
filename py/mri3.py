@@ -7,7 +7,9 @@
 import os
 import sys
 import re
+import copy
 import argparse
+import json
 import logging
 import logging.config
 import i3ipc
@@ -50,12 +52,16 @@ def go(args):
         #debug(i3.get_tree(), _print=True)
         for w in get_root().workspaces():
             debug(w, _print=True)
-    if 1:
+    if 0:
         #remove_single_child_containers(i3.get_tree().find_focused().workspace())
         #remove_single_child_containers(i3.get_tree().find_focused())
         remove_single_child_containers(None)
 
+    if 1:
+        grid_layout()
+
 def debug(e, recursive=True, indent='', _rA=None, _print=True):
+    pprint(vars(e.props))
     if _rA is None:
         _rA = []
     if e is not None:
@@ -89,6 +95,9 @@ def debug(e, recursive=True, indent='', _rA=None, _print=True):
 
 def is_window(w):
     return w.window is not None
+
+def is_append_layout_window(w):
+    return is_window(w) and w.window_role is None and w.window_class is None
 
 def is_container(n):
     return n.type == 'con' and not is_window(n)
@@ -129,23 +138,66 @@ def focused():
 
 def remove_single_child_containers(c=None):
     current = focused()
+    k = -1
     for n in traverse_all_elem(start_from=c, only_visible=True):
-        if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
-            debug(n.nodes[0], recursive=False, _print=True)
-            logger.info("is_workspace %s", is_workspace(n.parent))
-            if 1 and is_workspace(n.parent):
-                if n.parent.orientation == 'vertical':
-                    direction = 'up'
+        for i in copy.copy(n.marks):
+            if i.startswith('to-') or i.startswith('del-') or i.startswith('from-'):
+                n.command('unmark ' + i)
+    done = True
+    cont = True
+    while done and cont:
+        done = False
+        cont = False
+        for n in traverse_all_elem(start_from=c, only_visible=True):
+            if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
+                k = k + 1
+                debug(n.nodes[0], recursive=False, _print=True)
+                if is_workspace(n.parent):
+                    i = n.parent.nodes.index(n)
+                    if 0 and i == 0:
+                        logger.info('from workspace i:first')
+                        if n.parent.orientation == 'vertical':
+                            direction = 'up'
+                        else:
+                            direction = 'left'
+                    elif 0 and i == len(n.parent.nodes) - 1:
+                        logger.info('from workspace i:last')
+                        if n.parent.orientation == 'vertical':
+                            direction = 'down'
+                        else:
+                            direction = 'right'
+                    else:
+                        if i > 0 and is_window(n.parent.nodes[i - 1]):
+                            logger.info('from workspace prev window')
+                            if n.parent.orientation == 'vertical':
+                                direction = 'up'
+                            else:
+                                direction = 'left'
+                        elif i < len(n.parent.nodes) - 1 and is_window(n.parent.nodes[i + 1]):
+                            logger.info('from workspace next window')
+                            if n.parent.orientation == 'vertical':
+                                direction = 'down'
+                            else:
+                                direction = 'right'
+                        else:
+                            logger.info('from workspace no resolution')
+                            cont = True
+                            continue
+                    cmd = 'move {}'.format(direction)
+                    logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
+                    n.nodes[0].command(cmd)
+                    done = True
                 else:
-                    direction = 'left'
-                cmd = 'move {}'.format(direction)
-                logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
-                n.nodes[0].command(cmd)
-            else:
-                n.parent.command('mark habon')
-                #cmd = 'move scratchpad'
-                #n.nodes[0].command(cmd)
-                n.nodes[0].command('move to mark habon')
+                    logger.info('not workspace')
+                    n.parent.command('mark --add to-{}'.format(k))
+                    n.command('mark --add del-{}'.format(k))
+                    n.nodes[0].command('mark --add from-{}'.format(k))
+                    #cmd = 'move scratchpad'
+                    #n.nodes[0].command(cmd)
+                    n.nodes[0].command('move to mark to-{}'.format(k))
+                    done = True
+    logger.info('returns %s', not cont)
+    return not cont
 
     #current.command('focus')
     #c.command('focus')
@@ -159,6 +211,94 @@ def mrinspect(foA, foO):
             return True
     foA.pop()
     return False
+
+def grid_layout():
+    def _name(c, r):
+        i = ord('A')
+        return '{}{}'.format(
+            chr(i + c),
+            r
+            )
+    key = '_grid_layout-unique-'
+    current_windows = []
+    for w in traverse_all_elem(focused().workspace()):
+        for m in w.marks:
+            if m.startswith(key):
+                w.command('unmark ' + m)
+        if is_append_layout_window(w):
+            w.command('kill window')
+            continue
+        if is_window(w):
+            current_windows.append(w)
+    orientation = 'h'
+    s = len(current_windows)
+    if s <= 3: return
+    elif s <= 4: cols, rows = 2, 2
+    elif s <= 6: cols, rows = 2, 3
+    elif s <= 8: cols, rows = 2, 4
+    elif s <= 9: cols, rows = 3, 3
+    elif s <= 12: cols, rows = 3, 4
+    elif s <= 15: cols, rows = 3, 5
+    elif s <= 16: cols, rows = 4, 4
+    elif s <= 20: cols, rows = 4, 5
+    elif s <= 24: cols, rows = 4, 6
+    elif s <= 25: cols, rows = 5, 5
+    elif s <= 30: cols, rows = 5, 6
+    elif s <= 35: cols, rows = 5, 7
+    elif s <= 36: cols, rows = 6, 6
+    elif s <= 49: cols, rows = 7, 7
+    else:         cols, rows = 8, 8
+    tH = dict(
+        type='con',
+        layout='split' + orientation,
+        #border='none',
+        #floating='auto_off',
+        #percent=None,
+        nodes=[],
+        )
+    o = 'v' if orientation == 'h' else 'h'
+    for c in range(cols):
+        cH = dict(
+            #border='none',
+            #floating='auto_off',
+            type='con',
+            #percent=0.5,
+            layout='split' + o,
+            nodes=[]
+            )
+        tH['nodes'].append(cH)
+        for r in range(rows):
+            rH = dict(
+                #border='none',
+                #current_border_width=0,
+                #floating='auto_off',
+                type='con',
+                #percent=0.5,
+                swallows=[
+                    {'class':"will-never-be-satisfied- " + _name(c, r)}
+                    ],
+                #geometry=dict( height=628, width=884, x=0, y=0),
+                name = _name(c, r),
+                marks = [key + _name(c, r)]
+                )
+            cH['nodes'].append(rH)
+
+    fp = '/tmp/grid'
+    with open(fp, 'w') as f:
+        json.dump(tH, f)
+    focused().workspace().command('append_layout ' + fp)
+    k = 0
+    for c in range(cols):
+        for r in range(rows):
+            key_instance = '{}{}'.format(key, _name(c, r))
+            if k < len(current_windows):
+                current_windows[k].command('swap with mark {}'.format(key_instance))
+                k = k + 1
+    for w in traverse_all_elem(focused().workspace()):
+        if is_append_layout_window(w):
+            w.command('kill window')
+
+    return tH
 
 def mrFocusedStack():
     """ returns a list of container in which the latest is the focused window """

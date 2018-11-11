@@ -1071,3 +1071,5 @@ except BaseException as e:
 	logger.error('mmmh %s', b)
 	raise type(e), type(e)(e), sys.exc_info()[2]
 ```
+chr(65)  # => 'A' ord character
+ord('A') # => 65  chr character 
