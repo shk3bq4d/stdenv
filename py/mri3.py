@@ -5,6 +5,7 @@
 # https://github.com/acrisci/i3ipc-python
 
 import os
+import math
 import sys
 import re
 import copy
@@ -212,7 +213,9 @@ def mrinspect(foA, foO):
     foA.pop()
     return False
 
-def grid_layout():
+def grid_layout(cols=None, rows=None):
+    if cols == 0: cols = 1
+    if rows == 0: rows = 1
     def _name(c, r):
         i = ord('A')
         return '{}{}'.format(
@@ -232,22 +235,33 @@ def grid_layout():
             current_windows.append(w)
     orientation = 'h'
     s = len(current_windows)
-    if s <= 3: return
-    elif s <= 4: cols, rows = 2, 2
-    elif s <= 6: cols, rows = 2, 3
-    elif s <= 8: cols, rows = 2, 4
-    elif s <= 9: cols, rows = 3, 3
-    elif s <= 12: cols, rows = 3, 4
-    elif s <= 15: cols, rows = 3, 5
-    elif s <= 16: cols, rows = 4, 4
-    elif s <= 20: cols, rows = 4, 5
-    elif s <= 24: cols, rows = 4, 6
-    elif s <= 25: cols, rows = 5, 5
-    elif s <= 30: cols, rows = 5, 6
-    elif s <= 35: cols, rows = 5, 7
-    elif s <= 36: cols, rows = 6, 6
-    elif s <= 49: cols, rows = 7, 7
-    else:         cols, rows = 8, 8
+    if cols is None and rows is None:
+        if s <= 3: return
+        elif s <= 4: cols, rows = 2, 2
+        elif s <= 6: cols, rows = 2, 3
+        elif s <= 8: cols, rows = 2, 4
+        elif s <= 9: cols, rows = 3, 3
+        elif s <= 12: cols, rows = 3, 4
+        elif s <= 15: cols, rows = 3, 5
+        elif s <= 16: cols, rows = 4, 4
+        elif s <= 20: cols, rows = 4, 5
+        elif s <= 24: cols, rows = 4, 6
+        elif s <= 25: cols, rows = 5, 5
+        elif s <= 30: cols, rows = 5, 6
+        elif s <= 35: cols, rows = 5, 7
+        elif s <= 36: cols, rows = 6, 6
+        elif s <= 49: cols, rows = 7, 7
+        else:         cols, rows = 8, 8
+    elif cols is None:
+        cols = math.ceil(s / rows)
+    elif rows is None:
+        rows = math.ceil(s / cols)
+    else:
+        while rows * cols < s:
+            if rows < cols:
+                cols = cols + 1
+            else:
+                rows = rows + 1
     tH = dict(
         type='con',
         layout='split' + orientation,

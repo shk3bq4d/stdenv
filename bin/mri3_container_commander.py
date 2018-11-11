@@ -59,18 +59,20 @@ parser.add_argument('--menu',
 if len(menu_args) and menu_args[0] == '--':
     menu_args = menu_args[1:]
 
-small = socket.gethostname() in ['acer2011']
+fontH = dict(
+    acer2011=11,
+    dec17=14
+    )
+small = socket.gethostname() in fontH.keys()
 monitor1 = socket.gethostname() in ['ru'+'mo-pc']
 
 # set default menu args for supported menus
 if basename(args.menu) == 'dmenu':
     menu_args += ['-i', '-f', '-b', '-fn']
-    if small:
-        menu_args += ['DejaVuSansMono-11']
-    else:
-        menu_args += ['DejaVuSansMono-28']
+    menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
     if monitor1:
         menu_args += ['-m', '1']
+    menu_args += [ '-nb', '#222222' ]
 
 
 elif basename(args.menu) == 'rofi':

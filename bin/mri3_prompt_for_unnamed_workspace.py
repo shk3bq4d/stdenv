@@ -74,19 +74,20 @@ def mrdmenu(prompt, items):
     else:
         from sh import dmenu
     import socket
-    small = socket.gethostname() in ['acer2011']
+    fontH = dict(
+        acer2011=11,
+        dec17=14
+        )
     monitor1 = socket.gethostname() in ['ru'+'mo-pc']
 
     # set default menu args for supported menus
     menu_args = []
     #menu_args += ['-i', '-p', prompt, '-f', '-b', '-fn']
     menu_args += ['-i', '-f', '-b', '-fn']
-    if small:
-        menu_args += ['DejaVuSansMono-11']
-    else:
-        menu_args += ['DejaVuSansMono-28']
+    menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
     if monitor1:
         menu_args += ['-m', '1']
+    menu_args += ['-nb', '#222222']
     #menu_input = bytes(str.join('\n', items), 'UTF-8')
     menu_input = '\n'.join(items)
     l = str(max(1, min(50, len(items))))

@@ -145,8 +145,8 @@ bindsym  $mod+Shift+Down move down
 bindsym  $mod+Shift+Up move up
 bindsym  $mod+Shift+Right move right
 
-# code: 24, qwerty: q dvorak: ;
-bindcode __release $mod+24  exec mri3_resize_window.py
+# code: 24, qwerty: +q dvorak: +;
+bindcode --release $mod+24        exec mri3_resize_window.py
 bindcode --release $mod+Shift+24  exec mri3_resize_window.py -
 # code:55 => sym: 0x76, symbol:v
 bindcode --release $mod+60  exec mri3_toggle_orientation.py # <= 4.11-1
@@ -395,7 +395,7 @@ focus_follows_mouse yes
 bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
 
 # code:32 => sym: 0x6f, symbol:o
-bindcode $mod+39  exec ~/bin/mri3mod_plus_o.sh # chromium chrome +o
+bindcode $mod+39  exec ~/bin/mri3_mod_plus_o.sh # chromium chrome +o
 #assign [class="Krdc"] $ws2
 #assign [class="Firefox"] $ws7
 #assign [class="Eclipse"] $ws8
