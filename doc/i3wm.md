@@ -42,3 +42,10 @@ markup=pango
 xprop
 xev # catches mouse and keyboard event
 xwininfo
+
+# links
+* https://github.com/talwrii/i3-clever-layout
+* https://github.com/cornerman/i3-easyfocus
+* https://www.reddit.com/r/i3wm/comments/4twwi8/saving_and_restoring_layouts/
+i3-save-tree --workspace  0 > ~/tmp/2x2.json
+i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"

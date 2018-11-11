@@ -67,6 +67,7 @@ os+=('virtualenvwrapper')
 os+=('vim-gtk')
 os+=('xclip')
 os+=('x11-utils') # xprop used in some i3.py mr scripts
+os+=('xdotool')
 os+=('zsh')
 os+=('apt-transport-https') # docker-ce
 os+=('ca-certificates') # docker-ce
