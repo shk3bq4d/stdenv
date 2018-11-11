@@ -72,7 +72,7 @@ if basename(args.menu) == 'dmenu':
     menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
     if monitor1:
         menu_args += ['-m', '1']
-    menu_args += [ '-nb', '#222222' ]
+    menu_args += [ '-nb', '#222222', '-nf', '#999999' ]
 
 
 elif basename(args.menu) == 'rofi':

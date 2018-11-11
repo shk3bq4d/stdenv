@@ -87,7 +87,7 @@ def mrdmenu(prompt, items):
     menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
     if monitor1:
         menu_args += ['-m', '1']
-    menu_args += ['-nb', '#222222']
+    menu_args += ['-nb', '#222222', '-nf', '#999999']
     #menu_input = bytes(str.join('\n', items), 'UTF-8')
     menu_input = '\n'.join(items)
     l = str(max(1, min(50, len(items))))
