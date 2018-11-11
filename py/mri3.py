@@ -55,21 +55,25 @@ def go(args):
         #remove_single_child_containers(i3.get_tree().find_focused())
         remove_single_child_containers(None)
 
-def debug(e, recursive=True, indent='', _rA=None, _print=False):
-    #pprint(vars(e))
+def debug(e, recursive=True, indent='', _rA=None, _print=True):
     if _rA is None:
         _rA = []
+    if e is not None:
+        if len(e.marks) == 0:
+            mmarks = ''
+        else:
+            mmarks = ' m:' + ','.join(e.marks)
     if e == None:
         _rA.append(u'{indent}Python None'.format(indent=indent))
     elif is_window(e):
-        _rA.append(u'{indent}w:{window_class} "{name}" {id}'.format(indent=indent, **vars(e)))
+        _rA.append(u'{indent}w:{window_class} "{name}" {id}{mmarks}'.format(mmarks=mmarks, indent=indent, **vars(e)))
     elif e.type in ['workspace', 'root', 'output'] or True:
         extra = ''
         if e.type in ['workspace', 'con'] and e.layout is not None: extra = '{} {}'.format(extra, e.layout)
         if e.type in ['workspace', 'con'] and e.orientation is not None: extra = '{} {}'.format(extra, e.orientation)
         if e.name is not None and e.name.lower() != 'none': extra = '{} "{}"'.format(extra, e.name)
         extra = extra.strip()
-        _rA.append(u'{indent}o:{type}: {extra} {id}'.format(extra=extra, indent=indent, **vars(e)))
+        _rA.append(u'{indent}o:{type}: {extra} {id}{mmarks}'.format(mmarks=mmarks, extra=extra, indent=indent, **vars(e)))
         if recursive:
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
@@ -88,6 +92,9 @@ def is_window(w):
 
 def is_container(n):
     return n.type == 'con' and not is_window(n)
+
+def is_workspace(n):
+    return n.type == 'workspace'
 
 def traverse_all_elem(start_from=None, only_visible=False):
     rA = []
@@ -125,20 +132,22 @@ def remove_single_child_containers(c=None):
     for n in traverse_all_elem(start_from=c, only_visible=True):
         if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
             debug(n.nodes[0], recursive=False, _print=True)
-            n.parent.command('mark habon')
-            #cmd = 'move scratchpad'
-            #n.nodes[0].command(cmd)
-            n.nodes[0].command('move to mark habon')
-
-            continue
-            if n.parent.orientation == 'vertical':
-                direction = 'up'
+            logger.info("is_workspace %s", is_workspace(n.parent))
+            if 1 and is_workspace(n.parent):
+                if n.parent.orientation == 'vertical':
+                    direction = 'up'
+                else:
+                    direction = 'left'
+                cmd = 'move {}'.format(direction)
+                logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
+                n.nodes[0].command(cmd)
             else:
-                direction = 'left'
-            cmd = 'move {}'.format(direction)
-            logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
-            n.nodes[0].command(cmd)
-    current.command('focus')
+                n.parent.command('mark habon')
+                #cmd = 'move scratchpad'
+                #n.nodes[0].command(cmd)
+                n.nodes[0].command('move to mark habon')
+
+    #current.command('focus')
     #c.command('focus')
 
 def mrinspect(foA, foO):

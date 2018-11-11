@@ -3,10 +3,10 @@
 import sys
 import os
 try:
-    from mri3 import *
+    import mri3
 except:
     sys.path.append(os.path.expanduser('~/py'))
-    from mri3 import *
+    import mri3
 import time
 
 def t(w, cmd):
@@ -19,7 +19,7 @@ def t(w, cmd):
         pass
     w.command(cmd)
     w.command('border pixel 10')
-    
+
     time.sleep(5)
     newpid = pid
     try:
@@ -31,18 +31,37 @@ def t(w, cmd):
     except:
         w.command('border none')
 
-w = get_root().find_focused()
+w = mri3.get_root().find_focused()
+ws = w.workspace()
 p = w.parent
+debug = 1
+if debug: mri3.debug(ws)
+
 
 if len(p.nodes) == 1:
-    if p.orientation is None or p.orientation == 'none':
+    if p == ws:
+        if p.orientation is None or p.orientation == 'none':
+            if debug: print(6)
+            t(w, 'split horizontal')
+        elif p.orientation == 'horizontal':
+            if debug: print(7)
+            t(w, 'split vertical')
+        else:
+            if debug: print(8)
+            t(w, 'split horizontal')
+    elif p.orientation is None or p.orientation == 'none':
+        if debug: print(1)
         t(w, 'split horizontal')
     elif p.orientation == 'horizontal':
+        if debug: print(2)
         t(w, 'split vertical')
     elif p.orientation == 'vertical':
+        if debug: print(3)
         w.command('border none')
-        remove_single_child_containers(p)
+        mri3.remove_single_child_containers(p)
     else:
+        if debug: print(4)
         pass
 else:
+    if debug: print(5)
     t(w, 'split horizontal')

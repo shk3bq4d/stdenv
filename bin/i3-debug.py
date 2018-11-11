@@ -33,8 +33,11 @@ def logging_conf(
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
 def go(args):
-    for w in get_root().workspaces():
-        debug(w, _print=True)
+    if 0:
+        for w in get_root().workspaces():
+            debug(w, _print=True)
+    if 1:
+        debug(focused().workspace())
 
 if __name__ == '__main__':
 
