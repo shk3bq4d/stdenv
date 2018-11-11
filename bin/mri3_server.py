@@ -391,7 +391,7 @@ def focus(i3, window_id):
     i3.command(cmd)
 
 
-pickle_fp = os.environ['HOME'] +  '/.tmp/mri3-server.pickle'
+pickle_fp = os.environ['HOME'] +  '/.tmp/mri3_server.pickle'
 def persist(bipA):
     with open(pickle_fp, 'wb') as f:
         pickle.dump(bipA, f)
@@ -409,7 +409,7 @@ def load():
 i3block_fp = os.path.expanduser('~/.tmp/mri3server-block.msg')
 i3blockraw_fp = os.path.expanduser('~/.tmp/mri3server-rawname')
 
-pid_fp = os.path.expanduser('~/.tmp/pid/mri3-server.pid')
+pid_fp = os.path.expanduser('~/.tmp/pid/mri3_server.pid')
 def pidfile_cleanup():
     os.unlink(pid_fp)
 

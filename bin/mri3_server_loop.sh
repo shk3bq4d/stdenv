@@ -36,7 +36,7 @@ fi
 echo $$ > $PIDF
 while :; do
 	echo "starting"
-	~/bin/mri3-server.py && echo "exited with 0" || echo "exited with 1"
+	~/bin/mri3_server.py && echo "exited with 0" || echo "exited with 1"
 	sleep 10
 done
 rm -f $PIDF

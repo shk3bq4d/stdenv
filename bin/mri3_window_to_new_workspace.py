@@ -6,7 +6,7 @@ from sh import i3_msg
 from pprint import pprint
 import json
 import sys
-import i3_prompt_for_unnamed_workspace
+import mri3_prompt_for_unnamed_workspace
 import i3ipc
 
 
@@ -20,7 +20,7 @@ def go(args):
         if w not in workspaces:
             window.command('move container to workspace {}'.format(w))
             i3.command('workspace {}'.format(w))
-            i3_prompt_for_unnamed_workspace.go()
+            mri3_prompt_for_unnamed_workspace.go()
             return
         continue
         if len(args) > 0:

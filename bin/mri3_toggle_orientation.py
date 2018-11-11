@@ -11,7 +11,7 @@ import time
 
 def t(w, cmd):
     pid = str(os.getpid())
-    fp = os.path.expanduser('~/.tmp/tmp/mri3-toggle-orientation-{}'.format(w.id))
+    fp = os.path.expanduser('~/.tmp/tmp/mri3_toggle-orientation-{}'.format(w.id))
     try:
         with open(fp, 'w') as f:
             f.write(pid)

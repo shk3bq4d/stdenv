@@ -6,7 +6,7 @@ from sh import i3_msg
 from pprint import pprint
 import json
 import sys
-import i3_prompt_for_unnamed_workspace
+import mri3_prompt_for_unnamed_workspace
 import i3ipc
 
 
@@ -23,7 +23,7 @@ def go(args):
           i3_msg(*args)
         i3_msg(*o)
         i3_msg('move','workspace','to','output', name)
-        i3_prompt_for_unnamed_workspace.go()
+        mri3_prompt_for_unnamed_workspace.go()
         i3_msg('move','workspace','to','output', name)
         print(w)
         break

@@ -146,12 +146,12 @@ bindsym  $mod+Shift+Up move up
 bindsym  $mod+Shift+Right move right
 
 # code: 24, qwerty: q dvorak: ;
-bindcode --release $mod+24  exec i3-resize-window.py
-bindcode --release $mod+Shift+24  exec i3-resize-window.py -
+bindcode __release $mod+24  exec mri3_resize_window.py
+bindcode --release $mod+Shift+24  exec mri3_resize_window.py -
 # code:55 => sym: 0x76, symbol:v
-bindcode --release $mod+60  exec mri3-toggle-orientation.py # <= 4.11-1
+bindcode --release $mod+60  exec mri3_toggle_orientation.py # <= 4.11-1
 # code:42 => sym: 0x67, symbol:g
-bindcode --release $mod+30  exec mri3-toggle-border.py # <= 4.11-1
+bindcode --release $mod+30  exec mri3_toggle_border.py # <= 4.11-1
 #bindsym --release $mod+v split toggle # new since 4.12 # but doesn't have fancy resize border like I do
 
 # enter fullscreen mode for the focused container
@@ -177,7 +177,7 @@ bindsym  $mod+space focus mode_toggle
 
 # focus the parent container
 # code:38 => sym: 0x61, symbol:a
-bindcode $mod+38  focus parent; exec mri3-flash-border.py
+bindcode $mod+38  focus parent; exec mri3_flash_border.py
 
 
 # code:24 => sym: 0x71, symbol:q
@@ -189,78 +189,78 @@ bindcode $mod+53  sticky toggle
 #bindcode  $mod+d focus child
 # code:58 => sym: 0x6d, symbol:m
 # code:31 => sym: 0x69, symbol:i
-bindcode $mod+42 exec python3 ~/bin/i3-container-commander.py
-bindcode $mod+Shift+42 exec python3 ~/bin/i3-container-commander.py --command "move to workspace current && focus"
+bindcode $mod+42 exec python3 ~/bin/mri3_container_commander.py
+bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command "move to workspace current && focus"
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+49 workspace number $ws0; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+10 workspace number $ws1; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+10 workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+11 workspace number $ws2; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+11 workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+12 workspace number $ws3; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+12 workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+13 workspace number $ws4; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+13 workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+14 workspace number $ws5; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+14 workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+15 workspace number $ws6; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+15 workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+16 workspace number $ws7; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+16 workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+17 workspace number $ws8; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+17 workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+18 workspace number $ws9; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+18 workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+19 workspace number $ws10; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+19 workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+20 workspace number $ws11; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+20 workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+21 workspace number $ws12; exec ~/bin/i3_prompt_for_unnamed_workspace.py
-#bindcode  $mod+22 workspace number $ws13; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+21 workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+22 workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:22 => sym: 0xff08, symbol: BackSpace
-bindcode  $mod+22      exec ~/bin/i3_new_workspace.py
-#bindcode  $mod+Shif+22 exec ~/bin/i3_new_workspace.py move window
+bindcode  $mod+22      exec ~/bin/mri3_new_workspace.py
+#bindcode  $mod+Shif+22 exec ~/bin/mri3_new_workspace.py move window
 # code:22 => sym: 0xff08, symbol: BackSpace
-bindcode  $mod+Shift+22 exec ~/bin/i3_window_to_new_workspace.sh
+bindcode  $mod+Shift+22 exec ~/bin/mri3_window_to_new_workspace.sh
 
 #bindsym  $mod+Control+h workspace prev
 #bindsym  $mod+Control+l workspace next
 # code:43 => sym: 0x68, symbol:h
-bindcode $mod+Control+44  exec i3-move-container-left.py
+bindcode $mod+Control+44  exec mri3_move_container_left.py
 # code:46 => sym: 0x6c, symbol:l
-bindcode $mod+Control+33  exec i3-move-container-right.py
+bindcode $mod+Control+33  exec mri3_move_container_right.py
 
 # move focused container to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+Shift+49 move workspace number $ws0;	workspace number $ws0; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+49 move workspace number $ws0;	workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+Shift+10 move workspace number $ws1;	workspace number $ws1; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+10 move workspace number $ws1;	workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+Shift+11 move workspace number $ws2;	workspace number $ws2; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+11 move workspace number $ws2;	workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+Shift+12 move workspace number $ws3;	workspace number $ws3; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+12 move workspace number $ws3;	workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+Shift+13 move workspace number $ws4;	workspace number $ws4; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+13 move workspace number $ws4;	workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+Shift+14 move workspace number $ws5;	workspace number $ws5; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+14 move workspace number $ws5;	workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+Shift+15 move workspace number $ws6;	workspace number $ws6; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+15 move workspace number $ws6;	workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+Shift+16 move workspace number $ws7;	workspace number $ws7; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+16 move workspace number $ws7;	workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+Shift+17 move workspace number $ws8;	workspace number $ws8; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+17 move workspace number $ws8;	workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+Shift+18 move workspace number $ws9;	workspace number $ws9; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+18 move workspace number $ws9;	workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+Shift+19 move workspace number $ws10;	workspace number $ws10; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+19 move workspace number $ws10;	workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+Shift+20 move workspace number $ws11;	workspace number $ws11; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+20 move workspace number $ws11;	workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+Shift+21 move workspace number $ws12;	workspace number $ws12; exec ~/bin/i3_prompt_for_unnamed_workspace.py
-#bindcode  $mod+Shift+22 move workspace number $ws13;	workspace number $ws13; exec ~/bin/i3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+21 move workspace number $ws12;	workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+Shift+22 move workspace number $ws13;	workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 
 # reload the configuration file
 # code:54 => sym: 0x63, symbol:c
@@ -395,7 +395,7 @@ focus_follows_mouse yes
 bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
 
 # code:32 => sym: 0x6f, symbol:o
-bindcode $mod+39  exec ~/bin/i3mod-plus-o.sh # chromium chrome +o
+bindcode $mod+39  exec ~/bin/mri3mod_plus_o.sh # chromium chrome +o
 #assign [class="Krdc"] $ws2
 #assign [class="Firefox"] $ws7
 #assign [class="Eclipse"] $ws8
@@ -480,7 +480,7 @@ exec --no-startup-id compton  --dbus --config ~/.config/i3/compton.conf
 bindcode $mod+27  exec --no-startup-id true
 # code:33 => sym: 0x70, symbol:p
 bindcode $mod+Shift+27  exec --no-startup-id true
-exec --no-startup-id ~/bin/mri3-server-loop.sh 2>&1 | ts > ~/.tmp/log/i3-config-mri3-server.log
+exec --no-startup-id ~/bin/mri3_server_loop.sh 2>&1 | ts > ~/.tmp/log/i3_config_mri3_server.log
 exec --no-startup-id ~/bin/mrlsyncd.sh 2>&1 | ts > ~/.tmp/log/mrlsyncd.sh.log
 
 set $mode_gaps Gaps: (o) outer, (i) inner

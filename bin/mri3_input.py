@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 #
-from sh import i3_input as sh_i3_input
+from sh import mri3_input as sh_i3_input
 import sys
 
 def go(*args):

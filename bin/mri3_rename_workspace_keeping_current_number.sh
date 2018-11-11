@@ -3,7 +3,7 @@
 
 
 set -x
-prefix="$(i3_current_workspace.py  | sed -r -e 's/^(.....\S+ ).*/\1/')"
+prefix="$(mri3_current_workspace.py  | sed -r -e 's/^(.....\S+ ).*/\1/')"
 postfix="   "
 i3 rename workspace to "\"${prefix}$@${postfix}\""
 
