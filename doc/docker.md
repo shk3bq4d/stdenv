@@ -411,3 +411,7 @@ containerd.io docker-ce-cli
 The following packages will be upgraded:
 docker-ce
 1 upgraded, 2 newly installed, 1 to remove and 0 not upgraded.
+
+# cleanup
+docker ps --filter status=dead --filter status=exited -aq | xargs docker rm -v
+docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r docker rmi

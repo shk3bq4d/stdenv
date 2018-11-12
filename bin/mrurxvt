@@ -226,7 +226,7 @@ if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
 fi
 ;;
 esac
-CD=$(mri3-focused-window-cwd.py)
+CD=$(mri3_focused_window_cwd.py)
 echo $CD
 if [[ -d $CD ]] && $(cd $CD); then
 	CD="-cd $CD"
