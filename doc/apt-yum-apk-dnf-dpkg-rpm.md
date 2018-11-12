@@ -89,3 +89,6 @@ pkg info -D zoneminder
 
 apt install --reinstall docker-ce
 apt-cache madison docker-ce # list available version
+
+needs-restarting -r # yum reboot check if necessary
+test -f /var/run/reboot-required # apt check restart necessary
