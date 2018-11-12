@@ -16,6 +16,6 @@ myuser  ALL = (root) NOPASSWD: /bin/umount bip,/usr/sbin/pm-suspend
 sudo visudo -f /etc/sudoers.d/sshuttle
 myuser  ALL = (root) NOPASSWD:SETENV: /usr/bin/python3 /usr/bin/sshuttle -v --method auto --firewall
 myuser  ALL = (root) NOPASSWD:SETENV: /usr/bin/python3 /home/myuser/bin/sshuttle -v --method auto --firewall
-
+myuser  ALL = (root) NOPASSWD:SETENV: /usr/bin/env PYTHONPATH=/home/myuser/.local/lib/python3.6/site-packages /usr/bin/python3 /home/myuser/bin/sshuttle -v --method auto --firewall
 
 
