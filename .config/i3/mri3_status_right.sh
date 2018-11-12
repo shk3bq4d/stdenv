@@ -25,8 +25,8 @@ echo '[]'
 #exit 0
 
 
-#tail -F ~/.config/i3/mri3status-right.json | while :; do
-while :; do cat ~/.config/i3/mri3status-right.json | while read time line; do
+#tail -F ~/.config/i3/mri3status_right.json | while :; do
+while :; do cat ~/.config/i3/mri3_status_right.json | while read time line; do
 	[[ "$time" == "#"* ]] && continue
 	echo "$line"
 	sleep $time

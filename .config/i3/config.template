@@ -330,7 +330,7 @@ bar {
 #status_command i3status
 	#status_command i3status -c ~/.i3status-or.conf
 	#status_command i3status -c ~/.i3status-or.conf
-	status_command ~/.config/i3/mri3status-left.sh
+	status_command ~/.config/i3/mri3_status_left.sh
 #status_command i3status
 	output $ol
 	tray_output $ol
