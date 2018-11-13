@@ -10,6 +10,8 @@ make mr mr http://jlighttpd.ly.lan/websupport/search.py?q=%s the default
 make mr mr http://127.0.0.1:63435/websupport/search.py?q=%s the default
 rename the shortcut for the other ones, do not delete as they'll be readded when browing those sites
 
+Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-suggestion-from-the-chrome-address-bar
+
 # extensions list
 http://userscripts-mirror.org/scripts/source/78822.user.js # Better Outlook Web Access
 ublock origin

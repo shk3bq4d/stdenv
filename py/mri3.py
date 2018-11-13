@@ -233,6 +233,7 @@ def grid_layout(cols=None, rows=None):
             continue
         if is_window(w):
             current_windows.append(w)
+    current_windows = sorted(current_windows, key=lambda x: (x.name, x.window))
     orientation = 'h'
     s = len(current_windows)
     if cols is None and rows is None:
