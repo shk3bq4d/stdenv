@@ -92,3 +92,7 @@ apt-cache madison docker-ce # list available version
 
 needs-restarting -r # yum reboot check if necessary
 test -f /var/run/reboot-required # apt check restart necessary
+
+aptitude why PACKAGE # describe why package was installed
+
+/var/log/apt/history.log

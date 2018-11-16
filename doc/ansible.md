@@ -6,39 +6,45 @@
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
 ```yaml
-    - name: mongo_dev_fs_id
-      set_fact: fs_id='fs-d3ad0faa'
-      when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
-      tags:
-        - efs
-    - name: mongo_dev_fs_id
-      set_fact:
-        mr_hehe: "{{hihi[hostvars[inventory_hostname]['ec2_tag_Environment']]}}"
-      tags:
-        - mrdebug
-    - name: include_inline_efs_role
-      import_role:
-        name: efs
-      vars:
-        mount_point: "{{ mongo_backup_path }}"
-        fs_id: "{{ fs_id }}"
-      tags:
-        - efg
-    - name: include vars
-      include_vars: environment_vars_dev.yml
-      when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
-      tags:
-        - efse
-    - name: myshell
-      shell: "echo 'test'"
-      register: foo
-      tags:
-        - mrdebug
-    - name: myfoo
-      debug:
-          #msg: "the echo was {{ foo.stdout }}"
-        msg: "the echo was hihi {{ mr_hehe }}"
-      tags:
+- name: mongo_dev_fs_id
+  set_fact: fs_id='fs-d3ad0faa'
+  when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
+  tags:
+	- efs
+- name: mongo_dev_fs_id
+  set_fact:
+	mr_hehe: "{{hihi[hostvars[inventory_hostname]['ec2_tag_Environment']]}}"
+  tags:
+	- mrdebug
+- name: include_inline_efs_role
+  import_role:
+	name: efs
+  vars:
+	mount_point: "{{ mongo_backup_path }}"
+	fs_id: "{{ fs_id }}"
+  tags:
+	- efg
+- name: include vars
+  include_vars: environment_vars_dev.yml
+  when: hostvars[inventory_hostname]['ec2_tag_Environment'] == 'dev'
+  tags:
+	- efse
+- name: myshell
+  shell: "echo 'test'"
+  register: foo
+  tags:
+	- mrdebug
+- name: myfoo
+  debug:
+	  #msg: "the echo was {{ foo.stdout }}"
+	msg: "the echo was hihi {{ mr_hehe }}"
+  tags:
+- name: Show all possible accessible hasts
+  debug:
+    var: hostvars[inventory_hostname]
+  tags:
+    - mrdebug
+  # from https://gryzli.info/2017/12/21/ansible-debug-print-variables/
 ```
 
 ansible-playbook -h                                                                                        27' 41"
@@ -134,3 +140,5 @@ Options:
                         ask for privilege escalation password
 
 {% for host in hosts|sort(attribute='name') %}
+
+shell, command no change when exit code is 0 change_when: false -> # http://www.middlewareinventory.com/blog/ansible-changed_when-and-failed_when-examples/
