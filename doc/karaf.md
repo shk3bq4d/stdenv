@@ -14,8 +14,9 @@ ssh -p 8101 -o KexAlgorithms=diffie-hellman-group1-sha1 karaf@localhost
 ssh config: ~/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/data_mr/cache/org.eclipse.osgi/bundles/5/data/config/org/apache/karaf/shell.config
 password file /home/mruser/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/etc/users.properties
 
-tail -f ~/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/log/tesb.log
-vi ~/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/data/karaf.out
+tail -f ~mruser/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/log/tesb.log
+vi ~mruser/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/data/karaf.out
+ls -al ~mruser/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/log/tesb.log ~mruser/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/data/karaf.out
 
 cd ~/TOS_ESB-r104014-V5.3.1/Runtime_ESBSE/container/bin && ./client
 bundles:list | grep MrSendMail

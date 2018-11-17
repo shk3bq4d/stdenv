@@ -2,6 +2,9 @@
 wget http://embydata.com/downloads/addons/xbmb3c/repo-install/repository.emby.kodi-1.0.3.zip
 http://kodi.wiki/view/Add-on:Emby_for_Kodi
 
+ssh root@10.19.29.60 # password: libreelec
+
+
 
 # API
 {u'description': u'JSON-RPC API of XBMC',
