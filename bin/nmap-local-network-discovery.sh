@@ -12,4 +12,10 @@
 set -euo pipefail
 
 set -x
-nmap -sP -PS22,80,443 192.168.0.0/16 10.0.0.0/8
+echo Ping discovery
+nmap -v -sn 192.168.0.0/16 10.0.0.0/8
+echo 
+#echo Ping + Port
+#nmap -sn -PS22,80,443 192.168.0.0/16 10.0.0.0/8
+echo Seleceted ports only
+nmap -v -Pn -PS22,80,443 192.168.0.0/16 10.0.0.0/8
