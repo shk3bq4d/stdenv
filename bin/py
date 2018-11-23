@@ -59,6 +59,8 @@ def logging_conf(
            'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
            #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
+    try: logging.getLogger('sh.command').setLevel(logging.WARN)
+    except: pass
 
 def go(args):
     # https://docs.python.org/2/library/argparse.html

@@ -293,3 +293,5 @@ autocmd CursorHold,CursorHoldI * update
 ```sh
 :sav # https://stackoverflow.com/questions/31092505/how-to-save-a-file-with-a-new-name-in-vim-while-switching-to-that-new-buffer-an
 ```
+
+set ft=messages " syslog

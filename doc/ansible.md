@@ -142,3 +142,5 @@ Options:
 {% for host in hosts|sort(attribute='name') %}
 
 shell, command no change when exit code is 0 change_when: false -> # http://www.middlewareinventory.com/blog/ansible-changed_when-and-failed_when-examples/
+
+"{{ 'ternary operator jinja' if expose_service == 'true' else 'ClusterIP' }}"
