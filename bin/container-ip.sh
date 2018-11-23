@@ -7,12 +7,13 @@ CYGWIN*)
 *)	
 	f=$(echo ~/.tmp/container_ip)
 	ips --no-internet | \
-		grep -Ev 'lo |docker' | \
+		grep -Evw 'lo|docker[0-9]+|virbr[0-9]+' | \
 		awk-print2.sh | \
 		tr -d '\n' | \
 		tee $f |
 		grep -E . || echo "no ip" >&2
 	pgrep forti &>/dev/null && echo -n " forti" >> $f
+	true
 	;;
 esac
 
