@@ -17,7 +17,7 @@ mycurl() {
 	local URL=$1
 	set -o pipefail
 	if command -v curl &>/dev/null; then
-		output="$(curl -s -m $timeout $URL 2>/dev/null)"
+		output="$(curl -4 -s -m $timeout $URL 2>/dev/null)"
 	elif command -v wget &>/dev/null; then
 		output="$(wget -O- --timeout $timeout $URL 2>/dev/null)"
 	fi
