@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-#exec > >(tee /tmp/logfile.txt)
-#exec 2>&1
+exec > >(tee /tmp/logfile.txt)
+exec 2>&1
+date
 #env | sort
 
 #  http://www.imagemagick.org/Usage/canvas/#gradient
@@ -226,7 +227,9 @@ if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
 fi
 ;;
 esac
+set +e
 CD=$(mri3_focused_window_cwd.py)
+set -e
 echo $CD
 if [[ -d $CD ]] && $(cd $CD); then
 	CD="-cd $CD"
