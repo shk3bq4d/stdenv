@@ -12,10 +12,11 @@
 
     - name: apt install
       apt:
-        name: 
+        name:
           - numlockx
         state: present
 
+    # https://ubuntuforums.org/showthread.php?t=2218111
     - name: numlock set to on on startup
       lineinfile:
         path: /usr/share/lightdm/lightdm.conf.d/50-unity-greeter.conf
