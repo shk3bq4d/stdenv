@@ -45,6 +45,13 @@
   tags:
     - mrdebug
   # from https://gryzli.info/2017/12/21/ansible-debug-print-variables/
+- name: "local_action with no sudo root"
+  vars:
+	ansible_become: false
+  local_action:
+	module: ec2
+	group: ['mygroup']
+	id: hostvars[inventory_hostname]['ec2_id']
 ```
 
 ansible-playbook -h                                                                                        27' 41"
