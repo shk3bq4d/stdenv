@@ -188,6 +188,15 @@ case $SCRIPT in \
     $engine -Tsvg -o$svg -v $SCRIPT
     nohup firefox $svg
     ;;
+*yml)
+    # trying for ansible
+    if grep -qE "\s*tasks:" $SCRIPT; then
+        ansible-playbook $SCRIPT --ask-become-pass --diff --check
+    else
+        echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
+        exit 1
+    fi
+    ;;
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
     exit 0
