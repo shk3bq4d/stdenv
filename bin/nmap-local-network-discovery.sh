@@ -17,7 +17,8 @@ NET="192.168.0.0/16"
 
 set -x
 echo Ping discovery
-nmap -v -sn $NET | grep -v "host down"
+nmap -v -sn $NET
+#nmap -v -sn $NET | grep -v "host down"
 echo 
 #echo Ping + Port
 #nmap -sn -PS22,80,443 192.168.0.0/16 10.0.0.0/8
