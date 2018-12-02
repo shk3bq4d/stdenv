@@ -34,3 +34,6 @@ hdmi_mode=87
 hdmi_cvt 480 800 60 6 0 0 0
 dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
 display_rotate=3
+
+# temperature probe sonde https://www.ebay.com/itm/1M-1-2-5-10-DS18B20-Waterproof-Sensor-Digital-Probe-Thermometer-Thermal-Arduino-/283278069158
+Probe's wire received is Red, Yellow and Black, conncet your probe as Output lead : Red (VCC), Yellow(DATA), Black(GND) : )
