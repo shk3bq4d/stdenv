@@ -136,12 +136,14 @@ date -Ihours              # 2017-07-28T10+02:00
 printf '%(%Y.%m.%d %H:%M:%S)T' # bash date built in, but not zsh
 while :; do printf '%(%Y.%m.%d %H:%M:%S)T '; echo "" | nc -w 1 100.96.10.165 2181 &>/dev/null && echo ok || echo no; sleep 1; done
 
-###sleep until
+###sleep until, or script duration
 current_epoch=$(date +%s)
 target_epoch=$(date -d '01/01/2010 12:00' +%s)
 target_epoch=$(date -d 'tomorrow 12:00' +%s)
 sleep_seconds=$(( $target_epoch - $current_epoch ))
 sleep $sleep_seconds
+duration=$(( $(date +%s) - $current_epoch ))
+echo "job took $duration seconds"
 
 
 
