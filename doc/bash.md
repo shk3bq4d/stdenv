@@ -134,12 +134,14 @@ date -Iminutes            # 2017-07-28T10:47+02:00
 date -Iseconds            # 2017-07-28T10:47:08+02:00
 date -Ihours              # 2017-07-28T10+02:00
 
-###sleep until
+###sleep until, or script duration
 current_epoch=$(date +%s)
 target_epoch=$(date -d '01/01/2010 12:00' +%s)
 target_epoch=$(date -d 'tomorrow 12:00' +%s)
 sleep_seconds=$(( $target_epoch - $current_epoch ))
 sleep $sleep_seconds
+duration=$(( $(date +%s) - $current_epoch ))
+echo "job took $duration seconds"
 
 
 
