@@ -133,6 +133,8 @@ date -I                   # 2017-07-28
 date -Iminutes            # 2017-07-28T10:47+02:00
 date -Iseconds            # 2017-07-28T10:47:08+02:00
 date -Ihours              # 2017-07-28T10+02:00
+printf '%(%Y.%m.%d %H:%M:%S)T' # bash date built in, but not zsh
+while :; do printf '%(%Y.%m.%d %H:%M:%S)T '; echo "" | nc -w 1 100.96.10.165 2181 &>/dev/null && echo ok || echo no; sleep 1; done
 
 ###sleep until, or script duration
 current_epoch=$(date +%s)

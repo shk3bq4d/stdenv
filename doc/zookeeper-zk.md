@@ -139,3 +139,8 @@ $ grep execve /tmp/strace.out.18*
 13:51:57 7 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminmru
 $ strace -s 99999 -ffttTo /tmp/strace.out service zookeeper-server init
 
+
+2181 # external port
+2888 # internal port 1 (node to node)
+3888 # internal port 2 (leader election)
+

@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  vars:
+    p: /etc/default/keyboard
+  become: true
+  tasks:
+    - lineinfile:
+        path: "{{ p }}"
+        regexp: '^XKBLAYOUT='
+        line: 'XKBLAYOUT="us"'
+    - lineinfile:
+        path: "{{ p }}"
+        regexp: '^XKBMODEL='
+        line: 'XKBMODEL="pc105"'
+    - lineinfile:
+        path: "{{ p }}"
+        regexp: '^XKBVARIANT='
+        line: 'XKBVARIANT="dvp"'
+    - lineinfile:
+        path: "{{ p }}"
+        regexp: '^XKBOPTIONS='
+        line: 'XKBOPTIONS=""'
+    - lineinfile:
+        path: "{{ p }}"
+        regexp: '^BACKSPACE='
+        line: 'BACKSPACE="guess"'
