@@ -95,3 +95,9 @@ zpool get dedupratio data
 https://constantin.glez.de/2011/07/27/zfs-to-dedupe-or-not-dedupe/
 
 https://brismuth.com/scheduling-automated-zfs-scrubs-9b2b452e08a4
+
+# add disk as read cache
+geom disk list
+zpool add zroot cache /dev/vtbd6
+zpool iostat -v zroot 5 # livestat
+
