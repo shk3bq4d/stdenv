@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+import yaml
 import os
 import sys
 import re
