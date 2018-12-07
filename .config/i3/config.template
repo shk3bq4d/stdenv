@@ -337,6 +337,10 @@ bar {
 	#tray_output none
     bindsym  button4 nop
     bindsym  button5 nop
+    bindsym  button6 nop
+    bindsym  button7 nop
+    bindsym  button8 nop
+    bindsym  button9 nop
 #separator_symbol ":|:"
 	separator_symbol "-"
 #height 50
