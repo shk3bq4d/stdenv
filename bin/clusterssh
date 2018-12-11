@@ -32,6 +32,6 @@ if [[ $# -eq 0 ]]; then
 elif [[ "$@" = *"-h"* ]]; then
 	/usr/bin/clusterssh "$@" 
 else
-	{ sleep 5; mri3_grid_layout.py; } & 
+	#{ sleep 5; mri3_grid_layout.py; } & 
 	nohup /usr/bin/clusterssh -c ~/.clusterssh/cluster-stdks "$@" & &>/dev/null
 fi
