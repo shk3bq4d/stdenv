@@ -104,3 +104,5 @@ geom disk list
 zpool add zroot cache /dev/vtbd6
 zpool iostat -v zroot 5 # livestat
 
+# check if FS is mounted
+zfs list -o name,mounted

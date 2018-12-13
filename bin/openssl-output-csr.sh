@@ -6,7 +6,7 @@
 ##    REMOTEHOST: remote host where to ssh
 ##    REMOTEPORT: JMX port (default: 12345)
 ##
-## Author: Jeff Malone, 08 Nov 2018
+## Author: Jeff Malone, 13 Dec 2018
 ##
 
 set -euo pipefail
@@ -27,11 +27,5 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-if [[ $# -eq 0 ]]; then
-	cat ~/.clusterssh/cluster-*
-elif [[ "$@" = *"-h"* ]]; then
-	/usr/bin/clusterssh "$@" 
-else
-	{ sleep 5; mri3_grid_layout.py; } & 
-	nohup /usr/bin/clusterssh -c ~/.clusterssh/cluster-stdks "$@" & &>/dev/null
-fi
+set -x
+openssl req -text -noout -verify -in $f

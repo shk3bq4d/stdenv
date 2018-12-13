@@ -6,3 +6,5 @@ rsync -vnra --progress --stats --human-readable --modify-window=2
 -f '- *(?).mp3' # will match 'bip(5).mp3'
 
 rsync -a --rsync-path="sudo rsync" from to # rsync (scp) as root
+
+cp -R --attributes-only /data/ data # 0-size structure zero don't use rsync
