@@ -68,3 +68,9 @@ convert -coalesce brocoli.gif out%05d.gif # convert -coalesce brocoli.gif out%05
 magicwand 1,1 -t 10 -o 0 in.gif out.gif
 magicwand 0,0 -r outside -c red extracted00000.gif /var/www/html/out.gif
 convert -delay 0 -loop 0 -alpha set -dispose 2 extr*gif screencapture.gif
+
+# font list
+convert -list type       # for IM older than v6.3.5-7
+convert -list font       # for newer versions
+
+convert selenium.png -gravity NorthEast -font DejaVu-Sans -annotate 0 "bip %[EXIF:DateTimeOriginal]" selenium2.png # adds overlay text
