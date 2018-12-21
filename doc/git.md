@@ -441,3 +441,5 @@ git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"
 
 git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra 
+
+git config pull rebase true

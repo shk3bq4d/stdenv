@@ -27,7 +27,18 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
-~/.local/bin/youtube-dl --ignore-errors --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$@" || echo "pip install --upgrade --user youtube_dl"
+if [[ $# -eq 0 ]]; then
+	CLIP=$(xclip -o)
+	if [[ $CLIP == https://www.youtube.com* ]]; then
+		ARG=$CLIP
+	else
+		echo "FATAL: give URL as arg (nothing in clipboard as well)"
+		exit 1
+	fi
+else
+	ARG="$@"
+fi
+~/.local/bin/youtube-dl --ignore-errors --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$ARG" || echo "pip install --upgrade --user youtube_dl"
 
 echo EOF
 exit 0
