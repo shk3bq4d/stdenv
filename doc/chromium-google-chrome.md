@@ -19,6 +19,7 @@ cookie exporter
 tampermonkey
 http://127.0.0.1:63435/websupport/tampermonkey/mr.js
 
+https://chrome.google.com/extensions
 chrome://extensions/
 https://chrome.google.com/webstore/category/apps # use it from chromium
 

@@ -14,7 +14,7 @@ curl -H "Content-Type: application/json"     --data-binary '{"key1":"value"}' # 
 curl -H "Content-Type: multipart/form-data;" -F "key1=val1"        # raw form
 curl -T filename.txt # PUT --upload-file
 curl --upload-file filename.txt # PUT --upload-file
-curl -v # see certificate, request headers, response headers
+curl -v # debug verbose see certificate, request headers, response headers
 openssl s_client -connect {HOSTNAME}:{PORT} -showcerts # certificate save as file
 UA="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 curl -A "$UA"

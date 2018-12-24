@@ -34,6 +34,10 @@ sys.setdefaultencoding('utf-8')
 # PYTHONIOENCODING="UTF-8"
 # in your shell or read
 # https://stackoverflow.com/questions/3828723/why-should-we-not-use-sys-setdefaultencodingutf-8-in-a-py-script
+
+# or
+from io import open
+with open(fp, 'w', encoding='utf-8') as f:
 @end=python@
 
 
