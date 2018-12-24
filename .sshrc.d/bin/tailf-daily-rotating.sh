@@ -1,0 +1,1 @@
+../../bin/tailf-daily-rotating.sh

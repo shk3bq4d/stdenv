@@ -15,6 +15,7 @@ for i in chmod touch; do ! command -v "$i" &>/dev/null && echo "FATAL: unexistin
 f="$1"
 [[ -f "$f" ]] && echo "FATAL: already exists file $f" && exit 1
 [[ -d "$f" ]] && echo "FATAL: already exists directory $f" && exit 1
+[[ -n $VIMF6 ]] && echo "running from vim-f6"
 
 touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
 
