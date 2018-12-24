@@ -31,7 +31,7 @@ DATEBIN=date
 uname | grep -qi freebsd && DATEBIN=gdate
 ! hash $DATEBIN 2>/dev/null && echo "FATAL: not present $DATEBIN. pkg install coreutils" && exit 1
 
-if [[ -n $VIMF6 ]]; then
+if [[ -n ${VIMF6+1} ]]; then
 	filepath="./BrowserServer.2018-12-24"
 else
 	filepath="$1"
@@ -58,17 +58,17 @@ for format in  \
 	'%d%m%y' \
 	; do
 	if [[ -f "$filepath" ]]; then
-		today=$(date "+$format" -r "$filepath")
+		today=$($DATEBIN "+$format" -r "$filepath")
 	else
-		today=$(date "+$format")
+		today=$($DATEBIN "+$format")
 	fi
 	if echo "$filename" | grep -Fq $today; then
 		template=${filepath//$today/}
 		echo "detected format is $format ! template is $template"
 		while :; do
-			todays_filepath="$template$(date +"$format")"
-			now=$(date +%s)
-			midnight=$(date +%s -d 'tomorrow 0:00')
+			todays_filepath="$template$($DATEBIN +"$format")"
+			now=$($DATEBIN +%s)
+			midnight=$($DATEBIN +%s -d 'tomorrow 0:00')
 			diff=$(($midnight - $now))
 			echo "diff is $diff"
 			echo "timeout $diff tail -n 300 -F \"$todays_filepath\""
