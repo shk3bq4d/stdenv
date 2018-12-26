@@ -72,7 +72,9 @@ for format in  \
 			diff=$(($midnight - $now))
 			echo "diff is $diff"
 			echo "timeout $diff tail -n 300 -F \"$todays_filepath\""
+			set +e
 			timeout $diff tail -n 300 -F "$todays_filepath"
+			set -e
 		done
 		break
 	fi

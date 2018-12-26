@@ -1,3 +1,5 @@
+# /* ex: set filetype=python fenc=utf-8 expandtab ts=4 sw=4 : */
+
 //*[@class='real-time']/text()']/text()
  @ 
 ./*[1]//*[contains(@class, 'odds')]
