@@ -36,7 +36,7 @@ if [[ -n ${VIMF6+1} ]]; then
 else
 	filepath="$1"
 	if [[ ! -f "$filepath" ]]; then
-		echo "FATAL not a file $f"
+		echo "FATAL not a file $filepath"
 		exit 1
 	fi
 fi
