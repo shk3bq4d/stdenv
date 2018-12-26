@@ -1077,3 +1077,7 @@ except BaseException as e:
 ```
 chr(65)  # => 'A' ord character
 ord('A') # => 65  chr character 
+
+# https://code-maven.com/switch-to-interactive-mode-from-python-script
+import code
+code.interact(local=locals())
