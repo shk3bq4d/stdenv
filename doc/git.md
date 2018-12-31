@@ -237,6 +237,9 @@ https://stackoverflow.com/questions/16244969/how-to-tell-git-to-ignore-individua
 git status -uno # which is equivalent to git status --untracked-files=no
 git config status.showuntrackedfiles no
 
+# list untracked files
+git ls-files --others --exclude-standard
+
 # store in another directory
 export GIT_DIR=/home/jly200_user/gitfw/
 export GIT_WORK_TREE=/
