@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  vars:
+    source: "https://askubuntu.com/posts/907249"
+  become: true
+  tasks:
+    - name: "Disable Systemd-Resolved service"
+      service:
+        name: systemd-resolved
+        enabled: no
+        state:   stopped
+
+    - name: "edit network manager config"
+      lineinfile:
+        path: "/etc/NetworkManager/NetworkManager.conf"
+        regexp: '^dns='
+        line: 'dns=default'
+
+    - name: "edit network manager config"
+      file:
+        path: "/etc/resolv.conf"
+        state: absent
+
+    - name: "Restart Network-Manager"
+      service:
+        name: network-manager
+        state: restarted
