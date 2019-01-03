@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: dep
+      apt:
+        name: "libxml2-dev"
+    - name: "mr pip"
+      pip:
+        name: lxml
+        extra_args: --user

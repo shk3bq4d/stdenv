@@ -26,7 +26,11 @@ dec17.ly.lan)
 	#PROXYPAC="file://$HOME/proxy.pac"
 	;;
 esac
-UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+# http://www.useragentstring.com/pages/useragentstring.php?name=Firefox
+# http://www.useragentstring.com/pages/useragentstring.php?name=chrome
+UA=""
+UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/ 71.0.3578.98 Safari/537.36"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
 #echo $PROXYPAC > /tmp/buou1
 #exit 0
 if [[ -z "$PROXYPAC" ]]; then
