@@ -1,5 +1,5 @@
 $mod+Control+Return exec mrurxvt-dvorak.sh
-setxkbmap -layout us -variant dvp -option lv3:ralt_switch # dvorak programmer
+setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch # dvorak programmer
 
 lv3:ralt_switch : keeps alt-gr for accentuated characters
 
