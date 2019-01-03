@@ -1,3 +1,5 @@
+http://piproj:8080/
+
 # emby plugin
 wget http://embydata.com/downloads/addons/xbmb3c/repo-install/repository.emby.kodi-1.0.3.zip
 http://kodi.wiki/view/Add-on:Emby_for_Kodi
