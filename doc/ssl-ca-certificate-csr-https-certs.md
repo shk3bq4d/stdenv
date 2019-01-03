@@ -166,3 +166,4 @@ PKCS #15   1.1   Cryptographic Token Information Format Standard  Defines a stan
 
 pip install --trusted-host pypi.python.org  ldap3 # no validate python pip
 
+openssl rsa -aes256 -in adminmru.key -out adminmru-key.key # add change passphrase key password

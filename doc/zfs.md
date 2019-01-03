@@ -73,6 +73,7 @@ growfs -N zroot/mrvol/ly80lvmr0
 zfs destroy data/emea/bcv.ch/f5_hsv2000v@zfs-auto-snap_daily-2018-04-17-0000,zfs-auto-snap_daily-2018-04-18-0000%zfs-auto-snap_daily-2018-04-19-0000,zfs-auto-snap_daily-2018-04-20-0000%zfs-auto-snap_daily-2018-04-21-0000,zfs-auto-snap_daily-2018-04-22-0000%zfs-auto-snap_daily-2018-04-23-0000 # delete snapshot
 zfs destroy filesystem|volume@snap[%snap[,snap[%snap]]]... # delete snapshot
 
+zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') 
 zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') | xargs -prn1 zfs destroy 
 
 zfs get all data/global/mayerbrown.com/chinwsa001.mayerbrown.com
