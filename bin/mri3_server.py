@@ -101,7 +101,6 @@ def on_window(i3, e):
         persist(wA)
     logging.warn('/on_window %s', e.change)
 
-_lastpid = None
 def blockpidcheck(pid):
     try:
         with open('/proc/{}/cmdline'.format(pid), mode='rb') as fd:
@@ -111,16 +110,17 @@ def blockpidcheck(pid):
     logger.debug('pid: %s, content: %s', pid,  content)
     return content == 'i3blocks'
 
+_lastpid = None
 def blockpid():
     global _lastpid
-    if _lastpid is not None and blockpidcheck(_lastpid):
+    if _lastpid is not None:
         return _lastpid
+    _lastpid = []
     for dirname in os.listdir('/proc'):
         if dirname == 'curproc':
             continue
         if blockpidcheck(dirname):
-            _lastpid = int(dirname)
-            break
+            _lastpid.append(int(dirname))
     return _lastpid
 
 _machine = socket.gethostname()
@@ -293,8 +293,9 @@ def i3blocklet_name(name):
         #f.write(name + '\n')
 
     s = signal.SIGUSR1 + signal.SIGRTMIN
-    logger.info('sending signal %s to process %s', s, pid)
-    os.kill(pid, s)
+    for p in pid:
+        logger.info('sending signal %s to process %s', s, p)
+        os.kill(p, s)
 
 def on_workspace(i3, e):
     logging.warn('on_workspace %s', e.change)

@@ -99,3 +99,8 @@ exit 0
 vm="Windows XP"; for i in $(seq 1 4); do VBoxManage controlvm "$vm" setlinkstate$i off ; sleep 1; VBoxManage controlvm "$vm" setlinkstate$i on; done
 
 sudo modprobe vboxdrv # reload kernel module on restart
+
+
+# autostart on boot
+vboxmanage showvminfo mitmproxy2 --machinereadable | grep autostart
+vboxmanage modifyvm dnsmasq --autostart-enabled off

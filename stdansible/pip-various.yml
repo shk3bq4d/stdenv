@@ -2,36 +2,80 @@
 - hosts: localhost
   become: false
   tasks:
-    - name: "check if user pip is present"
+    - name: "Python3 Python 2+3 system pip"
+      apt:
+        name:
+        - "python-pip"
+        - "python3-pip"
+      become: true
+
+    - name: "Python2 check if user is present"
       stat:
         path: ~/.local/bin/pip2
-      register: stat_result
+      register: stat2_result
 
-    - name: "install user pip"
+    - name: "Python2 install user pip2"
       pip:
         name:
         - pip
+        executable: /usr/bin/pip2
         extra_args: --user
-      when: stat_result.stat.exists == False
+      when: stat2_result.stat.exists == False
 
-    - name: "upgrade user pip"
+    - name: "Python2 upgrade user pip"
       pip:
         name:
         - pip
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
-      when: stat_result.stat.exists == True
+      when: stat2_result.stat.exists == True
 
-    - name: "ensure latest"
+    - name: "Python2 ensure packages latest"
       pip:
         name:
         - youtube_dl
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 
-    - name: "ensure present"
+    - name: "Python2 ensure packages present"
       pip:
         name:
         - sh
         extra_args: --user
         executable: ~/.local/bin/pip2
+
+    - name: "Python3 check if user pip3 is present"
+      stat:
+        path: ~/.local/bin/pip3
+      register: stat3_result
+
+    - name: "Python3 install user pip3"
+      pip:
+        name:
+        - pip
+        extra_args: --user
+        executable: /usr/bin/pip3
+      when: stat3_result.stat.exists == False
+
+    - name: "Python3 upgrade user pip"
+      pip:
+        name:
+        - pip
+        extra_args: --upgrade --user
+        executable: ~/.local/bin/pip3
+      when: stat3_result.stat.exists == True
+
+    - name: "Python3 ensure packages latest"
+      pip:
+        name:
+        - youtube_dl
+        extra_args: --upgrade --user
+        executable: ~/.local/bin/pip3
+
+    - name: "Python3 ensure packages present"
+      pip:
+        name:
+        - sh
+        - fontawesome # mri3server
+        extra_args: --user
+        executable: ~/.local/bin/pip3
