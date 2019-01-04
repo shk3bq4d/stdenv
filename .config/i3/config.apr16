@@ -1,8 +1,8 @@
 # /* ex: set filetype=sh: */
 export STDHOME_OUTPUTS='
-set $ol HDMI2
-set $oc HDMI2
-set $or HDMI2
+set $ol HDMI-2
+set $oc HDMI-2
+set $or HDMI-2
 exec xrandr --output "$oc" --primary
 '
 
