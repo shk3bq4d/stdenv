@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  vars:
+    source: "https://askubuntu.com/questions/1081695/error-during-converting-jpg-to-pdf"
+  become: true
+  tasks:
+    - name: "Fix Image Magick JPG to PDF conversion"
+      xml:
+        path: "/etc/ImageMagick-6/policy.xml"
+        xpath: "/policymap/policy[@pattern='PDF']"
+        attribute: rights
+        value: "read|write"

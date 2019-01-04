@@ -1,7 +1,9 @@
 $mod+Control+Return exec mrurxvt-dvorak.sh
 setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch # dvorak programmer
 
-lv3:ralt_switch : keeps alt-gr for accentuated characters
+lv3:ralt_switch : keeps alt-gr for accentuated characters as simultaneous action
+compose:ralt: uses right alt for successive keys accentuated
+
 
 # lightweight print version
 ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌─────────┐
@@ -136,9 +138,12 @@ lv3:ralt_switch : keeps alt-gr for accentuated characters
     state 0x0, keycode 61 (keysym 0x2f, slash), same_screen YES,
     state 0x0, keycode 62 (keysym 0xffe2, Shift_R), same_screen YES,
 
-é altgr-u
-è altgr-` e  or altgr-# e
-ê altgr-^ e  or altgr-@ e
+
+# accent simultaneous mode
+é altgr-u                            # aigu cute
+é altgr-' e                          # aigu cute
+è altgr-` e  or altgr-# e            # grave
+ê altgr-^ e  or altgr-@ e            # 
 ë altgr-: e  or altgr-; e
 ẽ altgr-~ e  or altgr-$ e
 ç altgr-c
