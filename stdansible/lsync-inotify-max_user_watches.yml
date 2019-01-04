@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  vars:
+    source: "https://stackoverflow.com/questions/535768/what-is-a-reasonable-amount-of-inotify-watches-with-linux"
+  become: true
+  tasks:
+    - name: "Set inotify max user watches"
+      sysctl:
+        name: fs.inotify.max_user_watches
+        value: 524288
+        state: present
+        reload: yes
+        sysctl_set: yes

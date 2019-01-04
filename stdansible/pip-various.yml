@@ -34,6 +34,7 @@
       pip:
         name:
         - youtube_dl
+        - i3ipc
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 
@@ -77,5 +78,6 @@
         name:
         - sh
         - fontawesome # mri3server
+        - i3ipc
         extra_args: --user
         executable: ~/.local/bin/pip3
