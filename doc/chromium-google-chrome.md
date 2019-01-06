@@ -12,12 +12,15 @@ rename the shortcut for the other ones, do not delete as they'll be readded when
 
 Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-suggestion-from-the-chrome-address-bar
 
+# tamper monkey script
+* http://userscripts-mirror.org/scripts/source/78822.user.js # Better Outlook Web Access
+* http://127.0.0.1:57155/tampermonkey/mr.js
+
 # extensions list
-http://userscripts-mirror.org/scripts/source/78822.user.js # Better Outlook Web Access
-ublock origin
-cookie exporter
-tampermonkey
-http://127.0.0.1:63435/websupport/tampermonkey/mr.js
+* tampermonkey https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+* git@github.com:shK3Bq4d/X-Agent.git # mr user-agent useragent
+* ublock origin
+* cookie exporter
 
 https://chrome.google.com/extensions
 chrome://extensions/

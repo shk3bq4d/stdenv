@@ -5,12 +5,11 @@ set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
 	PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
-	# if pgrep forti &>/dev/null || \
-	# 	ips --no-internet | grep 'wlp58s0.*172.28'; then
-	# 	PROXYPAC=""
-	# else
-	# 	PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
-	# fi
+	~/bin/container-ip.sh
+	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
+	;;
+apr16.ly.lan)
+	PROXYPAC="http://127.0.0.1:57155/proxy.pac.ly.py"
 	~/bin/container-ip.sh
 	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
 	;;
@@ -34,7 +33,7 @@ UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Ge
 #echo $PROXYPAC > /tmp/buou1
 #exit 0
 if [[ -z "$PROXYPAC" ]]; then
-	/usr/bin/chromium-browser --user-agent="$UA" </dev/null &>/dev/null &
+	/usr/bin/chromium-browser &>/dev/null &
 else
-	/usr/bin/chromium-browser --user-agent="$UA" --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
+	/usr/bin/chromium-browser --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
 fi

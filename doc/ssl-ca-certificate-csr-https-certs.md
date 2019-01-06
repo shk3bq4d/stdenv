@@ -1,5 +1,5 @@
 # ubuntu
-save rootCA.pem in /usr/local/share/ca-certificates/
+save rootCA.pem in /usr/local/share/ca-certificates/ with a .crt extension
 sudo update-ca-certificates
 systemctl restart docker.service # optional for artifactory
 ## cert will probably show up in /etc/ssl/certs
