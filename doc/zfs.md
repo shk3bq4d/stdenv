@@ -104,6 +104,9 @@ https://brismuth.com/scheduling-automated-zfs-scrubs-9b2b452e08a4
 geom disk list
 zpool add zroot cache /dev/vtbd6
 zpool iostat -v zroot 5 # livestat
+zpool status zroot
+# remove disk from read cache
+zpool remove zroot vtbd6
 
 # check if FS is mounted
 zfs list -o name,mounted
