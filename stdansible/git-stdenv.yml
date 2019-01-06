@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+    - name: "ZSH syntax highlighting"
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+    - name: "ZSH autosuggestions"
+      git:
+        repo: git://github.com/zsh-users/zsh-autosuggestions
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
