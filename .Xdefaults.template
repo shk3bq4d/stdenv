@@ -205,9 +205,9 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 
 ! appears to fix Home and End in VI (but not ZSH) on rumopc
 ! https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working#Readline
-URxvt.keysym.Home: \033[1~
-URxvt.keysym.End: \033[4~
-URxvt.keysym.KP_Home: \033[1~
-URxvt.keysym.KP_End:  \033[4~
+!URxvt.keysym.Home: \033[1~
+!URxvt.keysym.End: \033[4~
+!URxvt.keysym.KP_Home: \033[1~
+!URxvt.keysym.KP_End:  \033[4~
 
 ! /* ex: set filetype=xdefaults: */
