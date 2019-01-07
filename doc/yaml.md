@@ -1,6 +1,18 @@
 https://learnxinyminutes.com/docs/yaml/
 
+```yaml
+array:
+- hehe
+- habon
+hash:
+  firstkey: firstvalue # this is a comment
+  rootkey:
+---
+seconddocument:
+  youpi: "string"
+```
 
+```yaml
 block_mapping:
     name:  foo
     id:    bar
@@ -9,10 +21,11 @@ empty_flow_mapping: {}
 
 flow_mapping:  http://www.yaml.org/spec/1.2/spec.html#id2790832
 block_mapping: http://www.yaml.org/spec/1.2/spec.html#id2798057
+```
 
 
 # https://stackoverflow.com/questions/6432605/any-yaml-libraries-in-python-that-support-dumping-of-long-strings-as-block-liter
-@begin=python@
+```python
     import yaml
     class folded_unicode(unicode): pass
     class literal_unicode(unicode): pass
@@ -29,4 +42,4 @@ block_mapping: http://www.yaml.org/spec/1.2/spec.html#id2798057
             #rH['data'][os.path.basename(f)] = unicode(fd.read())
             rH['data'][os.path.basename(f)] = literal_unicode(unicode(fd.read()))
     print(yaml.dump(rH, default_flow_style=False))
-@end=python@
+```
