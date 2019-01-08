@@ -8,6 +8,8 @@ leaving at precisely 11:34 for K0 cafetaria blitz lunch (< 15 min). One car seat
 
 As far as I am aware, there hasn't been any news on this subject. As to not clog the progress board, I mark this ticket as DONE. Please feel free to reopen it or create a new ticket should you feel otherwise.
 
+Marking this ticket as "Resolved" as it is my understanding the service request has been correctly fulfilled. Let us know without hesitation if you have any remarks/questions or feel otherwise.
+
 zabbix hostgroup creation request for global/emea/us customer pssigroup.com/iu.com
 
 # Git
