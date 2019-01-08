@@ -14,6 +14,8 @@ apt list --installed
 /etc/apt/sources.list.d/
 echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-httproxy
 
+netstat : apt install net-tools
+
 # YUM
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x

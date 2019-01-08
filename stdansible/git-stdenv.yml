@@ -8,5 +8,5 @@
 
     - name: "ZSH autosuggestions"
       git:
-        repo: git://github.com/zsh-users/zsh-autosuggestions
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
