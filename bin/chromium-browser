@@ -21,7 +21,7 @@ apr16.ly.lan)
 	PROXYPAC=""
 	;;
 *)
-	PROXYPAC="http://127.0.0.1:57155/websupport/proxy.ks.pac.py"
+	PROXYPAC="http://127.0.0.1:57155/proxy.ks.pac.py"
 	#PROXYPAC="file://$HOME/proxy.pac"
 	;;
 esac
