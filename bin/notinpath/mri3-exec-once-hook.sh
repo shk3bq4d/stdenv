@@ -10,5 +10,6 @@
 touch ~/.tmp/touch/mri3-exec-once-hook.start
 
 xrdb -merge ~/.Xdefaults
+xset r rate 800 40
 
 touch ~/.tmp/touch/mri3-exec-once-hook.end

@@ -66,10 +66,10 @@ $STDHOME_OUTPUTS
 #client.unfocused        #333333 #222222 #888888 #292d2e
 #client.urgent           #2f343a #900000 #ffffff #900000
 #client.focused          #ff8888 #ff0000 #ffffff #9900ff
-client.focused          #4c7899 #4c7899 #ffffff #ffff00
-client.focused_inactive #555555 #000000 #ffffff #484e50
-client.unfocused        #dddddd #aaaaaa #000000 #484e50
-client.urgent           #0000cc #0000ff #ffffff #0000CC
+client.focused          #4c7899 #4c7899 #ffffff #ffff00 #ff0000
+client.focused_inactive #555555 #000000 #ffffff #484e50 #ff0000
+client.unfocused        #dddddd #aaaaaa #000000 #484e50 #ff0000
+client.urgent           #0000cc #0000ff #ffffff #0000CC #ff0000
 
 #hide_edge_borders both
 

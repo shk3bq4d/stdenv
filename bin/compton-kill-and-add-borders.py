@@ -13,7 +13,10 @@ try:
 except:
     pass
 border = 'pixel 9'
-border_config = 'pixel 9'
+if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
+    border = 'pixel 5'
+border_config = border
+
 with open(os.path.expanduser('~/.tmp/compton-enabled'), 'wb') as f:
     f.write('false')
 i3 = i3ipc.Connection()
@@ -37,9 +40,9 @@ shutil.copy2(config_fp, configtmp_fp)
 sed('-r', '-i',
     '-e', r's/^(new_window ).*/\1{}/'.format(border_config),
     '-e', r'/^for_window.*border/d',
-    '-e', r's/^(client.unfocused ).*/\1        #000000 #000000 #ffffff #ffff00 #ff0000/',
-    '-e', r's/^(client.focused ).*/\1          #268BD2 #268BD2 #000000 #ffff00 #ff0000/',
-    '-e', r's/^(client.focused_inactive ).*/\1 #000000 #000000 #ffffff #ffff00 #ff0000/',
+    '-e', r's/^(client.unfocused ).*/\1        #aaaaaa #aaaaaa #ffffff #ffff00 #aaaaaa/',
+    '-e', r's/^(client.focused ).*/\1          #DC322F #DC322F #ffffff #ffff00 #DC322F/',
+    '-e', r's/^(client.focused_inactive ).*/\1 #666666 #666666 #ffffff #ffff00 #666666/',
     config_fp
     )
 #with open(config_fp, 'rb') as f:
