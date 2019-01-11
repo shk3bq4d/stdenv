@@ -20,6 +20,7 @@ i3.command('reload')
 bash("-c", """
 if pgrep compton; then 
 	pkill --signal SIGUSR1 compton
+        echo true > ~/.tmp/compton-enabled
 else
 	compton-background.sh
 fi

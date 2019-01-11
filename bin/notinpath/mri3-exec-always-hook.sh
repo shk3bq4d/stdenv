@@ -9,7 +9,7 @@
 ## Author: Jeff Malone, 11 Jan 2019
 ##
 
-# set -euo pipefail
+set -euo pipefail
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
@@ -23,20 +23,12 @@
 
 #[[ -n ${VIMF6+1} ]] && echo running from vim-f6
 
-exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
-exec 2>&1
+# exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
+# exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
+# exec 2>&1
 
-#dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#222222" -nf "#999999"
-case $HOSTNAMEF in \
-dec17.ly.lan)
-	test $(cat ~/.tmp/compton-enabled) == true \
-	&& dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#222222" -nf "#bbbbbb" \
-	|| dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#FFFFFF" -nf "#000000"
-	;;
-$WORK_PC1F)
-	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999 -m 1"
-	;;
-*)
-	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999"
-	;;
-esac
+# test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
+
+echo EOF
+exit 0
+

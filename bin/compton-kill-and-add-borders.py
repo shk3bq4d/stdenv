@@ -14,6 +14,8 @@ except:
     pass
 border = 'pixel 9'
 border_config = 'pixel 9'
+with open(os.path.expanduser('~/.tmp/compton-enabled'), 'wb') as f:
+    f.write('false')
 i3 = i3ipc.Connection()
 if True:
     i3.command('[class="[.]*"] border {}'.format(border))
@@ -51,30 +53,6 @@ try:
 except:
     pass
 shutil.move(configtmp_fp, config_fp)
+#with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'wb') as f:
+    #f.write(border_config)
 
-sys.exit(0)
-
-focused = i3.get_tree().find_focused()
-border = focused.border
-if border == 'pixel':
-    border = u'{} {}'.format(border, focused.current_border_width)
-
-pprint(vars(focused))
-borders = [
-    'none',
-    'pixel 1',
-    'pixel 10',
-    'pixel 20',
-    'normal'
-    ]
-next_border = borders[
-    (1 + borders.index(border)) % len(borders)
-    ]
-print(next_border)
-i3.command('[id="{}"] border {}'.format(focused.window, next_border))
-#i3.command('[id="{}"] split toggle'.format(focused.window))
-#i3.command('[id="{}"] border pixel 10'.format(focused.window))
-#time.sleep(5)
-#i3.command('[id="{}"] border none'.format(focused.window))
-
-sys.exit(0)

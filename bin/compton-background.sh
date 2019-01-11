@@ -8,3 +8,4 @@ if [[ ! -f $f ]]; then
 	stdhome-install-onefile.sh compton.conf
 fi
 compton -b --dbus --config $f
+echo true > ~/.tmp/compton-enabled

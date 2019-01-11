@@ -434,6 +434,8 @@ for_window [class="xfreerdp"] border normal
 #for_window [title="bash"] border 4pixel
 #exec --no-startup-id  ~/bin/apr16/1screen.sh
 exec --no-startup-id  xset r rate 800 40
+exec_always --no-startup-id  touch ~/.tmp/touch/i3-exec
+exec_always --no-startup-id  grep -Po '(?<=^new_window\s).+' ~/.config/i3/config > ~/.tmp/i3-new_window_border
 #for_window [class="term"] border 1pixel
 #for_window [class="Rekonq"] border 1pixel
 #for_window [class="Krdc"] border 1pixel
@@ -479,7 +481,7 @@ bindcode $mod+28  mode "pass-through"
 new_window none
 # youpi mouais
 #exec --no-startup-id compton  -i 0.8 -c -r 22 -z -o 0.3 -l -30 -t -30 --inactive-dim 0.4 -f -C -G -z
-exec --no-startup-id compton  --dbus --config ~/.config/i3/compton.conf
+exec --no-startup-id ~/bin/compton-background.sh
 
 # code:33 => sym: 0x70, symbol:p
 bindcode $mod+27  exec --no-startup-id true
