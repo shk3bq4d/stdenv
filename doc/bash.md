@@ -1033,3 +1033,12 @@ echo abc        | # Normal comment OK here
      uniq         # Final comment
 
 ```
+#  while subshell avoidance by using process substitution https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+```sh
+var=0
+while read i;
+do
+  # perform computations on $i
+  ((var++))
+done < <(find . -type f -name "*.bin" -maxdepth 1)
+```

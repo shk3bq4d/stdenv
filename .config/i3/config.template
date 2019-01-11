@@ -111,7 +111,7 @@ bindcode $mod+Shift+53  kill
 
 # start dmenu (a program launcher)
 # code:40 => sym: 0x64, symbol:d
-bindcode $mod+43  exec dmenu_run $STDHOME_DMENU_ARGS
+bindcode $mod+43  exec ~/bin/notinpath/dmenu-run.sh # mod+d
 
 # change focus
 # code:43 => sym: 0x68, symbol:h

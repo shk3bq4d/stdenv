@@ -44,7 +44,7 @@ set -euo pipefail
 
 #[[ -n \${VIMF6+1} ]] && echo "running from vim-f6"
 
-# exec > >(tee -a ~/log/\$(basename \$0 .sh).log)
+# exec > >(tee -a ~/.tmp/log/\$(basename \$0 .sh).log)
 # exec > >(tee >(logger --id=\$\$ -t \"\$(basename \$0)\" -p user.info ))
 # exec 2>&1
 
