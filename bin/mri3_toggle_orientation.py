@@ -21,7 +21,10 @@ def t(w, cmd):
     except BaseException as e:
         pass
     w.command(cmd)
-    w.command('border pixel 10')
+    if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
+        w.command('border pixel 7')
+    else:
+        w.command('border pixel 10')
 
     time.sleep(5)
     newpid = pid
