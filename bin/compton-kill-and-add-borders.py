@@ -37,9 +37,9 @@ shutil.copy2(config_fp, configtmp_fp)
 sed('-r', '-i',
     '-e', r's/^(new_window ).*/\1{}/'.format(border_config),
     '-e', r'/^for_window.*border/d',
-    '-e', r's/^(client.unfocused ).*/\1        #000000 #000000 #ffffff #ffff00/',
-    '-e', r's/^(client.focused ).*/\1          #00ff33 #00ff33 #000000 #ffff00/',
-    '-e', r's/^(client.focused_inactive ).*/\1 #000000 #000000 #ffffff #ffff00/',
+    '-e', r's/^(client.unfocused ).*/\1        #000000 #000000 #ffffff #ffff00 #ff0000/',
+    '-e', r's/^(client.focused ).*/\1          #268BD2 #268BD2 #000000 #ffff00 #ff0000/',
+    '-e', r's/^(client.focused_inactive ).*/\1 #000000 #000000 #ffffff #ffff00 #ff0000/',
     config_fp
     )
 #with open(config_fp, 'rb') as f:
@@ -53,6 +53,6 @@ try:
 except:
     pass
 shutil.move(configtmp_fp, config_fp)
-#with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'wb') as f:
-    #f.write(border_config)
+with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'wb') as f:
+    f.write(border_config)
 

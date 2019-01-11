@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: apt update + upgrade
+      apt:
+        #autoremove: yes
+        #upgrade: 'safe'
+        cache_valid_time: 86400
+        update_cache: yes
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+    - name: apt install
+      apt:
+        name:
+          - gpick
+        state: present

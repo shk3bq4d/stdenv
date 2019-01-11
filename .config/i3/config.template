@@ -1,4 +1,5 @@
 # ${STDHOME_GENERATED_TIME}
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
@@ -235,32 +236,32 @@ bindcode $mod+Control+33  exec mri3_move_container_right.py
 
 # move focused container to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+Shift+49 move workspace number $ws0;	workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+49 move workspace number $ws0;    workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+Shift+10 move workspace number $ws1;	workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+10 move workspace number $ws1;    workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+Shift+11 move workspace number $ws2;	workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+11 move workspace number $ws2;    workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+Shift+12 move workspace number $ws3;	workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+12 move workspace number $ws3;    workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+Shift+13 move workspace number $ws4;	workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+13 move workspace number $ws4;    workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+Shift+14 move workspace number $ws5;	workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+14 move workspace number $ws5;    workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+Shift+15 move workspace number $ws6;	workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+15 move workspace number $ws6;    workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+Shift+16 move workspace number $ws7;	workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+16 move workspace number $ws7;    workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+Shift+17 move workspace number $ws8;	workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+17 move workspace number $ws8;    workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+Shift+18 move workspace number $ws9;	workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+18 move workspace number $ws9;    workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+Shift+19 move workspace number $ws10;	workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+19 move workspace number $ws10;    workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+Shift+20 move workspace number $ws11;	workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+20 move workspace number $ws11;    workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+Shift+21 move workspace number $ws12;	workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
-#bindcode  $mod+Shift+22 move workspace number $ws13;	workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+21 move workspace number $ws12;    workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+Shift+22 move workspace number $ws13;    workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 
 # reload the configuration file
 # code:54 => sym: 0x63, symbol:c
@@ -322,19 +323,19 @@ bindsym  Escape mode "default"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	id bar-left
-	strip_workspace_numbers yes
-	i3bar_command i3bar -t
-	position $STDHOME_FIRSTBAR_POSITION
-	height $bar_height
+    id bar-left
+    strip_workspace_numbers yes
+    i3bar_command i3bar -t
+    position $STDHOME_FIRSTBAR_POSITION
+    height $bar_height
 #status_command i3status
-	#status_command i3status -c ~/.i3status-or.conf
-	#status_command i3status -c ~/.i3status-or.conf
-	status_command ~/.config/i3/mri3_status_left.sh
+    #status_command i3status -c ~/.i3status-or.conf
+    #status_command i3status -c ~/.i3status-or.conf
+    status_command ~/.config/i3/mri3_status_left.sh
 #status_command i3status
-	output $ol
-	tray_output $ol
-	#tray_output none
+    output $ol
+    tray_output $ol
+    #tray_output none
     bindsym  button4 nop
     bindsym  button5 nop
     bindsym  button6 nop
@@ -342,11 +343,11 @@ bar {
     bindsym  button8 nop
     bindsym  button9 nop
 #separator_symbol ":|:"
-	separator_symbol "-"
+    separator_symbol "-"
 #height 50
 #border_bottom 0
-	colors {
-		background #00000000
+    colors {
+        background #00000000
         statusline #ffffff
         separator #666666
 #border_left 0
@@ -359,7 +360,7 @@ bar {
 #binding_mode       #2f343a #900000 #ffffff
 
         binding_mode       #ff0000 #900000 #ffffff
-	}
+    }
 }
 
 workspace 0  output $ol
@@ -433,9 +434,8 @@ for_window [class="xfreerdp"] border normal
 
 #for_window [title="bash"] border 4pixel
 #exec --no-startup-id  ~/bin/apr16/1screen.sh
-exec --no-startup-id  xset r rate 800 40
-exec_always --no-startup-id  touch ~/.tmp/touch/i3-exec
-exec_always --no-startup-id  grep -Po '(?<=^new_window\s).+' ~/.config/i3/config > ~/.tmp/i3-new_window_border
+exec        --no-startup-id  ~/bin/notinpath/mri3-exec-once-hook.sh
+exec_always --no-startup-id  ~/bin/notinpath/mri3-exec-always-hook.sh
 #for_window [class="term"] border 1pixel
 #for_window [class="Rekonq"] border 1pixel
 #for_window [class="Krdc"] border 1pixel
@@ -473,7 +473,7 @@ exec mrparcellite
 
 mode "pass-through" {
 # code:28 => sym: 0x74, symbol:t
-	        bindcode $mod+28  mode "default"
+    bindcode $mod+28  mode "default"
 }
 
 # code:28 => sym: 0x74, symbol:t

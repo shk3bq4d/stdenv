@@ -9,26 +9,9 @@
 ## Author: Jeff Malone, 11 Jan 2019
 ##
 
-set -euo pipefail
+touch ~/.tmp/touch/mri3-exec-always-hook.start
 
-# function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
+grep -Po '(?<=^new_window\s).+' ~/.config/i3/config > ~/.tmp/i3-new_window_border
+~/bin/compton-background.sh
 
-# [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
-
-# [[ $# -lt 1 || $# -gt 2 ]] && echo FATAL: incorrect number of args && usage && exit 1
-
-# for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i && exit 1; done
-
-# DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-
-#[[ -n ${VIMF6+1} ]] && echo running from vim-f6
-
-# exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
-# exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
-# exec 2>&1
-
-# test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
-
-echo EOF
-exit 0
-
+touch ~/.tmp/touch/mri3-exec-always-hook.end

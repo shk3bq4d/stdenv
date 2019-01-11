@@ -9,6 +9,9 @@ except:
     import mri3
 import time
 
+with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'r') as f:
+    next_border = 'border {}'.format(f.read().strip())
+
 def t(w, cmd):
     pid = str(os.getpid())
     fp = os.path.expanduser('~/.tmp/tmp/mri3_toggle-orientation-{}'.format(w.id))
@@ -26,10 +29,10 @@ def t(w, cmd):
         with open(fp, 'r') as f:
             newpid = f.read()
         if newpid == pid:
-            w.command('border none')
+            w.command(next_border)
             os.unlink(fp)
     except:
-        w.command('border none')
+        w.command(next_border)
 
 w = mri3.get_root().find_focused()
 ws = w.workspace()
@@ -58,7 +61,7 @@ if len(p.nodes) == 1:
     elif p.orientation == 'vertical':
         if mri3.remove_single_child_containers(p):
             if debug: print(9)
-            w.command('border none')
+            w.command(next_border)
         else:
             if debug: print(10)
             t(w, 'split horizontal')
