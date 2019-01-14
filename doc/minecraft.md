@@ -101,3 +101,7 @@ This is a great alternative to double-tapping W, but I switched it to the R key 
 Alright, that's about everything you need to know to be a Minecraft Keyboard Expert! 
 I probably missed a few things, so this information may not be exact. 
 I know this definitely works for WIndows, but i'm not sure about the others.
+
+# apprivoiser un dauphin
+https://minecraft-fr.gamepedia.com/Mods/Mo%27_Creatures
+https://minecraft-fr.gamepedia.com/Mods/Mo%27_Creatures#Apprivoiser_un_cheval
