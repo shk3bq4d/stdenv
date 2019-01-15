@@ -34,7 +34,7 @@ dec17.ly.lan)
 	|| dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#FFFFFF" -nf "#000000"
 	;;
 $WORK_PC1F)
-	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999 -m 1"
+	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999" -m 1
 	;;
 *)
 	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999"

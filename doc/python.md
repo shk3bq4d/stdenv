@@ -200,11 +200,8 @@ Expressing a percentage:
 'Correct answers: 88.64%'
 Using type-specific formatting:
 
->>>
->>> import datetime
->>> d = datetime.datetime(2010, 7, 4, 12, 15, 58)
->>> '{:%Y-%m-%d %H:%M:%S}'.format(d)
-'2010-07-04 12:15:58'
+'{:%Y-%m-%d %H:%M:%S} printf with strftime formatting'.format(datetime.datetime(2010, 7, 4, 12, 15, 58))
+
 Nesting arguments and more complex examples:
 
 >>>
@@ -363,7 +360,7 @@ os.path.basename()
 os.path.realpath()
 os.path.abspath()
 os.path.realpath(os.path.abspath())
-lmod = datetime.datetime.fromtimestamp(os.path.getmtime(fp)) # last modified time of file fp
+lmod = datetime.datetime.fromtimestamp(os.path.getmtime(__file__)) # last modified time of file fp
 datetime.datetime.fromtimestamp(1465016400) # equivalent of date -d @1465016400 # unix epoch
 python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch
 os.name is 'posix', 'nt', 'os2', 'ce' or 'riscos'

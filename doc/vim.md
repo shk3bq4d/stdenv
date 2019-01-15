@@ -295,3 +295,34 @@ autocmd CursorHold,CursorHoldI * update
 ```
 
 set ft=messages " syslog
+
+# browse VIM help
+http://vim.wikia.com/wiki/Learn_to_use_help
+:help :help
+:help quickref.txt
+* Press Ctrl-] to follow the link (jump to the quickref topic).
+* After browsing the quickref topic, press Ctrl-T to go back to the previous topic.
+* You can also press Ctrl-O to jump to older locations, or Ctrl-I to jump to newer locations.
+
+
+# map
+     COMMANDS                    MODES
+:map   :noremap  :unmap     Normal, Visual, Select, Operator-pending
+:nmap  :nnoremap :nunmap    Normal
+:vmap  :vnoremap :vunmap    Visual and Select
+:smap  :snoremap :sunmap    Select
+:xmap  :xnoremap :xunmap    Visual
+:omap  :onoremap :ounmap    Operator-pending
+:map!  :noremap! :unmap!    Insert and Command-line
+:imap  :inoremap :iunmap    Insert
+:lmap  :lnoremap :lunmap    Insert, Command-line, Lang-Arg
+:cmap  :cnoremap :cunmap    Command-line
+:tmap  :tnoremap :tunmap    Terminal-Job
+
+
+    COMMANDS                                  MODES
+                                       Normal  Visual+Select  Operator-pending
+:map   :noremap   :unmap   :mapclear     yes        yes            yes
+:nmap  :nnoremap  :nunmap  :nmapclear    yes         -              -
+:vmap  :vnoremap  :vunmap  :vmapclear     -         yes             -
+:omap  :onoremap  :ounmap  :omapclear     -          -             yes
