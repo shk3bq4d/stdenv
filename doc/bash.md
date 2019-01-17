@@ -859,7 +859,7 @@ echo \
 'multiline
 echo'
 
-cat - << EOF
+cat - << EOF > /tmp/hehe
 heredocument multiline cat
 super
 EOF
