@@ -8,7 +8,20 @@ if [[ ! -f $f ]]; then
 	cd i3
 	stdhome-install-onefile.sh compton.conf
 fi
-compton -b --dbus --config $f
+case $HOSTNAMEF in \
+dec17.ly.lan)
+	extra="
+		--shadow-exclude-reg x20+0+0 
+		--shadow-radius=6 
+		--shadow-offset-x=-9 
+		--shadow-offset-y=-9 
+		"
+	;;
+*)
+	extra=
+	;;
+esac
+compton -b --dbus $extra --config $f
 echo true > ~/.tmp/compton-enabled
 xwininfo -root -tree \
   | sed -n 's/^ *    \(0x[[:xdigit:]]*\).*/\1/p' \
