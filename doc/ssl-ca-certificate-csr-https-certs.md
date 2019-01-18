@@ -65,6 +65,8 @@ keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass c
 
 cacert password -> changeit
 keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
+keytool -storepass "123456" -list -v -keystore ~/apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks
+keytool -storepass "123456"  -exportcert -alias webserver -v -keystore apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks -rfc > /tmp/out3
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
 keytool -import -trustcacerts -file KS-CFC-Root_KS-CFC-Root.crt -alias KS-CFC-Root -keystore ks-cacerts2.jks -storepass HqBcm
 keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS-CFC-Issuing-01 -keystore ks-cacerts.jks -storepass HqBcm
