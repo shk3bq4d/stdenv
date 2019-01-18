@@ -68,7 +68,10 @@ small = socket.gethostname() in fontH.keys()
 monitor1 = socket.gethostname() in ['ru'+'mo-pc']
 
 col_nb = '#222222'
-col_nf = '#999999' 
+col_nf = '#999999'
+if 1:
+    col_nb = '#FFFFFF'
+    col_nf = '#000000'
 if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
     try:
         pgrep('compton')
@@ -77,7 +80,7 @@ if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
         col_nf = '#000000'
 # set default menu args for supported menus
 if basename(args.menu) == 'dmenu':
-    menu_args += ['-i', '-f', '-b', '-fn']
+    menu_args += ['--class', 'mrdmenu', '-i', '-f', '-b', '-fn']
     menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
     if monitor1:
         menu_args += ['-m', '1']

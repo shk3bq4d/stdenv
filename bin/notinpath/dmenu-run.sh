@@ -30,13 +30,14 @@ exec 2>&1
 case $HOSTNAMEF in \
 dec17.ly.lan)
 	test $(cat ~/.tmp/compton-enabled) == true \
-	&& dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#222222" -nf "#bbbbbb" \
-	|| dmenu_run -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#FFFFFF" -nf "#000000"
+	&& dmenu_run --class mrdmenu -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#FFFFFF" -nf "#000000" \
+	|| dmenu_run --class mrdmenu -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#FFFFFF" -nf "#000000"
+	#&& dmenu_run --class mrdmenu -i -b -l 20 -fn  "DejaVuSansMono-14" -nb "#222222" -nf "#bbbbbb" \
 	;;
 $WORK_PC1F)
-	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999" -m 1
+	dmenu_run --class mrdmenu -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#FFFFFF" -nf "#000000" -m 1
 	;;
 *)
-	dmenu_run -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999"
+	dmenu_run --class mrdmenu -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#FFFFFF" -nf "#000000"
 	;;
 esac

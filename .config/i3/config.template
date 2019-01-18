@@ -112,7 +112,7 @@ bindcode $mod+Shift+53  kill
 
 # start dmenu (a program launcher)
 # code:40 => sym: 0x64, symbol:d
-bindcode $mod+43  exec ~/bin/notinpath/dmenu-run.sh # mod+d
+bindcode $mod+43  exec --no-startup-id ~/bin/notinpath/dmenu-run.sh # mod+d
 
 # change focus
 # code:43 => sym: 0x68, symbol:h
@@ -189,7 +189,7 @@ bindcode $mod+53  sticky toggle
 #bindcode  $mod+d focus child
 #bindcode  $mod+d focus child
 # code:58 => sym: 0x6d, symbol:m
-# code:31 => sym: 0x69, symbol:i
+# code:31 => sym: 0x69, symbol:i mod-i mod+i
 bindcode $mod+42 exec python3 ~/bin/mri3_container_commander.py
 bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command "move to workspace current && focus"
 
