@@ -191,7 +191,9 @@ case $SCRIPT in \
 *yml)
     # trying for ansible
     if grep -qE "\s*tasks:" $SCRIPT; then
+        set -x
         ansible-playbook $SCRIPT --ask-become-pass --diff --check
+        set +x
     else
         echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
         exit 1

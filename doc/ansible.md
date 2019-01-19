@@ -34,6 +34,10 @@
   register: foo
   tags:
 	- mrdebug
+  vars:
+    work_dir: "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}/.tmp/ansible"
+- name: environment variable access
+  debug: var=ansible_env.SUDO_USER
 - name: myfoo
   debug:
 	  #msg: "the echo was {{ foo.stdout }}"
@@ -151,3 +155,27 @@ Options:
 shell, command no change when exit code is 0 change_when: false -> # http://www.middlewareinventory.com/blog/ansible-changed_when-and-failed_when-examples/
 
 "{{ 'ternary operator jinja' if expose_service == 'true' else 'ClusterIP' }}"
+
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
+"{{ ('~' + ansible_env.SUDO_USER) | expanduser }}"
+To add quotes for shell usage: ```yaml - shell: echo {{ string_value | quote }}```
+To use one value on true and another on false (new in version 1.9): ```yaml {{ (name == "John") | ternary('Mr','Ms') }}```
+To concatenate a list into a string: ```yaml {{ list | join(" ") }}```
+To get the last name of a file path, like ‘foo.txt’ out of ‘/etc/asdf/foo.txt’: ```yaml {{ path | basename }}```
+To get the last name of a windows style file path (new in version 2.0): ```yaml {{ path | win_basename }}```
+To separate the windows drive letter from the rest of a file path (new in version 2.0): ```yaml {{ path | win_splitdrive }}```
+To get only the windows drive letter: ```yaml {{ path | win_splitdrive | first }}```
+To get the rest of the path without the drive letter: ```yaml {{ path | win_splitdrive | last }}```
+To get the directory from a path: ```yaml {{ path | dirname }}```
+To get the directory from a windows path (new version 2.0): ```yaml {{ path | win_dirname }}```
+To expand a path containing a tilde (~) character (new in version 1.5): ```yaml {{ path | expanduser }}```
+To expand a path containing environment variables: ```yaml {{ path | expandvars }}```
+To get the real path of a link (new in version 1.8): ```yaml {{ path | realpath }}```
+To get the relative path of a link, from a start point (new in version 1.7): ```yaml {{ path | relpath('/etc') }}```
+
+ To get the root and extension of a path or filename (new in version 2.0): ```yaml {{ path | splitext }}```
+To work with Base64 encoded strings: ```yaml {{ encoded | b64decode }}```
+To work with Base64 encoded strings: ```yaml {{ encoded | b64encode }}```
+To work with Base64 encoded strings: ```yaml {{ encoded | b64decode(encoding='utf-16-le') }}```
+To work with Base64 encoded strings: ```yaml {{ encoded | b64encode(encoding='utf-16-le') }}```
+To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uuid }}```
