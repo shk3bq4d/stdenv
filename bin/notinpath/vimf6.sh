@@ -191,7 +191,9 @@ case $SCRIPT in \
 *yml)
     # trying for ansible
     if grep -qE "\s*tasks:" $SCRIPT; then
+        set -x
         ansible-playbook $SCRIPT --ask-become-pass --diff --check
+        set +x
     else
         echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
         exit 1
@@ -200,6 +202,23 @@ case $SCRIPT in \
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
     exit 0
+    ;;
+*tex)
+    out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-$(basename $SCRIPT).pdf
+    #docker run -i narf/latex < $SCRIPT > $out
+    image=mrlatex
+    if ! docker images $image | grep -wqE "^${image}"; then
+        echo "Image not found $image, execute the following:"
+        echo "  git clone https://github.com/shK3Bq4d/docker-latex/ ~/git/shK3Bq4d/docker-latex/ && \\"
+        echo "    cd ~/git/shK3Bq4d/docker-latex/ && ./build.sh"
+    elif docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
+        echo $out
+        nohup evince $out &>/dev/null </dev/null &
+    else
+        echo "exit code is $?"
+        cat $out
+        exit 1
+    fi
     ;;
 *.plantuml)
     f=~/.tmp/bip.svg
