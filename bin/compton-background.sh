@@ -19,7 +19,7 @@ dec17.ly.lan)
     ;;
 *)
     extra="
-        --shadow-exclude-reg x24+0+0
+        --shadow-exclude-reg x39+0+0
         --shadow-radius=12
         --shadow-offset-x=-18
         --shadow-offset-y=-18
