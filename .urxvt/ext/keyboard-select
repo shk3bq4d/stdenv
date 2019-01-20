@@ -56,6 +56,12 @@ sub on_action {
 sub on_user_command {
 	my ($self, $cmd) = @_;
 
+	# https://www.systutorials.com/docs/linux/man/3-urxvtperl/
+	#$self->scr_add_lines("coucou\n");
+	#$self->tt_write("\1\e[1 q\2");
+	$self->cmd_parse("\1\e[1 q\2");
+	#$self->scr_add_lines("mrend\n");
+
 	if (not $self->{active}) {
 		if ($cmd eq 'keyboard-select:activate') {
 			activate($self);
@@ -507,6 +513,10 @@ sub deactivate {
 	$self->want_refresh();
 
 	$self->{active} = 0;
+	#$self->cmd_parse("\x1b");
+	# can't manage to send escape key to ensure being in cmd mode
+	# so I put insert mode char and this will be correct 50% of the time
+	$self->cmd_parse("\1\e[5 q\2");
 
 	()
 }

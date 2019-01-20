@@ -4,7 +4,11 @@
   vars:
     bip: "systemctl status docker.service | grep dns"
   tasks:
-    - name: "Set DNS config"
+    - name: "Only apply on machines that have dnsmasq listening on docker interface"
+      meta: end_play
+      when: ansible_fqdn != ansible_env.WORK_PC1F
+
+    - name: "Set docker DNS config"
       copy:
         dest: "/etc/systemd/system/docker.service.d/99-dns.conf"
         content: |

@@ -4,6 +4,10 @@
     source: "https://askubuntu.com/posts/907249"
   become: true
   tasks:
+    - name: "Only apply on machines that have alternate dnsmasq set up"
+      meta: end_play
+      when: ansible_fqdn != ansible_env.WORK_PC1F
+
     - name: "Disable Systemd-Resolved service"
       service:
         name: systemd-resolved
