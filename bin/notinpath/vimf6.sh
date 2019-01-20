@@ -9,6 +9,8 @@ LOG="$2"
 #exec > >(tr -d '\r' | tee "$LOG")
 exec > >(tee "$LOG")
 exec 2>&1
+SCRIPT_DIR=$(dirname "$SCRIPT")
+SCRIPT_NAME=$(basename "$SCRIPT")
 
 # puppet module to capsule
 if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
@@ -108,7 +110,7 @@ vimf6.sh)
 *pl)  perl $SCRIPT;;
 *php) php $SCRIPT;;
 *java)
-    D=$(dirname "$SCRIPT")
+    D=$SCRIPT_DIR
     mrjava_cp() {
         if [[ -d ../MrTools/ ]]; then
             echo -n ':../MrTools/build/classes'
@@ -184,27 +186,39 @@ case $SCRIPT in \
             engine=dot
             ;;
     esac
-    svg=/tmp/$(basename $SCRIPT).svg
+    svg=/tmp/${SCRIPT_NAME}.svg
     $engine -Tsvg -o$svg -v $SCRIPT
     nohup firefox $svg
     ;;
 *yml)
     # trying for ansible
     if grep -qE "\s*tasks:" $SCRIPT; then
-        set -x
-        ansible-playbook $SCRIPT --ask-become-pass --diff --check
+        #ansible-playbook $SCRIPT --ask-become-pass --diff --check
+        if grep -wq become $SCRIPT &>/dev/null; then
+            set -x
+            sudo -E $(which ansible-playbook) $SCRIPT --diff --check # -l 127.0.0.1
+        else
+            set -x
+            ansible-playbook $SCRIPT                   --diff --check # -l 127.0.0.1
+        fi
         set +x
+        rm -f $SCRIPT_DIR/$(basename $SCRIPT .yml).retry || true
     else
         echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
         exit 1
     fi
+    ;;
+$HOME/.Xdefaults)
+    set -x
+    xrdb -merge ~/.Xdefaults
+    set +x
     ;;
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
     exit 0
     ;;
 *tex)
-    out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-$(basename $SCRIPT).pdf
+    out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-${SCRIPT_NAME}.pdf
     #docker run -i narf/latex < $SCRIPT > $out
     image=mrlatex
     if ! docker images $image | grep -wqE "^${image}"; then
@@ -246,13 +260,12 @@ $HOME/.config/i3/config.*)
     echo "i3 restarted B"
     ;;
 */Dockerfile)
-    DIR=$(dirname $SCRIPT)
-    if [[ -f $DIR/build.sh ]]; then
+    if [[ -f $SCRIPT_DIR/build.sh ]]; then
         bash $DIR/build.sh
-    elif [[ -f $DIR/../build.sh ]]; then
-        bash $DIR/../build.sh
+    elif [[ -f $SCRIPT_DIR/../build.sh ]]; then
+        bash $SCRIPT_DIR/../build.sh
     else
-        docker build -f $SCRIPT $(dirname $SCRIPT)
+        docker build -f $SCRIPT $SCRIPT_DIR
     fi
     ;;
 *)

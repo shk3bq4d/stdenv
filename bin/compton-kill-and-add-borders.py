@@ -13,7 +13,7 @@ border = 'pixel 9'
 border_color_focused = '#DC322F'
 text_color = '#ffffff'
 if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
-    border = 'pixel 5'
+    border = 'pixel 9'
     border_color_focused = '#00ffff'
     text_color = '#000000'
 border_config = border
@@ -65,7 +65,7 @@ configtmp_fp = '{}-tmp'.format(config_fp)
 shutil.copy2(config_fp, configtmp_fp)
 sed('-r', '-i',
     '-e', r's/^(inactive-opacity = |frame-opacity = ).*/\1 1.0;/',
-    '-e', r's/^(inactive-dim = ).*/\1 0.15;/',
+    '-e', r's/^(inactive-dim = ).*/\1 0.09;/',
     config_fp
     )
 

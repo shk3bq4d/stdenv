@@ -1,0 +1,158 @@
+#!/usr/bin/env perl
+# https://www.systutorials.com/docs/linux/man/3-urxvtperl/
+
+use strict;
+
+sub trim {
+   return $_[0] =~ s/^\s+|\s+$//rg;
+}
+sub lg {
+   my ($msg) = @_;
+   my $DEBUG_FILE = '/tmp/mrtools.log';
+   my $DEBUG_FH;
+
+   open($DEBUG_FH, ">>$DEBUG_FILE");
+   print $DEBUG_FH "$msg\n";
+   close($DEBUG_FH);
+}
+sub on_reset{
+    my ($self, $text) = @_;
+    if (0 && $self->{mrtop})
+    {    $self->{mrtop} = $self->top_row;
+    }
+    mrupdate($self);
+}
+sub on_add_lines{
+
+    my ($self, $text) = @_;
+    #lg(sprintf("on_add_lines %s", $text));
+    if (!$self->{mrtop} && $text !~ /^\s*$/ && $text !~ /^\s*[0-9 \n\t\r]+\s*$/)
+    {   # register line number of first non-empty lines
+        # which are output by ~/.bashrc due to
+        # * https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing and,
+        # * better explained https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing
+        # echo -n "$(<~/.config/urxvt-resize-bug)"
+        $self->{mrtop} = $self->top_row + 1;
+        lg(sprintf("on_add_lines mrtop grep %d _${text}grep_", $self->{mrtop}, trim($text)));
+    }
+    mrupdate($self);
+}
+
+sub mrupdate{
+    my ($self) = @_;
+    #status_area($self);
+    my ($stat, $stat_len, $mrextra, $a, $vlocation);
+    my ($last_line_in_view, $first_line_in_view, $total_lines);
+    my ($last_line_in_view_o, $first_line_in_view_o);
+
+
+    if (!$self->{mrtop})
+    {    return;
+    }
+    if ($self->current_screen != 0)
+    {
+        if ($self->{overlay})
+        {    $self->{overlay}->hide();
+        }
+        return;
+    }
+    my ($cr, $cc) = $self->screen_cur();
+    $a = $self->line($cr);
+
+    # a)                    100                 + 0 - 101
+    # b)                    101                 + 0 - 101
+
+    $total_lines          = -$self->top_row     + $self->{mrtop} + $a->end;
+    $first_line_in_view   = -$self->top_row     + $self->view_start();
+    $last_line_in_view    = $first_line_in_view + $self->nrow - 1;
+
+    $last_line_in_view_o  = $last_line_in_view  + $self->{mrtop};
+    $first_line_in_view_o = $first_line_in_view + $self->{mrtop};
+
+    if ($total_lines >= $self->nrow)
+    {    # we're past screen has been completly filled, we no longer need
+        # add_lines
+        $self->disable("add_lines");
+    }
+    if ($total_lines <= $last_line_in_view_o)
+    {    $stat = sprintf('%d', $total_lines);
+    }
+    elsif ($last_line_in_view_o < 1)
+    {    $stat = sprintf('TOP/%d', $total_lines);
+    }
+    else
+    {    $stat = sprintf('%d-%d/%d',
+            $first_line_in_view_o < 1 ? 1 : $first_line_in_view_o,
+            $last_line_in_view_o,
+            $total_lines
+            );
+    }
+
+
+    if (1)
+    {
+        #$stat = sprintf(
+        lg(sprintf("
+first_line_in_view:   $first_line_in_view
+first_line_in_view_o: $first_line_in_view_o
+.self->{mrtop}:       $self->{mrtop}
+.self->{mrtop}:       $self->{mrtop}
+.self->nrow:          %d
+.self->view_start:    %d
+.self->top_row:       %d
+.self->saveLines:     %d
+.self->total_rows:    %d
+.a->beg:              %d
+.a->end:              %d",
+    $self->nrow,
+    $self->view_start,
+    $self->top_row,
+    $self->saveLines,
+    $self->total_rows(),
+    $a->beg,
+    $a->end
+    ));
+    }
+    $stat_len = length($stat);
+
+    #if ($self->top_row > 0)
+    if ($last_line_in_view != $total_lines || $last_line_in_view > $self->nrow)
+    {   $vlocation = 0;
+    }
+    else
+    {   $vlocation = -1;
+    }
+    if (!$self->{overlay}
+        || $self->{overlay_len} != $stat_len
+        || $self->{overlay_vlocation} != $vlocation
+        ) {
+        delete $self->{overlay} if $self->{overlay};
+        $self->{overlay} = $self->overlay(-1, $vlocation, $stat_len, 1,
+            #urxvt::OVERLAY_RSTYLE,
+                urxvt::DEFAULT_RSTYLE,
+                0);
+        $self->{overlay_len} = $stat_len;
+        $self->{overlay_vlocation} = $vlocation;
+    }
+
+    $self->{overlay}->set(0, 0, $self->special_encode($stat));
+    $self->{overlay}->show();
+}
+
+sub on_view_change{
+    my ($self) = @_;
+    mrupdate($self);
+}
+sub on_scroll_back{
+    my ($self) = @_;
+    mrupdate($self);
+}
+sub on_start{
+    my ($self) = @_;
+    #$self->{hehe} = "habon";
+    #$self->scr_add_lines("coucou\n");
+    #status_area($self);
+    mrupdate($self);
+
+    ()
+}

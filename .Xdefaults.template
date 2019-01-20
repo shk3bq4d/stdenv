@@ -33,7 +33,7 @@ URxvt*foreground: rgb:44/44/44
 !URxvt.perl-ext-common: clipboard-osc,font-size,vim-scrollback
 !URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default,matcher
 !URxvt.perl-ext-common: randombackground,clipboard-osc,font-size,keyboard-select,default
-URxvt.perl-ext-common: clipboard-osc,font-size,keyboard-select,default
+URxvt.perl-ext-common: clipboard-osc,font-size,keyboard-select,default,mrscrollpos
 !URxvt.keysym.M-u: perl:url-select:select_next
 !URxvt.url-select.launcher: /usr/bin/xdg-open
 !URxvt.url-select.underline: true
@@ -209,5 +209,9 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 !URxvt.keysym.End: \033[4~
 !URxvt.keysym.KP_Home: \033[1~
 !URxvt.keysym.KP_End:  \033[4~
+
+! disable scroll back while on secondary screen (vim)
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
 
 ! /* ex: set filetype=xdefaults: */
