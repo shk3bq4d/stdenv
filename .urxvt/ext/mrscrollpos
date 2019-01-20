@@ -23,7 +23,7 @@ sub trim {
 sub lg {
    my ($msg) = @_;
    if (1)
-   {	return;
+   {    return;
    }
    my $DEBUG_FILE = '/tmp/mrtools.log';
    my $DEBUG_FH;
@@ -37,7 +37,7 @@ sub on_reset{
     if (0 && $self->{mrtop})
     {    $self->{mrtop} = $self->top_row;
     }
-	lg("grep on_reset");
+    lg("grep on_reset");
     mrupdate($self);
 }
 sub on_add_lines{
@@ -90,22 +90,22 @@ sub mrupdate{
     if ($total_lines >= $self->nrow)
     {   # we're past screen has been completly filled, we no longer need
         # add_lines
-		# EDIT well in case window size changed, then we would need this back
-		# so commenting out the disabling
-		#$self->disable("add_lines");
+        # EDIT well in case window size changed, then we would need this back
+        # so commenting out the disabling
+        #$self->disable("add_lines");
     }
     if ($total_lines <= $last_line_in_view_o)
     {   $stat = sprintf('%s %d',
-			#strftime('%Y.%m.%d %H:%M:%S', gmtime()),
-			#strftime('%H:%M:%S ', gmtime()),
-			"",
-			$total_lines
-			);
-		$mrstyle = $mrstyle3;
+            #strftime('%Y.%m.%d %H:%M:%S', gmtime()),
+            #strftime('%H:%M:%S ', gmtime()),
+            "",
+            $total_lines
+            );
+        $mrstyle = $mrstyle3;
     }
     elsif ($last_line_in_view_o < 1)
     {   #$stat = sprintf('TOP/%d', $total_lines);
-		$mrstyle = $mrstyle2;
+        $mrstyle = $mrstyle2;
          $stat = sprintf('-%d-%d/%d',
             -$first_line_in_view_o,
             -$last_line_in_view_o,
@@ -118,7 +118,7 @@ sub mrupdate{
             $last_line_in_view_o,
             $total_lines
             );
-		$mrstyle = $mrstyle3;
+        $mrstyle = $mrstyle3;
     }
 
 
@@ -138,8 +138,8 @@ first_line_in_view_o: $first_line_in_view_o
     $self->nrow,
     $self->view_start,
     $self->top_row,
-	#    $self->saveLines,
-	#    $self->total_rows(),
+    #    $self->saveLines,
+    #    $self->total_rows(),
     $a->beg,
     $a->end
     ));
