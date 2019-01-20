@@ -4,7 +4,7 @@ set -e
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR 
 function cleanup() {
-	echo cleanup
+	#echo cleanup
 	sudo rm -f $DIR/*.retry &>/dev/null
 }
 trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
@@ -17,9 +17,17 @@ else
 	for pb in "$@"; do
 		if grep -wq become $pb &>/dev/null; then
 			#ansible-playbook $pb --ask-become-pass --diff -l 127.0.0.1
-			sudo -E ~/bin/ansible-playbook $pb --diff -l 127.0.0.1
+			if ! sudo -E ~/bin/ansible-playbook $pb --diff -l 127.0.0.1; then
+				echo "FATAL: didn't run $pb"
+				cleanup
+				exit 1
+			fi
 		else
-			ansible-playbook $pb                   --diff -l 127.0.0.1
+			if ! ansible-playbook $pb                   --diff -l 127.0.0.1; then
+				echo "FATAL: didn't run $pb"
+				cleanup
+				exit 1
+			fi
 		fi
 	done
 fi

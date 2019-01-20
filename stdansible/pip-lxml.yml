@@ -10,3 +10,4 @@
       pip:
         name: lxml
         extra_args: --user
+        executable: ~/.local/bin/pip2
