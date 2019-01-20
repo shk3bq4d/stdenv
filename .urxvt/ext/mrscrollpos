@@ -2,7 +2,19 @@
 # https://www.systutorials.com/docs/linux/man/3-urxvtperl/
 
 use strict;
+use POSIX qw(strftime);
 
+my $mrstyle;
+$mrstyle = urxvt::DEFAULT_RSTYLE;
+# black = 0
+# white = 1
+# white = 2
+# red = 2
+# cyan = 8
+# black = 9
+# white = 10
+# grey = 13
+$mrstyle = urxvt::SET_FGCOLOR($mrstyle, 3);
 sub trim {
    return $_[0] =~ s/^\s+|\s+$//rg;
 }
@@ -20,6 +32,7 @@ sub on_reset{
     if (0 && $self->{mrtop})
     {    $self->{mrtop} = $self->top_row;
     }
+	lg("grep on_reset");
     mrupdate($self);
 }
 sub on_add_lines{
@@ -70,12 +83,19 @@ sub mrupdate{
     $first_line_in_view_o = $first_line_in_view + $self->{mrtop};
 
     if ($total_lines >= $self->nrow)
-    {    # we're past screen has been completly filled, we no longer need
+    {   # we're past screen has been completly filled, we no longer need
         # add_lines
-        $self->disable("add_lines");
+		# EDIT well in case window size changed, then we would need this back
+		# so commenting out the disabling
+		#$self->disable("add_lines");
     }
     if ($total_lines <= $last_line_in_view_o)
-    {    $stat = sprintf('%d', $total_lines);
+    {    $stat = sprintf('%s %d',
+			#strftime('%Y.%m.%d %H:%M:%S', gmtime()),
+			#strftime('%H:%M:%S ', gmtime()),
+			"",
+			$total_lines
+			);
     }
     elsif ($last_line_in_view_o < 1)
     {    $stat = sprintf('TOP/%d', $total_lines);
@@ -100,18 +120,18 @@ first_line_in_view_o: $first_line_in_view_o
 .self->nrow:          %d
 .self->view_start:    %d
 .self->top_row:       %d
-.self->saveLines:     %d
-.self->total_rows:    %d
 .a->beg:              %d
 .a->end:              %d",
     $self->nrow,
     $self->view_start,
     $self->top_row,
-    $self->saveLines,
-    $self->total_rows(),
+	#    $self->saveLines,
+	#    $self->total_rows(),
     $a->beg,
     $a->end
     ));
+#.self->saveLines:     %d uninteresting until buffer fully reached,  goes to 65535
+#.self->total_rows:    %d uninteresting until buffer fully reached,  goes to 65535 + nrow
     }
     $stat_len = length($stat);
 
@@ -129,7 +149,7 @@ first_line_in_view_o: $first_line_in_view_o
         delete $self->{overlay} if $self->{overlay};
         $self->{overlay} = $self->overlay(-1, $vlocation, $stat_len, 1,
             #urxvt::OVERLAY_RSTYLE,
-                urxvt::DEFAULT_RSTYLE,
+                $mrstyle,
                 0);
         $self->{overlay_len} = $stat_len;
         $self->{overlay_vlocation} = $vlocation;
