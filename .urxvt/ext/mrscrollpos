@@ -4,7 +4,7 @@
 use strict;
 use POSIX qw(strftime);
 
-my $mrstyle;
+my ($mrstyle,$mrstyle2,$mrstyle3);
 $mrstyle = urxvt::DEFAULT_RSTYLE;
 # black = 0
 # white = 1
@@ -14,12 +14,17 @@ $mrstyle = urxvt::DEFAULT_RSTYLE;
 # black = 9
 # white = 10
 # grey = 13
-$mrstyle = urxvt::SET_FGCOLOR($mrstyle, 3);
+$mrstyle3 = urxvt::SET_FGCOLOR($mrstyle, 3);
+$mrstyle2 = urxvt::SET_FGCOLOR($mrstyle, 8);
+$mrstyle = $mrstyle3;
 sub trim {
    return $_[0] =~ s/^\s+|\s+$//rg;
 }
 sub lg {
    my ($msg) = @_;
+   if (1)
+   {	return;
+   }
    my $DEBUG_FILE = '/tmp/mrtools.log';
    my $DEBUG_FH;
 
@@ -90,26 +95,34 @@ sub mrupdate{
 		#$self->disable("add_lines");
     }
     if ($total_lines <= $last_line_in_view_o)
-    {    $stat = sprintf('%s %d',
+    {   $stat = sprintf('%s %d',
 			#strftime('%Y.%m.%d %H:%M:%S', gmtime()),
 			#strftime('%H:%M:%S ', gmtime()),
 			"",
 			$total_lines
 			);
+		$mrstyle = $mrstyle3;
     }
     elsif ($last_line_in_view_o < 1)
-    {    $stat = sprintf('TOP/%d', $total_lines);
+    {   #$stat = sprintf('TOP/%d', $total_lines);
+		$mrstyle = $mrstyle2;
+         $stat = sprintf('-%d-%d/%d',
+            -$first_line_in_view_o,
+            -$last_line_in_view_o,
+            $self->{mrtop}
+            );
     }
     else
-    {    $stat = sprintf('%d-%d/%d',
+    {   $stat = sprintf('%d-%d/%d',
             $first_line_in_view_o < 1 ? 1 : $first_line_in_view_o,
             $last_line_in_view_o,
             $total_lines
             );
+		$mrstyle = $mrstyle3;
     }
 
 
-    if (1)
+    if (0)
     {
         #$stat = sprintf(
         lg(sprintf("
