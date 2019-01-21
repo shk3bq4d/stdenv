@@ -17,6 +17,14 @@ dec17.ly.lan)
         --shadow-offset-y=-9
         "
     ;;
+$WORK_PC1F)
+    extra="
+        --shadow-exclude-reg x32+0-0
+        --shadow-radius=12
+        --shadow-offset-x=-18
+        --shadow-offset-y=-18
+        "
+	;;
 *)
     extra="
         --shadow-exclude-reg x39+0+0

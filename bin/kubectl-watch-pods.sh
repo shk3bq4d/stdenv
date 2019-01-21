@@ -29,7 +29,26 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-while :; do kubectl get pods "$@" --watch-only=true | while read NAMESPACE NAME READY STATUS RESTARTS AGE; do printf "%-14s %-68s %-5s %-20s %-3s %s\n" $NAMESPACE $NAME $READY $STATUS $RESTARTS $AGE; done | ts; done
+while :;
+do
+    kubectl get pods "$@" --no-headers --watch-only=true |
+        while read NAMESPACE NAME COUNT READY STATUS RESTARTS AGE leftover;
+        do
+			leftover=$(echo $leftover)
+            printf \
+                "%-14s %-68s %-5s %-20s %-3s %s %s %s\n" \
+                "$NAMESPACE" \
+                "$NAME" \
+                "$COUNT" \
+                "$READY" \
+                "$STATUS" \
+                "$RESTARTS" \
+                "$AGE" \
+				"$leftover" \
+				;
+				#"$(echo -n $leftover)" \
+		done;
+    done | ts
 echo EOF
 exit 0
 
