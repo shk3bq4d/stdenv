@@ -13,7 +13,7 @@ only window: <C-a> Q
 screen -x -R gm -h 9999
 
 #scroll back
-  C-A [
+  C-A [ #(opening squared bracket)
   # vi keybinding
   <ESC>
   # scroll back mode exited
