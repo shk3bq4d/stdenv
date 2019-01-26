@@ -1066,15 +1066,26 @@ pydoc requests.sessions
 # reraise https://franklingu.github.io/programming/2016/06/30/properly-reraise-exception-in-python/
 ```python
 try:
-	b = 5
-	b = 1 / 0
+    b = 5
+    b = 1 / 0
 except BaseException as e:
-	logger.error('mmmh %s', b)
-	raise type(e), type(e)(e), sys.exc_info()[2]
+    logger.error('mmmh %s', b)
+    raise type(e), type(e)(e), sys.exc_info()[2]
 ```
 chr(65)  # => 'A' ord character
-ord('A') # => 65  chr character 
+ord('A') # => 65  chr character
 
 # https://code-maven.com/switch-to-interactive-mode-from-python-script
 import code
 code.interact(local=locals())
+
+# https://stackoverflow.com/questions/5434891/iterate-a-list-as-pair-current-next-in-python
+```python
+
+import itertools
+def pairwise(iterable):
+    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
+    a, b = itertools.tee(iterable)
+    next(b, None)
+    return itertools.izip(a, b) # <- this is python2 for 3 replace "itertool.izip" with solely "zip" (no itertool)
+```
