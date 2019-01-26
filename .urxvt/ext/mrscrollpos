@@ -149,7 +149,8 @@ first_line_in_view_o: $first_line_in_view_o
     $stat_len = length($stat);
 
     #if ($self->top_row > 0)
-    if ($last_line_in_view != $total_lines || $last_line_in_view > $self->nrow)
+	#if ($last_line_in_view != $total_lines || $last_line_in_view > $self->nrow)
+	if ($first_line_in_view_o > 1 || $a->end + 1 >= $self->nrow)
     {   $vlocation = 0;
     }
     else
