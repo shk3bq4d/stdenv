@@ -28,29 +28,15 @@ set -euo pipefail
 # exec 2>&1
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
+#
 mrarg=
 [[ $# -eq 0 ]] && mrarg="--all-namespaces"
 
 while :;
 do
-    kubectl get pods $mrarg "$@" --no-headers --watch-only=true |
-        while read NAMESPACE NAME COUNT READY STATUS RESTARTS AGE leftover;
-        do
-			leftover=$(echo $leftover)
-            printf \
-                "%-14s %-68s %-5s %-20s %-3s %s %s %s\n" \
-                "$NAMESPACE" \
-                "$NAME" \
-                "$COUNT" \
-                "$READY" \
-                "$STATUS" \
-                "$RESTARTS" \
-                "$AGE" \
-				"$leftover" \
-				;
-				#"$(echo -n $leftover)" \
-		done;
-    done | ts
+    kubectl get events $mrarg "$@" --no-headers --watch-only=true |
+        ts
+done
 echo EOF
 exit 0
 
