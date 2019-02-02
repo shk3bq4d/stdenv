@@ -186,3 +186,13 @@ guestfish -a rhel-7-server-guest-image.qcow2
   </devices>
 </domain>
 @end=xml@
+
+# remove SSD disk from charlotte
+```xml
+    <disk type='block' device='disk'>
+      <driver name='qemu' type='raw' cache='none' io='native'/>
+      <source dev='/dev/disk/by-id/ata-Samsung_SSD_860_PRO_512GB_S42YNF0KA09392W'/>
+      <target dev='sdg' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x0e' function='0x0'/>
+    </disk>
+```
