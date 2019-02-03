@@ -1,4 +1,5 @@
 #!/usr/bin/env bash 
+# https://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why/427881#427881
 
 set -x
 ARGS=-0
