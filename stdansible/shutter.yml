@@ -5,13 +5,15 @@
     work_dir:       "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}/.tmp/ansible"
     preference_dir: "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}/.shutter"
     archives:
-      - url: https://launchpad.net/ubuntu/+archive/primary/+files/libgoocanvas-common_1.0.0-1_all.deb
-        checksum: sha256:067cb55ea73bd4445e2115ae46982f6874fcb9fcefd1dba66b50b647cb3d6b64
+      - url: https://launchpad.net/ubuntu/+archive/primary/+files/libgoocanvas3_1.0.0-1_amd64.deb
+        checksum: sha256:d6329b2d89d728d6d00128fae707544880fb6b864aaac078f85eac20f85eb04c
       - url: https://launchpad.net/ubuntu/+archive/primary/+files/libgoo-canvas-perl_0.06-2ubuntu3_amd64.deb
         checksum: sha256:15f70008852e946fe2e32c23f2d238d044eecd07bd2fff02fa93a0ce3c7d1ac1
+      - url: https://launchpad.net/ubuntu/+archive/primary/+files/libgoocanvas-common_1.0.0-1_all.deb
+        checksum: sha256:067cb55ea73bd4445e2115ae46982f6874fcb9fcefd1dba66b50b647cb3d6b64
   tasks:
     - meta: end_play
-      when: ansible_distribution != 'Ubuntu' or 
+      when: ansible_distribution != 'Ubuntu' or
             ansible_distribution_version != '18.04'
 
     - name: apt install

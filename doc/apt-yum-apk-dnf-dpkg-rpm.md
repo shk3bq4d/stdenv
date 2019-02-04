@@ -25,6 +25,7 @@ yum list installed 'http*'
 yum info elasticsearch # show version
 yum whatprovides ack       && yum clean all
 yum whatprovides ack       && yum clean all # moreutils
+yum whatprovides ts       && yum clean all # moreutils
 yum whatprovides dig       && yum clean all # bind-utils
 yum whatprovides locate    && yum clean all # mlocate
 yum whatprovides snmpwalk  && yum clean all # net-snmp-utils

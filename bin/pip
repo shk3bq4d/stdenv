@@ -11,7 +11,9 @@
 
 set -euo pipefail
 
-if [[ -f ~/.local/bin/pip ]]; then
+if [[ -f ~/.local/bin/pip2 ]]; then
+	~/.local/bin/pip2 "$@"
+elif [[ -f ~/.local/bin/pip ]]; then
 	~/.local/bin/pip "$@"
 else
 	export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin

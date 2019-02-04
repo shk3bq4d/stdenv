@@ -71,3 +71,23 @@ date +'\%Y\%m\%d'
 # file cleanup
 5 5 * * * sleep ${RANDOM:0:2} && find ~/Downloads/ -maxdepth 1 -type f -mtime +2 -name 'zbx_export_templates*.xml' -delete
 
+
+# common entrypoint script run for ech crontab entries by abusing SHELL env
+## crontab file
+```sh
+SHELL=/path/to/setup/cron-entrypoint.bash
+*/10 * * * * node $HOME/foo.js
+```
+##/path/to/setup/cron-entrypoint.bash
+```sh
+#!/bin/bash
+set -e
+# setup any env variables you want here
+source /etc/environment
+source /etc/profile
+[...] anything you would like
+# restore SHELL env var for cron
+SHELL=/bin/bash
+# execute the cron command in an actual shell
+exec /bin/bash --norc "$@"
+```
