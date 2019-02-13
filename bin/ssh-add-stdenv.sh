@@ -23,15 +23,16 @@ set -euo pipefail
 
 #[[ -n ${VIMF6+1} ]] && echo running from vim-f6
 
-# exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
+#exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
 # exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
-# exec 2>&1
+#exec 2>&1
+#set -x
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 if /usr/bin/ssh-add -l &>/dev/null; then
 	true
 else
-	echo -n "$(hostname -f): "
+	echo "ssh-add ssh-add-stdenv.sh (Ctrl-D to abort) $(hostname -f): "
     /usr/bin/ssh-add -t 43200
 fi
 
