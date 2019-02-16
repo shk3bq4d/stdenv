@@ -110,3 +110,10 @@ zpool remove zroot vtbd6
 
 # check if FS is mounted
 zfs list -o name,mounted
+
+
+# NFS
+zfs get sharenfs zroot/mr/users_data/bip                                                                                                                                                                                   9:48:34  0ms
+NAME                      PROPERTY  VALUE                                 SOURCE
+zroot/mr/users_data/bip  sharenfs  -maproot=root -network 10.19.29.0/24  local
+sudo zfs set "sharenfs=-maproot=root -network 10.19.29.62/32" zroot/mr/movies_data

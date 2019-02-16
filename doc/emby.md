@@ -30,3 +30,32 @@ Server: Mono-HTTPAPI/1.0
 Date: Sun, 20 Aug 2017 13:13:09 GMT
 Content-Length: 0
 Status: 204
+
+
+# logs
+cd /var/db/emby-server/logs
+
+ /usr/jails/jemby/.zfs/snapshot  ls -1d */usr/local/share/licenses/emby-server-*                                                                                                                                              8:51:42  3"000
+2017-12-31_04.00.00--7y/usr/local/share/licenses/emby-server-3.2.20.0
+2018-08-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2018-09-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2018-10-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2018-11-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2018-12-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2018-12-24_03.00.00--7w/usr/local/share/licenses/emby-server-3.2.20.0
+2018-12-31_03.00.00--7w/usr/local/share/licenses/emby-server-3.2.20.0
+2018-12-31_04.00.00--7y/usr/local/share/licenses/emby-server-3.2.20.0
+2019-01-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.2.20.0
+2019-01-07_03.00.00--7w/usr/local/share/licenses/emby-server-3.2.20.0
+2019-01-14_03.00.00--7w/usr/local/share/licenses/emby-server-3.2.20.0
+2019-01-21_03.00.00--7w/usr/local/share/licenses/emby-server-3.5.2.0
+2019-01-28_03.00.00--7w/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-01_04.00.00--7m/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-04_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-04_03.00.00--7w/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-05_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-06_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-07_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-08_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-09_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+2019-02-10_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0

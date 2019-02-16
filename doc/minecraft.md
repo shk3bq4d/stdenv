@@ -105,3 +105,12 @@ I know this definitely works for WIndows, but i'm not sure about the others.
 # apprivoiser un dauphin
 https://minecraft-fr.gamepedia.com/Mods/Mo%27_Creatures
 https://minecraft-fr.gamepedia.com/Mods/Mo%27_Creatures#Apprivoiser_un_cheval
+
+
+https://minecraft-fr.gamepedia.com/Cr%C3%A9atures
+
+# nommer une créature
+poser une enclume par terre
+utiliser une étiquette avec l'enclume
+- renommer l'étiquette
+appliquer sur l'animal
