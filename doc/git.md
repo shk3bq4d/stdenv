@@ -224,7 +224,7 @@ git push origin --delete bip # delete rm remove remote branch
 git ls-files --deleted -z | xargs -0 git rm # https://stackoverflow.com/questions/492558/removing-multiple-files-from-a-git-repo-that-have-already-been-deleted-from-disk git autoremove files no longer present
 
 git reset --hard commitHash # cancel / revert local, puts back HEAD to previous commit (you should use the commit that you want to restart, eg. 44a587491e32eafa1638aca7738)
-git revert REF # cancels out specified REF in a new commit with its inverted diff 
+git revert REF # cancels out specified REF in a new commit with its inverted diff
 
 
 
@@ -443,9 +443,13 @@ git commit --amend --reset-author
 git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"
 
-git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra 
+git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra
 
 git config pull rebase true
 
 if [ -z "$(git status --porcelain)" ]; # working directory clean             https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
 if [ -n "$(git status --porcelain)" ]; # uncommitted change in tracked files https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
+
+
+git log --oneline $MAINREF..$MYREF | awk-print1.sh | tac | while read a; do git show --color-words $a; done # for
+for i in $(git diff $REF --name-only); do git diff $REF -- $i; done # while

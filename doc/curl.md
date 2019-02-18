@@ -1,4 +1,4 @@
-# ex: set filetype=sh:
+# ex: set filetype=txt:
 curl -u username
 curl -u username:password
 curl -X POST
@@ -21,3 +21,5 @@ UA="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/4
 curl -A "$UA"
 
 curl -s -o './#1.yaml' 'https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/helloWorld/{configMap,deployment,kustomization,service}.yaml' # multidownload
+
+curl --resolve backoffice-ks.fabric-ci-74.hehee.k8s.haha.com:443:10.0.2.15 https://backoffice-ks.fabric-ci-74.hehe.k8s.haha.com # SNI cheat, custom name DNS resolution
