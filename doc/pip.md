@@ -27,3 +27,5 @@ https://github.com/pypa/pip/issues/5240
 
 
 uninstall # remove delete
+--force-reinstall
+python -m pip install burp
