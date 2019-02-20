@@ -306,3 +306,6 @@ echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement
 
 
 kill -SIGQUIT $(pgrep ping) # ping status statistics withou quitting
+
+
+wall "my message" # How to Send a Message to Logged Users in Linux Terminal broadcast

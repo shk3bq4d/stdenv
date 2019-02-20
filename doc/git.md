@@ -208,6 +208,8 @@ git remote get-url origin # get remote url
 
 git push -u origin --all
 git push -u origin --tags
+git push --tags
+git push origin mytagname # push single tag (origin is mandatory)
 
 
 git submodule update --init --recursive # first time

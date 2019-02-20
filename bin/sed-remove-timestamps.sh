@@ -27,18 +27,18 @@ set -euo pipefail
 # exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
 # exec 2>&1
 #
-PRE_BOUNDARY="(^|\\s)" # \b sucks at 1354586456.2019 would match 2019
-POST_BOUNDARY="($|\\s)" # \b sucks at 1354586456.2019 would match 2019
-DATE_BOUNDARY="[\\.\\-\\/]?"
-TIME_BOUNDARY="[\\.:]"
-WHITE_SPACES="[ ]+"
-
+PRE_BOUNDARY='(^|\s| +)' # \b sucks at 1354586456.2019 would match 2019
+POST_BOUNDARY='($|\s| +)' # \b sucks at 1354586456.2019 would match 2019
+DATE_BOUNDARY='[./-]?'
+TIME_BOUNDARY='[.:]'
+TIME_DECIMAL_BOUNDARY='[.,]'
+WHITE_SPACES='[ ]+'
 
 sed -r \
 	-e "s/${PRE_BOUNDARY}[0-9]{4}${DATE_BOUNDARY}[0-9]{2}${DATE_BOUNDARY}[0-9]{2}${POST_BOUNDARY}/ /" \
 	-e "s/${PRE_BOUNDARY}[0-9]{2}${DATE_BOUNDARY}[0-9]{2}${DATE_BOUNDARY}[0-9]{2}${POST_BOUNDARY}/ /" \
 	-e "s/${PRE_BOUNDARY}[0-9]{2}${DATE_BOUNDARY}[0-9]{2}${DATE_BOUNDARY}[0-9]{4}${POST_BOUNDARY}/ /" \
 	-e "s/${PRE_BOUNDARY}(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)${WHITE_SPACES}[0-9 ][0-9]${POST_BOUNDARY}/ /" \
-	-e "s/${PRE_BOUNDARY}[0-9]{1,2}${TIME_BOUNDARY}[0-9]{2}(${TIME_BOUNDARY}[0-9]{2})?${POST_BOUNDARY}/ /" \
+	-e "s/${PRE_BOUNDARY}[0-9]{1,2}${TIME_BOUNDARY}[0-9]{2}(${TIME_BOUNDARY}[0-9]{2}(${TIME_DECIMAL_BOUNDARY}([0-9]{3}|[0-9]{6}|[0-9]{9}))?)?${POST_BOUNDARY}/ /" \
 
 
