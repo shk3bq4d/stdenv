@@ -8,6 +8,7 @@ fi
 export RCD=$SSHHOME/.sshrc.d
 source $RCD/.bashrc
 [[ "$HOSTNAME" == *kafka* ]] && kafka_mr
+[[ "$HOSTNAME" == *k8s-master* ]] && ks_k8s
 export VIMINIT='so $RCD/.vim/.vimrc'
 if ! type sudomr &>/dev/null ; then
     function sudomr() {
