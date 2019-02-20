@@ -1,5 +1,6 @@
 $mod+Control+Return exec mrurxvt-dvorak.sh
 setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch # dvorak programmer
+setxkbmap -layout ch -variant fr
 
 lv3:ralt_switch : keeps alt-gr for accentuated characters as simultaneous action
 compose:ralt: uses right alt for successive keys accentuated
