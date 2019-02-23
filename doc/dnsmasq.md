@@ -1,4 +1,5 @@
 
+- --log-queries=extra
 
       - args:
         - -v=2
