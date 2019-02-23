@@ -11,7 +11,8 @@ helm ls
 helm package MYPACKAGE # creates the .tgz as well as copy the .tgz to ~/.heml/repository/local/
 helm upgrade --set replicaCount=2 ....
 helm upgrade -f bip.yaml releasename packagename
-helm get values releasename
+helm get values    releasename
+helm get values -a releasename
 helm rollback myrelease myversion
 helm package --sign
 

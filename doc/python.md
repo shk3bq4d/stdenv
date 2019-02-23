@@ -1003,6 +1003,7 @@ except sh.ErrorReturnCode_2:
 # https://amoffat.github.io/sh/reference.html
 sh.cat(_in="_in is stdin")
 sh.cat(_in="_in is stdin", _out=None, )
+sh.cat(_out=sys.stdout, _err=sys.stderr)
 sh.Command('ssh-keygen')
 ~/.local/lib/python2.7/site-packages/sh.py
 sh Controlling Output _out _err _err_to_out _encoding _decode_errors _tee
