@@ -455,3 +455,5 @@ if [ -n "$(git status --porcelain)" ]; # uncommitted change in tracked files htt
 
 git log --oneline $MAINREF..$MYREF | awk-print1.sh | tac | while read a; do git show --color-words $a; done # for
 for i in $(git diff $REF --name-only); do git diff $REF -- $i; done # while
+
+git log --no-renames
