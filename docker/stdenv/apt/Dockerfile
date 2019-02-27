@@ -29,6 +29,7 @@ RUN \
 		python2.7 \
 		pylint \
 		pylint3 \
+		locales-all \
 		puppet-lint \
 		software-properties-common \
 		sysstat \
