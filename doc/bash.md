@@ -885,9 +885,9 @@ if ! [[ $yournumber =~ $re ]] ; then
    echo "error: Not a number" >&2; exit 1
 fi
 
-_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempfile:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
-_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
-_tempfiles=();function my_mktemp() {local f;f="$(mktemp)";$_tempfiles+=($f);echo "$f";};myfile=$(my_mktemp); function cleanup() { local f;for f in "${!_tempfiles[@]}"; do [[ -n "${f:-}" && -f "$f" ]] && rm -f $f; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempfiles=();function my_mktemp() {local f;f="$(mktemp)";$_tempfiles+=($f);echo "$f";};myfile=$(my_mktemp); function cleanup() { local f;for f in "${!_tempfiles[@]}"; do [[ -n "${f:-}" && -f "$f" ]] && rm -f $f || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 true
 cleanup
 exit 0
