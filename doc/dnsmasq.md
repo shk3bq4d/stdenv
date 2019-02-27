@@ -1,4 +1,5 @@
 
+# kubedns debug, add
 - --log-queries=extra
 
       - args:
@@ -10,7 +11,7 @@
         - -k
         - --cache-size=1000
         - --dns-forward-max=250
-        - --log-queries=extra
+        - --log-queries=extra   # <--- in *here*
         - --no-negcache
         - --log-facility=-
         - --server=/cluster.local/127.0.0.1#10053
