@@ -33,7 +33,7 @@ apt-get install net-tools #netstat
 apt-get install nmap #nc
 apt-get install less #less
 apt-get install locate #locate
-apt-get install vim #less
+apt-get install vim
 
 
 docker build -t name .
@@ -417,3 +417,7 @@ docker ps --filter status=dead --filter status=exited -aq | xargs docker rm -v
 docker images --no-trunc | grep '<none>' | awk '{ print $3 }' | xargs -r docker rmi
 
 docker stats # top for all containers
+
+docker image tag d7c1ab014f53 shk3bq4d/stdenv:apt
+docker login
+docker push shk3bq4d/stdenv:apt

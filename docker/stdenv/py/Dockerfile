@@ -1,13 +1,13 @@
-FROM shK3Bq4d/stdenv:apt
+FROM shk3bq4d/stdenv:apt
 
+	#&& pip3 install --upgrade --user pip \
+	# && pip install --upgrade --user pip \
 RUN true \
-	&& pip3 install --upgrade --user pip \
 	&& pip3 install --user \
 		requests \
 		sh \
 		sshuttle \
 		psutil \
-	&& pip install --upgrade --user pip \
 	&& pip install --user \
 		requests \
 		sh \
