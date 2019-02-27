@@ -5,7 +5,8 @@ RUN true \
 	&& git config --global user.email "jeff@stdenv.stdenv" \
 	&& cd ~ \
 	&& mkdir -p ~/.ssh/c \
-	&& git clone https://github.com/shK3Bq4d/stdhome.git ~/stdhome 
+	&& git clone https://github.com/shK3Bq4d/stdhome.git ~/stdhome  && true
+RUN sed -r -i -e '/stdhome-install-onefile/s/...dev.tty/echo "" |/' ~/stdhome/bin/stdhome-install.sh
 RUN bash -x ~/stdhome/bin/stdhome-install.sh -a o
 RUN true \
 	&& cd ~ \
