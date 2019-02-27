@@ -5,43 +5,41 @@ RUN \
 	true \
 	&& apt update -y \
 	&& apt install -y \
-		bash \
-		p7zip-full \
-		p7zip-rar \
+		apt-file \
 		apt-transport-https \
 		ascii \
-		apt-file \
+		bash \
 		build-essential \
 		ca-certificates \
 		cmake \
 		curl \
 		dos2unix \
-		moreutils \
 		gawk \
 		git \
 		ipcalc \
 		less \
+		locales-all \
 		locate \
+		moreutils \
 		net-tools \
 		nmap \
-		python-pip \
-		python3-pip \
-		python2.7 \
+		p7zip-full \
+		p7zip-rar \
+		puppet-lint \
 		pylint \
 		pylint3 \
-		locales-all \
-		puppet-lint \
+		python-pip \
+		python2.7 \
+		python3-pip \
 		software-properties-common \
 		sysstat \
+		tree \
 		util-linux \
 		vim \
-		tree \
 		virtualenv \
 		virtualenvwrapper \
 		zsh \
-		apt-transport-https \
-		ca-certificates \
-		software-properties-common
+	&& true
 
 ENV DEBIAN_FRONTEND ""
 

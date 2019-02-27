@@ -18,18 +18,25 @@ GREEN=$(echo -e "\033[0;32m")    # green
 OFF=$(echo -e "\033[m")
 OPENSSL_OPTIONS=""
 
-_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempfile:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempfile=$_tempdir/a
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
 [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
-NAME=$1
-[[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
-NAME="$( echo -n $NAME | sed -r \
-	-e 's/^#//' \
-	-e 's/(^\s+|\s+$)//g' \
-	-e 's/^.*(https?:..)([^ ]+).*$/\2/' 
-	)"
+if [[ $# -eq 0 ]] || [[ $# -eq 1 && $1 == "-" ]]; then
+    MODE=file
+    NAME=$_tempdir/b
+    cat - > $NAME
+else
+    NAME=$1
+    [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
+    NAME="$( echo -n $NAME | sed -r \
+        -e 's/^#//' \
+        -e 's/(^\s+|\s+$)//g' \
+        -e 's/^.*(https?:..)([^ ]+).*$/\2/'
+        )"
+fi
 [[ $# -lt 2 ]] && PORT=443 || PORT=$2
 if [[ $# -lt 3 ]]; then
        IP=$NAME
