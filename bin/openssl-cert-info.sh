@@ -25,6 +25,11 @@ _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfi
 [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
 NAME=$1
 [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
+NAME="$( echo -n $NAME | sed -r \
+	-e 's/^#//' \
+	-e 's/(^\s+|\s+$)//g' \
+	-e 's/^.*(https?:..)([^ ]+).*$/\2/' 
+	)"
 [[ $# -lt 2 ]] && PORT=443 || PORT=$2
 if [[ $# -lt 3 ]]; then
        IP=$NAME
