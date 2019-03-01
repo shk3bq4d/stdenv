@@ -421,3 +421,4 @@ docker stats # top for all containers
 docker image tag d7c1ab014f53 shk3bq4d/stdenv:apt
 docker login
 docker push shk3bq4d/stdenv:apt
+docker push shk3bq4d/canon-mf4890dw-cups-driver:latest
