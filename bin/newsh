@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ex: set filetype=sh :
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 ##
 ##Usage:  __SCRIPT__ FILENAME
 ##generates a new shell script using default template
@@ -20,7 +20,7 @@ touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
 
 echo \
 "#!/usr/bin/env bash
-# ex: set filetype=sh :
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 ##
 ##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
 ##configures whatever action with whatever config

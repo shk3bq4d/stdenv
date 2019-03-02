@@ -457,3 +457,5 @@ git log --oneline $MAINREF..$MYREF | awk-print1.sh | tac | while read a; do git 
 for i in $(git diff $REF --name-only); do git diff $REF -- $i; done # while
 
 git log --no-renames
+
+git rev-parse --show-toplevel # https://stackoverflow.com/questions/957928/is-there-a-way-to-get-the-git-root-directory-in-one-commandt rev-parse --show-toplevel
