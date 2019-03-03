@@ -41,3 +41,20 @@ bip hehe
 # z
 https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/z
 z -x # exclude current directory from index
+
+# completion https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+compdef newcommand=existingcommand
+* https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+_complete_help	Ctrl+x h	displays information about context names, tags, and completion functions used when completing at the current cursor position
+_complete_help	Alt+2 Ctrl+x h	as above but displays even more information
+_complete_debug	Ctrl+x ?	performs ordinary completion, but captures in a temporary file a trace of the shell commands executed by the completion system
+
+complete_function() {
+    local f=$1; shift
+    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
+  }
+complete_function kubectl-get-yaml.py   kubectl get
+complete_function kubectl-watch-pods.sh kubectl get pods
+
+## generate list of functions for each command
+compaudit; less ~/.zcompdump

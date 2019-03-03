@@ -16,7 +16,7 @@ exit
 
 
 script touch file system read only
-#save /system mount rw vs ro status    
+#save /system mount rw vs ro status
 c=$(grep /system /proc/mounts | cut -d' ' -f4 | cut -d',' -f1)
 [[ "${c}" != "rw" ]] && mount -o remount,rw -t yaffs2 $(grep /system /proc/mounts | cut -d' ' -f1) /system
 # do your business
@@ -32,7 +32,7 @@ am start -a android.intent.action.SENDTO -d sms:+41774552829 --es sms_body "xxx 
 #sshserver
 install sshdroid
 
-#crontab android 
+#crontab android
 
 # >= 3.0
 mount -o remount,rw -t rootfs / /
@@ -111,3 +111,45 @@ tablette motorola: port 2222 /sdcard/Movies/
 
 natel telephone isabelle galaxy-a3:/sdcard/Music
 natel telephone marc motog:/sdcard/Music
+
+
+# sdcard Isabelle
+## dmesg
+[  +0.434781] mmc0: error -110 whilst initialising SD card
+[Feb 1 02:14] usb 1-1: new high-speed USB device number 7 using xhci_hcd
+[  +0.148373] usb 1-1: New USB device found, idVendor=aaaa, idProduct=8816
+[  +0.000007] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[  +0.000004] usb 1-1: Product: MXT USB Device
+[  +0.000004] usb 1-1: Manufacturer: MXTronics
+[  +0.000003] usb 1-1: SerialNumber: 130818v01
+[  +0.000930] usb-storage 1-1:1.0: USB Mass Storage device detected
+[  +0.000367] scsi host0: usb-storage 1-1:1.0
+[  +1.018841] scsi 0:0:0:0: Direct-Access     MXT-USB  Storage Device   1308 PQ: 0 ANSI: 0 CCS
+[  +0.001048] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[  +0.000404] sd 0:0:0:0: [sda] 31342592 512-byte logical blocks: (16.0 GB/14.9 GiB)
+[  +0.000141] sd 0:0:0:0: [sda] Write Protect is off
+[  +0.000005] sd 0:0:0:0: [sda] Mode Sense: 03 00 00 00
+[  +0.000141] sd 0:0:0:0: [sda] No Caching mode page found
+[  +0.000010] sd 0:0:0:0: [sda] Assuming drive cache: write through
+[  +0.002383]  sda: sda1
+[  +0.001285] sd 0:0:0:0: [sda] Attached SCSI removable disk
+## fdisk
+ ~  sudo fdisk /dev/sda                12:36:41  33"660
+
+Welcome to fdisk (util-linux 2.31.1).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help): p
+Disk /dev/sda: 15 GiB, 16047407104 bytes, 31342592 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+
+Device     Boot Start      End  Sectors Size Id Type
+/dev/sda1        8192 31342591 31334400  15G  c W95 FAT32 (LBA)
+
+Command (m for help):

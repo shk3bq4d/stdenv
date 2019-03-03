@@ -117,3 +117,4 @@ zfs get sharenfs zroot/mr/users_data/bip                                        
 NAME                      PROPERTY  VALUE                                 SOURCE
 zroot/mr/users_data/bip  sharenfs  -maproot=root -network 10.19.29.0/24  local
 sudo zfs set "sharenfs=-maproot=root -network 10.19.29.62/32" zroot/mr/movies_data
+sudo zfs set "sharenfs=-maproot=root --alldirs -network 10.19.29.62/32" zroot/mr/olivia-nfs

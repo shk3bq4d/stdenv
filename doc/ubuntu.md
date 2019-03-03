@@ -51,3 +51,28 @@ ls -al /usr/bin/x-www-browser                                                   
 lrwxrwxrwx 1 root root 31 Dec 18  2017 /usr/bin/x-www-browser -> /etc/alternatives/x-www-browser
 ls -al /etc/alternatives/x-www-browser                                                                                                       11:18:14  12ms
  lrwxrwxrwx 1 root root 25 Sep 26 11:16 /etc/alternatives/x-www-browser -> /usr/bin/chromium-browser
+
+
+# bionic network
+```yaml
+# $ sudo cat /etc/netplan/01-netcfg.yaml
+# $ sudo netplan apply
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens3:
+      dhcp4: no
+      addresses:
+      - 10.19.29.62/8
+      - 10.19.29.63/8
+      nameservers:
+        addresses:
+          - 10.19.29.1
+      routes:
+      - to: 0.0.0.0/0
+        via: 10.19.29.1
+        metric: 100
+```
