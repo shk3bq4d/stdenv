@@ -11,7 +11,7 @@ import argparse
 import logging
 
 color = False
-if sys.stdout.isatty():
+if sys.stdout.isatty() or os.environ.get('MRCOLORSAFE', '0') == '1':
     try:
         from pygments import highlight
         from pygments.lexers import YamlLexer
