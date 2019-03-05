@@ -10,6 +10,7 @@ sed -n -e '/TERMINATE/,$p' # will print the line matching TERMINATE till the end
 
 
 sed -e '1,/TERMINATE/d' #will print from the following line matching TERMINATE till the end of the file: Explained: 1,/TERMINATE/ is an address (line) range selection meaning the first line for the input to the 1st line matching the TERMINATE regular expression, and d is the delete command which delete the current line and skip to the next line. As sed default behavior is to print the lines, it will print the lines after TERMINATE to the end of input.
+sed -e '5,10d;12d' file # delete line 5 to 10 as well as line 12
 
 sed -r -n -e '/./,$p'                 # delete leading empty lines
 sed -r -n -e '/\S/,$p'                # delete leading blank lines
