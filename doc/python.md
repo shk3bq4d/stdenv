@@ -83,6 +83,7 @@ str_ = re.escape(pattern)
 pprint(matcher.group())
 pprint(matcher.groups())
 pprint(matcher.groupdict())
+pprint(re.search('(?P<first>\S+) (?P<second>\S+)', 'bonjour madame').groupdict()) # {'second': 'madame', 'first': 'bonjour'}
 list_matcher = re.findall(pattern, string, flags=0)
 iterator = re.finditer(pattern, string, flags=0)
 match = re.match(pattern, string, flags=0)
