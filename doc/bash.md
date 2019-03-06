@@ -1,40 +1,40 @@
 # /* ex: set filetype=md: */
 ```sh
-[ -a FILE ]	True if FILE exists.
-[ -b FILE ]	True if FILE exists and is a block-special file.
-[ -c FILE ]	True if FILE exists and is a character-special file.
-[ -d FILE ]	True if FILE exists and is a directory.
-[ -e FILE ]	True if FILE exists.
-[ -f FILE ]	True if FILE exists and is a regular file.
-[ -g FILE ]	True if FILE exists and its SGID bit is set.
-[ -h FILE ]	True if FILE exists and is a symbolic link.
-[ -k FILE ]	True if FILE exists and its sticky bit is set.
-[ -p FILE ]	True if FILE exists and is a named pipe (FIFO).
-[ -r FILE ]	True if FILE exists and is readable.
-[ -s FILE ]	True if FILE exists and has a size greater than zero.
-[ -t FD ]	True if file descriptor FD is open and refers to a terminal. tty
-	[ -t 0 ] stdin
-	[ -t 1 ] stdout
-	[ -t 2 ] stderr
-[ -u FILE ]	True if FILE exists and its SUID (set user ID) bit is set.
-[ -w FILE ]	True if FILE exists and is writable.
-[ -x FILE ]	True if FILE exists and is executable.
-[ -O FILE ]	True if FILE exists and is owned by the effective user ID.
-[ -G FILE ]	True if FILE exists and is owned by the effective group ID.
-[ -L FILE ]	True if FILE exists and is a symbolic link.
-[ -N FILE ]	True if FILE exists and has been modified since it was last read.
-[ -S FILE ]	True if FILE exists and is a socket.
-[ FILE1 -nt FILE2 ]	True if FILE1 has been changed more recently than FILE2, or if FILE1 exists and FILE2 does not.
-[ FILE1 -ot FILE2 ]	True if FILE1 is older than FILE2, or is FILE2 exists and FILE1 does not.
-[ FILE1 -ef FILE2 ]	True if FILE1 and FILE2 refer to the same device and inode numbers.
-[ -o OPTIONNAME ]	True if shell option "OPTIONNAME" is enabled.
-[ -z STRING ]	True of the length if "STRING" is zero.
-[ -n STRING ] or [ STRING ]	True if the length of "STRING" is non-zero.
-[ STRING1 == STRING2 ] 	True if the strings are equal. "=" may be used instead of "==" for strict POSIX compliance.
-[ STRING1 != STRING2 ] 	True if the strings are not equal.
-[ STRING1 < STRING2 ] 	True if "STRING1" sorts before "STRING2" lexicographically in the current locale.
-[ STRING1 > STRING2 ] 	True if "STRING1" sorts after "STRING2" lexicographically in the current locale.
-[ ARG1 OP ARG2 ]	"OP" is one of -eq, -ne, -lt, -le, -gt or -ge. These arithmetic binary operators return true if "ARG1" is equal to, not equal to, less than, less than or equal to, greater than, or greater than or equal to "ARG2", respectively. "ARG1" and "ARG2" are integers.
+[ -a FILE ]    True if FILE exists.
+[ -b FILE ]    True if FILE exists and is a block-special file.
+[ -c FILE ]    True if FILE exists and is a character-special file.
+[ -d FILE ]    True if FILE exists and is a directory.
+[ -e FILE ]    True if FILE exists.
+[ -f FILE ]    True if FILE exists and is a regular file.
+[ -g FILE ]    True if FILE exists and its SGID bit is set.
+[ -h FILE ]    True if FILE exists and is a symbolic link.
+[ -k FILE ]    True if FILE exists and its sticky bit is set.
+[ -p FILE ]    True if FILE exists and is a named pipe (FIFO).
+[ -r FILE ]    True if FILE exists and is readable.
+[ -s FILE ]    True if FILE exists and has a size greater than zero.
+[ -t FD ]    True if file descriptor FD is open and refers to a terminal. tty
+    [ -t 0 ] stdin
+    [ -t 1 ] stdout
+    [ -t 2 ] stderr
+[ -u FILE ]    True if FILE exists and its SUID (set user ID) bit is set.
+[ -w FILE ]    True if FILE exists and is writable.
+[ -x FILE ]    True if FILE exists and is executable.
+[ -O FILE ]    True if FILE exists and is owned by the effective user ID.
+[ -G FILE ]    True if FILE exists and is owned by the effective group ID.
+[ -L FILE ]    True if FILE exists and is a symbolic link.
+[ -N FILE ]    True if FILE exists and has been modified since it was last read.
+[ -S FILE ]    True if FILE exists and is a socket.
+[ FILE1 -nt FILE2 ]    True if FILE1 has been changed more recently than FILE2, or if FILE1 exists and FILE2 does not.
+[ FILE1 -ot FILE2 ]    True if FILE1 is older than FILE2, or is FILE2 exists and FILE1 does not.
+[ FILE1 -ef FILE2 ]    True if FILE1 and FILE2 refer to the same device and inode numbers.
+[ -o OPTIONNAME ]    True if shell option "OPTIONNAME" is enabled.
+[ -z STRING ]    True of the length if "STRING" is zero.
+[ -n STRING ] or [ STRING ]    True if the length of "STRING" is non-zero.
+[ STRING1 == STRING2 ]     True if the strings are equal. "=" may be used instead of "==" for strict POSIX compliance.
+[ STRING1 != STRING2 ]     True if the strings are not equal.
+[ STRING1 < STRING2 ]     True if "STRING1" sorts before "STRING2" lexicographically in the current locale.
+[ STRING1 > STRING2 ]     True if "STRING1" sorts after "STRING2" lexicographically in the current locale.
+[ ARG1 OP ARG2 ]    "OP" is one of -eq, -ne, -lt, -le, -gt or -ge. These arithmetic binary operators return true if "ARG1" is equal to, not equal to, less than, less than or equal to, greater than, or greater than or equal to "ARG2", respectively. "ARG1" and "ARG2" are integers.
 
 nb nombre args argument count
 $# # dollar hash, argument count
@@ -44,11 +44,11 @@ if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surroun
 Expressions may be combined using the following operators, listed in decreasing order of precedence:
 
 Table 7-2. Combining expressions
-Operation	Effect
-[ ! EXPR ]	True if EXPR is false.
-[ ( EXPR ) ]	Returns the value of EXPR. This may be used to override the normal precedence of operators.
-[ EXPR1 -a EXPR2 ]	True if both EXPR1 and EXPR2 are true.
-[ EXPR1 -o EXPR2 ]	True if either EXPR1 or EXPR2 is true.
+Operation    Effect
+[ ! EXPR ]    True if EXPR is false.
+[ ( EXPR ) ]    Returns the value of EXPR. This may be used to override the normal precedence of operators.
+[ EXPR1 -a EXPR2 ]    True if both EXPR1 and EXPR2 are true.
+[ EXPR1 -o EXPR2 ]    True if either EXPR1 or EXPR2 is true.
 
 
 
@@ -67,12 +67,12 @@ bar=${foo// /.} # pseudo-regexp pattern replacement
 
 for i in a b c ; do echo "coucuo $i"; done # iterate
 for i in $(echo "P1D
-	PT10H5s
-	P5Y11M
-	P2M4DT10M5.23S
-	"); do
-	
-	echo $i
+    PT10H5s
+    P5Y11M
+    P2M4DT10M5.23S
+    "); do
+
+    echo $i
 done
 
 #errorlevel return code returncode $?
@@ -91,8 +91,8 @@ see also ${BASH_LINENO[0]}
 
 # shift
 while (( "$#" )); do
-	echo $1
-	shift
+    echo $1
+    shift
 done
 
 
@@ -109,21 +109,21 @@ echo $(basename ${BASH_SOURCE[0]})
 
 if [[ "bip" == "bap" ]]
 then
-	echo ok
+    echo ok
 fi
 if [[ "bip" == "bap" ]]; then
-	echo ok
+    echo ok
 fi
 
 while :
 do
-	echo coucou
-	sleep 1
+    echo coucou
+    sleep 1
 done
 
 if find . -maxdepth 0 -name mrbip -mmin +1 >/dev/null 2>&1;
 then
-	echo found
+    echo found
 fi
 
 date +'%Y%m%d'            # 20170728
@@ -326,7 +326,7 @@ vi mode cheatsheet
 
 .---------------------------------------------------------------------------.
 | Peteris Krumins (peter@catonmat.net), 2008.01.08.                         |
-| http://www.catonmat.net  -  good coders code, great reuse                 | 
+| http://www.catonmat.net  -  good coders code, great reuse                 |
 |                                                                           |
 | Released under the GNU Free Document License                              |
 '---------------------------------------------------------------------------'
@@ -334,9 +334,9 @@ vi mode cheatsheet
 
 flock inside script
 #!/bin/bash
-(	# Wait for lock on /var/lock/.myscript.exclusivelock (fd 200) for 10 seconds
-	if ! flock -x -n 200; then exit
-	# Do stuff
+(    # Wait for lock on /var/lock/.myscript.exclusivelock (fd 200) for 10 seconds
+    if ! flock -x -n 200; then exit
+    # Do stuff
 
 ) 200>/var/lock/$(basename ${BASH_SOURCE[0]}).lock
 
@@ -351,31 +351,31 @@ flock with trap
 ## License: GNU General Public License v2, v3
 #
 # Lockable script boilerplate
- 
+
 ### HEADER ###
 LOCKFILE="/var/lock/`basename $0`"
 LOCKFD=99
- 
+
 # PRIVATE
 _lock()             { flock -$1 $LOCKFD; }
 _no_more_locking()  { _lock u; _lock xn && rm -f $LOCKFILE; }
 _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
- 
+
 # ON START
 _prepare_locking
- 
+
 # PUBLIC
 exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fail
 exlock()            { _lock x; }   # obtain an exclusive lock
 shlock()            { _lock s; }   # obtain a shared lock
 unlock()            { _lock u; }   # drop a lock
- 
+
 ### BEGIN OF SCRIPT ###
- 
+
 # Simplest example is avoiding running multiple instances of script.
 exlock_now || exit 1
 . ~/bin/dot.lockfunctions; exlock_now || exit 1
- 
+
 # Remember! Lock file is removed when one of the scripts exits and it is
 #           the only script holding the lock or lock is not acquired at all.
 
@@ -438,22 +438,22 @@ SUFF=TXT
 suff=txt
 
 for i in $(ls *.$SUFF)
-	do
-	  mv -f $i ${i%.$SUFF}.$suff
-	    #  Leave unchanged everything *except* the shortest pattern match
-	    #+ starting from the right-hand-side of the variable $i . . .
-	  done ### This could be condensed into a "one-liner" if desired.
+    do
+      mv -f $i ${i%.$SUFF}.$suff
+        #  Leave unchanged everything *except* the shortest pattern match
+        #+ starting from the right-hand-side of the variable $i . . .
+      done ### This could be condensed into a "one-liner" if desired.
 
 ${string%%substring} # Deletes longest match of $substring from back of $string.
 
-	  stringZ=abcABC123ABCabc
+      stringZ=abcABC123ABCabc
 #                    ||     shortest
 #        |------------|     longest
 
-	  echo ${stringZ%b*c}      # abcABC123ABCa
+      echo ${stringZ%b*c}      # abcABC123ABCa
 # Strip out shortest match between 'b' and 'c', from back of $stringZ.
 
-	  echo ${stringZ%%b*c}     # a
+      echo ${stringZ%%b*c}     # a
 # Strip out longest match between 'b' and 'c', from back of $stringZ.
 
 
@@ -504,10 +504,10 @@ echo $VAR_NAME | tr '[:upper:]' '[:lower:]'  # lowercase
 echo $VAR_NAME | tr '[:lower:]' '[:upper:]'  # uppercase
 
 grep -Po "(?<=syntaxHighlighterConfig\.)[a-zA-Z]+Color" file # look-beind zero width assertion regexp
-(?=X)	X, via zero-width positive lookahead  regexp
-(?!X)	X, via zero-width negative lookahead  regexp
-(?<=X)	X, via zero-width positive lookbehind regexp
-(?<!X)	X, via zero-width negative lookbehind regexp
+(?=X)    X, via zero-width positive lookahead  regexp
+(?!X)    X, via zero-width negative lookahead  regexp
+(?<=X)    X, via zero-width positive lookbehind regexp
+(?<!X)    X, via zero-width negative lookbehind regexp
 
 ^((?!my string).)*$ # regexp not containt substring 'my string'
 
@@ -549,8 +549,8 @@ array[foo]=bar
 array[bar]=foo
 for i in "${!array[@]}" # iterate over an array
 do
-	echo "key  : $i"
-	echo "value: ${array[$i]}"
+    echo "key  : $i"
+    echo "value: ${array[$i]}"
 done
 ${#array[@]} # length
 
@@ -599,8 +599,8 @@ if [ -t 1 ] ; then echo terminal; fi
 # returns "terminal", because the output is going straight to you, while
 (if [ -t 1 ] ; then echo terminal; fi) | cat
 #returns nothing, because the output is going to cat.
-#0:     stdin  
-#1:     stdout  
+#0:     stdin
+#1:     stdout
 #2:     stderr
 
 
@@ -662,10 +662,10 @@ echo {A..Z}
 
 Bang commands
 
-Bash supports C-shell command and argument reuse capabilities ( bang commands). For example, if you know exact prefix for the command that you executed recently you can reuse it without manually browsing history by typing ! followed by the first few letters of the command. Among other possibilities of retrieving commands from history provided by bang commands: 
+Bash supports C-shell command and argument reuse capabilities ( bang commands). For example, if you know exact prefix for the command that you executed recently you can reuse it without manually browsing history by typing ! followed by the first few letters of the command. Among other possibilities of retrieving commands from history provided by bang commands:
 
-$ !n --Will execute the line n of the history record. 
-$ !-n --Will execute the command n lines back. 
+$ !n --Will execute the line n of the history record.
+$ !-n --Will execute the command n lines back.
 $ !! --Will execute the last command. Same as !-1 or "up-arrow + return"
 !gzip  -- will re-execute the most recent gzip command (history is searched  in reverse order). string specified is considered to be prefix of the necessary command.
 !?etc.gz – same as above but the unique string doesn't have to be at the start of the command. That means that you can identify command by a unique string appearing anywhere in the command  (exactly like in Ctrl-R  mechanism)
@@ -721,8 +721,8 @@ e remove all but the last suffix of a filename (extension)
 g make changes globally, use with s modifier, below
 p print the command but do not execute it
 q quote the generated text
-s/old/new/ substitute new for old in the text. Any delimiter may be used. An & in the argument means the value of old. With empty old , use last old , or the most recent !? str ? search if there was no previous old 
-x quote the generated text, but break into words at blanks and newline 
+s/old/new/ substitute new for old in the text. Any delimiter may be used. An & in the argument means the value of old. With empty old , use last old , or the most recent !? str ? search if there was no previous old
+x quote the generated text, but break into words at blanks and newline
 & repeat the last substitution
 Searching history
 
@@ -773,73 +773,73 @@ fi
 
 @begin=sh@
 if [[ -t 1 ]]; then
-	local NONE="\033[0m"    # unsets color to term's fg color
-	local BOLD="\033[1m"
-	local OFF="\033[m"
+    local NONE="\033[0m"    # unsets color to term's fg color
+    local BOLD="\033[1m"
+    local OFF="\033[m"
 else
-	local NONE=""    # unsets color to term's fg color
-	local BOLD=""
-	local OFF=""
+    local NONE=""    # unsets color to term's fg color
+    local BOLD=""
+    local OFF=""
 fi
 @end=sh@
 
 # colors
 @begin=sh@
 if [[ -t 1 ]]; then
-	local BLACK="\033[0;30m"    # black
-	local RED="\033[0;31m"    # red
-	local GREEN="\033[0;32m"    # green
-	local YELLOW="\033[0;33m"    # yellow
-	local BLUE="\033[0;34m"    # blue
-	local MAGENTA="\033[0;35m"    # magenta
-	local CYAN="\033[0;36m"    # cyan
-	local WHITE="\033[0;37m"    # white
+    local BLACK="\033[0;30m"    # black
+    local RED="\033[0;31m"    # red
+    local GREEN="\033[0;32m"    # green
+    local YELLOW="\033[0;33m"    # yellow
+    local BLUE="\033[0;34m"    # blue
+    local MAGENTA="\033[0;35m"    # magenta
+    local CYAN="\033[0;36m"    # cyan
+    local WHITE="\033[0;37m"    # white
 else
-	local BLACK=""    # black
-	local RED=""    # red
-	local GREEN=""    # green
-	local YELLOW=""    # yellow
-	local BLUE=""    # blue
-	local MAGENTA=""    # magenta
-	local CYAN=""    # cyan
-	local WHITE=""    # white
+    local BLACK=""    # black
+    local RED=""    # red
+    local GREEN=""    # green
+    local YELLOW=""    # yellow
+    local BLUE=""    # blue
+    local MAGENTA=""    # magenta
+    local CYAN=""    # cyan
+    local WHITE=""    # white
 else
 @end=sh@
 
 # emphasized (bolded) colors
 @begin=sh@
 if [[ -t 1 ]]; then
-	local EMBLACK="\033[1;30m"
-	local EMRED="\033[1;31m"
-	local EMGREEN="\033[1;32m"
-	local EMYELLOW="\033[1;33m"
-	local EMBLUE="\033[1;34m"
-	local EMMAGENTA="\033[1;35m"
-	local EMCYAN="\033[1;36m"
-	local EMWHITE="\033[1;37m"
+    local EMBLACK="\033[1;30m"
+    local EMRED="\033[1;31m"
+    local EMGREEN="\033[1;32m"
+    local EMYELLOW="\033[1;33m"
+    local EMBLUE="\033[1;34m"
+    local EMMAGENTA="\033[1;35m"
+    local EMCYAN="\033[1;36m"
+    local EMWHITE="\033[1;37m"
 else
-	local EMBLACK=""
-	local EMRED=""
-	local EMGREEN=""
-	local EMYELLOW=""
-	local EMBLUE=""
-	local EMMAGENTA=""
-	local EMCYAN=""
-	local EMWHITE=""
+    local EMBLACK=""
+    local EMRED=""
+    local EMGREEN=""
+    local EMYELLOW=""
+    local EMBLUE=""
+    local EMMAGENTA=""
+    local EMCYAN=""
+    local EMWHITE=""
 fi
 @end=sh@
 
 # background colors
 @begin=sh@
 if [[ -t 1 ]]; then
-	local BGBLACK="\033[40m"
-	local BGRED="\033[41m"
-	local BGGREEN="\033[42m"
-	local BGYELLOW="\033[43m"
-	local BGBLUE="\033[44m"
-	local BGMAGENTA="\033[45m"
-	local BGCYAN="\033[46m"
-	local BGWHITE="\033[47m"
+    local BGBLACK="\033[40m"
+    local BGRED="\033[41m"
+    local BGGREEN="\033[42m"
+    local BGYELLOW="\033[43m"
+    local BGBLUE="\033[44m"
+    local BGMAGENTA="\033[45m"
+    local BGCYAN="\033[46m"
+    local BGWHITE="\033[47m"
 fi
 @end=sh@
 
@@ -892,7 +892,7 @@ true
 cleanup
 exit 0
 
-#!/usr/bin/env bash                                            
+#!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
 ##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
@@ -926,7 +926,7 @@ ARRAY+=('foo') # append to an array
 ARRAY+=('bar')
 
 
-# tunnel                                                                                                                       
+# tunnel
 mkfifo /tmp/myfifo
 while :; do nc -l -4 25 < /tmp/myfifo | tee -a /tmp/traffic | nc mail.mydomain.local 25 | tee -a /tmp/traffic > /tmp/myfifo; done
 while sleep 10; do true; done
@@ -941,7 +941,7 @@ die() {
 }
 
 trace_calls() {
-	caller 0 >> /tmp/trace_function.log
+    caller 0 >> /tmp/trace_function.log
 }
 
 
@@ -1042,3 +1042,8 @@ do
   ((var++))
 done < <(find . -type f -name "*.bin" -maxdepth 1)
 ```
+
+[[ $_ != $0 ]] && echo "Script is being sourced" || echo "Script is a subshell" # bash and ksh compatible
+[[ "${BASH_SOURCE[0]}" != "${0}" ]] && echo "script ${BASH_SOURCE[0]} is being sourced ..." # bash only
+([[ -n $ZSH_EVAL_CONTEXT && $ZSH_EVAL_CONTEXT =~ :file$ ]] || [[ -n $KSH_VERSION && $(cd "$(dirname -- "$0")" && printf '%s' "${PWD%/}/")$(basename -- "$0") != "${.sh.file}" ]] || [[ -n $BASH_VERSION ]] && (return 0 2>/dev/null)) && sourced=1 || sourced=0 # zsh, bash, ksh. For ZSH, must be called outside a function https://stackoverflow.com/a/28776166
+[[ $ZSH_EVAL_CONTEXT =~ :file$ ]] && sourced=1 || sourced=0 # must be called outside a function https://stackoverflow.com/a/28776166
