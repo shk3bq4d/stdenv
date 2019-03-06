@@ -587,7 +587,7 @@ echo "${@:3}"   extract all starting from 3
 
 
 
-# if not running in terminal, strip colors
+# if not running in terminal, strip ansi colors
 if [[ ! -t 1 ]]; then exec > >(sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"); fi
 
 #case insensitive string comparison
@@ -760,8 +760,8 @@ xxd # hex dump
 od  # hex dump
 
 
-cut -f2 -d$'\t' infile # inline tab character tabulation
-cut -f2 -d$'\n' infile # inline tab character tabulation
+cut -f2 -d$'\t' infile # inline tab character tabulation raw
+cut -f2 -d$'\n' infile # inline character newline new line raw
 
 ctrl+s # suspends terminal (not bash specific but not sure where to add)
 ctrl+q # resumes terminal after suspension (not bash specific but not sure where to add)
