@@ -1047,3 +1047,12 @@ done < <(find . -type f -name "*.bin" -maxdepth 1)
 [[ "${BASH_SOURCE[0]}" != "${0}" ]] && echo "script ${BASH_SOURCE[0]} is being sourced ..." # bash only
 ([[ -n $ZSH_EVAL_CONTEXT && $ZSH_EVAL_CONTEXT =~ :file$ ]] || [[ -n $KSH_VERSION && $(cd "$(dirname -- "$0")" && printf '%s' "${PWD%/}/")$(basename -- "$0") != "${.sh.file}" ]] || [[ -n $BASH_VERSION ]] && (return 0 2>/dev/null)) && sourced=1 || sourced=0 # zsh, bash, ksh. For ZSH, must be called outside a function https://stackoverflow.com/a/28776166
 [[ $ZSH_EVAL_CONTEXT =~ :file$ ]] && sourced=1 || sourced=0 # must be called outside a function https://stackoverflow.com/a/28776166
+
+
+echo -n "Are you sure you want to proceed (yN): " # read
+read _read
+echo # read 
+case "$_read" in \
+y|Y) true ;; # read
+*)   false;; # read
+esac # read

@@ -29,3 +29,5 @@ https://github.com/pypa/pip/issues/5240
 uninstall # remove delete
 --force-reinstall
 python -m pip install burp
+
+pip install --user ldap3=2.5.1 # https://github.com/cannatag/ldap3/issues/639 File "/home/bip/.local/lib/python2.7/site-packages/ldap3/protocol/formatters/formatters.py", line 337, in format_ad_timedelta return format_ad_timestamp(raw_value * -1) - format_ad_timestamp(0) TypeError: unsupported operand type(s) for -: 'str' and 'datetime.datetime'

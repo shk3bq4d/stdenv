@@ -1,6 +1,8 @@
 grep -l # only print matching files
 grep --line-buffered
 
+grep -e -mypattern # for patterns that start with minus dash tiret
+
 grep -text
 
 The `\' character, when followed by certain ordinary characters, takes

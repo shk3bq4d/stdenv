@@ -44,8 +44,7 @@ But then you have to escape the $ meaning the last line so the shell will not tr
 I forgot to tell that the new line is important after the filenames in the script so that sed knows that the filenames end.
 
 
-# remove emptylines
-sed -e '/^\s*$/ d'
+sed -e '/^\s*$/ d' # remove emptylines
 
 rint between line 45 and 50
 sed -n '45,50p' filename
