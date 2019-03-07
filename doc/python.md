@@ -404,6 +404,8 @@ import glob, re
 print map(lambda x: re.sub(r'[/\\]+', '/', x), glob.glob("/home/adam/*.txt"))
 
 
+zip map reduce
+
 
 map ( function , sequence , [ sequence... ] ) → list
 Create a new list from the results of applying the given function to the items of the given sequence . If more than one sequence is given, the function is called with multiple arguments, consisting of the corresponding item of each sequence. If any sequence is too short, None is used for missing value. If the function is None, map will create tuples from corresponding items in each list, much like the zip function.
