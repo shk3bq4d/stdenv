@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: '1'
+    deployment.kubernetes.io/max-replicas: '2'
+    deployment.kubernetes.io/revision: '1'
+  labels:
+    pod-template-hash: 5478df79c
+    run: stdenv
+  name: stdenv-5478df79c
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: stdenv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-template-hash: 5478df79c
+      run: stdenv
+  template:
+    metadata:
+      labels:
+        pod-template-hash: 5478df79c
+        run: stdenv
+    spec:
+      containers:
+      - command:
+        - tail
+        - -f
+        - /dev/null
+        image: shk3bq4d/stdenv:stdenv
+        imagePullPolicy: IfNotPresent
+        name: stdenv
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+

@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: stdenv-5478df79c-
+  labels:
+    pod-template-hash: 5478df79c
+    run: stdenv
+  name: stdenv-5478df79c-gmjm7
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: stdenv-5478df79c
+spec:
+  containers:
+  - command:
+    - tail
+    - -f
+    - /dev/null
+    image: shk3bq4d/stdenv:stdenv
+    imagePullPolicy: IfNotPresent
+    name: stdenv
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-bpl46
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: canigou
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-bpl46
+    secret:
+      defaultMode: 420
+      secretName: default-token-bpl46
+
