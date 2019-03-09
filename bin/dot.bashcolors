@@ -27,6 +27,34 @@ if [[ -t 1 ]]; then
 	BGCYAN="\033[46m"
 	BGWHITE="\033[47m"
 
+	ENONE=$'\033[0m'    # unsets color to term's fg color
+	EBOLD=$'\033[1m'
+	EOFF=$'\033[m'
+	EBLACK=$'\033[0;30m'    # black (or more likely white if terminal in day mode)
+	ERED=$'\033[0;31m'    # red
+	EGREEN=$'\033[0;32m'    # green
+	EYELLOW=$'\033[0;33m'    # yellow
+	EBLUE=$'\033[0;34m'    # blue
+	EMAGENTA=$'\033[0;35m'    # magenta
+	ECYAN=$'\033[0;36m'    # cyan
+	EWHITE=$'\033[0;37m'    # white (or more likely black if terminal in day mode)
+	EEMBLACK=$'\033[1;30m'
+	EEMRED=$'\033[1;31m'
+	EEMGREEN=$'\033[1;32m'
+	EEMYELLOW=$'\033[1;33m'
+	EEMBLUE=$'\033[1;34m'
+	EEMMAGENTA=$'\033[1;35m'
+	EEMCYAN=$'\033[1;36m'
+	EEMWHITE=$'\033[1;37m'
+	EBGBLACK=$'\033[40m'
+	EBGRED=$'\033[41m'
+	EBGGREEN=$'\033[42m'
+	EBGYELLOW=$'\033[43m'
+	EBGBLUE=$'\033[44m'
+	EBGMAGENTA=$'\033[45m'
+	EBGCYAN=$'\033[46m'
+	EBGWHITE=$'\033[47m'
+
 ansi_color_dump() {
 	echo -e "
 ${BLACK}BLACK${OFF}
@@ -86,5 +114,32 @@ else
 	BGMAGENTA=""
 	BGCYAN=""
 	BGWHITE=""
+	ENONE=""    # unsets color to term's fg color
+	EBOLD=""
+	EOFF=""
+	EBLACK=""    # black
+	ERED=""    # red
+	EGREEN=""    # green
+	EYELLOW=""    # yellow
+	EBLUE=""    # blue
+	EMAGENTA=""    # magenta
+	ECYAN=""    # cyan
+	EWHITE=""    # white
+	EEMBLACK=""
+	EEMRED=""
+	EEMGREEN=""
+	EEMYELLOW=""
+	EEMBLUE=""
+	EEMMAGENTA=""
+	EEMCYAN=""
+	EEMWHITE=""
+	EBGBLACK=""
+	EBGRED=""
+	EBGGREEN=""
+	EBGYELLOW=""
+	EBGBLUE=""
+	EBGMAGENTA=""
+	EBGCYAN=""
+	EBGWHITE=""
 fi
 # /* ex: set filetype=sh: */

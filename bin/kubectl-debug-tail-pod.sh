@@ -11,6 +11,8 @@
 
 set -euo pipefail
 
+source ~/bin/dot.bashcolors
+
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
 # [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
@@ -21,7 +23,7 @@ set -euo pipefail
 
 # DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 
-[[ -n ${VIMF6+1} ]] && VIMF6="-n gitlab gitlab-unicorn-565459dcf7-r9hjl"
+[[ -n ${VIMF6:-} ]] && VIMF6="-n gitlab gitlab-unicorn-565459dcf7-r9hjl"
 
 _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 
@@ -32,20 +34,26 @@ _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempd
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 f=$_tempdir/pod.yaml
 
-kubectl get pod "$@" $VIMF6 -o yaml > $f
+kubectl get pod "$@" -o yaml > $f
 #cat $f
+{
+
 cat $f |
 python -c '
 # ```python
+import os
 import sys
 import yaml
 from pprint import pprint
 rH = yaml.load(sys.stdin)
-f = "{init:<1s}{name:<20s} {ready!s:<5s} {state:<12s} {exitCode!s:<3s} {restartCount!s:<3s} {startedat!s:<19s} {finishedat!s:<19s} {image}"
+pattern = "{init:<1s}{name:<20s} {ready!s:<5s} {state:<12s} {exitCode!s:<3s} {restartCount!s:<3s} {startedat!s:<19s} {finishedat!s:<19s} {image}"
 #pprint(rH)
 
-pprint(rH["status"])
-print(f.format(init = "", name="NAME", ready="READY", state="STATE", exitCode="$?", restartCount="#R", startedat="START", finishedat="FINISHED", image="IMAGE"))
+f_containers = open(os.path.join(sys.argv[1], "containers"), "wb")
+open(os.path.join(sys.argv[1], "name"),      "wb").write(rH["metadata"]["name"])
+open(os.path.join(sys.argv[1], "namespace"), "wb").write(rH["metadata"]["namespace"])
+#pprint(rH["status"])
+print(pattern.format(init = "", name="NAME", ready="READY", state="STATE", exitCode="$?", restartCount="#R", startedat="START", finishedat="FINISHED", image="IMAGE"))
 cA = map(lambda x: ("*", x), rH["status"].get("initContainerStatuses", []))
 cA.extend(map(lambda x: ("", x), rH["status"].get("containerStatuses", [])))
 for init, cH in cA:
@@ -61,9 +69,44 @@ for init, cH in cA:
     startedat = stateH.get("startedAt", "")
     finishedat = stateH.get("finishedAt", "")
 
-    print(f.format(**locals()))
+    print(pattern.format(**locals()))
+    f_containers.write(" " + name)
 # ```
-'
+' $_tempdir
+
+name="$(cat $_tempdir/name)"
+namespace="$(cat $_tempdir/namespace)"
+
+echo -e "\n\nEvents:"
+kubectl get event --namespace $namespace --field-selector involvedObject.name=$name
+echo -e "\n\n press Q to start reading logs up until now"
+
+} | less --no-init
+
+name="$(cat $_tempdir/name)"
+namespace="$(cat $_tempdir/namespace)"
+mkdir $_tempdir/logs
+for container in $(cat $_tempdir/containers); do
+    kubectl logs \
+        --timestamps=true \
+        --namespace=$namespace \
+        --container=$container \
+        $name |
+        sed -r -e 's,(\S+) (.*),\1 '${EBLUE}${container}${EOFF}' \2,' \
+        > $_tempdir/logs/${container}.log
+done
+sort $_tempdir/logs/*.log | less -M --raw-control-chars --ignore-case --status-column --no-init
+exit 0
+echo -e "\n\n press Q to start tailing logs up until now"
+
+for container in $_tempdir/containers; do
+    kubectl logs \
+        --all-containers=true \
+        --tail=100 \
+        --follow=true \
+        --timestamps=true \
+        
+done
 
 echo EOF
 cleanup

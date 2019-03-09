@@ -17,11 +17,13 @@ RUN \
 		gawk \
 		git \
 		ipcalc \
+		iputils-ping \
 		less \
 		locales-all \
 		locate \
 		moreutils \
 		net-tools \
+		netcat \
 		nmap \
 		p7zip-full \
 		p7zip-rar \
