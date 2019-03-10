@@ -13,5 +13,5 @@ http://vortexgear.tw/vortex3.asp
 https://www.reddit.com/r/MechanicalKeyboards/wiki/pok3r 
 https://www.amazon.com/Mechanical-Keyboard-Keycaps-Cherry-Mx-Clear/dp/B00OFM6F80
 
-https://raw.githubusercontent.com/shK3Bq4d/stdenv/stdenv/.ackrc
+https://raw.githubusercontent.com/shk3bq4d/stdenv/stdenv/.ackrc
 

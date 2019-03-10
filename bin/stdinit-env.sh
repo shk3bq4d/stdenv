@@ -15,8 +15,8 @@ unset GIT_DIR
 unset GIT_WORK_TREE
 
 github=github
-githuburl=https://github.com/shK3Bq4d/
-githubpushurl=https://github.com/shK3Bq4d/
+githuburl=https://github.com/shk3bq4d/
+githubpushurl=https://github.com/shk3bq4d/
 
 addremote() {
 	if git remote | grep -q $1; then
