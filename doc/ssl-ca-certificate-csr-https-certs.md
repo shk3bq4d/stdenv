@@ -8,18 +8,18 @@ systemctl restart docker.service # optional for artifactory
 yum install ca-certificates                  # Install the ca-certificates package:
 update-ca-trust force-enable                 # Enable the dynamic CA configuration feature:
 #cp foo.crt /etc/pki/ca-trust/source/anchors/ # Add it as a new file to /etc/pki/ca-trust/source/anchors/:
-cd /etc/pki/ca-trust/source/anchors/ 
+cd /etc/pki/ca-trust/source/anchors/
 cat - > myca.crt
 update-ca-trust extract                      # activate (and also takes care of /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts)
 
-# alpine 
+# alpine
 apk update && apk add ca-certificates
-cat - > myca.crt
+cp yourca.crt /usr/local/share/ca-certificates/yourca.crt
 update-ca-certificates
 => file /etc/ssl/certs/ca-certificates.cr has been updated
 
 # alpine docker zabbix trouble shooting
-python -i                                                                                                                      
+python -i
 from idecore import idelogging, credentials, idetools, zabbix
 zabbix.connection(url='https://myzabbix.url')
 less /etc/ssl/certs/ca-certificates.crt
@@ -77,7 +77,7 @@ keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS
           keystore="nbproject/private/mykeystore.jks"
           keypass="fasdfkjdslfjadlfjldsjflkdjlsa"
           tsaurl="http://timestamp.digicert.com"
-          alias="myalias"                                                                                                 
+          alias="myalias"
           />
 jarsigner -verify /e/me/local/appsdata/apache-tomcat/projects/fw/build/WEB-INF/lib/FwServlet.jar
 jarsigner.exe -verify -verbose -certs $(cygpath -wa /java/FwBrowse/dist/FwBrowse.jar)  | less
