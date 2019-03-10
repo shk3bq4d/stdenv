@@ -21,7 +21,7 @@ i3 '[id="127926281"] floating enable'
 
 # i3 blocks install
 #git clone git://github.com/vivien/i3blocks
-git clone -b mr https://github.com/shK3Bq4d/i3blocks.git
+git clone -b mr https://github.com/shk3bq4d/i3blocks.git
 cd i3blocks
 make clean debug # or make clean all
 sudo make install

@@ -223,8 +223,8 @@ $HOME/.Xdefaults)
     image=mrlatex
     if ! docker images $image | grep -wqE "^${image}"; then
         echo "Image not found $image, execute the following:"
-        echo "  git clone https://github.com/shK3Bq4d/docker-latex/ ~/git/shK3Bq4d/docker-latex/ && \\"
-        echo "    cd ~/git/shK3Bq4d/docker-latex/ && ./build.sh"
+        echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/shk3bq4d/docker-latex/ && \\"
+        echo "    cd ~/git/shk3bq4d/docker-latex/ && ./build.sh"
     elif docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
         echo $out
         nohup evince $out &>/dev/null </dev/null &
