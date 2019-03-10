@@ -7,10 +7,10 @@ RUN true \
 	&& git config --global user.email "jeff@stdenv.stdenv" \
 	&& cd ~ \
 	&& mkdir -p ~/.ssh/c \
-	&& git clone https://github.com/shK3Bq4d/stdhome.git ~/stdhome \
+	&& git clone https://github.com/shk3bq4d/stdhome.git ~/stdhome \
     && ~/stdhome/bin/stdhome-install.sh -a o \
 	&& cd ~ \
-	&& git clone --no-checkout https://github.com/shK3Bq4d/stdenv.git ~/stdenv \
+	&& git clone --no-checkout https://github.com/shk3bq4d/stdenv.git ~/stdenv \
 	&& cd ~/stdenv \
 	&& git config branch.autosetupmerge always \
 	&& git config status.showuntrackedfiles no \

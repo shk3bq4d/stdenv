@@ -86,6 +86,7 @@ echo -e "\n\n press Q to start reading logs up until now"
 name="$(cat $_tempdir/name)"
 namespace="$(cat $_tempdir/namespace)"
 mkdir $_tempdir/logs
+now="$(date --rfc-3339=seconds)"
 for container in $(cat $_tempdir/containers); do
     kubectl logs \
         --timestamps=true \
@@ -96,19 +97,23 @@ for container in $(cat $_tempdir/containers); do
         > $_tempdir/logs/${container}.log
 done
 sort $_tempdir/logs/*.log | less -M --raw-control-chars --ignore-case --status-column --no-init
-exit 0
-echo -e "\n\n press Q to start tailing logs up until now"
+
+echo -e "\n\n press Q to start tailf from now on or Ctrl-C to abort"
 
 for container in $_tempdir/containers; do
     kubectl logs \
-        --all-containers=true \
-        --tail=100 \
         --follow=true \
         --timestamps=true \
-        
+        --since-time="$now" \
+        --namespace=$namespace \
+        --container=$container \
+        $name |
+        sed -r -e 's,(\S+) (.*),\1 '${EBLUE}${container}${EOFF}' \2,' \
+        >> $_tempdir/logs/${container}.log &
 done
+kubectl get event --namespace $namespace --field-selector involvedObject.name=$name -w > $_tempdir/logs/events.log &
+tail -f $_tempdir/logs/*.log
 
-echo EOF
 cleanup
 exit 0
 

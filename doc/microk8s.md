@@ -15,3 +15,6 @@ sudo iptables -P FORWARD ACCEPT
 # dockerd
 export DOCKER_HOST="unix:///var/snap/microk8s/current/docker.sock"
 microk8s.docker
+## two hosts directives in to have gitlab runner build docker images /var/snap/microk8s/current/args/dockerd
+-H tcp://10.199.1.1:2375
+-H unix://${SNAP_DATA}/docker.sock
