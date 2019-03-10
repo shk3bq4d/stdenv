@@ -8,3 +8,16 @@ jq -r '.[].ID' $SG
 jq -r '.[] | select(.Name | startswith("infra_")) | .ID' $SG
 jq -r '.[] | [."Security Group", .ID ] | @csv' $RULES
 jq -r '.[] | select(.ID == "'$1'") | .Name' $SG
+
+
+if jq -e ".jsonpath" bip.json >/dev/null; then # --exit-status Sets the exit status of jq to 0 if the last output values was neither fal se nor null, 1 if the last output value was either false or null, or 4  if  no  valid result  was  ever produced. Normally jq exits with 2 if there was any usa ge problem or system error, 3 if there was a jq program compile error, or 0 if the jq program ran.  
+
+jq . bip.json
+{
+  "hehe": 5
+}
+jq '.bob = 3' bip.json
+{
+  "hehe": 5,
+  "bob": 3
+}

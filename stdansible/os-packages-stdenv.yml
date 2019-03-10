@@ -14,4 +14,5 @@
       apt:
         name:
           - gpick
+          - jq
         state: present
