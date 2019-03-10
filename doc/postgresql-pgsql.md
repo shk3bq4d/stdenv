@@ -48,3 +48,13 @@ pg_dumpall -U django -oc
 postgres postgres -f -
 
 psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups where group_id = 9;"
+
+
+# backups backup
+https://github.com/wal-e/wal-e
+```sh
+echo $POSTGRES_HOSTNAME:"*:*":$POSTGRES_USER:$(cat /conf/postgres-password) > ~/.pgpass;
+chmod 0400 ~/.pgpass
+pg_dumpall --host $POSTGRES_HOSTNAME | gzip -c > /backupdata/$(date +'%Y.%m.%d-%H.%M.%S')-all.dump.gz
+```
+19 mai
