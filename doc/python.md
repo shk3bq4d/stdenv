@@ -1093,3 +1093,6 @@ def pairwise(iterable):
     next(b, None)
     return itertools.izip(a, b) # <- this is python2 for 3 replace "itertool.izip" with solely "zip" (no itertool)
 ```
+
+os.mkdir()     # mkdir makedir
+os.makedirs()  # mkdir -p 
