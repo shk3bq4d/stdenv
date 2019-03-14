@@ -102,3 +102,48 @@ I am also sure that I will get comments saying that the differences I described 
 Another topic I didn't touch on is that same-gender harassment also exists, that transgender harassment is different from harassment between cisgendered people, etc. I kept the answer heteronormative, because it is complex enough without me addressing issues with which I have little experience and which are not relevant for the concrete situation experienced by the OP.
 
 https://www.quora.com/profile/Jacob-Wells-12 # very articulate psychopath
+
+## How to create a quality ticket/issue
+Whenever you request help from DevOps, the engineers expect some information to be given as to efficiently work on the issue without spending most of the time hunting for information.
+
+Therefore, we've put some guideline together in order to help you create a great ticket ￼
+
+Use the "Service Request" type for most of your requests, unless you know you should do otherwise.
+
+We can always requalify them.
+
+The "Change" type is reserved for DevOps teams. If a change is required, it'll be prepared by DevOps and you will be kept informed.
+
+Take the few minutes needed to fill out the description with proper English (or French possibly), with as much details as possible. These minutes will likely make everyone save possible hours down the line.
+
+1 problem == 1 ticket
+If you need help on several issues, please open different tickets.
+Do not hijack tickets, meaning, do not use an existing ticket to talk about another issue just because it looks easier for you.
+Provide context around your issue
+What environment are in?
+Production? staging? Mention it to us if you don't know.
+What user are you using to perform your action?
+Are you trying from home or from the office?
+Let us know your external IP address if you think that can help.
+Has anyone else helped you?
+Beware of the difference between Nagra environments and our own KS environments. We know it can be confusing and it's happened before.
+If you've done several tests of your own, please mention it
+If you've tried to resolve your issue on your own first, we truly appreciate it! ￼
+Please let us know what exactly that you tried
+Provide an exact error message?
+A screenshot is nice to express something. Make sure you capture everything that is relevant in that screenshot
+The URL is always good
+The windows border will point us to the fact that you may be using a Linux O/S, Windows or Mac, which may help.
+Provide logs if available.
+Example, your vpn client logs
+If you're hunting down a problem with a server, please provide some server logs that pertains to the issue.
+
+If you open an issue with us, you need to follow-up.
+We expect timely response when troubleshooting a ticket for you.
+If there is no response, we may close your ticket.
+We'll try to be nice, so should you.
+That sounds odd, I know.
+Keep in mind we're an engineering team and true helpdesk is not our forte.
+However, be sure that we will always try our best to help you, just as we expect you to help us in giving us the right info at the right time.
+
+If we feel an issue is raised without respecting guidelines, it may be closed without further due and you may need to reopen another one, with the proper information.

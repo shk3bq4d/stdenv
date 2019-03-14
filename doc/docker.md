@@ -40,7 +40,7 @@ docker build -t name .
 docker build -t $(basename $(realpath .)) .
 
 # test if running inside a container:
-[[ -d /.dockerenv ]] && echo yes # http://stackoverflow.com/questions/23513045/how-to-check-if-a-process-is-running-inside-docker-container
+[[ -f /.dockerenv ]] && echo yes # http://stackoverflow.com/questions/23513045/how-to-check-if-a-process-is-running-inside-docker-container
 
 # straight from git
 docker build -t rogaha/docker-desktop git://github.com/rogaha/docker-desktop.git

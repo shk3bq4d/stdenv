@@ -948,24 +948,45 @@ trace_calls() {
 
 #!/bin/bash
 #### getopts example
-usage() { echo "Usage: $0 [-s <45|90>] [-p <string>]" 1>&2; exit 1; }
-while getopts ":s:p:" o; do
+#### There are three implementations that may be considered:
+#### Bash builtin getopts. This does not support long option names with the double-dash prefix. It only supports single-character options.
+#### BSD UNIX implementation of standalone getopt command (which is what MacOS uses). This does not support long options either.
+#### GNU implementation of standalone getopt. GNU getopt(3) (used by the command-line getopt(1) on Linux) supports parsing long options.
+#### The basic syntax of getopts is (see: man bash):
+####   getopts OPTSTRING VARNAME [ARGS...]
+#### where:
+#### OPTSTRING is string with list of expected arguments,
+####   h - check for option -h without parameters; gives error on unsupported options;
+####   h: - check for option -h with parameter; gives errors on unsupported options;
+####   abc - check for options -a, -b, -c; gives errors on unsupported options;
+####   :abc - check for options -a, -b, -c; silences errors on unsupported options;
+####      Notes: In other words, colon in front of options allows you handle the errors in your code. Variable will contain ? in the case of unsupported option, : in the case of missing value.
+#### OPTARG - is set to current argument value,
+#### OPTERR - indicates if Bash should display error messages.
+usage() { echo "Usage: $0 [-s <45|90>] [-p <string>]" 1>&2; }
+# while getopts ":s:p:" o "-s" 45 "-s" "salut les cocos"; do
+while getopts ":s:p:h" o; do
     case "${o}" in
         s)
             s=${OPTARG}
-            ((s == 45 || s == 90)) || usage
+            ! ((s == 45 || s == 90)) && usage && exit 1
             ;;
         p)
             p=${OPTARG}
             ;;
+        h)
+            usage
+            exit 0
         *)
             usage
+            exit 1
             ;;
     esac
 done
-shift $((OPTIND-1))
-if [ -z "${s}" ] || [ -z "${p}" ]; then
+shift $((OPTIND-1)) || true
+if [ -z "${s:-}" ] || [ -z "${p:-}" ]; then
     usage
+    exit 1
 fi
 echo "s = ${s}"
 echo "p = ${p}"
@@ -1052,9 +1073,9 @@ done < <(find . -type f -name "*.bin" -maxdepth 1)
 
 echo -n "Are you sure you want to proceed (yN): " # read
 read _read
-echo # read 
-case "$_read" in \
-y|Y) true ;; # read
+echo # read
+case "${_read,,}" in \
+y|yes) true ;; # read
 *)   false;; # read
 esac # read
 
