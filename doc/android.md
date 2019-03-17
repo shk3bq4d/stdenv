@@ -107,7 +107,9 @@ https://console.firebase.google.com/project/mrr0-30688/settings/general/
 tablette samsung rose: ssh galaxytab port 22 /mnt/sdcard/extStorages/SdCard/movies
 rsync -e 'sshpass -f~/.words/galaxytab ssh' -vrtD --no-xattrs --no-chmod --no-owner --stats --human-readable --progress *mp4 galaxytab:/mnt/sdcard/extStorages/SdCard/movies/sisters/
 watch -n 120 'rsync -e "sshpass -f~/.words/galaxytab ssh" -vrtD --no-xattrs --no-chmod --no-owner --stats --human-readable --progress *mp4 galaxytab:/mnt/sdcard/extStorages/SdCard/movies/sisters/'
-tablette motorola: port 2222 /sdcard/Movies/
+tablette motorola xoom: port 2222 /sdcard/Movies/
+sshpass -f~/.words/motog /usr/bin/ssh motog mkdir /sdcard/Music/$i/
+rsync -avr -e "sshpass -f~/.words/motog /usr/bin/ssh" --copy-links --delete $DIR/$i/. motog:/sdcard/Music/$i/.
 
 natel telephone isabelle galaxy-a3:/sdcard/Music
 natel telephone marc motog:/sdcard/Music

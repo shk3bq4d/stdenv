@@ -7,5 +7,7 @@ ifuse /media/iphone/
 sudo umount /media/iphone
 rsync -vtr --progress --human-readable --stats /media/iphone/DCIM/. thinkpade:/pictures/iphone/DCIM/.
 rsync -vtr --progress --human-readable --stats /media/iphone/DCIM/. thinkpadw:/pictures/iphone/DCIM/.
+rsync -avr -e "sshpass -f~/.words/motog /usr/bin/ssh" --copy-links --delete $DIR/$i/. motog:/sdcard/Music/$i/.
+sshpass -f~/.words/motog /usr/bin/ssh motog mkdir /sdcard/Music/$i/
                                                                             |
 

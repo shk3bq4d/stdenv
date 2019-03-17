@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: unicorn
+    chart: unicorn-1.6.1
+    heritage: Tiller
+    release: gitlab
+  name: gitlab-unicorn
+  namespace: gitlab
+spec:
+  clusterIP: 10.152.183.186
+  ports:
+  - name: unicorn
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: workhorse
+    port: 8181
+    protocol: TCP
+    targetPort: 8181
+  selector:
+    app: unicorn
+    release: gitlab
+  sessionAffinity: None
+  type: ClusterIP
+
