@@ -1,0 +1,9 @@
+#!/usr/bin/env bash 
+
+set -x
+ARGS=-0
+if which vim &>/dev/null; then
+	xargs $ARGS bash -c '</dev/tty vim $@' ignoreme
+else
+	xargs $ARGS bash -c '</dev/tty vi $@' ignoreme
+fi
