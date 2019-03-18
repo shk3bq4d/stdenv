@@ -91,14 +91,14 @@ xxd FILENAME | vi -
 
 #The following performs a search and replace in all buffers (all those listed with the :ls command):
 :bufdo %s/pattern/replace/ge | update
-#bufdo	Apply the following commands to all buffers.
-#%s	Search and replace all lines in the buffer.
-#pattern	Search pattern.
-#replace	Replacement text.
-#g	Change all occurrences in each line (global).
-#e	No error if the pattern is not found.
-#|	Separator between commands.
-#update	Save (write file only if changes were made).
+#bufdo    Apply the following commands to all buffers.
+#%s    Search and replace all lines in the buffer.
+#pattern    Search pattern.
+#replace    Replacement text.
+#g    Change all occurrences in each line (global).
+#e    No error if the pattern is not found.
+#|    Separator between commands.
+#update    Save (write file only if changes were made).
 #The command above uses :update
 
 #To replace "blue" with "green" in lines that contain "red":
@@ -157,11 +157,11 @@ gi # insert from last edit position
 83%
 ...etc
 
-# swap parameters swap_parameters.vim http://www.vim.org/scripts/script.php?script_id=2032 	
-key bindings (normal mode): 
-[count]gb -- where count defaults to 1 -- swap the argument under 
-             the cursor with the [count] matenext one 
-[count]gB -- swap with the previous one 
+# swap parameters swap_parameters.vim http://www.vim.org/scripts/script.php?script_id=2032
+key bindings (normal mode):
+[count]gb -- where count defaults to 1 -- swap the argument under
+             the cursor with the [count] matenext one
+[count]gB -- swap with the previous one
 
 
 # diff
@@ -172,20 +172,20 @@ key bindings (normal mode):
 # merge
 do # or :diffget gets diff from other viewport
 dp # or :diffput push diff to the other viewpor
-:63diffget gets line 63 
+:63diffget gets line 63
 zX restore original folds (do it on both buffers)
 vimdiff -c 'set diffopt+=iwhite' # ignores whitespace
 
 
 # fold
 :{range}fo[ld] creat a fold for the lines in range
-zA # expands folds recursively 
+zA # expands folds recursively
 za # expands fold
 zC # closes  fold recusriveley
 zX # undo manual folds
 
 BASEDIR=~/.vim && mkdir -p $BASEDIR/autoload $BASEDIR/bundle && \
-	curl -LSso $BASEDIR/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    curl -LSso $BASEDIR/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 echo "execute pathogen#infect()" >>.vimrc
 
@@ -199,15 +199,15 @@ rsync -avr ~/.vim ~/.vimrc root@192.168.56.106:.
 
 int i = 42;
 for (int k = 17; k < 28; ++k)
-{	sprintf(\03423, "%s");
+{    sprintf(\03423, "%s");
 }
 
 :call SyntaxRange#Include('@begin=json@', '@end=json@', 'json', 'NonText')
 @begin=c@
     int i = 42;
-	for (int k = 17; k < 28; ++k)
-	{	sprintf(\03423, "%s");
-	}
+    for (int k = 17; k < 28; ++k)
+    {    sprintf(\03423, "%s");
+    }
 @end=c@
 
 vi -R #readonly
