@@ -35,20 +35,20 @@ BIN="$HOME/bin/terraform-$terraform_version"
 
 
 if [[ ! -f $BIN ]]; then
-	echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
-	read _read
-	echo # read
-	case "${_read,,}" in \
-	y|Y|yes)
-		true
-		;;
-	*)   
-		exit 1
-		;;
-	esac
-	curl -Os https://releases.hashicorp.com/terraform/$terraform_version/terraform_"$terraform_version"_linux_amd64.zip
-	unzip -d ~/.tmp terraform_"$terraform_version"_linux_amd64.zip 
-	mv ~/.tmp/terraform ~/bin/terraform-$terraform_version
+    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    read _read
+    echo # read
+    case "${_read,,}" in \
+    y|Y|yes)
+        true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+    curl -Os https://releases.hashicorp.com/terraform/$terraform_version/terraform_"$terraform_version"_linux_amd64.zip
+    unzip -d ~/.tmp terraform_"$terraform_version"_linux_amd64.zip
+    mv ~/.tmp/terraform ~/bin/terraform-$terraform_version
 fi
 
 ~/bin/terraform-$terraform_version "$@"
