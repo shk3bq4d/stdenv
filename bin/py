@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+import re
 import os
 import sys
 from pprint import pprint
@@ -13,6 +14,9 @@ Usage:
 {} NEW_SCRIPT_FILENAME
 saves default python script template to file specified as sole argument
                                                                                                         """.format(os.path.basename(__file__)))
+def toCamelCase(i):
+    i = re.sub(r'[^a-zA-Z0-9]+', ' ', i)
+    return ''.join(x for x in i.title() if not x.isspace())
 
 
 if len(sys.argv) != 2:
@@ -26,6 +30,8 @@ if os.path.isfile(fp):
     print('FATAL, file {} already exists'.format(sys.argv[1]))
     sys.exit(1)
 
+name, _ = os.path.splitext(os.path.basename(fp))
+
 with open(fp, 'wb') as f:
     f.write("""#!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -34,12 +40,39 @@ with open(fp, 'wb') as f:
 import os
 import sys
 import re
+import unittest
 import argparse
 import logging
 
 from pprint import pprint, pformat
 
 logger = logging.getLogger(__name__)
+
+class __NAME__(unittest.TestCase):
+    #def __init__(self, methodName='runTest'): pass
+    def tearDown(self): pass
+    def tearUp(self): pass
+
+    @classmethod
+    def setUpClass(cls): pass
+
+    @classmethod
+    def tearDownClass(cls): pass
+
+    def test_queue_summary_alter(self):
+        self.assertIn(   'a', 'abcde', msg='a is supposed to be in abcde')
+        self.assertNotIn('z', 'abcde', msg='z is not supposed to be in abcde')
+        # assertAlmostEqual assertAlmostEquals assertDictContainsSubset assertDictEqual
+        # assertEqual assertEquals assertFalse assertGreater assertGreaterEqual
+        # assertIn assertIs assertIsInstance assertIsNone assertIsNot assertIsNotNone
+        # assertItemsEqual assertLess assertLessEqual assertListEqual assertMultiLineEqual
+        # assertNotAlmostEqual assertNotAlmostEquals assertNotEqual assertNotEquals
+        # assertNotIn assertNotIsInstance assertNotRegexpMatches assertRaises
+        # assertRaisesRegexp assertRegexpMatches assertSequenceEqual assertSetEqual
+        # assertTrue assertTupleEqual assert_ countTestCases debug defaultTestResult
+        # doCleanups fail failIf failIfAlmostEqual failIfEqual failUnless failUnlessAlmostEqual
+        # failUnlessEqual failUnlessRaises failureException id longMessage maxDiff
+        # run setUp setUpClass shortDescription skipTest tearDown tearDownClass
 
 def logging_conf(
         level='INFO', # DEBUG
@@ -77,17 +110,19 @@ def go(args):
     # pprint(ar)
 
 if __name__ == '__main__':
-
     logging_conf()
-    try:
-        go(sys.argv[1:])
-    except BaseException as e:
-        #logging.exception('oups for %s', sys.argv)
-        logging.error('oups for %s', sys.argv)
-        raise type(e), type(e)(e), sys.exc_info()[2]
+    if 'VIMRUNTIME' in os.environ:
+        unittest.main()
+    else:
+        try:
+            go(sys.argv[1:])
+        except BaseException as e:
+            #logging.exception('oups for %s', sys.argv)
+            logging.error('oups for %s', sys.argv)
+            #raise type(e), type(e)(e), sys.exc_info()[2]
 
-""".replace('___', '"""'))
-    os.chmod(fp, 0740)
+""".replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')))
+    os.chmod(fp, 0750)
     print(fp)
 
 if False:

@@ -11,6 +11,7 @@ import re
 import copy
 import argparse
 import json
+import unittest
 import logging
 import logging.config
 import i3ipc
@@ -18,6 +19,80 @@ import i3ipc
 from pprint import pprint
 
 logger = logging.getLogger(__name__)
+
+class Mri3Test(unittest.TestCase):
+    #def __init__(self, methodName='runTest'): pass
+    def tearDown(self): pass
+    def tearUp(self): pass
+
+    @classmethod
+    def setUpClass(cls): pass
+
+    @classmethod
+    def tearDownClass(cls): pass
+
+    def test_workspace_name_to_letter(self):
+        for i in [
+            ("0   $   ", '$'),
+            (0, '$'),
+            ("$", '$'),
+            ("1   &amp;   ", "&amp;"),
+            (1, "&amp;"),
+            ("&amp;", "&amp;"),
+            ("2   7   ", "7"),
+            (2, "7"),
+            ("7", "7"),
+            ("3   5   ", "5"),
+            (3, "5"),
+            ("5", "5"),
+            ("4   3   ", "3"),
+            (4, "3"),
+            ("3", "3"),
+            ("5   1   ", "1"),
+            (5, "1"),
+            ("1", "1"),
+            ("6   9   ", "9"),
+            (6, "9"),
+            ("9", "9"),
+            ("7   0   ", "0"),
+            (7, "0"),
+            ("0", "0"),
+            ("8   2   ", "2"),
+            (8, "2"),
+            ("2", "2"),
+            ("9   4   ", "4"),
+            (9, "4"),
+            ("4", "4"),
+            ("10   6   ", "6"),
+            (10, "6"),
+            ("6", "6"),
+            ("11   8   ", "8"),
+            (11, "8"),
+            ("8", "8"),
+            ("12   !   ", "!"),
+            (12, "!"),
+            ("!", "!"),
+            ("0   $ bip", "$"),
+            ("1   &amp; ampersand", "&amp;"),
+            ("4   3 three habon he", "3"),
+            ("9   4 bip", "4"),
+            ]:
+            self.assertEqual(i[1], workspace_name_to_letter(i[0]))#, msg="workspace_name_to_letter('{}') is supposed
+
+    def test_queue_summary_alter(self):
+        self.assertIn(   'a', 'abcde', msg='a is supposed to be in abcde')
+        self.assertNotIn('z', 'abcde', msg='z is not supposed to be in abcde')
+        # assertAlmostEqual assertAlmostEquals assertDictContainsSubset assertDictEqual
+        # assertEqual assertEquals assertFalse assertGreater assertGreaterEqual
+        # assertIn assertIs assertIsInstance assertIsNone assertIsNot assertIsNotNone
+        # assertItemsEqual assertLess assertLessEqual assertListEqual assertMultiLineEqual
+        # assertNotAlmostEqual assertNotAlmostEquals assertNotEqual assertNotEquals
+        # assertNotIn assertNotIsInstance assertNotRegexpMatches assertRaises
+        # assertRaisesRegexp assertRegexpMatches assertSequenceEqual assertSetEqual
+        # assertTrue assertTupleEqual assert_ countTestCases debug defaultTestResult
+        # doCleanups fail failIf failIfAlmostEqual failIfEqual failUnless failUnlessAlmostEqual
+        # failUnlessEqual failUnlessRaises failureException id longMessage maxDiff
+        # run setUp setUpClass shortDescription skipTest tearDown tearDownClass
 
 def logging_conf(
         level='INFO', # DEBUG
@@ -105,6 +180,9 @@ def is_container(n):
 
 def is_workspace(n):
     return n.type == 'workspace'
+
+def is_workspace_focused(n):
+    return focused().workspace().num == n.num
 
 def traverse_all_elem(start_from=None, only_visible=False):
     rA = []
@@ -315,6 +393,47 @@ def grid_layout(cols=None, rows=None):
 
     return tH
 
+WORKSPACES_LETTER = [
+'$',
+'&amp;',
+'7',
+'5',
+'3',
+'1',
+'9',
+'0',
+'2',
+'4',
+'6',
+'8',
+'!',
+'#']
+
+WORKSPACES_NAMES = [
+    "0   $   ",
+    "1   &amp;   ",
+    "2   7   ",
+    "3   5   ",
+    "4   3   ",
+    "5   1   ",
+    "6   9   ",
+    "7   0   ",
+    "8   2   ",
+    "9   4   ",
+    "10   6   ",
+    "11   8   ",
+    "12   !   "
+    ]
+
+def workspace_name_to_letter(i):
+    if isinstance(i, int):
+        return WORKSPACES_LETTER[i]
+    iA = i.split(None, 2)
+    if len(iA) == 1:
+        return iA[0]
+    return iA[1]
+
+
 def mrFocusedStack():
     """ returns a list of container in which the latest is the focused window """
     import json
@@ -329,10 +448,13 @@ def mrFocusedStack():
 if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
-    logging_conf()
-    try:
-        go(sys.argv[1:])
-    except BaseException as e:
-        #logging.exception('oups for %s', sys.argv)
-        logging.exception('oups for %s', sys.argv)
-        #raise type(e), type(e)(e), sys.exc_info()[2]
+    if 'VIMRUNTIME' in os.environ:
+        unittest.main()
+    else:
+        logging_conf()
+        try:
+            go(sys.argv[1:])
+        except BaseException as e:
+            #logging.exception('oups for %s', sys.argv)
+            logging.exception('oups for %s', sys.argv)
+            #raise type(e), type(e)(e), sys.exc_info()[2]
