@@ -195,32 +195,33 @@ bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command 
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+49 exec ~/bin/mri3_workspace.py $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+10 workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+10 exec ~/bin/mri3_workspace.py $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+11 workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+11 exec ~/bin/mri3_workspace.py $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+12 workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+12 exec ~/bin/mri3_workspace.py $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+13 workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+13 exec ~/bin/mri3_workspace.py $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+14 workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+14 exec ~/bin/mri3_workspace.py $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+15 workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+15 exec ~/bin/mri3_workspace.py $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+16 workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+16 exec ~/bin/mri3_workspace.py $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+17 workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+17 exec ~/bin/mri3_workspace.py $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+18 workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+18 exec ~/bin/mri3_workspace.py $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+19 workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+19 exec ~/bin/mri3_workspace.py $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+20 workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+20 exec ~/bin/mri3_workspace.py $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+21 workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
-#bindcode  $mod+22 workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+21 exec ~/bin/mri3_workspace.py $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+22 exec ~/bin/mri3_workspace.py $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:22 => sym: 0xff08, symbol: BackSpace
 bindcode  $mod+22      exec ~/bin/mri3_new_workspace.py
 #bindcode  $mod+Shif+22 exec ~/bin/mri3_new_workspace.py move window
