@@ -360,8 +360,8 @@ All exceptions that Requests explicitly raises inherit from requests.exceptions.
 http://stackoverflow.com/questions/22609385/python-requests-library-define-specific-dns
 
 proxies = {
-	'http': 'socks5://user:pass@host:port',
-	'https': 'socks5://user:pass@host:port'
+    'http': 'socks5://user:pass@host:port',
+    'https': 'socks5://user:pass@host:port'
 }
 
 
@@ -370,17 +370,19 @@ requests.get(url, params=None, proxies=None, verify=True)
 proxies = {'http': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']), 'https': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']) }
 
 # http://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
-def download_file(url):
-    local_filename = url.split('/')[-1]
+```python
+def download_file(url, locale_filename=None):
+    if local_filename is None:
+        local_filename = url.split('/')[-1]
     # NOTE the stream=True parameter
     r = requests.get(url, stream=True)
     with open(local_filename, 'wb') as f:
-        for chunk in r.iter_content(chunk_size=1024): 
+        for chunk in r.iter_content(chunk_size=1024):
             if chunk: # filter out keep-alive new chunks
                 f.write(chunk)
                 #f.flush() commented by recommendation from J.F.Sebastian
     return local_filename
-
+```
 
 I don't have SSL setup on this domain, so it throws an exception. Excellent. GitHub does though:
 
