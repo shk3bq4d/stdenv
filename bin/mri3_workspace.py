@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def logging_conf(
         level='INFO', # DEBUG
-        use='stdout' # "stdout syslog" "stdout syslog file"
+        use='stdout file syslog' # "stdout syslog" "stdout syslog file"
         ):
     import logging.config
     script_directory, script_name = os.path.split(__file__)
@@ -72,7 +72,9 @@ def go(args):
     #script_directory, script_name = os.path.split(__file__)
     focused_workspace = mri3.focused().workspace()
     #pprint(vars(focused_workspace))
+    logger.info('ar.WORKSPACE is %s', ar.WORKSPACE)
     if ar.WORKSPACE:
+        logger.info('ar.WORKSPACE is %s', ar.WORKSPACE)
         desired_letter = mri3.workspace_name_to_letter(ar.WORKSPACE)
         wH = current_workspaces_letter_obj()
         if desired_letter in wH:
@@ -95,8 +97,9 @@ def go(args):
             mri3.get_root().command('workspace number ' + desired_name)
             # bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
         return
+    mri3.get_root().command('workspace number 8')
 
-
+    if False:
 
 
         pprint(list(current_workspaces_letter()))
