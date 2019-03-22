@@ -135,6 +135,7 @@ git help everyday
 http://stackoverflow.com/questions/6934752/combining-multiple-commits-before-pushing-in-git
 git rebase -i origin/master     # Change all the pick to squash except the first one:
 git rebase -i origin/production # Change all the pick to squash except the first one:
+git tag $(git_current_branch)-prerebase-$(date-Y.m.d.sh)
 
 git pull
 git fetch
