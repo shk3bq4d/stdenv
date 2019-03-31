@@ -37,6 +37,7 @@ class Mri3Test(unittest.TestCase):
             (0, '$'),
             ("$", '$'),
             ("1   &amp;   ", "&amp;"),
+            ("1   &amp   ", "&amp;"),
             (1, "&amp;"),
             ("&amp;", "&amp;"),
             ("2   7   ", "7"),
@@ -411,7 +412,7 @@ WORKSPACES_LETTER = [
 
 WORKSPACES_NAMES = [
     "0   $   ",
-    "1   &amp;   ",
+    '"1   &amp;   "',
     "2   7   ",
     "3   5   ",
     "4   3   ",
@@ -429,10 +430,9 @@ def workspace_name_to_letter(i):
     if isinstance(i, int):
         return WORKSPACES_LETTER[i]
     iA = i.split(None, 2)
-    if len(iA) == 1:
-        return iA[0]
-    return iA[1]
-
+    r = iA[0] if len(iA) == 1 else iA[1]
+    if r == '&amp': r = '&amp;'
+    return r
 
 def mrFocusedStack():
     """ returns a list of container in which the latest is the focused window """
