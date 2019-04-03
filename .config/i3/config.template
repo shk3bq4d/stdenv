@@ -195,7 +195,6 @@ bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command 
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave
-#bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:10 => sym: 0x31, symbol: 1
 bindcode  $mod+10 workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
