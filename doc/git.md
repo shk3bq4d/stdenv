@@ -358,6 +358,7 @@ git checkout <SHA>^ -- <path-to-file> # "restore specific file as it was from hi
 
 # relative reference https://git-scm.com/book/en/v2/Git-Tools-Revision-Selectiohttps://git-scm.com/book/en/v2/Git-Tools-Revision-Selection
 git diff 'HEAD@{2.months.ago}'
+git show 'HEAD@{1.weeks.ago}':smart_class_variables_diffs_katello/identity/identity::users.json # cat
 master@{yesterday}
 HEAD@{5}
 HEAD^
