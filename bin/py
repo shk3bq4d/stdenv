@@ -62,6 +62,7 @@ class __NAME__(unittest.TestCase):
     def test_queue_summary_alter(self):
         self.assertIn(   'a', 'abcde', msg='a is supposed to be in abcde')
         self.assertNotIn('z', 'abcde', msg='z is not supposed to be in abcde')
+        self.assertNotEqual('expected', 'actual', msg='expected is first argument')
         # assertAlmostEqual assertAlmostEquals assertDictContainsSubset assertDictEqual
         # assertEqual assertEquals assertFalse assertGreater assertGreaterEqual
         # assertIn assertIs assertIsInstance assertIsNone assertIsNot assertIsNotNone

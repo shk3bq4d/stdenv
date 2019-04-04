@@ -368,6 +368,7 @@ proxies = {
 session.proxies
 requests.get(url, params=None, proxies=None, verify=True)
 proxies = {'http': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']), 'https': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']) }
+proxies = {'http': 'http://127.0.0.1:15134', 'https': 'http://127.0.0.1:15134' }
 
 # http://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
 ```python
@@ -427,6 +428,7 @@ def get(suburl, apisystem='servicedeskapi', paginate=True, method='GET', params=
         key='mr/ksengineering.atlassian.net jira desk ticket'
         proxies = None
         proxies = {'http': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']), 'https': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']) }
+        proxies = {'http': 'http://127.0.0.1:15134', 'https': 'http://127.0.0.1:15134' }
         _session = requests.Session()
         _session.verify = False
         _session.auth = credentials.get(key, user=True)

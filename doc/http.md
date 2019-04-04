@@ -195,3 +195,9 @@ httpd.serve_forever()
 location.replace('https://85.184.255.102');
 </script></head><body></body></html>
 @end=html@
+
+
+# common headers
+Content-Type: application/x-www-form-urlencoded
+
+http://httpstat.us/500 # to return an HTTP 500
