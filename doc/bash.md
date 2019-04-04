@@ -30,6 +30,7 @@
 [ -o OPTIONNAME ]    True if shell option "OPTIONNAME" is enabled.
 [ -z STRING ]    True of the length if "STRING" is zero.
 [ -n STRING ] or [ STRING ]    True if the length of "STRING" is non-zero.
+echo "$( [[ "${ssh_public_key:-}" =~ '\S' ]] && echo "--ssh-public-key" "${ssh_public_key}" || true )" # test non-zero and not blank
 [ STRING1 == STRING2 ]     True if the strings are equal. "=" may be used instead of "==" for strict POSIX compliance.
 [ STRING1 != STRING2 ]     True if the strings are not equal.
 [ STRING1 < STRING2 ]     True if "STRING1" sorts before "STRING2" lexicographically in the current locale.
