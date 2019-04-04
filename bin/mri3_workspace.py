@@ -8,7 +8,12 @@ import re
 import argparse
 import logging
 import i3ipc
-import mri3
+try:
+    import mri3
+except:
+    sys.path.append(os.path.expanduser('~/py'))
+    import mri3
+
 
 from pprint import pprint, pformat
 
@@ -32,6 +37,7 @@ def logging_conf(
            'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
            #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
+    pprint(use)
     try: logging.getLogger('sh.command').setLevel(logging.WARN)
     except: pass
 
@@ -45,6 +51,8 @@ def current_workspaces_letter_obj():
         print('{num} {_focused} {name}'.format(_focused=_focused, **vars(w)))
 
 WORKSPACES_PRIORITY = [
+'$',
+'&amp;',
 '7',
 '5',
 '3',
@@ -55,8 +63,6 @@ WORKSPACES_PRIORITY = [
 '4',
 '6',
 '8',
-'$',
-'&amp;',
 '!',
 '#']
 
@@ -73,17 +79,38 @@ def go(args):
     focused_workspace = mri3.focused().workspace()
     #pprint(vars(focused_workspace))
     logger.info('ar.WORKSPACE is %s', ar.WORKSPACE)
+    try2(ar)
+
+def try2(ar):
+    #desired_letter = mri3.workspace_name_to_letter(ar.WORKSPACE)
+    wH = current_workspaces_letter_obj()
+    kH = wH.keys()
+    pprint([x for x in kH])
+    kH = filter(lambda x: not mri3.is_workspace_focused(wH[x]), wH)
+    pprint([x for x in kH])
+
+def try1(ar):
     if ar.WORKSPACE:
-        logger.info('ar.WORKSPACE is %s', ar.WORKSPACE)
         desired_letter = mri3.workspace_name_to_letter(ar.WORKSPACE)
         wH = current_workspaces_letter_obj()
+        logger.info('ar.WORKSPACE is _%s_, desired_letter is _%s_ current worspaces lettter are %s', ar.WORKSPACE, desired_letter, wH.keys())
+        #pprint(wH['3'])
+        #help(wH['3'])
         if desired_letter in wH:
             desired_workspace = wH[desired_letter]
+            #help(desired_workspace)
             if mri3.is_workspace_focused(desired_workspace):
                 # to be seen what to do in here
                 pass
             else:
-                desired_workspace.focus()
+                logger.info("dersired workspace %s", desired_workspace)
+                logger.info("dersired workspace.focus %s", desired_workspace.focus)
+                #desired_workspace.focus[0].focus()
+                #con = desired_workspace.find_focused().focus()
+                i = mri3.WORKSPACES_LETTER.index(desired_letter)
+                #print(i)
+                desired_name = mri3.WORKSPACES_NAMES[i]
+                mri3.get_root().command('workspace number ' + desired_name)
         else:
             actual_letter = next(x for x in WORKSPACES_PRIORITY if x not in wH)
             #print(wH.keys())
@@ -92,6 +119,7 @@ def go(args):
             i = mri3.WORKSPACES_LETTER.index(actual_letter)
             #print(i)
             desired_name = mri3.WORKSPACES_NAMES[i]
+            logger.info('actual letter %s, idx:%s, desired_name: %s', actual_letter, i, desired_name)
             #print(desired_name)
             #help(mri3.get_root().command)
             mri3.get_root().command('workspace number ' + desired_name)

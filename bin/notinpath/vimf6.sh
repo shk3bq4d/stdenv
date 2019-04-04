@@ -249,14 +249,15 @@ docker run -d -p 8081:8080 plantuml/plantuml-server:jetty
     ;;
 $HOME/.config/i3/config)
     cd $HOME/.config/i3/
-    i3 restart && sleep 5 && compton-i3-restart-reset-opacity.sh
+    #i3 restart && sleep 5 && compton-i3-restart-reset-opacity.sh
+    i3 restart && sleep 5 && compton-reinitialize.py
     echo "i3 restarted A"
     ;;
 $HOME/.config/i3/config.*)
     cd $HOME/.config/i3/
     ./stdhome-templating-config.sh
     i3 restart || true
-    { sleep 6 && compton-i3-restart-reset-opacity.sh; } &
+    { sleep 6 && compton-reinitialize.py; } &
     echo "i3 restarted B"
     ;;
 */Dockerfile)

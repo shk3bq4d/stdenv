@@ -1086,3 +1086,7 @@ echo -e "\e[4munderline\e[0m" # ansi escape color
 echo -e "\e[9mstrikethrough\e[0m" # ansi escape color
 echo -e "\e[31mHello World\e[0m" # ansi escape color
 echo -e "\x1B[31mHello World\e[0m" # ansi escape color
+
+# https://linuxconfig.org/how-to-backup-and-restore-permissions-for-entire-directory-on-linux
+getfacl -nR /data/ > ~/getfacl.txt
+setfacl --restore=~/getfacl.txt
