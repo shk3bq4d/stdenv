@@ -425,11 +425,11 @@ git add -p # stages interactively
 git reset -p # unstages interactively
 
 # diff conveniency
-git diff --ignore-space-at-eol
+git diff --ignore-space-at-eol     # white blank spaces diff
 git diff --color-words # https://stackoverflow.com/questions/28551556/git-remove-leading-plus-minus-from-lines-in-diff
-git log -b # --ignore-space-change # diff
-git log -w # --ignore-all-space    # diff
-git log --ignore-blank-lines # diff
+git log -b # --ignore-space-change # white blank tabs spaces diff
+git log -w # --ignore-all-space    # white blank tabs spaces diff
+git log --ignore-blank-lines       # white blank tabs spaces diff
 git log --inter-hunk-context= # diff with more lines of context like in grep -C -A -B
 git log -W # --function-context # diff
 
@@ -461,3 +461,21 @@ for i in $(git diff $REF --name-only); do git diff $REF -- $i; done # while
 git log --no-renames
 
 git rev-parse --show-toplevel # https://stackoverflow.com/questions/957928/is-there-a-way-to-get-the-git-root-directory-in-one-commandt rev-parse --show-toplevel
+
+# Client hooks
+## Around commits:
+* pre-commit: before commit creation, even before message editing (e.g. linting, unit tests);
+* prepare-commit-msg: before commit creation, when everything's ready to start editing the message (e.g. pre-calculated message injection);
+* commit-msg: before commit creation, but after message editing (e.g. message content control and override);
+* post-commit: when the commit is done (e.g. notification);
+## Around patches (git am):
+* applypatch-msg: before the patch (e.g. check patch message);
+* pre-applypatch: after the patch is applied, but before the commit is created (e.g. patch content validation);
+* post-applypatch: when the path is applied and the commit is done (e.g. notify patch author);
+# Other actions:
+* pre-rebase: before starting git rebase (e.g. stop rebase of master branch);
+* post-checkout: after git checkout execution, for instance on rebase or at the end of a git clone (e.g. setting up a branch-associated configuration);
+* post-merge: after a successful git merge (e.g. check if there are conflict markers left after a "bad" merge);
+* post-rewrite: called by "rewriting" commands (git commit --amend, git rebase);
+* pre-auto-gc: on garbage collection (e.g. stop references clean-up if we have to use old ones);
+* pre-push: just before pushing revisions and objects to a remote repository (e.g. running unit tests and stop push if they they fail).
