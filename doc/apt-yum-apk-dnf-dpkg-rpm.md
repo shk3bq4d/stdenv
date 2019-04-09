@@ -90,6 +90,8 @@ iputils-ping: /bin/ping
 inetutils-ping: /bin/ping
 
 
+sudo yum reinstall --downloadonly --downloaddir=/home/adminmru zabbix-agent
+
 # FreeBSD PKG
 pkg info -D zoneminder
 
