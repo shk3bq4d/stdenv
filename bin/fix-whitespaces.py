@@ -3,10 +3,12 @@
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 import os
+import copy
 import sys
 import re
 import unittest
 import argparse
+import fileinput
 import logging
 
 from pprint import pprint, pformat
@@ -79,13 +81,11 @@ def logging_conf(
     logging.config.dictConfig({'version':1,'disable_existing_loggers':False,
        'formatters':{
            'standard':{'format':'%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s'},
-           'syslogf': {'format':'%(filename)s[%(process)d]: %(levelname)-5s %(funcName)s(): %(message)s'},
            #'graylogf':{"format":"%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s"},
            },
        'handlers':{
            'stdout':   {'level':level,'formatter': 'standard','class':'logging.StreamHandler',         'stream': 'ext://sys.stdout'},
            'file':     {'level':level,'formatter': 'standard','class':'logging.FileHandler',           'filename': os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))}, #
-           'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
            #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
     try: logging.getLogger('sh.command').setLevel(logging.WARN)
@@ -93,24 +93,64 @@ def logging_conf(
 
 def parse_args(args):
     parser = argparse.ArgumentParser(description="Convert tabs (or vice-versa) in each FILE to spaces, writing to standard output. With no FILE, or when FILE is -, read standard input.")
-    #parser.add_argument("FILENAME", type=str, nargs='+', help="file to process")
+    parser.add_argument("FILENAME", type=str, nargs='*', help="file to process")
     #parser.add_argument("-i", "--initial", help="do not convert after non-blank", action="store_true")
-    parser.add_argument("-t", "--tabs", help="convert spaces to tabs instead", action="store_true")
+    parser.add_argument("-s", "--spaces", help="convert tabs to spaces", action="store_true")
+    parser.add_argument("-t", "--tabs", help="convert spaces to tabs", action="store_true")
+    #parser.add_argument("-n", "--no-auto", help="skips auto-detection of tab2space or space2tab detection", action="store_true")
     parser.add_argument("--tab-stops", type=int, default=4)
     ar = parser.parse_args(args)
+    if ar.spaces and ar.tabs:
+        raise BaseException("invalid combination of --spaces and --tabs")
     return ar
+
+def detect(line, conf):
+    if len(line) == 0:
+        return None
+    if line[0] not in [' ', "\t"]:
+        return None
+    if re.match(r'^\s+', line) is not None:
+        return None
+    new_conf = copy.deep_copy(conf)
+    if line[0] == ' ':
+        new_conf.spaces = True
+    else:
+        new_conf.tabs = True
+    return new_conf
+
+def output(line):
+    print(line)
 
 def go(args):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
-    if 'VIMRUNTIME' in os.environ: args = ['HEHE', '-i']
-    ar = parse_args(args)
-    # pprint(ar)
+    conf = parse_args(args)
+    auto = False
+    if not conf.spaces and not conf.tabs:
+        in_memory = []
+        auto = True
+    for line in filter(None, map(str.rstrip, fileinput.input(files=conf.FILENAME))):
+        if auto:
+            new_conf = detect(line, conf)
+            if new_conf is not None:
+                conf = new_conf
+                for line2 in in_memory:
+                    output(process_line(line2, conf))
+                auto = False
+                in_memory = None # release memory
+                output(process_line(line, conf))
+            else:
+                in_memory.append(line)
+            continue
+        output(process_line(line, conf))
+    if auto:
+        for line2 in in_memory:
+            output(process_line(line2, conf))
 
 if __name__ == '__main__':
     logging_conf()
-    if 'VIMRUNTIME' in os.environ:
+    if 'VIMF6' in os.environ:
         unittest.main()
     else:
         try:
