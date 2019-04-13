@@ -1095,4 +1095,11 @@ def pairwise(iterable):
 ```
 
 os.mkdir()     # mkdir makedir
-os.makedirs()  # mkdir -p
+os.makedirs()  # mkdir -p 
+
+
+```sh
+cat << 'HEREDOC' | python -
+print(2 + 5)
+HEREDOC
+```
