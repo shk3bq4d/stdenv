@@ -26,14 +26,41 @@ class FixWhitespacesTest(unittest.TestCase):
     @classmethod
     def tearDownClass(cls): pass
 
-    def test_tabs_to_space(self):
+    def test_space_to_tabs_2(self):
+        conf = parse_args("-t --tab-stops 2".split())
+        dA = [
+            ("", ""),
+            ("abcd", "abcd"),
+            ("abcd ", "abcd"),
+            (" abcd", " abcd"),
+            ("  abcd", "\tabcd"),
+            ("\tabcd", "\tabcd"),
+            ("{\tabcd",    "{\tabcd"),
+            ("{\t\tabcd",  "{\t\tabcd"),
+            ("{\t{\tabcd", "{\t{\tabcd"),
+            ("{ abcd",    "{\tabcd"),
+            ("  abcd",    "\tabcd"),
+            ("   abcd",    "\t abcd"),
+            ("    abcd",    "\t\tabcd"),
+            ("     abcd",    "\t\t abcd"),
+            ("      abcd",    "\t\t\tabcd"),
+            ("\t    abcd",    "\t\t\tabcd"),
+            ("\t  \tabcd",    "\t\t\tabcd"),
+            ("\t\t  abcd",    "\t\t\tabcd"),
+            ]
+        for d in dA:
+            found = process_line(d[0], conf)
+            self.assertEqual(d[1], found, msg=rr(found, d[1], d[0]))
+
+
+    def test_default(self):
         conf = parse_args([])
         dA = [
+            ("", ""),
             ("abcd", "abcd"),
             ("abcd ", "abcd"),
             (" abcd", " abcd"),
             ("  abcd", "  abcd"),
-            (" abcd", " abcd"),
             ("\tabcd", "    abcd"),
             ("{\tabcd",    "{   abcd"),
             ("{\t\tabcd",  "{       abcd"),
@@ -42,12 +69,36 @@ class FixWhitespacesTest(unittest.TestCase):
         for d in dA:
             self.assertEqual(d[1], process_line(d[0], conf), msg=rr(d))
 
-def rr(i,j=None):
-    if j is None:
-        if isinstance(i, str) or isinstance(i, unicode):
-            return i.replace("\t", "\\t")
-        return rr(*i)
-    return "expected '{}', found '{}'".format(rr(j), rr(i))
+    def test_empty_lines(self):
+        a = "\n\n\n"
+        oA = []
+        args = []
+        go(args, a.splitlines(), oA.append)
+        found = '\n'.join(oA) + "\n"
+        self.assertEquals(a, found)
+
+    def test_empty_lines_2(self):
+        import textwrap
+        a = textwrap.dedent("""
+            a = 5
+
+            b = 6
+            """).strip() + "\n"
+        oA = []
+        args = []
+        go(args, a.splitlines(), oA.append)
+        found = '\n'.join(oA) + "\n"
+        self.assertEquals(a, found)
+
+
+def rr(i,j=None, k=None):
+    if k is None:
+        if j is None:
+            if isinstance(i, str) or isinstance(i, unicode):
+                return i.replace("\t", "\\t")
+            return rr(*i)
+        return "expected '{}', found '{}'".format(rr(j), rr(i))
+    return "expected '{}', found '{}' for input '{}'".format(rr(j), rr(i), rr(k))
 
 def process_line(line, conf):
     line = line.rstrip()
@@ -58,7 +109,37 @@ def process_line(line, conf):
     return line
 
 def process_line_space_to_tab(line, conf):
-    raise BaseException("unimplemented")
+    if " " not in line: return line
+    outA = []
+    nb_consecutive_spaces = 0
+    position_modulo_ts = 0
+    prev_char = None
+    for curr_char in line:
+        if curr_char == "\t":
+            nb_consecutive_spaces = 0
+            position_modulo_ts = 0
+            outA.append("\t")
+        elif curr_char == " ":
+            nb_consecutive_spaces = nb_consecutive_spaces + 1
+            position_modulo_ts = position_modulo_ts + 1
+            if position_modulo_ts % conf.tab_stops == 0:
+                if nb_consecutive_spaces == 1:
+                    if prev_char in ["{"]:
+                        outA.append("\t")
+                    else:
+                        outA.append(" ")
+                else:
+                    outA.append("\t")
+                nb_consecutive_spaces = 0
+                position_modulo_ts = 0
+        else:
+            if nb_consecutive_spaces > 0:
+                outA.append(" " * nb_consecutive_spaces)
+                nb_consecutive_spaces = 0
+            position_modulo_ts = ( position_modulo_ts + 1 ) % conf.tab_stops
+            outA.append(curr_char)
+        prev_char = curr_char
+    return ''.join(outA)
 
 def process_line_tab_to_space(line, conf):
     if "\t" not in line: return line
@@ -71,6 +152,7 @@ def process_line_tab_to_space(line, conf):
         else:
             outA.append(c)
     return ''.join(outA)
+
 
 def logging_conf(
         level='INFO', # DEBUG
@@ -121,32 +203,39 @@ def detect(line, conf):
 def output(line):
     print(line)
 
-def go(args):
+def go(args, iterator=None, outputter=output):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
     conf = parse_args(args)
     auto = False
     if not conf.spaces and not conf.tabs:
-        in_memory = []
         auto = True
-    for line in filter(None, map(str.rstrip, fileinput.input(files=conf.FILENAME))):
+    if iterator is None:
+        iterator = fileinput.input(files=conf.FILENAME)
+
+    process(auto, conf, iterator, outputter)
+
+def process(auto, conf, iterator, outputter=output):
+    if auto:
+        in_memory = []
+    for line in map(str.rstrip, iterator):
         if auto:
             new_conf = detect(line, conf)
             if new_conf is not None:
                 conf = new_conf
                 for line2 in in_memory:
-                    output(process_line(line2, conf))
+                    outputter(process_line(line2, conf))
                 auto = False
                 in_memory = None # release memory
-                output(process_line(line, conf))
+                outputter(process_line(line, conf))
             else:
                 in_memory.append(line)
             continue
-        output(process_line(line, conf))
+        outputter(process_line(line, conf))
     if auto:
         for line2 in in_memory:
-            output(process_line(line2, conf))
+            outputter(process_line(line2, conf))
 
 if __name__ == '__main__':
     logging_conf()
