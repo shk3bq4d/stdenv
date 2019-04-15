@@ -65,13 +65,13 @@ doc.xpath('/*')
 import fileinput
 
 for line in fileinput.input():
-    line = line.strip()
+    line = line.rstrip()
     if line == '':
         continue
 
 # or in onliner
-for line in filter(lambda x: len(x) > 0, map(lambda x: x.strip(), fileinput.input(files=None))):
-for line in filter(None, map(str.strip, fileinput.input(files=None))):
+for line in filter(lambda x: len(x) > 0, map(lambda x: x.rstrip(), fileinput.input(files=None))):
+for line in filter(None, map(str.rstrip, fileinput.input(files=None))):
 
 """
 from pprint import pprint; pprint(vars(obj))
@@ -1100,3 +1100,9 @@ os.mkdir()     # mkdir makedir
 os.makedirs()  # mkdir -p 
 
 ln -s foo-bar.py foo_bar.py # https://stackoverflow.com/questions/8350853/how-to-import-module-when-module-name-has-a-dash-or-hyphen-in-it
+
+```sh
+cat << 'HEREDOC' | python -
+print(2 + 5)
+HEREDOC
+```
