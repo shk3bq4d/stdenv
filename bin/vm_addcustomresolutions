@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+vboxmanage setextradata "$*" CustomVideoMode1 1362x728x32
+vboxmanage setextradata "$*" CustomVideoMode2 1368x768x32
+vboxmanage setextradata "$*" CustomVideoMode3 1594x1160x32
+vboxmanage setextradata "$*" CustomVideoMode4 1600x1200x32
+
+echo "done"
+exit 0

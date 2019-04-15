@@ -1,0 +1,2 @@
+#!/bin/sh
+vboxheadless --startvm "$*" --vrde=config   &

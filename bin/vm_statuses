@@ -1,0 +1,10 @@
+#!/bin/sh
+vboxmanage list vms | cut -d'"' -f 2 | sort --ignore-case | while read vm; do
+#/bin/echo -ne "$vm "
+#vboxmanage showvminfo "$vm"  | grep -Pio "^(?<=State).*"
+	vmstatusfull=$(vboxmanage showvminfo "$vm"  | grep -Po "(?<=State:).*")
+	vmsince=$(echo $vmstatusfull | grep -Po '.since.*')
+	vmstatus=$(echo $vmstatusfull | cut -d '(' -f 1)
+	printf "%-30s %-15s %s\n" "$vm" "$vmstatus" "$vmsince"
+done
+

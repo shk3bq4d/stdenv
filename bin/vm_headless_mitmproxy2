@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:$HOME/bin
+env
+exec > >(tee /tmp/$(basename $0))
+exec 2>&1
+
+while ! modprobe vboxdrv; do sleep 1; done
+~/bin/vm_headless mitmproxy2

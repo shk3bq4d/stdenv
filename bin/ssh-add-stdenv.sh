@@ -30,9 +30,9 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 if /usr/bin/ssh-add -l &>/dev/null; then
-	true
+    true
 else
-	echo "ssh-add ssh-add-stdenv.sh (Ctrl-D to abort) $(hostname -f): "
+    echo "ssh-add ssh-add-stdenv.sh (Ctrl-D to abort) $(hostname -f): "
     /usr/bin/ssh-add -t 43200
 fi
 

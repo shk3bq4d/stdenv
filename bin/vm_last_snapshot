@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+[[ $# -ne 1 ]] && exit 1
+VM="$@"
+
+SNAPUUID=$(vboxmanage snapshot $VM list  --machinereadable | grep -Po '(?<=CurrentSnapshotUUID=")[^"]+')
+vboxmanage controlvm $VM poweroff && \
+	vboxmanage snapshot $VM restore $SNAPUUID && \
+	vboxmanage startvm $VM --type headless

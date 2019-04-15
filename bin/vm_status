@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $# -eq 0 ]]; then
+	echo USAGE $(basename $0) VMNAME
+	vm_statuses
+else
+	vboxmanage showvminfo "$*" 
+fi

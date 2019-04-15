@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mr=$(pwd)
+if [[ -a "$1" ]]; then
+	mr="$mr/$1"
+fi
+echo "$mr"
+echo -n "$mr" | xclip -i -selection "clipboard"

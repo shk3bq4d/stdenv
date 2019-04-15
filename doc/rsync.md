@@ -8,3 +8,5 @@ rsync -vnra --progress --stats --human-readable --modify-window=2
 rsync -a --rsync-path="sudo rsync" from to # rsync (scp) as root
 
 cp -R --attributes-only /data/ data # 0-size structure zero don't use rsync
+
+rsync -avrnR --prune-empty-dirs --exclude=".*" --include="*/" --include="*.sh" --include="*.py" --include="mr.key" --include="mr.kdbix" --exclude="*" --stats --progress --human-readable /home/user/. remote:hehe/
