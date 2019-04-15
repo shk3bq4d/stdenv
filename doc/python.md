@@ -363,7 +363,9 @@ os.path.abspath()
 os.path.realpath(os.path.abspath())
 lmod = datetime.datetime.fromtimestamp(os.path.getmtime(__file__)) # last modified time of file fp
 datetime.datetime.fromtimestamp(1465016400) # equivalent of date -d @1465016400 # unix epoch
+python -c "import datetime; print(datetime.datetime.utcnow().strftime('%s'))" # to unix epoch totimestamp
 python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch
+python -c "import datetime; print('{:%s}'.format(datetime.datetime.utcnow()))" # to unix epoch totimestamp
 os.name is 'posix', 'nt', 'os2', 'ce' or 'riscos'
 os.curdir is a string representing the current directory ('.' or ':')
 os.pardir is a string representing the parent directory ('..' or '::')
@@ -1097,6 +1099,7 @@ def pairwise(iterable):
 os.mkdir()     # mkdir makedir
 os.makedirs()  # mkdir -p 
 
+ln -s foo-bar.py foo_bar.py # https://stackoverflow.com/questions/8350853/how-to-import-module-when-module-name-has-a-dash-or-hyphen-in-it
 
 ```sh
 cat << 'HEREDOC' | python -
