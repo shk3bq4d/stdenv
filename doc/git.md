@@ -479,3 +479,5 @@ git rev-parse --show-toplevel # https://stackoverflow.com/questions/957928/is-th
 * post-rewrite: called by "rewriting" commands (git commit --amend, git rebase);
 * pre-auto-gc: on garbage collection (e.g. stop references clean-up if we have to use old ones);
 * pre-push: just before pushing revisions and objects to a remote repository (e.g. running unit tests and stop push if they they fail).
+
+git diff -w --no-color [file names] | git apply --cached --ignore-whitespace # https://stackoverflow.com/questions/23910879/git-unstage-lines-where-the-only-changes-is-white-space

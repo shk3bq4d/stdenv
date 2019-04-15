@@ -24,6 +24,7 @@ grant all on mrowncloud.* to mrowncloud;
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass'; 
+ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
 @end=sql@
 
 
