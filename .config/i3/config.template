@@ -474,6 +474,7 @@ exec mrparcellite
 mode "pass-through" {
 # code:28 => sym: 0x74, symbol:t
     bindcode $mod+28  mode "default"
+    bindcode $mod+29  mode "default"; fullscreen
 }
 
 # code:28 => sym: 0x74, symbol:t
