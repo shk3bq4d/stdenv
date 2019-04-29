@@ -4,9 +4,13 @@
 set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
-	PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
-	~/bin/container-ip.sh
-	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
+	if true; then # last exit day
+		PROXYPAC=
+	else
+		PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
+		~/bin/container-ip.sh
+		docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
+	fi
 	;;
 apr16.ly.lan)
 	PROXYPAC="http://127.0.0.1:57155/proxy.pac.ly.py"
