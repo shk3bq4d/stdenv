@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+
+    - name: "shk3bq4d clone"
+      git:
+        repo: "git@github.com:shk3bq4d/{{ item }}.git"
+        dest: "~/git/shk3bq4d/{{ item }}"
+      with_items: "{{ shk3bq4d }}"
