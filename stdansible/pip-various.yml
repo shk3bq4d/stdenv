@@ -3,6 +3,7 @@
   become: false
   tasks:
     - name: "Python3 Python 2+3 system pip"
+      become: true
       apt:
         name:
         - "python-pip"
@@ -35,6 +36,7 @@
         name:
         - youtube_dl
         - i3ipc
+        - future
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 

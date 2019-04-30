@@ -15,4 +15,7 @@
         name:
           - gpick
           - jq
+          - ack-grep
+          - keepassxc
+          - i3lock
         state: present
