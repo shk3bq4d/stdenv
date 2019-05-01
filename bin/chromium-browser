@@ -42,7 +42,7 @@ UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Ge
 #echo $PROXYPAC > /tmp/buou1
 #exit 0
 if [[ -z "$PROXYPAC" ]]; then
-	/usr/bin/chromium-browser &>/dev/null &
+	/usr/bin/chromium-browser                           "$@" </dev/null &>/dev/null &
 else
 	/usr/bin/chromium-browser --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
 fi
