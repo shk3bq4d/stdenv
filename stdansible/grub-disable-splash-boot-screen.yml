@@ -1,10 +1,34 @@
 ---
 - hosts: localhost
-  become: yes
+  become: true
+  vars:
+    path: /etc/default/grub
   tasks:
-
-    - name: "shk3bq4d clone"
-      git:
-        repo: "git@github.com:shk3bq4d/{{ item }}.git"
-        dest: "~/git/shk3bq4d/{{ item }}"
-      with_items: "{{ shk3bq4d }}"
+    - name: removes splash and quiet from /etc/default/grub
+      lineinfile:
+        backrefs: yes
+        backup: yes
+        path: "{{ path }}"
+        #regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=".*)\\b{{ item }}\\b'
+        #regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=".*)'
+        #regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=.*?)\b{{ item.x }}\b(.*)'
+        regexp: '^(GRUB_CMDLINE_LINUX_DEFAULT=.*?){{ item.x }}(.*)'
+        #regexp: '^G'
+        line: '\1{{ item.r }}\2'
+      with_items:
+      - x: '\bquiet\b'
+        r: ''
+      - x: '\bsplash\b'
+        r: ''
+      - x: '" +'
+        r: '"'
+      - x: ' +"'
+        r: '"'
+      - x: ' {2,}'
+        r: ' '
+      - x: '" "'
+        r: '""'
+      notify:
+      - reload grub
+  handlers:
+    - name: reload grub
