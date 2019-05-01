@@ -81,8 +81,9 @@ pip2 list $OPTS --user > pip2-list-user
 pip3 list $OPTS        > pip3-list
 pip3 list $OPTS --user > pip3-list-user
 if [ -n "$(git status --porcelain . )" ]; then
+    git diff
     git add pip{2,3}-list{,-user}
-    git commit -m "autocommit"
+    git commit -m "autocommit $@"
     echo "Committed"
 else
     echo "No changes"
