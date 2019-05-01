@@ -43,7 +43,7 @@
       #msg: "the echo was {{ foo.stdout }}"
     msg: "the echo was hihi {{ mr_hehe }}"
   tags:
-- name: Show all possible accessible hasts
+- name: Show all possible accessible hosts
   debug:
     var: hostvars[inventory_hostname]
   tags:
