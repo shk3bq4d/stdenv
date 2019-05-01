@@ -7,7 +7,7 @@ javascript:window.open(location.href, "detab", "toolbar=0"); window.close()
 
 # search engines
 make mr mr http://jlighttpd.ly.lan/websupport/search.py?q=%s the default
-make mr mr http://127.0.0.1:63435/websupport/search.py?q=%s the default
+make mr mr http://127.0.0.1:57155/websupport/search.py?q=%s the default
 rename the shortcut for the other ones, do not delete as they'll be readded when browing those sites
 
 Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-suggestion-from-the-chrome-address-bar

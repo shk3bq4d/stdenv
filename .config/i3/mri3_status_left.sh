@@ -3,11 +3,15 @@
 set -u
 set -e
 set -o pipefail
+LOG=~/.tmp/log/mri3_status_left_i3blocks.log
+LOG=/dev/null
+date >> $LOG
+echo $PATH >> $LOG
 case $(hostname -f) in \
 apr16.ly.lan|dec17.ly.lan|acer2011.ly.lan|*)
 	f=~/.config/i3/i3blocks-$(hostname -f).conf
 	test -f "$f" || f=~/.config/i3/i3blocks-default.conf
-	i3blocks -c $f #|tee ~/.tmp/log/mri3_status_left_i3blocks.log
+	i3blocks -c $f |tee -a $LOG
 	exit 0
 	;;
 esac
