@@ -7,23 +7,34 @@ wids=$(xdotool search --class "keepass")
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then
-		if xdotool windowactivate $wid; then
-			exit 0
-		fi
+        if xdotool windowactivate $wid; then
+            exit 0
+        fi
     fi
 done
 DIR=~/bin
-if [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
-	export QT_SCALE_FACTOR=2
-	BIN=$DIR/KeePassXC-2.2.0-x86_64.AppImage
-	cd ~/.keepass
-	if [[ -f $PWD/mr.key ]]; then
-		$BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
-	else
-		$BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
-	fi
+set -x
+if hash keepassxc &>/dev/null; then
+    export QT_SCALE_FACTOR=2
+    export QT_SCALE_FACTOR=1
+    BIN=keepassxc
+    cd ~/.keepass
+    if [[ -f $PWD/mr.key ]]; then
+        $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+    else
+        $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+    fi
+elif [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
+    export QT_SCALE_FACTOR=2
+    BIN=$DIR/KeePassXC-2.2.0-x86_64.AppImage
+    cd ~/.keepass
+    if [[ -f $PWD/mr.key ]]; then
+        $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+    else
+        $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+    fi
 else
-	cd ~/.keepass
-	BIN=/usr/bin/keepass2
-	$BIN mr.kdbx  &>/dev/null </dev/null &
+    cd ~/.keepass
+    BIN=/usr/bin/keepass2
+    $BIN mr.kdbx  &>/dev/null </dev/null &
 fi

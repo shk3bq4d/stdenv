@@ -3,6 +3,7 @@
 case $(hostname -f) in \
 	$WORK_PC1F)
 		ROOT=/mnt/local/00-1to
+		ROOT=$HOME
 		;;
 	*)
 		ROOT=$HOME

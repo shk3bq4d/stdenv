@@ -7,7 +7,7 @@ javascript:window.open(location.href, "detab", "toolbar=0"); window.close()
 
 # search engines
 make mr mr http://jlighttpd.ly.lan/websupport/search.py?q=%s the default
-make mr mr http://127.0.0.1:57155/websupport/search.py?q=%s the default
+make mr mr http://127.0.0.1:57155/search.py?q=%s the default
 rename the shortcut for the other ones, do not delete as they'll be readded when browing those sites
 
 Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-suggestion-from-the-chrome-address-bar
@@ -18,11 +18,11 @@ Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-sugge
 
 # extensions list
 * tampermonkey https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
-* dbepggeogbaibhgnhhndojpepiihcmeb vimium
+* https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb dbepggeogbaibhgnhhndojpepiihcmeb vimium
 * git@github.com:shk3bq4d/X-Agent.git # mr user-agent useragent
   * ~/git/shk3bq4d/X-Agent
-* ublock origin
-* cookie exporter
+* https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm ublock origin
+* https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg cookies.txt cookie exporter
 
 https://chrome.google.com/extensions
 chrome://extensions/

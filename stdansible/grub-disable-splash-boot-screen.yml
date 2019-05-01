@@ -32,3 +32,4 @@
       - reload grub
   handlers:
     - name: reload grub
+      command: update-grub
