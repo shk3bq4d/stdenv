@@ -19,7 +19,7 @@ CLIP="$(xclip -o -selection primary 2>/dev/null | ~/bin/sed_remove_colors.sh | t
 	)"
 #CLIP="${CLIP//#/}"
 #CLIP="${CLIP// .*/}"
-echo $CLIP
+echo "clip is $CLIP"
 case "$CLIP" in \
 	*$'\x70\x6F\x72\x6E'*) # think of the children
 		URL=""
