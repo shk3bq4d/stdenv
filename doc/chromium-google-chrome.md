@@ -18,6 +18,7 @@ Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-sugge
 
 # extensions list
 * tampermonkey https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
+* dbepggeogbaibhgnhhndojpepiihcmeb vimium
 * git@github.com:shk3bq4d/X-Agent.git # mr user-agent useragent
   * ~/git/shk3bq4d/X-Agent
 * ublock origin
