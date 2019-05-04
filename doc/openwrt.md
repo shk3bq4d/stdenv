@@ -47,3 +47,161 @@ with error message "Wireless is disabled or not associated"
 went to https://www.reddit.com/r/openwrt/comments/6afbxh/wireless_is_disabled_or_not_associated/ 
 and
 ssh to box and run "iw phy0 info", then reenable interface on GUI
+
+curl 'http://10.19.29.251/cgi-bin/luci/?status=1&_=0.8997745715767451' -H 'DNT: 1' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,fr;q=0.8' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/73.0.3683.86 Chrome/73.0.3683.86 Safari/537.36' -H 'Accept: */*' -H 'Referer: http://10.19.29.251/cgi-bin/luci/' -H 'Cookie: sysauth=ac182ba23a11f1fb6fcfc74596be7d61' -H 'Connection: keep-alive' --compressed
+```json
+{
+    "conncount": 11,
+    "connmax": 16384,
+    "leases": [],
+    "leases6": [],
+    "loadavg": [
+        81568,
+        48256,
+        23200
+    ],
+    "localtime": "Thu May  2 13:33:40 2019",
+    "memory": {
+        "buffered": 2764800,
+        "free": 444407808,
+        "shared": 458752,
+        "total": 493223936
+    },
+    "swap": {
+        "free": 0,
+        "total": 0
+    },
+    "uptime": 10597523,
+    "wan": {
+        "dns": [
+            "10.19.29.1"
+        ],
+        "expires": -1,
+        "gwaddr": "10.19.29.1",
+        "ifname": "br-lan",
+        "ipaddr": "10.19.29.251",
+        "link": "/cgi-bin/luci/admin/network/network/lan",
+        "netmask": "255.0.0.0",
+        "proto": "static",
+        "uptime": 10597497
+    },
+    "wifinets": [
+        {
+            "device": "radio0",
+            "name": "Generic 802.11ac Wireless Controller (radio0)",
+            "networks": [
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio0.network1",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio0.network1",
+                    "mode": "Unknown",
+                    "name": "Unknown \"njsfjlk FDS354\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "njsfjlk FDS354",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                },
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio0.network2",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio0.network2",
+                    "mode": "Unknown",
+                    "name": "Unknown \"Olivia\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "Olivia",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                },
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio0.network3",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio0.network3",
+                    "mode": "Unknown",
+                    "name": "Unknown \"Olivia151\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "Olivia151",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                }
+            ],
+            "up": false
+        },
+        {
+            "device": "radio1",
+            "name": "Generic 802.11bgn Wireless Controller (radio1)",
+            "networks": [
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio1.network1",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio1.network1",
+                    "mode": "Unknown",
+                    "name": "Unknown \"njsfjlk FDS354\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "njsfjlk FDS354",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                },
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio1.network2",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio1.network2",
+                    "mode": "Unknown",
+                    "name": "Unknown \"Olivia\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "Olivia",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                },
+                {
+                    "assoclist": [],
+                    "country": "US",
+                    "disabled": true,
+                    "encryption": "-",
+                    "ifname": "radio1.network3",
+                    "link": "/cgi-bin/luci/admin/network/wireless/radio1.network3",
+                    "mode": "Unknown",
+                    "name": "Unknown \"Olivia-124\"",
+                    "noise": 0,
+                    "quality": 0,
+                    "signal": 0,
+                    "ssid": "Olivia-124",
+                    "txpower": 0,
+                    "txpoweroff": 0,
+                    "up": false
+                }
+            ],
+            "up": false
+        }
+    ]
+}
+```
