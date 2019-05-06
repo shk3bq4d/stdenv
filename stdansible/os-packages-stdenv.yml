@@ -18,4 +18,6 @@
           - ack-grep
           - keepassxc
           - i3lock
+          - unattended-upgrades
+          - python-backports.ssl-match-hostname # ansible docker module for python2
         state: present
