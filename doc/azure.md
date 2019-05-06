@@ -26,3 +26,7 @@ https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/M
 
 # Azure Stack
 https://ukcloud.com/hub/news/ansible-and-azure-stack-deep-dive/#
+
+
+# destroy https://blog.scottlowe.org/2016/10/23/managing-aws-infrastructure-ansible/
+https://www.hashicorp.com/resources/ansible-terraform-better-together
