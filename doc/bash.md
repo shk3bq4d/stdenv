@@ -1090,3 +1090,15 @@ echo -e "\x1B[31mHello World\e[0m" # ansi escape color
 # https://linuxconfig.org/how-to-backup-and-restore-permissions-for-entire-directory-on-linux
 getfacl -nR /data/ > ~/getfacl.txt
 setfacl --restore=~/getfacl.txt
+
+# prepend each arg https://stackoverflow.com/questions/44745046/bash-pass-all-arguments-exactly-as-they-are-to-a-function-and-prepend-a-flag-on
+```sh
+myfunc() {
+   echo "myfunc I was given $# args"
+}
+ARRAY=()
+for var in "$@"; do
+    ARRAY+=('--var' "$var")
+done
+myfunc "${ARRAY[@]}"
+```
