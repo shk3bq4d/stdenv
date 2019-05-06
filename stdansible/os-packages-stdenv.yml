@@ -21,5 +21,10 @@
           - unattended-upgrades
           - python-backports.ssl-match-hostname # ansible docker module for python2
           - redshift
+          # xmllint
+          - libxml2-utils
+          # citrix-receiver
+          - libwebkitgtk-1.0-0
+          - libjavascriptcoregtk-1.0-0
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
