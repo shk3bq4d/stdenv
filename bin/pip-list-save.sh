@@ -9,7 +9,17 @@
 ## Author: Jeff Malone, 01 May 2019
 ##
 
+touch ~/.tmp/touch/$(basename $0 .sh).start
+#exec > >(tee ~/.tmp/log/$(basename $0 .sh).log)
+#exec 2>&1
 set -euo pipefail
+#date
+#echo $PATH
+#which -a pip
+#which -a pip2
+#set -x
+#bash -x pip list | head -n 5
+#exit 0
 
 # function usage() { sed -r -n -e "s/__SCRIPT__/$\(basename $0\)/" -e '/^##/s/^..// p'   $0 ; }
 
@@ -64,6 +74,8 @@ set -euo pipefail
 # exec 2>&1
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
+#
+_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 
 D=~/.config/$(hostname -f)/pip-list
 test -d $D || mkdir -p $D
@@ -72,14 +84,18 @@ if [[ ! -d .git ]]; then
     git init
 fi
 if [ -n "$(git status --porcelain)" ]; then
-    echo "working directory not clean"
+    echo "working directory $PWD not clean"
     exit 1
 fi
 OPTS="--format freeze"
-pip2 list $OPTS        > pip2-list
-pip2 list $OPTS --user > pip2-list-user
-pip3 list $OPTS        > pip3-list
-pip3 list $OPTS --user > pip3-list-user
+export PATH=~/.local/bin:$PATH
+pip2 list $OPTS        > $_tempdir/pip2-list
+pip2 list $OPTS --user > $_tempdir/pip2-list-user
+pip3 list $OPTS        > $_tempdir/pip3-list
+pip3 list $OPTS --user > $_tempdir/pip3-list-user
+for f in $_tempdir/*; do
+    diff -q $f $(basename $f) &>/dev/null || mv -f $f .
+done
 if [ -n "$(git status --porcelain . )" ]; then
     git diff
     git add pip{2,3}-list{,-user}
@@ -89,3 +105,5 @@ else
     echo "No changes"
 fi
 
+cleanup
+touch ~/.tmp/touch/$(basename $0 .sh).end

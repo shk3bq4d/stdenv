@@ -20,4 +20,6 @@
           - i3lock
           - unattended-upgrades
           - python-backports.ssl-match-hostname # ansible docker module for python2
+          - redshift
         state: present
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

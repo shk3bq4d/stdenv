@@ -151,8 +151,7 @@ git init --bare
 # or if it was done on init
 git config --bool core.bare true
 
-# list file currently versionned control
-git ls-tree -r master --name-only
+git ls-tree -r master --name-only # list file currently versionned control
 
 http://toroid.org/git-website-howto
 
