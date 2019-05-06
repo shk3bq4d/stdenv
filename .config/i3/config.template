@@ -451,7 +451,7 @@ for_window [class="Kodi"] fullscreen enable
 for_window [floating] border normal
 no_focus [window_role="pop-up"]
 
-exec --no-startup-id feh --bg-scale ~/Pictures/i3lock/boreal3.png
+exec --no-startup-id feh --bg-scale ${STDHOME_BACKGROUND_IMAGE}
 exec --no-startup-id ~/bin/startup/mrredshift.sh
 exec --no-startup-id ~/bin/capslock-to-esc.sh
 #exec setxkbmap -option ctrl:escape

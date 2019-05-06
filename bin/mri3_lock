@@ -14,7 +14,8 @@ if false; then
 elif [[ "$(hostname -f)" == dec17* ]]; then
 	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif [[ "$(hostname -f)" == may19* ]]; then
-	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3-2560x1440.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3-5120x2160.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+	#i3lock --debug -enf -i ~/Pictures/i3lock/boreal3-2560x1440.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif true; then
 	i3lock --tiling --debug -enf -i ~/Pictures/i3lock/ks3840x2160black.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif true; then
