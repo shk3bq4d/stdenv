@@ -11,9 +11,22 @@ msg lock
 #i3lock --debug -enf -i $(find ~/Pictures/i3lock/ -type f | shuf -n 1) >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 if false; then
 	i3lock --debug -enf -c 0000ff  $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
-elif [[ "$(hostname -f)" == dec17* ]]; then
-	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
-elif [[ "$(hostname -f)" == may19* ]]; then
+fi
+set -x
+case "$(hostname -f)" in \
+dec17*|may19*)
+	f="$HOME/Pictures/i3lock/boreal3-$(current-resolution.sh).png"
+	if [[ ! -f "$f" ]]; then
+		convert -resize $(current-resolution.sh) \
+			~/Pictures/i3lock/boreal3.png \
+			"$f"
+	fi
+	i3lock --debug -enf -i "$f" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+	msg unlock
+	exit 0
+	;;
+esac
+if [[ "$(hostname -f)" == may19* ]]; then
 	i3lock --debug -enf -i ~/Pictures/i3lock/boreal3-5120x2160.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 	#i3lock --debug -enf -i ~/Pictures/i3lock/boreal3-2560x1440.png >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 elif true; then
