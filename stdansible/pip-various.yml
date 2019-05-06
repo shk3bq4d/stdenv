@@ -37,6 +37,9 @@
         - youtube_dl
         - i3ipc
         - future
+        # - packaging # ansible azure
+        - ansible[azure]
+        - azure
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 

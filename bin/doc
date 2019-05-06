@@ -25,11 +25,11 @@ UNAME=${UNAME,,}
 
 case $UNAME in \
 freebsd)
-	XARGS=xargs
-	;;
+    XARGS=xargs
+    ;;
 *)
-	XARGS="xargs --no-run-if-empty"
-	;;
+    XARGS="xargs --no-run-if-empty"
+    ;;
 esac
 
 filelist() {
@@ -63,7 +63,7 @@ then
         #grep -i $ARG2 $3 $4 $5 $6 $7 $8 $9 $DOCDIR/*$ARG1*
     filelist $1 | $XARGS -0 $ACK \
         --with-filename \
-           --ignore-case \
+        --ignore-case \
         "$ARG2" # $3 $4 $5 $6 $7 $8 $9"
 
 elif [[ $(filelistcount "$1") -eq 1 ]]; then
@@ -92,8 +92,8 @@ else
     done
     #echo "${ARRAY[3]}"
 
-    #filelistcount "$1" 
-    #filelist "$1" 
+    #filelistcount "$1"
+    #filelist "$1"
     #filelist "$1" | vi_$XARGS -c "set nonumber"
 fi
 

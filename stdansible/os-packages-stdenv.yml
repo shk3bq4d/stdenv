@@ -18,4 +18,6 @@
           - ack-grep
           - keepassxc
           - i3lock
+          - redshift
         state: present
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
