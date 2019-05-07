@@ -25,6 +25,10 @@ https://portal.azure.com/#home
 https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Compute%2FVirtualMachines
 
 
+https://www.terraform.io/docs/providers/azurerm/index.html
+https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html
+
+
 # Azure Stack
 https://ukcloud.com/hub/news/ansible-and-azure-stack-deep-dive/#
 
