@@ -26,5 +26,7 @@
           # citrix-receiver
           - libwebkitgtk-1.0-0
           - libjavascriptcoregtk-1.0-0
+          # keepass kpcli
+          - kpcli
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

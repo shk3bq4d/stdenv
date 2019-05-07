@@ -6,6 +6,7 @@ pip install --user azure-cli
 
 ## init
 https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli?view=azure-cli-latest
+pip install azure-cli
 ```sh
 az login
 az find secret

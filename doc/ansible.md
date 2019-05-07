@@ -1138,3 +1138,9 @@ localhost | SUCCESS => {
     },
     "changed": false
 }
+
+ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
+
+
+# conversions
+boolean: off,false => false
