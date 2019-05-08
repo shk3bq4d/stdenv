@@ -9,7 +9,6 @@
 ## Author: Jeff Malone, 07 May 2019
 ##
 
-set -euo pipefail
 
 # function usage() { sed -r -n -e "s/__SCRIPT__/$\(basename $0\)/" -e '/^##/s/^..// p'   $0 ; }
 

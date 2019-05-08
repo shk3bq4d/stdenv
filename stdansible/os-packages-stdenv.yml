@@ -28,5 +28,11 @@
           - libjavascriptcoregtk-1.0-0
           # keepass kpcli
           - kpcli
+          # golang
+          - golang
+          # virtualbox
+          - virtualbox
+          # vagrant
+          - vagrant
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

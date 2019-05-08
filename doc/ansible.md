@@ -1144,3 +1144,35 @@ ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-cli
 
 # conversions
 boolean: off,false => false
+
+https://docs.ansible.com/ansible/latest/modules/terraform_module.html
+https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/cloud/misc/terraform.py
+https://alex.dzyoba.com/blog/terraform-ansible/
+
+https://docs.ansible.com/ansible/latest/modules/add_host_module.html
+meta: refresh_inventory
+
+# loop
+with_list
+with_items
+with_indexed_items
+with_flattened
+with_together
+with_dict
+with_sequence
+with_subelements
+with_nested/with_cartesian
+with_random_choice
+```yaml
+- shell: /usr/bin/foo
+  register: result
+  until: result.stdout.find("all systems go") != -1
+  retries: 5
+  delay: 10
+
+- shell: "/bin/true"
+  register: myvar
+  until: myvar.rc != 0 or myvar.attempts == 3
+  retries: 20
+  delay: 1
+```
