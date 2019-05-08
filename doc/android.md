@@ -155,3 +155,15 @@ Device     Boot Start      End  Sectors Size Id Type
 /dev/sda1        8192 31342591 31334400  15G  c W95 FAT32 (LBA)
 
 Command (m for help):
+
+# adb
+adb devices
+adb connect TA93005EKM
+adb shell
+adb push lineage-16.0-20190422-UNOFFICIAL-falcon\ \(1\).zip /sdcard/
+adb push open_gapps-arm-9.0-pico-20180820-UNOFFICIAL.zip /sdcard/
+
+https://github.com/opengapps/opengapps/wiki/Advanced-Features-and-Options
+/sdcard # cat .gapps-config
+Include
+Search
