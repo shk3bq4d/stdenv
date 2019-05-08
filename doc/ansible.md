@@ -58,6 +58,8 @@
     id: hostvars[inventory_hostname]['ec2_id']
 ```
 
+ansible-galaxy install -r requirements.yml
+
 ansible-playbook -h                                                                                        27' 41"
 Usage: ansible-playbook playbook.yml
 Options:

@@ -8,8 +8,6 @@
 ## Author: Jeff Malone, 08 May 2019
 ##
 
-set -eo pipefail
-
  function usage() { sed -r -n -e "s/__SCRIPT__/$\(basename $0\)/" -e '/^##/s/^..// p'   $0 ; }
 
 # [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
@@ -50,6 +48,10 @@ shift $((OPTIND-1)) || true
 out="uteahnuet"
 while :; do
     newout=$(eval "$@" >&1)
+    ret=$?
+    if [[ $ret -ne 0 ]]; then
+        newout="$newout => $ret"
+    fi
     if [[ "$out" != "$newout" ]]; then
         echo "$newout"
         out="$newout"
