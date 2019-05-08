@@ -24,12 +24,13 @@ touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
 
 
 # @begin=yaml@
-cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $0)/g" >>$f
+cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $f .yml)/g" >>$f
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff --check
 - hosts: localhost
   connection: local
   vars:
-    _random: vimf6nocheck
+    _random: hehe
     filename: FILENAME
   tasks:
     - shell: "echo \"aa\\nbb\\ncc\""

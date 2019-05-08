@@ -1152,7 +1152,10 @@ https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/cloud/misc/ter
 https://alex.dzyoba.com/blog/terraform-ansible/
 
 https://docs.ansible.com/ansible/latest/modules/add_host_module.html
+https://github.com/ansible/ansible/tree/devel/contrib/inventory
+```yml
 meta: refresh_inventory
+```
 
 # loop
 with_list
@@ -1178,3 +1181,10 @@ with_random_choice
   retries: 20
   delay: 1
 ```
+
+changed_when: "'already running' not in starthttpdout.stdout"
+failed_when: "'already running' not in starthttpdout.stdout"
+
+# directory layout
+project-name
+* kk

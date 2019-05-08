@@ -194,14 +194,14 @@ case $SCRIPT in \
     # trying for ansible
     if grep -qE "\s*tasks:" $SCRIPT; then
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
-        check="--check"
-        grep -wq vimf6nocheck $SCRIPT && check=""
+        ansible_args=$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT)
+        test -z "$ansible_args" && ansible_args="--diff --check"
         if grep -wq become $SCRIPT &>/dev/null; then
             set -x
-            sudo -E $(which ansible-playbook) $SCRIPT --diff $check # -l 127.0.0.1
+            sudo -E $(which ansible-playbook) $SCRIPT $ansible_args # -l 127.0.0.1
         else
             set -x
-            ansible-playbook $SCRIPT                  --diff $check # -l 127.0.0.1
+            ansible-playbook $SCRIPT                  $ansible_args # -l 127.0.0.1
         fi
         set +x
         rm -f $SCRIPT_DIR/$(basename $SCRIPT .yml).retry || true
