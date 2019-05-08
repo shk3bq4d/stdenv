@@ -196,7 +196,7 @@ case $SCRIPT in \
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args=$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT)
         test -z "$ansible_args" && ansible_args="--diff --check"
-        if grep -wq become $SCRIPT &>/dev/null; then
+        if grep -wq become $SCRIPT && ! grep -wq vimf6_ansible_nolocalsudo $SCRIPT; then
             set -x
             sudo -E $(which ansible-playbook) $SCRIPT $ansible_args # -l 127.0.0.1
         else
