@@ -1154,7 +1154,14 @@ https://alex.dzyoba.com/blog/terraform-ansible/
 https://docs.ansible.com/ansible/latest/modules/add_host_module.html
 https://github.com/ansible/ansible/tree/devel/contrib/inventory
 ```yml
+https://docs.ansible.com/ansible/latest/modules/meta_module.html
+meta: flush_handlers
 meta: refresh_inventory
+meta: noop
+meta: clear_facts
+meta: clear_host_errors
+meta: end_play
+meta: reset_connection
 ```
 
 # loop
