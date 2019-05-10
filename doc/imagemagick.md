@@ -74,3 +74,4 @@ convert -list type       # for IM older than v6.3.5-7
 convert -list font       # for newer versions
 
 convert selenium.png -gravity NorthEast -font DejaVu-Sans -annotate 0 "bip %[EXIF:DateTimeOriginal]" selenium2.png # adds overlay text
+convert -density 300 -define pdf:fit-page=A4 FREE-Girl-On-Horse.jpg girl-on-horse.pdf
