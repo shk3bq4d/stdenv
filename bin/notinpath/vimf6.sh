@@ -192,7 +192,7 @@ case $SCRIPT in \
     ;;
 *yml)
     # trying for ansible
-    if grep -qE "\s*tasks:" $SCRIPT; then
+    if grep -qE "\s*(tasks|roles):" $SCRIPT; then
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args=$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT)
         test -z "$ansible_args" && ansible_args="--diff --check"

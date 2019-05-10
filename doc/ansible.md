@@ -185,6 +185,8 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'ansible' | regex_search('(foobar)') }} # will return empty if it cannot find a match
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
 
+- include: ....
+    when: optional_file|exists
 
 localhost | SUCCESS => {
     "ansible_facts": {
@@ -1175,7 +1177,18 @@ with_sequence
 with_subelements
 with_nested/with_cartesian
 with_random_choice
+with_first_found # doesn't actually loop, but takes first existing file exists
 ```yaml
+
+- include: "{{ prerequisites_file }}"
+  with_first_found:
+    - files:
+        - "prerequisites-{{ ansible_distribution }}.yml"
+        - "prerequisites-{{ ansible_os_family }}.yml"
+      skip: true
+  loop_control:
+    loop_var: prerequisites_file
+
 - shell: /usr/bin/foo
   register: result
   until: result.stdout.find("all systems go") != -1
@@ -1187,10 +1200,55 @@ with_random_choice
   until: myvar.rc != 0 or myvar.attempts == 3
   retries: 20
   delay: 1
+
+- tasks:
+   - name: Install Apache
+     # https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
+     block:
+       - yum:
+           name: "{{ item }}"
+           state: installed
+         with_items:
+           - httpd
+           - memcached
+       - template:
+           src: templates/src.j2
+           dest: /etc/foo.conf
+       - service:
+           name: bar
+           state: started
+           enabled: True
+     when: ansible_facts['distribution'] == 'CentOS'
+     become: true
+     become_user: root
+- name: Attempt and graceful roll back demo
+  block: # try catch trycatch
+    - debug:
+        msg: 'I execute normally'
+    - name: i force a failure
+      command: /bin/false
+    - debug:
+        msg: 'I never execute, due to the above task failing, :-('
+  rescue: # try catch trycatch
+    - debug:
+        msg: 'I caught an error'
+    - name: i force a failure in middle of recovery! >:-)
+      command: /bin/false
+    - debug:
+        msg: 'I also never execute :-('
+  always: # try catch trycatch
+    - debug:
+        msg: "This always executes"
 ```
 
 changed_when: "'already running' not in starthttpdout.stdout"
 failed_when: "'already running' not in starthttpdout.stdout"
+
+
+
+create ad_hoc group to avoid multiple when: https://docs.ansible.com/ansible/latest/modules/group_by_module.html#group-by-module
+
+
 
 # directory layout
 project-name
