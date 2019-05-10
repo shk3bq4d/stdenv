@@ -187,6 +187,12 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 
 - include: ....
     when: optional_file|exists
+- include_vars:                  # implicit exists for include
+    depth: 1                     # implicit exists for include
+    dir: vars                    # implicit exists for include
+    files_matching: "{{ item }}" # implicit exists for include
+  with_items:                    # implicit exists for include
+    - myname.yml                 # implicit exists for include
 
 localhost | SUCCESS => {
     "ansible_facts": {
