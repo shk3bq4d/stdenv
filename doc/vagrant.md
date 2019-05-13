@@ -1,4 +1,4 @@
-# packaging 
+# packaging
 http://vertis.io/2012/11/02/creating-a-vagrant-base-box-from-an-existing-vmdk.html
 
 
@@ -15,3 +15,10 @@ grep -i password /cygdrive/c/Users/$USER/.vagrant.d/boxes/ubuntu-VAGRANTSLASH-xe
 "5.1" => Version_5_0, mr
 https://github.com/hashicorp/vagrant/issues/9090
 linge
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "mwrock/windows2016"
+  config.vm.hostname = "host-win"
+  winClientIP = "192.168.99.103"
+  config.vm.network "private_network", ip: winClientIP
+end

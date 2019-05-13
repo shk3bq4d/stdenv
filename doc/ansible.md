@@ -187,6 +187,15 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
 
 ```json
+- include: ....
+    when: optional_file|exists
+- include_vars:                  # implicit exists for include
+    depth: 1                     # implicit exists for include
+    dir: vars                    # implicit exists for include
+    files_matching: "{{ item }}" # implicit exists for include
+  with_items:                    # implicit exists for include
+    - myname.yml                 # implicit exists for include
+
 localhost | SUCCESS => {
     "ansible_facts": {
         "ansible_all_ipv4_addresses": [
@@ -1176,8 +1185,19 @@ with_sequence
 with_subelements
 with_nested/with_cartesian
 with_random_choice
+with_first_found # doesn't actually loop, but takes first existing file exists
 ```yaml
 # until loop
+
+- include: "{{ prerequisites_file }}"
+  with_first_found:
+    - files:
+        - "prerequisites-{{ ansible_distribution }}.yml"
+        - "prerequisites-{{ ansible_os_family }}.yml"
+      skip: true
+  loop_control:
+    loop_var: prerequisites_file
+
 - shell: /usr/bin/foo
   register: result
   until: result.stdout.find("all systems go") != -1
@@ -1227,12 +1247,56 @@ with_random_choice
     mode: '0600'
     validate: /usr/sbin/sshd -t -f %s
     backup: yes
+
+- tasks:
+   - name: Install Apache
+     # https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
+     block:
+       - yum:
+           name: "{{ item }}"
+           state: installed
+         with_items:
+           - httpd
+           - memcached
+       - template:
+           src: templates/src.j2
+           dest: /etc/foo.conf
+       - service:
+           name: bar
+           state: started
+           enabled: True
+     when: ansible_facts['distribution'] == 'CentOS'
+     become: true
+     become_user: root
+- name: Attempt and graceful roll back demo
+  block: # try catch trycatch
+    - debug:
+        msg: 'I execute normally'
+    - name: i force a failure
+      command: /bin/false
+    - debug:
+        msg: 'I never execute, due to the above task failing, :-('
+  rescue: # try catch trycatch
+    - debug:
+        msg: 'I caught an error'
+    - name: i force a failure in middle of recovery! >:-)
+      command: /bin/false
+    - debug:
+        msg: 'I also never execute :-('
+  always: # try catch trycatch
+    - debug:
+        msg: "This always executes"
 ```
 
 changed_when: "'already running' not in starthttpdout.stdout"
 failed_when: "'already running' not in starthttpdout.stdout"
 
 delegate_to: localhost
+
+
+create ad_hoc group to avoid multiple when: https://docs.ansible.com/ansible/latest/modules/group_by_module.html#group-by-module
+
+
 
 # directory layout
 ansible galaxy init role-directory-layout
