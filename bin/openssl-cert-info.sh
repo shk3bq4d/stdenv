@@ -34,7 +34,7 @@ else
     NAME="$( echo -n $NAME | sed -r \
         -e 's/^#//' \
         -e 's/(^\s+|\s+$)//g' \
-        -e 's/^.*(https?:..)([^ ]+).*$/\2/'
+        -e 's/^.*(https?:..)([^ ]+?).*$/\2/'
         )"
 fi
 [[ $# -lt 2 ]] && PORT=443 || PORT=$2
