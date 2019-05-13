@@ -59,6 +59,7 @@
 ```
 
 ansible-galaxy install -r requirements.yml
+https://galaxy.ansible.com/search?deprecated=false&order_by=-relevance&keywords=
 
 ansible-playbook -h                                                                                        27' 41"
 Usage: ansible-playbook playbook.yml
@@ -185,7 +186,7 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'ansible' | regex_search('(foobar)') }} # will return empty if it cannot find a match
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
 
-
+```json
 localhost | SUCCESS => {
     "ansible_facts": {
         "ansible_all_ipv4_addresses": [
@@ -1140,6 +1141,7 @@ localhost | SUCCESS => {
     },
     "changed": false
 }
+```
 
 ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
 
@@ -1152,8 +1154,7 @@ https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/cloud/misc/ter
 https://alex.dzyoba.com/blog/terraform-ansible/
 
 https://docs.ansible.com/ansible/latest/modules/add_host_module.html
-https://github.com/ansible/ansible/tree/devel/contrib/inventory
-```yml
+```yaml
 https://docs.ansible.com/ansible/latest/modules/meta_module.html
 meta: flush_handlers
 meta: refresh_inventory
@@ -1176,6 +1177,7 @@ with_subelements
 with_nested/with_cartesian
 with_random_choice
 ```yaml
+# until loop
 - shell: /usr/bin/foo
   register: result
   until: result.stdout.find("all systems go") != -1
@@ -1187,11 +1189,113 @@ with_random_choice
   until: myvar.rc != 0 or myvar.attempts == 3
   retries: 20
   delay: 1
+# templates
+# Example from Ansible Playbooks
+- template:
+    src: /mytemplates/foo.j2
+    dest: /etc/file.conf
+    owner: bin
+    group: wheel
+    mode: 0644
+
+# The same example, but using symbolic modes equivalent to 0644
+- template:
+    src: /mytemplates/foo.j2
+    dest: /etc/file.conf
+    owner: bin
+    group: wheel
+    mode: "u=rw,g=r,o=r"
+
+# Create a DOS-style text file from a template
+- template:
+    src: config.ini.j2
+    dest: /share/windows/config.ini
+    newline_sequence: '\r\n'
+
+# Copy a new "sudoers" file into place, after passing validation with visudo
+- template:
+    src: /mine/sudoers
+    dest: /etc/sudoers
+    validate: '/usr/sbin/visudo -cf %s'
+
+# Update sshd configuration safely, avoid locking yourself out
+- template:
+    src: etc/ssh/sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    validate: /usr/sbin/sshd -t -f %s
+    backup: yes
 ```
 
 changed_when: "'already running' not in starthttpdout.stdout"
 failed_when: "'already running' not in starthttpdout.stdout"
 
+delegate_to: localhost
+
 # directory layout
-project-name
-* kk
+ansible galaxy init role-directory-layout
+role-directory-layout/templates/
+role-directory-layout/files/
+role-directory-layout/meta/main.yml
+role-directory-layout/tests/test.yml
+role-directory-layout/tests/inventory
+role-directory-layout/defaults/main.yml
+role-directory-layout/README.md
+role-directory-layout/handlers/main.yml
+role-directory-layout/vars/main.yml
+role-directory-layout/tasks/main.yml
+
+# inventory
+https://github.com/ansible/ansible/tree/devel/contrib/inventory
+[all]
+dnsmasq ansible_host=192.168.9.16 ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key ansible_user=vagrant ansible_ssh_common_args="-o StrictHostKeyChecking=no"
+```yaml
+all:
+  hosts:
+    dnsmasq.vbox.local:
+      ansible_host: 192.168.9.16
+  vars:
+    ansible_ssh_private_key_file: ~/.vagrant.d/insecure_private_key
+    ansible_user: vagrant
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+    #ansible_ssh_extra_args: "-o StrictHostKeyChecking=no"
+```
+
+# ansible.cfg
+[defaults]
+roles_path    = ../common/ansible/roles/
+
+
+# facts
+- gather_facts: no
+  tasks:
+    - setup: {}
+      when: ansible_fqdn is not defined
+
+
+# variables
+Variable precedence: Where should I put a variable?
+* command line values (eg “-u user”)
+* role defaults [1]
+* inventory file or script group vars [2]
+* inventory group_vars/all [3]
+* playbook group_vars/all [3]
+* inventory group_vars/* [3]
+* playbook group_vars/* [3]
+* inventory file or script host vars [2]
+* inventory host_vars/* [3]
+* playbook host_vars/* [3]
+* host facts / cached set_facts [4]
+* play vars
+* play vars_prompt
+* play vars_files
+* role vars (defined in role/vars/main.yml)
+* block vars (only for tasks in block)
+* task vars (only for the task)
+* include_vars
+* set_facts / registered vars
+* role (and include_role) params
+* include params
+* extra vars (always win precedence)

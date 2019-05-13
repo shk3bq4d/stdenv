@@ -3,6 +3,7 @@ https://docs.docker.com/engine/reference/builder/
 man dockerfile # apt install docker-doc
 /var/lib/docker/volumes/
 docker export adoring_kowalevski > contents.tar
+docker export e2309cd22c4b | tar -x
 c=bb6bf; d=$(mktemp -d); cd $d && docker export $c | tar x
 
 $ find $PWD | grep 57b823f5669f

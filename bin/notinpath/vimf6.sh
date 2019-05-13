@@ -192,11 +192,11 @@ case $SCRIPT in \
     ;;
 *yml)
     # trying for ansible
-    if grep -qE "\s*tasks:" $SCRIPT; then
+    if grep -qE "^[- ] hosts:" $SCRIPT; then
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
-        ansible_args=$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT)
+        ansible_args=$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)
         test -z "$ansible_args" && ansible_args="--diff --check"
-        if grep -wq become $SCRIPT && ! grep -wq vimf6_ansible_nolocalsudo $SCRIPT; then
+        if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
             set -x
             sudo -E $(which ansible-playbook) $SCRIPT $ansible_args # -l 127.0.0.1
         else

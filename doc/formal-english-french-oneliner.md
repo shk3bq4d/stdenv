@@ -19,6 +19,7 @@ see parent commit(s) message(s) for more info about this tag
 You have been included in the communication because we believe that you may be a consumer of this information and could base your operations or decisions on its results.
 Let me know if you have any doubt
 Let me know if I missed something and this does not respond to your question.
+If you have any question or remark, please contact the SF IT Data Centre distribution list.
 
 ## polite no
 Hi!
