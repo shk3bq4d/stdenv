@@ -1199,12 +1199,14 @@ with_first_found # doesn't actually loop, but takes first existing file exists
     loop_var: prerequisites_file
 
 - shell: /usr/bin/foo
+  chdir: /tmp
   register: result
   until: result.stdout.find("all systems go") != -1
   retries: 5
   delay: 10
 
 - shell: "/bin/true"
+  chdir: /tmp
   register: myvar
   until: myvar.rc != 0 or myvar.attempts == 3
   retries: 20
@@ -1363,3 +1365,12 @@ Variable precedence: Where should I put a variable?
 * role (and include_role) params
 * include params
 * extra vars (always win precedence)
+
+```yaml
+- stat:
+    path: /etc/foo.conf
+  register: st
+- fail:
+    msg: "Whoops! file ownership has changed"
+  when: st.stat.pw_name != 'root'
+ ```
