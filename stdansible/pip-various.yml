@@ -40,6 +40,8 @@
         # - packaging # ansible azure
         - ansible[azure]
         - azure
+        # websupport/search.py
+        - LatLon
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 
