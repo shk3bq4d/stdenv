@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
 
+CMD=mp3gain
+case "$1" in \
+sh|bash|zsh)
+	CMD=""
+	;;
+esac
 docker run \
     --rm \
+    -w $PWD \
     -v $PWD:$PWD \
     -v /home:/home \
     -v /tmp:/tmp \
     -it \
     shk3bq4d/mp3gain:latest \
-    mp3gain \
+	$CMD \
     "$@"

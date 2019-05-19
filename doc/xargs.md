@@ -5,3 +5,4 @@
 -p           --interactive        Prompt  the  user  about whether to run each command line and read a line from the terminal.  Only run the command line if the response starts with `y' or `Y'.  Implies -t.
 -r           --no-run-if-empty
 -I@ -i@ --replace=@ : xargs -I@ cp security-groups.tf @.tf
+-o, --open-tty
