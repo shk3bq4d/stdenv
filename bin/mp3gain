@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+docker run \
+    --rm \
+    -v $PWD:$PWD \
+    -v /home:/home \
+    -v /tmp:/tmp \
+    -it \
+    shk3bq4d/mp3gain:latest \
+    mp3gain \
+    "$@"
