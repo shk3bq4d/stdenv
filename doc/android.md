@@ -95,6 +95,10 @@ Go Back to the Main Settings Page
 Scroll Down and Tap on Developer Options
 # enable root through developer options on cyanogenmod
 
+Setting>About>Software>Build Number and Tap on the build number repeatedly so that the Developer mode will turn on. # enable developer mode Android 9
+
+https://www.techdroidtips.com/unlock-bootloader-huawei-p-smart-2019/
+
 # decompile apk jar dex2jar
 http://stackoverflow.com/questions/5257830/how-to-use-dextojar/19954951#19954951
 Download dex2jar https://code.google.com/p/dex2jar/downloads/list

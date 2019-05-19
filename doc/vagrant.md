@@ -16,9 +16,19 @@ grep -i password /cygdrive/c/Users/$USER/.vagrant.d/boxes/ubuntu-VAGRANTSLASH-xe
 https://github.com/hashicorp/vagrant/issues/9090
 linge
 
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "mwrock/windows2016"
   config.vm.hostname = "host-win"
   winClientIP = "192.168.99.103"
   config.vm.network "private_network", ip: winClientIP
+  v.linked_clone = true
+  vagrant_root = File.dirname(__FILE__)
+  ENV['ANSIBLE_ROLES_PATH'] = "#{vagrant_root}/ansible/roles"
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "ansible/playbooks/default.yml"
+    ansible.verbose = "vv"
+    ansible.raw_arguments = ["-i", "ansible/hostsfile"]
+  end
 end
+```

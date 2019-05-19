@@ -1374,3 +1374,8 @@ Variable precedence: Where should I put a variable?
     msg: "Whoops! file ownership has changed"
   when: st.stat.pw_name != 'root'
  ```
+
+# windows
+https://github.com/jonashackt/ansible-windows-docker-springboot
+https://chocolatey.org/packages/zabbix-agent
+https://github.com/dohque/ansible-role-win-filebeat/blob/master/tasks/main.yml
