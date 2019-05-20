@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+/usr/bin/chromium-browser                           "$@" </dev/null &>/dev/null &

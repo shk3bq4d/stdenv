@@ -480,3 +480,6 @@ git rev-parse --show-toplevel # https://stackoverflow.com/questions/957928/is-th
 * pre-push: just before pushing revisions and objects to a remote repository (e.g. running unit tests and stop push if they they fail).
 
 git diff -w --no-color [file names] | git apply --cached --ignore-whitespace # https://stackoverflow.com/questions/23910879/git-unstage-lines-where-the-only-changes-is-white-space
+
+git rev-parse --short HEAD # current revision
+git rev-parse         HEAD # current revision

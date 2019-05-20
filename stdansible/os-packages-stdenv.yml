@@ -35,6 +35,8 @@
           # vagrant
           - vagrant
           # xfreerdp
-          - freerdp-x11
+          - freerdp2-x11
+          # gimp
+          - gimp
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
