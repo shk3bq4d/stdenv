@@ -443,6 +443,7 @@ for_window [class="Vncviewer"] border normal
 for_window [class="VisualVM*"] border normal
 for_window [class="keepassxc"] border normal
 for_window [class="keepassxc"] floating enable
+for_window [class="VirtualBox Machine"] floating enable
 for_window [class="Gitk"] fullscreen enable
 for_window [class="Gitk"] border normal
 for_window [class="Kodi"] fullscreen enable

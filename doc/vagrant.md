@@ -32,3 +32,6 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
+config.vm.provision "shell", run: "always", inline: <<-SHELL
+        mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
+SHELL

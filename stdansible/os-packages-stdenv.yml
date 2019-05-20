@@ -33,10 +33,12 @@
           # virtualbox
           - virtualbox
           # vagrant
-          - vagrant
+          #- vagrant
           # xfreerdp
           - freerdp2-x11
           # gimp
           - gimp
+          # prename
+          - rename
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
