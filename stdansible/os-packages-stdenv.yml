@@ -34,5 +34,7 @@
           - virtualbox
           # vagrant
           - vagrant
+          # xfreerdp
+          - freerdp-x11
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

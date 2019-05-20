@@ -16,8 +16,8 @@ grep -i password /cygdrive/c/Users/$USER/.vagrant.d/boxes/ubuntu-VAGRANTSLASH-xe
 https://github.com/hashicorp/vagrant/issues/9090
 linge
 
-Vagrant.configure("2") do |config|
-  config.vm.box = "mwrock/windows2016"
+vagrant.configure("2") do |config|
+  config.vm.box = "mwrock/Windows2016"
   config.vm.hostname = "host-win"
   winClientIP = "192.168.99.103"
   config.vm.network "private_network", ip: winClientIP
