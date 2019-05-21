@@ -2,6 +2,7 @@
 * https://docs.ansible.com/ansible/latest/modules/include_vars_module.html
 * https://docs.ansible.com/ansible/latest/modules/get_url_module.html
 * https://docs.ansible.com/ansible/latest/modules/user_module.html
+* https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 *    https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
@@ -1373,6 +1374,46 @@ Variable precedence: Where should I put a variable?
 - fail:
     msg: "Whoops! file ownership has changed"
   when: st.stat.pw_name != 'root'
+
+- debug: msg="Append list to list, or merge two lists"
+
+- name: Setup two lists to be merged
+  set_fact:
+    list_one:
+      - 1
+      - 2
+      - 3
+    list_two:
+      - 4
+      - 5
+      - 6
+
+- name: Merge the two lists
+  set_fact:
+    lists_merged: "{{ list_one + list_two }}"
+
+- name: Demonstrate merged lists
+  debug: var=lists_merged
+
+- name: Initialize an empty list for our strings
+  set_fact:
+    my_strings: []
+
+- name: Setup a string variable
+  set_fact:
+    my_name: "Max"
+
+- name: Append string to list
+  set_fact:
+    my_strings: "{{ my_strings + [ my_name ] }}"
+
+- debug: var=my_strings
+
+- name: Append another item to the list
+  set_fact:
+    my_strings: "{{ my_strings + [ 'Power' ] }}"
+
+- debug: var=my_strings
  ```
 
 # windows

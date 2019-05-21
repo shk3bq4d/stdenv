@@ -91,3 +91,8 @@ SHELL=/bin/bash
 # execute the cron command in an actual shell
 exec /bin/bash --norc "$@"
 ```
+
+
+# user crontab location
+/var/spool/cron/crontabs/<user> # ubuntu debiant
+/var/spool/cron<user> # centos
