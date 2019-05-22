@@ -11,3 +11,6 @@ vaina playlist https://www.youtube.com/playlist\?list\=PLx8R-ixn250vlO14TY1ILr0A
 https://www.youtube.com/watch?v=WjQhHvw1obU
 https://www.youtube.com/watch?v=UhPxxeDTS1U soca bate vira
 https://www.youtube.com/playlist?list=PLVMPUbJD7RMGviS5uYlWD-ghEVXX6uirf fifi brindassier
+
+# joakim
+https://www.youtube.com/results?search_query=708cn
