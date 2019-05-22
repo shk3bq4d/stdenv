@@ -381,7 +381,7 @@ workspace 13 output $oc
 
 #bindsym  $mod+o exec i3lock -p win -i ~/Pictures/migdesk.png
 # code:54 => sym: 0x63, symbol:c
-bindcode $mod+31  exec ~/bin/p2v
+bindcode $mod+31  exec ~/bin/p2v # c vim mod+c
 # code:56 => sym: 0x62, symbol:b
 bindcode $mod+57  move scratchpad
 # code:57 => sym: 0x6e, symbol:n

@@ -42,6 +42,8 @@
         - azure
         # websupport/search.py
         - LatLon
+        # BeautifulSoup
+        - bs4
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
 

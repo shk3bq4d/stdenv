@@ -7,7 +7,13 @@
 
 
 echo "start \$TERMINAL is $TERMINAL"
-[[ -z "$TERMINAL" ]] && TERMINAL=xterm
+if [[ -z "$TERMINAL" ]]; then
+	if hash mrurxvt; then
+		TERMINAL=mrurxvt
+	else
+		TERMINAL=xterm
+	fi
+fi
 
 file=$(mktemp -t "$O.XXXXXXXXXXX")
 if false; then

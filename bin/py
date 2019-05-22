@@ -100,7 +100,7 @@ def go(args):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
-    if 'VIMF6' in os.environ: args = ['HEHE', '-i']
+    if 'VIMF6' in os.environ and False: args = ['HEHE', '-i']
     parser = argparse.ArgumentParser(description="This is the description of what I do")
     parser.add_argument("FILENAME", type=str, nargs='+', help="file to process")
     parser.add_argument("-i", "--in-place", help="saves output in place", action="store_true")
@@ -112,7 +112,7 @@ def go(args):
 
 if __name__ == '__main__':
     logging_conf()
-    if 'VIMF6' in os.environ:
+    if 'VIMF6' in os.environ and False:
         unittest.main()
     else:
         try:
