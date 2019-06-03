@@ -1,3 +1,5 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff -vvv
 ---
 - hosts: localhost
   become: true
@@ -40,5 +42,7 @@
           - gimp
           # prename
           - rename
+          # snmpwalk
+          - snmp
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
