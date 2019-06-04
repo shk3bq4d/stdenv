@@ -37,7 +37,8 @@ default NAT port on host: 2222
 
 
 # port forwarding
-VM=foreman; IF=1; GUESTIP=10.0.2.15; GUESTPORT=443; HOSTIP=127.0.0.1; HOSTPORT=$(next_free_port.py); vboxmanage controlvm $VM savestate; vboxmanage modifyvm $VM --natpf$IF "host$HOSTPORT,tcp,$HOSTIP,$HOSTPORT,$GUESTIP,$GUESTPORT"; vboxmanage startvm $VM --type headless; vboxmanage showvminfo $VM | grep -E "^NIC...Rule"; echo $HOSTPORT
+VM="foreman"; IF=1; GUESTIP=10.0.2.15; GUESTPORT=443; HOSTIP=127.0.0.1; HOSTPORT=$(next_free_port.py); vboxmanage controlvm "$VM" savestate; vboxmanage modifyvm "$VM" --natpf$IF "host$HOSTPORT,tcp,$HOSTIP,$HOSTPORT,$GUESTIP,$GUESTPORT"; vboxmanage startvm "$VM" --type headless; vboxmanage showvminfo "$VM" | grep -E "^NIC...Rule"; echo $HOSTPORT
+
 
 # minikube kafka
 vboxmanage controlvm minikube savestate
@@ -104,3 +105,5 @@ sudo modprobe vboxdrv # reload kernel module on restart
 # autostart on boot
 vboxmanage showvminfo mitmproxy2 --machinereadable | grep autostart
 vboxmanage modifyvm dnsmasq --autostart-enabled off
+
+vboxmanage clonemedium ~/ITO-BACKUPS-01_Ubuntu16044.vhdx ITO-BACKUPS-01_Ubuntu16044.vdi --format VDI

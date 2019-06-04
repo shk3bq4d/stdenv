@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
   winClientIP = "192.168.99.103"
   config.vm.network "private_network", ip: winClientIP
   v.linked_clone = true
+  # config.disksize.size = "20GB"
   vagrant_root = File.dirname(__FILE__)
   ENV['ANSIBLE_ROLES_PATH'] = "#{vagrant_root}/ansible/roles"
   config.vm.provision :ansible do |ansible|
