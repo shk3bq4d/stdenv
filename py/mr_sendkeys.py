@@ -75,6 +75,7 @@ def go(args):
     parser.add_argument("-i", "--id", nargs='?', help="window ID where to send the key event", type=str)
     ar = parser.parse_args(args)
     window_id = find_window() if ar.id is None else ar.id
+    args = ar.ARGS
     if len(args) > 0:
         args = ' '.join(args)
         for i in args:
