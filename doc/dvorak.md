@@ -2,6 +2,8 @@ $mod+Control+Return exec mrurxvt-dvorak.sh
 setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch # dvorak programmer
 setxkbmap -layout ch -variant fr
 
+vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch
+
 lv3:ralt_switch : keeps alt-gr for accentuated characters as simultaneous action
 compose:ralt: uses right alt for successive keys accentuated
 

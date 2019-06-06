@@ -37,6 +37,10 @@
     - mrdebug
   vars:
     work_dir: "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}/.tmp/ansible"
+  args:
+    warn: false
+	creates: /tmp/hehe
+
 - name: environment variable access
   debug: var=ansible_env.SUDO_USER
 - name: myfoo
@@ -189,7 +193,8 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 
 ```json
 - include: ....
-    when: optional_file|exists
+    when: optional_file|exists # deprecated
+    when: not optional_file|exists # deprecated
 - include_vars:                  # implicit exists for include
     depth: 1                     # implicit exists for include
     dir: vars                    # implicit exists for include
@@ -1414,8 +1419,14 @@ Variable precedence: Where should I put a variable?
     my_strings: "{{ my_strings + [ 'Power' ] }}"
 
 - debug: var=my_strings
- ```
 
+- name: Ensure the JBoss memory settings are exactly as needed
+  lineinfile:
+    path: /opt/jboss-as/bin/standalone.conf
+    regexp: '^(.*)Xms(\\d+)m(.*)$'
+    line: '\1Xms${xms}m\3'
+    backrefs: yes
+ ```
 # windows
 https://github.com/jonashackt/ansible-windows-docker-springboot
 https://chocolatey.org/packages/zabbix-agent

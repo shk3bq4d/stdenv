@@ -313,3 +313,5 @@ wall "my message" # How to Send a Message to Logged Users in Linux Terminal broa
 https://www.reddit.com/r/linuxadmin/comments/9h3x84/ubuntu_vs_centos_should_i_stay_or_should_i_go/
 
 lspci | grep VGA # find out graphical card nvidia amd intel
+
+nice -n 15 clamscan && clamscan --stdout -v -ir /chroot/

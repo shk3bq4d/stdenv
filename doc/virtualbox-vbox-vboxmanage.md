@@ -107,3 +107,6 @@ vboxmanage showvminfo mitmproxy2 --machinereadable | grep autostart
 vboxmanage modifyvm dnsmasq --autostart-enabled off
 
 vboxmanage clonemedium ~/ITO-BACKUPS-01_Ubuntu16044.vhdx ITO-BACKUPS-01_Ubuntu16044.vdi --format VDI
+
+
+vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch

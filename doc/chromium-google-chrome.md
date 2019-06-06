@@ -1688,3 +1688,6 @@ chrome://webrtc-logs
 chrome://webui
 chrome://welcome
 chrome://youtube
+
+
+policies policy https://www.chromium.org/administrators/policy-list-3

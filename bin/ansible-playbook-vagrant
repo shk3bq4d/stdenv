@@ -66,6 +66,7 @@ set -euo pipefail
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
 ansible-playbook \
+    --become \
     --ssh-extra-arg="-o StrictHostKeyChecking=No" \
     -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory \
     "$@"
