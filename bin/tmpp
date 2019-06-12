@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 case $(hostname -f) in \
-	$WORK_PC1F)
-		ROOT=/mnt/local/00-1to
-		ROOT=$HOME
-		;;
-	*)
-		ROOT=$HOME
-		;;
+    $WORK_PC1F)
+        ROOT=/mnt/local/00-1to
+        ROOT=$HOME
+        ;;
+    *)
+        ROOT=$HOME
+        ;;
 esac
 # del old empty dir
 for i in ${ROOT}/tmpp/*; do
@@ -22,7 +22,7 @@ newdir="${ROOT}/tmpp/$(date +'%Y%m%d')"
 [[ ! -d $newdir ]] && mkdir -p $newdir
 target=~/tmp
 if [[ "$(readlink -f "$newdir")" == "$(readlink -f "$target")" ]] && [[ -L $target ]]; then
-	exit 0
+    exit 0
 fi
 [[ -L $target ]] && rm $target
 [[ -d $target ]] && rmdir $target

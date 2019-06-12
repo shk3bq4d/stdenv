@@ -11,3 +11,6 @@ lftp -f /tmp/mylftpscript.x
 # mirror options
 -R for upload
 -e to delete files
+
+# open options
+--env-password read LFTP_PASSWORD environment variable
