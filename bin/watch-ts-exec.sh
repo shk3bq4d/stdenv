@@ -47,7 +47,7 @@ shift $((OPTIND-1)) || true
 # echo "p = ${p}"
 out="uteahnuet"
 while :; do
-    newout=$(eval "$@" >&1)
+    newout="$(eval "$@" >&1)"
     ret=$?
     if [[ $ret -ne 0 ]]; then
         newout="$newout => $ret"
