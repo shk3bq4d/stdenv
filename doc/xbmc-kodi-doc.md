@@ -1,3 +1,5 @@
+embycon # light plugin
+
 http://piproj:8080/
 
 # emby plugin
