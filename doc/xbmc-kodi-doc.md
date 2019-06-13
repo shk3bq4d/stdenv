@@ -3128,3 +3128,5 @@ ssh root@10.19.29.60 # password: libreelec
 
 
 https://bugs.launchpad.net/ubuntu/+source/pyopenssl/+bug/1636573
+
+~/.kodi/temp/kodi.log
