@@ -40,6 +40,7 @@ RUN \
 		vim \
 		virtualenv \
 		virtualenvwrapper \
+		wget \
 		zsh \
 	&& true
 

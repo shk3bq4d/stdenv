@@ -188,7 +188,7 @@ case $SCRIPT in \
     esac
     svg=/tmp/${SCRIPT_NAME}.svg
     $engine -Tsvg -o$svg -v $SCRIPT
-    nohup firefox $svg
+    nohup firefox $svg &>/dev/null &
     ;;
 *yml)
     # trying for ansible

@@ -1,3 +1,4 @@
+~/bin/refresh-emby-lib.sh
 @begin=sh@
 curl -vX POST -H "Content-Length: 0" -H 'x-emby-authorization: MediaBrowser Client="Emby Mobile", Device="Chrome", DeviceId="e92ff4f01cc5a1b8399980ba46348a03b256ce93", Version="3.2.20.0", Token="0f933879758443ee9bb38d9767ff02a3"' http://jemby.ly.lan:8096/emby/ScheduledTasks/Running/6330ee8fb4a957f33981f89aa78b030f
 @end=sh@

@@ -46,5 +46,9 @@
           - snmp
           # nmap
           - nmap
+          # graphviz
+          - graphviz
+          # mkpasswd
+          - whois
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
