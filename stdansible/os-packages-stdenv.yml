@@ -50,5 +50,7 @@
           - graphviz
           # mkpasswd
           - whois
+          # htop
+          - htop
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
