@@ -25,11 +25,20 @@ if hash keepassxc &>/dev/null; then
         ;;
     esac
     BIN=keepassxc
-    cd ~/.keepass
-    if [[ -f $PWD/mr.key ]]; then
-        $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+    if [[ -f ~/bip/mr.kdbx ]]; then
+        cd ~/bip
+        if [[ -f $PWD/mr.key ]]; then
+            $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+        else
+            $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+        fi
     else
-        $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+        cd ~/.keepass
+        if [[ -f $PWD/mr.key ]]; then
+            $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+        else
+            $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+        fi
     fi
 elif [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
     export QT_SCALE_FACTOR=2

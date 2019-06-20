@@ -38,6 +38,7 @@ if [[ $# -eq 0 ]]; then
 else
 	ARG="$@"
 fi
+pip install --user --upgrade youtube-dl
 ~/.local/bin/youtube-dl --no-call-home --ignore-errors --no-playlist --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$ARG" || echo "pip install --upgrade --user youtube_dl"
 
 echo EOF
