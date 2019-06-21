@@ -5,7 +5,7 @@ zfs list -t snapshot -o name,creation
 zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') # snapshot current working directory cwd pwd filesystem fs
 zfs snapshot filesystem@snapname
 zfs rollback filesystem@snapname # revert restore
-zfs rollback zroot/ezjail/jmadsonic@2017-05-25_01.00.00--7d # revert restore 
+zfs rollback zroot/ezjail/jmadsonic@2017-05-25_01.00.00--7d # revert restore
 zfs rollback zroot/ezjail/jmadsonic@2017-05-25_01.00.00--7d -r # revert intermediate snapshosts
 cd myfs/.zfs/snapshot/day.24
 
@@ -25,7 +25,7 @@ Code:
 /usr/ports                      /jail/myjail/usr/ports                nullfs  ro      0       0
 And in /etc/rc.conf:
 jail_myjail_mount_enable="YES"
-Then it'll be automatically mounted/unmounted when the jail starts/stops. 
+Then it'll be automatically mounted/unmounted when the jail starts/stops.
 
 sudo zfs create             zroot/mr/jsabnzbd_data
 sudo mkdir                                          /usr/jails/jsabnzbd-0-7-20/jsabnzbd_data
@@ -57,8 +57,8 @@ jail_restart.sh $JAILNAME
 
 sudo zfs get casesensitivity /usr/jails/jly200
 sudo zfs get 2>&1 | grep -E 'PROPERTY|case'
-	PROPERTY       EDIT  INHERIT   VALUES
-		casesensitivity  NO      YES   sensitive | insensitive | mixed
+    PROPERTY       EDIT  INHERIT   VALUES
+        casesensitivity  NO      YES   sensitive | insensitive | mixed
 
 sudo zfs set casesensitivity=insensitive zroot/ezjail/jly200
 cannot set property for 'zroot/ezjail/jly200': 'casesensitivity' is readonly
@@ -73,8 +73,8 @@ growfs -N zroot/mrvol/ly80lvmr0
 zfs destroy data/emea/bcv.ch/f5_hsv2000v@zfs-auto-snap_daily-2018-04-17-0000,zfs-auto-snap_daily-2018-04-18-0000%zfs-auto-snap_daily-2018-04-19-0000,zfs-auto-snap_daily-2018-04-20-0000%zfs-auto-snap_daily-2018-04-21-0000,zfs-auto-snap_daily-2018-04-22-0000%zfs-auto-snap_daily-2018-04-23-0000 # delete snapshot
 zfs destroy filesystem|volume@snap[%snap[,snap[%snap]]]... # delete snapshot
 
-zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') 
-zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') | xargs -prn1 zfs destroy 
+zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }')
+zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') | xargs -prn1 zfs destroy
 
 zfs get all data/global/mayerbrown.com/chinwsa001.mayerbrown.com
 
@@ -118,3 +118,33 @@ NAME                      PROPERTY  VALUE                                 SOURCE
 zroot/mr/users_data/bip  sharenfs  -maproot=root -network 10.19.29.0/24  local
 sudo zfs set "sharenfs=-maproot=root -network 10.19.29.62/32" zroot/mr/movies_data
 sudo zfs set "sharenfs=-maproot=root --alldirs -network 10.19.29.62/32" zroot/mr/olivia-nfs
+
+
+# linux
+sudo apt install zfs-dkms
+zpool create -m /zfs proliant4to /dev/disk/by-id/ata-ST4000VN008-2DR166_ZDH60MXQ
+sudo zfs create proliant4to/green-vhd
+sudo zfs set dedup=on proliant4to/green-vhd
+sudo zfs set compression=on proliant4to/green-vhd
+sudo zpool get dedupratio proliant4to
+
+
+# zfSnap
+TTL SYNTAX
+The Time‐To‐Live (TTL) contains numbers and modifiers. Valid modifiers are:
+y years (calendar)
+m months (calendar)
+w weeks
+d days
+h hours
+M minutes
+s seconds
+forever
+a special‐case modifier that will never expire and cannot be used with other TTL modifiers. Both [-F] and [-D] will delete snapshots with a TTL of forever.
+You do not need to use all of the modifiers, but they must be used in the above order (i.e. sequentially).
+## crontab
+0       2       *       *       *       root    /usr/sbin/zfSnap -d # delete old snapshot
+0       1       *       *       *       root    /bin/bash -c '/usr/sbin/zfSnap -a 28d -r proliant4to'
+0       3       *       *       mon     root    /bin/bash -c '/usr/sbin/zfSnap -a 28w -r proliant4to'
+0       4       1       *       *       root    /bin/bash -c '/usr/sbin/zfSnap -a 28m -r proliant4to'
+0       4       31      12      *       root    /bin/bash -c '/usr/sbin/zfSnap -a 28y -r proliant4to'

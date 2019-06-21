@@ -1159,6 +1159,7 @@ localhost | SUCCESS => {
 ```
 
 ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
+ansible localhost -m apt -a name=xeyes
 
 
 # conversions
