@@ -1,4 +1,5 @@
 ---
+## vimf6_ansible_args: --diff
 - hosts: localhost
   tasks:
     - name: "ZSH syntax highlighting"
@@ -10,3 +11,8 @@
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+    - name: "Ansible ZSH completion"
+      git:
+        repo: https://github.com/nojanath/ansible-zsh-completion.git
+        dest: ~/.zsh/completion/ansible-zsh-completion
