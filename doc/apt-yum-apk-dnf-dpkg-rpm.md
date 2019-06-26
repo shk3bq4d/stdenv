@@ -104,3 +104,6 @@ test -f /var/run/reboot-required # apt check restart necessary
 aptitude why PACKAGE # describe why package was installed
 
 /var/log/apt/history.log
+
+# mrhyp
+sed -e '/mirrorlist=.*/d' -e 's/#baseurl=/baseurl=/' -e "s/\$releasever/7.4.1708/g" -e "s/mirror.centos.org\\/centos/vault.centos.org/g" -i /etc/yum.repos.d/CentOS-Base.repo
