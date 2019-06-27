@@ -1158,8 +1158,20 @@ localhost | SUCCESS => {
 }
 ```
 
+# adhoc
 ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
-ansible localhost -m apt -a name=xeyes
+ansible all -m yum -a "name=httpd state=present"
+ansible all -m apt -a "name=httpd state=present"
+ansible web -m service -a "name=httpd state=started"
+ansible web -m service -a "name=httpd state=restarted"
+ansible all -m file -a "path=/project/devops state=directory"
+ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"
+ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"
+ansible all -m user -a "name=ansible group=devops password=ansible123"
+ansible all -m setup
+ansible web -m group -a "name=devops state=present"
+ansible web -m command -a "free -m"
+ansible zabbix_proxy -c local -i inventory.yml -m shell -a "sh -c 'printf \"GREP %s: %s\n\" {{inventory_hostname}} \"\$(dig +short {{ inventory_hostname }})\"'"
 
 
 # conversions

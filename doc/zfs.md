@@ -127,6 +127,10 @@ sudo zfs create proliant4to/green-vhd
 sudo zfs set dedup=on proliant4to/green-vhd
 sudo zfs set compression=on proliant4to/green-vhd
 sudo zpool get dedupratio proliant4to
+sudo zfs send -c proliant4to/green-vhd > zfs-send2
+
+sudo zpool create -m /zfs jun19 /dev/disk/by-id/ata-ST8000VN0022-2EL112_ZA1EYSB0
+sudo zfs receive jun19/green-vhd < ~/doc/zfs-send2
 
 
 # zfSnap
