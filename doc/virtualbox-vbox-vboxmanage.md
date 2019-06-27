@@ -110,3 +110,5 @@ vboxmanage clonemedium ~/ITO-BACKUPS-01_Ubuntu16044.vhdx ITO-BACKUPS-01_Ubuntu16
 
 
 vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch
+
+vboxmanage guestproperty enumerate VMID

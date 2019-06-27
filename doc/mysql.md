@@ -37,3 +37,13 @@ ALTER USER 'fw'@'10.1.1.120' IDENTIFIED WITH mysql_native_password BY 'fwpass';
 @end=sql@
 
 mysql -U -h 127.0.0.1 -u root --password=mypasswordislongerasyours repository_sd2 <<<"select * from (select count(1) as co, formatbasic FROM SUBFIELD where \`release\` = '20171222' and formatbasic regexp '.*[0-9]{2,}.*' group by formatbasic) mralias where co > 35 order by formatbasic;"
+
+```sql
+
+-- disk usage by table
+SELECT table_schema as `Database`,
+     table_name AS `Table`,
+     round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB`
+FROM information_schema.TABLES
+ORDER BY (data_length + index_length) DESC;
+```

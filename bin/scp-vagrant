@@ -64,8 +64,7 @@ set -euo pipefail
 # exec 2>&1
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
-BIN=ssh
-hash sshrc &>/dev/null && BIN=sshrc
+BIN=scp
 
 IP=
 if [[ $# -eq 0 ]]; then
