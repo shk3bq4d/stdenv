@@ -1172,6 +1172,9 @@ ansible all -m setup
 ansible web -m group -a "name=devops state=present"
 ansible web -m command -a "free -m"
 ansible zabbix_proxy -c local -i inventory.yml -m shell -a "sh -c 'printf \"GREP %s: %s\n\" {{inventory_hostname}} \"\$(dig +short {{ inventory_hostname }})\"'"
+sudo ansible localhost user -a "name=mysql-backup home=/data/mysql-backup"
+sudo ansible localhost -m user -a "name=mysql-backup state=absent"
+sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-port-forwarding,from="10.0.1.1"' key='ssh-rsa '"
 
 
 # conversions

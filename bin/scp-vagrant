@@ -67,7 +67,6 @@ set -euo pipefail
 BIN=scp
 
 IP=
-if [[ $# -eq 0 ]]; then
     if grep vagrant <<< $PWD; then
         while [[ ! -d .vagrant ]]; do
             cd ..
@@ -78,9 +77,9 @@ if [[ $# -eq 0 ]]; then
         done
     fi
     IP=$(vboxmanage guestproperty get $(cat $(find .vagrant/machines -type f -name id -print -quit)) /VirtualBox/GuestInfo/Net/1/V4/IP | awk '{ print $2 }')
-fi
 
 
+set -x
 $BIN \
     -i ~/.vagrant.d/insecure_private_key \
     $( find . -type f -name private_key 2>/dev/null | sed -r -e 's/(.*)/-i \1/') \
@@ -88,6 +87,5 @@ $BIN \
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=No \
     -o User=vagrant \
-    $IP \
-    "$@"
+    $(echo "$@" | sed -r -e "s/\<_\>/$IP/")
 
