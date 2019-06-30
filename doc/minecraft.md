@@ -120,3 +120,7 @@ https://minecraft-fr.gamepedia.com/Lama
 
 # rail train
 https://minecraft.gamepedia.com/Tutorials/Minecarts
+
+# comment manger
+* prendre de la nourriture dans la main
+* cliquer bouton droit
