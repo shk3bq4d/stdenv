@@ -30,6 +30,7 @@ touch /tmp/home_myuser_.vnc_xstartup
 
 
 pkg info -D zoneminder
+pkg update -f
 
 /usr/libexec/locate.updatedb # mlocate updatedb
 
