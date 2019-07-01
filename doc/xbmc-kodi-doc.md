@@ -1,4 +1,8 @@
-embycon # light plugin
+# embycon # light plugin
+EmbyCon is a lightweight Kodi addon that lets you browse and play media files from your Emby server directly within your beloved Kodi interface.
+
+The key difference with its sibling Emby for Kodi addon is that EmbyCon does not perform any heavy synchronization between Kodi and the Emby server: instead, it requests, fetches and caches all the information it needs from the server on demand.
+https://github.com/faush01/plugin.video.embycon
 
 http://piproj:8080/
 
