@@ -65,7 +65,7 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-~/py/mr_sendkeys.py --id $(citrix-window-id.sh) $@
+~/py/mr_sendkeys.py --id $(citrix-window-id.sh) "$@"
 
 exit 0
 
