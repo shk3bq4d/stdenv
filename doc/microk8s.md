@@ -12,6 +12,7 @@ sudo snap install microk8s --classic --channel=1.14/stable
 vi /snap/microk8s/current/microk8s-resources/default-args/kubelet
 vi /snap/microk8s/current/microk8s-resources/kubelet.config
 sudo iptables -P FORWARD ACCEPT
+Adding --iptables=false to /var/snap/microk8s/current/args/dockerd fixes it.
 
 
 # dockerd
@@ -24,3 +25,4 @@ microk8s.docker
 
 # upgrade
 sudo snap refresh microk8s --classic --channel=1.14/stable
+sudo snap info microk8s 

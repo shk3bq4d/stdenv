@@ -16,6 +16,7 @@ echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-
 
 netstat : apt install net-tools
 apt update && apt install -y netcat curl wget net-tools; curl http://localhost; nc -v localhost 80
+dpkg -S $(which dig) # dnsutils: /usr/bin/dig
  
 
 # YUM
