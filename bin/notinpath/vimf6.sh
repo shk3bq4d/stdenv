@@ -12,6 +12,11 @@ exec 2>&1
 SCRIPT_DIR=$(dirname "$SCRIPT")
 SCRIPT_NAME=$(basename "$SCRIPT")
 
+function myexit() {
+    echo "vimf6.sh by extension exit code is $1" # to review if we have case exit corde or real interpreter
+    exit $1
+}
+
 # puppet module to capsule
 if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
     last_host_fp=~/.tmp/vimf6-last_host
@@ -86,8 +91,7 @@ fi
 # executables
 if [[ -x "$SCRIPT" ]]; then
     $SCRIPT
-    echo "vimf6.sh -x exit code is $?"
-    exit 0
+    myexit $?
 fi
 
 # shebang
@@ -95,8 +99,7 @@ FIRSTLINE=$(head -n 1 $SCRIPT)
 if [[ $FIRSTLINE =~ ^#!.* ]]; then
     CMD=$(echo "$FIRSTLINE" | sed -r -e 's/^..//')
     $CMD $SCRIPT
-    echo "vimf6.sh shebang exit code is $?"
-    exit 0
+    myexit $?
 fi
 
 # by extension
@@ -105,10 +108,10 @@ vimf6.sh)
     echo "Inception B"
     exit 0
     ;;
-*sh)  bash $SCRIPT;;
-*py)  python2 $SCRIPT;;
-*pl)  perl $SCRIPT;;
-*php) php $SCRIPT;;
+*sh)  bash    $SCRIPT; myexit $?;;
+*py)  python2 $SCRIPT; myexit $?;;
+*pl)  perl    $SCRIPT; myexit $?;;
+*php) php     $SCRIPT; myexit $?;;
 *java)
     D=$SCRIPT_DIR
     mrjava_cp() {
@@ -189,6 +192,7 @@ case $SCRIPT in \
     svg=/tmp/${SCRIPT_NAME}.svg
     $engine -Tsvg -o$svg -v $SCRIPT
     nohup firefox $svg &>/dev/null &
+    exit 0
     ;;
 *yml)
     # trying for ansible
@@ -199,12 +203,15 @@ case $SCRIPT in \
         if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
             set -x
             sudo -E $(which ansible-playbook) $SCRIPT $ansible_args # -l 127.0.0.1
+            _exit=$?
         else
             set -x
             ansible-playbook $SCRIPT                  $ansible_args # -l 127.0.0.1
+            _exit=$?
         fi
         set +x
         rm -f $SCRIPT_DIR/$(basename $SCRIPT .yml).retry || true
+        myexit $_exit
     else
         echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
         exit 1
@@ -213,7 +220,7 @@ case $SCRIPT in \
 $HOME/.Xdefaults)
     set -x
     xrdb -merge ~/.Xdefaults
-    set +x
+    myexit $?
     ;;
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
@@ -227,9 +234,11 @@ $HOME/.Xdefaults)
         echo "Image not found $image, execute the following:"
         echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/shk3bq4d/docker-latex/ && \\"
         echo "    cd ~/git/shk3bq4d/docker-latex/ && ./build.sh"
+        exit 1
     elif docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
         echo $out
         nohup evince $out &>/dev/null </dev/null &
+        exit 0
     else
         echo "exit code is $?"
         cat $out
@@ -254,6 +263,7 @@ $HOME/.config/i3/config)
     #i3 restart && sleep 5 && compton-i3-restart-reset-opacity.sh
     i3 restart && sleep 5 && compton-reinitialize.py
     echo "i3 restarted A"
+    exit 0
     ;;
 $HOME/.config/i3/config.*)
     cd $HOME/.config/i3/
@@ -261,6 +271,7 @@ $HOME/.config/i3/config.*)
     i3 restart || true
     { sleep 6 && compton-reinitialize.py; } &
     echo "i3 restarted B"
+    exit 0
     ;;
 */Dockerfile)
     if [[ -f $SCRIPT_DIR/build.sh ]]; then
@@ -270,6 +281,12 @@ $HOME/.config/i3/config.*)
     else
         docker build -f $SCRIPT $SCRIPT_DIR
     fi
+    exit 0
+    ;;
+/e/*/validator/run/rules/*/*/*.js)
+    set -x
+    /validator/testrules.sh -j $(echo $SCRIPT | sed -r -e 's/.*rules.(.*)/\1/')
+    exit $?
     ;;
 *)
     # validator.sh
@@ -278,8 +295,8 @@ $HOME/.config/i3/config.*)
         ./tree.sh -e 1 $SCRIPT 2>&1 | dos2unix
         exit $?
     fi
-    echo "($(basename $0)): unimplemented case for script $SCRIPT"
     exit 1
     ;;
 esac
-echo "vimf6.sh by extension exit code is $?" # to review if we have case exit corde or real interpreter
+echo "($(basename $0)): unimplemented case for script $SCRIPT"
+exit 1
