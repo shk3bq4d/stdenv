@@ -1447,3 +1447,8 @@ Variable precedence: Where should I put a variable?
 https://github.com/jonashackt/ansible-windows-docker-springboot
 https://chocolatey.org/packages/zabbix-agent
 https://github.com/dohque/ansible-role-win-filebeat/blob/master/tasks/main.yml
+
+
+# git-crypt
+https://medium.com/faun/https-medium-com-mikhail-advani-secret-management-with-ansible-3bfdd92472ef
+https://www.dewinter.com/gnupg_howto/english/GPGMiniHowto-3.html#ss3.1
