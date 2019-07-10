@@ -1,0 +1,56 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+## vimf6_ansible_nolocalsudo: yes
+## vimf6_ansible_nolocalsudo: no
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - add_host:
+        name: centos7-b386
+        ansible_connection: docker
+        #ansible_docker_extra_args: "--tlsverify --tlscacert=/path/to/ca.pem --tlscert=/path/to/client-cert.pem --tlskey=/path/to/client-key.pem -H=tcp://myserver.net:4243"
+        ansible_user: root
+        groups:
+        - docker
+      changed_when: false
+      tags:
+        - yes
+- hosts: docker
+  connection: docker
+  #become: true
+  gather_facts: no
+  vars:
+    _random: hehe
+    filename: lxml
+  tasks:
+    - name: Ensure yum EPEL
+      yum:
+        name:
+          - epel-release
+    - name: Ensure Python 3.4 is gone on Centos 7
+      yum:
+        name:
+          - python34
+        state: absent
+    - yum:
+        name:
+          - python36-pip
+          - python36-setuptools
+          - python36-devel
+          - libxml2-devel
+          - libxslt-devel
+- hosts: docker
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.6
+  connection: docker
+  tasks:
+    - pip:
+        name:
+          - lxml
+        executable: /usr/bin/pip3
+        extra_args: "--no-binary :all:"
+      tags:
+        - yes

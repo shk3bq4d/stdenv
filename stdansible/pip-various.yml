@@ -97,5 +97,7 @@
         - sh
         - fontawesome # mri3server
         - i3ipc
+        - lxml
+        - zabbix_api
         extra_args: --user
         executable: ~/.local/bin/pip3
