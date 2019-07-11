@@ -36,12 +36,14 @@
           - python34
         state: absent
     - yum:
+        # yum install -y python36-devel libxml2-devel libxslt-devel gcc
         name:
           - python36-pip
           - python36-setuptools
           - python36-devel
           - libxml2-devel
           - libxslt-devel
+          - gcc
 - hosts: docker
   vars:
     ansible_python_interpreter: /usr/bin/python3.6
