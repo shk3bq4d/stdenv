@@ -32,7 +32,7 @@ echo \
 
 set -euo pipefail
 
-# function usage() { sed -r -n -e \"s/__SCRIPT__/\$\(basename \$0\)/\" -e '/^##/s/^..// p'   \$0 ; }
+# function usage() { sed -r -n -e \"s/__SCRIPT__/\$(basename \$0)/\" -e '/^##/s/^..// p'   \$0 ; }
 
 # [[ \$# -eq 1 && ( "\$1" == -h || "\$1" == --help ) ]] && usage && exit 0
 
