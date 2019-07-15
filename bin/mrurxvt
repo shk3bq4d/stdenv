@@ -11,15 +11,15 @@ OUTDIR=~/.tmp/mrurxvt/
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
 for i in ~/.std*_aliases; do
-	source $i
+    source $i
 done
 case $HOSTNAMEF in \
 $WORK_PC1F)
-	date > /tmp/workpc
-	f=$OUTDIR/filelist
-	test -f $f || find $OUTDIR -type f -name '*.jpg' -maxdepth 1 >$f
-	f=$(shuf -n 1 $f)
-	;;
+    date > /tmp/workpc
+    f=$OUTDIR/filelist
+    test -f $f || find $OUTDIR -type f -name '*.jpg' -maxdepth 1 >$f
+    f=$(shuf -n 1 $f)
+    ;;
 *)
 source ~/bin/mrurxvt-colors
 randomcolor
@@ -62,70 +62,70 @@ method=${methods[$idx]}
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
 noise)
-	a=$(( ( RANDOM % 2 ) ))
-	convert -size 32x32 xc:   +noise Random -virtual-pixel tile  -blur 0x3 -auto-level \
-		 -implode $a \
-		  -brightness-contrast 50x-20 \
-		$f
-	;;
+    a=$(( ( RANDOM % 2 ) ))
+    convert -size 32x32 xc:   +noise Random -virtual-pixel tile  -blur 0x3 -auto-level \
+         -implode $a \
+          -brightness-contrast 50x-20 \
+        $f
+    ;;
 noisehue)
-	d=( 2 4 8 16 32 64 128 256 )
-	d=( 2 3 4 5 6 )
-	e=$(( $RANDOM % ${#d[@]} ))
-	c=${d[$e]}
-	e=$(( $RANDOM % ${#d[@]} ))
-	g=${d[$e]}
-	convert -size ${c}x${g} xc:   +noise Random -virtual-pixel tile  -auto-level \
-		-set colorspace HSB \
-	  -channel GB -evaluate set 100% +channel \
-			-colorspace RGB \
-		  -brightness-contrast 50x-60 \
-			$f
-	;;
+    d=( 2 4 8 16 32 64 128 256 )
+    d=( 2 3 4 5 6 )
+    e=$(( $RANDOM % ${#d[@]} ))
+    c=${d[$e]}
+    e=$(( $RANDOM % ${#d[@]} ))
+    g=${d[$e]}
+    convert -size ${c}x${g} xc:   +noise Random -virtual-pixel tile  -auto-level \
+        -set colorspace HSB \
+      -channel GB -evaluate set 100% +channel \
+            -colorspace RGB \
+          -brightness-contrast 50x-60 \
+            $f
+    ;;
 dev)
-	convert -size 100x100 xc:none +antialias -fill none -strokewidth 0.5 \
+    convert -size 100x100 xc:none +antialias -fill none -strokewidth 0.5 \
           -stroke Red    -draw "path 'M 26,0  A 55,61 0 0,1 26,100'" \
           -stroke White  -draw "line 50,0  50,100" \
 txt:- |\
-	    sed '1d; / 0) /d; s/:.* /,/;' |\
-		      convert -size 100x100 xc: -sparse-color shepards '@-' \
-			  $f
-	;;
+        sed '1d; / 0) /d; s/:.* /,/;' |\
+              convert -size 100x100 xc: -sparse-color shepards '@-' \
+              $f
+    ;;
 old)
-	convert -size 4096x4096 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" \
-	-fill none -stroke Blue  \
-	-draw "stroke red  bezier 100,100 300,900   250,100 500,500 " \
+    convert -size 4096x4096 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" \
+    -fill none -stroke Blue  \
+    -draw "stroke red  bezier 100,100 300,900   250,100 500,500 " \
     -draw "stroke red  bezier 500,500 750,900   700,100 900,400 " \
-	-draw "image over 2000,2000 2000,2000 \"$HOME/tmp/bip.jpg\"" \
-	$f
-	;;
+    -draw "image over 2000,2000 2000,2000 \"$HOME/tmp/bip.jpg\"" \
+    $f
+    ;;
 plasma)
-	# http://www.imagemagick.org/Usage/canvas/#plasma_fractal
-	c=$(( 0 + ${RANDOM:0:3} ))
-	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
-	#convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
-	convert -size 512x512  "plasma:#${a}-#${b}" -blur 0x2  -shave 20x20  \
-		  -modulate 114\% \
-		  $f
-		  #-contrast \
-	;;
+    # http://www.imagemagick.org/Usage/canvas/#plasma_fractal
+    c=$(( 0 + ${RANDOM:0:3} ))
+    f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+    #convert -size 512x512  plasma:fractal -blur 0x2  -swirl $c  -shave 20x20  \
+    convert -size 512x512  "plasma:#${a}-#${b}" -blur 0x2  -shave 20x20  \
+          -modulate 114\% \
+          $f
+          #-contrast \
+    ;;
 legacy)
-	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
-	if [[ ! -f $f ]]; then
-		convert -size 32x32 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" $f
-	fi
-	;;
+    f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+    if [[ ! -f $f ]]; then
+        convert -size 32x32 xc: -sparse-color barycentric "0,0 #${a}  -%w,%h #${b}  %w,%h #${c}" $f
+    fi
+    ;;
 mean)
-	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
-	if [[ ! -f $f ]]; then
-		s=256
-		p=$(( $s / 2 ))
-		q=$(( $s / 10 ))
-		r=$(( $s / 10 * 9 ))
-		t=$q
-		u=$(( $s / 10 * 7 ))
-		v=$r
-		convert -size ${s}x${s} xc: +size "xc:#$a" "xc:#$b" "xc:#$c" \
+    f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+    if [[ ! -f $f ]]; then
+        s=256
+        p=$(( $s / 2 ))
+        q=$(( $s / 10 ))
+        r=$(( $s / 10 * 9 ))
+        t=$q
+        u=$(( $s / 10 * 7 ))
+        v=$r
+        convert -size ${s}x${s} xc: +size "xc:#$a" "xc:#$b" "xc:#$c" \
           -colorspace HSB -channel R \
           -fx "aa=u[1]*2*pi; ba=u[2]*2*pi; ca=u[3]*2*pi;
                ar=1/max(1, hypot(i-$p,j-$t) );
@@ -137,95 +137,95 @@ mean)
                        )/(2*pi)+1, 1)" \
           -separate -background white -combine +channel \
           -set colorspace HSB -colorspace sRGB  \
-		  -modulate 190\% \
-		  $f
-	fi
-	;;
+          -modulate 190\% \
+          $f
+    fi
+    ;;
 Shepards|Inverse)
-	d=${RANDOM:1:1}
-	e=${RANDOM:1:1}
-	g=${RANDOM:1:1}
-	h=${RANDOM:1:1}
-	i=${RANDOM:1:1}
-	j=${RANDOM:1:1}
-	f=$OUTDIR/${method}-${a}-${b}-${c}-$d$e$g$h$i$j.jpg
-	if [[ ! -f $f ]]; then
-		convert -size 100x100 xc: -colorspace RGB \
-			  -sparse-color  $method "${d}0,${e}0 #$a  ${g}0,${h}0 #$b  ${i}0,${j}0 #$c" \
-			  -colorspace sRGB  $f
-	fi
-	;;
+    d=${RANDOM:1:1}
+    e=${RANDOM:1:1}
+    g=${RANDOM:1:1}
+    h=${RANDOM:1:1}
+    i=${RANDOM:1:1}
+    j=${RANDOM:1:1}
+    f=$OUTDIR/${method}-${a}-${b}-${c}-$d$e$g$h$i$j.jpg
+    if [[ ! -f $f ]]; then
+        convert -size 100x100 xc: -colorspace RGB \
+              -sparse-color  $method "${d}0,${e}0 #$a  ${g}0,${h}0 #$b  ${i}0,${j}0 #$c" \
+              -colorspace sRGB  $f
+    fi
+    ;;
 2spot)
-	c=${RANDOM:1:1}
-	d=${RANDOM:1:1}
-	e=${RANDOM:1:1}
-	g=${RANDOM:1:1}
-	f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
-	nbtry=4
-	if [[ ! -f $f ]]; then
-		while :; do
-			[[ $nbtry -le 0 ]] && break
-			nbtry=$(( $nbtry - 1 ))
-			c=${RANDOM:1:1}
-			d=${RANDOM:1:1}
-			e=${RANDOM:1:1}
-			g=${RANDOM:1:1}
-			f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
-			[[ -f $f ]] && break
-			convert -size 32x32 xc: +size "xc:#$a" "xc:#$b" -colorspace RGB \
-			  -fx "ar=hypot( i/w-.$c, j/h-.$d )*4;
-				   br=hypot( i/w-.$e, j/h-.$g )*4;
-				   u[1]*br/(ar+br) + u[2]*ar/(ar+br)" \
-			  -colorspace RGB $f && break
-		done
-	fi
-	;;
+    c=${RANDOM:1:1}
+    d=${RANDOM:1:1}
+    e=${RANDOM:1:1}
+    g=${RANDOM:1:1}
+    f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
+    nbtry=4
+    if [[ ! -f $f ]]; then
+        while :; do
+            [[ $nbtry -le 0 ]] && break
+            nbtry=$(( $nbtry - 1 ))
+            c=${RANDOM:1:1}
+            d=${RANDOM:1:1}
+            e=${RANDOM:1:1}
+            g=${RANDOM:1:1}
+            f=$OUTDIR/${method}-${a}-${b}-$c$d$e$g.jpg
+            [[ -f $f ]] && break
+            convert -size 32x32 xc: +size "xc:#$a" "xc:#$b" -colorspace RGB \
+              -fx "ar=hypot( i/w-.$c, j/h-.$d )*4;
+                   br=hypot( i/w-.$e, j/h-.$g )*4;
+                   u[1]*br/(ar+br) + u[2]*ar/(ar+br)" \
+              -colorspace RGB $f && break
+        done
+    fi
+    ;;
 triangleresize)
-	randomcolor
-	d=$_MRCOLOR
-	f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
-	if [[ ! -f $f ]]; then
-		convert \( "xc:#$a" "xc:#$b" +append \) \
-			  \( "xc:#$c" "xc:#$d" +append \) -append \
-			  -filter triangle -resize 32x32\! \
-			  -modulate 110\% \
-			  $f
-	fi
-	;;
+    randomcolor
+    d=$_MRCOLOR
+    f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
+    if [[ ! -f $f ]]; then
+        convert \( "xc:#$a" "xc:#$b" +append \) \
+              \( "xc:#$c" "xc:#$d" +append \) -append \
+              -filter triangle -resize 32x32\! \
+              -modulate 110\% \
+              $f
+    fi
+    ;;
 semiradial)
-	c=$(( ( RANDOM % 4 ) * 90 ))
-	f=$OUTDIR/$method-${a}-${b}-${c}.jpg
-	if [[ ! -f $f ]]; then
-		convert -size 32x32 gradient:"#$a-#$b" -distort Arc "180 $c 16 0" $f
-	fi
-	;;
+    c=$(( ( RANDOM % 4 ) * 90 ))
+    f=$OUTDIR/$method-${a}-${b}-${c}.jpg
+    if [[ ! -f $f ]]; then
+        convert -size 32x32 gradient:"#$a-#$b" -distort Arc "180 $c 16 0" $f
+    fi
+    ;;
 swirl)
-	c=$(( ${RANDOM:0:3} - 500 ))
-	f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
-	if [[ ! -f $f ]]; then
-		convert -size 32x32 gradient:"#$a-#$b" -swirl $c $f
-	fi
-	;;
+    c=$(( ${RANDOM:0:3} - 500 ))
+    f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
+    if [[ ! -f $f ]]; then
+        convert -size 32x32 gradient:"#$a-#$b" -swirl $c $f
+    fi
+    ;;
 blending)
-	randomcolor
-	d=$_MRCOLOR
-	#a=ffbbbb
-	#b=bbffff
-	#c=bbbbff
-	#d=bbffbb
-	f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
-	if [[ ! -f $f ]]; then
-		convert -size 100x100 gradient:"#$a-#$b" \
-			  \( gradient:"#$c-#$d" -rotate -90 \) \
-			  -compose Multiply -composite  \
-			  -modulate 130\% \
-			  $f
-	fi
-	;;
+    randomcolor
+    d=$_MRCOLOR
+    #a=ffbbbb
+    #b=bbffff
+    #c=bbbbff
+    #d=bbffbb
+    f=$OUTDIR/${method}-${a}-${b}-${c}-${d}.jpg
+    if [[ ! -f $f ]]; then
+        convert -size 100x100 gradient:"#$a-#$b" \
+              \( gradient:"#$c-#$d" -rotate -90 \) \
+              -compose Multiply -composite  \
+              -modulate 130\% \
+              $f
+    fi
+    ;;
 esac
 if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
-	# see ~/bin/mrurxvt-generate-cache.sh for reference
-	exit 0
+    # see ~/bin/mrurxvt-generate-cache.sh for reference
+    exit 0
 fi
 ;;
 esac
@@ -234,56 +234,56 @@ CD=$(mri3_focused_window_cwd.py)
 set -e
 echo $CD
 if [[ -d $CD ]] && $(cd $CD); then
-	CD="-cd $CD"
+    CD="-cd $CD"
 else
-	CD=""
+    CD=""
 fi
 ~/bin/notinpath/mrxmodmap.sh &
 #MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
 if [[ "$@" == *VT100.allowSendEvents* ]]; then
-	#echo "args is $@"
-	# args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
-	# args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
-	# args="$(echo -n "$@" | sed -r -e 's/-(font|bg|fg) \S+//g')"
-	#exec > >(tee /tmp/logfile.txt)
-	#exec 2>&1
-	# https://stackoverflow.com/questions/402377/using-getopts-in-bash-shell-script-to-get-long-and-short-command-line-options
-	intermediate_args=()
-	skip_one=0
-	i=-1
-	echo "grep orig args are $@"
-	for var in "$@" # iterate>
-	do
-		i=$(( $i + 1 ))
-		if [[ $skip_one == 1 ]]; then
-			skip_one=0
-			echo "grep $var skip_one continue"
-			continue
-		fi
-		case "$var" in \
-		-bg|-fg|-font)
-			skip_one=1
-			echo "grep $var detected option"
-			continue
-			;;
-		-e)
-			echo "grep $var break"
-			break
-			;;
-		*)
-			echo "grep $var adding to array $intermediate_args"
-			intermediate_args+=($var)
-			;;
-		esac
-	done
-	shift $(( $i -1 ))
-	echo "grep having shifted $i elements lead to $@"
-	echo "grep while intermediate_args is $intermediate_args"
+    #echo "args is $@"
+    # args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
+    # args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
+    # args="$(echo -n "$@" | sed -r -e 's/-(font|bg|fg) \S+//g')"
+    #exec > >(tee /tmp/logfile.txt)
+    #exec 2>&1
+    # https://stackoverflow.com/questions/402377/using-getopts-in-bash-shell-script-to-get-long-and-short-command-line-options
+    intermediate_args=()
+    skip_one=0
+    i=-1
+    echo "grep orig args are $@"
+    for var in "$@" # iterate>
+    do
+        i=$(( $i + 1 ))
+        if [[ $skip_one == 1 ]]; then
+            skip_one=0
+            echo "grep $var skip_one continue"
+            continue
+        fi
+        case "$var" in \
+        -bg|-fg|-font)
+            skip_one=1
+            echo "grep $var detected option"
+            continue
+            ;;
+        -e)
+            echo "grep $var break"
+            break
+            ;;
+        *)
+            echo "grep $var adding to array $intermediate_args"
+            intermediate_args+=($var)
+            ;;
+        esac
+    done
+    shift $(( $i -1 ))
+    echo "grep having shifted $i elements lead to $@"
+    echo "grep while intermediate_args is $intermediate_args"
 
-	#MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
-	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
+    #MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
+    MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
 else
-	MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+    MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
 fi
 
 exit 0

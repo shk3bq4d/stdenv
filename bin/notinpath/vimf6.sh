@@ -194,6 +194,10 @@ case $SCRIPT in \
     nohup firefox $svg &>/dev/null &
     exit 0
     ;;
+*svg)
+    nohup firefox $SCRIPT &>/dev/null &
+    exit 0
+    ;;
 *yml)
     # trying for ansible
     if grep -qE "^[- ] hosts:" $SCRIPT; then

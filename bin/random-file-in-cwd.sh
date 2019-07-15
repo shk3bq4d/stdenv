@@ -9,4 +9,5 @@
 ## Author: Jeff Malone, 21 Dec 2018
 ##
 
-find -maxdepth 1 -type f -print0 | shuf -z | head -zn 1 | xargs -0 basename
+#find -maxdepth 1 -type f -print0 | shuf -z | head -zn 1 | xargs -0 basename
+find -maxdepth 1 -type f -print0 | shuf -zn 1 | xargs -0 basename

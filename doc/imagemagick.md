@@ -75,3 +75,6 @@ convert -list font       # for newer versions
 
 convert selenium.png -gravity NorthEast -font DejaVu-Sans -annotate 0 "bip %[EXIF:DateTimeOriginal]" selenium2.png # adds overlay text
 convert -density 300 -define pdf:fit-page=A4 FREE-Girl-On-Horse.jpg girl-on-horse.pdf
+
+# gradient swift
+i=~/global/apache-tomcat/webapps/ROOT/WEB-INF/www/fwdata/images//mbordertitle/w8h8_c8fbfef_bf8f9fb.png; test -f $i || { echo $i | sed -r -e 's/.*w8h8_c(.*)_b(.*).png/\1 \2/' | while read a b; do convert -size 8x8 gradient:"#${a}-#${b}" PNG8:"$i"; done; }
