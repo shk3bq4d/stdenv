@@ -324,7 +324,7 @@ exec 2> /tmp/logfile2.txt
 ssh -o LogLevel=DEBUG3 -o IdentityFile=$(get_private_key_filepath) \$@
 EOF
 chmod u+x $ssh_wrapper
-export GIT_SSH="$ssh_wrapper
+export GIT_SSH="$ssh_wrapper"
 
 
 
@@ -342,7 +342,12 @@ git checkout `git rev-list -n 1 --before="2009-07-27 13:37" master`
 git config -e
 [filter "ssh_config"]
     clean = "sed -r -e '/# ?(gitignore|sedkatello|sedvirtualbox)$/'d"
-config filter=ssh_config # part of WORKDIR/.gitattributes ~/.gitattributes or GIT_DIR/attributes
+config filter=ssh_config # part of WORKDIR/.gitattributes ~/.gitattributes or GIT_DIR/info/attributes
+
+# example 2
+git config filter.r4pvim.clean 'grep -vE "^#( ex|# vimf6)"'
+git config filter.r4pvim.required true
+echo '*.yml filter=r4pvim' | tee -a $(git_root_dir).git/info/attributes
 
 
 git format-patch HEAD^ # see detailed diff changes (including file mode) # https://stackoverflow.com/questions/14564946/git-status-shows-changed-files-but-git-diff-doesnt
@@ -451,8 +456,8 @@ git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra
 
 git config pull rebase true
 
-if [ -z "$(git status --porcelain)" ]; # working directory clean             https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
-if [ -n "$(git status --porcelain)" ]; # uncommitted change in tracked files https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
+if [ -z "$(git status --porcelain)" ]; # working directory clean                 https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
+if [ -n "$(git status --porcelain)" ]; # uncommitted change in current directory https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
 
 
 git log --oneline $MAINREF..$MYREF | awk-print1.sh | tac | while read a; do git show --color-words $a; done # for
@@ -484,3 +489,7 @@ git diff -w --no-color [file names] | git apply --cached --ignore-whitespace # h
 
 git rev-parse --short HEAD # current revision
 git rev-parse         HEAD # current revision
+
+
+# git-crypt
+https://medium.com/faun/https-medium-com-mikhail-advani-secret-management-with-ansible-3bfdd92472ef

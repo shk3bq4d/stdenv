@@ -772,8 +772,8 @@ localhost | SUCCESS => {
             "USERNAME": "user",
             "VAGRANT_SERVER_URL": "https://app.vagrantup.com",
             "VAULT_ADDR": "https://vault.bip.net",
-            "VAULT_CLIENT_CERT": "/home/user/.words/vault/adminmru.crt",
-            "VAULT_CLIENT_KEY": "/home/user/.words/vault/adminmru.key",
+            "VAULT_CLIENT_CERT": "/home/user/vault/user.crt",
+            "VAULT_CLIENT_KEY": "/home/user/vault/user.key",
             "VAULT_SKIP_VERIFY": "1",
             "VIRTUALENVWRAPPER_SCRIPT": "/usr/share/virtualenvwrapper/virtualenvwrapper.sh",
             "WINDOWID": "41943049",
@@ -782,7 +782,7 @@ localhost | SUCCESS => {
             "WORK_PC1": "user-pc",
             "WORK_PC1F": "user-pc.bip.local",
             "WORK_PC2": "hehehaha",
-            "WORK_PC2F": "hehehah.hg.g.krp",
+            "WORK_PC2F": "hehehah.hg.g.local",
             "WORK_PC3": "ubuntu-corp",
             "WORK_PC3F": "ubuntu-corp.usercorp.local",
             "XAUTHORITY": "/run/user/1000/gdm/Xauthority",
@@ -1177,6 +1177,8 @@ sudo ansible localhost user -a "name=mysql-backup home=/data/mysql-backup"
 sudo ansible localhost -m user -a "name=mysql-backup state=absent"
 sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-port-forwarding,from="10.0.1.1"' key='ssh-rsa '"
 
+when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 # conversions
 boolean: off,false => false
@@ -1457,6 +1459,18 @@ gpg --import blabla.gpg
 gpg --edit-key 4298F79FAE76FB11A2DF80B65803C1E207E1682B trust
 5 I trust ultimately
 
+```sh
+# first user
+git-crypt init
+git-crypt add-gpg-user ONESELF # add oneself as a user
+echo '*.key filter=git-crypt diff=git-crypt' > .gitattributes # setup which files should be encrypted
+# first user allows second user
+git-crypt add-gpg-user SECONDUSER # allow second user
+# second user setup
+git pull # there should be a second file appearing in git-crypt/keys/default/0/4298F79FAE76FB11A2DF80B65803C1E207E1682B.gpg
+git-crypt unlock
+```
+
 # list of modules
 https://docs.ansible.com/ansible/latest/modules/community_maintained.html
 
@@ -1598,3 +1612,407 @@ until                          This keyword implies a ‘retries loop’ that wi
 vars                           Dictionary/map of variables
 when                           Conditional expression, determines if an iteration of a task is run or not.
 with_<lookup_plugin>           The same as loop but magically adds the output of any lookup plugin to generate the item list.
+
+
+webservers:dbservers   # OR group
+webservers:!phoenix    # exclude group
+webservers:&staging    # AND group
+webservers:dbservers:&staging:!phoenix # The above configuration means “all machines in the groups ‘webservers’ and ‘dbservers’ are to be managed if they are in the group ‘staging’ also, but the machines are not to be managed if they are in the group ‘phoenix’ ... whew!
+webservers:!{{excluded}}:&{{required}}
+
+~(web|db).*\.example\.com # usually pattern is glob, but starting pattern with tilde ~ makes it a regex
+
+# vault
+yq r extra_vars/credentials.yml my.yaml.path.to.secret | ansible-vault decrypt  --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev
+
+# filters
+{{ some_variable | to_json }}
+{{ some_variable | to_yaml }}
+{{ some_variable | to_nice_json }}
+{{ some_variable | to_nice_yaml }}
+{{ some_variable | to_nice_json(indent=2) }}
+{{ some_variable | to_nice_yaml(indent=8) }}
+{{ some_variable | to_yaml(indent=8, width=1337) }}
+{{ some_variable | to_nice_yaml(indent=8, width=1337) }}
+{{ some_variable | from_json }}
+{{ some_variable | from_yaml }}
+myvar: "{{ result.stdout | from_json }}"
+loop: '{{ result.stdout | from_yaml_all | list }}'
+{{ variable | mandatory }}
+{{ some_variable | default(5) }}
+{{ lookup('env', 'MY_USER') | default('admin', true) }}
+file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
+{{ list1 | min }}
+{{ [3, 4, 2] | max }}
+{{ [3, [4, 2] ] | flatten }}
+{{ [3, [4, [2]] ] | flatten(levels=1) }}
+{{ list1 | unique }}
+{{ list1 | union(list2) }}
+{{ list1 | intersect(list2) }}
+{{ list1 | difference(list2) }}
+{{ list1 | symmetric_difference(list2) }}
+{{ dict | dict2items }}
+{{ files | dict2items(key_name='file', value_name='path') }}
+{{ tags | items2dict }}
+{{ tags | items2dict(key_name='key', value_name='value') }}
+msg: "{{ [1,2,3,4,5] | zip(['a','b','c','d','e','f']) | list }}"
+msg: "{{ [1,2,3] | zip(['a','b','c','d','e','f']) | list }}"
+msg: "{{ [1,2,3] | zip_longest(['a','b','c','d','e','f'], [21, 22, 23], fillvalue='X') | list }}"
+{{ dict(keys_list | zip(values_list)) }}
+{{ users | subelements('groups', skip_missing=True) }}
+key: "{{ lookup('file', item.1) }}"
+loop: "{{ users | subelements('authorized') }}"
+"{{ '52:54:00' | random_mac }}"
+"{{ ['a','b','c'] | random }}"
+"{{ 60 | random }} * * * * root /script/from/cron"
+{{ 101 | random(step=10) }}
+{{ 101 | random(1, 10) }}
+{{ 101 | random(start=1, step=10) }}
+"{{ 60 | random(seed=inventory_hostname) }} * * * * root /script/from/cron"
+{{ ['a','b','c'] | shuffle }}
+{{ ['a','b','c'] | shuffle }}
+{{ ['a','b','c'] | shuffle(seed=inventory_hostname) }}
+Get the logarithm (default is e):
+{{ myvar | log }}
+{{ myvar | log(10) }}
+Give me the power of 2! (or 5):
+{{ myvar | pow(2) }}
+{{ myvar | pow(5) }}
+{{ myvar | root }}
+{{ myvar | root(5) }}
+loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}"
+loop: "{{ domain_definition | json_query('domain.server[*].name') }}"
+loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
+msg: "{{ domain_definition | json_query('domain.server[?cluster==`cluster1`].port') | join(', ') }}"
+loop: "{{ domain_definition | json_query('domain.server[?cluster==''cluster1''].port') }}"
+loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
+{{ myvar | ipaddr }}
+{{ myvar | ipv4 }}
+{{ myvar | ipv6 }}
+{{ '192.0.2.1/24' | ipaddr('address') }}
+{{ output | parse_cli('path/to/spec') }}
+items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
+items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
+- "^(?P<name>Ethernet\\d\\/\\d*)"
+- "admin state is (?P<state>.+),"
+- "Port mode is (.+)"
+{{ output.stdout[0] | parse_cli_textfsm('path/to/fsm') }}
+{{ output | parse_xml('path/to/spec') }}
+enabled: "{{ item.state.get('inactive') != 'inactive' }}"
+state: "{% if item.state.get('inactive') == 'inactive'%} inactive {% else %} active {% endif %}"
+enabled: "{{ item.state.get('inactive') != 'inactive' }}"
+state: "{% if item.state.get('inactive') == 'inactive'%} inactive {% else %} active {% endif %}"
+{{ 'test1' | hash('sha1') }}
+{{ 'test1' | hash('md5') }}
+{{ 'test2' | checksum }}
+Other hashes (platform dependent):
+{{ 'test2' | hash('blowfish') }}
+To get a sha512 password hash (random salt):
+{{ 'passwordsaresecret' | password_hash('sha512') }}
+{{ 'secretpassword' | password_hash('sha256', 'mysecretsalt') }}
+{{ 'secretpassword' | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
+{{ 'secretpassword' | password_hash('sha256', 'mysecretsalt', rounds=10000) }}
+{{ {'a':1, 'b':2} | combine({'b':3}) }}
+{{ {'a':{'foo':1, 'bar':2}, 'b':2} | combine({'a':{'bar':3, 'baz':4}}, recursive=True) }}
+{{ a | combine(b, c, d) }}
+{{ [0,2] | map('extract', ['x','y','z']) | list }}
+{{ ['x','y'] | map('extract', {'x': 42, 'y': 31}) | list }}
+{{ groups['x'] | map('extract', hostvars, 'ec2_ip_address') | list }}
+{{ ['a'] | map('extract', b, ['x','y']) | list }}
+{{ "Plain style (default)" | comment }}
+# Plain style (default)
+{{ "C style" | comment('c') }}
+{{ "C block style" | comment('cblock') }}
+{{ "Erlang style" | comment('erlang') }}
+{{ "XML style" | comment('xml') }}
+{{ "My Special Case" | comment(decoration="! ") }}
+{{ "Custom style" | comment('plain', prefix='#######\n#', postfix='#\n#######\n   ###\n    #') }}
+{{ ansible_managed | comment }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('hostname') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('netloc') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('username') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('password') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('path') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('port') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('scheme') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('query') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit('fragment') }}
+{{ "http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment" | urlsplit }}
+{{ 'foobar' | regex_search('(foo)') }}
+{{ 'ansible' | regex_search('(foobar)') }}
+{{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }}
+{{ 'Some DNS servers are 8.8.8.8 and 8.8.4.4' | regex_findall('\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b') }}
+{{ 'ansible' | regex_replace('^a.*i(.*)$', 'a\\1') }}
+{{ 'foobar' | regex_replace('^f.*o(.*)$', '\\1') }}
+{{ 'localhost:80' | regex_replace('^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>, \\g<port>') }}
+{{ 'localhost:80' | regex_replace(':80') }}
+{{ hosts | map('regex_replace', '^(.*)$', 'https://\\1') | list }}
+# convert '^f.*o(.*)$' to '\^f\.\*o\(\.\*\)\$'
+{{ '^f.*o(.*)$' | regex_escape() }}
+# convert '^f.*o(.*)$' to '\^f\.\*o(\.\*)\$'
+{{ '^f.*o(.*)$' | regex_escape('posix_basic') }}
+{{ configmap_resource_definition | k8s_config_resource_name }}
+name: {{ my_secret | k8s_config_resource_name }}
+- shell: echo {{ string_value | quote }}
+{{ (name == "John") | ternary('Mr','Ms') }}
+{{ enabled | ternary('no shutdown', 'shutdown', omit) }}
+{{ list | join(" ") }}
+{{ path | basename }}
+{{ path | win_basename }}
+{{ path | win_splitdrive }}
+{{ path | win_splitdrive | first }}
+{{ path | win_splitdrive | last }}
+{{ path | dirname }}
+{{ path | win_dirname }}
+{{ path | expanduser }}
+{{ path | expandvars }}
+{{ path | realpath }}
+{{ path | relpath('/etc') }}
+{{ path | splitext }}
+{{ encoded | b64decode }}
+{{ decoded | b64encode }}
+{{ encoded | b64decode(encoding='utf-16-le') }}
+{{ decoded | b64encode(encoding='utf-16-le') }}
+{{ hostname | to_uuid }}
+when: some_string_value | bool
+{{ ansible_mounts | map(attribute='mount') | join(',') }}
+{{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime('%Y-%m-%d'))).total_seconds()  }}
+{{ (("2016-08-14 20:00:12" | to_datetime) - ("2016-08-14 18:00:00" | to_datetime)).seconds  }}
+{{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime('%Y-%m-%d'))).days  }}
+{{ '%Y-%m-%d' | strftime }}
+{{ '%H:%M:%S' | strftime }}
+{{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }}
+{{ '%Y-%m-%d' | strftime(0) }}          # => 1970-01-01
+{{ '%Y-%m-%d' | strftime(1441357287) }} # => 2015-09-04
+- name: give me largest permutations (order matters)
+msg: "{{ [1,2,3,4,5] | permutations | list }}"
+msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
+msg: "{{ [1,2,3,4,5] | combinations(2) | list }}"
+msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}"
+{{ myvar | type_debug }}
+- '"1.00 Bytes" == 1|human_readable'
+- '"1.00 bits" == 1|human_readable(isbits=True)'
+- '"10.00 KB" == 10240|human_readable'
+- '"97.66 MB" == 102400000|human_readable'
+- '"0.10 GB" == 102400000|human_readable(unit="G")'
+- '"0.10 Gb" == 102400000|human_readable(isbits=True, unit="G")'
+- "{{'0'|human_to_bytes}}        == 0"
+- "{{'0.1'|human_to_bytes}}      == 0"
+- "{{'0.9'|human_to_bytes}}      == 1"
+- "{{'1'|human_to_bytes}}        == 1"
+- "{{'10.00 KB'|human_to_bytes}} == 10240"
+- "{{   '11 MB'|human_to_bytes}} == 11534336"
+- "{{  '1.1 GB'|human_to_bytes}} == 1181116006"
+- "{{'10.00 Kb'|human_to_bytes(isbits=True)}} == 10240"
+{% if loop.index is divisibleby(3) %}
+# for href, caption in [('index.html', 'Index'),
+('about.html', 'About')]:
+{{ super() }}
+<h1>{{ self.title() }}</h1>
+{{ super() }}
+{{ user.username|e }}
+the template, with the |safe filter
+<li>{{ user.username|e }}</li>
+{% for key, value in my_dict.iteritems() %}
+<dt>{{ key|e }}</dt>
+<dd>{{ value|e }}</dd>
+loop.index	The current iteration of the loop. (1 indexed)
+loop.index0	The current iteration of the loop. (0 indexed)
+loop.revindex	The number of iterations from the end of the loop (1 indexed)
+loop.revindex0	The number of iterations from the end of the loop (0 indexed)
+loop.changed(*val)	True if previously called with a different value (or not called at all).
+<li class="{{ loop.cycle('odd', 'even') }}">{{ row }}</li>
+<li>{{ user.username|e }}</li>
+<li>{{ user.username|e }}</li>
+<li><a href="{{ item.href|e }}">{{ item.title }}</a>
+<ul class="submenu">{{ loop(item.children) }}</ul>
+{% if loop.changed(entry.category) %}
+<li>{{ user.username|e }}</li>
+{% macro input(name, value='', type='text', size=20) -%}
+value|e }}" size="{{ size }}">
+<p>{{ input('username') }}</p>
+<p>{{ input('password', type='password') }}</p>
+This is true if the macro accepts extra positional arguments (i.e.: accesses the special varargs variable).
+{% macro render_dialog(title, class='dialog') -%}
+{{ caller() }}
+{% call render_dialog('Hello World') %}
+{% macro dump_users(users) -%}
+<li><p>{{ user.username|e }}</p>{{ caller(user) }}</li>
+{% call(user) dump_users(list_of_user) %}
+<dd>{{ user.realname|e }}</dd>
+{% set navigation = [('index.html', 'Index'), ('about.html', 'About')] %}
+{% set key, value = call_something() %}
+{% set ns = namespace(found=false) %}
+{% if item.check_something() %}
+{% set reply | wordwrap %}
+{% macro input(name, value='', type='text') -%}
+<input type="{{ type }}" value="{{ value|e }}" name="{{ name }}">
+{%- macro textarea(name, value='', rows=10, cols=40) -%}
+}}">{{ value|e }}</textarea>
+<dd>{{ forms.input('username') }}</dd>
+<dd>{{ forms.input('password', type='password') }}</dd>
+<p>{{ forms.textarea('comment') }}</p>
+<dd>{{ input_field('username') }}</dd>
+<dd>{{ input_field('password', type='password') }}</dd>
+<p>{{ textarea('comment') }}</p>
+{% for href, caption in [('index.html', 'Index'), ('about.html', 'About'),
+ ('downloads.html', 'Downloads')] %}
+(‘tuple’, ‘of’, ‘values’):
+negate a statement (see below).
+(expr)
+|
+{{ "Hello " ~ name ~ "!" }} would return (assuming name is set to 'John') Hello John!.
+()
+{{ post.render(user, full=true) }}.
+Get an attribute of an object. (See Variables)
+abs(number)
+attr(obj, name)
+batch(value, linecount, fill_with=None)
+{%- for row in items|batch(3, '&nbsp;') %}
+capitalize(s)
+center(value, width=80)
+default(value, default_value=u'', boolean=False)
+{{ my_variable|default('my_variable is not defined') }}
+{{ ''|default('the string was empty', true) }}
+dictsort(value, case_sensitive=False, by='key', reverse=False)
+{% for item in mydict|dictsort %}
+{% for item in mydict|dictsort(reverse=true) %}
+{% for item in mydict|dictsort(true) %}
+{% for item in mydict|dictsort(false, 'value') %}
+escape(s)
+filesizeformat(value, binary=False)
+first(seq)
+float(value, default=0.0)
+forceescape(value)
+format(value, *args, **kwargs)
+{{ "%s - %s"|format("Hello?", "Foo!") }}
+groupby(value, attribute)
+{% for group in persons|groupby('gender') %}
+{% for grouper, list in persons|groupby('gender') %}
+indent(s, width=4, first=False, blank=False, indentfirst=None)
+int(value, default=0, base=10)
+join(value, d=u'', attribute=None)
+{{ [1, 2, 3]|join('|') }}
+-> 1|2|3
+{{ [1, 2, 3]|join }}
+{{ users|join(', ', attribute='username') }}
+last(seq)
+length(object)
+list(value)
+lower(s)
+map()
+Users on this page: {{ users|map(attribute='username')|join(', ') }}
+Users on this page: {{ titles|map('lower')|join(', ') }}
+max(value, case_sensitive=False, attribute=None)
+{{ [1, 2, 3]|max }}
+min(value, case_sensitive=False, attribute=None)
+{{ [1, 2, 3]|min }}
+pprint(value, verbose=False)
+random(seq)
+reject()
+{{ numbers|reject("odd") }}
+rejectattr()
+{{ users|rejectattr("is_active") }}
+{{ users|rejectattr("email", "none") }}
+replace(s, old, new, count=None)
+{{ "Hello World"|replace("Hello", "Goodbye") }}
+{{ "aaaaargh"|replace("a", "d'oh, ", 2) }}
+reverse(value)
+round(value, precision=0, method='common')
+{{ 42.55|round }}
+{{ 42.55|round(1, 'floor') }}
+{{ 42.55|round|int }}
+safe(value)
+select()
+{{ numbers|select("odd") }}
+{{ numbers|select("odd") }}
+{{ numbers|select("divisibleby", 3) }}
+{{ numbers|select("lessthan", 42) }}
+{{ strings|select("equalto", "mystring") }}
+selectattr()
+{{ users|selectattr("is_active") }}
+{{ users|selectattr("email", "none") }}
+slice(value, slices, fill_with=None)
+{%- for column in items|slice(3) %}
+sort(value, reverse=False, case_sensitive=False, attribute=None)
+{% for item in iterable|sort %}
+{% for item in iterable|sort(attribute='date') %}
+string(object)
+striptags(value)
+sum(iterable, attribute=None, start=0)
+Total: {{ items|sum(attribute='price') }}
+title(s)
+tojson(value, indent=None)
+trim(value) # strip
+| trim() # strip
+truncate(s, length=255, killwords=False, end='...', leeway=None)
+{{ "foo bar baz qux"|truncate(9) }}
+{{ "foo bar baz qux"|truncate(9, True) }}
+{{ "foo bar baz qux"|truncate(11) }}
+{{ "foo bar baz qux"|truncate(11, False, '...', 0) }}
+unique(value, case_sensitive=False, attribute=None)
+{{ ['foo', 'bar', 'foobar', 'FooBar']|unique }}
+upper(s)
+urlencode(value)
+urlize(value, trim_url_limit=None, nofollow=False, target=None, rel=None)
+{{ mytext|urlize(40, true) }}
+{{ mytext|urlize(40, target='_blank') }}
+wordcount(s)
+wordwrap(s, width=79, break_long_words=True, wrapstring=None)
+xmlattr(d, autospace=True)
+'id': 'list-%d'|format(variable)}|xmlattr }}>
+callable(object)
+defined(value)
+divisibleby(value, num)
+eq(a, b)
+escaped(value)
+even(value)
+ge(a, b)
+gt(a, b)
+in(value, seq)
+iterable(value)
+le(a, b)
+lower(value)
+lt(a, b)
+mapping(value)
+ne(a, b)
+none(value)
+number(value)
+odd(value)
+sameas(value, other)
+sequence(value)
+string(value)
+undefined(value)
+Like defined() but the other way round.
+upper(value)
+range([start, ]stop[, step])
+{% for number in range(10 - users|count) %}
+lipsum(n=5, html=True, min=20, max=100)
+dict(**items)
+class cycler(*items)
+{% set row_class = cycler('odd', 'even') %}
+<li class="folder {{ row_class.next() }}">{{ folder|e }}</li>
+<li class="file {{ row_class.next() }}">{{ filename|e }}</li>
+reset()
+next()
+class joiner(sep=', ')
+{% set pipe = joiner("|") %}
+{% if categories %} {{ pipe() }}
+Categories: {{ categories|join(", ") }}
+{% if author %} {{ pipe() }}
+Author: {{ author() }}
+{% if can_edit %} {{ pipe() }}
+class namespace(...)
+{% set ns = namespace() %}
+{% set ns = namespace(found=false) %}
+{% if item.check_something() %}
+{% trans count=list|length %}
+{% trans ..., user_count=users|length %}...
+{{ _('Hello World!') }}
+{{ _('Hello %(user)s!')|format(user=user.username) }}
+{{ gettext('Hello World!') }}
+{{ gettext('Hello %(name)s!', name='World') }}
+{{ ngettext('%(num)d apple', '%(num)d apples', apples|count) }}
+{% do navigation.append('a string') %}
+Development (unstable)
+Jinja 2.10.x (stable)

@@ -326,3 +326,6 @@ http://vim.wikia.com/wiki/Learn_to_use_help
 :nmap  :nnoremap  :nunmap  :nmapclear    yes         -              -
 :vmap  :vnoremap  :vunmap  :vmapclear     -         yes             -
 :omap  :onoremap  :ounmap  :omapclear     -          -             yes
+
+# add-hoc reformat
+:'<,'>!bash -c 'cat - | while read i b; do printf "\%-30s \%s\n" $i "$b"; done'
