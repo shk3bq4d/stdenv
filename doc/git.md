@@ -460,7 +460,7 @@ if [ -z "$(git status --porcelain)" ]; # working directory clean                
 if [ -n "$(git status --porcelain)" ]; # uncommitted change in current directory https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
 
 
-git log --oneline $MAINREF..$MYREF | awk-print1.sh | tac | while read a; do git show --color-words $a; done # for
+git log --oneline $(git_current_branch)...$MYREF | awk-print1.sh | tac | while read a; do git show --color-words $a; done # for
 for i in $(git diff $REF --name-only); do git diff $REF -- $i; done # while
 
 git log --no-renames
@@ -493,3 +493,76 @@ git rev-parse         HEAD # current revision
 
 # git-crypt
 https://medium.com/faun/https-medium-com-mikhail-advani-secret-management-with-ansible-3bfdd92472ef
+
+# strategies
+## Recursive
+git merge -s recursive branch1 branch2
+This operates on two heads. Recursive is the default merge strategy when pulling or merging one branch. Additionally this can detect and handle merges involving renames, but currently cannot make use of detected copies. This is the default merge strategy when pulling or merging one branch.
+
+## Resolve
+git merge -s resolve branch1 branch2
+This can only resolve two heads using a 3-way merge algorithm. It tries to carefully detect cris-cross merge ambiguities and is considered generally safe and fast.
+
+## Octopus
+git merge -s octopus branch1 branch2 branch3 branchN
+The default merge strategy for more than two heads. When more than one branch is passed octopus is automatically engaged. If a merge has conflicts that need manual resolution octopus will refuse the merge attempt. It is primarily used for bundling similar feature branch heads together.
+
+## Ours
+git merge -s ours branch1 branch2 branchN
+The Ours strategy operates on multiple N number of branches. The output merge result is always that of the current branch HEAD. The "ours" term implies the preference effectively ignoring all changes from all other branches. It is intended to be used to combine history of similar feature branches.
+
+## Strategy Subtree
+git merge -s subtree branchA branchB
+This is an extension of the recursive strategy. When merging A and B, if B is a child subtree of A, B is first updated to reflect the tree structure of A, This update is also done to the common ancestor tree that is shared between A and B.
+
+Types of Git Merge Strategies
+Strategy Explicit Merges
+Explicit merges are the default merge type. The 'explicit' part is that they create a new merge commit. This alters the commit history and explicitly shows where a merge was executed. The merge commit content is also explicit in the fact that it shows which commits were the parents of the merge commit. Some teams avoid explicit merges because arguably the merge commits add "noise" to the history of the project.
+
+implicit merge via rebase or fast-forward merge
+Whereas explicit merges create a merge commit, implicit merges do not. An implicit merge takes a series of commits from a specified branch head and applies them to the top of a target branch. Implicit merges are triggered by rebase events, or fast forward merges. An implicit merge is an ad-hoc selection of commits from a specified branch.
+
+Squash on merge, generally without explicit merge
+Another type of implicit merge is a squash. A squash can be performed during an interactive rebase. A squash merge will take the commits from a target branch and combine or squash them in to one commit. This commit is then appended to the HEAD of the merge base branch. A squash is commonly used to keep a 'clean history' during a merge. The target merge branch can have a verbose history of frequent commits. When squashed and merged the target branches commit history then becomes a singular squashed 'branch commit'. This technique is useful with git workflows that utilize feature branches.
+
+Recursive Git Merge Strategy Options
+The 'recursive' strategy introduced above, has its own subset of additional operation options.
+
+## Recursive substrategy ours
+Not to be confused with the Ours merge strategy. This option conflicts to be auto-resolved cleanly by favoring the 'our' version. Changes from the 'theirs' side are automatically incorporated if they do not conflict.
+
+## Recursive substrategy theirs
+The opposite of the 'ours' strategy. the "theirs" option favors the foreign merging tree in conflict resolution.
+
+## Recursive substrategy patience
+This option spends extra time to avoid mis-merges on unimportant matching lines. This options is best used when branches to be merged have extremely diverged.
+
+## Recursive substrategy diff-algorithim
+This option allows specification of an explicit diff-algorithim. The diff-algorithims are shared with the git diff command.
+
+ignore-*
+
+    ignore-space-change
+    ignore-all-space
+    ignore-space-at-eol
+    ignore-cr-at-eol
+A set of options that target whitespace characters. Any line that matches the subset of the passed option will be ignored.
+
+## Recursive substrategy renormalize
+This option runs a check-out and check-in on all of the tree git trees while resolving a three-way merge. This option is intended to be used with merging branches with differing checkin/checkout states.
+
+## Recursive substrategy no-normalize
+Disables the renormalize option. This overrides the merge.renormalize configuration variable.
+
+## Recursive substrategy no-renames
+This option will ignore renamed files during the merge.
+
+## Recursive substrategy find-renames=n
+This is the default behavior. The recursive merge will honor file renames. The n parameter can be used to pass a threshold for rename similarity. The default n value is 100%.
+
+## Recursive substrategy subtree
+This option borrows from the `subtree` strategy. Where the strategy operates on two trees and modifies how to make them match on a shared ancestor, this option instead operates on the path metadata of the tree to make them match.
+
+
+# giant vimf6 removal restore git filter
+git revert --no-commit bf40f3df

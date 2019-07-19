@@ -192,7 +192,7 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'ansible' | regex_search('(foobar)') }} # will return empty if it cannot find a match
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
 
-```json
+```yaml
 - include: ....
     when: optional_file|exists # deprecated
     when: not optional_file|exists # deprecated
@@ -203,6 +203,18 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
   with_items:                    # implicit exists for include
     - myname.yml                 # implicit exists for include
 
+# -------------------------------# exists                               
+- stat:                          # exists
+    path: /var/log/secure        # exists
+  register: stat_secure          # exists
+- debug:                         # exists
+    msg: file exists             # exists
+  when: stat_secure.stat.exists  # exists
+# -------------------------------# exists                               
+```
+
+
+```json
 localhost | SUCCESS => {
     "ansible_facts": {
         "ansible_all_ipv4_addresses": [
@@ -1355,8 +1367,380 @@ all:
 ```
 
 # ansible.cfg
+https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
 [defaults]
 roles_path    = ../common/ansible/roles/
+action_warnings                          True                           By default Ansible will issue a warning when received from a task action (module or action plugin) These warnings can be silenced by adjusting this setting to False.
+agnostic_become_prompt                   True                           Display an agnostic become prompt instead of displaying a prompt containing the command line supplied become method
+allow_world_readable_tmpfiles            False                          This makes the temporary files created on the machine to be world readable and will issue a warning instead of failing the task. It is useful when becoming an unprivileged user.
+ansible_connection_path                  None                           Specify where to look for the ansible-connection script. This location will be checked before searching $PATH. If null, ansible will start with the same directory as the ansible script.
+ansible_cow_path                         None                           Specify a custom cowsay path or swap in your cowsay implementation of choice
+ansible_cow_selection                    default                        This allows you to chose a specific cowsay stencil for the banners or use ‘random’ to cycle through them.
+ansible_cow_whitelist                    [‘bud-frogs’,              ‘bunny’, ‘cheese’, ‘daemon’, ‘default’, ‘dragon’, ‘elephant-in-snake’, ‘elephant’, ‘eyes’, ‘hellokitty’, ‘kitty’, ‘luke-koala’, ‘meow’, ‘milk’, ‘moofasa’, ‘moose’, ‘ren’, ‘sheep’, ‘small’, ‘stegosaurus’, ‘stimpy’, ‘supermilker’, ‘three-eyes’, ‘turkey’, ‘turtle’, ‘tux’, ‘udder’, ‘vader-koala’, ‘vader’, ‘www’] White list of cowsay templates that are ‘safe’ to use, set to empty list if you want to enable all installed templates.
+ansible_force_color                      False                          This options forces color mode even when running without a TTY or the “nocolor” setting is True.
+ansible_nocolor                          False                          This setting allows suppressing colorizing output, which is used to give a better indication of failure and status information.
+ansible_nocows                           False                          If you have cowsay installed but want to avoid the ‘cows’ (why????), use this.
+ansible_pipelining                       False                          Pipelining, if supported by the connection plugin, reduces the number of network operations required to execute a module on the remote server, by executing many Ansible modules without actual file transfer. This can result in a very significant performance improvement when enabled. However this conflicts with privilege escalation (become). For example, when using ‘sudo:’ operations you must first disable ‘requiretty’ in /etc/sudoers on all managed hosts, which is why it is disabled by default. This options is disabled if ANSIBLE_KEEP_REMOTE_FILES is enabled.
+ansible_ssh_args                         -C                             -o ControlMaster=auto -o ControlPersist=60s If set, this will override the Ansible default ssh arguments. In particular, users may wish to raise the ControlPersist time to encourage performance. A value of 30 minutes may be appropriate. Be aware that if -o ControlPath is set in ssh_args, the control path setting is not used.
+ansible_ssh_control_path                 None                           This is the location to save ssh’s ControlPath sockets, it uses ssh’s variable substitution. Since 2.3, if null, ansible will generate a unique hash. Use %(directory)s to indicate where to use the control dir path setting. Before 2.3 it defaulted to control_path=%(directory)s/ansible-ssh-%%h-%%p-%%r. Be aware that this setting is ignored if -o ControlPath is set in ssh args.
+ansible_ssh_control_path_dir             ~/.ansible/cp                  This sets the directory to use for ssh control path if the control path setting is null. Also, provides the %(directory)s variable for the control path setting.
+ansible_ssh_executable                   ssh                            This defines the location of the ssh binary. It defaults to ssh which will use the first ssh binary available in $PATH. This option is usually not required, it might be useful when access to system ssh is restricted, or when using ssh wrappers to connect to remote hosts.
+ansible_ssh_retries                      0                              Number of attempts to establish a connection before we give up and report the host as ‘UNREACHABLE’
+any_errors_fatal                         False                          Sets the default value for the any_errors_fatal keyword, if True, Task failures will be considered fatal errors.
+become_allow_same_user                   False                          This setting controls if become is skipped when remote user and become user are the same. I.E root sudo to root.
+become_plugin_path                       ~/.ansible/plugins/become:/usr/share/ansible/plugins/become Colon separated paths in which Ansible will search for Become Plugins.
+cache_plugin                             memory                         Chooses which cache plugin to use, the default ‘memory’ is ephimeral.
+cache_plugin_connection                  None                           Defines connection or path information for the cache plugin
+cache_plugin_prefix                      ansible_facts                  Prefix to use for cache plugin files/tables
+cache_plugin_timeout                     86400                          Expiration timeout for the cache plugin data
+collections_paths                        ~/.ansible/collections:/usr/share/ansible/collections Defines the color to use on ‘Changed’ task status
+color_changed                            yellow                         Defines the default color to use for ansible-console
+color_console_prompt                     white                          Defines the color to use when emitting debug messages
+color_debug                              dark                           gray Defines the color to use when emitting deprecation messages
+color_deprecate                          purple                         Defines the color to use when showing added lines in diffs
+color_diff_add                           green                          Defines the color to use when showing diffs
+color_diff_lines                         cyan                           Defines the color to use when showing removed lines in diffs
+color_diff_remove                        red                            Defines the color to use when emitting error messages
+color_error                              red                            Defines the color to use for highlighting
+color_highlight                          white                          Defines the color to use when showing ‘OK’ task status
+color_ok                                 green                          Defines the color to use when showing ‘Skipped’ task status
+color_skip                               cyan                           Defines the color to use on ‘Unreachable’ status
+color_unreachable                        bright                         red Defines the color to use when emitting verbose messages. i.e those that show with ‘-v’s.
+color_verbose                            blue                           Defines the color to use when emitting warning messages
+color_warn                               bright                         purple By default Ansible will issue a warning when the shell or command module is used and the command appears to be similar to an existing Ansible module. These warnings can be silenced by adjusting this setting to False. You can also control this at the task level with the module option warn.
+command_warnings                         True                           With this setting on (True), running conditional evaluation ‘var’ is treated differently than ‘var.subkey’ as the first is evaluated directly while the second goes through the Jinja2 parser. But ‘false’ strings in ‘var’ get evaluated as booleans. With this setting off they both evaluate the same but in cases in which ‘var’ was ‘false’ (a string) it won’t get evaluated as a boolean anymore. Currently this setting defaults to ‘True’ but will soon change to ‘False’ and the setting itself will be removed in the future. Expect the default to change in version 2.10 and that this setting eventually will be deprecated after 2.12
+conditional_bare_vars                    True                           Which modules to run during a play’s fact gathering stage based on connection
+connection_facts_modules                 {‘junos’:                  ‘junos_facts’, ‘eos’: ‘eos_facts’, ‘frr’: ‘frr_facts’, ‘iosxr’: ‘iosxr_facts’, ‘nxos’: ‘nxos_facts’, ‘ios’: ‘ios_facts’, ‘vyos’: ‘vyos_facts’} Colon separated paths in which Ansible will search for Action Plugins.
+default_action_plugin_path               ~/.ansible/plugins/action:/usr/share/ansible/plugins/action When enabled, this option allows lookup plugins (whether used in variables as {{lookup('foo')}} or as a loop as with_foo) to return data that is not marked ‘unsafe’. By default, such data is marked as unsafe to prevent the templating engine from evaluating any jinja2 templating language, as this could represent a security risk. This option is provided to allow for backwards-compatibility, however users should first consider adding allow_unsafe=True to any lookups which may be expected to contain data which may be run through the templating engine late
+default_allow_unsafe_lookups             False                          This controls whether an Ansible playbook should prompt for a login password. If using SSH keys for authentication, you probably do not needed to change this setting.
+default_ask_pass                         False                          This controls whether an Ansible playbook should prompt for a su password.
+default_ask_su_pass                      False                          This controls whether an Ansible playbook should prompt for a sudo password.
+default_ask_sudo_pass                    False                          This controls whether an Ansible playbook should prompt for a vault password.
+default_ask_vault_pass                   False                          Toggles the use of privilege escalation, allowing you to ‘become’ another user after login.
+default_become                           False                          Toggle to prompt for privilege escalation password.
+default_become_ask_pass                  False                          executable to use for privilege escalation, otherwise Ansible will depend on PATH
+default_become_exe                       None                           Flags to pass to the privilege escalation executable.
+default_become_flags                     Description:                   escalation method to use when become is enabled.
+default_become_method                    sudo                           The user your login/remote user ‘becomes’ when using privilege escalation, most systems will use ‘root’ when no user is specified.
+default_become_user                      root                           Colon separated paths in which Ansible will search for Cache Plugins.
+default_cache_plugin_path                ~/.ansible/plugins/cache:/usr/share/ansible/plugins/cache Whitelist of callable methods to be made available to template evaluation
+default_callable_whitelist               []                             Colon separated paths in which Ansible will search for Callback Plugins.
+default_callback_plugin_path             ~/.ansible/plugins/callback:/usr/share/ansible/plugins/callback List of whitelisted callbacks, not all callbacks need whitelisting, but many of those shipped with Ansible do as we don’t want them activated by default.
+default_callback_whitelist               []                             Colon separated paths in which Ansible will search for Cliconf Plugins.
+default_cliconf_plugin_path              ~/.ansible/plugins/cliconf:/usr/share/ansible/plugins/cliconf Colon separated paths in which Ansible will search for Connection Plugins.
+default_connection_plugin_path           ~/.ansible/plugins/connection:/usr/share/ansible/plugins/connection Toggles debug output in Ansible. This is very verbose and can hinder multiprocessing. Debug output can also include secret information despite no_log settings being enabled, which means debug mode should not be used in production.
+default_debug                            False                          This indicates the command to use to spawn a shell under for Ansible’s execution needs on a target. Users may need to change this in rare instances when shell usage is constrained, but in most cases it may be left as is.
+default_executable                       /bin/sh                        This option allows you to globally configure a custom path for ‘local_facts’ for the implied M(setup) task when using fact gathering. If not set, it will fallback to the default from the M(setup) module: /etc/ansible/facts.d. This does not affect user defined tasks that use the M(setup) module.
+default_fact_path                        None                           Colon separated paths in which Ansible will search for Jinja2 Filter Plugins.
+default_filter_plugin_path               ~/.ansible/plugins/filter:/usr/share/ansible/plugins/filter This option controls if notified handlers run on a host even if a failure occurs on that host. When false, the handlers will not run if a failure has occurred on a host. This can also be set per play or on the command line. See Handlers and Failure for more details.
+default_force_handlers                   False                          Maximum number of forks Ansible will use to execute tasks on target hosts.
+default_forks                            5                              Set the gather_subset option for the M(setup) task in the implicit fact gathering. See the module documentation for specifics. It does not apply to user defined M(setup) tasks.
+default_gather_subset                    [‘all’]                    Set the timeout in seconds for the implicit fact gathering. It does not apply to user defined M(setup) tasks.
+default_gather_timeout                   10                             This setting controls the default policy of fact gathering (facts discovered about remote systems). When ‘implicit’ (the default), the cache plugin will be ignored and facts will be gathered per play unless ‘gather_facts: False’ is set. When ‘explicit’ the inverse is true, facts will not be gathered unless directly requested in the play. The ‘smart’ value means each new host that has no facts discovered will be scanned, but if the same host is addressed in multiple plays it will not be contacted again in the playbook run. This option can be useful for those wishing to save fact gathering time. Both ‘smart’ and ‘explicit’ will use the cache plugin.
+default_gathering                        implicit                       Since 2.0 M(include) can be ‘dynamic’, this setting (if True) forces that if the include appears in a handlers section to be ‘static’.
+default_handler_includes_static          False                          This setting controls how variables merge in Ansible. By default Ansible will override variables in specific precedence orders, as described in Variables. When a variable of higher precedence wins, it will replace the other value. Some users prefer that variables that are hashes (aka ‘dictionaries’ in Python terms) are merged. This setting is called ‘merge’. This is not the default behavior and it does not affect variables whose values are scalars (integers, strings) or arrays. We generally recommend not using this setting unless you think you have an absolute need for it, and playbooks in the official examples repos do not use this setting In version 2.0 a combine filter was added to allow doing this for a particular variable (described in Filters).
+default_hash_behaviour                   replace                        Comma separated list of Ansible inventory sources
+default_host_list                        /etc/ansible/hosts             Colon separated paths in which Ansible will search for HttpApi Plugins.
+default_httpapi_plugin_path              ~/.ansible/plugins/httpapi:/usr/share/ansible/plugins/httpapi This sets the interval (in seconds) of Ansible internal processes polling each other. Lower values improve performance with large playbooks at the expense of extra CPU load. Higher values are more suitable for Ansible usage in automation scenarios, when UI responsiveness is not required but CPU usage might be a concern. The default corresponds to the value hardcoded in Ansible <= 2.1
+default_internal_poll_interval           0.001                          Colon separated paths in which Ansible will search for Inventory Plugins.
+default_inventory_plugin_path            ~/.ansible/plugins/inventory:/usr/share/ansible/plugins/inventory This is a developer-specific feature that allows enabling additional Jinja2 extensions. See the Jinja2 documentation for details. If you do not know what these do, you probably don’t need to change this setting :)
+default_jinja2_extensions                []                             This option preserves variable types during template operations. This requires Jinja2 >= 2.10.
+default_jinja2_native                    False                          Enables/disables the cleaning up of the temporary files Ansible used to execute the tasks on the remote. If this option is enabled it will disable ANSIBLE_PIPELINING.
+default_keep_remote_files                False                          This setting causes libvirt to connect to lxc containers by passing –noseclabel to virsh. This is necessary when running on systems which do not have SELinux.
+default_libvirt_lxc_noseclabel           False                          Controls whether callback plugins are loaded when running /usr/bin/ansible. This may be used to log activity from the command line, send notifications, and so on. Callback plugins are always loaded for ansible-playbook.
+default_load_callback_plugins            False                          Temporary directory for Ansible to use on the controller.
+default_local_tmp                        ~/.ansible/tmp                 List of logger names to filter out of the log file
+default_log_filter                       []                             File to which Ansible will log on the controller. When empty logging is disabled.
+default_log_path                         None                           Colon separated paths in which Ansible will search for Lookup Plugins.
+default_lookup_plugin_path               ~/.ansible/plugins/lookup:/usr/share/ansible/plugins/lookup Sets the macro for the ‘ansible_managed’ variable available for M(template) and M(win_template) modules. This is only relevant for those two modules.
+default_managed_str                      Ansible                        managed This sets the default arguments to pass to the ansible adhoc binary if no -a is specified.
+default_module_args                      Description:                   scheme to use when transferring Python modules to the target.
+default_module_compression               ZIP_DEFLATED                   Language locale setting to use for modules when they execute on the target. If empty it tries to set itself to the LANG environment variable on the controller. This is only used if DEFAULT_MODULE_SET_LOCALE is set to true
+default_module_lang                      {{                             CONTROLLER_LANG }} Module to use with the ansible AdHoc command, if none is specified via -m.
+default_module_name                      command                        Colon separated paths in which Ansible will search for Modules.
+default_module_path                      ~/.ansible/plugins/modules:/usr/share/ansible/plugins/modules Controls if we set locale for modules when executing on the target.
+default_module_set_locale                False                          Colon separated paths in which Ansible will search for Module utils files, which are shared by modules.
+default_module_utils_path                ~/.ansible/plugins/module_utils:/usr/share/ansible/plugins/module_utils Colon separated paths in which Ansible will search for Netconf Plugins.
+default_netconf_plugin_path              ~/.ansible/plugins/netconf:/usr/share/ansible/plugins/netconf Toggle Ansible’s display and logging of task details, mainly used to avoid security disclosures.
+default_no_log                           False                          Toggle Ansible logging to syslog on the target when it executes tasks.
+default_no_target_syslog                 False                          What templating should return as a ‘null’ value. When not set it will let Jinja2 decide.
+default_null_representation              None                           For asynchronous tasks in Ansible (covered in Asynchronous Actions and Polling), this is how often to check back on the status of those tasks when an explicit poll interval is not supplied. The default is a reasonably moderate 15 seconds which is a tradeoff between checking in frequently and providing a quick turnaround when something may have completed.
+default_poll_interval                    15                             Option for connections using a certificate or key file to authenticate, rather than an agent or passwords, you can set the default value here to avoid re-specifying –private-key with every invocation.
+default_private_key_file                 None                           Makes role variables inaccessible from other roles. This was introduced as a way to reset role variables to default values if a role is used more than once in a playbook.
+default_private_role_vars                False                          Port to use in remote connections, when blank it will use the connection plugin default.
+default_remote_port                      None                           Sets the login user for the target machines When blank it uses the connection plugin’s default, normally the user currently executing Ansible.
+default_remote_user                      None                           Colon separated paths in which Ansible will search for Roles.
+default_roles_path                       ~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles Preferred method to use when transferring files over ssh. When set to smart, Ansible will try them until one succeeds or they all fail. If set to True, it will force ‘scp’, if False it will use ‘sftp’.
+default_scp_if_ssh                       smart                          Some filesystems do not support safe operations and/or return inconsistent errors, this setting makes Ansible ‘tolerate’ those in the list w/o causing fatal errors. Data corruption may occur and writes are not always verified when a filesystem is in the list.
+default_selinux_special_fs               fuse,                          nfs, vboxsf, ramfs, 9p Ansible can optimise actions that call modules that support list parameters when using with_ looping. Instead of calling the module once for each item, the module is called once with the full list. The default value for this setting is only for certain package managers, but it can be used for any module. Currently, this is only supported for modules that have a name or pkg parameter, and only when the item is the only thing being passed to the parameter.
+default_sftp_batch_mode                  True                           unused?
+default_squash_actions                   apk,                           apt, dnf, homebrew, openbsd_pkg, pacman, pip, pkgng, yum, zypper Set the main callback used to display Ansible output, you can only have one at a time. You can have many other callbacks, but just one can be in charge of stdout.
+default_ssh_transfer_method              None                           Set the default strategy used for plays.
+default_stdout_callback                  default                        Colon separated paths in which Ansible will search for Strategy Plugins.
+default_strategy                         linear                         Toggle the use of “su” for tasks.
+default_strategy_plugin_path             ~/.ansible/plugins/strategy:/usr/share/ansible/plugins/strategy specify an “su” executable, otherwise it relies on PATH.
+default_su                               False                          Flags to pass to su
+default_su_exe                           su                             User you become when using “su”, leaving it blank will use the default configured on the target (normally root)
+default_su_flags                         Description:                   facility to use when Ansible logs to the remote target
+default_su_user                          None                           The include tasks can be static or dynamic, this toggles the default expected behaviour if autodetection fails and it is not explicitly set in task.
+default_syslog_facility                  LOG_USER                       Colon separated paths in which Ansible will search for Terminal Plugins.
+default_task_includes_static             False                          Colon separated paths in which Ansible will search for Jinja2 Test Plugins.
+default_terminal_plugin_path             ~/.ansible/plugins/terminal:/usr/share/ansible/plugins/terminal This is the default timeout for connection plugins to use.
+default_test_plugin_path                 ~/.ansible/plugins/test:/usr/share/ansible/plugins/test Default connection plugin to use, the ‘smart’ option will toggle between ‘ssh’ and ‘paramiko’ depending on controller OS and ssh versions
+default_timeout                          10                             When True, this causes ansible templating to fail steps that reference variable names that are likely typoed. Otherwise, any ‘{{ template_expression }}’ that contains undefined variables will be rendered in a template or ansible action line exactly as written.
+default_transport                        smart                          Colon separated paths in which Ansible will search for Vars Plugins.
+default_undefined_var_behavior           True                           The vault_id to use for encrypting by default. If multiple vault_ids are provided, this specifies which to use for encryption. The –encrypt-vault-id cli option overrides the configured value.
+default_vars_plugin_path                 ~/.ansible/plugins/vars:/usr/share/ansible/plugins/vars If true, decrypting vaults with a vault id will only try the password from the matching vault-id
+default_vault_encrypt_identity           None                           The label to use for the default vault id label in cases where a vault id label is not provided
+default_vault_id_match                   False                          A list of vault-ids to use by default. Equivalent to multiple –vault-id args. Vault-ids are tried in order.
+default_vault_identity                   default                        The vault password file to use. Equivalent to –vault-password-file or –vault-id
+default_vault_identity_list              []                             Sets the default verbosity, equivalent to the number of -v passed in the command line.
+default_vault_password_file              None                           Toggle to control the showing of deprecation warnings
+default_verbosity                        0                              Configuration toggle to tell modules to show differences when in ‘changed’ status, equivalent to --diff.
+deprecation_warnings                     True                           How many lines of context to show when displaying the differences between files.
+diff_always                              False                          Normally ansible-playbook will print a header for each task that is run. These headers will contain the name: field from the task if you specified one. If you didn’t then ansible-playbook uses the task’s action to help you tell which task is presently running. Sometimes you run many of the same action and so you want more information about the task to differentiate it from others of the same action. If you set this variable to True in the config then ansible-playbook will also include the task’s arguments in the header. This setting defaults to False because there is a chance that you have sensitive values in your parameters and you do not want those to be printed. If you set this to True you should be sure that you have secured your environment’s stdout (no one can shoulder surf your screen and you aren’t saving stdout to an insecure file) or made sure that all of your playbooks explicitly added the no_log: True parameter to tasks which have sensitive values See How do I keep secret data in my playbook? for more information.
+diff_context                             3                              Toggle to control displaying skipped task/host entries in a task in the default callback
+display_args_to_stdout                   False                          Colon separated paths in which Ansible will search for Documentation Fragments Plugins.
+display_skipped_hosts                    True                           Root docsite URL used to generate docs URLs in warning/error text; must be an absolute URL with valid scheme and trailing slash.
+doc_fragment_plugin_path                 ~/.ansible/plugins/doc_fragments:/usr/share/ansible/plugins/doc_fragments Whether or not to enable the task debugger, this previously was done as a strategy plugin. Now all strategy plugins can inherit this behavior. The debugger defaults to activating when a task is failed on unreachable. Use the debugger keyword for more flexibility.
+docsite_root_url                         https://docs.ansible.com/ansible/ Toggle to allow missing handlers to become a warning instead of an error when notifying.
+enable_task_debugger                     False                          Which modules to run during a play’s fact gathering stage, using the default of ‘smart’ will try to figure it out based on connection type.
+error_on_missing_handler                 True                           If set to yes, ansible-galaxy will not validate TLS certificates. This can be useful for testing against a server with a self-signed certificate.
+facts_modules                            [‘smart’]                  Role skeleton directory to use as a template for the init action in ansible-galaxy, same as --role-skeleton.
+galaxy_ignore_certs                      False                          patterns of files to ignore inside a galaxy role skeleton directory
+galaxy_role_skeleton                     None                           URL to prepend when roles don’t specify the full URI, assume they are referencing this server as the source.
+galaxy_role_skeleton_ignore              [‘^.git$’,                 ‘^.*/.git_keep$’] GitHub personal access token
+galaxy_server                            https://galaxy.ansible.com     Set this to “False” if you want to avoid host key checking by the underlying tools Ansible uses to connect to the host
+galaxy_token                             None                           This setting changes the behaviour of mismatched host patterns, it allows you to force a fatal error, a warning or just ignore it
+host_key_checking                        True                           Facts are available inside the ansible_facts variable, this setting also pushes them as their own vars in the main namespace. Unlike inside the ansible_facts dictionary, these will have an ansible_ prefix.
+host_pattern_mismatch                    warning                        Path to the Python interpreter to be used for module execution on remote targets, or an automatic discovery mode. Supported discovery modes are auto, auto_silent, and auto_legacy (the default). All discovery modes employ a lookup table to use the included system Python (on distributions known to include one), falling back to a fixed ordered list of well-known Python interpreter locations if a platform-specific default is not available. The fallback behavior will issue a warning that the interpreter should be set explicitly (since interpreters installed later may change which one is used). This warning behavior can be disabled by setting auto_silent. The default value of auto_legacy provides all the same behavior, but for backwards-compatibility with older Ansible releases that always defaulted to /usr/bin/python, will use that interpreter if present (and issue a warning that the default behavior will change to that of auto in a future Ansible release.
+inject_facts_as_vars                     True                           If ‘false’, invalid attributes for a task will result in warnings instead of errors
+interpreter_python                       auto_legacy                    If ‘true’, it is a fatal error when any given inventory source cannot be successfully parsed by any available inventory plugin; otherwise, this situation only attracts a warning.
+interpreter_python_distro_map            {‘centos’:                 {‘8’: ‘/usr/libexec/platform-python’, ‘6’: ‘/usr/bin/python’}, ‘rhel’: {‘8’: ‘/usr/libexec/platform-python’, ‘6’: ‘/usr/bin/python’}, ‘fedora’: {‘23’: ‘/usr/bin/python3’}, ‘redhat’: {‘8’: ‘/usr/libexec/platform-python’, ‘6’: ‘/usr/bin/python’}, ‘ubuntu’: {‘14’: ‘/usr/bin/python’, ‘16’: ‘/usr/bin/python3’}} Toggle to turn on inventory caching
+interpreter_python_fallback              [‘/usr/bin/python’,        ‘python3.7’, ‘python3.6’, ‘python3.5’, ‘python2.7’, ‘python2.6’, ‘/usr/libexec/platform-python’, ‘/usr/bin/python3’, ‘python’] The plugin for caching inventory. If INVENTORY_CACHE_PLUGIN is not provided CACHE_PLUGIN can be used instead.
+invalid_task_attribute_failed            True                           The inventory cache connection. If INVENTORY_CACHE_PLUGIN_CONNECTION is not provided CACHE_PLUGIN_CONNECTION can be used instead.
+inventory_any_unparsed_is_failed         False                          The table prefix for the cache plugin. If INVENTORY_CACHE_PLUGIN_PREFIX is not provided CACHE_PLUGIN_PREFIX can be used instead.
+inventory_cache_enabled                  False                          Expiration timeout for the inventory cache plugin data. If INVENTORY_CACHE_TIMEOUT is not provided CACHE_TIMEOUT can be used instead.
+inventory_cache_plugin                   Description:                   of enabled inventory plugins, it also determines the order in which they are used.
+inventory_cache_plugin_connection        Description:                   if ansible-inventory will accurately reflect Ansible’s view into inventory or its optimized for exporting.
+inventory_cache_plugin_prefix            ansible_facts                  List of extensions to ignore when using a directory as an inventory source
+inventory_cache_timeout                  3600                           List of patterns to ignore when using a directory as an inventory source
+inventory_enabled                        [‘host_list’,              ‘script’, ‘auto’, ‘yaml’, ‘ini’, ‘toml’] If ‘true’ it is a fatal error if every single potential inventory source fails to parse, otherwise this situation will only attract a warning.
+inventory_export                         False                          By default Ansible will issue a warning when there are no hosts in the inventory. These warnings can be silenced by adjusting this setting to False.
+inventory_ignore_exts                    {{(BLACKLIST_EXTS              + ( ‘.orig’, ‘.ini’, ‘.cfg’, ‘.retry’))}} Maximum size of files to be considered for diff display
+inventory_ignore_patterns                []                             This variable is used to enable bastion/jump host with netconf connection. If set to True the bastion/jump host ssh settings should be present in ~/.ssh/config file, alternatively it can be set to custom ssh configuration file path to read the bastion/jump host settings.
+inventory_unparsed_is_failed             False                          Previouslly Ansible would only clear some of the plugin loading caches when loading new roles, this led to some behaviours in which a plugin loaded in prevoius plays would be unexpectedly ‘sticky’. This setting allows to return to that behaviour.
+localhost_warning                        True                           This controls the amount of time to wait for response from remote device before timing out presistent connection.
+max_file_size_for_diff                   104448                         This controls the retry timeout for presistent connection to connect to the local domain socket.
+netconf_ssh_config                       None                           This controls how long the persistent connection will remain idle before it is destroyed.
+network_group_modules                    [‘eos’,                    ‘nxos’, ‘ios’, ‘iosxr’, ‘junos’, ‘enos’, ‘ce’, ‘vyos’, ‘sros’, ‘dellos9’, ‘dellos10’, ‘dellos6’, ‘asa’, ‘aruba’, ‘aireos’, ‘bigip’, ‘ironware’, ‘onyx’, ‘netconf’] Path to socket to be used by the connection persistence system.
+old_plugin_cache_clearing                False                          This sets which playbook dirs will be used as a root to process vars plugins, which includes finding host_vars/group_vars The top option follows the traditional behaviour of using the top playbook in the chain to find the root directory. The bottom option follows the 2.4.0 behaviour of using the current playbook to find the root directory. The all option examines from the first parent to the current playbook.
+paramiko_host_key_auto_add               False                          A path to configuration for filtering which plugins installed on the system are allowed to be used. See Plugin Filter Configuration for details of the filter file’s format. The default is /etc/ansible/plugin_filters.yml
+paramiko_look_for_keys                   True                           Attempts to set RLIMIT_NOFILE soft limit to the specified value when executing Python modules (can speed up subprocess usage on Python 2.x. See https://bugs.python.org/issue11284). The value will be limited by the existing hard limit. Default value of 0 does not attempt to adjust existing system-defined limits.
+persistent_command_timeout               30                             This controls whether a failed Ansible playbook should create a .retry file.
+persistent_connect_retry_timeout         15                             This sets the path in which Ansible will save .retry files when a playbook fails and retry files are enabled.
+persistent_connect_timeout               30                             This adds the custom stats set via the set_stats plugin to the default output
+persistent_control_path_dir              ~/.ansible/pc                  Action to take when a module parameter value is converted to a string (this does not affect variables). For string parameters, values such as ‘1.00’, “[‘a’, ‘b’,]”, and ‘yes’, ‘y’, etc. will be converted by the YAML parser unless fully quoted. Valid options are ‘error’, ‘warn’, and ‘ignore’. Since 2.8, this option defaults to ‘warn’ but will change to ‘error’ in 2.12.
+playbook_vars_root                       top                            This list of filters avoids ‘type conversion’ when templating variables Useful when you want to avoid conversion into lists or dictionaries for JSON strings, for example.
+plugin_filters_cfg                       None                           Allows disabling of warnings related to potential issues on the system running ansible itself (not on the managed hosts) These may include warnings about 3rd party packages or other conditions that should be resolved if possible.
+python_module_rlimit_nofile              0                              default list of tags to run in your plays, Skip Tags has precedence.
+retry_files_enabled                      False                          default list of tags to skip in your plays, has precedence over Run Tags
+retry_files_save_path                    None                           This option defines whether the task debugger will be invoked on a failed task when ignore_errors=True is specified. True specifies that the debugger will honor ignore_errors, False will not honor ignore_errors.
+show_custom_stats                        False                          Make ansible transform invalid characters in group names supplied by inventory sources. If ‘never’ it will allow for the group name but warn about the issue. When ‘always’ it will replace any invalid charachters with ‘_’ (underscore) and warn the user When ‘silently’, it does the same as ‘always’ sans the warnings.
+string_conversion_action                 warn                           Toggles the use of persistence for connections.
+string_type_filters [‘string’, ‘to_json’, ‘to_nice_json’, ‘to_yaml’, ‘ppretty’, ‘json’] Allows to change the group variable precedence merge order.
+system_warnings True Force ‘verbose’ option to use stderr instead of stdout
+tags_run [] Check all of these extensions when looking for ‘variable’ files which should be YAML or JSON or vaulted versions of these. This affects vars_files, include_vars, inventory and vars plugins among others.
+tags_skip []
+
+task_debugger_ignore_errors               boolean
+transform_invalid_group_chars             string
+use_persistent_connections                boolean
+variable_precedence                       list
+verbose_to_stderr                         bool
+yaml_filename_extensions                  list
+ansible_config                            the default ansible config file
+ansible_connection_path                   where to look for the ansible-connection script. This location will be checked before searching $PATH.If null, ansible will start with the same directory as the ansible script.
+ansible_gather_subset                     the gather_subset option for the M(setup) task in the implicit fact gathering. See the module documentation for specifics.It does not apply to user defined M(setup) tasks.
+ansible_inventory_cache_timeout           timeout for the inventory cache plugin data. If INVENTORY_CACHE_TIMEOUT is not provided CACHE_TIMEOUT can be used instead.
+display_skipped_hosts                     to control displaying skipped task/host entries in a task in the default callback
+ansible_display_skipped_hosts             to control displaying skipped task/host entries in a task in the default callback
+ansible_persistent_connect_retry_timeout  controls the retry timeout for presistent connection to connect to the local domain socket.
+ansible_diff_context                      many lines of context to show when displaying the differences between files.
+ansible_cow_path                          a custom cowsay path or swap in your cowsay implementation of choice
+ansible_test_plugins                      separated paths in which Ansible will search for Jinja2 Test Plugins.
+ansible_inventory_enabled                 of enabled inventory plugins, it also determines the order in which they are used.
+ansible_galaxy_role_skeleton_ignore       of files to ignore inside a galaxy role skeleton directory
+ansible_pipelining                        if supported by the connection plugin, reduces the number of network operations required to execute a module on the remote server, by executing many Ansible modules without actual file transfer.This can result in a very significant performance improvement when enabled.However this conflicts with privilege escalation (become). For example, when using ‘sudo:’ operations you must first disable ‘requiretty’ in /etc/sudoers on all managed hosts, which is why it is disabled by default.This options is disabled if ANSIBLE_KEEP_REMOTE_FILES is enabled.
+ansible_ssh_pipelining                    if supported by the connection plugin, reduces the number of network operations required to execute a module on the remote server, by executing many Ansible modules without actual file transfer.This can result in a very significant performance improvement when enabled.However this conflicts with privilege escalation (become). For example, when using ‘sudo:’ operations you must first disable ‘requiretty’ in /etc/sudoers on all managed hosts, which is why it is disabled by default.This options is disabled if ANSIBLE_KEEP_REMOTE_FILES is enabled.
+ansible_become_method                     escalation method to use when become is enabled.
+ansible_host_key_checking                 this to “False” if you want to avoid host key checking by the underlying tools Ansible uses to connect to the host
+ansible_ask_su_pass                       controls whether an Ansible playbook should prompt for a su password.
+ansible_su_user                           you become when using “su”, leaving it blank will use the default configured on the target (normally root)
+ansible_callable_whitelist                of callable methods to be made available to template evaluation
+ansible_color_verbose                     the color to use when emitting verbose messages. i.e those that show with ‘-v’s.
+ansible_gathering                         setting controls the default policy of fact gathering (facts discovered about remote systems).When ‘implicit’ (the default), the cache plugin will be ignored and facts will be gathered per play unless ‘gather_facts: False’ is set.When ‘explicit’ the inverse is true, facts will not be gathered unless directly requested in the play.The ‘smart’ value means each new host that has no facts discovered will be scanned, but if the same host is addressed in multiple plays it will not be contacted again in the playbook run.This option can be useful for those wishing to save fact gathering time. Both ‘smart’ and ‘explicit’ will use the cache plugin.
+ansible_connection_facts_modules          modules to run during a play’s fact gathering stage based on connection
+ansible_timeout                           is the default timeout for connection plugins to use.
+ansible_scp_if_ssh                        method to use when transferring files over ssh.When set to smart, Ansible will try them until one succeeds or they all fail.If set to True, it will force ‘scp’, if False it will use ‘sftp’.
+ansible_nocows                            you have cowsay installed but want to avoid the ‘cows’ (why????), use this.
+ansible_host_pattern_mismatch             setting changes the behaviour of mismatched host patterns, it allows you to force a fatal error, a warning or just ignore it
+ansible_inventory_ignore_regex            of patterns to ignore when using a directory as an inventory source
+ansible_no_log                            Ansible’s display and logging of task details, mainly used to avoid security disclosures.
+ansible_max_diff_size                     size of files to be considered for diff display
+ansible_handler_includes_static           2.0 M(include) can be ‘dynamic’, this setting (if True) forces that if the include appears in a handlers section to be ‘static’.
+ansible_keep_remote_files                 the cleaning up of the temporary files Ansible used to execute the tasks on the remote.If this option is enabled it will disable ANSIBLE_PIPELINING.
+ansible_python_interpreter                to the Python interpreter to be used for module execution on remote targets, or an automatic discovery mode. Supported discovery modes are auto, auto_silent, and auto_legacy (the default). All discovery modes employ a lookup table to use the included system Python (on distributions known to include one), falling back to a fixed ordered list of well-known Python interpreter locations if a platform-specific default is not available. The fallback behavior will issue a warning that the interpreter should be set explicitly (since interpreters installed later may change which one is used). This warning behavior can be disabled by setting auto_silent. The default value of auto_legacy provides all the same behavior, but for backwards-compatibility with older Ansible releases that always defaulted to /usr/bin/python, will use that interpreter if present (and issue a warning that the default behavior will change to that of auto in a future Ansible release.
+ansible_poll_interval                     asynchronous tasks in Ansible (covered in Asynchronous Actions and Polling), this is how often to check back on the status of those tasks when an explicit poll interval is not supplied. The default is a reasonably moderate 15 seconds which is a tradeoff between checking in frequently and providing a quick turnaround when something may have completed.
+ansible_cliconf_plugins                   separated paths in which Ansible will search for Cliconf Plugins.
+ansible_become_allow_same_user            setting controls if become is skipped when remote user and become user are the same. I.E root sudo to root.
+ansible_ssh_args                          set, this will override the Ansible default ssh arguments.In particular, users may wish to raise the ControlPersist time to encourage performance. A value of 30 minutes may be appropriate.Be aware that if -o ControlPath is set in ssh_args, the control path setting is not used.
+ansible_action_plugins                    separated paths in which Ansible will search for Action Plugins.
+ansible_remote_user                       the login user for the target machinesWhen blank it uses the connection plugin’s default, normally the user currently executing Ansible.
+ansible_inventory_cache                   to turn on inventory caching
+ansible_inventory_plugins                 separated paths in which Ansible will search for Inventory Plugins.
+ansible_vault_password_file               vault password file to use. Equivalent to –vault-password-file or –vault-id
+ansible_cache_plugins                     separated paths in which Ansible will search for Cache Plugins.
+ansible_inventory_cache_plugin            plugin for caching inventory. If INVENTORY_CACHE_PLUGIN is not provided CACHE_PLUGIN can be used instead.
+ansible_callback_plugins                  separated paths in which Ansible will search for Callback Plugins.
+ansible_terminal_plugins                  separated paths in which Ansible will search for Terminal Plugins.
+ansible_connection_plugins                separated paths in which Ansible will search for Connection Plugins.
+ansible_jinja2_extensions                 is a developer-specific feature that allows enabling additional Jinja2 extensions.See the Jinja2 documentation for details. If you do not know what these do, you probably don’t need to change this setting :)
+ansible_command_warnings                  default Ansible will issue a warning when the shell or command module is used and the command appears to be similar to an existing Ansible module.These warnings can be silenced by adjusting this setting to False. You can also control this at the task level with the module option warn.
+ansible_color_ok                          the color to use when showing ‘OK’ task status
+ansible_inject_fact_vars                  are available inside the ansible_facts variable, this setting also pushes them as their own vars in the main namespace.Unlike inside the ansible_facts dictionary, these will have an ansible_ prefix.
+ansible_color_changed                     the color to use on ‘Changed’ task status
+ansible_display_args_to_stdout            ansible-playbook will print a header for each task that is run. These headers will contain the name: field from the task if you specified one. If you didn’t then ansible-playbook uses the task’s action to help you tell which task is presently running. Sometimes you run many of the same action and so you want more information about the task to differentiate it from others of the same action. If you set this variable to True in the config then ansible-playbook will also include the task’s arguments in the header.This setting defaults to False because there is a chance that you have sensitive values in your parameters and you do not want those to be printed.If you set this to True you should be sure that you have secured your environment’s stdout (no one can shoulder surf your screen and you aren’t saving stdout to an insecure file) or made sure that all of your playbooks explicitly added the no_log: True parameter to tasks which have sensitive values See How do I keep secret data in my playbook? for more information.
+ansible_collections_paths                 also COLLECTIONS_PATHS
+ansible_local_temp                        directory for Ansible to use on the controller.
+ansible_color_error                       the color to use when emitting error messages
+ansible_vault_id_match                    true, decrypting vaults with a vault id will only try the password from the matching vault-id
+ansible_error_on_missing_handler          to allow missing handlers to become a warning instead of an error when notifying.
+ansible_string_conversion_action          to take when a module parameter value is converted to a string (this does not affect variables). For string parameters, values such as ‘1.00’, “[‘a’, ‘b’,]”, and ‘yes’, ‘y’, etc. will be converted by the YAML parser unless fully quoted.Valid options are ‘error’, ‘warn’, and ‘ignore’.Since 2.8, this option defaults to ‘warn’ but will change to ‘error’ in 2.12.
+ansible_cache_plugin                      which cache plugin to use, the default ‘memory’ is ephimeral.
+ansible_become                            the use of privilege escalation, allowing you to ‘become’ another user after login.
+ansible_verbosity                         the default verbosity, equivalent to the number of -v passed in the command line.
+ansible_facts_modules                     modules to run during a play’s fact gathering stage, using the default of ‘smart’ will try to figure it out based on connection type.
+ansible_squash_actions                    can optimise actions that call modules that support list parameters when using with_ looping. Instead of calling the module once for each item, the module is called once with the full list.The default value for this setting is only for certain package managers, but it can be used for any module.Currently, this is only supported for modules that have a name or pkg parameter, and only when the item is the only thing being passed to the parameter.
+ansible_vars_plugins                      separated paths in which Ansible will search for Vars Plugins.
+ansible_filter_plugins                    separated paths in which Ansible will search for Jinja2 Filter Plugins.
+ansible_galaxy_role_skeleton              skeleton directory to use as a template for the init action in ansible-galaxy, same as --role-skeleton.
+ansible_persistent_connect_timeout        controls how long the persistent connection will remain idle before it is destroyed.
+ansible_become_ask_pass                   to prompt for privilege escalation password.
+ansible_invalid_task_attribute_failed     ‘false’, invalid attributes for a task will result in warnings instead of errors
+ansible_persistent_command_timeout        controls the amount of time to wait for response from remote device before timing out presistent connection.
+ansible_inventory                         separated list of Ansible inventory sources
+ansible_gather_timeout                    the timeout in seconds for the implicit fact gathering.It does not apply to user defined M(setup) tasks.
+ansible_library                           separated paths in which Ansible will search for Modules.
+ansible_module_args                       sets the default arguments to pass to the ansible adhoc binary if no -a is specified.
+ansible_localhost_warning                 default Ansible will issue a warning when there are no hosts in the inventory.These warnings can be silenced by adjusting this setting to False.
+ansible_vault_identity_list               list of vault-ids to use by default. Equivalent to multiple –vault-id args. Vault-ids are tried in order.
+ansible_color_diff_add                    the color to use when showing added lines in diffs
+ansible_color_console_prompt              the default color to use for ansible-console
+ansible_cow_whitelist                     list of cowsay templates that are ‘safe’ to use, set to empty list if you want to enable all installed templates.
+ansible_sftp_batch_mode                   also DEFAULT_SFTP_BATCH_MODE
+ansible_force_color                       options forces color mode even when running without a TTY or the “nocolor” setting is True.
+ansible_inventory_export                  if ansible-inventory will accurately reflect Ansible’s view into inventory or its optimized for exporting.
+ansible_transport                         connection plugin to use, the ‘smart’ option will toggle between ‘ssh’ and ‘paramiko’ depending on controller OS and ssh versions
+ansible_verbose_to_stderr                 ‘verbose’ option to use stderr instead of stdout
+ansible_color_diff_remove                 the color to use when showing removed lines in diffs
+ansible_galaxy_server                     to prepend when roles don’t specify the full URI, assume they are referencing this server as the source.
+ansible_doc_fragment_plugins              separated paths in which Ansible will search for Documentation Fragments Plugins.
+ansible_force_handlers                    option controls if notified handlers run on a host even if a failure occurs on that host.When false, the handlers will not run if a failure has occurred on a host.This can also be set per play or on the command line. See Handlers and Failure for more details.
+ansible_debug                             debug output in Ansible. This is very verbose and can hinder multiprocessing. Debug output can also include secret information despite no_log settings being enabled, which means debug mode should not be used in production.
+ansible_stdout_callback                   the main callback used to display Ansible output, you can only have one at a time.You can have many other callbacks, but just one can be in charge of stdout.
+ansible_color_diff_lines                  the color to use when showing diffs
+ansible_transform_invalid_group_chars     ansible transform invalid characters in group names supplied by inventory sources.If ‘never’ it will allow for the group name but warn about the issue.When ‘always’ it will replace any invalid charachters with ‘_’ (underscore) and warn the userWhen ‘silently’, it does the same as ‘always’ sans the warnings.
+ansible_task_includes_static              include tasks can be static or dynamic, this toggles the default expected behaviour if autodetection fails and it is not explicitly set in task.
+ansible_become_flags                      to pass to the privilege escalation executable.
+ansible_su_flags                          to pass to su
+ansible_httpapi_plugins                   separated paths in which Ansible will search for HttpApi Plugins.
+ansible_color_warn                        the color to use when emitting warning messages
+ansible_color_unreachable                 the color to use on ‘Unreachable’ status
+ansible_ask_sudo_pass                     controls whether an Ansible playbook should prompt for a sudo password.
+ansible_module_lang                       locale setting to use for modules when they execute on the target.If empty it tries to set itself to the LANG environment variable on the controller.This is only used if DEFAULT_MODULE_SET_LOCALE is set to true
+libvirt_lxc_noseclabel                    setting causes libvirt to connect to lxc containers by passing –noseclabel to virsh. This is necessary when running on systems which do not have SELinux.
+ansible_libvirt_lxc_noseclabel            setting causes libvirt to connect to lxc containers by passing –noseclabel to virsh. This is necessary when running on systems which do not have SELinux.
+ansible_null_representation               templating should return as a ‘null’ value. When not set it will let Jinja2 decide.
+ansible_fact_path                         option allows you to globally configure a custom path for ‘local_facts’ for the implied M(setup) task when using fact gathering.If not set, it will fallback to the default from the M(setup) module: /etc/ansible/facts.d.This does not affect user defined tasks that use the M(setup) module.
+ansible_inventory_any_unparsed_is_failed  ‘true’, it is a fatal error when any given inventory source cannot be successfully parsed by any available inventory plugin; otherwise, this situation only attracts a warning.
+ansible_private_role_vars                 role variables inaccessible from other roles.This was introduced as a way to reset role variables to default values if a role is used more than once in a playbook.
+ansible_enable_task_debugger              or not to enable the task debugger, this previously was done as a strategy plugin.Now all strategy plugins can inherit this behavior. The debugger defaults to activating whena task is failed on unreachable. Use the debugger keyword for more flexibility.
+ansible_color_debug                       the color to use when emitting debug messages
+ansible_load_callback_plugins             whether callback plugins are loaded when running /usr/bin/ansible. This may be used to log activity from the command line, send notifications, and so on. Callback plugins are always loaded for ansible-playbook.
+ansible_syslog_facility                   facility to use when Ansible logs to the remote target
+ansible_paramiko_host_key_auto_add        also PARAMIKO_HOST_KEY_AUTO_ADD
+ansible_use_persistent_connections        the use of persistence for connections.
+ansible_task_debugger_ignore_errors       option defines whether the task debugger will be invoked on a failed task when ignore_errors=True is specified.True specifies that the debugger will honor ignore_errors, False will not honor ignore_errors.
+ansible_vault_identity                    label to use for the default vault id label in cases where a vault id label is not provided
+ansible_yaml_filename_ext                 all of these extensions when looking for ‘variable’ files which should be YAML or JSON or vaulted versions of these.This affects vars_files, include_vars, inventory and vars plugins among others.
+ansible_color_skip                        the color to use when showing ‘Skipped’ task status
+ansible_string_type_filters               list of filters avoids ‘type conversion’ when templating variablesUseful when you want to avoid conversion into lists or dictionaries for JSON strings, for example.
+ansible_remote_port                       to use in remote connections, when blank it will use the connection plugin default.
+ansible_playbook_vars_root                sets which playbook dirs will be used as a root to process vars plugins, which includes finding host_vars/group_varsThe top option follows the traditional behaviour of using the top playbook in the chain to find the root directory.The bottom option follows the 2.4.0 behaviour of using the current playbook to find the root directory.The all option examines from the first parent to the current playbook.
+ansible_ask_vault_pass                    controls whether an Ansible playbook should prompt for a vault password.
+ansible_precedence                        to change the group variable precedence merge order.
+ansible_python_module_rlimit_nofile       to set RLIMIT_NOFILE soft limit to the specified value when executing Python modules (can speed up subprocess usage on Python 2.x. See https://bugs.python.org/issue11284). The value will be limited by the existing hard limit. Default value of 0 does not attempt to adjust existing system-defined limits.
+ansible_hash_behaviour                    setting controls how variables merge in Ansible. By default Ansible will override variables in specific precedence orders, as described in Variables. When a variable of higher precedence wins, it will replace the other value.Some users prefer that variables that are hashes (aka ‘dictionaries’ in Python terms) are merged. This setting is called ‘merge’. This is not the default behavior and it does not affect variables whose values are scalars (integers, strings) or arrays. We generally recommend not using this setting unless you think you have an absolute need for it, and playbooks in the official examples repos do not use this settingIn version 2.0 a combine filter was added to allow doing this for a particular variable (described in Filters).
+ansible_become_user                       user your login/remote user ‘becomes’ when using privilege escalation, most systems will use ‘root’ when no user is specified.
+ansible_error_on_undefined_vars           True, this causes ansible templating to fail steps that reference variable names that are likely typoed.Otherwise, any ‘{{ template_expression }}’ that contains undefined variables will be rendered in a template or ansible action line exactly as written.
+ansible_cache_plugin_timeout              timeout for the cache plugin data
+ansible_ssh_control_path                  is the location to save ssh’s ControlPath sockets, it uses ssh’s variable substitution.Since 2.3, if null, ansible will generate a unique hash. Use %(directory)s to indicate where to use the control dir path setting.Before 2.3 it defaulted to control_path=%(directory)s/ansible-ssh-%%h-%%p-%%r.Be aware that this setting is ignored if -o ControlPath is set in ssh args.
+ansible_cache_plugin_prefix               to use for cache plugin files/tables
+network_group_modules                     also NETWORK_GROUP_MODULES
+ansible_network_group_modules             also NETWORK_GROUP_MODULES
+ansible_log_path                          to which Ansible will log on the controller. When empty logging is disabled.
+ansible_run_tags                          list of tags to run in your plays, Skip Tags has precedence.
+ansible_skip_tags                         list of tags to skip in your plays, has precedence over Run Tags
+ansible_strategy                          the default strategy used for plays.
+ansible_diff_always                       toggle to tell modules to show differences when in ‘changed’ status, equivalent to --diff.
+ansible_no_target_syslog                  Ansible logging to syslog on the target when it executes tasks.
+ansible_module_set_locale                 if we set locale for modules when executing on the target.
+ansible_lookup_plugins                    separated paths in which Ansible will search for Lookup Plugins.
+ansible_ask_pass                          controls whether an Ansible playbook should prompt for a login password. If using SSH keys for authentication, you probably do not needed to change this setting.
+ansible_inventory_unparsed_failed         ‘true’ it is a fatal error if every single potential inventory source fails to parse, otherwise this situation will only attract a warning.
+ansible_callback_whitelist                of whitelisted callbacks, not all callbacks need whitelisting, but many of those shipped with Ansible do as we don’t want them activated by default.
+ansible_private_key_file                  for connections using a certificate or key file to authenticate, rather than an agent or passwords, you can set the default value here to avoid re-specifying –private-key with every invocation.
+ansible_inventory_cache_plugin_prefix     table prefix for the cache plugin. If INVENTORY_CACHE_PLUGIN_PREFIX is not provided CACHE_PLUGIN_PREFIX can be used instead.
+ansible_persistent_control_path_dir       to socket to be used by the connection persistence system.
+ansible_module_utils                      separated paths in which Ansible will search for Module utils files, which are shared by modules.
+ansible_roles_path                        separated paths in which Ansible will search for Roles.
+ansible_cache_plugin_connection           connection or path information for the cache plugin
+ansible_become_exe                        to use for privilege escalation, otherwise Ansible will depend on PATH
+ansible_ssh_retries                       of attempts to establish a connection before we give up and report the host as ‘UNREACHABLE’
+ansible_color_deprecate                   the color to use when emitting deprecation messages
+ansible_netconf_plugins                   separated paths in which Ansible will search for Netconf Plugins.
+ansible_inventory_cache_connection        inventory cache connection. If INVENTORY_CACHE_PLUGIN_CONNECTION is not provided CACHE_PLUGIN_CONNECTION can be used instead.
+ansible_executable                        indicates the command to use to spawn a shell under for Ansible’s execution needs on a target. Users may need to change this in rare instances when shell usage is constrained, but in most cases it may be left as is.
+ansible_deprecation_warnings              to control the showing of deprecation warnings
+ansible_nocolor                           setting allows suppressing colorizing output, which is used to give a better indication of failure and status information.
+ansible_paramiko_look_for_keys            also PARAMIKO_LOOK_FOR_KEYS
+ansible_retry_files_enabled               controls whether a failed Ansible playbook should create a .retry file.
+ansible_strategy_plugins                  separated paths in which Ansible will search for Strategy Plugins.
+ansible_ssh_control_path_dir              sets the directory to use for ssh control path if the control path setting is null.Also, provides the %(directory)s variable for the control path setting.
+ansible_inventory_ignore                  of extensions to ignore when using a directory as an inventory source
+ansible_galaxy_ignore                     set to yes, ansible-galaxy will not validate TLS certificates. This can be useful for testing against a server with a self-signed certificate.
+ansible_retry_files_save_path             sets the path in which Ansible will save .retry files when a playbook fails and retry files are enabled.
+ansible_show_custom_stats                 adds the custom stats set via the set_stats plugin to the default output
+ansible_vault_encrypt_identity            vault_id to use for encrypting by default. If multiple vault_ids are provided, this specifies which to use for encryption. The –encrypt-vault-id cli option overrides the configured value.
+ansible_cow_selection                     allows you to chose a specific cowsay stencil for the banners or use ‘random’ to cycle through them.
+ansible_galaxy_token                      personal access token
+ansible_forks                             number of forks Ansible will use to execute tasks on target hosts.
+ansible_su                                the use of “su” for tasks.
+ansible_become_plugins                    separated paths in which Ansible will search for Become Plugins.
+ansible_color_highlight                   the color to use for highlighting
+ansible_netconf_ssh_config                variable is used to enable bastion/jump host with netconf connection. If set to True the bastion/jump host ssh settings should be present in ~/.ssh/config file, alternatively it can be set to custom ssh configuration file path to read the bastion/jump host settings.
+ansible_jinja2_native                     option preserves variable types during template operations. This requires Jinja2 >= 2.10.
+ansible_agnostic_become_prompt            an agnostic become prompt instead of displaying a prompt containing the command line supplied become method
+ansible_su_exe                            an “su” executable, otherwise it relies on PATH.
+ansible_any_errors_fatal                  the default value for the any_errors_fatal keyword, if True, Task failures will be considered fatal errors.
+ansible_system_warnings                   disabling of warnings related to potential issues on the system running ansible itself (not on the managed hosts)These may include warnings about 3rd party packages or other conditions that should be resolved if possible.
+ansible_old_plugin_cache_clear            Ansible would only clear some of the plugin loading caches when loading new roles, this led to some behaviours in which a plugin loaded in prevoius plays would be unexpectedly ‘sticky’. This setting allows to return to that behaviour.
+ansible_ssh_transfer_method
+ansible_ssh_executable                    defines the location of the ssh binary. It defaults to ssh which will use the first ssh binary available in $PATH.This option is usually not required, it might be useful when access to system ssh is restricted, or when using ssh wrappers to connect to remote hosts.
+ansible_action_warnings                   default Ansible will issue a warning when received from a task action (module or action plugin)These warnings can be silenced by adjusting this setting to False.
+ansible_log_filter                        of logger names to filter out of the log file
+ansible_conditional_bare_vars             this setting on (True), running conditional evaluation ‘var’ is treated differently than ‘var.subkey’ as the first is evaluated directly while the second goes through the Jinja2 parser. But ‘false’ strings in ‘var’ get evaluated as booleans.With this setting off they both evaluate the same but in cases in which ‘var’ was ‘false’ (a string) it won’t get evaluated as a boolean anymore.Currently this setting defaults to ‘True’ but will soon change to ‘False’ and the setting itself will be removed in the future.Expect the default to change in version 2.10 and that this setting eventually will be deprecated after 2.12
 
 
 # facts
@@ -1470,6 +1854,9 @@ git-crypt add-gpg-user SECONDUSER # allow second user
 git pull # there should be a second file appearing in git-crypt/keys/default/0/4298F79FAE76FB11A2DF80B65803C1E207E1682B.gpg
 git-crypt unlock
 ```
+# vault
+yq r extra_vars/zabbix-credentials.yml zabbix.prod.login_password | ansible-vault decrypt  --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev
+echo -n "Bonjour123" | ansible-vault encrypt --encrypt-vault-id prod --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev | sed -r -n -e '1 s/^/\n\nmypassword: vault |\n  / p' -e '2,$ s/^/  / p'
 
 # list of modules
 https://docs.ansible.com/ansible/latest/modules/community_maintained.html
@@ -1622,8 +2009,6 @@ webservers:!{{excluded}}:&{{required}}
 
 ~(web|db).*\.example\.com # usually pattern is glob, but starting pattern with tilde ~ makes it a regex
 
-# vault
-yq r extra_vars/credentials.yml my.yaml.path.to.secret | ansible-vault decrypt  --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev
 
 # filters
 {{ some_variable | to_json }}
@@ -1945,6 +2330,7 @@ title(s)
 tojson(value, indent=None)
 trim(value) # strip
 | trim() # strip
+| trim   # strip
 truncate(s, length=255, killwords=False, end='...', leeway=None)
 {{ "foo bar baz qux"|truncate(9) }}
 {{ "foo bar baz qux"|truncate(9, True) }}
@@ -2016,3 +2402,8 @@ class namespace(...)
 {% do navigation.append('a string') %}
 Development (unstable)
 Jinja 2.10.x (stable)
+
+
+name: "{{ item.split()[0] }}" # split first words
+
+https://fossies.org/linux/ansible/lib/ansible/modules/monitoring/zabbix/zabbix_proxy.py

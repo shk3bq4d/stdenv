@@ -32,7 +32,6 @@ yum whatprovides dig       && yum clean all # bind-utils
 yum whatprovides locate    && yum clean all # mlocate
 yum whatprovides snmpwalk  && yum clean all # net-snmp-utils
 yum whatprovides mongodump && yum clean all # mongodb-org-tools
-apk: dig => bind-tools
 yum clean all
 
 yum-config-manager --disable base,extras,updates
@@ -45,6 +44,7 @@ rpm -q kernel # list versions
 snap install yq
 
 # APK
+apk: dig => bind-tools
 # cat /etc/alpine-release
 3.3.3
 # echo 'http://dl-cdn.alpinelinux.org/alpine/v3.2/main' >> /etc/apk/repositories

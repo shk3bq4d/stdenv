@@ -217,8 +217,15 @@ case $SCRIPT in \
         rm -f $SCRIPT_DIR/$(basename $SCRIPT .yml).retry || true
         myexit $_exit
     else
-        echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
-        exit 1
+        #echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
+        echo '# /* e''x: set filetype=python */'
+        python -c "
+import yaml
+import pprint
+with open('$SCRIPT', 'rb') as f:
+    pprint.pprint(yaml.safe_load(f))
+            "
+        exit 0
     fi
     ;;
 $HOME/.Xdefaults)
