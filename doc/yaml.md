@@ -30,7 +30,7 @@ items:
       quantity:  1
 
 bill-to:  &id001
-    street: |
+    street: | # multiline are kept as multiline but dedented. Ends with new line
             123 Tornado Alley
             Suite 16
     city:   East Centerville
@@ -60,7 +60,7 @@ ship-to:  *id001
     spotSize: 2mm                # redefines just this key; refers to &id001 for the rest
 - step: *id002
 
-specialDelivery:  >
+specialDelivery:  > # multiline are merged on single line. Ends with new line
     Follow the Yellow Brick
     Road to the Emerald City.
     Pay no attention to the

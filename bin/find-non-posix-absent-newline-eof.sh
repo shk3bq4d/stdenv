@@ -66,6 +66,6 @@ set -euo pipefail
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
 # https://unix.stackexchange.com/questions/18743/whats-the-point-in-adding-a-new-line-to-the-end-of-a-file
-find -type f -print0 | xargs -0 -L1 bash -c 'test "$(tail -c 1 "$0")" && echo "$0"'
+find "$@" -type f -print0 | xargs -0 -L1 bash -c 'test "$(tail -c 1 "$0")" && echo "$0"'
 exit 0
 

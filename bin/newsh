@@ -86,6 +86,14 @@ set -euo pipefail
 
 # test -z \"\${HOSTNAMEF:-}\" && HOSTNAMEF=\$(hostname -f)
 
+#echo -n \"Are you sure you want to proceed (yN): \"
+#read _read
+#echo
+#case \"\${_read,,}\" in \
+#y|yes) true ;;
+#*)   false;;
+#esac
+
 echo EOF
 exit 0
 " >> "$f"

@@ -923,6 +923,7 @@ out = '\n'.join(map(str.strip, s.communicate()))
 ~/py/mryaml.py
 from ruamel import yaml; yaml.dump({})
 import yaml; yaml.dump({})
+import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.safe_load(f)
 import yaml; yaml.safe_dump({}, default_flow_style=False)
 from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""
     """)))
