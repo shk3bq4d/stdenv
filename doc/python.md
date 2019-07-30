@@ -1005,6 +1005,7 @@ try:
 except sh.ErrorReturnCode_2:
         print("directory doesn't exist")
 
+logging.getLogger('sh.command').setLevel(logging.WARN) # logger sh level
 # https://amoffat.github.io/sh/
 # https://amoffat.github.io/sh/reference.html
 sh.cat(_in="_in is stdin")
