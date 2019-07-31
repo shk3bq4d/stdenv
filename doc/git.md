@@ -1,5 +1,3 @@
-
-
 # https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud # recommended by @aviolat
 git init
 git add
@@ -546,6 +544,8 @@ ignore-*
     ignore-all-space
     ignore-space-at-eol
     ignore-cr-at-eol
+
+## mark
 A set of options that target whitespace characters. Any line that matches the subset of the passed option will be ignored.
 
 ## Recursive substrategy renormalize
@@ -566,3 +566,15 @@ This option borrows from the `subtree` strategy. Where the strategy operates on 
 
 # giant vimf6 removal restore git filter
 git revert --no-commit bf40f3df
+
+# hide changes in specific, tracked files
+https://apiumhub.com/tech-blog-barcelona/gittip-skip-worktree/
+[alias]
+   hide = update-index –skip-worktree
+   unhide = update-index –no-skip-worktree
+   unhide-all = ls-files -v | grep -i ^S | cut -c 3- | xargs git update-index –no-skip-worktree
+   hidden = ! git ls-files -v | grep ‘^S’ | cut -c3-
+
+
+# worktree
+git worktree add ../iaac_master master
