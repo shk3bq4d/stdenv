@@ -39,6 +39,15 @@ yum-config-manager --disable base,extras,updates
 rpm -qa | grep rsyslog
 rpm -q kernel # list versions
 
+https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/
+
+## YUM pin
+```bash
+yum install yum-plugin-versionlock # pin
+yum versionlock add puppet # pin
+yum versionlock list # pin
+yum versionlock delete 0:openldap-2.4.39-8.el6.* # pin
+```
 
 # snap
 snap install yq

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 import re
@@ -33,7 +33,7 @@ if os.path.isfile(fp):
 name, _ = os.path.splitext(os.path.basename(fp))
 
 with open(fp, 'wb') as f:
-    f.write("""#!/usr/bin/env python
+    f.write("""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -81,6 +81,7 @@ def logging_conf(
         ):
     import logging.config
     script_directory, script_name = os.path.split(__file__)
+    # logging.getLogger('sh.command').setLevel(logging.WARN)
     logging.config.dictConfig({'version':1,'disable_existing_loggers':False,
        'formatters':{
            'standard':{'format':'%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s'},

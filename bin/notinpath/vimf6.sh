@@ -303,7 +303,7 @@ $HOME/.config/i3/config.*)
     # validator.sh
     if [[ "$HOSTNAME" = jly200 ]] && head -c 6 $SCRIPT | grep -qE '^\{1:F01$'; then
         cd /validator
-        ./tree.sh -e 1 $SCRIPT 2>&1 | dos2unix
+        ./tree.sh -r $(date +'%y') -e 1 $SCRIPT 2>&1 | dos2unix
         exit $?
     fi
     exit 1
