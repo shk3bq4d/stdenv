@@ -566,3 +566,8 @@ This option borrows from the `subtree` strategy. Where the strategy operates on 
 
 # giant vimf6 removal restore git filter
 git revert --no-commit bf40f3df
+
+# https://stackoverflow.com/questions/4698759/converting-git-repository-to-shallow
+git pull --depth 1
+git tag -d $(git tag -l)
+git gc --prune=all
