@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 cursorcolumn :
+##
+##Usage:  __SCRIPT__ FILENAME
+##generates a new ansible playbook using default template
+##    FILENAME: new playbook's filepath
+##
+
+set -euo pipefail
+function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
+[[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
+[[ $# -lt 1 || $# -gt 1 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
+for i in chmod touch; do ! command -v "$i" &>/dev/null && echo "FATAL: unexisting dependency $i" && exit 1; done
+
+f="$1"
+extension="${f##*.}"
+if [[ $f != *.* || "$extension" = "" ]]; then
+    f="${f}.java"
+fi
+[[ -f "$f" ]] && echo "FATAL: already exists file $f" && exit 1
+[[ -d "$f" ]] && echo "FATAL: already exists directory $f" && exit 1
+
+touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
+
+
+# ```java
+cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $f .java)/g" >>$f
+public class FILENAME
+{
+public FILENAME
+(
+)
+{
+}
+public static void main
+(   final String[] foAString
+)
+throws Exception
+{
+    System.out.println("I can has C4t!");
+}
+}
+HERE_DOCUMENT
+# ```
+
+echo "$f"
+exit 0

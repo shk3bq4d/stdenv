@@ -138,6 +138,8 @@ print(prev_line)
 # @end=python@
 "
         }
+    package=$(sed -r -n -e 's/^[[:blank:]]*package[[:blank:]]+([[:graph:]]+)[[:blank:]]*;.*/\1/ p' "$SCRIPT")
+    test -n "$package" && package="${package}/"
     while :; do
         if [[ -f "$D/build.xml" ]]; then
             C=$(mktemp)
@@ -145,11 +147,10 @@ print(prev_line)
             if ant compile &> $C; then
                 if cat $SCRIPT | sed -r -e 's/[[:blank:]]+/ /g' | tr '\n\r' '  ' | tr -s ' ' | grep -qE '\<void main ?\('; then
                     rm -f $C
-                    package=$(sed -r -n -e 's/^[[:blank:]]*package[[:blank:]]+([[:graph:]]+)[[:blank:]]*;.*/\1/ p' "$SCRIPT")
                     echo "Would you like to execute ? Press Ctrl-C to abord"
-                    echo java -cp "build/classes:$(mrjava_cp)" $package/$(basename $SCRIPT .java)
+                    echo java -cp "build/classes:$(mrjava_cp)" ${package}$(basename $SCRIPT .java)
                     read a
-                         java -cp "build/classes:$(mrjava_cp)" $package/$(basename $SCRIPT .java)
+                         java -cp "build/classes:$(mrjava_cp)" ${package}$(basename $SCRIPT .java)
                     exit 0
                else
                     ant_output $C
@@ -162,7 +163,9 @@ print(prev_line)
         fi
         D="$(readlink -f "$(dirname "$D")")"
         if [[ -z $D || "$D" == "/" ]]; then
-            echo "Couldn't find a proper java compilation method"
+            javac $SCRIPT -d /tmp
+            java -cp "/tmp/" ${package}$(basename $SCRIPT .java)
+            #echo "Couldn't find a proper java compilation method"
             exit 1
         fi
     done
