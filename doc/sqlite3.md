@@ -70,6 +70,17 @@ select length(mycol), * from mytable where length(mycol) >= 80 order by 1 desc;
 
 create index myindex on mytable(mycol);
 
+```markdown
+# Substr
+SQLite substr() returns the specified number of characters from a particular position of a given string.
+Syntax:
+substr(X,Y,Z);
+Name	Description
+X	A string from which a substring is to be returned.
+Y	An integer indicating a string position within the string X.
+Z	An integer indicating a number of characters to be returned.
+If Z is omitted then substr(X,Y) returns all characters through the end of the string X beginning with the Y-th. The left-most character of X is number 1. If Y is negative then the first character of the substring is found by counting from the right rather than the left. If Z is negative then the abs(Z) characters preceding the Y-th character are returned.
+```
 
 SELECT replace(mycol1, 'prefix..', '.') AS mycol2, 
 strftime('%Y-%m-%d', datetime(datecre / 1000, 'unixepoch')) as txcreation,
