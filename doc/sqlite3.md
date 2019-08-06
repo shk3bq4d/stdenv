@@ -71,13 +71,13 @@ select length(mycol), * from mytable where length(mycol) >= 80 order by 1 desc;
 create index myindex on mytable(mycol);
 
 
-SELECT replace(mycol1, 'prefix..', '.') AS mycol2, 
+SELECT replace(mycol1, 'prefix..', '.') AS mycol2,
 strftime('%Y-%m-%d', datetime(datecre / 1000, 'unixepoch')) as txcreation,
 strftime('%Y-%m-%d %H:%M:%S', datetime(datecre / 1000, 'unixepoch')) as txcreationfull,
-datecre AS datec, 
-'TALEND' AS myref, 
+datecre AS datec,
+'TALEND' AS myref,
 TXSTATUS
-FROM mytable  
+FROM mytable
 WHERE datetime(datecre / 1000, 'unixepoch') BETWEEN  date(CURRENT_DATE, '-1 day')  AND CURRENT_DATE AND TXSTATUS <> 'replaymanuel'
 and mycol in (5068783, 5008783);
 
@@ -111,7 +111,7 @@ where
 detected_by  in('rutom','butryj','datessid','prettm','cavatera','trossart','spantonm'))
 and status not in ('Closed', 'Refused')
 and detected_by not in ('penvent')
-order by 
+order by
 case when Livraison_cible is null then 'b' when Livraison_cible like '% SR %' then Livraison_cible else 'a' || Livraison_cible end,
 id
 ;
@@ -165,3 +165,5 @@ order by jour, ref
 2014.11.16 	 bip 	 <null> 	 3509
 2014.11.16 	 bip 	 <null> 	 9580
 2014.11.17 	 bip 	 2      	 6
+
+select * from fec_ limit 1;
