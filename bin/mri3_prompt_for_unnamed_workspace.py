@@ -103,6 +103,9 @@ def mrdmenu(prompt, items):
 
 def go(args=[]):
     logger.info('go()')
+    go2(args)
+
+def go2(args=[], only_for_unnamed=True):
     i3 = i3ipc.Connection()
     debug_mode = len(args) > 0
     if debug_mode:
@@ -114,7 +117,7 @@ def go(args=[]):
     words = ws.split()
 
 
-    if len(words) != 1 and not re.match(r'^\d+\s+(\d+|&amp;?|[$&%`#])$',ws.strip()):
+    if only_for_unnamed and len(words) != 1 and not re.match(r'^\d+\s+(\d+|&amp;?|[$&%`#])$',ws.strip()):
         logger.info('len(words), {} != 1'.format(len(words)))
         return
 

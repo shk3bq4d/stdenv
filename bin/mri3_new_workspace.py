@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -8,9 +8,16 @@ import json
 import sys
 import mri3_prompt_for_unnamed_workspace
 import i3ipc
+import os
+try:
+    import mri3
+except:
+    sys.path.append(os.path.expanduser('~/py'))
+    import mri3
 
 
 def go(args):
+    mri3.renumber_workspaces()
     i3 = i3ipc.Connection()
     i3.get_tree().find_focused().workspace().parent.parent.workspace()
     name = i3.get_tree().find_focused().workspace().parent.parent.name

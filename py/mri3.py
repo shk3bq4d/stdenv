@@ -497,15 +497,28 @@ def mrFocusedStack():
     return rA
 
 def renumber_workspaces():
-    pprint(get_root().workspaces())
+    all_workspaces = copy.copy(get_root().workspaces())
+    used_numbers = []
+    spaces = 3 * ' '
+    i3 = i3ipc.Connection()
+    for k, w in enumerate(all_workspaces):
+        number, left_over = re.match(r'^(\d*)\s*(.*?)\s*$', w.name).groups()
+        new_name = '{k}{spaces}{left_over}{spaces}'.format(**locals())
+        if w.name == new_name:
+            logger.info("Not renaming %s (noop)", new_name)
+            continue
+        command = 'rename workspace "{}" to "{}"'.format(w.name, new_name)
+        logger.info('executing %s as old name was %s', command, w.name)
+        result = i3.command(command)
+        logger.info(result)
 
 if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
     if 'VIMRUNTIME' in os.environ:
-        #unittest.main()
-        logging_conf()
-        renumber_workspaces()
+        unittest.main()
+        #logging_conf()
+        #renumber_workspaces()
     else:
         logging_conf()
         try:
