@@ -33,7 +33,7 @@ set $ws8 "8   2   "
 set $ws9 "9   4   "
 set $ws10 "10   6   "
 set $ws11 "11   8   "
-set $ws12 "12   !   "
+set $ws12 "12   #   "
 
 show_marks yes
 #fake-outputs 1000x768+0+0,366x768+1000+0
@@ -195,31 +195,33 @@ bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command 
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+49 workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+49 exec python3 ~/bin/mri3_workspace_migration.py '$ws0' >>/tmp/hehe2.log 2>&1
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+10 workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py '$ws1' >>/tmp/hehe2.log 2>&1
+bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py  '1   &amp   ' >>/tmp/hehe3.log 2>&1 # notice the lack of ; after amp; it is intentional
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+11 workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+11 exec python3 ~/bin/mri3_workspace_migration.py '$ws2' >>/tmp/hehe2.log 2>&1
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+12 workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+12 exec python3 ~/bin/mri3_workspace_migration.py '$ws3' >>/tmp/hehe2.log 2>&1
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+13 workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+13 exec python3 ~/bin/mri3_workspace_migration.py '$ws4' >>/tmp/hehe2.log 2>&1
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+14 workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+14 exec python3 ~/bin/mri3_workspace_migration.py '$ws5' >>/tmp/hehe2.log 2>&1
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+15 workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+15 exec python3 ~/bin/mri3_workspace_migration.py '$ws6' >>/tmp/hehe2.log 2>&1
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+16 workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+16 exec python3 ~/bin/mri3_workspace_migration.py '$ws7' >>/tmp/hehe2.log 2>&1
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+17 workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+17 exec python3 ~/bin/mri3_workspace_migration.py '$ws8' >>/tmp/hehe2.log 2>&1
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+18 workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+18 exec python3 ~/bin/mri3_workspace_migration.py '$ws9' >>/tmp/hehe2.log 2>&1
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+19 workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+19 exec python3 ~/bin/mri3_workspace_migration.py '$ws10' >>/tmp/hehe2.log 2>&1
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+20 workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+20 exec python3 ~/bin/mri3_workspace_migration.py '$ws11' >>/tmp/hehe2.log 2>&1
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+21 workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+21 exec python3 ~/bin/mri3_workspace_migration.py '$ws12' >>/tmp/hehe2.log 2>&1
 #bindcode  $mod+22 workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 # code:22 => sym: 0xff08, symbol: BackSpace
 bindcode  $mod+22      exec ~/bin/mri3_new_workspace.py
@@ -234,33 +236,39 @@ bindcode $mod+Control+44  exec mri3_move_container_left.py
 # code:46 => sym: 0x6c, symbol:l
 bindcode $mod+Control+33  exec mri3_move_container_right.py
 
+# code:43 => sym: 0x68, symbol:h
+bindcode $mod+Shift+Control+44  exec mri3_move_workspace_left.py
+# code:46 => sym: 0x6c, symbol:l
+bindcode $mod+Shift+Control+33  exec mri3_move_workspace_right.py
+
 # move focused container to workspace
 # code:49 => sym: 0x60, symbol: grave
-bindcode  $mod+Shift+49 move workspace number $ws0;    workspace number $ws0; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+49 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws0' >>/tmp/hehe3.log 2>&1
 # code:10 => sym: 0x31, symbol: 1
-bindcode  $mod+Shift+10 move workspace number $ws1;    workspace number $ws1; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+#bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws1' >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py        -s '1   &amp   ' >>/tmp/hehe3.log 2>&1 # notice the lack of ; after amp; it is intentional
 # code:11 => sym: 0x32, symbol: 2
-bindcode  $mod+Shift+11 move workspace number $ws2;    workspace number $ws2; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+11 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws2' >>/tmp/hehe3.log 2>&1
 # code:12 => sym: 0x33, symbol: 3
-bindcode  $mod+Shift+12 move workspace number $ws3;    workspace number $ws3; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+12 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws3' >>/tmp/hehe3.log 2>&1
 # code:13 => sym: 0x34, symbol: 4
-bindcode  $mod+Shift+13 move workspace number $ws4;    workspace number $ws4; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+13 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws4' >>/tmp/hehe3.log 2>&1
 # code:14 => sym: 0x35, symbol: 5
-bindcode  $mod+Shift+14 move workspace number $ws5;    workspace number $ws5; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+14 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws5' >>/tmp/hehe3.log 2>&1
 # code:15 => sym: 0x36, symbol: 6
-bindcode  $mod+Shift+15 move workspace number $ws6;    workspace number $ws6; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+15 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws6' >>/tmp/hehe3.log 2>&1
 # code:16 => sym: 0x37, symbol: 7
-bindcode  $mod+Shift+16 move workspace number $ws7;    workspace number $ws7; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+16 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws7' >>/tmp/hehe3.log 2>&1
 # code:17 => sym: 0x38, symbol: 8
-bindcode  $mod+Shift+17 move workspace number $ws8;    workspace number $ws8; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+17 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws8' >>/tmp/hehe3.log 2>&1
 # code:18 => sym: 0x39, symbol: 9
-bindcode  $mod+Shift+18 move workspace number $ws9;    workspace number $ws9; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+18 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws9' >>/tmp/hehe3.log 2>&1
 # code:19 => sym: 0x30, symbol: 0
-bindcode  $mod+Shift+19 move workspace number $ws10;    workspace number $ws10; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+19 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws10' >>/tmp/hehe3.log 2>&1
 # code:20 => sym: 0x2d, symbol: minus
-bindcode  $mod+Shift+20 move workspace number $ws11;    workspace number $ws11; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+20 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws11' >>/tmp/hehe3.log 2>&1
 # code:21 => sym: 0x3d, symbol: equal
-bindcode  $mod+Shift+21 move workspace number $ws12;    workspace number $ws12; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
+bindcode  $mod+Shift+21 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws12' >>/tmp/hehe3.log 2>&1
 #bindcode  $mod+Shift+22 move workspace number $ws13;    workspace number $ws13; exec ~/bin/mri3_prompt_for_unnamed_workspace.py
 
 # reload the configuration file

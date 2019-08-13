@@ -137,7 +137,9 @@ def go(args=[]):
         output = mrdmenu(prompt, proposals)
     logger.info('prompted value is {}'.format(output))
     if not debug_mode or True:
-        i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=True, append_english=True, quotes=True))
+        prepend_real_number=False
+        prepend_real_number=True
+        i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=prepend_real_number, append_english=True, quotes=True))
         if output.strip() and output not in mrstack_excludes:
             mrstack.write(u'workspace: ' + unicode(output))
         if output in proposalsH:
@@ -164,6 +166,8 @@ def workspace_name(real_number, desired_name, append_english=False, prepend_real
 
     left_padding = right_padding = "   "
     #new_name = '"{left_padding}{ws} {desired_name}{right_padding}"'.format(**locals())
+    if 1:
+        display_number = ''
     new_name = '{display_number} {desired_name}'.format(**locals())
     new_name = new_name.strip()
     new_name = re.sub(r'\s+', ' ', new_name)

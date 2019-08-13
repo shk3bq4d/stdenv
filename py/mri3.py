@@ -31,6 +31,52 @@ class Mri3Test(unittest.TestCase):
     @classmethod
     def tearDownClass(cls): pass
 
+    def test_workspace_name_index(self):
+        for i in [
+            ("0   $   ", 0),
+            (0, 0),
+            ("$", 0),
+            ("1   &amp;   ", 1),
+            ("1   &amp   ", 1),
+            (1, 1),
+            ("&amp;", 1),
+            ("2   7   ", 2),
+            (2, 2),
+            ("7", 2),
+            ("3   5   ", 3),
+            (3, 3),
+            ("5", 3),
+            ("4   3   ",4),
+            (4,4),
+            ("3",4),
+            ("5   1   ",5),
+            (5,5),
+            ("1",5),
+            ("6   9   ",6),
+            (6,6),
+            ("9",6),
+            ("7   0   ",7),
+            (7,7),
+            ("0",7),
+            ("8   2   ",8),
+            (8,8),
+            ("2",8),
+            ("9   4   ",9),
+            (9,9),
+            ("4",9),
+            ("10   6   ",10),
+            (10,10),
+            ("6",10),
+            ("11   8   ",11),
+            (11,11),
+            ("8",11),
+            ("0   $ bip", 0),
+            ("1   &amp; ampersand",1),
+            ("4   3 three habon he",4),
+            ("9   4 bip",9),
+            ]:
+            self.assertEqual(i[1], workspace_name_index(i[0]))#, msg="workspace_name_to_letter('{}') is supposed
+
     def test_workspace_name_to_letter(self):
         for i in [
             ("0   $   ", '$'),
@@ -70,13 +116,14 @@ class Mri3Test(unittest.TestCase):
             ("11   8   ", "8"),
             (11, "8"),
             ("8", "8"),
-            ("12   !   ", "!"),
-            (12, "!"),
-            ("!", "!"),
             ("0   $ bip", "$"),
             ("1   &amp; ampersand", "&amp;"),
             ("4   3 three habon he", "3"),
             ("9   4 bip", "4"),
+            (12, '#'),
+            (13, None),
+            (14, None),
+            (-1, None),
             ]:
             self.assertEqual(i[1], workspace_name_to_letter(i[0]))#, msg="workspace_name_to_letter('{}') is supposed
 
@@ -407,7 +454,6 @@ WORKSPACES_LETTER = [
 '4',
 '6',
 '8',
-'!',
 '#']
 
 WORKSPACES_NAMES = [
@@ -423,11 +469,16 @@ WORKSPACES_NAMES = [
     "9   4   ",
     "10   6   ",
     "11   8   ",
-    "12   !   "
+    "12   #   "
     ]
+
+def workspace_name_index(i):
+    return WORKSPACES_LETTER.index(workspace_name_to_letter(i))
 
 def workspace_name_to_letter(i):
     if isinstance(i, int):
+        if i < 0 or i >= len(WORKSPACES_LETTER):
+            return None
         return WORKSPACES_LETTER[i]
     iA = i.split(None, 2)
     r = iA[0] if len(iA) == 1 else iA[1]
@@ -445,11 +496,16 @@ def mrFocusedStack():
     mrinspect(rA, cO)
     return rA
 
+def renumber_workspaces():
+    pprint(get_root().workspaces())
+
 if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
     if 'VIMRUNTIME' in os.environ:
-        unittest.main()
+        #unittest.main()
+        logging_conf()
+        renumber_workspaces()
     else:
         logging_conf()
         try:

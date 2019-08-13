@@ -1,18 +1,67 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 from pprint import pprint
-import mrstack
-import i3ipc
-import sys
+import argparse
 import os
+import sys
+try:
+    import mri3
+except ModuleNotFoundError:
+    sys.path.append(os.path.expanduser('~/py'))
+    import mri3
+import i3ipc
 import re
 import logging
+import unittest
 import sh
 
 
 logger = logging.getLogger(__name__)
+
+class Mri3WorkspaceMigrationTest(unittest.TestCase):
+    #def __init__(self, methodName='runTest'): pass
+    def tearDown(self): pass
+    def tearUp(self): pass
+
+    @classmethod
+    def setUpClass(cls): pass
+
+    @classmethod
+    def tearDownClass(cls): pass
+
+    def test_mri3_workspace_migration(self):
+        for size in range(20):
+            self.assertEqual(0, get_index_uniform(mri3.WORKSPACES_NAMES[0], size))
+
+        size = 2
+        for i in range(0, 7):
+            self.assertEqual(0, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(7, len(mri3.WORKSPACES_NAMES)):
+            self.assertEqual(1, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+
+        size = 3
+        for i in range(0, 5):
+            self.assertEqual(0, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(5, 9):
+            self.assertEqual(1, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(9, len(mri3.WORKSPACES_NAMES)):
+            self.assertEqual(2, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+
+        size = 4
+        for i in range(0, 4):
+            self.assertEqual(0, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(4, 7):
+            self.assertEqual(1, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(7, 10):
+            self.assertEqual(2, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+        for i in range(10, len(mri3.WORKSPACES_NAMES)):
+            self.assertEqual(3, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
+
+        size = 30
+        for i in range(0, len(mri3.WORKSPACES_NAMES)):
+            self.assertEqual(i, get_index_uniform(mri3.WORKSPACES_NAMES[i], size))
 
 def auto(
         level='INFO', # DEBUG
@@ -31,154 +80,99 @@ def auto(
            'syslog': {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
-english = \
-{'0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four', '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine',
-'10': 'ten', '11': 'eleven', '12': 'twelve', '13': 'thirteen', '14': 'fourteen', '15': 'fifteen', '16': 'sixteen', '17': 'seventeen', '18': 'eighteen', '19': 'nineteen',
-'20': 'twenty', '21': 'twenty-one', '22': 'twenty-two', '23': 'twenty-three', '24': 'twenty-four', '25': 'twenty-five', '26': 'twenty-six', '27': 'twenty-seven', '28': 'twenty-eight', '29': 'twenty-nine',
-'30': 'thirty', '31': 'thirty-one', '32': 'thirty-two', '33': 'thirty-three', '34': 'thirty-four', '35': 'thirty-five', '36': 'thirty-six', '37': 'thirty-seven', '38': 'thirty-eight', '39': 'thirty-nine',
-'40': 'fourty', '41': 'fourty-one', '42': 'fourty-two', '43': 'fourty-three', '44': 'fourty-four', '45': 'fourty-five', '46': 'fourty-six', '47': 'fourty-seven', '48': 'fourty-eight', '49': 'fourty-nine',
-'50': 'fifty', '51': 'fifty-one', '52': 'fifty-two', '53': 'fifty-three', '54': 'fifty-four', '55': 'fifty-five', '56': 'fifty-six', '57': 'fifty-seven', '58': 'fifty-eight', '59': 'fifty-nine',
-'60': 'sixty', '61': 'sixty-one', '62': 'sixty-two', '63': 'sixty-three', '64': 'sixty-four', '65': 'sixty-five', '66': 'sixty-six', '67': 'sixty-seven', '68': 'sixty-eight', '69': 'sixty-nine',
-'$': 'dollar',
-'%': 'percent',
-'&': 'ampersand',
-'&amp;': 'ampersand',
-'#': 'hash',
-'`': 'backquote',
-}
-mrstack_excludes = 'comm whatsapp bg kodi vpn doc $ % & &amp; # `'.split()
-
-names = [
-'$',
-'&amp;',
-'7',
-'5',
-'3',
-'1',
-'9',
-'0',
-'2',
-'4',
-'6',
-'8',
-'!',
-'#']
-def mrdmenu(prompt, items):
-    if 0:
-        try:
-            from sh import rofi
-            #dmenu = rofi.bake('-dmenu').bake('-normal-window')
-            dmenu = rofi.bake('-dmenu')
-        except:
-            from sh import dmenu
-    else:
-        from sh import dmenu
-    import socket
-    fontH = dict(
-        acer2011=11,
-        dec17=14
-        )
-    monitor1 = socket.gethostname() in ['ru'+'mo-pc']
-
-    # set default menu args for supported menus
-    menu_args = []
-    #menu_args += ['-i', '-p', prompt, '-f', '-b', '-fn']
-    menu_args += ['--class', 'mrdmenu', '-i', '-f', '-b', '-fn']
-    menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
-    if monitor1:
-        menu_args += ['-m', '1']
-    menu_args += ['-nb', '#FFFFFF', '-nf', '#000000']
-    #menu_input = bytes(str.join('\n', items), 'UTF-8')
-    menu_input = '\n'.join(items)
-    l = str(max(1, min(50, len(items))))
-    menu_cmd = ['-l', l] + menu_args
-    pprint(menu_cmd)
-    try:
-        menu_result = dmenu(*menu_cmd, _in=menu_input)
-    except sh.ErrorReturnCode_1 as e:
-        menu_result = ''
-    r = menu_result.strip()
-    print('show_menu r:{}'.format(r))
-    return r
-
 def go(args=[]):
     logger.info('go()')
-    i3 = i3ipc.Connection()
-    debug_mode = len(args) > 0
-    if debug_mode:
-        ws = args[0]
-    else:
-        ws = i3.get_tree().find_focused().workspace().name
-    logger.info('Current workspace is "{}"'.format(ws))
+    if 'VIMF6' in os.environ: args = ["0   $   ", '-s']
+    if 'VIMF6' in os.environ: args = ["0   $   "]
 
-    words = ws.split()
-
-
-    if len(words) != 1 and not re.match(r'^\d+\s+(\d+|&amp;?|[$&%`#])$',ws.strip()):
-        logger.info('len(words), {} != 1'.format(len(words)))
+    parser = argparse.ArgumentParser(description="single entrypoint for the i3.config.bindcode+workspace to allow easy switch between future and roll back version")
+    parser.add_argument("DESKTOP", type=str, help="desktop name")
+    parser.add_argument("-s", "--shift", help="saves output in place", action="store_true")
+    # script_directory, script_name = os.path.split(__file__)
+    # script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
+    # print(script_txt)
+    ar = parser.parse_args(args)
+    logger.info(ar)
+    if 0:
+        legacy(ar)
         return
+    if 0 and ar.shift:
+        legacy(ar)
+        return
+    try3(ar)
 
-    ws_number = words[0]
-    logger.info('ws_number is {}'.format(ws_number))
+def current_workspaces_letter_obj():
+    return {mri3.workspace_name_to_letter(x.num): x for x in mri3.get_root().workspaces()}
 
-    proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh'}
-    # i3 isn't yet provided with those .bashrc env var
-    if True or \
-        os.environ.get('HOSTNAMEF', '') not in [os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC3F', '')]:
-        proposalsH['kodi'] = 'kodi'
-    proposals = [' '] + sorted(proposalsH.keys())
-    if debug_mode:
-        output = ' '.join(args[1:])
-    else:
-        #output = i3_input.go("w:")
-        prompt = words[1] if len(words) > 1 else ws
-        for i in range(6):
-            proposals.append(' ')
-        output = mrdmenu(prompt, proposals)
-    logger.info('prompted value is {}'.format(output))
-    if not debug_mode or True:
-        i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=True, append_english=True, quotes=True))
-        if output.strip() and output not in mrstack_excludes:
-            mrstack.write(u'workspace: ' + unicode(output))
-        if output in proposalsH:
-            i3.command('exec ' + proposalsH[output])
-            #from sh import bash
-            #bash('-c', proposalsH[output])
+def get_index_uniform(requested_desktop_key, nb_existing_desktops):
+    if nb_existing_desktops == 0:
+        return 0
+    percentage = mri3.workspace_name_index(requested_desktop_key) / len(mri3.WORKSPACES_NAMES)
+    idx = int(percentage * min(len(mri3.WORKSPACES_NAMES), nb_existing_desktops))
+    if idx >= nb_existing_desktops:
+        idx = nb_existing_desktops - 1
+    logger.info("asked for %s out of %s => %s => %s", requested_desktop_key, nb_existing_desktops, percentage, idx)
+    return idx
 
-def workspace_name(real_number, desired_name, append_english=False, prepend_real_number=False, quotes=False):
+def try2(ar):
+    wH = current_workspaces_letter_obj()
+    kH = list(wH.keys())
+    logger.info("Current workspaces: %s", [x for x in kH])
+    idx = get_index_uniform(ar.DESKTOP, len(kH))
+    target_workspace = wH[kH[idx]]
+    i3 = i3ipc.Connection()
+    back_and_forth_allowed_for_shift = False
+    back_and_forth_allowed_for_non_shift = False
+    if mri3.is_workspace_focused(target_workspace):
+        if ar.shift:
+            #logger.info("workspace is already focused %s and ignoring back and forth", target_workspace.name)
+            if not back_and_forth_allowed_for_shift:
+                return
+        else:
+            if not back_and_forth_allowed_for_non_shift:
+                return
+            #logger.info("workspace is already focused %s but continuing due to allowing back and forth", target_workspace.name)
+    if ar.shift:
+        mri3.focused().command('move workspace "{}"'.format(target_workspace.name))
+    i3.command('workspace "{}"'.format(target_workspace.name))
 
-    try:
-        converted_number = names[int(real_number)]
-        display_number = converted_number
-    except:
-        converted_number = str(real_number)
-        display_number = 'r' + str(real_number)
+def try3(ar):
+    wH = current_workspaces_letter_obj()
+    kH = list(wH.keys())
+    logger.info("Current workspaces: %s", [x for x in kH])
+    idx = mri3.workspace_name_index(ar.DESKTOP)
+    if idx < 0:
+        idx = 0
+    if idx >= len(kH):
+        idx = len(kH) - 1
+    target_workspace = wH[kH[idx]]
+    i3 = i3ipc.Connection()
+    back_and_forth_allowed_for_shift = False
+    back_and_forth_allowed_for_non_shift = False
+    if mri3.is_workspace_focused(target_workspace):
+        if ar.shift:
+            #logger.info("workspace is already focused %s and ignoring back and forth", target_workspace.name)
+            if not back_and_forth_allowed_for_shift:
+                return
+        else:
+            if not back_and_forth_allowed_for_non_shift:
+                return
+            #logger.info("workspace is already focused %s but continuing due to allowing back and forth", target_workspace.name)
+    if ar.shift:
+        mri3.focused().command('move workspace "{}"'.format(target_workspace.name))
+    i3.command('workspace "{}"'.format(target_workspace.name))
 
-    if append_english and (desired_name is None or len(desired_name.strip()) == 0):
-        desired_name = 'noid {}'.format(display_number)
-        desired_name = 'noid'
-        try:
-            desired_name = english[converted_number]
-        except:
-            pass
-
-    left_padding = right_padding = "   "
-    #new_name = '"{left_padding}{ws} {desired_name}{right_padding}"'.format(**locals())
-    new_name = '{display_number} {desired_name}'.format(**locals())
-    new_name = new_name.strip()
-    new_name = re.sub(r'\s+', ' ', new_name)
-    if not new_name:
-        left_padding = right_padding = ""
-    if not prepend_real_number:
-        real_number=''
-
-
-    #ws = ws.strip()
-    q = '"' if quotes else ''
-    new_name = '{q}{real_number}{left_padding}{new_name}{right_padding}{q}'.format(**locals())
-    logger.info('new_name is "{}"'.format(new_name))
-    return new_name
+def legacy(ar):
+    i3 = i3ipc.Connection()
+    if ar.shift:
+        mri3.focused().command('move workspace number ' + ar.DESKTOP)
+    i3.command('workspace number ' + ar.DESKTOP)
+    os.system(os.path.expanduser('~/bin/mri3_prompt_for_unnamed_workspace.py'))
 
 if __name__ ==  "__main__":
-    auto(use='stdout file syslog')
-    print(go(sys.argv[1:]))
+    if 'VIMRUNTIME' in os.environ:
+        auto(use='stdout file syslog')
+        unittest.main()
+    else:
+        auto(use='stdout file syslog')
+        go(sys.argv[1:])

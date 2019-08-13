@@ -123,8 +123,8 @@ if __name__ == '__main__':
             #logging.error('oups for %s', sys.argv)
             #raise type(e), type(e)(e), sys.exc_info()[2]
 
-""".replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')))
-    os.chmod(fp, 0750)
+""".replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')).encode())
+    os.chmod(fp, 0o0750)
     print(fp)
 
 if False:
