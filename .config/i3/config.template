@@ -241,6 +241,10 @@ bindcode $mod+Shift+Control+44  exec mri3_move_workspace_left.py
 # code:46 => sym: 0x6c, symbol:l
 bindcode $mod+Shift+Control+33  exec mri3_move_workspace_right.py
 
+#bindcode $mod+Shift+Control+Return  exec mri3_prompt_for_workspace.py >>/tmp/mri3_prompt 2>&1
+# code:22 => sym: 0xff08, symbol: BackSpace
+bindcode  $mod+Control+22 exec mri3_prompt_for_workspace.py >>/tmp/mri3_prompt3 2>&1
+
 # move focused container to workspace
 # code:49 => sym: 0x60, symbol: grave
 bindcode  $mod+Shift+49 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws0' >>/tmp/hehe3.log 2>&1
