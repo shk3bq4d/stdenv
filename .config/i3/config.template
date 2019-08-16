@@ -199,7 +199,7 @@ bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command 
 bindcode  $mod+49 exec python3 ~/bin/mri3_workspace_migration.py '$ws0' >>/tmp/hehe2.log 2>&1
 # code:10 => sym: 0x31, symbol: 1
 #bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py '$ws1' >>/tmp/hehe2.log 2>&1
-bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py  '1   &amp   ' >>/tmp/hehe3.log 2>&1 # notice the lack of ; after amp; it is intentional
+bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py  '1   &amp   ' >>/tmp/hehe3.log 2>&1
 # code:11 => sym: 0x32, symbol: 2
 bindcode  $mod+11 exec python3 ~/bin/mri3_workspace_migration.py '$ws2' >>/tmp/hehe2.log 2>&1
 # code:12 => sym: 0x33, symbol: 3
