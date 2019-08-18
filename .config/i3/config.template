@@ -250,7 +250,8 @@ bindcode  $mod+Control+22 exec mri3_prompt_for_workspace.py >>/tmp/mri3_prompt3 
 bindcode  $mod+Shift+49 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws0' >>/tmp/hehe3.log 2>&1
 # code:10 => sym: 0x31, symbol: 1
 #bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws1' >>/tmp/hehe2.log 2>&1
-bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py        -s '1   &amp   ' >>/tmp/hehe3.log 2>&1 # notice the lack of ; after amp; it is intentional
+# notice the lack of ; after amp; it is intentional
+bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py        -s '1   &amp   ' >>/tmp/hehe3.log 2>&1
 # code:11 => sym: 0x32, symbol: 2
 bindcode  $mod+Shift+11 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws2' >>/tmp/hehe3.log 2>&1
 # code:12 => sym: 0x33, symbol: 3
