@@ -25,7 +25,7 @@ sudo unattended-upgrade # apt implicitely applies security updates
 
 # YUM
 yum provides PROG
-yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x
+yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x available
 yum list installed 'http*'
 yum info elasticsearch # show version
 yum whatprovides ack       && yum clean all
