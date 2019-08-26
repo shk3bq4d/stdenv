@@ -58,3 +58,6 @@ chmod 0400 ~/.pgpass
 pg_dumpall --host $POSTGRES_HOSTNAME | gzip -c > /backupdata/$(date +'%Y.%m.%d-%H.%M.%S')-all.dump.gz
 ```
 19 mai
+
+```sql
+select 1; -- from dual

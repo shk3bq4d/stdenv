@@ -74,7 +74,7 @@ sshme() {
 }
 history_all_old() {
     { sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history*' | xargs sudo ls -latr
-      sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history' | xargs sudo ls -1tr | xargs sudo grep --color=always -E '^'
+      sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history*' | xargs sudo ls -1tr | xargs sudo grep --color=always -E '^'
       history
     } | less -R
 }

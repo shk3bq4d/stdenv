@@ -27,5 +27,5 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-ack "$@" ~/.bashrc ~/.zshrc ~/bin/dot.bashfunctions ~/.*aliases
+ack "$@" ~/.bashrc ~/.zshrc ~/.sshrc ~/bin/dot.bashfunctions ~/.*aliases
 

@@ -127,3 +127,8 @@ mv wslbridge* /bin
 mintty.exe /bin/wslbridge.exe -t /bin/bash -l
 
 http://babun.github.io/
+
+# curl
+bitsadmin /addfile thisissomejobname http://kakao.ro/Pictures.iso C:\john_pictures.iso
+(New-Object System.Net.WebClient).DownloadFile($url, $output)
+Invoke-WebRequest -Uri "https://blabla.com/pictures.iso" -OutFile "c:\lol.iso"

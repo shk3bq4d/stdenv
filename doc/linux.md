@@ -315,3 +315,6 @@ https://www.reddit.com/r/linuxadmin/comments/9h3x84/ubuntu_vs_centos_should_i_st
 lspci | grep VGA # find out graphical card nvidia amd intel
 
 nice -n 15 clamscan && clamscan --stdout -v -ir /chroot/
+
+
+ssh blabla sudo shutdown -r 04:10 # reboot reset remote overnight business hours
