@@ -1750,7 +1750,7 @@ ansible_conditional_bare_vars             this setting on (True), running condit
       when: ansible_fqdn is not defined
 
 
-# variables
+# variables precedence priority order vars
 Variable precedence: Where should I put a variable?
 * command line values (eg “-u user”)
 * role defaults [1]

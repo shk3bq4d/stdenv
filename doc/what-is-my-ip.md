@@ -8,3 +8,4 @@ dig +short myip.opendns.com @resolver1.opendns.com
 nc 4.ifcfg.me 23 | grep IPv4 | cut -d' ' -f4
 echo close | ftp 4.ifcfg.me | awk '{print $4; exit}'
 
+curl -s --resolve whatismyip.akamai.com:80:77.109.138.83 http://whatismyip.akamai.com/

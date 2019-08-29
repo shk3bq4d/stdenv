@@ -14,7 +14,7 @@ esac
 [[ $# -ne 0 ]] && exit 0
 timeout=4
 mycurl() {
-	local URL=$1
+	local URL="$@"
 	set -o pipefail
 	if command -v curl &>/dev/null; then
 		output="$(curl -4 -s -m $timeout $URL 2>/dev/null)"
@@ -32,6 +32,7 @@ timeout_bin=
 command -v timeout &>/dev/null && timeout_bin="timeout $timeout "
 printf "%-16s" internet
 for x in 1; do
+	mycurl --resolve whatismyip.akamai.com:80:77.109.138.83 http://whatismyip.akamai.com/ && break
 	mycurl http://whatismyip.akamai.com/ && break
 	mycurl https://4.ifcfg.me/ && break
 	mycurl http://canhazip.com && break
