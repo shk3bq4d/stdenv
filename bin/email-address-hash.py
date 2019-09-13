@@ -42,11 +42,14 @@ def go(args):
     ar = parser.parse_args(args)
     h = hashlib.sha512(ar.identifier).hexdigest()
     print("""123r4p+{}{}@gmail.com
-{}-{}@abc1.ch""".format(
+{}-{}@abc1.ch
+password:
+Abcd12.-{}
+""".format(
         ar.identifier, h[:8],
-        ar.identifier, h[:8]
+        ar.identifier, h[:8],
+        h[8:14]
         ))
-    #print
 
 if __name__ == '__main__':
     reload(sys)
