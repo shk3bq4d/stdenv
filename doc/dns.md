@@ -1,12 +1,20 @@
 dig -x 195.94.108.9 # reverse DNS lookup
 
-dig +short mail.nagra.com @10.0.92.180
-
-10.36.211.20 10.36.211.21 # crissier
-10.0.92.180 10.0.93.182 # corp
+dig +short mail.microsoft.com @10.8.92.180
 
 
 https://www.madboa.com/geek/dig/
+
+```sh
+python -c 'import socket; print socket.gethostbyname("www.example.com")'
+ping -q -c 1 -t 1 your_host_here | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"
+getent hosts unix.stackexchange.com | cut -d' ' -f1 # 
+host unix.stackexchange.com | awk '/has address/ { print $4 }' # directly to DNS server
+nslookup unix.stackexchange.com | awk '/^Address: / { print $2 }' # directly to DNS server
+dig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 }' # directly to DNS server
+dig +tcp   +short unix.stackexchange.com
+dig +notcp +short unix.stackexchange.com
+```
 
 
 

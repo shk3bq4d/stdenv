@@ -2407,3 +2407,14 @@ Jinja 2.10.x (stable)
 name: "{{ item.split()[0] }}" # split first words
 
 https://fossies.org/linux/ansible/lib/ansible/modules/monitoring/zabbix/zabbix_proxy.py
+
+https://www.reddit.com/r/ansible/comments/9t0egv/ansible_python3_and_package_management_with/ yum centos7 ansible python3 python2
+
+
+## vimf6_ansible_args: --step
+## vimf6_ansible_args: --start-at-task startattask
+## vimf6_ansible_args: --diff -e zabbix_env=uat -i inventory.yml --vault-id dev@secrets/ansible-vault-dev
+## vimf6_ansible_args: --diff -e zabbix_env=none -i inventory.yml -t vimf6 --vault-id dev@secrets/ansible-vault-dev -v
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+## vimf6_ansible_nolocalsudo: yes

@@ -30,7 +30,8 @@ sudo mkdir /data && echo "/dev/mapper/vg_system-lv_data /data                   
 
 
 no, for major FS when extending, yes for shrinking #https://unix.stackexchange.com/questions/58432/must-the-filesystem-be-unmounted-while-extending-an-lvm-logical-volume
-pvdisplay | grep -E "PE Size|Free PE"
+sudo pvdisplay | grep -E "PE Size|Free PE"
+sudo lvdisplay | grep -E "LV Path|LV Size"
 lvresize -l+512 -r /dev/vg_system/lv_opt
 
 lvresize --size +1G --resizefs /dev/VolGroup00/varlv

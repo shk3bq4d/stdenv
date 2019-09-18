@@ -169,3 +169,7 @@ PKCS #15   1.1   Cryptographic Token Information Format Standard  Defines a stan
 pip install --trusted-host pypi.python.org  ldap3 # no validate python pip
 
 openssl rsa -aes256 -in adminmru.key -out adminmru-key.key # add change passphrase key password
+
+# pfx
+openssl pkcs12 -in client_ssl.pfx -out client_ssl.pem -clcerts # extract CL certs (but not CA certs) from pfx
+openssl pkcs12 -in client_ssl.pfx -out root.pem -cacerts       # extract CA certs (but not CL certs) from pfx

@@ -3,7 +3,7 @@ apt-get changelog pkgname
 sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides in installed packages
-dpkg -S $(which tail) # core-utils
+dpkg -S $(which tail) # whatprovides core-utils
 dpkg -L python # list files that were installed per package
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip                                                2" 360
@@ -21,6 +21,7 @@ dpkg -S $(which dig) # dnsutils: /usr/bin/dig
 
 ## APT security updates
 apt-get upgrade -s | grep -i security # list security updates
+/usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
 
 # YUM
@@ -35,6 +36,7 @@ yum whatprovides dig       && yum clean all # bind-utils
 yum whatprovides locate    && yum clean all # mlocate
 yum whatprovides snmpwalk  && yum clean all # net-snmp-utils
 yum whatprovides mongodump && yum clean all # mongodb-org-tools
+yum whatprovides dos2unix  && yum clean all # dos2unix
 yum clean all
 
 yum-config-manager --disable base,extras,updates
@@ -121,3 +123,7 @@ aptitude why PACKAGE # describe why package was installed
 
 # mrhyp
 sed -e '/mirrorlist=.*/d' -e 's/#baseurl=/baseurl=/' -e "s/\$releasever/7.4.1708/g" -e "s/mirror.centos.org\\/centos/vault.centos.org/g" -i /etc/yum.repos.d/CentOS-Base.repo
+
+
+# clean boot
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -E 'linux-(cloud|headers|image|modules|tools)-' | xargs sudo apt-get -y purge #no space left on device (/boot) on apt-get: here is how to clean

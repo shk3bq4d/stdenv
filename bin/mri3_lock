@@ -25,7 +25,10 @@ may19*)
 esac
 case "$(hostname -f)" in \
 dec17*|may19*)
-	f="$HOME/Pictures/i3lock/boreal3-$(current-resolution.sh).png"
+	case "$(hostname -f)" in \
+		may19*) f="$HOME/images/sf.png";;
+		*)      f="$HOME/Pictures/i3lock/boreal3-$(current-resolution.sh).png";;
+	esac
 	if [[ ! -f "$f" ]]; then
 		convert -resize $(current-resolution.sh) \
 			~/Pictures/i3lock/boreal3.png \

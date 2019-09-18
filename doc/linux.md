@@ -27,7 +27,6 @@ cut -d: -f1 /etc/passwd # list all users on system
 cut -d: -f1 /etc/group # list all groups on system
 (echo body text; uuencode ~/path_to_file.jpg attachment_name.jpg ) | mailx -s "email prive $i" -t 123r4p+doclinux87f90a32@gmail.com # email with attachment
 dhclient -r; sleep 10; dhclient # renew dhcp
-dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge #no space left on device (/boot) on apt-get: here is how to clean
 ln -is TARGET LINKNAME
 sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child processes 3266
 @end=sh@
