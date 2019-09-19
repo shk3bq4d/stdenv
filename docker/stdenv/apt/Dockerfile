@@ -9,6 +9,7 @@ RUN \
 		apt-transport-https \
 		ascii \
 		bash \
+		bind-utils \
 		build-essential \
 		ca-certificates \
 		cmake \
