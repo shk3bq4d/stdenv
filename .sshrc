@@ -80,7 +80,7 @@ history_all_old() {
 }
 history_all() {
     { { { sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history*' | xargs sudo ls -latr
-       sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history' | xargs sudo ls -1tr | xargs sudo grep --color=always -E '^'
+       sudo find /root/ /home/* -maxdepth 1 -mindepth 1 -type f -name '.bash_history*' | xargs sudo ls -1tr | xargs sudo grep --color=always -E '^'
       } | sed -r -n -e '/.*:......#(.*)$/ N; s/.*#(.*)\n(.*)/\1 \2/g; p;' | while read ts line; do [[ "$ts" =~ ^[0-9][0-9][0-9][0-9][0-9][0-9]+$ ]] && echo "$(date -d @$ts +'%Y.%m.%d %H:%M:%S') $line" || echo "$ts $line"; done
       history | sed -r -e 's/^ *[0-9]+? *(20[0-9][0-9][^0-9].*)/\1/'
       command last -Fi | grep -vE '^reboot|still logged in|wtmp begins' |  while read user ps ip b1 b2 b3 b4 b5 c d1 d2 d3 d4 d5 leftover; do echo "$(date -d "$b1 $b2 $b3 $b4 $b5" +'%Y.%m.%d %H:%M:%S') $(printf ' -> \033[0;32m%-16s\033[0m %15s' $user $ip)"; echo "$(date -d "$d1 $d2 $d3 $d4 $d5" +'%Y.%m.%d %H:%M:%S') $(printf ' <- \033[0;31m%-16s\033[0m %15s %s' $user $ip "$leftover")"; done
@@ -101,7 +101,15 @@ export GIT_SSH=$RCD/git_ssh
 if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null; then
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
-    [[ -z $CMDARGS ]] && command last -daxFn 20 && ips --no-internet && echo "" && uptime
+    if [[ -z $CMDARGS ]]; then
+		command last -daxFn 20
+		ips --no-internet
+		uptime
+		timeout 5 df -h | grep -wE '^/(snap|run|sys)'
+		sudo -n true \
+		&& sudo netstat -tlnp \
+		||      netstat -tln
+	fi
 fi
 sshrc_ln() {
     target=/tmp/me
