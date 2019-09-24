@@ -102,14 +102,14 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
     if [[ -z $CMDARGS ]]; then
-		command last -daxFn 20
-		ips --no-internet
-		uptime
-		timeout 5 df -h | grep -wE '^/(snap|run|sys)'
-		sudo -n true \
-		&& sudo netstat -tlnp \
-		||      netstat -tln
-	fi
+        command last -daxFn 20
+        ips --no-internet
+        uptime
+        timeout 5 df -h | grep -wE '^/(snap|run|sys)'
+        sudo -n true \
+        && sudo netstat -tlnp \
+        ||      netstat -tln
+    fi
 fi
 sshrc_ln() {
     target=/tmp/me
