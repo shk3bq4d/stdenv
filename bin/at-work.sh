@@ -20,7 +20,8 @@ $WORK_PC1F)
 	exit 0
 	;;
 dec17.ly.lan)
-	ips --no-internet | grep -q 'wlp58s0.*172.28'
+	#ips --no-internet | grep -q 'wlp58s0.*172.28'
+	ifconfig wlp58s0 | grep -qF "inet 10.14.2." && exit 0
 	;;
 esac
 exit 1
