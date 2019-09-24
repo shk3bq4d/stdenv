@@ -63,6 +63,10 @@ set -euo pipefail
 # exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
 # exec 2>&1
 
+set +e
+set -x
+systemctl status cups | cat
+docker ps -a | grep -w cups
 lpstat -p -d #list printers
 
 exit 0

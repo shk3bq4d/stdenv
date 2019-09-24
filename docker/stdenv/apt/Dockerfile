@@ -9,11 +9,11 @@ RUN \
 		apt-transport-https \
 		ascii \
 		bash \
-		bind-utils \
 		build-essential \
 		ca-certificates \
 		cmake \
 		curl \
+		dnsutils \
 		dos2unix \
 		gawk \
 		git \
