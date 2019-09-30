@@ -17,12 +17,15 @@ RUN \
 		dos2unix \
 		gawk \
 		git \
+		htop \
+		iftop \
 		ipcalc \
 		iputils-ping \
 		less \
 		locales-all \
 		locate \
 		moreutils \
+		nethogs \
 		net-tools \
 		netcat \
 		nmap \
