@@ -52,5 +52,7 @@
           - whois
           # htop
           - htop
+          - sshpass
+          - nethogs
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
