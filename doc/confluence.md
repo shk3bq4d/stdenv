@@ -1,3 +1,5 @@
+https://confluence.atlassian.com/doc/confluence-release-notes-327.html # changelog upgrade version latest update
+
 www_confluence_help.sh
 http://confluence/renderer/notationhelp.action?section=all
 
@@ -2388,3 +2390,8 @@ Notation Guide - Confluence
 
 # Macro
 Content by label
+
+
+# SQL
+sudo -u postgres psql confluencedb
+select * from content where title like 'Add vl%' limit 10;

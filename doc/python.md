@@ -1109,3 +1109,9 @@ cat << 'HEREDOC' | python -
 print(2 + 5)
 HEREDOC
 ```
+import enum
+class REST(enum.Enum):
+    get = "get" # enum
+    put = "put" # enum
+    post = "post" # enum
+    delete = "delete" # enum

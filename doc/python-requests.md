@@ -3,8 +3,10 @@ pydoc requests
 pydoc requests.sessions
 
 >>> r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
->>> r.status_code
+>>> r.status_code # 404 403 500 http error result
 200
+>>> r.reason # 404 403 500 http error message status
+'OK'
 >>> r.headers['content-type']
 'application/json; charset=utf8'
 >>> r.encoding
@@ -368,7 +370,7 @@ proxies = {
 session.proxies
 requests.get(url, params=None, proxies=None, verify=True)
 proxies = {'http': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']), 'https': 'http://mitmproxy.{}.local:8080'.format(os.environ['USER']) }
-proxies = {'http': 'http://127.0.0.1:15134', 'https': 'http://127.0.0.1:15134' }
+proxies = {'http': 'http://127.0.0.1:15133', 'https': 'http://127.0.0.1:15133' } # proxy
 
 # http://stackoverflow.com/questions/16694907/how-to-download-large-file-in-python-with-requests-py
 ```python
