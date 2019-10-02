@@ -11,6 +11,7 @@ apt-file search ts | grep -E '/ts$' # whatprovides in all packages
 iproute2: /sbin/ip
 apt list --upgradable
 apt list --installed
+apt list --installed | grep PACKAGE # current version info
 /etc/apt/sources.list
 /etc/apt/sources.list.d/
 echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-httproxy
