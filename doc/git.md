@@ -582,3 +582,6 @@ https://apiumhub.com/tech-blog-barcelona/gittip-skip-worktree/
 
 # worktree
 git worktree add ../iaac_master master
+
+git config --global credential.helper store # ask git to save all   https credentials
+git config          credential.helper store # ask git to save local https credentials
