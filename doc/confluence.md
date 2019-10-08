@@ -1,4 +1,5 @@
-https://confluence.atlassian.com/doc/confluence-release-notes-327.html # changelog upgrade version latest update
+changelog upgrade version latest update # https://confluence.atlassian.com/doc/confluence-release-notes-327.html
+upgrade version latest update # https://www.atlassian.com/software/confluence/download-archives 
 
 www_confluence_help.sh
 http://confluence/renderer/notationhelp.action?section=all

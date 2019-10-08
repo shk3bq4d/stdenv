@@ -18,10 +18,10 @@ Windows Registry Editor Version 5.00
 "ProductDir"="C:\\Users\\MyUser\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0"
 """
 import hashlib
-hashlib.sha512("Nobody inspects the spammish repetition").hexdigest()
-hashlib.md5("Nobody inspects the spammish repetition").hexdigest()
-hashlib.sha1("Nobody inspects the spammish repetition").hexdigest()
-hashlib.sha256("Nobody inspects the spammish repetition").hexdigest()
+hashlib.sha512("Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.md5("Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha1("Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
 
 
 # UTF-8 IO
