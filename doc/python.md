@@ -1008,6 +1008,7 @@ except sh.ErrorReturnCode_2:
 logging.getLogger('sh.command').setLevel(logging.WARN) # logger sh level
 # https://amoffat.github.io/sh/
 # https://amoffat.github.io/sh/reference.html
+sh.cat(_fg=True) # did the trick for git clone when _out=sys.stdout, _err=sys.stderr, _tty_in=True  wasn't
 sh.cat(_in="_in is stdin")
 sh.cat(_in="_in is stdin", _out=None, )
 sh.cat(_out=sys.stdout, _err=sys.stderr)
