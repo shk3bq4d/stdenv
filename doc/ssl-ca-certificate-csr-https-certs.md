@@ -96,6 +96,8 @@ export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/source/anchors/myca.crt
 # git https
 GIT_SSL_NO_VERIFY=true
 
+AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
+
 # verify validation (full chain must be in onefile)
 host=www.google.com; a=$(mktemp); python -c "import ssl; print(ssl.get_server_certificate(('$host', 443)))" |tee $a; openssl verify -verbose -CAfile ~/myca.crt $a
 
