@@ -428,6 +428,12 @@ git add -p # stages interactively
 git reset -p # unstages interactively
 
 # diff conveniency
+git diff --ignore-cr-at-eol # Ignore carriage-return at the end of line when doing a comparison. white blank spaces diff
+git diff --ignore-space-at-eol # Ignore changes in whitespace at EOL. white blank spaces diff
+git diff -b, --ignore-space-change # Ignore changes in amount of whitespace. This ignores whitespace at line end, and considers all other sequences of one or more whitespace characters to be equivalent. white blank spaces diff 
+git diff -w, --ignore-all-space # Ignore whitespace when comparing lines. This ignores differences even if one line has whitespace where the other line has none. white blank spaces diff 
+git diff --ignore-blank-lines #  white blank spaces diff 
+
 git diff --ignore-space-at-eol     # white blank spaces diff
 git diff --color-words # https://stackoverflow.com/questions/28551556/git-remove-leading-plus-minus-from-lines-in-diff
 git log -b # --ignore-space-change # white blank tabs spaces diff

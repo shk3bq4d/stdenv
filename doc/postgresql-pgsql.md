@@ -44,7 +44,7 @@ SELECT * FROM information_schema.tables where table_name='dbversion';
 psql -U zabbix -h localhost
 java -jar schemaSpy_5.0.0.jar -t pgsql -host localhost:5432 -db zabbix -s public -o /tmp/bip -u zabbix -p myPasswordFSD0.fs8 -dp postgresql-42.1.4.jar
 
-pg_dumpall -U django -oc 
+pg_dumpall -U django -oc
 postgres postgres -f -
 
 psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups where group_id = 9;"
@@ -61,3 +61,10 @@ pg_dumpall --host $POSTGRES_HOSTNAME | gzip -c > /backupdata/$(date +'%Y.%m.%d-%
 
 ```sql
 select 1; -- from dual
+
+select * from users where username like 'jerem%';
+select username, lastname from users where username like 'jerem%';
+begin; -- or begin transaction;
+update users set lastname='Bopton' where username like 'jere.bs%';
+end transaction; -- or commit;
+```

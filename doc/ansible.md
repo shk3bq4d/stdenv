@@ -2094,10 +2094,10 @@ state: "{% if item.state.get('inactive') == 'inactive'%} inactive {% else %} act
 Other hashes (platform dependent):
 {{ 'test2' | hash('blowfish') }}
 To get a sha512 password hash (random salt):
-{{ 'passwordsaresecret' | password_hash('sha512') }}
-{{ 'secretpassword' | password_hash('sha256', 'mysecretsalt') }}
-{{ 'secretpassword' | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
-{{ 'secretpassword' | password_hash('sha256', 'mysecretsalt', rounds=10000) }}
+{{ 'passwordsaresecret' | string | password_hash('sha512') }}
+{{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt') }}
+{{ 'secretpassword' | string | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
+{{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt', rounds=10000) }}
 {{ {'a':1, 'b':2} | combine({'b':3}) }}
 {{ {'a':{'foo':1, 'bar':2}, 'b':2} | combine({'a':{'bar':3, 'baz':4}}, recursive=True) }}
 {{ a | combine(b, c, d) }}

@@ -1491,3 +1491,7 @@ Previous: Native Python Types
 Next: Extensions
 Quick search
 © Copyright 2008, Armin Ronacher. Created using Sphinx.
+
+
+
+ALL: {% for iprange in rhel7cis_host_allow -%}{{ iprange }}{% if not loop.last %}, {% endif %}{% endfor %}

@@ -22,6 +22,9 @@
 ũ Ũ
 ü Ü. &uuml; &Uuml;
 
+```sh
+echo $'\x75\x64\x65\x6c\x73' # bash escape -> udels
+```
 
 
 &icirc; &Icirc;
