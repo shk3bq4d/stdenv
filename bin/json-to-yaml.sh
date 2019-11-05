@@ -6,11 +6,12 @@
 ##    REMOTEHOST: remote host where to ssh
 ##    REMOTEPORT: JMX port (default: 12345)
 ##
-## Author: Jeff Malone, 07 May 2019
+## Author: Jeff Malone, 05 Nov 2019
 ##
 
+set -euo pipefail
 
-# function usage() { sed -r -n -e "s/__SCRIPT__/$\(basename $0\)/" -e '/^##/s/^..// p'   $0 ; }
+# function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
 
 # [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
 
@@ -63,9 +64,13 @@
 # exec 2>&1
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
-source ~/.virtualenvs/az-cli/bin/activate
-case $(basename $0) in \
-az-uat|az-sfopsb) export AZURE_CONFIG_DIR=$HOME/.azure-sfopsb/;;
-az-prod|az-sfops) export AZURE_CONFIG_DIR=$HOME/.azure-sfops/;;
-esac
-az "$@"
+
+#echo -n "Are you sure you want to proceed (yN): "
+#read _read
+#echo
+#case "${_read,,}" in #y|yes) true ;;
+#*)   false;;
+#esac
+
+cat $@ | prettify-json | yq r -
+

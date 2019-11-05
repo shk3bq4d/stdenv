@@ -1189,6 +1189,8 @@ ansible zabbix_proxy -c local -i inventory.yml -m shell -a "sh -c 'printf \"GREP
 sudo ansible localhost user -a "name=mysql-backup home=/data/mysql-backup"
 sudo ansible localhost -m user -a "name=mysql-backup state=absent"
 sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-port-forwarding,from="10.0.1.1"' key='ssh-rsa '"
+ansible -i inventory.yml "green:&linux" -m shell -a "cat /proc/loadavg" # cpu usage
+ansible -i inventory.yml "green:&linux" -m shell -a "netstat -tn | wc -l" # network connections number
 
 when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -2419,3 +2421,5 @@ https://www.reddit.com/r/ansible/comments/9t0egv/ansible_python3_and_package_man
 ## vimf6_ansible_args: --diff --check -vv
 ## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
 ## vimf6_ansible_nolocalsudo: yes
+
+https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
