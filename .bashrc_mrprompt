@@ -122,7 +122,7 @@ function mr_prompt() {
         local f
         f=/etc/profile.d/98-sf-prompt.sh
         if [[ -f $f ]]; then
-            . $f
+            source $f
             case $_SF_PSCOLOR in \
                 bold)      PROMPT="${PROMPT}${BOLD}";;
                 off)       PROMPT="${PROMPT}${OFF}";;

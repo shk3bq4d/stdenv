@@ -1,0 +1,5 @@
+## vimf6_ansible_args: --diff -e zabbix_env=uat -i inventory.yml --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod
+## vimf6_ansible_args: --diff -e zabbix_env=uat -i inventory.yml
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+## vimf6_ansible_nolocalsudo: yes
