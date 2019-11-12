@@ -209,11 +209,11 @@ case $SCRIPT in \
         test -z "$ansible_args" && ansible_args="--diff --check"
         if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
             set -x
-            sudo -E $(which ansible-playbook) $SCRIPT $ansible_args # -l 127.0.0.1
+            sudo -E $(which ansible-playbook) $SCRIPT $ansible_args 2>&1 | ts # -l 127.0.0.1
             _exit=$?
         else
             set -x
-            ansible-playbook $SCRIPT                  $ansible_args # -l 127.0.0.1
+            ansible-playbook $SCRIPT                  $ansible_args 2>&1 | ts # -l 127.0.0.1
             _exit=$?
         fi
         set +x
