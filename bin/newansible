@@ -34,6 +34,7 @@ cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $f .yml)/g" >>$f
 - hosts: localhost
   connection: local
   #become: true
+  gather_facts: no
   vars:
     _random: hehe
     filename: FILENAME

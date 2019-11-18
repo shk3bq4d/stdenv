@@ -1189,6 +1189,7 @@ ansible zabbix_proxy -c local -i inventory.yml -m shell -a "sh -c 'printf \"GREP
 sudo ansible localhost user -a "name=mysql-backup home=/data/mysql-backup"
 sudo ansible localhost -m user -a "name=mysql-backup state=absent"
 sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-port-forwarding,from="10.0.1.1"' key='ssh-rsa '"
+ansible -i inventory.yml HOSTNAME -m authorized_key -a "user=ansible exclusive=no comment=id_rsa_ansible key='$(cat ~/.ssh/id_rsa_ansible.pub)'"
 ansible -i inventory.yml "green:&linux" -m shell -a "cat /proc/loadavg" # cpu usage
 ansible -i inventory.yml "green:&linux" -m shell -a "netstat -tn | wc -l" # network connections number
 
@@ -2423,3 +2424,40 @@ https://www.reddit.com/r/ansible/comments/9t0egv/ansible_python3_and_package_man
 ## vimf6_ansible_nolocalsudo: yes
 
 https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
+
+
+# data manipulation in python
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    salut:
+      keya:
+        - elema
+        - elemb
+        - elemc
+      keyb:
+        - elemd
+        - eleme
+        - elemf
+  tasks:
+    - copy:
+        dest: /tmp/bip.py
+        content:
+          #```python
+          import json
+          import sys
+          inH = json.load(sys.stdin)
+          outH = []
+          for k, v in inH.items():
+            for elem in v:
+              outH.append('{}-{}'.format(k, elem))
+          print(json.dumps(outH))
+          #```
+    - shell: python3 /tmp/bip.py
+      args:
+        stdin: "{{ salut | to_json }}"
+      register: out
+    - set_fact:
+        out_ansible: "{{out.stdout | from_json }}"
+    - debug: var=out_ansible

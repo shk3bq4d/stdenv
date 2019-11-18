@@ -14,3 +14,5 @@ Expand selection: "Select - Grow"
 
 Remove Selection " Control + Mouse"
 Free Select: f
+
+Tools - Selection Tool - Rectangle, Image - Crop to selection
