@@ -2461,3 +2461,6 @@ https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
     - set_fact:
         out_ansible: "{{out.stdout | from_json }}"
     - debug: var=out_ansible
+
+
+when: - "Multiple conditions that all need to be true (a logical ‘and’) can also be specified as a list -> not or"

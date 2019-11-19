@@ -60,7 +60,7 @@ ship-to:  *id001
     spotSize: 2mm                # redefines just this key; refers to &id001 for the rest
 - step: *id002
 
-specialDelivery:  > # multiline are merged on single line. Ends with new line
+specialDelivery:  > # multiline are merged / fold on single line. Ends with new line
     Follow the Yellow Brick
     Road to the Emerald City.
     Pay no attention to the
