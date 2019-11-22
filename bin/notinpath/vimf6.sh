@@ -236,6 +236,10 @@ $HOME/.Xdefaults)
     xrdb -merge ~/.Xdefaults
     myexit $?
     ;;
+*tf)
+    terraform apply -no-color
+    myexit $?
+    ;;
 *txt)
     echo "($(basename $0)): ignored for filetype $SCRIPT"
     exit 0
