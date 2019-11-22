@@ -1,4 +1,5 @@
----
+## vimf6_ansible_args: --diff
+## vimf6_ansible_nolocalsudo: yes
 - hosts: localhost
   vars:
     source: "https://askubuntu.com/questions/1081695/error-during-converting-jpg-to-pdf"
