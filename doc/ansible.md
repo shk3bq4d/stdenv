@@ -54,6 +54,7 @@ creates: /tmp/hehe
     var: hostvars[inventory_hostname]
   tags:
     - mrdebug
+- debug: var=hostvars[inventory_hostname]
   # from https://gryzli.info/2017/12/21/ansible-debug-print-variables/
 - name: "local_action with no sudo root"
   vars:
@@ -2464,3 +2465,5 @@ https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
 
 
 when: - "Multiple conditions that all need to be true (a logical ‘and’) can also be specified as a list -> not or"
+
+subject_alt_name: "{{ bH.cert_subject_alt_name | map('regex_replace', '(.*)', 'DNS:\\1') | join(',') | default('DNS:' + bH.cert_common_name, true)}}"

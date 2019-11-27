@@ -27,5 +27,4 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-set -x
-openssl req -text -noout -verify -in $f
+openssl req -text -noout -verify -in "$@" 2>&1 | grep --color=always -E '^|CN = [^,]+|X509v3 Subject Alternative Name|IP Address:.*|DNS:.*' | less -M --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init

@@ -833,7 +833,8 @@ os.stat('somefile.txt').st_size # filesize file size
 
 import os
 activate_this_file = '{}/.virtualenvs/{}/bin/activate_this.py'.format(os.environ['HOME'], 'foreman2katello') # venv
-execfile(activate_this_file, dict(__file__=activate_this_file)) # venv
+execfile(activate_this_file, dict(__file__=activate_this_file))         # venv python2
+exec(open(activate_this_file).read(), {'__file__': activate_this_file}) # venv python3
 
 
 ~/.local/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:843: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings InsecureRequestWarning)
