@@ -1,6 +1,9 @@
 # /* ex: set filetype=sh: */
 export STDHOME_BACKGROUND_IMAGE="~/Pictures/i3lock/boreal3.png"
 export STDHOME_MOD="Mod4"
+export STDHOME_FIRSTBAR_OUTPUT="output \$ol
+tray_output \$ol
+"
 export STDHOME_FIRSTBAR_POSITION="top"
 export STDHOME_OUTPUTS='
 set $ol default

@@ -346,9 +346,7 @@ bar {
     #status_command i3status -c ~/.i3status-or.conf
     status_command ~/.config/i3/mri3_status_left.sh
 #status_command i3status
-    output $ol
-    tray_output $ol
-    #tray_output none
+    $STDHOME_FIRSTBAR_OUTPUT
     bindsym  button4 nop
     bindsym  button5 nop
     bindsym  button6 nop
@@ -555,3 +553,32 @@ hide_edge_borders ${hide_edge_borders}
 ${gaps_forwindow_border}
 
 ${STDHOME_TAIL}
+
+# code: 36 sym: ff0d => Return
+# code: 38 sym: 61 => a
+# code: 57 sym: 62 => b
+# code: 31 sym: 63 => c
+# code: 43 sym: 64 => d
+# code: 40 sym: 65 => e
+# code: 29 sym: 66 => f
+# code: 30 sym: 67 => g
+# code: 44 sym: 68 => h
+# code: 42 sym: 69 => i
+# code: 54 sym: 6a => j
+# code: 55 sym: 6b => k
+# code: 33 sym: 6c => l
+# code: 58 sym: 6d => m
+# code: 46 sym: 6e => n
+# code: 39 sym: 6f => o
+# code: 27 sym: 70 => p
+# code: 53 sym: 71 => q
+# code: 32 sym: 72 => r
+# code: 47 sym: 73 => s
+# code: 45 sym: 74 => t
+# code: 41 sym: 75 => u
+# code: 60 sym: 76 => v
+# code: 59 sym: 77 => w
+# code: 56 sym: 78 => x
+# code: 28 sym: 79 => y
+# code: 61 sym: 7a => z
+# code: 133 sym: 0xffeb => Super_L
