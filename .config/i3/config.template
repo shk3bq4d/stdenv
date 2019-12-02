@@ -108,7 +108,7 @@ bindsym  Print         exec mr-shutter.sh
 
 # kill focused window
 # code:24 => sym: 0x71, symbol:q
-bindcode $mod+Shift+53  kill
+bindsym $mod+Shift+53  kill
 
 # start dmenu (a program launcher)
 # code:40 => sym: 0x64, symbol:d
@@ -308,12 +308,6 @@ bindcode 33  resize shrink up 10 px or 10 ppt
 # code:46 => sym: 0x6c, symbol:l
 bindcode Shift+33  resize grow   up 10 px or 10 ppt
 
-# code:47 => sym: 0x3b, symbol:semicolon
-#bindcode 47  resize shrink right 10 px or 10 ppt
-# code:47 => sym: 0x3b, symbol:semicolon
-#bindcode Shift+47  resize grow   right 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
 bindsym  Left resize shrink left 10 px or 10 ppt
 bindsym  Shift+Left resize grow   left 10 px or 10 ppt
 
@@ -346,9 +340,7 @@ bar {
     #status_command i3status -c ~/.i3status-or.conf
     status_command ~/.config/i3/mri3_status_left.sh
 #status_command i3status
-    output $ol
-    tray_output $ol
-    #tray_output none
+    $STDHOME_FIRSTBAR_OUTPUT
     bindsym  button4 nop
     bindsym  button5 nop
     bindsym  button6 nop
@@ -393,14 +385,10 @@ workspace 13 output $oc
 
 
 #bindsym  $mod+o exec i3lock -p win -i ~/Pictures/migdesk.png
-# code:54 => sym: 0x63, symbol:c
 bindcode $mod+31  exec ~/bin/p2v # c vim mod+c
-# code:56 => sym: 0x62, symbol:b
 bindcode $mod+57  move scratchpad
-# code:57 => sym: 0x6e, symbol:n
 bindcode $mod+46  scratchpad show
 
-# code:39 => sym: 0x73, symbol:s
 bindcode $mod+Shift+47  move workspace to output right
 workspace_auto_back_and_forth yes
 #popup_during_fullscreen <ignore|leave_fullscreen>
@@ -408,7 +396,6 @@ popup_during_fullscreen leave_fullscreen
 force_focus_wrapping no
 
 focus_follows_mouse yes
-# code:52 => sym: 0x7a, symbol: z
 # bindcode  $mod+52 exec ~/bin/mrswitch-kb.sh
 bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
 
@@ -553,3 +540,43 @@ hide_edge_borders ${hide_edge_borders}
 ${gaps_forwindow_border}
 
 ${STDHOME_TAIL}
+
+# A keysym (key symbol) is a description for a specific symbol, like "a" or "b",
+# but also more strange ones like "underscore" instead of "_". These are the ones
+# you use in Xmodmap to remap your keys. To get the current mapping of your keys,
+# use xmodmap -pke. To interactively enter a key and see what keysym it is
+# configured to, use xev.
+# 
+# Keycodes do not need to have a symbol assigned (handy for custom vendor hotkeys
+# on some notebooks) and they will not change their meaning as you switch to a
+# different keyboard layout (when using xmodmap).
+
+
+# code: 36 sym: ff0d => Return
+# code: 38 sym: 61 => a
+# code: 57 sym: 62 => b
+# code: 31 sym: 63 => c
+# code: 43 sym: 64 => d
+# code: 40 sym: 65 => e
+# code: 29 sym: 66 => f
+# code: 30 sym: 67 => g
+# code: 44 sym: 68 => h
+# code: 42 sym: 69 => i
+# code: 54 sym: 6a => j
+# code: 55 sym: 6b => k
+# code: 33 sym: 6c => l
+# code: 58 sym: 6d => m
+# code: 46 sym: 6e => n
+# code: 39 sym: 6f => o
+# code: 27 sym: 70 => p
+# code: 53 sym: 71 => q
+# code: 32 sym: 72 => r
+# code: 47 sym: 73 => s
+# code: 45 sym: 74 => t
+# code: 41 sym: 75 => u
+# code: 60 sym: 76 => v
+# code: 59 sym: 77 => w
+# code: 56 sym: 78 => x
+# code: 28 sym: 79 => y
+# code: 61 sym: 7a => z
+# code: 133 sym: 0xffeb => Super_L
