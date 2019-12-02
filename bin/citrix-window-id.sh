@@ -66,7 +66,7 @@ set -euo pipefail
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 
-xdotool search --name "ITTS Desktop -" > $_tempfile
+xdotool search --name "ITTS Desktop" > $_tempfile
 xdotool search --class Wfica | grep -f $_tempfile
 
 cleanup
