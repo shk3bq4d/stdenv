@@ -1747,6 +1747,10 @@ ansible_action_warnings                   default Ansible will issue a warning w
 ansible_log_filter                        of logger names to filter out of the log file
 ansible_conditional_bare_vars             this setting on (True), running conditional evaluation ‘var’ is treated differently than ‘var.subkey’ as the first is evaluated directly while the second goes through the Jinja2 parser. But ‘false’ strings in ‘var’ get evaluated as booleans.With this setting off they both evaluate the same but in cases in which ‘var’ was ‘false’ (a string) it won’t get evaluated as a boolean anymore.Currently this setting defaults to ‘True’ but will soon change to ‘False’ and the setting itself will be removed in the future.Expect the default to change in version 2.10 and that this setting eventually will be deprecated after 2.12
 
+ansible_play_batch                        List of active hosts in the current play run limited by the serial, aka ‘batch’. Failed/Unreachable hosts are not considered ‘active’.
+ansible_play_hosts                        The same as ansible_play_batch
+ansible_play_hosts_all                     List of all the hosts that were targeted by the play
+
 
 # facts
 - gather_facts: no
@@ -2467,3 +2471,6 @@ https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
 when: - "Multiple conditions that all need to be true (a logical ‘and’) can also be specified as a list -> not or"
 
 subject_alt_name: "{{ bH.cert_subject_alt_name | map('regex_replace', '(.*)', 'DNS:\\1') | join(',') | default('DNS:' + bH.cert_common_name, true)}}"
+
+- debug: msg="{{ groups.keys() | list }}" # list all group in inventory
+

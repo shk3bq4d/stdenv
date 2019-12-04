@@ -2,7 +2,7 @@
 
 one Maintenance may contain several periods and affect Hosts or Groups (of Hosts)
 
-IT Services: example: C015 - N* 
+IT Services: example: C015 - N*
 click, edit (context menu), time (tab)
 
 https://www.zabbix.com/documentation/3.2/manual/api/
@@ -22,20 +22,20 @@ Data types
 
 The Zabbix API supports the following data types:
 
-Type	Description
-bool	A boolean value, accepts either true or false.
-flag	The value is considered to be true if it is passed and not equal to null and false otherwise.
-integer	A whole number.
-float	A floating point number.
-string	A text string.
-text	A longer text string.
-timestamp	A Unix timestamp.
-array	An ordered sequence of values, that is, a plain array.
-object	An associative array.
-query	A value which defines, what data should be returned. 
+Type    Description
+bool    A boolean value, accepts either true or false.
+flag    The value is considered to be true if it is passed and not equal to null and false otherwise.
+integer A whole number.
+float   A floating point number.
+string  A text string.
+text    A longer text string.
+timestamp   A Unix timestamp.
+array   An ordered sequence of values, that is, a plain array.
+object  An associative array.
+query   A value which defines, what data should be returned.
 
-Can be defined as an array of property names to return only specific properties, or as one of the predefined values: 
-extend - returns all object properties; 
+Can be defined as an array of property names to return only specific properties, or as one of the predefined values:
+extend - returns all object properties;
 count - returns the number of retrieved records, supported only by certain subselects.
 Property labels
 
@@ -47,40 +47,40 @@ Common "get" method parameters
 
 The following parameters are supported by all get methods:
 
-Parameter	Type	Description
-countOutput	flag	Return the number of records in the result instead of the actual data.
-editable	boolean	If set to true return only objects that the user has write permissions to. 
+Parameter   Type    Description
+countOutput flag    Return the number of records in the result instead of the actual data.
+editable    boolean If set to true return only objects that the user has write permissions to.
 
 Default: false.
-excludeSearch	flag	Return results that do not match the criteria given in the search parameter.
-filter	object	Return only those results that exactly match the given filter.
+excludeSearch   flag    Return results that do not match the criteria given in the search parameter.
+filter  object  Return only those results that exactly match the given filter.
 
-Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against. 
+Accepts an array, where the keys are property names, and the values are either a single value or an array of values to match against.
 
 Doesn't work for text fields.
-limit	integer	Limit the number of records returned.
-output	query	Object properties to be returned. 
+limit   integer Limit the number of records returned.
+output  query   Object properties to be returned.
 
 Default: extend.
-preservekeys	flag	Use IDs as keys in the resulting array.
-search	object	Return results that match the given wildcard search.
+preservekeys    flag    Use IDs as keys in the resulting array.
+search  object  Return results that match the given wildcard search.
 
 Accepts an array, where the keys are property names, and the values are strings to search for. If no additional options are given, this will perform a LIKE “%…%” search.
 
 Works only for string and text fields.
-searchByAny	boolean	If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them. 
+searchByAny boolean If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them.
 
 Default: false.
-searchWildcardsEnabled	boolean	If set to true enables the use of “*” as a wildcard character in the search parameter. 
+searchWildcardsEnabled  boolean If set to true enables the use of “*” as a wildcard character in the search parameter.
 
 Default: false.
-sortfield	string/array	Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting.
-sortorder	string/array	Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.
+sortfield   string/array    Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting.
+sortorder   string/array    Order of sorting. If an array is passed, each value will be matched to the corresponding property given in the sortfield parameter.
 
-Possible values are: 
-ASC - ascending; 
+Possible values are:
+ASC - ascending;
 DESC - descending.
-startSearch	flag	The search parameter will compare the beginning of fields, that is, perform a LIKE “…%” search instead.
+startSearch flag    The search parameter will compare the beginning of fields, that is, perform a LIKE “…%” search instead.
 
 echo "select * from zabbix.timeperiods;" | ssh vbox_zabbix24 mysql --table --user root --password=zabbix
 echo "select * from zabbix.timeperiods;" | ssh vbox_zabbix30 mysql --table --user root --password=bSLCf3B4kw
@@ -91,7 +91,7 @@ date.timezone = America/Kentucky/Louisville||
 (use this url to find your correct timezone format: http://us3.php.net/manual/en/timezones.php )
 
 
-Opened questions: 
+Opened questions:
 - timezone problem.
 
 - should we extend Maintenance Active till (and Active since) if time period is outside of it?
@@ -131,7 +131,7 @@ Name: Create ServiceNow ticket
 Default Subject: {TRIGGER.STATUS}
 Default Message:
 Trigger: {TRIGGER.NAME}
-Trigger description: {TRIGGER.DESCRIPTION} 
+Trigger description: {TRIGGER.DESCRIPTION}
 Trigger severity: {TRIGGER.SEVERITY}
 Trigger nseverity: {TRIGGER.NSEVERITY}
 Trigger status: {TRIGGER.STATUS}
@@ -139,7 +139,7 @@ Trigger URL: {TRIGGER.URL}
 Host: {HOST.HOST}
 Host description: {HOST.DESCRIPTION}
 Event age: {EVENT.AGE}
-Current Zabbix time: {DATE} {TIME} 
+Current Zabbix time: {DATE} {TIME}
 Item values:
 1. {ITEM.NAME1} ({HOST.NAME1}:{ITEM.KEY1}): {ITEM.VALUE1}
 2. {ITEM.NAME2} ({HOST.NAME2}:{ITEM.KEY2}): {ITEM.VALUE2}
@@ -148,8 +148,8 @@ Zabbix event ID: {EVENT.ID}
 Zabbix web UI: https://zabbix.domain.com/zabbix
 For a full list of trigger macros see https://www.zabbix.com/documentation/2.4/manual/appendix/macros/supported_by_location
 At the Conditions tab, to only forward PROBLEM events:
-(A) Maintenance status not in "maintenance" 
-(B) Trigger value = "PROBLEM" 
+(A) Maintenance status not in "maintenance"
+(B) Trigger value = "PROBLEM"
 Finally, add an operation:
 Send to Users: Admin
 Send only to: ServiceNow API
@@ -178,7 +178,7 @@ Z=zabbixmaster; H=$(hostname -f);D="{\"request\":\"active checks\",\"host\":\"$H
 Z=zabbixmaster; H=$(hostname -f);D="{\"request\":\"active checks\",\"host\":\"$H\"}";L=$(echo $(( 0 + ${#D})) | awk '{hex=sprintf("%08X",$1); for (i=7;i>=1;i=i-2) printf "%s%s",substr(hex,i,2),(i>1?"\\x":"\n");}'); (echo  -ne "ZBXD\x01\x$L\x00\x00\x00\x00$D"; sleep 10 ) | nc -v $Z 10051
 
 
-wget http://www.zabbix.com/downloads/3.2.0/zabbix_agents_3.2.0.win.zip && 7za x zabbix_agents_3.2.0.win.zip 
+wget http://www.zabbix.com/downloads/3.2.0/zabbix_agents_3.2.0.win.zip && 7za x zabbix_agents_3.2.0.win.zip
 p="/cygdrive/c/Program Files/zabbix-agent/"; "$p/bin/win64/zabbix_agentd.exe" --install --config "$(cygpath -wa "$p/conf/zabbix_agentd.win.conf")"
 net start "Zabbix Agent"
 
@@ -188,7 +188,7 @@ fuzzytime # check drifting machines https://www.zabbix.com/documentation/3.2/man
 https://www.zabbix.org/wiki/Start_with_SNMP_traps_in_Zabbix
 
 # custom check
-$ cat /etc/zabbix/zabbix_agentd.d/reboot-needed.conf 
+$ cat /etc/zabbix/zabbix_agentd.d/reboot-needed.conf
 UserParameter=kernel.reboot,test $(ls -t1 /boot/vmlinuz-?\.* | head -1) == /boot/vmlinuz-$(uname -r) && echo "NO" || echo "YES"
 
 
@@ -299,3 +299,10 @@ ZBX_NOTSUPPORTED: Cannot perform DNS query.
 # admin super admin
 https://www.zabbix.com/documentation/3.2/manual/config/users_and_usergroups/usergroup
 https://www.zabbix.com/documentation/3.2/manual/config/users_and_usergroups/permissions
+
+
+# Agent trace request/response
+```sh
+sudo sed -i -r -e 's/^DebugLevel=/DebugLevel=4/' /etc/zabbix/zabbix_agentd.conf && sudo systemctl restart zabbix-agent
+sudo tail -f /var/log/zabbix/zabbix_agentd.log | grep -vE '__zbx_zbx_setproctitle|(In|End of) (update_cpustats)'
+```

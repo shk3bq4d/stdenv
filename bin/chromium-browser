@@ -13,7 +13,7 @@ dec17.ly.lan)
 	fi
 	;;
 may19*)
-	PROXYPAC=""
+	PROXYPAC="http://127.0.0.1:57155/proxy.pac.may19.py"
 	~/bin/container-ip.sh
 	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
 	;;

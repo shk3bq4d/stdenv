@@ -25,9 +25,10 @@ zabbix.connection(url='https://myzabbix.url')
 less /etc/ssl/certs/ca-certificates.crt
 apk update && apk add curl && curl https://myzabbix.url
 
-# chrome
+# chrome chromium
 chrome://settings/certificates
 chrome://net-internals/#hsts
+chrome://settings/certificates ~/.words/mitmproxy/mitmproxy-ca-cert.pem
 
 https://konklone.com/post/why-google-is-hurrying-the-web-to-kill-sha-1
 
