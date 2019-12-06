@@ -49,3 +49,7 @@ xwininfo
 * https://www.reddit.com/r/i3wm/comments/4twwi8/saving_and_restoring_layouts/
 i3-save-tree --workspace  0 > ~/tmp/2x2.json
 i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
+
+# errors
+less /run/user/1000/i3/errorlog.2489
+vi -R $(ls -1t /run/user/$EUID/i3/errorlog.2489 | head -n1 )
