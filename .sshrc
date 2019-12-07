@@ -15,7 +15,7 @@ if ! type sudomr &>/dev/null ; then
         local f
         f=$SSHHOME/.sshrc
         echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $f
-        sudo -i bash --rcfile $f
+        sudo -i bash --rcfile $f "$@"
     }
 fi
 
@@ -30,6 +30,9 @@ _rsync_rsh() {
 }
 _rsync_rsh_restore() {
     export RSYNC_RSH=""
+}
+screen() {
+	command screen -c "$SSHHOME/.sshrc.d/.screenrc" "$@"
 }
 tome() {
 #rsync -avr --chmod=o+rw -e "ssh -i $SSHHOME/.sshrc.d/scp  -p 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no -l scp" "$@" scp@127.0.0.1:chroot/data/
