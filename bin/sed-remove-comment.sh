@@ -67,10 +67,11 @@ set -euo pipefail
 
 cat "$@" |
     grep -vE '^\s*(#|;|//|/\*)' |
-    sed -r -e 's,\s*(#|;|//|/\*).*,,' |
+    sed -e '/^\s*$/ d' |
     cat -s
     #cat
 
-echo EOF
+#   sed -r -e 's,\s*(#|;|//|/\*).*,,' |
+
 exit 0
 

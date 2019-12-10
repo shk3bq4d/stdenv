@@ -58,3 +58,5 @@ complete_function kubectl-watch-pods.sh kubectl get pods
 
 ## generate list of functions for each command
 compaudit; less ~/.zcompdump
+
+myargs="-e hehe"; ls ${=myargs} <= dequote arguments with the equal
