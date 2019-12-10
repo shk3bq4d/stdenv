@@ -105,12 +105,12 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
     if [[ -z $CMDARGS ]]; then
-        bash ips --no-internet
+        ips --no-internet
         uptime
         timeout 5 df -h | grep -wE '^/(snap|run|sys)'
         if sudo -n true; then
             sudo netstat -tlnp
-            sudo command last -daxFn 20
+            sudo last -daxFn 20
         else
             netstat -tln
             command last -daxFn 20
