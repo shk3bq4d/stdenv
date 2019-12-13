@@ -1174,6 +1174,14 @@ localhost | SUCCESS => {
 
 # adhoc
 ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
+ansible localhost -m setup -a "gather_subset=all"      | grep -E ""
+ansible localhost -m setup -a "gather_subset=min"      | grep -E ""
+ansible localhost -m setup -a "gather_subset=hardware" | grep -E ""
+ansible localhost -m setup -a "gather_subset=network"  | grep -E ""
+ansible localhost -m setup -a "gather_subset=virtual"  | grep -E ""
+ansible localhost -m setup -a "gather_subset=oha"      | grep -E ""
+for i in min hardware network virtual oha all; do ansible localhost -m setup -a "gather_subset=$i" | sed -n -r -e "s/(ansible.*)/$i: \\1/"; done
+
 ansible all -m yum -a "name=httpd state=present"
 ansible all -m apt -a "name=httpd state=present"
 ansible web -m service -a "name=httpd state=started"
@@ -2474,3 +2482,4 @@ subject_alt_name: "{{ bH.cert_subject_alt_name | map('regex_replace', '(.*)', 'D
 
 - debug: msg="{{ groups.keys() | list }}" # list all group in inventory
 
+when: "'bip' in group_names"
