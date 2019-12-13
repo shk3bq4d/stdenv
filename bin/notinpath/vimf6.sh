@@ -208,6 +208,7 @@ case $SCRIPT in \
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)"
         test -z "$ansible_args" && ansible_args="--diff --check"
         if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
+            sudo true
             set -x
             # the eval allows --start-at-task "multiple word" constructs
             eval sudo -E $(which ansible-playbook) $SCRIPT ${ansible_args} 2>&1 | ts # -l 127.0.0.1
