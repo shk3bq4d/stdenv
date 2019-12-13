@@ -1,12 +1,19 @@
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
 ## vimf6_ansible_args: --diff
-## vimf6_ansible_args: --diff --check -vv
 ## vimf6_ansible_nolocalsudo: no
-## vimf6_ansible_nolocalsudo: yes
 ---
 - hosts: localhost
   become: false
+  vars:
+    mruser: "{{ ansible_env.SUDO_USER }}"
   tasks:
+    - name: Reset ownership beforehand
+      changed_when: false
+      args:
+        warn: no
+      shell: >
+        bash -c 'chown -R {{ mruser }}: ~{{ mruser }}/.local/{bin,lib/python*}'
+
     - name: "Python3 Python 2+3 system pip"
       apt:
         name:
@@ -14,13 +21,15 @@
         - "python3-pip"
       become: true
 
-    - name: "Python2 check if user is present"
+    - name: stat ~/.local/bin/pip2
+      become: "{{ mruser }}"
       stat:
         path: ~/.local/bin/pip2
       register: stat2_result
       become: false
 
     - name: "Python2 install user pip2"
+      become: "{{ mruser }}"
       pip:
         name:
         - pip
@@ -29,6 +38,7 @@
       when: stat2_result.stat.exists == False
 
     - name: "Python2 upgrade user pip"
+      become: "{{ mruser }}"
       pip:
         name:
         - pip
@@ -37,6 +47,7 @@
       when: stat2_result.stat.exists == True
 
     - name: "Python2 ensure packages latest"
+      become: "{{ mruser }}"
       pip:
         name:
         - youtube_dl
@@ -57,34 +68,40 @@
         executable: ~/.local/bin/pip2
 
     - name: "Python2 ensure packages present"
+      become: "{{ mruser }}"
       pip:
         name:
         - sh
         extra_args: --user
         executable: ~/.local/bin/pip2
 
-    - name: "Python3 check if user pip3 is present"
+    - name: stat ~/.local/bin/pip3
+      become: "{{ mruser }}"
       stat:
         path: ~/.local/bin/pip3
       register: stat3_result
 
+    - debug: var=stat3_result
+
     - name: "Python3 install user pip3"
+      become: "{{ mruser }}"
       pip:
         name:
         - pip
         extra_args: --user
         executable: /usr/bin/pip3
-      when: stat3_result.stat.exists == False
+      when: not stat3_result.stat.exists
 
     - name: "Python3 upgrade user pip"
+      become: "{{ mruser }}"
       pip:
         name:
         - pip
         extra_args: --upgrade --user
-        executable: ~/.local/bin/pip3
-      when: stat3_result.stat.exists == True
+        executable: "{{ '~/.local/bin/pip3' if stat3_result.stat.exists else '/usr/bin/pip3' }}"
 
     - name: "Python3 ensure packages latest"
+      become: "{{ mruser }}"
       pip:
         name:
         - youtube_dl
@@ -92,12 +109,21 @@
         executable: ~/.local/bin/pip3
 
     - name: "Python3 ensure packages present"
+      become: "{{ mruser }}"
       pip:
         name:
         - sh
         - fontawesome # mri3server
+        - scapy
         - i3ipc
         - lxml
         - zabbix_api
         extra_args: --user
         executable: ~/.local/bin/pip3
+
+    - name: Reset ownership afterwords
+      changed_when: false
+      args:
+        warn: no
+      shell: >
+        bash -c 'chown -R {{ mruser }}: ~{{ mruser }}/.local/{bin,lib/python*}'
