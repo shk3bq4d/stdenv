@@ -840,7 +840,7 @@ exec(open(activate_this_file).read(), {'__file__': activate_this_file}) # venv p
 ~/.local/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:843: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings InsecureRequestWarning)
 can be disabled using
 import warnings
-warnings.filterwarnings("ignore")
+import warnings; warnings.filterwarnings("ignore") # InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised.
 or calling python with -W attribute (not verified)
 
 sys._getframe().f_code.co_name # current function name http://stackoverflow.com/questions/5067604/determine-function-name-from-within-that-function-without-using-traceback
