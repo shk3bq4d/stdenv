@@ -211,7 +211,8 @@ case $SCRIPT in \
             sudo true
             set -x
             # the eval allows --start-at-task "multiple word" constructs
-            eval sudo -E $(which ansible-playbook) $SCRIPT ${ansible_args} 2>&1 | ts # -l 127.0.0.1
+            #eval sudo -E $(which ansible-playbook) $SCRIPT ${ansible_args} 2>&1 | ts # -l 127.0.0.1
+            eval ansible-playbook $SCRIPT                  ${ansible_args} 2>&1 | ts # -l 127.0.0.1
             _exit=$?
         else
             # the eval allows --start-at-task "multiple word" constructs
