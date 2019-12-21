@@ -76,6 +76,7 @@ for line in filter(None, map(str.rstrip, fileinput.input(files=None))):
 """
 from pprint import pprint; pprint(vars(obj))
 
+# regexp regular expression
 import re
 str2 = re.sub(r'fsdf', '', str1)
 pattern = re.compile(pattern, flags=0)
@@ -103,6 +104,16 @@ re.M re.MULTILINE
 re.U re.UNICODE
 re.VERBOSE
 re.search(r'\bis\b', your_string) # whole word words boundary boundaries
+https://docs.python.org/2/library/re.html
+(?iLmsux)
+(One or more letters from the set 'i', 'L', 'm', 's', 'u', 'x'.) The group matches the empty string; the letters set the corresponding flags:
+i: re.I (ignore case),
+L: re.L (locale dependent),
+m: re.M (multi-line),
+s: re.S (dot matches all),
+u: re.U (Unicode dependent),
+x: and re.X (verbose),
+for the entire regular expression. (The flags are described in Module Contents.) This is useful if you wish to include the flags as part of the regular expression, instead of passing a flag argument to the re.compile() function.
 
 # format https://docs.python.org/3/library/string.html#formatspec
 # format str https://www.python.org/dev/peps/pep-3101/
@@ -1117,3 +1128,6 @@ class REST(enum.Enum):
     put = "put" # enum
     post = "post" # enum
     delete = "delete" # enum
+
+
+
