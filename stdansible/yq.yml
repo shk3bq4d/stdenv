@@ -1,0 +1,19 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff -l $(hostname -f)
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+- hosts: keyboard
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Install snap package
+      become: yes
+      snap:
+        name: yq
+    
+    - name: Create symlink
+      become: no
+      file:
+        path: ~/bin/yq
+        state: link
+        src:  /snap/yq/current/bin/yq
