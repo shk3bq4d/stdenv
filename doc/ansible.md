@@ -2484,3 +2484,9 @@ subject_alt_name: "{{ bH.cert_subject_alt_name | map('regex_replace', '(.*)', 'D
 - debug: msg="{{ groups.keys() | list }}" # list all group in inventory
 
 when: "'bip' in group_names"
+
+```yml
+- name: YQ JQ Change animals.birds.cardinals.feathers to "red".
+  set_fact: # yq jq
+    animals: "{{ animals|combine({'birds': {'cardinals': {'feathers': 'red'}}}, recursive=True) }}" # yq.jq
+```
