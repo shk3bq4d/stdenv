@@ -120,7 +120,7 @@ docker run --net=host # run with network of host (think 127.0.0.1, localhost or 
 
 # running container metadata
 docker inspect apt-cacher-run  | less
-@begin=json@
+```json
 [
     {
         "Id": "5e2b4dced1dc7414ef7ec1350266a2716f59b238323fb5649447b66d48deb930",
@@ -321,7 +321,7 @@ docker inspect apt-cacher-run  | less
         }
     }
 ]
-@end=json@
+```
 
 https://github.com/jessfraz/dockerfiles/blob/master/mutt/Dockerfile
 
