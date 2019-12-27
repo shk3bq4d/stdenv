@@ -60,3 +60,5 @@ complete_function kubectl-watch-pods.sh kubectl get pods
 compaudit; less ~/.zcompdump
 
 myargs="-e hehe"; ls ${=myargs} <= dequote arguments with the equal
+
+git config oh-my-zsh.hide-status 1

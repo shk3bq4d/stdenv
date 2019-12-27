@@ -193,6 +193,9 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'ansible' | regex_search('(foobar)') }} # will return empty if it cannot find a match
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
 
+      when: url is match("http://example.com/users/.*/resources/.*") # regex
+      when: url is search("/users/.*/resources/.*") # regex
+
 ```yaml
 - include: ....
     when: optional_file|exists # deprecated
