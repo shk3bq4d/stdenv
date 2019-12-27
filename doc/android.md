@@ -174,3 +174,6 @@ https://github.com/opengapps/opengapps/wiki/Advanced-Features-and-Options
 /sdcard # cat .gapps-config
 Include
 Search
+
+
+https://android.com/find # ring search find lost devices
