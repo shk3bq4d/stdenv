@@ -209,6 +209,9 @@ tasks:
         msg: "matched pattern 4"
       when: url is regex("example.com/\w+/foo") # regexp
 
+      when: url is match("http://example.com/users/.*/resources/.*") # regex
+      when: url is search("/users/.*/resources/.*") # regex
+
 ```yaml
 - include: ....
     when: optional_file|exists # deprecated

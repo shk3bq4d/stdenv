@@ -188,3 +188,18 @@ openssl pkcs12 -in client_ssl.pfx -out root.pem -cacerts       # extract CA cert
 openssl pkcs12 -export -out domain.name.pfx -inkey domain.name.key -in domain.name.crt -in intermediate.crt -in rootca.crt # to pfx
 openssl pkcs12 -export -out out.pfx -inkey key.pem -in root.crt -in intermediate.crt -in mycert.pem
 openssl pkcs7 -print_certs  -in p2f.LweE3.p7b # microsoft CA
+
+
+# listen https
+openssl s_server -key /etc/ssl/private/nginx-selfsigned.key -cert /root/a.crt -cert_chain /root/b.crt -accept 443 -www
+socat openssl-listen:12345,reuseaddr,cert=test.pem,verify=0,fork stdio
+ncat -lvnp 12345 --ssl
+ncat -lvnp 443 --ssl --ssl-cert /etc/ssl/certs/nginx-selfsigned.crt --ssl-key /etc/ssl/private/nginx-selfsigned.key
+socat openssl-listen:12345,reuseaddr,cert=test.pem,verify=0,fork stdio
+
+# wrap
+ssh-keygen -f hehe
+date > data
+ssh-public-key-converter.sh hehe
+openssl rsautl -encrypt -pkcs -pubin -inkey ./hehe.pub.PKCS8 -in data -out data.secure
+openssl rsautl -decrypt -in data.secure -inkey hehe > data.unwrapped

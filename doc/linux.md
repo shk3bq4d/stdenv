@@ -317,3 +317,5 @@ nice -n 15 clamscan && clamscan --stdout -v -ir /chroot/
 
 
 ssh blabla sudo shutdown -r 04:10 # reboot reset remote overnight business hours
+date -d "@$( awk -F '=' '/USEC/{ $2=substr($2,1,10); print $2 }' /run/systemd/shutdown/scheduled )"
+systemctl status systemd-shutdownd.service
