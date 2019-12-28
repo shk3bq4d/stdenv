@@ -192,6 +192,22 @@ To create a UUID from a string (new in version 1.9): ```yaml {{ hostname | to_uu
 {{ 'foobar' | regex_search('(foo)') }} # search for "foo" in "foobar"
 {{ 'ansible' | regex_search('(foobar)') }} # will return empty if it cannot find a match
 {{ 'foo\nBAR' | regex_search("^bar", multiline=True, ignorecase=True) }} # case insensitive search in multiline mode
+tasks:
+    - debug:
+        msg: "matched pattern 1"
+      when: url is match("http://example.com/users/.*/resources/.*") # regexp
+
+    - debug:
+        msg: "matched pattern 2"
+      when: url is search("/users/.*/resources/.*") # regexp
+ # regexp
+    - debug:
+        msg: "matched pattern 3"
+      when: url is search("/users/") # regexp
+
+    - debug:
+        msg: "matched pattern 4"
+      when: url is regex("example.com/\w+/foo") # regexp
 
 ```yaml
 - include: ....
@@ -1875,6 +1891,7 @@ git-crypt unlock
 # vault
 yq r extra_vars/zabbix-credentials.yml zabbix.prod.login_password | ansible-vault decrypt  --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev
 echo -n "Bonjour123" | ansible-vault encrypt --encrypt-vault-id prod --vault-id prod@secrets/ansible-vault-prod --vault-id dev@secrets/ansible-vault-dev | sed -r -n -e '1 s/^/\n\nmypassword: vault |\n  / p' -e '2,$ s/^/  / p'
+echo -n "Bonjour123" | ansible-vault encrypt --encrypt-vault-id stdprivate --vault-id stdprivate@/home/me/git/me/stdprivate/secrets/stdprivate.key
 
 # list of modules
 https://docs.ansible.com/ansible/latest/modules/community_maintained.html
@@ -2490,3 +2507,4 @@ when: "'bip' in group_names"
   set_fact: # yq jq
     animals: "{{ animals|combine({'birds': {'cardinals': {'feathers': 'red'}}}, recursive=True) }}" # yq.jq
 ```
+debug: msg="{{ lookup('dig', 'example.com.')}}" # dns name resolution

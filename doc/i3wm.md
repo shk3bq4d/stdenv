@@ -53,3 +53,7 @@ i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
 # errors
 less /run/user/1000/i3/errorlog.2489
 vi -R $(ls -1t /run/user/$EUID/i3/errorlog.2489 | head -n1 )
+
+# chromium full screen bug
+https://www.reddit.com/r/i3wm/comments/edd5fx/fullscreen_mode_in_i3_automatically_set_firefox/
+https://www.reddit.com/r/i3wm/comments/e9pgou/no_more_full_screen_video_panes_in_chromefirefox/

@@ -164,7 +164,7 @@ def go_by_process(args):
     args.append('true')
     iterator = partial(myrun, args)
     applied_options = process(iterator, host=host)
-    if 'proxycommand' in applied_options:
+    if 'proxycommand' in applied_options and applied_options['proxycommand'].Value != 'none':
         cmd = applied_options['proxycommand'].Value
         cmd = re.sub(r'^\s*ssh\s+', '', cmd) # removes leading ssh command
         cmd = re.sub(r'\B-q\b', '', cmd) # removes quiet option
