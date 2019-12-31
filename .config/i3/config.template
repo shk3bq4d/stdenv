@@ -1,5 +1,5 @@
 # ${STDHOME_GENERATED_TIME}
-# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
+# /* ex: set filetype=apache fenc=utf-8 expandtab ts=4 sw=4 : */
 
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
@@ -448,6 +448,8 @@ for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] border 1pixel
 #for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] workspace "12   !   citrix   "
 for_window [class="VirtualBox Machine"] floating enable
 for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] floating disable
+for_window [class="Wfica"] fullscreen disable
+for_window [class="Wfica"] floating disable
 for_window [class="Gitk"] fullscreen enable
 for_window [class="Gitk"] border normal
 for_window [class="Kodi"] fullscreen enable

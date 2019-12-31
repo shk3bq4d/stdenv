@@ -32,7 +32,7 @@ _rsync_rsh_restore() {
     export RSYNC_RSH=""
 }
 screen() {
-	command screen -c "$SSHHOME/.sshrc.d/.screenrc" "$@"
+    command screen -c "$SSHHOME/.sshrc.d/.screenrc" "$@"
 }
 tome() {
 #rsync -avr --chmod=o+rw -e "ssh -i $SSHHOME/.sshrc.d/scp  -p 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no -l scp" "$@" scp@127.0.0.1:chroot/data/
@@ -105,7 +105,7 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
     if [[ -z $CMDARGS ]]; then
-        ips --no-internet
+        bash ips --no-internet
         uptime
         timeout 5 df -h | grep -wE '^/(snap|run|sys)'
         if sudo -n true; then

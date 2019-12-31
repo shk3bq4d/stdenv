@@ -22,3 +22,5 @@ jq '.bob = 3' bip.json
   "hehe": 5,
   "bob": 3
 }
+
+msg: "{{ out.json['values'] | list | json_query('[*].{a:name,b:project.key}') | to_nice_yaml }}"

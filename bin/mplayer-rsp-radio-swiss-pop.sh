@@ -11,7 +11,7 @@
 
 set -euo pipefail
 
-mplayer http://stream.srg-ssr.ch/m/rsp/aacp_96
+mplayer -cache $(( 96 / 8 * 60 )) http://stream.srg-ssr.ch/m/rsp/aacp_96
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
 # [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
