@@ -9,9 +9,14 @@ vboxmanage modifyvm kubuntu1404base --memory 1024
 vboxmanage guestproperty get xpbase vrdeport
 vboxmanage guestproperty set xptest vrdeport 6040
 vboxmanage guestproperty set xptest vrdeport 6040
+vboxmanage modifyvm "xp1 Clone" --vrde on
+vboxmanage modifyvm "xp1 Clone" --vrdeport 6040
+vboxmanage modifyvm "xp1 Clone" --vrdeproperty VNCPassword=secret
+vboxmanage startvm "xp1 Clone" --type headless
 vboxmanage discardstate projectlibre
 vboxmanage showvminfo
 vboxmanage showvminfo minikube G ssh
+
 
 
 # create a VM
@@ -73,17 +78,17 @@ service virtualbox-guest-utils stop
 
 # vbox to vmware
 - assign all disks to PIIX IDE controller
-- export as .ova 
+- export as .ova
 - 7za x -odir bip.ova
-- open ovf 
+- open ovf
 replace
-<vssd:VirtualSystemType>virtualbox-2.2</vssd:VirtualSystemType>
+# <vssd:VirtualSystemType>virtualbox-2.2</vssd:VirtualSystemType>
 with
-<vssd:VirtualSystemType>vmx-07</vssd:VirtualSystemType>
+# <vssd:VirtualSystemType>vmx-07</vssd:VirtualSystemType>
 - open *mf and suppress the line regarding the checksum of *ovf that was just edited on previous step
 - execute something similar
 #!/usr/bin/env bash
-set -e 
+set -e
 DIR=/mnt/local/00-1to/kanban/2016.09.26-zabbix-service-now-snow-servicenow/
 OVA=$DIR/t-mon-zabbix-001.ova
 SUBDIR=$DIR/t-mon-zabbix-001

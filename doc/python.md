@@ -937,7 +937,8 @@ from ruamel import yaml; yaml.dump({})
 import yaml; yaml.dump({})
 import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.safe_load(f)
 import yaml; yaml.safe_dump({}, default_flow_style=False)
-from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""
+from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python2
+from io       import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python3
     """)))
 
 # https://stackoverflow.com/questions/6432605/any-yaml-libraries-in-python-that-support-dumping-of-long-strings-as-block-liter

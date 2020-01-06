@@ -201,3 +201,4 @@ location.replace('https://85.184.255.102');
 Content-Type: application/x-www-form-urlencoded
 
 http://httpstat.us/500 # to return an HTTP 500
+http://httpstat.us/ # http only
