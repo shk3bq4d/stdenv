@@ -206,7 +206,23 @@ case $SCRIPT in \
     if grep -qE "^[- ] hosts:" $SCRIPT; then
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)"
-        test -z "$ansible_args" && ansible_args="--diff --check"
+        if test -z "$ansible_args"; then
+            ansible_args="--diff --check"
+            echo "Running ansible in check mode"
+        fi
+        while read key value; do
+            #[[ "$key" == "ansible"* ]] && echo upper
+            #[[ "$key" == "ansible"* ]] && key=${key^^}
+            echo "export ANSIBLE_${key^^}=$value"
+            eval "export ANSIBLE_${key^^}=$value"
+        done < <(head -n 50 $SCRIPT | sed -r -n -e 's/^.{,4}vimf6_ansible_env:\s*(.+)\s*[:=]\s*(.*?)/\1 \2/ p')
+
+        export ANSIBLE_STDOUT_CALLBACK=yaml
+        #export ANSIBLE_STDOUT_CALLBACK=timer
+        #export ANSIBLE_STDOUT_CALLBACK=dense
+        #export ANSIBLE_STDOUT_CALLBACK=unixy
+        #export ANSIBLE_STDOUT_CALLBACK=oneline
+        # export ANSIBLE_DISPLAY_OK_HOSTS=no
         if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
             sudo true
             set -x
