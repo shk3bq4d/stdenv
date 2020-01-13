@@ -15,4 +15,8 @@ exec --no-startup-id  x11vnc -display :0 -shared -forever
 gaps outer 0
 gaps inner 12
 '
-export bar_height=40
+export STDHOME_FONT='
+font pango:Monospace Regular 10
+'
+export gaps_inner=6
+export bar_height=20

@@ -223,14 +223,14 @@ tasks:
   with_items:                    # implicit exists for include
     - myname.yml                 # implicit exists for include
 
-# -------------------------------# exists                               
+# -------------------------------# exists
 - stat:                          # exists
     path: /var/log/secure        # exists
   register: stat_secure          # exists
 - debug:                         # exists
     msg: file exists             # exists
   when: stat_secure.stat.exists  # exists
-# -------------------------------# exists                               
+# -------------------------------# exists
 ```
 
 
@@ -2198,7 +2198,7 @@ name: {{ my_secret | k8s_config_resource_name }}
 {{ decoded | b64encode(encoding='utf-16-le') }}
 {{ hostname | to_uuid }}
 when: some_string_value | bool
-{{ ansible_mounts | map(attribute='mount') | join(',') }}
+{{ ansible_mounts | map(attribute='mount') | join(',') }} # json_query
 {{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime('%Y-%m-%d'))).total_seconds()  }}
 {{ (("2016-08-14 20:00:12" | to_datetime) - ("2016-08-14 18:00:00" | to_datetime)).seconds  }}
 {{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime('%Y-%m-%d'))).days  }}
@@ -2239,11 +2239,11 @@ the template, with the |safe filter
 {% for key, value in my_dict.iteritems() %}
 <dt>{{ key|e }}</dt>
 <dd>{{ value|e }}</dd>
-loop.index	The current iteration of the loop. (1 indexed)
-loop.index0	The current iteration of the loop. (0 indexed)
-loop.revindex	The number of iterations from the end of the loop (1 indexed)
-loop.revindex0	The number of iterations from the end of the loop (0 indexed)
-loop.changed(*val)	True if previously called with a different value (or not called at all).
+loop.index  The current iteration of the loop. (1 indexed)
+loop.index0 The current iteration of the loop. (0 indexed)
+loop.revindex The number of iterations from the end of the loop (1 indexed)
+loop.revindex0  The number of iterations from the end of the loop (0 indexed)
+loop.changed(*val)  True if previously called with a different value (or not called at all).
 <li class="{{ loop.cycle('odd', 'even') }}">{{ row }}</li>
 <li>{{ user.username|e }}</li>
 <li>{{ user.username|e }}</li>
@@ -2511,3 +2511,10 @@ when: "'bip' in group_names"
     animals: "{{ animals|combine({'birds': {'cardinals': {'feathers': 'red'}}}, recursive=True) }}" # yq.jq
 ```
 debug: msg="{{ lookup('dig', 'example.com.')}}" # dns name resolution
+
+lookup('dict', users) # convert dict to list [item.key, item.value]
+msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
+
+
+yum update_cache=yes state=latest name='*'
+apt update_cache=yes state=latest name='*'
