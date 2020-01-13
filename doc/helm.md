@@ -6,6 +6,7 @@ helm search MYPACKAGE
 helm delete MYRELEASE
 helm repo list
 helm repo update
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm inspect
 helm ls
 helm package MYPACKAGE # creates the .tgz as well as copy the .tgz to ~/.heml/repository/local/
