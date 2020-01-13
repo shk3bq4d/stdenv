@@ -5,7 +5,7 @@ unset GIT_DIR
 unset GIT_WORK_TREE
 
 DOCDIR=~/doc
-KANBANDIR=~/kanban
+KANBANDIR=~/git/sf/dcn/iaac/doc
 #VIMOPTS='-c "set nonumber"'
 VIM_C_ARGS="set nonumber"
 ARG1=$1
@@ -34,7 +34,7 @@ esac
 
 filelist() {
     find -L $DOCDIR -maxdepth 1 -name "*$1*.md" -print0 | sort -z
-    [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/doc.md" -print0 | sort -z
+    [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/README.md" -print0 | sort -z
 }
 filelistcount() {
     filelist "$@" | tr -cd '\0' | wc -c
@@ -42,7 +42,7 @@ filelistcount() {
 
 if [[ -z "$ARG1" ]]; then
     if [[ -e $KANBANDIR ]]; then
-        ls -thor $DOCDIR/*.md $KANBANDIR/*/doc.md
+        ls -thor $DOCDIR/*.md $KANBANDIR/*/README.md
     else
         ls -thor $DOCDIR/*.md
     fi

@@ -6,7 +6,7 @@
 ##    REMOTEHOST: remote host where to ssh
 ##    REMOTEPORT: JMX port (default: 12345)
 ##
-## Author: Jeff Malone, 04 Jul 2018
+## Author: Jeff Malone, 13 Jan 2020
 ##
 
 set -euo pipefail
@@ -27,18 +27,9 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
-terraform_version=0.11.8
-terraform_version=0.11.10
-terraform_version=0.11.13
-terraform_version=0.12.6
-terraform_version=0.12.8
-terraform_version=0.12.12
-terraform_version=0.12.16
-terraform_version=0.12.17
-terraform_version=0.12.18
-terraform_version=0.12.19
+helm_version=2.5.1
 
-BIN="$HOME/bin/terraform-$terraform_version"
+BIN="$HOME/bin/helm-$helm_version"
 
 
 if [[ ! -f $BIN ]]; then
@@ -53,11 +44,17 @@ if [[ ! -f $BIN ]]; then
         exit 1
         ;;
     esac
-    curl -Os https://releases.hashicorp.com/terraform/$terraform_version/terraform_"$terraform_version"_linux_amd64.zip
-    unzip -d ~/.tmp terraform_"$terraform_version"_linux_amd64.zip
-    mv ~/.tmp/terraform ~/bin/terraform-$terraform_version
-    rm terraform_"$terraform_version"_linux_amd64.zip || true
+    #curl -Os https://releases.hashicorp.com/helm/$helm_version/helm_"$helm_version"_linux_amd64.zip
+    cd ~/.tmp
+    test -d linux-amd64 && echo FATAL: dir already exists ~/.tmp/linux-amd64 && exit 1
+    curl -Os https://get.helm.sh/helm-v${helm_version}-linux-amd64.tar.gz
+    tar xzf helm-v${helm_version}-linux-amd64.tar.gz
+    mv linux-amd64/helm $BIN
+    rm -rf linux-amd64
+    #unzip -d ~/.tmp helm_"$helm_version"_linux_amd64.zip
+    #mv ~/.tmp/helm ~/bin/helm-$helm_version
+    #rm helm_"$helm_version"_linux_amd64.zip || true
 fi
 
-~/bin/terraform-$terraform_version "$@"
+~/bin/helm-$helm_version "$@"
 exit $?
