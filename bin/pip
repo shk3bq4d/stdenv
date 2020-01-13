@@ -11,7 +11,9 @@
 
 set -euo pipefail
 
-if [[ -f ~/.local/bin/pip2 ]]; then
+if [[ -f ~/.local/bin/pip3 ]]; then
+	~/.local/bin/pip3 "$@"
+elif [[ -f ~/.local/bin/pip2 ]]; then
 	~/.local/bin/pip2 "$@"
 elif [[ -f ~/.local/bin/pip ]]; then
 	~/.local/bin/pip "$@"

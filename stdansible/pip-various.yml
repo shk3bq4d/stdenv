@@ -3,11 +3,13 @@
 ## vimf6_ansible_nolocalsudo: no
 ---
 - hosts: localhost
-  become: false
+  become: no
   vars:
-    mruser: "{{ ansible_env.SUDO_USER }}"
+    mruser: "{{ ansible_user }}"
+    python2: false
   tasks:
     - name: Reset ownership beforehand
+      become: true
       changed_when: false
       args:
         warn: no
@@ -22,32 +24,28 @@
       become: true
 
     - name: stat ~/.local/bin/pip2
-      become: "{{ mruser }}"
       stat:
         path: ~/.local/bin/pip2
       register: stat2_result
-      become: false
 
     - name: "Python2 install user pip2"
-      become: "{{ mruser }}"
       pip:
         name:
         - pip
         executable: /usr/bin/pip2
         extra_args: --user
-      when: stat2_result.stat.exists == False
+      when: python2 and stat2_result.stat.exists == False
 
     - name: "Python2 upgrade user pip"
-      become: "{{ mruser }}"
       pip:
         name:
         - pip
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip2
-      when: stat2_result.stat.exists == True
+      when: python2 and stat2_result.stat.exists == True
 
     - name: "Python2 ensure packages latest"
-      become: "{{ mruser }}"
+      when: python2
       pip:
         name:
         - youtube_dl
@@ -68,7 +66,7 @@
         executable: ~/.local/bin/pip2
 
     - name: "Python2 ensure packages present"
-      become: "{{ mruser }}"
+      when: python2
       pip:
         name:
         - sh
@@ -76,7 +74,6 @@
         executable: ~/.local/bin/pip2
 
     - name: stat ~/.local/bin/pip3
-      become: "{{ mruser }}"
       stat:
         path: ~/.local/bin/pip3
       register: stat3_result
@@ -84,7 +81,6 @@
     - debug: var=stat3_result
 
     - name: "Python3 install user pip3"
-      become: "{{ mruser }}"
       pip:
         name:
         - pip
@@ -93,7 +89,6 @@
       when: not stat3_result.stat.exists
 
     - name: "Python3 upgrade user pip"
-      become: "{{ mruser }}"
       pip:
         name:
         - pip
@@ -101,27 +96,37 @@
         executable: "{{ '~/.local/bin/pip3' if stat3_result.stat.exists else '/usr/bin/pip3' }}"
 
     - name: "Python3 ensure packages latest"
-      become: "{{ mruser }}"
       pip:
         name:
         - youtube_dl
         extra_args: --upgrade --user
         executable: ~/.local/bin/pip3
 
-    - name: "Python3 ensure packages present"
-      become: "{{ mruser }}"
+    - name: "Python3 ensure packages absent"
+      pip:
+        state: absent
+        executable: ~/.local/bin/pip3
+        name:
+          - docker-py
+
+    - name: "Python3 ensure packages present+latest"
       pip:
         name:
-        - sh
+        - docker
+        - bs4 # beautiful soup 4
         - fontawesome # mri3server
-        - scapy
         - i3ipc
         - lxml
+        - scapy
+        - selenium
+        - sh
         - zabbix_api
         extra_args: --user
+        state: latest
         executable: ~/.local/bin/pip3
 
     - name: Reset ownership afterwords
+      become: true
       changed_when: false
       args:
         warn: no

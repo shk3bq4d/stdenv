@@ -43,7 +43,7 @@ def t(w, cmd):
 w = mri3.get_root().find_focused()
 ws = w.workspace()
 p = w.parent
-debug = 1
+debug = 0
 if debug: mri3.debug(ws)
 
 

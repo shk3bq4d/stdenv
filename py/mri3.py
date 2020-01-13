@@ -185,7 +185,8 @@ def go(args):
         grid_layout()
 
 def debug(e, recursive=True, indent='', _rA=None, _print=True):
-    pprint(vars(e.props))
+    #pprint(vars(e.props))
+    pprint(vars(e))
     if _rA is None:
         _rA = []
     if e is not None:

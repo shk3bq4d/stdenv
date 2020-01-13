@@ -11,7 +11,7 @@ exec > >(tee "$LOG")
 exec 2>&1
 SCRIPT_DIR=$(dirname "$SCRIPT")
 SCRIPT_NAME=$(basename "$SCRIPT")
-
+export PYTHONUNBUFFERED=hehe
 function myexit() {
     echo "vimf6.sh by extension exit code is $1" # to review if we have case exit corde or real interpreter
     exit $1
@@ -109,7 +109,7 @@ vimf6.sh)
     exit 0
     ;;
 *sh)  bash    $SCRIPT; myexit $?;;
-*py)  python2 $SCRIPT; myexit $?;;
+*py)  python3 $SCRIPT; myexit $?;;
 *pl)  perl    $SCRIPT; myexit $?;;
 *php) php     $SCRIPT; myexit $?;;
 *java)
