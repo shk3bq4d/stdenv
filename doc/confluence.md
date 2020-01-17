@@ -2396,3 +2396,7 @@ Content by label
 # SQL
 sudo -u postgres psql confluencedb
 select * from content where title like 'Add vl%' limit 10;
+
+
+
+https://www.atlassian.com/trust/security/advisories

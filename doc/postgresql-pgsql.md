@@ -68,3 +68,5 @@ begin; -- or begin transaction;
 update users set lastname='Bopton' where username like 'jere.bs%';
 end transaction; -- or commit;
 ```
+
+/var/lib/postgresql/.psql_history

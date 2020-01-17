@@ -131,6 +131,7 @@ ip addr sh
 iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
 iptables -A FORWARD -i enp0s8 -j ACCEPT
 sysctl -w net.ipv4.ip_forward=1
+cat  /proc/sys/net/ipv4/ip_forward
 # on client
 route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103 metric 99
 
