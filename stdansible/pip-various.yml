@@ -117,6 +117,7 @@
         - bs4 # beautiful soup 4
         - fontawesome # mri3server
         - i3ipc
+        - jmespath # ansible json_query filter dependency
         - kubernetes-validate # ansible kubernetes
         - lxml
         - openshift # ansible kubernetes
