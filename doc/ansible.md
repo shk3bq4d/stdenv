@@ -2519,3 +2519,4 @@ msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
 yum update_cache=yes state=latest name='*'
 apt update_cache=yes state=latest name='*'
 firewalld state=enabled port=10051/tcp permanent=yes immediate=yes
+setup gather_subset=all_ipv4_addresses

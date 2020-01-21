@@ -5,7 +5,7 @@ unset GIT_DIR
 unset GIT_WORK_TREE
 
 DOCDIR=~/doc
-KANBANDIR=~/git/sf/dcn/iaac/doc
+KANBANDIR=~/git/sf/dcn/iaac-master/doc
 #VIMOPTS='-c "set nonumber"'
 VIM_C_ARGS="set nonumber"
 ARG1=$1
