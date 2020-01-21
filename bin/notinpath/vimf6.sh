@@ -204,6 +204,8 @@ case $SCRIPT in \
 *yml)
     # trying for ansible
     if grep -qE "^[- ] hosts:" $SCRIPT; then
+        SCRIPT=$(realpath -e $SCRIPT)
+        cd $(dirname $SCRIPT)
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
