@@ -1,4 +1,5 @@
 #!/bin/bash
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=2 sw=2 : */
 
 ########################################################
 #
@@ -20,6 +21,11 @@
 #
 #
 ########################################################
+
+if ! xprop -id $(xdotool getwindowfocus) WM_CLASS | grep Chromium-browser; then
+  i3-msg fullscreen
+  exit 0
+fi
 
 if ! type "jq" 2>1 > /dev/null; then
   echo "Missing jq dependency. Install with:"

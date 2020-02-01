@@ -115,6 +115,7 @@
         - ansible
         - docker
         - bs4 # beautiful soup 4
+        - fahrplan # cff sbb timetable
         - fontawesome # mri3server
         - i3ipc
         - jmespath # ansible json_query filter dependency
