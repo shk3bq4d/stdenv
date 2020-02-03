@@ -3,6 +3,7 @@
 import sys
 import psutil
 import i3ipc
+import os
 import re
 import time
 from pprint import pprint, pformat
@@ -18,7 +19,7 @@ p = psutil.Process(int(m))
 children = p.children(recursive=True)
 #pprint(children[0].create_time())
 children = sorted(children, key=lambda x: -x.create_time())
-with open('/tmp/mruxvt.log', 'wb') as f:
+with open(os.path.expanduser('~/.tmp/log/mri3_grid.log'), 'wb') as f:
     #for child in children:
     #    f.write(pformat(child.as_dict()))
     for child in children:

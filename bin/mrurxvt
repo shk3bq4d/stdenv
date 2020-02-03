@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-exec > >(tee /tmp/logfile.txt)
+exec > >(ts | tee ~/.tmp/log/mrurxvt.log)
 exec 2>&1
 date
 #env | sort
@@ -230,14 +230,17 @@ fi
 ;;
 esac
 set +e
-CD=$(mri3_focused_window_cwd.py)
+TCD="$(mri3_focused_window_cwd.py)"
+CD=""
 set -e
-echo $CD
-if [[ -d $CD ]] && $(cd $CD); then
-    CD="-cd $CD"
-else
-    CD=""
+echo "cd is $TCD"
+set +x
+#test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
+if [[ -d $TCD ]]; then
+    ! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
 fi
+echo "cd now is $CD"
+set -x
 ~/bin/notinpath/mrxmodmap.sh &
 #MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
 if [[ "$@" == *VT100.allowSendEvents* ]]; then
