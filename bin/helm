@@ -28,7 +28,7 @@ set -euo pipefail
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
 helm_version=2.5.1
-helm_version=3.0.2
+helm_version=3.0.3
 
 BIN="$HOME/bin/helm-$helm_version"
 

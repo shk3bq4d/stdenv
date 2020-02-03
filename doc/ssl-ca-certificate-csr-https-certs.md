@@ -86,8 +86,24 @@ jarsigner -keystore /e/me/certs/mykeystore.jks -tsa http://timestamp.digicert.co
 for i in *jar; do printf "%-30s %s\n" $i "$(jarsigner -verify $i)"; done
 
 # retrieve certifcate from server
-openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
-openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -starttls smtp -showcerts # -starttls for upgraded connection
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_1
+ -no_ssl3                   Just disable SSLv3
+ -no_tls1                   Just disable TLSv1
+ -no_tls1_1                 Just disable TLSv1.1
+ -no_tls1_2                 Just disable TLSv1.2
+ -no_tls1_3                 Just disable TLSv1.3
+  -tls1                      Just use TLSv1
+  -tls1_1                    Just use TLSv1.1
+  -tls1_2                    Just use TLSv1.2
+  -tls1_3                    Just use TLSv1.3
+  -dtls                      Use any version of DTLS
+  -dtls1                     Just use DTLSv1
+  -dtls1_2                   Just use DTLSv1.2
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_1
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_2
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_3
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -starttls smtp -showcerts # -starttls for upgraded connection
 printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 
@@ -203,3 +219,13 @@ date > data
 ssh-public-key-converter.sh hehe
 openssl rsautl -encrypt -pkcs -pubin -inkey ./hehe.pub.PKCS8 -in data -out data.secure
 openssl rsautl -decrypt -in data.secure -inkey hehe > data.unwrapped
+
+# OSCP must-staple
+https://scotthelme.co.uk/ocsp-must-staple/
+```ini
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+1.3.6.1.5.5.7.1.24 = DER:30:03:02:01:05
+```

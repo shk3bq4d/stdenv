@@ -2520,3 +2520,6 @@ yum update_cache=yes state=latest name='*'
 apt update_cache=yes state=latest name='*'
 firewalld state=enabled port=10051/tcp permanent=yes immediate=yes
 setup gather_subset=all_ipv4_addresses
+
+
+# https://www.tailored.cloud/devops/how-to-filter-and-map-lists-in-ansible/
