@@ -41,3 +41,5 @@ log_format post_logs '[$time_local] "$request" $status $body_bytes_sent "$http_r
 
 /usr/sbin/nginx -s reload # hot re-read configuration
 /sbin/nginx     -s reload # hot re-read configuration
+
+ssl_protocols SSLv2 SSLv3 TLSv1.1 TLSv1.2 TLSv1.3;
