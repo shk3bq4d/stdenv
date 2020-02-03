@@ -17,6 +17,7 @@ RED=$(echo -e "\033[0;31m")    # red
 GREEN=$(echo -e "\033[0;32m")    # green
 OFF=$(echo -e "\033[m")
 OPENSSL_OPTIONS=""
+PORT=443
 
 _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempfile:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 _tempfile=$_tempdir/a
@@ -36,8 +37,16 @@ else
         -e 's/(^\s+|\s+$)//g' \
         -e 's/^.*(https?:..)([^ ]+?).*$/\2/'
         )"
+	if [[ $NAME = *:* ]]; then
+		PORT="$( echo -n $PORT | sed -r \
+			-e 's/.*://' \
+			)"
+		NAME="$( echo -n $NAME | sed -r \
+			-e 's/:.*//' \
+			)"
+	fi
 fi
-[[ $# -lt 2 ]] && PORT=443 || PORT=$2
+[[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
        IP=$NAME
     echo "$NAME -> $(dig -t a +short $NAME | tail -1)"

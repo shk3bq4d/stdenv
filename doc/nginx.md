@@ -9,19 +9,35 @@ setsebool httpd_can_network_connect on -P
 
 # reverse proxy
 http{
-	server{
-		   location ~* ^/nginx/(.*)$ {
-			         proxy_pass http://127.0.0.1:8080/$1;
-					       proxy_redirect off;
-						      }
-		    }
+    server{
+           location ~* ^/nginx/(.*)$ {
+                     proxy_pass http://127.0.0.1:8080/$1;
+                           proxy_redirect off;
+                              }
+            }
 }
 # almost same but support query string
 http{
-	server{
-		   location ~* ^/ {
-			         rewrite ^\/(.*) /$1 break;
-					       proxy_pass http://127.0.0.1:8080;
-						      }
-		    }
+    server{
+           location ~* ^/ {
+                     rewrite ^\/(.*) /$1 break;
+                           proxy_pass http://127.0.0.1:8080;
+                              }
+            }
 }
+
+
+# log post data
+### https://stackoverflow.com/a/14034744
+apt install libnginx-mod-http-echo
+### before server
+log_format post_logs '[$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" [$request_body]';
+### in the desired location
+    location /r/d/ct/ {
+       echo_read_request_body;
+       access_log  /var/log/nginx/expect-ct.log  post_logs;
+    }
+
+
+/usr/sbin/nginx -s reload # hot re-read configuration
+/sbin/nginx     -s reload # hot re-read configuration

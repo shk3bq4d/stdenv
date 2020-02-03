@@ -51,7 +51,7 @@ logger = logging.getLogger(__name__)
 class __NAME__(unittest.TestCase):
     #def __init__(self, methodName='runTest'): pass
     def tearDown(self): pass
-    def tearUp(self): pass
+    def setUp(self): pass
 
     @classmethod
     def setUpClass(cls): pass
