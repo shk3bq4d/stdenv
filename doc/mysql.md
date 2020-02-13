@@ -24,7 +24,7 @@ grant all on mrowncloud.* to mrowncloud;
 
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass'; 
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
 ```
 
@@ -33,7 +33,7 @@ ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
 # https://dev.mysql.com/doc/refman/5.5/en/old-client.html
 Client does not support authentication protocol requested by server
 ```sql
-SET PASSWORD FOR 'some_user'@'some_host' = OLD_PASSWORD('new_password'); 
+SET PASSWORD FOR 'some_user'@'some_host' = OLD_PASSWORD('new_password');
 ALTER USER 'fw'@'10.1.1.120' IDENTIFIED WITH mysql_native_password BY 'fwpass';
 ```
 
@@ -47,4 +47,12 @@ SELECT table_schema as `Database`,
      round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB`
 FROM information_schema.TABLES
 ORDER BY (data_length + index_length) DESC;
+
+
+
+
+
+INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+INSERT INTO table_name VALUES (value1, value2, value3, ...);
 ```
+

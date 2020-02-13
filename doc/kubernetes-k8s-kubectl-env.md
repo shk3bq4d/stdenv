@@ -12,7 +12,8 @@ gRPC (gRPC Remote Procedure Calls[1]) is an open source remote procedure call (R
 POD   .NAMESPACE .TYPE .cluster.local
 heketi.default   .svc.cluster.local
 heketi.default.svc.cluster.local
-heketi.default.pod.cluster.local
+heketi.default.pod.cluster.local # dns # name
+podname.namespace.podorsvc.cluster.local # dns # name
 
 minikube     Minikube is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day.
 # https://kubernetes.io/docs/setup/minikube/#quickstart
@@ -770,3 +771,7 @@ data:
   ssl-ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA"
   ssl-protocols: "TLSv1.3 TLSv1.2"
 ```
+
+
+kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
+kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
