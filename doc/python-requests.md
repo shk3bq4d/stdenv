@@ -323,7 +323,7 @@ For example, GitHub redirects all HTTP requests to HTTPS:
 [<Response [301]>]
 If you're using GET, OPTIONS, POST, PUT, PATCH or DELETE, you can disable redirection handling with the allow_redirects parameter:
 
->>> r = requests.get('http://github.com', allow_redirects=False)
+>>> r = requests.get('http://github.com', allow_redirects=False) # location relocate follow
 
 >>> r.status_code
 301
