@@ -1,3 +1,6 @@
+http://nginx.org/en/docs/http/ngx_http_headers_module.html
+
+
 yum install http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 yum install nginx
 
