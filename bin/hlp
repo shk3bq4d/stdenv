@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:~/bin:~/.local/bin
+
 
 function usage()
 {	echo $(basename $0) PROG

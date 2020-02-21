@@ -1,3 +1,4 @@
+fahrplan from vufflens-la-ville to allaman arrival at 20:30
 
 De Vufflens-la-Ville, à Vevey
 Relation du sam., 27.01.2018

@@ -306,3 +306,11 @@ https://www.zabbix.com/documentation/3.2/manual/config/users_and_usergroups/perm
 sudo sed -i -r -e 's/^DebugLevel=/DebugLevel=4/' /etc/zabbix/zabbix_agentd.conf && sudo systemctl restart zabbix-agent
 sudo tail -f /var/log/zabbix/zabbix_agentd.log | grep -vE '__zbx_zbx_setproctitle|(In|End of) (update_cpustats)'
 ```
+
+# docker
+docker pull zabbix/zabbix-appliance:ubuntu-4.0.17
+https://hub.docker.com/r/zabbix/zabbix-appliance
+https://hub.docker.com/r/zabbix/zabbix-server-mysql
+
+docker run --name some-zabbix-appliance -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:tag
+docker run --name zabbix -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:ubuntu-4.0.17
