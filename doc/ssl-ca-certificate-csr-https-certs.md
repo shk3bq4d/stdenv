@@ -113,6 +113,8 @@ export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/source/anchors/myca.crt
 # git https
 GIT_SSL_NO_VERIFY=true
 
+LDAPTLS_REQCERT=never ldapwhoami -v -x -H ldaps://10.0.1.15 -D myuser@domain # ldaps no verify ldapsearch
+
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
 
 # verify validation (full chain must be in onefile)

@@ -27,4 +27,8 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-rsync --rsync-path="sudo rsync" "$@"
+#if [[ -z ${SUDO_USER:-} ]]; then
+	rsync --rsync-path="sudo rsync" "$@"
+#else
+#	rsync --rsh="ssh -F $(eval echo -n ~$SUDO_USER)/.ssh/config" --rsync-path="sudo rsync" "$@"
+#fi

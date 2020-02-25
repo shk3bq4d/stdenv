@@ -1,4 +1,5 @@
 psql -U postgres
+sudo -u postgres psql
 
 \list or \l: list all databases
 \dt: list all tables in the current database
@@ -70,3 +71,6 @@ end transaction; -- or commit;
 ```
 
 /var/lib/postgresql/.psql_history
+
+
+create database docvault1304 with template docvault owner docvault;
