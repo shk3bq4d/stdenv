@@ -1,3 +1,59 @@
+# /* ex: set cursorcolumn fenc=utf-8 expandtab ts=4 sw=4 : */
+# Menu Navigation
+Up arrow               Up
+Down arrow             Down
+Left arrow             Left
+Right arrow            Right
+Enter                  Select
+M                      Side menu in default skin
+
+# Live TV
+B                      Schedule recordings in live TV
+C                      Contextual menu
+E                      Open the EPG (Electronic Program Guide)
+H                      Live TV channels window
+J                      Live radio channels window
+K                      Live TV recordings window
+0 (Zero)               Toggle between the last two viewed live TV channels
+I                      View information about the selected TV show
+Arrow keys             Up and down to move through channel list; left and right to switch channel groups
+
+# Media Playback Control
+P                      Play
+X                      Stop
+Space                  Play/Pause toggle
+F                      Fast forward---press once for 2x speed; twice for 4x, etc.
+R                      Rewind the video; tap multiple times for faster rewinding
+Right arrow            Skip forward in 30-second increments
+Left arrow             Skip back in 30-second increments
+\ (Backslash)          Toggle between full-screen and windowed mode
+Z                      Change the aspect ratio of the current video
+Ctrl + S               Capture screenshot (saved to preferred location selected after first use)
+O                      Display codec information
+W                      Mark as watched/unwatched
+Y                      Switch media player, e.g. between internal player and a uPnP player
+T                      Toggle subtitles
+Ctrl + T               Change subtitle position
+Alt + Left arrow       Decrease playback speed (0.8x - 1.5x speed)
+Alt + Right arrow      Increase playback speed (0.8x - 1.5x speed)
+Q                      Queue a file for playback
+D                      Move item down in the favorites list
+U                      Move item up
+Audio Control
++ (Plus)               Increase volume
+- (Minus)              Reduce volume
+F8                     Mute playback
+A                      If audio and video isn't in sync, use this to adjust the delay and bring the video back into sync
+Picture Viewing
++ (Plus)               Zoom into photo
+- (Minus)              Zoom out of photo
+1-9                    Incremental zoom, with 9 providing the greatest degree of magnification
+. (Period)             Browse back through image library
+, (Comma)              Browse forward through library
+Esc                    Return to the previous menu, or to the home screen
+S                      Display the shutdown menu---exit Kodi, or shutdown or hibernate the host system, such as Windows or macOS
+
+
 # embycon # light plugin
 EmbyCon is a lightweight Kodi addon that lets you browse and play media files from your Emby server directly within your beloved Kodi interface.
 

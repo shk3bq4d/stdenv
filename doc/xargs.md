@@ -6,3 +6,6 @@
 -r           --no-run-if-empty
 -I@ -i@ --replace=@ : xargs -I@ cp security-groups.tf @.tf
 -o, --open-tty
+
+xargs -d '\n'             ## GNU line separator while read line
+| tr '\n' '\0' | xargs -0 ##     line separator while read line
