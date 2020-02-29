@@ -62,3 +62,4 @@ vi -R $(ls -1t /run/user/$EUID/i3/errorlog.2489 | head -n1 )
 # chromium full screen bug
 https://www.reddit.com/r/i3wm/comments/edd5fx/fullscreen_mode_in_i3_automatically_set_firefox/
 https://www.reddit.com/r/i3wm/comments/e9pgou/no_more_full_screen_video_panes_in_chromefirefox/
+https://github.com/i3/i3/issues/2107
