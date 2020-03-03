@@ -2169,7 +2169,7 @@ To get a sha512 password hash (random salt):
 {{ 'foobar' | regex_replace('^f.*o(.*)$', '\\1') }}
 {{ 'localhost:80' | regex_replace('^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>, \\g<port>') }}
 {{ 'localhost:80' | regex_replace(':80') }}
-{{ hosts | map('regex_replace', '^(.*)$', 'https://\\1') | list }}
+{{ hosts | map('regex_replace', '^(.*)$', 'https://\\1') | list }} # format sprintf
 # convert '^f.*o(.*)$' to '\^f\.\*o\(\.\*\)\$'
 {{ '^f.*o(.*)$' | regex_escape() }}
 # convert '^f.*o(.*)$' to '\^f\.\*o(\.\*)\$'
@@ -2523,3 +2523,12 @@ setup gather_subset=all_ipv4_addresses
 
 
 # https://www.tailored.cloud/devops/how-to-filter-and-map-lists-in-ansible/
+
+
+ set_fact:                                                   # list comprehension
+    resolved_ips: |                                          # list comprehension
+      {% set ip_list = [] %}                                 # list comprehension
+      {% for host in all_hosts %}                            # list comprehension
+      {% set _ = ip_list.append(lookup('dig', host)) %}      # list comprehension
+      {% endfor %}                                           # list comprehension
+      {{ ip_list }}                                          # list comprehension

@@ -110,7 +110,8 @@ kubectl -n kafka exec -ti testclient -- ./bin/kafka-console-consumer.sh --new-co
 
 kubectl run mrgolang2 -n kafka --image minikube:consumer --command tailf /dev/null # creates an deployment + pod
 kubectl run nettools -n mrdbg --image ianneub/network-tools -o yaml --command -- tail -f /dev/null
-kubectl run stdenv --image shk3bq4d/stdenv:stdenv -o yaml --command -- tail -f /dev/null
+kubectl run stdenv --generator=run-pod/v1 --image shk3bq4d/stdenv:stdenv -o yaml --command -- tail -f /dev/null
+kubectl run mysql-client --generator=run-pod/v1 --image arey/mysql-client --command -- mysql -h
 kubectl exec -it stdenv zsh
 
 kubectl config view # Show Merged kubeconfig settings.
