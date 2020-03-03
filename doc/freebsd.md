@@ -46,3 +46,9 @@ su -m www -c 'sh -c "whoami"'
 
 pw usermod tom -G ftpusers,wwwusers # add user tom to secondary groups ftpusers and wwwusers
 
+# 10.3 to 12 upgrade
+https://www.cyberciti.biz/open-source/freebsd-12-released-here-is-how-to-upgrade-freebsd/
+$ freebsd-version
+10.3-RELEASE-p10
+$ uname -mrs
+FreeBSD 10.3-RELEASE-p7 amd64

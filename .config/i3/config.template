@@ -157,8 +157,8 @@ bindcode --release $mod+30  exec mri3_toggle_border.py # <= 4.11-1
 
 # enter fullscreen mode for the focused container
 # code:41 => sym: 0x66, symbol:f
-#bindcode $mod+29  fullscreen
-bindcode $mod+29  exec ~/bin/i3_maximize.sh
+bindcode $mod+29  fullscreen
+#bindcode $mod+29  exec ~/bin/i3_maximize.sh
 # code:41 => sym: 0x66, symbol:f
 bindcode $mod+Shift+29  fullscreen global
 #bindsym  $mod+Tab exec winmenu.py
