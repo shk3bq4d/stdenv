@@ -65,7 +65,7 @@ set -euo pipefail
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-xdotool sleep ${delay:-0.2} key --window $(citrix-window-id.sh) ctrl+alt+Delete
+xdotool sleep ${delay:-0.5} key --window $(citrix-window-id.sh) ctrl+alt+Delete
 
 exit 0
 

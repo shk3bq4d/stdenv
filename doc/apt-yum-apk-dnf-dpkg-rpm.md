@@ -39,6 +39,7 @@ yum whatprovides snmpwalk  && yum clean all # net-snmp-utils
 yum whatprovides mongodump && yum clean all # mongodb-org-tools
 yum whatprovides dos2unix  && yum clean all # dos2unix
 yum clean all
+yum history # log
 
 yum-config-manager --disable base,extras,updates
 

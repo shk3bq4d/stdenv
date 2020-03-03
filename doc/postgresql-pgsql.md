@@ -74,3 +74,4 @@ end transaction; -- or commit;
 
 
 create database docvault1304 with template docvault owner docvault;
+create database mattermostdb504 with template mattermost owner sa;
