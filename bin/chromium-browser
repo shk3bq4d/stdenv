@@ -4,7 +4,8 @@
 set -x
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
-	if true; then # last exit day
+	#if true; then # last exit day at KS
+	if false; then # last exit day at KS
 		PROXYPAC=
 	else
 		PROXYPAC="http://127.0.0.1:57155/proxy.pac.dec17.py"
