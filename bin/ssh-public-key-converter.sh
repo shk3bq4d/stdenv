@@ -89,7 +89,7 @@ process_file() {
         fi
     fi
     # openssh format
-    outfile="$(dirname "$f")/$(basename $f .pub).pub"
+    outfile="$(dirname "$f")/$(basename "$f" .pub).pub"
     if [[ -f "$outfile" ]]; then
         echo "skipping already existing openssh file $outfile"
     else
@@ -98,7 +98,7 @@ process_file() {
         echo "Successfully wrote $outfile"
     fi
     for format in $FORMATS; do
-        outfile="$(dirname "$f")/$(basename $f .pub).pub.$format"
+        outfile="$(dirname "$f")/$(basename "$f" .pub).pub.$format"
         if [[ -f "$outfile" ]]; then
             echo "skipping already existing $format file $outfile"
         else
