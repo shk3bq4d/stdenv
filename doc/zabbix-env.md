@@ -314,3 +314,5 @@ https://hub.docker.com/r/zabbix/zabbix-server-mysql
 
 docker run --name some-zabbix-appliance -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:tag
 docker run --name zabbix -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:ubuntu-4.0.17
+
+https://www.zabbix.com/documentation/4.0/manual/config/items/item/custom_intervals
