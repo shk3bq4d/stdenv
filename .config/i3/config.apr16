@@ -1,14 +1,15 @@
 # /* ex: set filetype=sh: */
 export STDHOME_OUTPUTS='
 set $ol HDMI-2
-set $oc HDMI-2
-set $or HDMI-2
+set $oc DP-2
+set $or DP-2
 exec xrandr --output "$oc" --primary
+xrandr --output DP-2 --auto --primary --output HDMI-2 --mode 1920x1200 --left-of DP-2
 '
 
 export STDHOME_TOGGLE='
-bindsym --release $mod+v exec mri3-toggle-orientation.py # <= 4.11-1
-#bindsym --release $mod+v split toggle # new since 4.12
+#bindsym --release $mod+v exec mri3-toggle-orientation.py # <= 4.11-1
+bindsym --release $mod+v split toggle # new since 4.12
 '
 export STDHOME_TAIL='
 exec --no-startup-id  x11vnc -display :0 -shared -forever
