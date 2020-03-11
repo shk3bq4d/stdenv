@@ -554,7 +554,8 @@ do
     echo "key  : $i"
     echo "value: ${array[$i]}"
 done
-${#array[@]} # length
+${#array[@]} # array  length
+${#var}      # string length
 
 #iterage over args arguments parameters
 for var in "$@" # iterate

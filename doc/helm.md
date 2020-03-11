@@ -16,6 +16,7 @@ helm get values    releasename
 helm get values -a releasename
 helm rollback myrelease myversion
 helm package --sign
+helm search repo -l nginx-ingress
 
 helm fetch && helm template ... | kubectl apply -f - # tiller less deployment
 

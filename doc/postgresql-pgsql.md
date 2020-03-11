@@ -5,6 +5,7 @@ sudo -u postgres psql
 \dt: list all tables in the current database
 \du list roles
 \connect database_name
+\x # toggles expanded display (vertical alignment)
 
 sELECT c.relname FROM pg_class c WHERE c.relkind = 'S'; # list sequences
 
