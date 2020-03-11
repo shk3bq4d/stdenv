@@ -9,6 +9,11 @@
 ## Author: Jeff Malone, 02 Nov 2017
 ##
 
+if true; then
+	nohup shutter --remove_cursor --select &>/dev/null &
+	exit 0
+fi
+
 set -euo pipefail
 
 function usage() { sed -r -n -e s/__SCRIPT__/$0/ -e '/^##/s/^..// p'   $0 ; }

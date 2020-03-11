@@ -3,21 +3,62 @@ export STDHOME_OUTPUTS='
 set $ol HDMI-2
 set $oc DP-2
 set $or DP-2
-exec xrandr --output "$oc" --primary
-xrandr --output DP-2 --auto --primary --output HDMI-2 --mode 1920x1200 --left-of DP-2
+
+workspace 0  output $ol
+workspace 1  output $or
+workspace 2  output $or
+workspace 3  output $or
+workspace 4  output $or
+workspace 5  output $or
+workspace 6  output $or
+workspace 7  output $or
+workspace 8  output $or
+workspace 9  output $or
+workspace 10 output $or
+workspace 11 output $or
+workspace 12 output $or
+workspace 13 output $or
+exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
 '
+#exec xrandr --output "$oc" --primary
 
 export STDHOME_TOGGLE='
-#bindsym --release $mod+v exec mri3-toggle-orientation.py # <= 4.11-1
-bindsym --release $mod+v split toggle # new since 4.12
-'
-export STDHOME_TAIL='
-exec --no-startup-id  x11vnc -display :0 -shared -forever
-gaps outer 0
-gaps inner 12
+bindsym --release $mod+v split toggle
 '
 export STDHOME_FONT='
-font pango:Monospace Regular 10
+font pango:Monospace Regular 14
 '
-export gaps_inner=6
-export bar_height=20
+#STDHOME_FIRSTBAR_OUTPUT="output \$or"
+
+export STDHOME_TAIL='
+bar {
+    id bar-right
+    position top
+    i3bar_command i3bar -t
+    #status_command ~/.config/i3/mri3_status_right.sh
+    status_command ~/.config/i3/mri3_status_left.sh
+    output $or
+    strip_workspace_numbers yes
+    tray_output $ol
+    #bindsym  button3 nop
+    bindsym  button4 nop
+    bindsym  button5 nop
+    separator_symbol " "
+    colors {
+        background #00000000
+        statusline #ffffff
+        separator #666666
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace  #333333 #28557700 #ffffff
+        inactive_workspace #33333300 #22222200 #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+}
+exec --no-startup-id x11vnc -display :0 -shared -forever
+exec --no-startup-id ~/bin/startup/mrredshift.sh
+for_window [class="Wfica"] floating disable
+for_window [class="Wfica"] fullscreen disable
+'
+
+export gaps_inner=8
+export bar_height=26

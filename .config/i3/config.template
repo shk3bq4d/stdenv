@@ -147,8 +147,8 @@ bindsym  $mod+Shift+Up move up
 bindsym  $mod+Shift+Right move right
 
 # code: 24, qwerty: +q dvorak: +;
-bindcode --release $mod+24        exec mri3_resize_window.py
-bindcode --release $mod+Shift+24  exec mri3_resize_window.py -
+bindcode --release $mod+24        exec mri3_resize_window.py -
+bindcode --release $mod+Shift+24  exec mri3_resize_window.py
 # code:55 => sym: 0x76, symbol:v
 bindcode --release $mod+60  exec mri3_toggle_orientation.py # <= 4.11-1
 # code:42 => sym: 0x67, symbol:g
@@ -368,21 +368,6 @@ bar {
         binding_mode       #ff0000 #900000 #ffffff
     }
 }
-
-workspace 0  output $ol
-workspace 1  output $ol
-workspace 2  output $ol
-workspace 3  output $ol
-workspace 4  output $ol
-workspace 5  output $ol
-workspace 6  output $ol
-workspace 7  output $oc
-workspace 8  output $oc
-workspace 9  output $oc
-workspace 10 output $oc
-workspace 11 output $oc
-workspace 12 output $oc
-workspace 13 output $oc
 
 
 #bindsym  $mod+o exec i3lock -p win -i ~/Pictures/migdesk.png
