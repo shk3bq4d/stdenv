@@ -497,6 +497,31 @@ def mrFocusedStack():
     mrinspect(rA, cO)
     return rA
 
+def current_workspace():
+    return focused().workspace()
+
+def current_output():
+    i3 = i3ipc.Connection()
+    current_workspace_rectH = vars(current_workspace().parent.parent.rect)
+    #logger.info(current_workspace_rectH)
+    for oH in i3.get_outputs():
+        #logger.info(oH.rect)
+        if oH.rect == current_workspace_rectH:
+            return oH
+    return None
+
+def current_output_workspaces():
+    i3 = i3ipc.Connection()
+    oH = i3.get_outputs()
+
+    current_output_rect = current_output().rect
+
+    rA = []
+    for workspace in get_root().workspaces():
+        if vars(workspace.parent.parent.rect) == current_output_rect:
+            rA.append(workspace)
+    return rA
+
 def renumber_workspaces():
     all_workspaces = copy.copy(get_root().workspaces())
     used_numbers = []

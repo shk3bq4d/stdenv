@@ -102,7 +102,8 @@ def go(args=[]):
     try3(ar)
 
 def current_workspaces_letter_obj():
-    return {mri3.workspace_name_to_letter(x.num): x for x in mri3.get_root().workspaces()}
+    #return {mri3.workspace_name_to_letter(x.num): x for x in mri3.get_root().workspaces()}
+    return  {mri3.workspace_name_to_letter(x.num): x for x in mri3.current_output_workspaces()}
 
 def get_index_uniform(requested_desktop_key, nb_existing_desktops):
     if nb_existing_desktops == 0:

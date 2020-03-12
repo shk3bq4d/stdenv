@@ -58,6 +58,7 @@ exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id ~/bin/startup/mrredshift.sh
 for_window [class="Wfica"] floating disable
 for_window [class="Wfica"] fullscreen disable
+for_window [class="Wfica"] workspace $ws0
 '
 
 export gaps_inner=8
