@@ -503,21 +503,27 @@ def current_workspace():
 def current_output():
     i3 = i3ipc.Connection()
     current_workspace_rectH = vars(current_workspace().parent.parent.rect)
-    #logger.info(current_workspace_rectH)
+    logger.info('A %s', current_workspace_rectH)
     for oH in i3.get_outputs():
-        #logger.info(oH.rect)
-        if oH.rect == current_workspace_rectH:
+        logger.info('B2 %s', vars(oH.rect))
+       # logger.info('B %s', oH.rect.rect)
+        if vars(oH.rect) == current_workspace_rectH:
+            logger.info("Returning something as current output")
             return oH
+    logger.warn("Returning None as current output")
     return None
 
 def current_output_workspaces():
     i3 = i3ipc.Connection()
     oH = i3.get_outputs()
 
-    current_output_rect = current_output().rect
+    current_output_rect = vars(current_output().rect)
 
     rA = []
+    #logger.info("cow1 %s", current_output_rect)
+    #logger.info("cow1b %d", len(get_root().workspaces()))
     for workspace in get_root().workspaces():
+        #logger.info("cow2 %s", vars(workspace.parent.parent.rect))
         if vars(workspace.parent.parent.rect) == current_output_rect:
             rA.append(workspace)
     return rA
