@@ -564,7 +564,7 @@ do
 done
 
 # shift arguments parameters args
-shift
+shift # push pop arguments
 
 #autocomplete save the following script in /etc/bash_completion.d/
 _script()

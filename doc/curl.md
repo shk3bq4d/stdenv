@@ -23,3 +23,4 @@ curl -A "$UA"
 curl -s -o './#1.yaml' 'https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/helloWorld/{configMap,deployment,kustomization,service}.yaml' # multidownload
 
 curl --resolve backoffice-ks.fabric-ci-74.hehee.k8s.haha.com:443:10.0.2.15 https://backoffice-ks.fabric-ci-74.hehe.k8s.haha.com # SNI cheat, custom name DNS resolution
+curl -D - -s -o /dev/null # only response headers
