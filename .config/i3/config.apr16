@@ -29,7 +29,7 @@ export STDHOME_FONT='
 font pango:Monospace Regular 14
 '
 #STDHOME_FIRSTBAR_OUTPUT="output \$or"
-
+export STDHOME_FIRSTBAR_POSITION='bottom'
 export STDHOME_TAIL='
 bar {
     id bar-right
