@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 ##
-##Usage:  __SCRIPT__ REMOTEHOST
-##
-##  ssh connects to REMOTEHOST, opens a proxy tunnel and
-##  start a local chrome session in a docker container with
-##  config proxy set to the REMOTEHOST socks proxy
-## 
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
 ##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
 ##
-## Author: Jeff Malone, 21 Feb 2020
+## Author: Jeff Malone, 04 Jun 2019
 ##
 
 set -euo pipefail
 
-function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
+# function usage() { sed -r -n -e "s/__SCRIPT__/$\(basename $0\)/" -e '/^##/s/^..// p'   $0 ; }
 
 # [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
 
-[[ $# -lt 1 || $# -gt 2 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
+# [[ $# -lt 1 || $# -gt 2 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
 
 #   h - check for option -h without parameters; gives error on unsupported options;
 #   h: - check for option -h with parameter; gives errors on unsupported options;
@@ -68,31 +65,7 @@ function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// 
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-#echo -n "Are you sure you want to proceed (yN): "
-#read _read
-#echo
-#case "${_read,,}" in #y|yes) true ;;
-#*)   false;;
-#esac
+xdotool sleep ${delay:-0.5} key --window $(citrix-window-id.sh) Down
 
-PORT=$(random-free-tcp-port.sh)
-LO=127.0.0.1
-LOP=$LO:$PORT
-export http_proxy=http://$LOP
-export https_proxy=http://$LOP
-env | grep -i http
-set -x
-#/usr/bin/chromium-browser --parent-profile=r4p --new-window --proxy-server="socks5://$LOP" --temp-profile http://whatismyip.akamai.com/
-echo "
-if you need your profile and not a container, close all you chromium-browser window and start
-chromium-browser --proxy-server="socks5://$LOP" http://whatismyip.akamai.com/
-"
-docker pull jess/chromium
-{ sleep 2;
-  docker-chromium-browser.sh --proxy-server="socks5://$LOP" http://whatismyip.akamai.com/;
-} >/dev/null 2>&1 </dev/null &
-ssh -o ControlMaster=no -o ControlPath=none -o ControlPersist=no -o ExitOnForwardFailure=yes -ND $LOP "$@"
-
-echo EOF
 exit 0
 
