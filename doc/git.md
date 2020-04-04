@@ -497,6 +497,13 @@ git rev-parse         HEAD # current revision
 
 # git-crypt
 https://medium.com/faun/https-medium-com-mikhail-advani-secret-management-with-ansible-3bfdd92472ef
+## git-crypt no gpg setup on execution script
+git-crypt export-key /tmp/key # on already unlock version
+cat /tmp/key | base64
+-- paste into remote host
+cat /tmp/key | base64 -d > /tmp/key2
+git-crypt unlock /tmp/key2
+-- voilà!
 
 # strategies
 ## Recursive

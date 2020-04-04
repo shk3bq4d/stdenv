@@ -1383,6 +1383,9 @@ role-directory-layout/handlers/main.yml
 role-directory-layout/vars/main.yml
 role-directory-layout/tasks/main.yml
 
+
+ansible_user # on localhost privileg ansible_ssh_user
+
 # inventory
 https://github.com/ansible/ansible/tree/devel/contrib/inventory
 [all]
