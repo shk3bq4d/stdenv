@@ -16,8 +16,13 @@ DIR=~/bin
 set -x
 if hash keepassxc &>/dev/null; then
     case $(hostname -f) in \
+    $WORK_PC1F)
+		echo "FATAL: disabled during corona"
+		exit 1
+		;;
     apr16.ly.lan|$WORK_PC1F)
         export QT_SCALE_FACTOR=1.5
+		true
         ;;
     *)
         export QT_SCALE_FACTOR=2
