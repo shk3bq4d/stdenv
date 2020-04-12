@@ -2,6 +2,9 @@
 
 export LC_ALL=en_US.UTF-8
 
+echo "FATAL: not redshift for you"
+exit 1
+
 set -e
 
 d=~/.tmp/log/
