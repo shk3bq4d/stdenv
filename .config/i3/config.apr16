@@ -28,18 +28,18 @@ bindsym --release $mod+v split toggle
 export STDHOME_FONT='
 font pango:Monospace Regular 14
 '
-#STDHOME_FIRSTBAR_OUTPUT="output \$or"
-export STDHOME_FIRSTBAR_POSITION='bottom'
+STDHOME_FIRSTBAR_OUTPUT="output \$or"
+export STDHOME_FIRSTBAR_POSITION='top'
 export STDHOME_TAIL='
 bar {
     id bar-right
-    position top
+    position bottom
     i3bar_command i3bar -t
     #status_command ~/.config/i3/mri3_status_right.sh
-    status_command ~/.config/i3/mri3_status_left.sh
-    output $or
+    #status_command ~/.config/i3/mri3_status_left.sh
+    output $ol
     strip_workspace_numbers yes
-    tray_output $ol
+    tray_output $or
     #bindsym  button3 nop
     bindsym  button4 nop
     bindsym  button5 nop
