@@ -1,10 +1,10 @@
-## vimf6_ansible_args: --diff --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod
+## vimf6_ansible_args: --diff 
 ## vimf6_ansible_args: --diff -e zabbix_env=uat -i inventory.yml --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod
 ## vimf6_ansible_args: --diff --check -vv
 ## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
 ## vimf6_ansible_env: display_skipped_hosts = yes
 ## vimf6_ansible_env: display_ok_hosts = yes
-## vimf6_ansible_nolocalsudo: yes#
+## vimf6_ansible_nolocalsudo: no
 ## vimf6_ansible_args: --diff
 ## vimf6_ansible_nolocalsudo: yes
 - hosts: localhost

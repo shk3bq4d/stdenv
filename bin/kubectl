@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh expandtab :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 13 Jan 2020
+##
+
+set -euo pipefail
+
+kubectl_version=1.18.1
+
+BIN="$HOME/bin/kubectl-$kubectl_version"
+# https://kubernetes.io/docs/tasks/tools/install-kubectl/
+# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+
+
+if [[ ! -f $BIN ]]; then
+    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    read _read
+    echo # read
+    case "${_read,,}" in \
+    y|Y|yes)
+        true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+    cd ~/.tmp
+    curl -sLO "https://storage.googleapis.com/kubernetes-release/release/v${kubectl_version}/bin/linux/amd64/kubectl"
+    mv -f ~/.tmp/kubectl $BIN
+    chmod u+x $BIN
+fi
+
+~/bin/kubectl-$kubectl_version "$@"
+exit $?
