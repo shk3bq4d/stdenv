@@ -1,5 +1,5 @@
 changelog upgrade version latest update # https://confluence.atlassian.com/doc/confluence-release-notes-327.html
-upgrade version latest update # https://www.atlassian.com/software/confluence/download-archives 
+upgrade version latest update # https://www.atlassian.com/software/confluence/download-archives
 
 www_confluence_help.sh
 http://confluence/renderer/notationhelp.action?section=all
@@ -23,62 +23,62 @@ Macros
 Help Tips Headings
 To create a header, place "hn. " at the start of the line (where n can be a number from 1-6).
 
-Notation	Comment
-h1. Biggest heading	
+Notation    Comment
+h1. Biggest heading
 Biggest heading
-h2. Bigger heading	
+h2. Bigger heading
 Bigger heading
-h3. Big Heading	
+h3. Big Heading
 Big Heading
-h4. Normal Heading	
+h4. Normal Heading
 Normal Heading
-h5. Small Heading	
+h5. Small Heading
 Small Heading
-h6. Smallest Heading	
+h6. Smallest Heading
 Smallest Heading
 Help Tips Text Effects
 Text effects are used to change the formatting of words and sentences.
 
-Notation	Comment
-*strong*	Makes text strong. bold
-_emphasis_	Makes text emphasis. 
-??citation??	Makes text in citation.
--strikethrough-	Makes text as strikethrough.
-+underlined+	Makes text as underlined.
-^superscript^	Makes text in superscript.
-~subscript~	Makes text in subscript.
-{{text will be monospaced}}	Makes text as code text.
-bq. Some block quoted text	To make an entire paragraph into a block quotation, place "bq. " before it.
+Notation    Comment
+*strong*    Makes text strong. bold
+_emphasis_  Makes text emphasis.
+??citation??    Makes text in citation.
+-strikethrough- Makes text as strikethrough.
++underlined+    Makes text as underlined.
+^superscript^   Makes text in superscript.
+~subscript~ Makes text in subscript.
+{{text will be monospaced}} Makes text as code text.
+bq. Some block quoted text  To make an entire paragraph into a block quotation, place "bq. " before it.
 Example:
 
 Some block quoted text
 {quote}
 here is quoteable
 content to be quoted
-{quote}	
+{quote}
 Quote a block of text that's longer than one paragraph.
 
 Example:
 here is quoteable
 content to be quoted
-{color:red} 
-look ma, red text! 
-{color}	 Changes the color of a block of text.
+{color:red}
+look ma, red text!
+{color}  Changes the color of a block of text.
 Example: look ma, red text!
 
 Help Tips Text Breaks
 Most of the time, explicit paragraph breaks are not required - Confluence will be able to paginate your paragraphs properly.
 
-Notation	Comment
-(empty line)	Produces a new paragraph
-\\	Creates a line break. Not often needed, most of the time Confluence will guess new lines for you appropriately.
-----	creates a horizontal ruler
----	Produces — symbol.
---	Produces – symbol.
+Notation    Comment
+(empty line)    Produces a new paragraph
+\\  Creates a line break. Not often needed, most of the time Confluence will guess new lines for you appropriately.
+----    creates a horizontal ruler
+--- Produces — symbol.
+--  Produces – symbol.
 Help Tips Links
 Links are the heart of Confluence, so learning how to create them quickly is important.
 
-Notation	Comment
+Notation    Comment
 [#anchor]
 [^attachment.ext]
 or
@@ -88,7 +88,7 @@ or
 or
 [spacekey:pagetitle]
 [spacekey:pagetitle#anchor]
-[spacekey:pagetitle^attachment.ext]	Creates an internal hyperlink to the specified page in the desired space (or the current one if you don't specify any space). Appending the optional '#' sign followed by an anchor name will lead into a specific bookmarked point of the desired page. Also having the optional '^' followed by the name of an attachment will lead into a link to the attachment of the desired page.
+[spacekey:pagetitle^attachment.ext] Creates an internal hyperlink to the specified page in the desired space (or the current one if you don't specify any space). Appending the optional '#' sign followed by an anchor name will lead into a specific bookmarked point of the desired page. Also having the optional '^' followed by the name of an attachment will lead into a link to the attachment of the desired page.
 Example: pagetitle
 
 If such a page doesn't already exist, it will allow you to create the page in the current space. Create page links will have a Create new page: anewpage after them.
@@ -104,10 +104,10 @@ or
 or
 [link alias|spacekey:pagetitle|link tip]
 [link alias|spacekey:pagetitle#anchor|link tip]
-[link alias|spacekey:pagetitle^attachment.ext|link tip]	Creates an internal hyperlink to the specified page in the desired space (or the current one if you don't specify any space) where the link text is different from the actual hyperlink link. Also you can have an optional link tip which will apear as tooltip. Appending the optional '#' sign followed by an anchor name will lead into a specific bookmarked point of the desired page. Also having the optional '^' followed by the name of an attachment will lead into a link to the attachment of the desired page.
+[link alias|spacekey:pagetitle^attachment.ext|link tip] Creates an internal hyperlink to the specified page in the desired space (or the current one if you don't specify any space) where the link text is different from the actual hyperlink link. Also you can have an optional link tip which will apear as tooltip. Appending the optional '#' sign followed by an anchor name will lead into a specific bookmarked point of the desired page. Also having the optional '^' followed by the name of an attachment will lead into a link to the attachment of the desired page.
 Example: link alias
 
-[/2004/01/12/Blog Post] [spacekey:/2004/01/12/Blog Post]	Creates an internal hyperlink to the specified blog post in the desired space (or the current one if you don't specify any space). You must specify the date the post was made in /year/month/day form as shown. Anchors and link text can be added the same way as described above.
+[/2004/01/12/Blog Post] [spacekey:/2004/01/12/Blog Post]    Creates an internal hyperlink to the specified blog post in the desired space (or the current one if you don't specify any space). You must specify the date the post was made in /year/month/day form as shown. Anchors and link text can be added the same way as described above.
 If you attempt to link to a blog post that doesn't exist, no link will be created.
 
 Example:
@@ -118,14 +118,14 @@ my link name
 [spacekey:/2004/01/12]
 or
 [my link name|/2004/01/12]
-[my link name|spacekey:/2004/01/12]	Creates an internal hyperlink to a view of a whole day's news. Specify the date you wish to link to as year/month/day. Link titles can be supplied as with other links. It is possible to link to days with no news items on them: the destination page will just be empty.
+[my link name|spacekey:/2004/01/12] Creates an internal hyperlink to a view of a whole day's news. Specify the date you wish to link to as year/month/day. Link titles can be supplied as with other links. It is possible to link to days with no news items on them: the destination page will just be empty.
 Examples:
 
 /2004/01/12/Blog Post
 my link name
 [$12345]
 or
-[my link name|$12345]	Creates a link to a piece of content by its internal database ID. This is currently the only way to link to a mail message.
+[my link name|$12345]   Creates a link to a piece of content by its internal database ID. This is currently the only way to link to a mail message.
 Examples:
 
 Re: Webwork 2 Upgrade
@@ -147,78 +147,78 @@ User Full Name
 custom link title
 [~nosuchuser]
 [phrase@shortcut]
-[custom link text|phrase@shortcut]	Creates a shortcut link to the specified shortcut site. Shortcuts are configured by the site administrator. You can add a link title to shortcuts in the same manner as other links.
+[custom link text|phrase@shortcut]  Creates a shortcut link to the specified shortcut site. Shortcuts are configured by the site administrator. You can add a link title to shortcuts in the same manner as other links.
 Examples:
 
 confluence@Google
 custom link text
 [http://confluence.atlassian.com]
-[Atlassian|http://atlassian.com]	Creates a link to an external resource, special characters that come after the URL and are not part of it must be separated with a space. External links are denoted with an arrow icon.
+[Atlassian|http://atlassian.com]    Creates a link to an external resource, special characters that come after the URL and are not part of it must be separated with a space. External links are denoted with an arrow icon.
 Note: the [] around external links are optional in the case you do not want to use any alias for the link.
 
 Examples:
 
 http://confluence.atlassian.com>>
 Atlassian>>
-[mailto:legendaryservice@atlassian.com]	Creates a link to an email address, complete with mail icon.
+[mailto:legendaryservice@atlassian.com] Creates a link to an email address, complete with mail icon.
 Example:  >>legendaryservice@atlassian.com
 
 [file://c:/temp/foo.txt]
-[file://z:/file/on/network/share.txt]	
-This only works on Internet Explorer 
+[file://z:/file/on/network/share.txt]
+This only works on Internet Explorer
 Creates a link to file on your computer or on a network share that you have mapped to a drive
 
-{doc:/display/DOC/Confluence+Documentation+Home}Confluence Documentation{doc}	
+{doc:/display/DOC/Confluence+Documentation+Home}Confluence Documentation{doc}
 A macro that allows you to quickly create links to content at http://confluence.atlassian.com.
 
 Default parameter — The link to the content relative to http://confluence.atlassian.com.
 Macro body — The link text, interpreted as wiki markup.
-{anchor:anchorname}	 Creates a bookmark anchor inside the page. You can then create links directly to that anchor. So the link [My Page#here] will link to wherever in "My Page" there is an {anchor:here} macro, and the link [#there] will link to wherever in the current page there is an {anchor:there} macro.
+{anchor:anchorname}  Creates a bookmark anchor inside the page. You can then create links directly to that anchor. So the link [My Page#here] will link to wherever in "My Page" there is an {anchor:here} macro, and the link [#there] will link to wherever in the current page there is an {anchor:there} macro.
 Help Tips Lists
 Lists allow you to present information as a series of ordered items.
 
-Notation	Comment
-* some 
-* bullet 
-** indented 
-** bullets 
-* points	A bulleted list (must be in first column). Use more (**) for deeper indentations.
-Example: 
+Notation    Comment
+* some
+* bullet
+** indented
+** bullets
+* points    A bulleted list (must be in first column). Use more (**) for deeper indentations.
+Example:
 some
 bullet
 indented
 bullets
 points
-- different 
-- bullet 
-- types	A list item (with -), several lines create a single list.
-Example: 
+- different
+- bullet
+- types A list item (with -), several lines create a single list.
+Example:
 different
 bullet
 types
-# a 
-# numbered 
-# list	A numbered list (must be in first column). Use more (##, ###) for deeper indentations.
-Example: 
+# a
+# numbered
+# list  A numbered list (must be in first column). Use more (##, ###) for deeper indentations.
+Example:
 a
 numbered
 list
-# a 
-# numbered 
-#* with 
-#* nested 
-#* bullet 
+# a
+# numbered
+#* with
+#* nested
+#* bullet
 # list
 
-* a 
-* bulletted 
-*# with 
-*# nested 
-*# numbered 
+* a
+* bulletted
+*# with
+*# nested
+*# numbered
 * list
 
 You can even go with any kind of mixed nested lists:
-Example: 
+Example:
 a
 numbered
 with
@@ -232,12 +232,12 @@ with
 nested
 numbered
 list
-{dynamictasklist:thingsToDo}	
+{dynamictasklist:thingsToDo}
 The Dynamic Tasklist Macro displays a task list which can be modified in the page as it is viewed. Despite the fact that this plugin has an ajax UI, it is still fully versioned like a normal Confluence page.
 
-Example: 
-What you need to type	What you will get
-{dynamictasklist:Arthurs To-Do's}	
+Example:
+What you need to type   What you will get
+{dynamictasklist:Arthurs To-Do's}
 {checklist:name=The animals| parent=Animals|checklabels=mammal, oviparous, pets}
 
 {checklist:name=Oviparious|parent=Animals|excerpt-heading=Classification|label=oviparous|checklabels=fish, amphibians, reptiles, birds|mutuallyexclusive=true}
@@ -254,29 +254,29 @@ The columns can be labels that are set/un-set for the pages, the excerpt or a te
 
 Parameters value can have any of the following keywords that will be replace when rendering the page:
 
-Keyword	 Value
-@user@	 current user's name
-@userfullname@	 current user's full name
-@self@ or title	 the title of the page owning the checklist
-@creator@	 the page creator's user name
-@modifier@	 the last modifier's user name
-@any other value name@	 the given metadata value in the page owning the checklist
+Keyword  Value
+@user@   current user's name
+@userfullname@   current user's full name
+@self@ or title  the title of the page owning the checklist
+@creator@    the page creator's user name
+@modifier@   the last modifier's user name
+@any other value name@   the given metadata value in the page owning the checklist
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 name or unnamed
-first parameter	 no	 current page's name	 the name of the checklist
-parent	 no	 	 the parent page, if not set, and there is no label set either, then the page containing the checklist will be used as such
-label	 no	 	 the label the selected must have
-space	 no	 	 the space to reduce the query to, when using label only and no parent
-depth	 no	0	 depth of the search for children ('0' for no limit)
-childrenonly	 no	false	 whether or not parent-children are to be included
-sort	 no	name	 How the table should be sorted: name to sort by name, created to sort by page creation date, or modified to sort by last modification date
-checklabels	 no	 	 a comma separated list of labels to be used to 'check' the pages
-mutuallyexclusive	 no	false	 whether or not the checklabels are mutually exclusive
-excerpt-heading	 no	 	 the heading for the excerpt column
-comment	 no	 	 the heading for a column to be used for comments
-class	 no	grid	 the style sheet (CSS) class to use for the table
-pagelink	 no	true	 whether or not to include a link to the pages as the first column of the table
+first parameter  no  current page's name     the name of the checklist
+parent   no      the parent page, if not set, and there is no label set either, then the page containing the checklist will be used as such
+label    no      the label the selected must have
+space    no      the space to reduce the query to, when using label only and no parent
+depth    no 0    depth of the search for children ('0' for no limit)
+childrenonly     no false    whether or not parent-children are to be included
+sort     no name     How the table should be sorted: name to sort by name, created to sort by page creation date, or modified to sort by last modification date
+checklabels  no      a comma separated list of labels to be used to 'check' the pages
+mutuallyexclusive    no false    whether or not the checklabels are mutually exclusive
+excerpt-heading  no      the heading for the excerpt column
+comment  no      the heading for a column to be used for comments
+class    no grid     the style sheet (CSS) class to use for the table
+pagelink     no true     whether or not to include a link to the pages as the first column of the table
 Examples
 
 Lets say we have a page Animals as parent of the pages Dog, Cat, Shark, Elephant, Turtle, Salmon, Snake, Whale, Frog, Toad, Lizard, Platypus and Eagle.
@@ -292,16 +292,16 @@ In the third example, only the children of Animals that have the label pets are 
 
 Note how the comment text can be actual wiki content.
 
-{checklist-label:Mammal?|label=mammal}	
+{checklist-label:Mammal?|label=mammal}
 When used within a {checklist} macro, it defines a column as a label check. Every time a cell of this column is selected, the label will be added/removed to/from the referred page
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-label	 no	 the heading	 The label to be used to 'check' the pages
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-readonly	 no	false	 whether or not the column is read-only
+first parameter  yes         The heading of the column
+label    no  the heading     The label to be used to 'check' the pages
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+readonly     no false    whether or not the column is read-only
 Example
 
 {checklist:name=Pets|parent=Animals|label=pets}
@@ -309,18 +309,18 @@ Example
 {checklist}
 Will render as:
 
-{checklist-input:Common pet names|cols=20}	
+{checklist-input:Common pet names|cols=20}
 When used within a {checklist} macro, it defines a column as a text input.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-cols	 yes	 	 The maximum number of characters read
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-readonly	 no	false	 whether or not the column is read-only
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
-store	no	rows	 Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
+first parameter  yes         The heading of the column
+cols     yes         The maximum number of characters read
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+readonly     no false    whether or not the column is read-only
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+store   no  rows     Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
 Example
 
 {checklist:name=Pets names|parent=Animals|label=pets}
@@ -328,19 +328,19 @@ Example
 {checklist}
 Will render as:
 
-{checklist-wikiinput:Comments| rows=5| cols=20| width=90%}	
+{checklist-wikiinput:Comments| rows=5| cols=20| width=90%}
 When used within a {checklist} macro, it defines a column as a wiki-text input.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-cols	 yes	 	 The number of columns in the text area when editing the value
-rows	 no	1	 The number of rows in the text area when editing the value
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-readonly	 no	false	 whether or not the column is read-only
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
-store	no	rows	 Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
+first parameter  yes         The heading of the column
+cols     yes         The number of columns in the text area when editing the value
+rows     no 1    The number of rows in the text area when editing the value
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+readonly     no false    whether or not the column is read-only
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+store   no  rows     Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
 Example
 
 {checklist:name=The pets| parent=Animals| label=pets}
@@ -363,17 +363,17 @@ birds|It's a bird
 {checklist-select:Who owns one?|usersgroup=all}
 When used within a {checklist} macro, it defines a column as a selection (drop-down menu). The selection can be from a list of options, a list of labels or a list of users.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-uselabels	 no	false	 instead of setting a metadata value, add the selected label
-usersgroup	 no	 	 instead of listing the value, use the given users group to select from a list of users. Use all for listing all the users
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-readonly	 no	false	 whether or not the column is read-only
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
-store	no	rows	 Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
-macro body	 	 	 If no usersgroup is given, the options to select from have to be defined as part of the body. Each line of the body define an option. Each option could have a different value from the actual caption by defining it as <value>|<caption>
+first parameter  yes         The heading of the column
+uselabels    no false    instead of setting a metadata value, add the selected label
+usersgroup   no      instead of listing the value, use the given users group to select from a list of users. Use all for listing all the users
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+readonly     no false    whether or not the column is read-only
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+store   no  rows     Determines where to store the value. Use rows to store the values for this column into the pages representing each row (metadata value name is <Column Heading>), or checklist to store the values into the page containing the checklist (metadata value name is <Column Heading>.<Row page title>)
+macro body           If no usersgroup is given, the options to select from have to be defined as part of the body. Each line of the body define an option. Each option could have a different value from the actual caption by defining it as <value>|<caption>
 If store is set to checklist and there is only one option to select from, then the column is handled as a checkbox.
 
 Examples
@@ -407,13 +407,13 @@ Will render as:
 {checklist-wiki}
 When used within a {checklist} macro, it defines a column as a wiki segment to be rendered for each of the pages on the checklist.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column and the metadata value name
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
-macro body	 	 	 the wiki segment to be rendered for each page on the checklist
+first parameter  yes         The heading of the column and the metadata value name
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+macro body           the wiki segment to be rendered for each page on the checklist
 Example
 
 Assuming each of the pages contains an attachment photo.jpg
@@ -425,15 +425,15 @@ Assuming each of the pages contains an attachment photo.jpg
 {checklist}
 Will render as:
 
-{checklist-excerpt:Classification|width=10%}	
+{checklist-excerpt:Classification|width=10%}
 When used within a {checklist} macro, it defines a column as the excerpt of each of the pages.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+first parameter  yes         The heading of the column
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
 Example
 
 {checklist:name=pets| parent=Animals| label=pets}
@@ -441,25 +441,25 @@ Example
 {checklist}
 Will render as:
 
-{checklist-pagelink:Edit|destination=view|width=10%}	
+{checklist-pagelink:Edit|destination=view|width=10%}
 When used within a {checklist} macro, it defines a column as a link to each of the pages.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-destination	 no	view	 the link should go to (view or edit)
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
-{checklist-include:Full page}	
+first parameter  yes         The heading of the column
+destination  no view     the link should go to (view or edit)
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+{checklist-include:Full page}
 When used within a {checklist} macro, it defines a column as the entire content of each of the pages.Use with caution, it can get really messy.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+first parameter  yes         The heading of the column
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
 Example
 
 {checklist:name=All the pet's pages|parent=Animals|label= pets}
@@ -470,12 +470,12 @@ Will render as:
 {checklist-metadata:Comments}
 When used within a {checklist} macro, it defines a column as a lookup of existing metadata for each page.
 
-parameter	 Mandatory?	 Default	 description
+parameter    Mandatory?  Default     description
 heading or unnamed
-first parameter	 yes	 	 The heading of the column and the metadata value name
-width	 no	 	 width of the column
-class	 no	 	 the style sheet (CSS) class to use for the cells
-sorttype	 no	S	 Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
+first parameter  yes         The heading of the column and the metadata value name
+width    no      width of the column
+class    no      the style sheet (CSS) class to use for the cells
+sorttype     no S    Type of value to be used to sort the table by this column. Values could be any of A, C, D, F, I, S, as defined in the Table Plugin
 Example
 
 {checklist:name=The pets names|parent=Animals|label=pets}
@@ -489,23 +489,23 @@ Will render as:
 
 Displays the value of an attribute set on a page through a {checklist}
 
-parameter	 description
-page	 (optional) title of the page to lookup. If none set, then the current page will be used
-attribute	Name of the attribute (column) set in the checklist
+parameter    description
+page     (optional) title of the page to lookup. If none set, then the current page will be used
+attribute   Name of the attribute (column) set in the checklist
 
 
 The first example on the side will display fido, dino... if the segment is in the Dog page
 The second example on the side will display If you are a cat person... from any page
 
-{checklist-log:format=useranddate| maxentries=1|Comments}	
+{checklist-log:format=useranddate| maxentries=1|Comments}
 Generates a checklist change report for a given page.
 
-parameter	 Mandatory?	 Default	 description
-page	 no	 current page	 The title of the page to generate the report from
-maxentries	 no	0 (no limit)	 The maximum number of entries to report (0 for no limit)
-maxentriespername	 no	0 (no limit)	 The maximum number of entries per value name (0 for no limit)
-mostrecentfirst	 no	false	 whether or not display the most recent entry first
-format	 no	detailed	 Defines the way each of log entries is to be reported:
+parameter    Mandatory?  Default     description
+page     no  current page    The title of the page to generate the report from
+maxentries   no 0 (no limit)     The maximum number of entries to report (0 for no limit)
+maxentriespername    no 0 (no limit)     The maximum number of entries per value name (0 for no limit)
+mostrecentfirst  no false    whether or not display the most recent entry first
+format   no detailed     Defines the way each of log entries is to be reported:
 date : display only the date
 dateanduser: display the date and use
 detailed: display all the available information
@@ -514,8 +514,8 @@ oldvalue: display only the last value
 simple: display date, user and new value in a single line
 user: display only the user
 useranddate: display the user and date
-remaining 
-unnamed parameters	 no	 	 each remaining unnamed parameters in the macro indicate what name values are to be included in the report. If none set, the report will include all the value names
+remaining
+unnamed parameters   no      each remaining unnamed parameters in the macro indicate what name values are to be included in the report. If none set, the report will include all the value names
 Example
 
 {checklist-log:format=useranddate|maxentries=1|Comments}
@@ -529,58 +529,58 @@ This macro is being deprecated. Use {checklist-label}, {checklist-excerpt} or {c
 
 Defines more detailed column information for a {checklist}.
 
-parameter	 Mandatory?	 Default	 description
-heading	 yes	 	 Heading of the column
-type	 yes	 	 type of column. It can be any of label, text or excerpt
-label	 yes, if
-type=label	 	 the label to be used to 'check' the pages
-rows	 yes, if
-type=text	 	 rows when editing text area
-cols	 yes, if
-type=text	 	 cols when editing text area
-width	 no	 	 width of the of column
-readonly	 no	false	 whether or not the column is read-only
+parameter    Mandatory?  Default     description
+heading  yes         Heading of the column
+type     yes         type of column. It can be any of label, text or excerpt
+label    yes, if
+type=label       the label to be used to 'check' the pages
+rows     yes, if
+type=text        rows when editing text area
+cols     yes, if
+type=text        cols when editing text area
+width    no      width of the of column
+readonly     no false    whether or not the column is read-only
 Note that the {checklist-column} macro must be contained within a {checklist} macro.
 
 Help Tips Images
 Images can be embedded into Confluence pages from attached files or remote sources.
 
-Notation	Comment
-!http://www.host.com/image.gif! 
-or 
-!attached-image.gif!	Inserts an image into the page.
+Notation    Comment
+!http://www.host.com/image.gif!
+or
+!attached-image.gif!    Inserts an image into the page.
 If a fully qualified URL is given the image will be displayed from the remote source, otherwise an attached image file is displayed.
 
-!spaceKey:pageTitle^image.gif! 
+!spaceKey:pageTitle^image.gif!
 
-!/2007/05/23/My Blog Post^image.gif!	Inserts an image that is attached on another page or blog post.
+!/2007/05/23/My Blog Post^image.gif!    Inserts an image that is attached on another page or blog post.
 If no space key is defined, the current is space is used by default.
 
-!image.jpg|thumbnail!	
+!image.jpg|thumbnail!
 Insert a thumbnail of the image into the page (only works with images that are attached to the page). Users can click on the thumbnail to see the full-sized image.
 
 Thumbnails must be enabled by the site administrator for this to work.
 
-!image.gif|align=right, vspace=4!	
+!image.gif|align=right, vspace=4!
 For any image, you can also specify attributes of the image tag as a comma separated list of name=value pairs like so.
 
-{gallery} 
+{gallery}
 
-{gallery:columns=3} 
+{gallery:columns=3}
 
-{gallery:title=Some office photos, and a waterfall|columns=3} 
+{gallery:title=Some office photos, and a waterfall|columns=3}
 
-{gallery:title=Some office photos, without the waterfall|exclude=waterfall.jpg} 
+{gallery:title=Some office photos, without the waterfall|exclude=waterfall.jpg}
 
-{gallery:title=One office photo, and a waterfall|include=office1.jpg,waterfall.jpg} 
+{gallery:title=One office photo, and a waterfall|include=office1.jpg,waterfall.jpg}
 
-{gallery:title=Some office photos, and a waterfall|page=Gallery of Pictures} 
+{gallery:title=Some office photos, and a waterfall|page=Gallery of Pictures}
 
-{gallery:title=Some office photos, and a waterfall|page=DOC:Gallery of Pictures} 
+{gallery:title=Some office photos, and a waterfall|page=DOC:Gallery of Pictures}
 
-{gallery:title=Some office photos, and a waterfall|sort=name} 
+{gallery:title=Some office photos, and a waterfall|sort=name}
 
-{gallery:title=Some office photos, and a waterfall|sort=date|reverse=true}	
+{gallery:title=Some office photos, and a waterfall|sort=date|reverse=true}
 Create a gallery of thumbnails of all images attached to a page. This will only work on pagesthat allow attachments, obviously.
 
 The title parameter allows you to supply a title for the gallery
@@ -604,18 +604,18 @@ Previous versions of the Gallery macro had an additional slideshow parameter. Th
 Help Tips Tables
 Tables allow you to organise content in a rows and columns, with a header row if required.
 
-Notation	Comment
-||heading 1||heading 2||heading 3|| 
-|col A1|col A2|col A3| 
-|col B1|col B2|col B3|	Makes a table. Use double bars for a table heading row. Note that each table-row has to be defined on a single line.
+Notation    Comment
+||heading 1||heading 2||heading 3||
+|col A1|col A2|col A3|
+|col B1|col B2|col B3|  Makes a table. Use double bars for a table heading row. Note that each table-row has to be defined on a single line.
 The code given here produces a table that looks like:
 
-heading 1	heading 2	heading 3
-col A1	col A2	col A3
-col B1	col B2	col B3
+heading 1   heading 2   heading 3
+col A1  col A2  col A3
+col B1  col B2  col B3
 {column:width=50%}
 Text in this column.
-{column}	
+{column}
 Defines a single column.
 
 width: - (optional) the width of the column.
@@ -635,31 +635,31 @@ Column two text goes here
 
 {section:border=true}
 ...
-{section}	
+{section}
 If you want to use columns instead of tables, you can define them first by marking a {section}, and then placing any number of {column}s inside.
 
 border: - (optional) set to "true" to draw a border around the section and columns.
-{csv} 
-, January, February, March, April 
-Max, 37.5, 32.7, 28.0, 25.3 
-Min, 31.3, 26.8, 25.1, 18.7 
-{csv} 
+{csv}
+, January, February, March, April
+Max, 37.5, 32.7, 28.0, 25.3
+Min, 31.3, 26.8, 25.1, 18.7
+{csv}
 
-{csv:output=wiki|width=900|border=15|delimiter=whitespace} 
-Month Max Min Average 
-January 25.5	*6.3* 15.9 
-February 32.4	12.8 22.6 
-March 44.6	24.5 34.6 
-April 59.7	37.1 48.4 
-May 72.5	48.7 60.6 
-June 81.3	57.9 69.6 
-July 85.2	62.8 74 
-August 82.5	60.7 71.6 
-September 73.7	51.7 62.7 
-October 61.1	40.1 50.6 
-November 43.6	27.4 35.5 
-December 29.9 13.6 21.8 
-{csv} 
+{csv:output=wiki|width=900|border=15|delimiter=whitespace}
+Month Max Min Average
+January 25.5    *6.3* 15.9
+February 32.4   12.8 22.6
+March 44.6  24.5 34.6
+April 59.7  37.1 48.4
+May 72.5    48.7 60.6
+June 81.3   57.9 69.6
+July 85.2   62.8 74
+August 82.5 60.7 71.6
+September 73.7  51.7 62.7
+October 61.1    40.1 50.6
+November 43.6   27.4 35.5
+December 29.9 13.6 21.8
+{csv}
 Converts csv and other deliminated data into a table. CSV is not a formal standard, but the best reference is The Comma Separated Value (CSV) File Format. The support in this macro comes close to following this pseudo-standard. For more details see SCRP-16. This macro shares common table capabilities with other table based macros (excel, table-plus, and sql).
 
 output - Determines how the output is formated:
@@ -686,31 +686,31 @@ double - Double quote character (default).
 single - Single quote character.
 escape - When wiki output is requested (output=wiki), some special characters (like '|', '[', ']', '{', '}') in data may cause undesirable formatting of the table. Set escape=true to allow these special characters to be escaped so that it will not affect the formatting. The default is false so that data that has wiki markup will be handled correctly.
 showWiki - Default is false. Set to true to show a non-formatted version of the wiki table following the formatted table. This is used to help resolve formating issues.
-{table-plus} 
-|| || January || February || March || April || 
-| Max | 37.5 | 32.7 | 28.0 | 25.3 | 
-| Min | 31.3 | 26.8 | 25.1 | 18.7 | 
-{table-plus} 
+{table-plus}
+|| || January || February || March || April ||
+| Max | 37.5 | 32.7 | 28.0 | 25.3 |
+| Min | 31.3 | 26.8 | 25.1 | 18.7 |
+{table-plus}
 
 {table-plus:width=500|border=15|enhableHighlighting=false|columnTypes=S,F,F,F}
-|| Month || Max || Min || Average || 
-| January | 25.5 | *6.3* | 15.9 | 
-| February | 32.4 | 12.8 | 22.6 | 
-| March | 44.6 | 24.5 | 34.6 | 
-| April | 59.7 | 37.1 | 48.4 | 
+|| Month || Max || Min || Average ||
+| January | 25.5 | *6.3* | 15.9 |
+| February | 32.4 | 12.8 | 22.6 |
+| March | 44.6 | 24.5 | 34.6 |
+| April | 59.7 | 37.1 | 48.4 |
 
-Other text can be here too! 
+Other text can be here too!
 
-|| Another table || | more data | {table-plus} 
+|| Another table || | more data | {table-plus}
 
-{table-plus:columnTypes=S,-,.|autoNumber=true|sortColumn=3 
-|columnAttributes=,,style="background:yellow; font-size:14pt;"} 
-|| Name || Phone || TCP || 
-| John | 555-1234 | 192.168.1.10 | 
-| Mary | 555-2134 | 192.168.1.12 | 
-| Bob | 555-4527 | 192.168.1.9 | 
+{table-plus:columnTypes=S,-,.|autoNumber=true|sortColumn=3
+|columnAttributes=,,style="background:yellow; font-size:14pt;"}
+|| Name || Phone || TCP ||
+| John | 555-1234 | 192.168.1.10 |
+| Mary | 555-2134 | 192.168.1.12 |
+| Bob | 555-4527 | 192.168.1.9 |
 
-{table-plus} 
+{table-plus}
 Adds column sorting and other attributes to one or more tables found in the body of the macro. The tables can be produced by wiki markup or other means. This macro shares common table capabilities with other table based macros (excel, csv, and sql).
 
 heading - Number of rows to be considered heading rows (default is 1 row). Specify heading=false or heading=0 to not show any heading lines. Heading rows do not participate in sorting.
@@ -753,22 +753,22 @@ id - Sets the table id for the table for use in macros (like the chart macro) to
 Help Tips Advanced Formatting
 More advanced text formatting.
 
-Notation	Comment
+Notation    Comment
 {code:title=Bar.java|borderStyle=solid}
 // Some comments here
 public String getFoo()
 {
     return foo;
 }
-{code} 
+{code}
 
-{code:xml} 
-<test> 
-  <another tag="attribute"/> 
-</test> 
-{code} 
+{code:xml}
+<test>
+  <another tag="attribute"/>
+</test>
+{code}
 Makes a preformatted block of code with syntax highlighting. All the optional parameters of {panel} macro are valid for {code} too. The default language is Java but you can specify JavaScript, ActionScript, XML, HTML and SQL too.
-Example: 
+Example:
 Bar.java
 // Some comments here
 public String getFoo()
@@ -779,63 +779,63 @@ public String getFoo()
 <test>
     <another tag="attribute"/>
 </test>
-{widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E} 
-{widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E | width=500 | height=400}	
+{widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E}
+{widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E | width=500 | height=400}
 Widget Connector
 url - (required) The URL to the widget you want to display in Confluence
 {widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E}
 width & height - (optional) Specify the width and height of your widget
 {widget:url=http://au.youtube.com/watch?v=cOE8ukQoz6E | width=500 | height=400}
-{macro-list}	
+{macro-list}
 Prints a list of all enabled macros in this installation.
 
 This is useful where you wish to let your users see exactly which macros are available for them to use.
 
-{shortcut-list}	
+{shortcut-list}
 Prints a list of all configured shortcuts in this installation.
 
 This is useful where you wish to let your users see exactly which shortcuts are available for them to use.
 
-{graph-from-table} 
-| A | B | 
-| A | C | 
-{graph-from-table} 
+{graph-from-table}
+| A | B |
+| A | C |
+{graph-from-table}
 
 
-{graph-from-table} 
-|| heading 1 ignored || heading 2 ignored || 
-| A node | B node | label="relationship 1", style=dashed | style=normal | fillcolor=lightblue | 
-| A node | C node | 
-| A node | D node | style=invis | 
-{graph-from-table} 
+{graph-from-table}
+|| heading 1 ignored || heading 2 ignored ||
+| A node | B node | label="relationship 1", style=dashed | style=normal | fillcolor=lightblue |
+| A node | C node |
+| A node | D node | style=invis |
+{graph-from-table}
 
 
-{graph-from-table:node=fillcolor=lightblue,fontsize=20|edge=style=bold,color=red| replace=key1:'style=dashed, color=blue', key2:style=invis|ranksep=2.0} 
-| A node | B node | | shape=polygon,sides=8,peripheries=3 | | 
-| A node | B node | | style=dashed | 
-| A node | C node | 
-| A node | D node | key2 | 
+{graph-from-table:node=fillcolor=lightblue,fontsize=20|edge=style=bold,color=red| replace=key1:'style=dashed, color=blue', key2:style=invis|ranksep=2.0}
+| A node | B node | | shape=polygon,sides=8,peripheries=3 | |
+| A node | B node | | style=dashed |
+| A node | C node |
+| A node | D node | key2 |
 
-Here is a second table 
-| E | F | key1 | 
-| F | G | key1 | 
-{graph-from-table} 
+Here is a second table
+| E | F | key1 |
+| F | G | key1 |
+{graph-from-table}
 
 
-{graph-from-table:direction=LR|ranksep=1.5|node=fillcolor=lightblue,fontsize=20| edge=style=bold,color=red|replace=key1:style=dashed} 
-| A node | B node | label="r1" | | | cluster 1 | key1 | 
-| F | G | key1 | | | cluster 1 | 
-| X | Y | key1 | | | cluster 1 | | big cluster | 
-{graph-from-table} 
+{graph-from-table:direction=LR|ranksep=1.5|node=fillcolor=lightblue,fontsize=20| edge=style=bold,color=red|replace=key1:style=dashed}
+| A node | B node | label="r1" | | | cluster 1 | key1 |
+| F | G | key1 | | | cluster 1 |
+| X | Y | key1 | | | cluster 1 | | big cluster |
+{graph-from-table}
 
 
 {graph-from-table:direction=LR|edge=color=blue|displayData=true}
 
-{sql:dataSource=ConfluenceDS} 
-select PARENTID, TITLE from CONTENT where PARENTID is not NULL 
-{sql} 
+{sql:dataSource=ConfluenceDS}
+select PARENTID, TITLE from CONTENT where PARENTID is not NULL
+{sql}
 
-{graph-from-table} 
+{graph-from-table}
 Converts a table into a Graphviz graph by rendering the body of the macro and then converting each row in each table to a node relationship. A flowchart macro is used for the rendering. This macro simplifies use of the Graphviz support by eliminating or significantly reducing the need to know the dot language. Advanced users will still need to consult the Graphviz documentation for the multitude of attributes and settings that are possible.
 
 The table or tables specified in the body of the macro can be wiki markup or created as a result of other macros. Specifically, the sql, csv, and excel macros can be used to produce the tables.
@@ -883,14 +883,14 @@ A -> B
 A -> C
 C -> D
 }
-{graphviz}	
+{graphviz}
 Displays a graph drawn using the GraphViz language.
 
 {flowchart}
 A -> B
 A -> C
 C -> D
-{flowchart}	
+{flowchart}
 Displays a flowchart diagram drawn using the GraphViz language. Some defaults are set to match the Confluence look.
 
 {word:file=^Report.doc}
@@ -911,23 +911,23 @@ space:page^attachment - Data is read from an attachment to the page name provide
 filename - Data is read from the file located in confluence home directory/script/filename. Subdirectories can be specified.
 url - Only required if file is not specified. Specifies the URL of an Excel file. Use of this parameter may be restricted for security reasons. See your administrator for details.
 sections - By default, each section in the document will be included. Use the sections parameter to control what sections of the document will be shown. The parameter value can be a comma separated list of section numbers (1-based counting)
-{run:replace=greeting:Hello,who:Bob} 
-{beanshell} 
-System.out.println("$greeting $who"); 
-{beanshell} 
-{run} 
+{run:replace=greeting:Hello,who:Bob}
+{beanshell}
+System.out.println("$greeting $who");
+{beanshell}
+{run}
 
-{run:replace=first:Bob:First name|exportFile=^bobs.html|titleExport=Archive result} 
-{sql:datasource=NameDS} 
-select * from NAMES where first='$first' 
-{sql} 
-{run} 
+{run:replace=first:Bob:First name|exportFile=^bobs.html|titleExport=Archive result}
+{sql:datasource=NameDS}
+select * from NAMES where first='$first'
+{sql}
+{run}
 
-{run:autorun=true|hideRun=true|hideParameters=true|dateFormat=yyyy} 
-{sql:datasource=NameDS} 
+{run:autorun=true|hideRun=true|hideParameters=true|dateFormat=yyyy}
+{sql:datasource=NameDS}
 select * from NAMES where userid='$current_user_id' and year='$current_time'
-{sql} 
-{run} 
+{sql}
+{run}
 
 Allows user control over the rendering of the body of the macro. Parameters can be provided and they will be used to replace parameters in the body prior to rendering. Parameters can be provided as request parameters on the URL, enabling automatic running of content based on the incoming parameters. Any text in the macro body that begins with $ immediately followed by a key value found in the replace parameter list of comma separated key:value:description triples will be replaced by the value. Until the documentation can be improved, look at the url after pressing the run button or after an autorun.
 
@@ -982,65 +982,65 @@ showKey - Show the key. The key is shown after the value entry field. Default is
 dateFormat - Date format to use for replacement of $current_time. Default is server date format. See Date Format for how to specify this value.
 keepRequestParameters - Default is false. Set to true to keep existing request parameters on the url after button is pressed. All requests parameters will be retained if *keepRequestIds* is not specified. Otherwise, non-run macro request parameters and those references by the *keepRequestIds* parameter will be retained.
 keepRequestIds - List of run macro ids whose request parameters should be retained on the url after a button is pressed. button is pressed. This will be required for recursive use of this macro. Use of this parameter or *keepRequestParameters* parameter is required for recursive use of this macro.
-{content-by-user:fred}	
+{content-by-user:fred}
 Displays a simple table of all the content (pages, comments, news items, user profiles and space descriptions) created by a user (here 'fred').
 
-{index}	
+{index}
 Displays an index of all the pages in the current space, cross linked and sorted alphabetically.
 
 {include:Home}
 
 {include:FOO:Home}
 
-{include:spaceKey=FOO|pageTitle=Home}	 Includes one page within another (this example includes a page called "Home"). Pages from another space can be included by prefacing the page title with a space key and a colon.
+{include:spaceKey=FOO|pageTitle=Home}    Includes one page within another (this example includes a page called "Home"). Pages from another space can be included by prefacing the page title with a space key and a colon.
 The user viewing the page must have permission to view the page being included, or it will not be displayed.
 
 {chart:title=Fish Sold}
-|| Fish Type || 2004 || 2005 || 
+|| Fish Type || 2004 || 2005 ||
 || Herring | 9,500 | 8,300 |
 || Salmon | 2,900 | 4,200 |
 || Tuna | 1,500 | 1,500 |
-{chart} 
+{chart}
 
-{chart:type=line|title=Temperatures in Brisbane|yLabel=Celcius 
-|dataDisplay=true|dataOrientation=vertical} 
-|| Month || Min || Max || 
-| January | 31.3 | 37.5 | 
-| February | 26.8 | 32.7 | 
-| March | 25.1 | 28 | 
-| April | 18.7 | 25.3 | 
-{chart} 
+{chart:type=line|title=Temperatures in Brisbane|yLabel=Celcius
+|dataDisplay=true|dataOrientation=vertical}
+|| Month || Min || Max ||
+| January | 31.3 | 37.5 |
+| February | 26.8 | 32.7 |
+| March | 25.1 | 28 |
+| April | 18.7 | 25.3 |
+{chart}
 
-{chart:type=timeSeries|dateFormat=MM.yyyy|timePeriod=Month| 
-dataOrientation=vertical|rangeAxisLowerBound=0|colors=blue,gray} 
-|| Month || Revenue || 
-| 1.2005 | 31.8 | 
-| 2.2005 | 41.8 | 
-| 3.2005 | 51.3 | 
-| 4.2005 | 33.8 | 
-| 5.2005 | 27.6 | 
-| 6.2005 | 49.8 | 
-| 7.2005 | 51.8 | 
-| 8.2005 | 77.3 | 
-| 9.2005 | 73.8 | 
-| 10.2005 | 97.6 | 
-| 11.2005 | 101.2 | 
-| 12.2005 | 113.7 | 
+{chart:type=timeSeries|dateFormat=MM.yyyy|timePeriod=Month|
+dataOrientation=vertical|rangeAxisLowerBound=0|colors=blue,gray}
+|| Month || Revenue ||
+| 1.2005 | 31.8 |
+| 2.2005 | 41.8 |
+| 3.2005 | 51.3 |
+| 4.2005 | 33.8 |
+| 5.2005 | 27.6 |
+| 6.2005 | 49.8 |
+| 7.2005 | 51.8 |
+| 8.2005 | 77.3 |
+| 9.2005 | 73.8 |
+| 10.2005 | 97.6 |
+| 11.2005 | 101.2 |
+| 12.2005 | 113.7 |
 
-|| Month || Expenses || 
-| 1.2005 | 41.1 | 
-| 2.2005 | 43.8 | 
-| 3.2005 | 45.3 | 
-| 4.2005 | 45.0 | 
-| 5.2005 | 44.6 | 
-| 6.2005 | 43.8 | 
-| 7.2005 | 51.8 | 
-| 8.2005 | 52.3 | 
-| 9.2005 | 53.8 | 
-| 10.2005 | 55.6 | 
-| 11.2005 | 61.2 | 
-| 12.2005 | 63.7 | 
-{chart} 
+|| Month || Expenses ||
+| 1.2005 | 41.1 |
+| 2.2005 | 43.8 |
+| 3.2005 | 45.3 |
+| 4.2005 | 45.0 |
+| 5.2005 | 44.6 |
+| 6.2005 | 43.8 |
+| 7.2005 | 51.8 |
+| 8.2005 | 52.3 |
+| 9.2005 | 53.8 |
+| 10.2005 | 55.6 |
+| 11.2005 | 61.2 |
+| 12.2005 | 63.7 |
+{chart}
 Displays a chart using data from the supplied table or tables.
 
 Chart type parameters - These parameters change what type of chart to display and the way the chart looks.
@@ -1120,7 +1120,7 @@ pieSectionLabel - Format for how pie section labels are displayed. :
 %0% is replaced by the pie section key.
 %1% is replaced by the pie section numeric value.
 %2% is replaced by the pie section percent value.
-Example 1: "%0% = %1%" would display something like "Independent = 20" 
+Example 1: "%0% = %1%" would display something like "Independent = 20"
 Example 2: "%0% (%2%)" would display something like "Independent (20%)"
 pieSectionExplode - Comma separated list of pie keys that are to be shown exploded. Defaults to no exploded sections. Note: requires jFreeChart version 1.0.3 or higher.
 Attachment parameters - These are advanced options that can be used for chart versioning, automation enablement, and to improve performance. Use these options carefully! Normally, the chart image is regenerated each time the page is displayed. These options allow for the generated image to be saved as an attachment and have subsequent access re-use the attachment. This can be useful especially when combined with the cache macro to improve performance. Depending on the options chosen, chart images can be versioned for historical purposes.
@@ -1136,11 +1136,11 @@ attachmentComment - Comment used for a saved chart attachment.
 thumbnail - Default is false. If true, the chart image attachment will be shown as a thumbnail.
 Colors
 Colors can be specified by name or hex value. See Web-colors. The following are the valid color names that will automatically be converted.
-Color	Hexadecimal	Color	Hexadecimal	Color	Hexadecimal	Color	Hexadecimal
-black	#000000	silver	#c0c0c0	maroon	#800000	red	#ff0000
-navy	#000080	blue	#0000ff	purple	#800080	fuchsia	#ff00ff
-green	#008000	lime	#00ff00	olive	#808000	yellow	#ffff00
-teal	#008080	aqua	#00ffff	gray	#808080	white	#ffffff
+Color   Hexadecimal Color   Hexadecimal Color   Hexadecimal Color   Hexadecimal
+black   #000000 silver  #c0c0c0 maroon  #800000 red #ff0000
+navy    #000080 blue    #0000ff purple  #800080 fuchsia #ff00ff
+green   #008000 lime    #00ff00 olive   #808000 yellow  #ffff00
+teal    #008080 aqua    #00ffff gray    #808080 white   #ffffff
 Date Format
 Copied from Java SimpleDateFormat specification.
 
@@ -1148,26 +1148,26 @@ Date and time formats are specified by date and time pattern strings. Within dat
 
 The following pattern letters are defined (all other characters from 'A' to 'Z' and from 'a' to 'z' are reserved):
 
-Letter	Date or Time Component	Presentation	Examples
-G	Era designator	Text	AD
-y	Year	Year	1996; 96
-M	Month in year	Month	July; Jul; 07
-w	Week in year	Number	27
-W	Week in month	Number	2
-D	Day in year	Number	189
-d	Day in month	Number	10
-F	Day of week in month	Number	2
-E	Day in week	Text	Tuesday; Tue
-a	Am/pm marker	Text	PM
-H	Hour in day (0-23)	Number	0
-k	Hour in day (1-24)	Number	24
-K	Hour in am/pm (0-11)	Number	0
-h	Hour in am/pm (1-12)	Number	12
-m	Minute in hour	Number	30
-s	Second in minute	Number	55
-S	Millisecond	Number	978
-z	Time zone	General time zone	Pacific Standard Time; PST; GMT-08:00
-Z	Time zone	RFC 822 time zone	-0800
+Letter  Date or Time Component  Presentation    Examples
+G   Era designator  Text    AD
+y   Year    Year    1996; 96
+M   Month in year   Month   July; Jul; 07
+w   Week in year    Number  27
+W   Week in month   Number  2
+D   Day in year Number  189
+d   Day in month    Number  10
+F   Day of week in month    Number  2
+E   Day in week Text    Tuesday; Tue
+a   Am/pm marker    Text    PM
+H   Hour in day (0-23)  Number  0
+k   Hour in day (1-24)  Number  24
+K   Hour in am/pm (0-11)    Number  0
+h   Hour in am/pm (1-12)    Number  12
+m   Minute in hour  Number  30
+s   Second in minute    Number  55
+S   Millisecond Number  978
+z   Time zone   General time zone   Pacific Standard Time; PST; GMT-08:00
+Z   Time zone   RFC 822 time zone   -0800
 Pattern letters are usually repeated, as their number determines the exact presentation.
 Text: For formatting, if the number of pattern letters is 4 or more, the full form is used; otherwise a short or abbreviated form is used if available. For parsing, both forms are accepted, independent of the number of pattern letters.
 Number: For formatting, the number of pattern letters is the minimum number of digits, and shorter numbers are zero-padded to this amount. For parsing, the number of pattern letters is ignored unless its needed to separate two adjacent fields.
@@ -1203,19 +1203,19 @@ TwoDigitHours must be between 00 and 23. Other definitions are as for general ti
 For parsing, general time zones are also accepted.
 
 
-{html:script=#example.html} 
-{html} 
+{html:script=#example.html}
+{html}
 
-{html:script=^example.html} 
-{html} 
+{html:script=^example.html}
+{html}
 
-{html:output=wiki|noPanel=true} 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-Aliquam fermentum vestibulum est. Cras rhoncus. 
-{html} 
+{html:output=wiki|noPanel=true}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Aliquam fermentum vestibulum est. Cras rhoncus.
+{html}
 
-{html:script=#http://localhost/example.html} 
-{html} 
+{html:script=#http://localhost/example.html}
+{html}
 
 Includes HTML data into a Confluence page. HTML and BODY tags are removed when output=html so the display of the Confluence page is not disrupted.
 
@@ -1232,22 +1232,22 @@ page^attachment - Data is read from an attachment to the page name provided.
 space:page^attachment - Data is read from an attachment to the page name provided in the space indicated.
 noPanel - When output=wiki, show the data within a panel (default) unless nopanel=true.
 {xslt:style=^cdcatalog.xsl}
-<catalog> 
-    <cd>  
-        <title>Empire Burlesque</title>  
-        <artist>Bob Dylan</artist>  
-        <country>USA</country>  
-    </cd>  
-    <cd>  
-        <title>Maggie May</title>  
-        <artist>Rod Stewart</artist>  
-        <country>UK</country>  
-    </cd>  
+<catalog>
+    <cd>
+        <title>Empire Burlesque</title>
+        <artist>Bob Dylan</artist>
+        <country>USA</country>
+    </cd>
+    <cd>
+        <title>Maggie May</title>
+        <artist>Rod Stewart</artist>
+        <country>UK</country>
+    </cd>
 </catalog>
-{xslt} 
+{xslt}
 
 {xslt:source=^cdcatalog.xml|style=#http://www.w3schools.com/xsl/cdcatalog.xsl}
-{xslt} 
+{xslt}
 Transforms XML to a Confluence page via an XSLT style sheet. Note that macro parameters not recognized by the xslt macro are automatically passed through to the xslt engine.
 
 This macro may have restricted use for security reasons. See your administrator for details.
@@ -1271,29 +1271,29 @@ space:page template name - Data is read from a space template.
 ^attachment - Data is read from an attachment to the current page.
 page^attachment - Data is read from an attachment to the page name provided.
 space:page^attachment - Data is read from an attachment to the page name provided in the space indicated.
-{calendar:id=myCalendar|title=My Calendar|defaultView=week}	
+{calendar:id=myCalendar|title=My Calendar|defaultView=week}
 Displays a calendar.
 
 id - (required) The page-unique ID of the calendar.
 title - (optional) The title of the initial sub-calendar.
 defaultView - (optional) The view to display by default. May be 'event', 'day', 'week', or 'month' (the default).
 firstDay - (optional) The first day of the week. Defaults to 'Monday'.
-{noformat} 
+{noformat}
 preformatted piece of text
-so *no* further _formatting_ is done here 
-{noformat}	 Makes a preformatted block of text with no syntax highlighting. All the optional parameters of {panel} macro are valid for {noformat} too.
+so *no* further _formatting_ is done here
+{noformat}   Makes a preformatted block of text with no syntax highlighting. All the optional parameters of {panel} macro are valid for {noformat} too.
 nopanel: If the value of "nopanel" is true, then the excerpt will be drawn without its surrounding panel.
 Example:
 preformatted piece of text
 so *no* further _formatting_ is done here
-{panel}Some text{panel} 
+{panel}Some text{panel}
 
-{panel:title=My Title}Some text with a title{panel} 
+{panel:title=My Title}Some text with a title{panel}
 
-{panel:title=My Title| borderStyle=dashed| borderColor=#ccc| titleBGColor=#F7D6C1| bgColor=#FFFFCE} 
-a block of text surrounded with a *panel* 
-yet _another_ line 
-{panel}	 Embraces a block of text within a fully customizable panel. The optional parameters you can define are the following ones: 
+{panel:title=My Title| borderStyle=dashed| borderColor=#ccc| titleBGColor=#F7D6C1| bgColor=#FFFFCE}
+a block of text surrounded with a *panel*
+yet _another_ line
+{panel}  Embraces a block of text within a fully customizable panel. The optional parameters you can define are the following ones:
 title: Title of the panel
 borderStyle: The style of the border this panel uses (solid, dashed and other valid CSS border styles)
 borderColor: The color of the border this panel uses
@@ -1311,18 +1311,18 @@ Provides a configurable form mail system, submitting using AJAX / DWR.
 
 See Also: Plugin Homepage and Documentation
 
-{rsvp} 
-{rsvp:Atlassian User Group} 
-{rsvp:width=600px} 
-{rsvp:admin=confluence-users} 
-{rsvp:admin=john} 
-{rsvp:sort=creation} 
-{rsvp:sort=name|reverse=true} 
-{rsvp:hide_replies=true} 
-{rsvp:must_login=true|hide_replies=true} 
-{rsvp:limit=10} 
-{rsvp:custom=Company} 
-{rsvp:url=true}	
+{rsvp}
+{rsvp:Atlassian User Group}
+{rsvp:width=600px}
+{rsvp:admin=confluence-users}
+{rsvp:admin=john}
+{rsvp:sort=creation}
+{rsvp:sort=name|reverse=true}
+{rsvp:hide_replies=true}
+{rsvp:must_login=true|hide_replies=true}
+{rsvp:limit=10}
+{rsvp:custom=Company}
+{rsvp:url=true}
 Usage
 Allows you to specify a title for your event.
 {rsvp:Atlassian User Group}
@@ -1377,55 +1377,55 @@ time - Will display the time of entry to the administrator.
 shows the time in the admin view.
 {note:title=Be Careful}
 The body of the note here..
-{note}	
+{note}
 Prints a simple note to the user.
 
 title: - (optional) the title of the note.
 icon: - (optional) if "false", dont display the icon.
-	Be Careful
+    Be Careful
 
 The body of the note here..
 {warning:title=Warning}
 Insert warning message here!
-{warning}	
+{warning}
 Prints a warning note to the user.
 
 title: - (optional) the title of the warning.
 icon: - (optional) if "false", dont display the icon.
-	Warning
+    Warning
 
 Insert warning message here!
 {info:title=Be Careful}
 This macro is useful for including helpful information in your confluence pages
-{info}	
+{info}
 Prints an informational note.
 
 title: - (optional) the title of the information box.
 icon: - (optional) if "false", dont display the icon.
-	Useful Information
+    Useful Information
 
 This macro is useful for including helpful information in your confluence pages
 {tip:title=Handy Hint}
 Join the Confluence Mailing-List!
-{tip}	
+{tip}
 Prints a helpful tip for the user.
 
 title: - (optional) the title of the tip.
 icon: - (optional) if "false", dont display the icon.
-	Handy Hint
+    Handy Hint
 
 Join the Confluence Mailing-List!
 Help Tips Confluence Content
 Ways to include, summarise or refer to other Confluence content.
 
-Notation	Comment
-!quicktime.mov! 
+Notation    Comment
+!quicktime.mov!
 
-!spaceKey:pageTitle^attachment.mov! 
+!spaceKey:pageTitle^attachment.mov!
 
-!quicktime.mov|width=300,height=400! 
+!quicktime.mov|width=300,height=400!
 
-!media.wmv|id=media!	 Embeds an object in a page, taking in a comma-separated of properties. 
+!media.wmv|id=media!     Embeds an object in a page, taking in a comma-separated of properties.
 
 Default supported formats:
 Flash (.swf)
@@ -1434,7 +1434,7 @@ Windows Media (.wma, .wmv)
 Real Media (.rm, .ram)
 MP3 files (.mp3)
 
-Other types of files can be used, but may require the specification of the "classid", "codebase" and "pluginspage" properties in order to be recognised by web browsers. 
+Other types of files can be used, but may require the specification of the "classid", "codebase" and "pluginspage" properties in order to be recognised by web browsers.
 
 Common properties are:
 width - the width of the media file
@@ -1442,7 +1442,7 @@ height - the height of the media file
 id - the ID assigned to the embedded object
 
 Due to security issues, files located on remote servers are not permitted
-Styling 
+Styling
 By default, each embedded object is wrapped in a "div" tag. If you wish to style the div and its contents, override the "embeddedObject" CSS class. Specifying an ID as a property also allows you to style different embedded objects differently. CSS class names in the format "embeddedObject-ID" are used.
 {userlister}
 
@@ -1450,7 +1450,7 @@ By default, each embedded object is wrapped in a "div" tag. If you wish to style
 
 {userlister:online=true}
 
-{userlister:groups=confluence-users|online=true}	
+{userlister:groups=confluence-users|online=true}
 Lists users registered in Confluence.
 
 Either a group or groups value must be supplied. If you want all users in the system use groups=*.
@@ -1465,9 +1465,9 @@ Specifying the online value allows you to filter the user list by the user onlin
 
 If you've configured this macro to display groups which are black listed by the administrator, you will get a warning panel at the top. The warning will be automatically displayed by default. To disable the warning, you can specify showWarning=false.
 
-{spacegraph} 
+{spacegraph}
 
-{spacegraph:spaceKey|showOutgoingLinks=true} 
+{spacegraph:spaceKey|showOutgoingLinks=true}
 Displays a diagram of the pages in a space. By default it displays the current space. If a spacekey is supplied as the default parameter, that space is displayed. Only pages that the current user is authorized to view are displayed.
 
 default parameter - use current space unless the default parameter is set to a space key.
@@ -1565,27 +1565,27 @@ Advanced Options
 
 showPages - show a list of pages returned above the list. Useful for debugging.
 noneFoundMessage - override the default message that is displayed when no contributors are found.
-{children} 
+{children}
 
-{children:all=true} 
+{children:all=true}
 
-{children:depth=x} 
+{children:depth=x}
 
-{children:depth=x|style=h3} 
+{children:depth=x|style=h3}
 
-{children:excerpt=true} 
+{children:excerpt=true}
 
-{children:page=Another Page} 
+{children:page=Another Page}
 
-{children:page=/} 
+{children:page=/}
 
-{children:page=SPACEKEY:} 
+{children:page=SPACEKEY:}
 
-{children:page=SPACEKEY:Page Title} 
+{children:page=SPACEKEY:Page Title}
 
-{children:first=x} 
+{children:first=x}
 
-{children:sort=<mode>|reverse=<true or false>}	 Displays the children and descendants of the current page. Specify 'all=true' to show all descendants of this page, or depth=x (where x is any number > 0) to show that many levels of descendants.
+{children:sort=<mode>|reverse=<true or false>}   Displays the children and descendants of the current page. Specify 'all=true' to show all descendants of this page, or depth=x (where x is any number > 0) to show that many levels of descendants.
 The 'style' attribute can be any of 'h1' through 'h6'. If you specify a style, the top level of child pages will be displayed as headings of that level, with their children then displayed as lists below. A great way to throw together a quick contents page!
 
 You can view the children of a different page in the same space with {children:page=Another Page Title}.
@@ -1607,9 +1607,9 @@ The 'sort' attribute is an optional attribute that allows you to configure how t
 
 The 'first' attribute allows you to restrict the number of children displayed at the top level.
 
-{search:query=my_query} 
+{search:query=my_query}
 
-{search:query=my_query|maxLimit=x}	 Does an inline site search.
+{search:query=my_query|maxLimit=x}   Does an inline site search.
 query: your query
 maxLimit=x: (where x is any number > 0) to limit the search result to a number of results.
 spacekey: specify the key of the space you want to search in
@@ -1619,22 +1619,22 @@ contributor: specify the username of the contributor of the content to be retrie
 Example:
 
 Found 2 result(s) for home
-Home (Space Home Page) Home (My Space) 
+Home (Space Home Page) Home (My Space)
 This is the home page for My Space.
 PDF File file-containing-home.pdf ( download)
-{blog-posts:max=5} 
+{blog-posts:max=5}
 
-{blog-posts:max=5|content=excerpts} 
+{blog-posts:max=5|content=excerpts}
 
-{blog-posts:max=5|content=titles} 
+{blog-posts:max=5|content=titles}
 
-{blog-posts:time=7d|spaces=@all} 
+{blog-posts:time=7d|spaces=@all}
 
-{blog-posts:max=15|time=14d|content=excerpts} 
+{blog-posts:max=15|time=14d|content=excerpts}
 
-{blog-posts:labels=confluence,atlassian} 
+{blog-posts:labels=confluence,atlassian}
 
-{blog-posts:labels=+atlassian,+confluence,+content} 
+{blog-posts:labels=+atlassian,+confluence,+content}
 
 Displays the most recent news items in this space.
 
@@ -1672,17 +1672,17 @@ modified: by time of last modification (creation is the "first" modification)
 reverse - (optional) reverses the currently applied sort. This parameter must be used in conjunction with the sort parameter.
 {excerpt}Confluence is a knowledge-sharing application that enables teams to communicate more effectively{excerpt}
 
-{excerpt:hidden=true}This excerpt will be recorded, but will not be displayed on the page.{excerpt}	 Marks some part of the page as the page's 'excerpt'. This doesn't change the display of the page at all, but other macros (for example children, excerpt-include and blog-posts) can use this excerpt to summarise the page's content.
+{excerpt:hidden=true}This excerpt will be recorded, but will not be displayed on the page.{excerpt}  Marks some part of the page as the page's 'excerpt'. This doesn't change the display of the page at all, but other macros (for example children, excerpt-include and blog-posts) can use this excerpt to summarise the page's content.
 hidden: If the value of "hidden" is true, then the contents of the excerpt macro will not appear on the page.
-{excerpt-include:Home} 
+{excerpt-include:Home}
 
-{excerpt-include:Home|nopanel=true} 
+{excerpt-include:Home|nopanel=true}
 
-{excerpt-include:blogPost=/2006/12/28/News Page}	 Includes the excerpt from one page (see the excerpt macro) within another. The included page must be in the same space as the page on which the macro is used.
+{excerpt-include:blogPost=/2006/12/28/News Page}     Includes the excerpt from one page (see the excerpt macro) within another. The included page must be in the same space as the page on which the macro is used.
 nopanel: If the value of "nopanel" is true, then the excerpt will be drawn without its surrounding panel.
-{popular-labels} 
+{popular-labels}
 
-{popular-labels:style=heatmap|count=15}	
+{popular-labels:style=heatmap|count=15}
 Renders a list (or heatmap) of the most popular labels ordered by popularity (or name).
 
 count - (optional) Specify the number of labels to be displayed. If not specified, a default of 100 is used.
@@ -1731,16 +1731,16 @@ title: by content title
 creation: by time of creation
 modified: by time of last modification (creation is the "first" modification)
 reverse - (optional) reverses the currently applied sort. This parameter must be used in conjunction with the sort parameter.
-{related-labels} 
+{related-labels}
 
-{related-labels:labels=labelone, labeltwo}	
+{related-labels:labels=labelone, labeltwo}
 Renders a list of labels related to the current page's labels.
 
 labels - (optional) comma-separated list of labels whose related labels will be displayed.
-{recently-updated} 
-{recently-updated: spaces=sales,marketing | labels=timesheets,summaries} 
-{recently-updated: labels=+confluence,-jira | spaces=@all} 
-{recently-updated: spaces=NOVELS,SHORTSTORIES | sort=creation | reverse=true}	
+{recently-updated}
+{recently-updated: spaces=sales,marketing | labels=timesheets,summaries}
+{recently-updated: labels=+confluence,-jira | spaces=@all}
+{recently-updated: spaces=NOVELS,SHORTSTORIES | sort=creation | reverse=true}
 Include a list of which Confluence content has changed recently Content will be listed from the current space or for each space defined in a comma separated list (space = x, y). The list will be rendered in a table with width matching the width argument (width=z) or defaulting to 100%
 
 space/spaces - (optional) spaces to search.
@@ -1772,18 +1772,18 @@ title: by content title
 creation: by time of creation
 modified: by time of last modification (creation is the "first" modification)
 reverse - (optional) reverses the currently applied sort. This parameter must be used in conjunction with the sort parameter.
-{recently-used-labels} 
+{recently-used-labels}
 
-{recently-used-labels:scope=space|count=15}	
+{recently-used-labels:scope=space|count=15}
 Renders a list (or table) of labels most recently used in a specified scope.
 
 count - (optional) Specify the number of labels to be displayed. If not specified, a default of 10 is used.
 scope - (optional) Allows 'global', 'space' and 'personal'. If not specified, the 'global' scope is used. The global scope will show labels that were recently used within this confluence instance. The space scope will show labels that were recently used in the current space. The personal scope will show you personal labels that you recently used.
 style - (optional) Allows 'table'. Specifying a table style will render the most recently used labels in a table form.
 title - (optional) Allows you to specify a heading for the table view of this macro. See the 'style' option above.
-{navmap:mylabel} 
+{navmap:mylabel}
 {navmap:mylabel|wrapAfter=3|cellWidth=110|cellHeight=20|theme=mytheme}
-Renders the list of pages associated with the specified label as a navigable map. 
+Renders the list of pages associated with the specified label as a navigable map.
 A label must be specified for this macro. The following parameters are all optional:
 
 title - the title for this navigation map.
@@ -1795,7 +1795,7 @@ Table of Contents
 Documentation
 Meeting Minutes
 Staff Directory
-{listlabels:spaceKey=@all} 
+{listlabels:spaceKey=@all}
 Renders the list of all labels or labels for a specific space sorted alphabetical.
 
 spaceKey - (optional) list the labels in the specified space (current space by default). If '@all' is specified, labels in all spaces will be listed.
@@ -1804,7 +1804,7 @@ A-Z documentation, staff, events, books, music
 || || Democrat || Republican || Independent ||
 || Mascots | 40 | 40 | 20 |
 {flotchart}
-        
+
 Displays interactive charts using tables in the macro's body as data.
 
 type — The type chart to show. Valid values are:
@@ -1844,7 +1844,7 @@ opacity — This defines the opacity of the series in the chart. Any value in th
 
 timeSeriesDisplayFormat — This defines the format of dates/time shown on charts. This defaults to short months (e.g. 'Jan'). If you wish to see dates/time on charts in other formats, you can specify it here. For more information about the formats, please see Flot's documentation.
 
-barWidth — This parameter controls the width of the bars in units of the x axis. For instance, in a time series chart, if you want the bars to take up a day's width on the x axis, you can specify 24 * 60 * 60 * 1000. You can also specify time units. For instance, to get the bar width of a day, you can specify 1d. Valid units are: m (minute), h (hour), d (day), w (week). 
+barWidth — This parameter controls the width of the bars in units of the x axis. For instance, in a time series chart, if you want the bars to take up a day's width on the x axis, you can specify 24 * 60 * 60 * 1000. You can also specify time units. For instance, to get the bar width of a day, you can specify 1d. Valid units are: m (minute), h (hour), d (day), w (week).
 
 For non-time series charts, the width defaults to the entire unit''s width (1). For time series charts, the width defaults to a day.
 
@@ -1858,7 +1858,7 @@ showSeriesToggle — Defines whether controls to hide/show series are shown. If 
 
 showDataPointValue — Whether to show the Y value of a data point (when it is enabled). By default, this is false. This feature will only be enabled if its value is true and the showShapes parameter is true.
 
-{attachments:patterns=.*doc|old=true}	
+{attachments:patterns=.*doc|old=true}
 Prints a list of attachments
 
 patterns: - (optional) a comma separated list of regular expressions. Only file names matching one of these are displayed.
@@ -1895,7 +1895,7 @@ printable - (optional) If set to 'false', the table of contents will not be visi
 {toc-zone:separator\=brackets|location=top}
 h1. First Heading
 blah blah blah...
-{toc-zone}	
+{toc-zone}
 Creates a Table of Contents for headings contained in the macro body.
 
 location - (optional) The location to have the table of contents output. May be 'top' or 'bottom'. If not set, it will be output at both locations.
@@ -1928,7 +1928,7 @@ printable - (optional) If set to 'false', the table of contents will not be visi
 
 {viewfile:spreadsheet.xls|grid=false|sheet=Sheet 1|row=4|col=5}
 
-{viewfile:slideshow.pdf|width=200|height=150}	
+{viewfile:slideshow.pdf|width=200|height=150}
 Embeds the content of a file attachment into a Confluence page. Supported formats:
 
 Microsoft Word Documents
@@ -1952,12 +1952,12 @@ Macro arguments specific to Powerpoint and PDF presentations
 slide - (optional)instead of an entire slideshow, you can specify a slide index (0-based). the slide at the specified index will be rendered as a jpg image in the page.
 height - (optional)overrides the default height of the flash control or image.
 width - (optional)overrides the default width of the flash control or image.
-{spaces:width=x} 
+{spaces:width=x}
 Displays a list of all spaces visible to the user, with linked icons leading to various space content functionality, within a table. The width parameter specifies the table width on the page.
 
 width - (optional) width of table on Confluence page, defaults to 100%.
-{recently-updated-dashboard} 
-{recently-updated-dashboard: spaces=sales,marketing | labels=timesheets,summaries} 
+{recently-updated-dashboard}
+{recently-updated-dashboard: spaces=sales,marketing | labels=timesheets,summaries}
 Include a list of which Confluence content has changed recently Content will be listed from the current space or for each space defined in a comma separated list (space = x, y). The list will be rendered in a table with width matching the width argument (width=z) or defaulting to 100%
 
 spaces - (optional) comma separated list of space keys
@@ -1973,14 +1973,14 @@ spacedesc: space descriptions
 personalspacedesc: personal space descriptions
 mail: emails in a space
 showProfilePic - if true, display the profile pictures of the users who updated the content.
-{global-reports: width=x} 
+{global-reports: width=x}
 Renders a list of links to global reports within a table of width x (defaults to 99%).
 
 width - (optional) width of table on Confluence page, defaults to 50%.
-{welcome-message} 
+{welcome-message}
 Include the Confluence site welcome message. The site welcome message may be configured in the Administration -> General Configuration section.
 
-{create-space-button: size=large | width=32 | height=32} 
+{create-space-button: size=large | width=32 | height=32}
 Renders a create space button linked to the create space page.
 
 size - small (size of 'small' uses a smaller graphic, whereas size of 'large' uses a larger one)
@@ -2052,7 +2052,7 @@ spaceKey: - (optional) this option searches within a single space.
 Help Tips External Content
 Ways to include, summarise or refer to content from other servers.
 
-Notation	Comment
+Notation    Comment
 {rss:url=http://host.com/rss.xml}
 
 {rss:url=http://host.com/rss.xml|max=5}
@@ -2065,11 +2065,11 @@ The 'max' parameter can be used to limit the number of entries displayed.
 
 Example:
 
- Sample RSS Feed (RSS 2.0) 
+ Sample RSS Feed (RSS 2.0)
 (Feed description here...)
-My Item ( Dec 30, 2003 06:53) 
+My Item ( Dec 30, 2003 06:53)
 And part of the item content here...
-Another Item ( Dec 30, 2003 06:53) 
+Another Item ( Dec 30, 2003 06:53)
 And part of the item content here...
 You can specify 'showTitlesOnly=true' to show only the RSS feed titles. This parameter defaults to false.
 
@@ -2078,15 +2078,15 @@ You can specify 'titleBar=false' to hide the feeds titlebar. This parameter defa
 You can specify anonymous=false to download the target content over a trusted connection (Trusted Application). For instance {rss:url=http://example.com/path/to/target/location}. This parameter defaults to true.
 
 {sql:dataSource=TestDS|output=wiki}
-select * from test 
+select * from test
 {sql}
 
 
 There are *{sql:dataSource=TestDS|table=false} select count(*) from test01 {sql}* rows in table test01
 
 
-{sql:dataSource=TestDS|p1=%test%|showsql=true} 
-select * from test01 where a1 like ? 
+{sql:dataSource=TestDS|p1=%test%|showsql=true}
+select * from test01 where a1 like ?
 {sql}
 Displays the result table(s) or values from an SQL statement(s), usually a query. Consider using the sql-query macro for simple queries. Data from single or multiple results sets are formatted usually as a table for display. Multiple SQL statements (semi-colon separated) can be specified within a single sql macro body (subject to support provided by specific databases). This macro supports common table capabilities with other table based macros (table-plus, csv, and excel).
 
@@ -2127,7 +2127,7 @@ REPEATABLE_READ - rows that are read retain locks so that another transaction ca
 SERIALIZABLE - Tables are locked for the transaction so that WHERE conditions cannot be changed by other transactions that add values to or remove values from a table
 NONE - Database does not support transactions
 {sql-query:dataSource=TestDS|output=wiki}
-select * from test 
+select * from test
 {sql}
 
 Displays a result table or values from an SQL select statement. The statement must produce a single result set. Use the sql macro for more complex select or other statements. The sql-query macro is recommended for better performance.
@@ -2141,19 +2141,19 @@ Recursive use: Three identical macros sql-query, sql-query1, and sql-query2 are 
 {junitreport:directory=file:///c:/test-reports}
 (currently only picks up result files in XML format. Set ant formatter to "xml")
 
-{junitreport:url=file:///test-reports/TestRep.xml}	 Displays the results of a series (or single) JUnit test.
-Success Rate	Tests	Failures	Time(s)	Time(s)
-93%	
-	
-14	1	0	1.531
+{junitreport:url=file:///test-reports/TestRep.xml}   Displays the results of a series (or single) JUnit test.
+Success Rate    Tests   Failures    Time(s) Time(s)
+93%
+
+14  1   0   1.531
 {updateablesql:dataSource=TestDS}
-select * from test 
+select * from test
 {sql}
 
 
-{updateablesql:dataSource=TestDS|fancy=true} select id,name,location from test01 {updateablesql} 
+{updateablesql:dataSource=TestDS|fancy=true} select id,name,location from test01 {updateablesql}
 
-{updateablesql:dataSource=TestDS|dateFormat=yy/mm/dd hh tt} select * from test2 {updateablesql} 
+{updateablesql:dataSource=TestDS|dateFormat=yy/mm/dd hh tt} select * from test2 {updateablesql}
 
 The updateable sql macro displays results from sql statements in tables. The results can be edited by users who have permissions to edit the page that a given macro is called on. For read only result display, consider using the sql or sql-query macros as they have less work for the server to perform to display the information. In addition, they have many more formatting options that are not available in the updateablesql macro.
 
@@ -2164,53 +2164,53 @@ This macro may have restricted use for security reasons. See your administrator 
 dataSource - Required parameter. Name of JDBC DataSource to retrive from JNDI. Do not use the standard prefix (java:comp/env/jdbc/) as it is added automatically. Specific values of this parameter may be restricted for security reasons. See your administrator for details.
 fancy - Optional parameter to enable 'paging' and searching of data.
 dateFormat - Optional parameter to display dates in results in an alternate format. The format of this string should be built based on the following table:
-Mask	Description
-d	Day of the month as digits; no leading zero for single-digit days.
-dd	Day of the month as digits; leading zero for single-digit days.
-ddd	Day of the week as a three-letter abbreviation.
-dddd	Day of the week as its full name.
-m	Month as digits; no leading zero for single-digit months.
-mm	Month as digits; leading zero for single-digit months.
-mmm	Month as a three-letter abbreviation.
-mmmm	Month as its full name.
-yy	Year as last two digits; leading zero for years less than 10.
-yyyy	Year represented by four digits.
-h	Hours; no leading zero for single-digit hours (12-hour clock).
-hh	Hours; leading zero for single-digit hours (12-hour clock).
-H	Hours; no leading zero for single-digit hours (24-hour clock).
-HH	Hours; leading zero for single-digit hours (24-hour clock).
-M	Minutes; no leading zero for single-digit minutes.
-MM	Minutes; leading zero for single-digit minutes.
-s	Seconds; no leading zero for single-digit seconds.
-ss	Seconds; leading zero for single-digit seconds.
-l or L	Milliseconds. l gives 3 digits. L gives 2 digits.
-t	Lowercase, single-character time marker string: a or p.
-tt	Lowercase, two-character time marker string: am or pm.
-T	Uppercase, single-character time marker string: A or P.
-TT	Uppercase, two-character time marker string: AM or PM.
-Z	US timezone abbreviation, e.g. EST or MDT. With non-US timezones or in the Opera browser, the GMT/UTC offset is returned, e.g. GMT-0500
-o	GMT/UTC timezone offset, e.g. -0500 or +0230.
-S	The date's ordinal suffix (st, nd, rd, or th). Works well with d.
-'…' or "…"	Literal character sequence. Surrounding quotes are removed.
-UTC:	Must be the first four characters of the mask. Converts the date from local time to UTC/GMT/Zulu time before applying the mask. The "UTC:" prefix is removed. More info on this formatting is available here 
-Note that this date format does not affect input. If a date field is set to dateFormat yyyy/mm/dd the info could be entered Jan 1 1999. Do not try to add any other information into date entries as they will not get parsed resulting in an error. 
+Mask    Description
+d   Day of the month as digits; no leading zero for single-digit days.
+dd  Day of the month as digits; leading zero for single-digit days.
+ddd Day of the week as a three-letter abbreviation.
+dddd    Day of the week as its full name.
+m   Month as digits; no leading zero for single-digit months.
+mm  Month as digits; leading zero for single-digit months.
+mmm Month as a three-letter abbreviation.
+mmmm    Month as its full name.
+yy  Year as last two digits; leading zero for years less than 10.
+yyyy    Year represented by four digits.
+h   Hours; no leading zero for single-digit hours (12-hour clock).
+hh  Hours; leading zero for single-digit hours (12-hour clock).
+H   Hours; no leading zero for single-digit hours (24-hour clock).
+HH  Hours; leading zero for single-digit hours (24-hour clock).
+M   Minutes; no leading zero for single-digit minutes.
+MM  Minutes; leading zero for single-digit minutes.
+s   Seconds; no leading zero for single-digit seconds.
+ss  Seconds; leading zero for single-digit seconds.
+l or L  Milliseconds. l gives 3 digits. L gives 2 digits.
+t   Lowercase, single-character time marker string: a or p.
+tt  Lowercase, two-character time marker string: am or pm.
+T   Uppercase, single-character time marker string: A or P.
+TT  Uppercase, two-character time marker string: AM or PM.
+Z   US timezone abbreviation, e.g. EST or MDT. With non-US timezones or in the Opera browser, the GMT/UTC offset is returned, e.g. GMT-0500
+o   GMT/UTC timezone offset, e.g. -0500 or +0230.
+S   The date's ordinal suffix (st, nd, rd, or th). Works well with d.
+'…' or "…"  Literal character sequence. Surrounding quotes are removed.
+UTC:    Must be the first four characters of the mask. Converts the date from local time to UTC/GMT/Zulu time before applying the mask. The "UTC:" prefix is removed. More info on this formatting is available here
+Note that this date format does not affect input. If a date field is set to dateFormat yyyy/mm/dd the info could be entered Jan 1 1999. Do not try to add any other information into date entries as they will not get parsed resulting in an error.
 The default date format display is: yyyy/mm/dd hh:MM:ss tt
-{jiraissues:url=http://jira.xml.url} 
+{jiraissues:url=http://jira.xml.url}
 
 {jiraissues:url=http://jira.xml.url|
-columns=type;key;summary} 
+columns=type;key;summary}
 
 {jiraissues:url=http://jira.xml.url|
-count=true} 
+count=true}
 
 {jiraissues:url=http://jira.xml.url|
-cache=off} 
+cache=off}
 
 {jiraissues:url=http://jira.xml.url?
-os_username=johnsmith&os_password=secret} 
+os_username=johnsmith&os_password=secret}
 
 {jiraissues:url=http://jira.xml.url|
-anonymous=true}	 Imports and displays JIRA issue list as inline content for the page. You can easily customize the list and order of the columns being displayed, by specifying columns parameter.
+anonymous=true}  Imports and displays JIRA issue list as inline content for the page. You can easily customize the list and order of the columns being displayed, by specifying columns parameter.
 The url should be copied from the XML link of Jira's Issue Navigator. Refer to the JIRA Issues Macro documentation for further details.
 
 To specify a custom title (the text above the columns), you can specify the title parameter. By default this is JIRA Issues. A custom title can be specified by adding title=<My Custom Title> to the macros parameters.
@@ -2234,12 +2234,12 @@ You can prevent the jiraissues macro from attempting to use a trusted applicatio
 Example:
 
 Atlassian JIRA (This file is an XML representation of some issues)
-Key	Summary	Assignee	Status	Res	Updated
-TEST-100	Add JIRA support	 John Gordon	 Open	UNRESOLVED	 01/Jan/04
-TEST-103	Add JUnit Support	 Robert Matson	 In Progress	UNRESOLVED	 25/Dec/03
-TEST-108	Add RSS Support	 Bill Watson	 In Progress	UNRESOLVED	 23/Dec/03
-TEST-109	Add Search Support	 Fred Morit	 Closed	FIXED	 03/Jan/04
-{jiraportlet:url=http://jira.portlet.url}	 Imports and displays JIRA 3 portlet into a Confluence page.
+Key Summary Assignee    Status  Res Updated
+TEST-100    Add JIRA support     John Gordon     Open   UNRESOLVED   01/Jan/04
+TEST-103    Add JUnit Support    Robert Matson   In Progress    UNRESOLVED   25/Dec/03
+TEST-108    Add RSS Support  Bill Watson     In Progress    UNRESOLVED   23/Dec/03
+TEST-109    Add Search Support   Fred Morit  Closed FIXED    03/Jan/04
+{jiraportlet:url=http://jira.portlet.url}    Imports and displays JIRA 3 portlet into a Confluence page.
 You can get the URL for the portlet by configuring the portlet into your JIRA dashboard. While in configuration mode, you can copy the portlet URL from the top of the portlet display.
 
 Note: Certain filters may require a logged-in user in order to work. Hence you may need to append:
@@ -2268,7 +2268,7 @@ By default, this is true.
 rows — The number of the latest X versions of the plugin to show compatibility of. By default, all versions of the plugin is shown.
 showBrokenBuilds — Lets you to choose whether to display broken builds as . By default, this is false and broken build cells are blank.
 {im:myscreenname|service=AIM}
-{im:me@hotmail.com|service=MSN|showid=false}	
+{im:me@hotmail.com|service=MSN|showid=false}
 impresence.template.help.label.about
 
 impresence.template.help.label.parameters
@@ -2314,17 +2314,17 @@ country - Used in combination with the language parameter. Valid values are 2 ch
 Help Tips Misc
 Various other syntax highlighting capabilities.
 
-Notation	Comment
-\X	Escape special character X (i.e. '{')
-:), :( etc	 Graphical emoticons (smileys).
-Notation	:)	:(	:P	:D	;)	(y)	(n)	(i)	(/)	(x)	(!)
-Image											
-Notation	(+)	(-)	(?)	(on)	(off)	(*)	(*r)	(*g)	(*b)	(*y)
-Image										
+Notation    Comment
+\X  Escape special character X (i.e. '{')
+:), :( etc   Graphical emoticons (smileys).
+Notation    :)  :(  :P  :D  ;)  (y) (n) (i) (/) (x) (!)
+Image
+Notation    (+) (-) (?) (on)    (off)   (*) (*r)    (*g)    (*b)    (*y)
+Image
 Help Tips Macros
 Macros allow you to perform programmatic functions within a page, and can be used for generating more complex content structures.
 
-Notation	Comment
+Notation    Comment
 {vote:What is your favorite color?}
 Red
 Blue
@@ -2338,37 +2338,37 @@ None of the above
 {vote}
 The vote macro allows Confluence users to vote on any topic of interest. Users are allowed to select only one of the given choices and vote one time, and the results will not be visible to them until they have voted. Users that have not logged in will be prompted to do so before allowing them to cast a vote. This macro was created to support quick, informal votes on various topics. The macro has a title and a series of choices, each choice starting on its own line.
 
-Parameter	Required	Default	Description
+Parameter   Required    Default Description
 
-true	
+true
 This is the title of the ballot and must be the first paramter.
-voters	false	all users	This is a comma seperated list of usernames to who are allowed to cast a vote. Users not in this list will not be allowed to vote, but if they are viewers will be shown the results of the vote. If this parameter is not specified, all users with access to the page are considered voters.
-viewers	false	all users	This is a comma seperated list of usernames to who are allowed to see the survey results. Users not in this list will be allowed to vote but after doing so will simply be shown which item they voted for. If a user is in this list but is not a voter, they will be taken straight to the results. If this parameter is not specified, all users will be able to see the results.
-changeableVotes	false	false	This parameter, if set to true, will allow the voters to change their vote after it has been cast.
-locked	false	false	Dont allow any further voting. Show a lock Symbol to indicate that.
+voters  false   all users   This is a comma seperated list of usernames to who are allowed to cast a vote. Users not in this list will not be allowed to vote, but if they are viewers will be shown the results of the vote. If this parameter is not specified, all users with access to the page are considered voters.
+viewers false   all users   This is a comma seperated list of usernames to who are allowed to see the survey results. Users not in this list will be allowed to vote but after doing so will simply be shown which item they voted for. If a user is in this list but is not a voter, they will be taken straight to the results. If this parameter is not specified, all users will be able to see the results.
+changeableVotes false   false   This parameter, if set to true, will allow the voters to change their vote after it has been cast.
+locked  false   false   Dont allow any further voting. Show a lock Symbol to indicate that.
 Before the user logs in:
 
 What is your favorite color? (Log In to vote.)
-Choices	Your Vote
-Red	
-Blue	
-None of the above	
+Choices Your Vote
+Red
+Blue
+None of the above
 Before the logged-in user votes:
 
 What is your favorite color?
-Choices	Your Vote
-Red	
-Blue	
-None of the above	
+Choices Your Vote
+Red
+Blue
+None of the above
 After the logged-in user votes:
 
 What is your favorite color?
-Choices	Your Vote	Current Results: (10 total votes)
-Red		
+Choices Your Vote   Current Results: (10 total votes)
+Red
 (4 votes, 40%)
-Blue		
+Blue
 (5 votes, 50%)
-None of the above		
+None of the above
 (1 votes, 10%)
 {survey:changeableVotes=true|voters=user1,user2|viewers=user3}
 Knowledge - This is the knowledge category.
@@ -2378,14 +2378,14 @@ The survey macro allows Confluence users to be surveyed on several categories. F
 
 The body of this macro defines the categories that the users will be polled on. Each line of the body will be treated as a seperate category and should be written in the format "title - description". The title is always required but the dash and the description are optional.
 
-Parameter	Required	Default	Description
-title	false	default no title	If a Title is specified the Survey gets a Box around which makes it looking more compact and feeling the votes are belonging more together.
-voters	false	all users	This is a comma seperated list of usernames to who are allowed to cast a vote. Users not in this list will not be allowed to vote, but if they are viewers will be shown the results of the vote. If this parameter is not specified, all users with access to the page are considered voters.
-viewers	false	all users	This is a comma seperated list of usernames to who are allowed to see the survey results. Users not in this list will be allowed to vote but after doing so will simply be shown which item they voted for. If a user is in this list but is not a voter, they will be taken straight to the results. If this parameter is not specified, all users will be able to see the results.
-changeableVotes	false	false	This parameter, if set to true, will allow the users to change their responses after they have been cast.
-choices	false	default 1-5	A comma separated List of choices. This will override the Default (1-5) List, but can still be overriden by a '-' separated list in each single line.
-showComments	false	true	Show comments-menu (the whole set: show, add, edit, delete)
-locked	false	false	Dont allow any further voting. Show a lock Symbol to indicate that. Image for Survey will only be displayed if you have the title-flag also. (It is still shown on the vote-elements)
+Parameter   Required    Default Description
+title   false   default no title    If a Title is specified the Survey gets a Box around which makes it looking more compact and feeling the votes are belonging more together.
+voters  false   all users   This is a comma seperated list of usernames to who are allowed to cast a vote. Users not in this list will not be allowed to vote, but if they are viewers will be shown the results of the vote. If this parameter is not specified, all users with access to the page are considered voters.
+viewers false   all users   This is a comma seperated list of usernames to who are allowed to see the survey results. Users not in this list will be allowed to vote but after doing so will simply be shown which item they voted for. If a user is in this list but is not a voter, they will be taken straight to the results. If this parameter is not specified, all users will be able to see the results.
+changeableVotes false   false   This parameter, if set to true, will allow the users to change their responses after they have been cast.
+choices false   default 1-5 A comma separated List of choices. This will override the Default (1-5) List, but can still be overriden by a '-' separated list in each single line.
+showComments    false   true    Show comments-menu (the whole set: show, add, edit, delete)
+locked  false   false   Dont allow any further voting. Show a lock Symbol to indicate that. Image for Survey will only be displayed if you have the title-flag also. (It is still shown on the vote-elements)
 Powered by Atlassian Confluence 3.0.2, the Enterprise Wiki. Bug/feature request – Atlassian news – Contact administrators
 Notation Guide - Confluence
 
@@ -2394,8 +2394,16 @@ Content by label
 
 
 # SQL
+```bash
 sudo -u postgres psql confluencedb
+```
+```sql
 select * from content where title like 'Add vl%' limit 10;
+select * from cwd_user limit 1;
+select * from cwd_user where user_name like '%admin%' limit 50;
+update cwd_user set email_address       = 'bill@example.com'   where user_name like '%admin%';
+update cwd_user set lower_email_address = lower(email_address) where user_name like '%admin%';
+```
 
 
 
