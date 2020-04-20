@@ -20,6 +20,7 @@ BIN="$HOME/bin/kubectl-$kubectl_version"
 
 
 if [[ ! -f $BIN ]]; then
+    [[ -t 1 ]] && [[ $# -gt 1 ]] && [[ "$1" == "completion" ]] && exit 1
     [[ -t 1 ]] || { >&2 echo "FATAL: no tty and no such file $BIN when calling with args $@"; exit 1; }
     echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
