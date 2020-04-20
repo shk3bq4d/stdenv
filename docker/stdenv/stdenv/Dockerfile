@@ -20,4 +20,9 @@ RUN true \
     && true
     #&& git checkout --force -b stdenv origin/stdenv \
 
-    #RUN sed -r -i -e '/stdhome-install-onefile/s/...dev.tty/echo "" |/' ~/stdhome/bin/stdhome-install.sh
+RUN true \
+	&& chsh -s /usr/bin/zsh \
+	&& chsh -s /usr/bin/zsh user \
+	&& chsh -s /usr/bin/zsh sudouser \
+	&& true
+
