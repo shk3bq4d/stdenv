@@ -27,8 +27,9 @@ set -euo pipefail
 # exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
 # exec 2>&1
 #
+# 2020-04-16T12:12:46.783Z
 PRE_BOUNDARY='(^|\s| +)' # \b sucks at 1354586456.2019 would match 2019
-POST_BOUNDARY='($|\s| +)' # \b sucks at 1354586456.2019 would match 2019
+POST_BOUNDARY='($|\s|[ZT]| +)' # \b sucks at 1354586456.2019 would match 2019
 DATE_BOUNDARY='[./-]?'
 TIME_BOUNDARY='[.:]'
 TIME_DECIMAL_BOUNDARY='[.,]'

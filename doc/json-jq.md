@@ -11,7 +11,7 @@ jq -r '.[] | select(.ID == "'$1'") | .Name' $SG
 jq 'map(select(."IP Range"=="0.0.0.0/0"))'
 
 
-if jq -e ".jsonpath" bip.json >/dev/null; then # --exit-status Sets the exit status of jq to 0 if the last output values was neither fal se nor null, 1 if the last output value was either false or null, or 4  if  no  valid result  was  ever produced. Normally jq exits with 2 if there was any usa ge problem or system error, 3 if there was a jq program compile error, or 0 if the jq program ran.  
+if jq -e ".jsonpath" bip.json >/dev/null; then # --exit-status Sets the exit status of jq to 0 if the last output values was neither fal se nor null, 1 if the last output value was either false or null, or 4  if  no  valid result  was  ever produced. Normally jq exits with 2 if there was any usa ge problem or system error, 3 if there was a jq program compile error, or 0 if the jq program ran.
 
 jq . bip.json
 {
@@ -24,3 +24,5 @@ jq '.bob = 3' bip.json
 }
 
 msg: "{{ out.json['values'] | list | json_query('[*].{a:name,b:project.key}') | to_nice_yaml }}"
+
+kgcm -A -o json | jq -r '.items[] | select(.metadata.name=="server-mysql-password") | .data["MYSQL-PASSWORD"]'

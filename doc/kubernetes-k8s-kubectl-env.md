@@ -698,7 +698,10 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
 kgp -Al app=sfw-cron # labels
+kgp -Al app=sfw-server # labels
+kgp -Al app=sfw-web-app # labels
 kgp -Al app=stp # labels
+kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
 
 # rolloute
 kubectl rollout status -n kube-system daemonset/fluentd

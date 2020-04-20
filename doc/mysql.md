@@ -54,5 +54,7 @@ ORDER BY (data_length + index_length) DESC;
 
 INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
 INSERT INTO table_name VALUES (value1, value2, value3, ...);
+
+select Host, User, password from mysql.user \G; -- vertical line alignement (the \G at the end of the query does the trick)
 ```
 
