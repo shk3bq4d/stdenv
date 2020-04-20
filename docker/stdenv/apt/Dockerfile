@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN \
 	true \
 	&& apt update -y \
+	&& apt dist-upgrade -y \
 	&& apt install -y \
 		apt-file \
 		apt-transport-https \
@@ -38,6 +39,7 @@ RUN \
 		python2.7 \
 		python3-pip \
 		software-properties-common \
+		sudo \
 		sysstat \
 		tree \
 		util-linux \
@@ -46,6 +48,12 @@ RUN \
 		virtualenvwrapper \
 		wget \
 		zsh \
+	&& true
+
+RUN true \
+	&& useradd -u 1000 -d /home/user             -m     user \
+	&& useradd -u 1001 -d /home/sudouser -G sudo -m sudouser \
+	&& sed -i -r -e "s,^%sudo .*,%sudo  ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \
 	&& true
 
 ENV DEBIAN_FRONTEND ""

@@ -698,7 +698,10 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
 kgp -Al app=sfw-cron # labels
+kgp -Al app=sfw-server # labels
+kgp -Al app=sfw-web-app # labels
 kgp -Al app=stp # labels
+kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
 
 # rolloute
 kubectl rollout status -n kube-system daemonset/fluentd
@@ -735,6 +738,7 @@ kubectl --kubeconfig ~root/admin.conf get namespaces # file config context
 kubectl get pods -n fabric-ci-1194 fabric-peers-0 -o jsonpath='{.spec.containers[*].name}' # list containers in pod
 kubectl get pods -n fabric-ci-1194 fabric-peers-0 -o jsonpath='{range .items[*]}{"\n"}{.spec.containers[*].name}{end}' # list containers in pod
 kubectl get namespace --no-headers -o custom-columns=name:.metadata.name
+kubectl get pod -n sfw-production -o json sfw-cron-5df5bf7dff-qgd7x | jq '.metadata.labels'
 ```
 
 kubectl get limitranges

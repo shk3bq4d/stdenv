@@ -10,4 +10,4 @@ archivemount bash-4.3.tar.gz bash-4.3-mount
 cd bash-4.3-mount
 ncdu
 ```
-
+zip file.zip filetocompress.txt

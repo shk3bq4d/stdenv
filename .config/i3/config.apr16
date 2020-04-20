@@ -35,7 +35,7 @@ bar {
     id bar-right
     position bottom
     i3bar_command i3bar -t
-    #status_command ~/.config/i3/mri3_status_right.sh
+    status_command ~/.config/i3/mri3_status_right.sh
     #status_command ~/.config/i3/mri3_status_left.sh
     output $ol
     strip_workspace_numbers yes
@@ -58,7 +58,9 @@ exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id ~/bin/startup/mrredshift.sh
 for_window [class="Wfica"] floating disable
 for_window [class="Wfica"] fullscreen disable
-for_window [class="Wfica"] workspace $ws0
+for_window [class="Wfica"] move container to workspace $ws0
+for_window [title=".*ITTS.Desktop....*"] move container to workspace $ws0
+for_window [title=".*ITTS.Desktop....*"] fullscreen disable
 '
 
 export gaps_inner=8
