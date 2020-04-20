@@ -219,14 +219,15 @@ prompt_status() {
 
   [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+  [[ -f /.dockerenv ]] && symbols+="%{%F{yellow}%}★"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
 prompt_vimode() {
-	local c
-	c="${${KEYMAP/vicmd/C}/(main|viins)/i}"
-	test -n "$c" && prompt_segment red black $c
+  local c
+  c="${${KEYMAP/vicmd/C}/(main|viins)/i}"
+  test -n "$c" && prompt_segment red black $c
 }
 
 ## Main prompt
@@ -237,9 +238,9 @@ build_prompt() {
   prompt_context
   prompt_dir
   prompt_git
-  prompt_bzr
-  prompt_hg
-	prompt_vimode
+  #prompt_bzr
+  #prompt_hg
+  #prompt_vimode
   prompt_end
 }
 
