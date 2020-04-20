@@ -1,0 +1,22 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
+
+set -x
+true \
+    && sh -c "$(curl -kfsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" < /dev/null \
+    && touch ~/.z \
+    && git config --global user.name "Jeff Malone" \
+    && git config --global user.email "jeff@stdenv.stdenv" \
+    && cd ~ \
+    && mkdir -p ~/.ssh/c \
+    && git clone https://github.com/shk3bq4d/stdhome.git ~/stdhome \
+    && ~/stdhome/bin/stdhome-install.sh -a o \
+    && cd ~ \
+    && git clone --no-checkout https://github.com/shk3bq4d/stdenv.git ~/stdenv \
+    && cd ~/stdenv \
+    && git config branch.autosetupmerge always \
+    && git config status.showuntrackedfiles no \
+    && git config core.worktree ~ \
+    && cd ~/stdenv \
+    && git checkout --force stdenv \
+    && true
+set +x
