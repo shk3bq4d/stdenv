@@ -11,6 +11,7 @@
 
 set -euo pipefail
 
+kubectl_version=1.18.0
 kubectl_version=1.18.1
 
 BIN="$HOME/bin/kubectl-$kubectl_version"
@@ -19,6 +20,7 @@ BIN="$HOME/bin/kubectl-$kubectl_version"
 
 
 if [[ ! -f $BIN ]]; then
+    test -t 0 || { >2 echo "FATAL: no tty and no such file $BIN"; exit 1; }
     echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
     echo # read
