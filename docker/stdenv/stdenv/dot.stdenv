@@ -3,6 +3,9 @@
 set -x
 true \
     && sh -c "$(curl -kfsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" < /dev/null \
+    && cd ~/.oh-my-zsh/custom/plugins/ && git clone https://github.com/zsh-users/zsh-autosuggestions.git \
+    && cd ~/.oh-my-zsh/custom/plugins/ && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+    && cd ~ \
     && touch ~/.z \
     && git config --global user.name "Jeff Malone" \
     && git config --global user.email "jeff@stdenv.stdenv" \
