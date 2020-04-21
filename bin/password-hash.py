@@ -68,7 +68,10 @@ def logging_conf(
 # https://passlib.readthedocs.io/en/stable/lib/passlib.hash.html#module-passlib.hash
 _ = {
     'Active Unix Hashes': [
-            [passlib.hash.bcrypt, 'BCrypt'],
+            [passlib.hash.bcrypt, 'BCrypt', dict(ident='2')],
+            [passlib.hash.bcrypt, 'BCrypt', dict(ident='2a')],
+            [passlib.hash.bcrypt, 'BCrypt', dict(ident='2b')],
+            [passlib.hash.bcrypt, 'BCrypt', dict(ident='2y')],
             [passlib.hash.sha256_crypt, 'SHA-256 Crypt'],
             [passlib.hash.sha512_crypt, 'SHA-512 Crypt'],
 
@@ -124,15 +127,15 @@ _ = {
             [passlib.hash.mssql2005, 'MS SQL 2005 password hash'],
             [passlib.hash.mysql323, 'MySQL 3.2.3 password hash'],
             [passlib.hash.mysql41, 'MySQL 4.1 password hash'],
-            [passlib.hash.postgres_md5, 'PostgreSQL MD5 password hash', True], # TypeError: user must be unicode or bytes, not None
-            [passlib.hash.oracle10, 'Oracle 10g password hash', True],
+            [passlib.hash.postgres_md5, 'PostgreSQL MD5 password hash', dict(user=True)], # TypeError: user must be unicode or bytes, not None
+            [passlib.hash.oracle10, 'Oracle 10g password hash', dict(user=True)],
             [passlib.hash.oracle11, 'Oracle 11g password hash'],
         ],
     'MS Windows Hashes': [ # The following hashes are used in various places by Microsoft Windows. As they were designed for “internal” use, they generally contain no identifying markers, identifying them is pretty much context-dependant.
             [passlib.hash.lmhash, 'LanManager Hash'],
             [passlib.hash.nthash, 'Windows’ NT-HASH'],
-            [passlib.hash.msdcc, 'Windows’ Domain Cached Credentials', True],
-            [passlib.hash.msdcc2, 'Windows’ Domain Cached Credentials v2', True],
+            [passlib.hash.msdcc, 'Windows’ Domain Cached Credentials', dict(user=True)],
+            [passlib.hash.msdcc2, 'Windows’ Domain Cached Credentials v2', dict(user=True)],
         ],
     'Cisco IOS': [ # The following hashes are used in various places on Cisco IOS, and are usually referred to by a Cisco-assigned “type” code:
             [passlib.hash.md5_crypt, '“Type 5”'], # hashes are actually just the standard Unix MD5-Crypt hash, the format is identical.'],
@@ -171,14 +174,13 @@ def go(args):
         #pprint(elem)
         if len(elem) == 2:
             algo, algoname = elem
-            user = False
+            kwargs = {}
         else:
-            algo, algoname, user = elem
+            algo, algoname, kwargs = elem
+            if 'user' in kwargs:
+                kwargs['user'] = username
         #print(algoname)
-        if user:
-            h = algo.hash(password, user=username)
-        else:
-            h = algo.hash(password)
+        h = algo.hash(password, **kwargs)
         print('{:<60s} {}'.format(algoname, h))
 
 
