@@ -53,7 +53,7 @@ RUN \
 RUN true \
 	&& useradd -u 1000 -d /home/user             -m     user \
 	&& useradd -u 1001 -d /home/sudouser -G sudo -m sudouser \
-	&& sed -i -r -e "s,^%sudo .*,%sudo  ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \
+	&& sed -i -r -e "s,^%sudo\\s.*,%sudo ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \
 	&& true
 
 ENV DEBIAN_FRONTEND ""
