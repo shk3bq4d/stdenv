@@ -7,7 +7,7 @@
   become: no
   vars:
     mruser: "{{ ansible_user }}"
-    python2: false
+    python2: true
   tasks:
     - name: Reset ownership beforehand
       become: true
@@ -52,9 +52,6 @@
         - youtube_dl
         - i3ipc
         - future
-        # - packaging # ansible azure
-        - ansible[azure]
-        - azure
         # websupport/search.py
         - LatLon
         # BeautifulSoup

@@ -1,0 +1,17 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff -vvv
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+## vimf6_ansible_nolocalsudo: no
+- hosts: localhost
+  connection: local
+  #become: true
+  gather_facts: no
+  vars:
+    _random: hehe
+    filename: google-chrome
+  tasks:
+    - name: install stable google chrome
+      become: true
+      apt:
+        deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
