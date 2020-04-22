@@ -121,6 +121,7 @@
         - lxml
         - openshift # ansible kubernetes
         - passlib # generate hashes
+        - pyzmail36 # smtp
         - scapy
         - selenium
         - sh
