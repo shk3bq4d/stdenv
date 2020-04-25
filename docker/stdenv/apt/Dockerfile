@@ -51,11 +51,15 @@ RUN \
 	&& true
 
 RUN true \
-	&& useradd -u 1000 -d /home/user             -m     user \
-	&& useradd -u 1001 -d /home/sudouser -G sudo -m sudouser \
+	&& useradd -u 1000 -d /home/user             -m     user -s /usr/bin/zsh \
+	&& touch /root/.zshrc /home/user/.zshrc \
+	&& chown user: /home/user/.zshrc \
 	&& sed -i -r -e "s,^%sudo\\s.*,%sudo ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \
 	&& true
 
 ENV DEBIAN_FRONTEND ""
 
-CMD zsh
+WORKDIR /root
+COPY entrypoint.sh .
+ENTRYPOINT ["/root/entrypoint.sh"]
+#CMD zsh
