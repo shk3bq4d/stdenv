@@ -7,5 +7,10 @@ cat subrepo-list.txt | while read dir url; do
 	cd "$DIR"
 	[[ -d "$dir" ]] && continue
 	git clone $url "$dir"
-	cd $dir && git submodule init && git submodule update || true
+	cd $dir && git submodule update --init --recursive
 done
+cd "$DIR"
+if [[ -d youcompleteme ]]; then
+	cd youcompleteme
+	./install.py
+fi
