@@ -1,14 +1,15 @@
 FROM shk3bq4d/stdenv:py
 
-RUN true
-
 COPY dot.stdenv /tmp
-RUN bash -x /tmp/dot.stdenv
-RUN sudo -i -u user bash -x /tmp/dot.stdenv
-
 RUN true \
+	&& bash -x /tmp/dot.stdenv \
+	&& sudo -i -u user bash -x /tmp/dot.stdenv \
 	&& chsh -s /usr/bin/zsh \
 	&& chsh -s /usr/bin/zsh user \
 	&& true
 
-ENTRYPOINT ["/root/entrypoint.sh"]
+VOLUME /stdenv
+
+COPY entrypoint-stdenv.sh /root/
+
+ENTRYPOINT ["/root/entrypoint-stdenv.sh"]

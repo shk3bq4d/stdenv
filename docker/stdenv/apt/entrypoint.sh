@@ -31,15 +31,22 @@ function _go() {
 
 	OLD_USER_NAME=user
 	OLD_USER_GROUPNAME=$OLD_USER_NAME
+	test -d /stdenv/root || mkdir /stdenv/root
+	if [[ ! -d /stdenv/user ]]; then
+		mkdir /stdenv/user
+		chown user: /stdenv/user
+	fi
 
 	if [[ -n "${STDENV_USER_UID:-}" ]]; then
 		usermod -u     $STDENV_USER_UID     $OLD_USER_NAME 2>&1 | mrcat
+		chown -R $STDENV_USER_UID /stdenv/user
 	fi
 	if [[ -n "${STDENV_USER_GID:-}" ]]; then
 		OLD_USER_GID=$(id -g $OLD_USER_NAME)
 		if [[ "$STDENV_USER_GID" != "$OLD_USER_GID" ]]; then
 			find $(eval echo ~$OLD_USER_NAME) -gid $OLD_USER_GID -print0 | xargs -0r chgrp -h $STDENV_USER_GID
 			groupmod -g $STDENV_USER_GID $OLD_USER_GROUPNAME 2>&1 | mrcat
+			chgrp -R $STDENV_USER_GID /stdenv/user
 		fi
 	fi
 	if [[ -n "${STDENV_USER_SUDOER:-}" ]]; then
