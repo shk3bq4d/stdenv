@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+import magic
+import pyzmail
+import fileinput
 import os
 import sys
 import re
@@ -80,6 +83,7 @@ def sendmail(to, subject, body, fr=None, cc=[], bcc=[], attachments=[], html=Non
 
         return (data, maintype, subtype, filename, charset)
 
+    attachments = attachments or []
     attachments = map(attach2pyzmail, attachments)
     payload, mail_from, rcpt_to, msg_id=pyzmail.compose_mail(
         sender,
@@ -114,21 +118,21 @@ def go(args):
     # logger.debug(__file__)
     if 'VIMF6' in os.environ and False: args = ['HEHE', '-i']
     parser = argparse.ArgumentParser(description="This is the description of what I do")
-    parser.add_argument("-t", "--to")
-    parser.add_argument("-s", "--subject")
-    parser.add_argument("-f", "--from")
-    parser.add_argument("-c", "--cc")
-    parser.add_argument("-b", "--bcc")
-    parser.add_argument("-a", "--attachments", type=list)
-    parser.add_argument("-r", "--html", action="store_true")
-    parser.add_argument("-o", "--stmp-host", action="store_true")
-    parser.add_argument("-p", "--stmp-port", type=int)
-    parser.add_argument("-l", "--smtp-login")
-    parser.add_argument("-w", "--smtp-password")
-    parser.add_argument("-m", "--smtp-mode", default='tls')
+    parser.add_argument("-t", "--to", default=os.getenv("STDENV_TO", None))
+    parser.add_argument("-s", "--subject", default=os.getenv("STDENV_SUBJECT", None))
+    parser.add_argument("-f", "--from", default=os.getenv("STDENV_FROM", None))
+    parser.add_argument("-c", "--cc", default=os.getenv("STDENV_CC", None))
+    parser.add_argument("-b", "--bcc", default=os.getenv("STDENV_BCC", None))
+    parser.add_argument("-a", "--attachments", type=str, action='append')
+    #parser.add_argument("-r", "--html", action="store_true")
+    parser.add_argument("-o", "--smtp-host", action="store_true", default=os.getenv("STDENV_SMTP_HOST", None))
+    parser.add_argument("-p", "--smtp-port", type=int, default=os.getenv("STDENV_SMTP_PORT", None))
+    parser.add_argument("-l", "--smtp-login", default=os.getenv("STDENV_SMTP_LOGIN", None))
+    parser.add_argument("-w", "--smtp-password", default=os.getenv("STDENV_SMTP_PASSWORD", None))
+    parser.add_argument("-m", "--smtp-mode", default=os.getenv("STDENV_SMTP_MODE", 'tls'))
     ar = parser.parse_args(args)
-    body = "\n".join(map(str.rstrip, fileinput.input(files=None)))
-    sendmail(ar.to, ar.subject, body, fr=ar.from, cc=ar.cc, bcc=ar.bcc, attachments=ar.attachments, html=ar.html, smtp_host=ar.smtp_host, smtp_port=ar.smtp_port, smtp_password=ar.smtp_password, smtp_login=ar.smtp_login, smtp_mode=ar.smtp_mode)
+    body = "\n".join(map(str.rstrip, fileinput.input(files="-")))
+    sendmail(ar.to, ar.subject, body, fr=vars(ar)['from'], cc=ar.cc, bcc=ar.bcc, attachments=ar.attachments, html=None, smtp_host=ar.smtp_host, smtp_port=ar.smtp_port, smtp_password=ar.smtp_password, smtp_login=ar.smtp_login, smtp_mode=ar.smtp_mode)
 
 
 
