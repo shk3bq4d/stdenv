@@ -15,3 +15,4 @@ RUN true \
 		psutil \
 	&& true
 
+ENTRYPOINT ["/root/entrypoint.sh"]

@@ -12,7 +12,7 @@ true \
     && cd ~ \
     && mkdir -p ~/.ssh/c \
     && git clone https://github.com/shk3bq4d/stdhome.git ~/stdhome \
-    && ~/stdhome/bin/stdhome-install.sh -a o \
+    && ~/stdhome/bin/stdhome-install.sh -s -a o \
     && cd ~ \
     && git clone --no-checkout https://github.com/shk3bq4d/stdenv.git ~/stdenv \
     && cd ~/stdenv \
@@ -21,5 +21,6 @@ true \
     && git config core.worktree ~ \
     && cd ~/stdenv \
     && git checkout --force stdenv \
+    && cd ~/.vim/bundle && ~/.vim/bundle/subrepo-list-install.sh \
     && true
 set +x
