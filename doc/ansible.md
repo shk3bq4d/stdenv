@@ -40,7 +40,7 @@
     work_dir: "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}/.tmp/ansible"
   args:
     warn: false
-creates: /tmp/hehe
+    creates: /tmp/hehe
 
 - name: environment variable access
   debug: var=ansible_env.SUDO_USER

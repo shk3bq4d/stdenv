@@ -5,6 +5,8 @@ sudo service ntp stop
 sudo ntpd -gq
 sudo service ntp start
 
+ssh -t myhost sudo date -us @$(date -u +%s)         
+
 
 /etc/systemd/timesyncd.conf
 #  This file is part of systemd.
