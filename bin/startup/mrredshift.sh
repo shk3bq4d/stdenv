@@ -2,8 +2,10 @@
 
 export LC_ALL=en_US.UTF-8
 
-echo "FATAL: not redshift for you"
-exit 1
+if false; then
+	echo "FATAL: not redshift for you because of netflix"
+	exit 1
+fi
 
 set -e
 
