@@ -6,6 +6,7 @@ RUN \
 	&& apt update -y \
 	&& apt dist-upgrade -y \
 	&& apt install -y \
+		ack \
 		apt-file \
 		apt-transport-https \
 		ascii \
