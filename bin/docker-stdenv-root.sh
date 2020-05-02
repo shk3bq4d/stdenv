@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker run "$@" -it shk3bq4d/stdenv:stdenv zsh
+docker run "$@" -e TERM=${TERM:-xterm} -it shk3bq4d/stdenv:stdenv zsh

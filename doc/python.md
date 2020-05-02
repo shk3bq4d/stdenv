@@ -62,9 +62,9 @@ doc.xpath('/*')
 
 # process stdin line by line
 """
-import fileinput
+import fileinput # stdin
 
-for line in fileinput.input():
+for line in fileinput.input(): # stdin
     line = line.rstrip()
     if line == '':
         continue
@@ -72,6 +72,8 @@ for line in fileinput.input():
 # or in onliner
 for line in filter(lambda x: len(x) > 0, map(lambda x: x.rstrip(), fileinput.input(files=None))):
 for line in filter(None, map(str.rstrip, fileinput.input(files=None))):
+for line in filter(None, map(str.rstrip, fileinput.input(files="-"))):
+for line in filter(None, map(str.rstrip, fileinput.input())):
 
 """
 from pprint import pprint; pprint(vars(obj))
