@@ -5,15 +5,13 @@
 ## vimf6_ansible_nolocalsudo: no
 - hosts:
     - localhost
-    - dec17.ly.lan
-    - may19.sfcri.lan
-    - apr16.ly.lan
   #become: true
-  gather_facts: no
+  gather_facts: yes
   tasks:
+    - debug: var=ansible_hostname
     - name: Schedules container cleanup
       become: true
       cron:
         name: docker container cleaup
         job: docker ps -q -f status=exited | xargs -r docker rm; docker images -q |xargs docker rmi
-        special_time: "{{ 'hourly' if inventory_hostname == 'dec17.ly.lan' else 'weekly' }}"
+        special_time: "{{ 'hourly' if ansible_hostname == 'dec17' else 'weekly' }}"
