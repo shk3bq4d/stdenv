@@ -11,5 +11,4 @@
 
 set -euo pipefail
 
-set -x
-find $(ls -1a / | grep -xEv 'proc|sys|lost\+found' | sed -r -e 's,^,/,') "$@"
+find $(ls -1a / | grep -xEv '\.|\.\.|proc|sys|lost\+found' | sed -r -e 's,^,/,') "$@"
