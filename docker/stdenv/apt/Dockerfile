@@ -40,6 +40,7 @@ RUN \
 		python-pip \
 		python2.7 \
 		python3-pip \
+		rsync \
 		software-properties-common \
 		sudo \
 		sysstat \
