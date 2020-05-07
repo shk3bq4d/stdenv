@@ -2535,3 +2535,18 @@ setup gather_subset=all_ipv4_addresses
       {% set _ = ip_list.append(lookup('dig', host)) %}      # list comprehension
       {% endfor %}                                           # list comprehension
       {{ ip_list }}                                          # list comprehension
+
+# double loop
+- debug:
+    msg: "{{ item }}"
+  vars:
+    #myelem: "{{ agentless | dict2items | selectattr('key', 'value.macros')}"
+    myelem: |
+      {% set output = [] %}
+      {% for elem in agentless|dict2items %}
+      {% for macro in elem.value.macros|default({})|dict2items %}
+      {% set _ = output.append({'host':elem.key,'macro_name':macro.key,'macro_value':macro.value}) %}
+      {% endfor %}
+      {% endfor %}
+      {{ output }}
+  with_items: "{{ myelem }}"

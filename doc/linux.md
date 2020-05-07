@@ -326,5 +326,5 @@ systemctl status systemd-shutdownd.service
 sudo udevadm monitor --environment --udev # follow udev events
 =======
 
-kazam # screen capture video
+kazam # screen capture video -- record
 >>>>>>> github/stdenv

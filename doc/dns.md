@@ -1,6 +1,7 @@
 dig -x 195.94.108.9 # reverse DNS lookup
 
 dig +short mail.microsoft.com @10.8.92.180
+dig +short "oktaverification.okta.a.sfops.io" txt # fetch TXT record
 
 dig +nocmd google.com any +multiline +noall +answer # all records
 
