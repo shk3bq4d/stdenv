@@ -3917,4 +3917,4 @@ Recent Mentions
 Click @ next to the search box to query for your most recent @mentions and words that trigger mentions. Click Jump next to a search result in the right-hand sidebar to jump the center pane to the channel and location of the message with the mention.
 
 
-
+https://docs.mattermost.com/administration/changelog.html
