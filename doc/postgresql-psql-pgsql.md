@@ -45,6 +45,11 @@ SELECT * FROM information_schema.tables where table_name='dbversion';
 
 psql -U zabbix -h localhost
 java -jar schemaSpy_5.0.0.jar -t pgsql -host localhost:5432 -db zabbix -s public -o /tmp/bip -u zabbix -p myPasswordFSD0.fs8 -dp postgresql-42.1.4.jar
+PGPASSWORD=auoehtnuhoeauaoetnuhoena psql \
+	-h hostname \
+	-U pgsqladmin@hostbip \
+	-d "database" \
+	-f my.sq
 
 pg_dumpall -U django -oc
 postgres postgres -f -

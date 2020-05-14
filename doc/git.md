@@ -601,3 +601,5 @@ git config          credential.helper store # ask git to save local https creden
 
 
 git config oh-my-zsh.hide-status 1
+
+git rebase --rebase-merges
