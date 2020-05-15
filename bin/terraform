@@ -41,6 +41,7 @@ terraform_version=0.12.20
 terraform_version=0.12.21
 terraform_version=0.12.23
 terraform_version=0.12.24
+terraform_version=0.12.25
 
 BIN="$HOME/bin/terraform-$terraform_version"
 
