@@ -111,6 +111,7 @@
       pip:
         name:
         - ansible
+        - ansible-lint
         - docker
         - bs4 # beautiful soup 4
         - fahrplan # cff sbb timetable
