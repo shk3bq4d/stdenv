@@ -55,6 +55,7 @@ pg_dumpall -U django -oc
 postgres postgres -f -
 
 psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups where group_id = 9;"
+docker exec -it postgres pg_dumpall -U docvault | gzip -c > /data/pgdump-$(date +'%Y.%m.%d-%H.%M.%S')-all.dump.gz
 
 
 # backups backup

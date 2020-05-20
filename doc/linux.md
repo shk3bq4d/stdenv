@@ -321,10 +321,10 @@ ssh blabla sudo shutdown -r 04:10 # reboot reset remote overnight business hours
 date -d "@$( awk -F '=' '/USEC/{ $2=substr($2,1,10); print $2 }' /run/systemd/shutdown/scheduled )"
 systemctl status systemd-shutdownd.service
 
-<<<<<<< HEAD
 # udev
 sudo udevadm monitor --environment --udev # follow udev events
-=======
-
 kazam # screen capture video -- record
->>>>>>> github/stdenv
+
+https://www.osetc.com/en/centos-7-rhel-7-how-to-change-the-system-keyboard-layout.html
+localectl list-keymaps | grep us
+localectl set-keyp ch-fr

@@ -2550,3 +2550,33 @@ setup gather_subset=all_ipv4_addresses
       {% endfor %}
       {{ output }}
   with_items: "{{ myelem }}"
+
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    mylist:
+      - habon
+      - youpi
+      - hehe
+    mydict:
+      keyA: ahah
+      keyB: bhbh
+  tasks:
+    - shell: "echo {{ item }} | tr [:lower:] [:upper:]"       # register iteration list
+      register: myvar                                         # register iteration list
+      with_items: "{{ mylist }}"                              # register iteration list
+    - debug:                                                  # register iteration list
+        msg: "{{ myvar.results[my_idx].stdout }}"             # register iteration list
+      with_items: "{{ mylist }}"                              # register iteration list
+      loop_control:                                           # register iteration list
+        index_var: my_idx                                     # register iteration list
+    - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict
+      register: myvardict                                     # register iteration dict
+      with_dict: "{{ mydict }}"                               # register iteration dict
+    - debug:                                                  # register iteration dict
+        msg: "{{ myvardict.results[my_idx2].stdout }}"        # register iteration dict
+      with_items: "{{ mydict }}"                              # register iteration dict
+      loop_control:                                           # register iteration dict
+        index_var: my_idx2                                    # register iteration dict
