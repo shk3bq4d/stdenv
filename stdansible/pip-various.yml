@@ -123,6 +123,7 @@
         - lxml
         - openshift # ansible kubernetes
         - passlib # generate hashes
+        - packaging # blobfuse role
         - pyzmail36 # smtp
         - scapy
         - selenium

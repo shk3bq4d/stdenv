@@ -26,14 +26,12 @@ touch "$f" || { echo "FATAL: Can't touch to $f" && exit 1; }
 # @begin=yaml@
 cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $f .yml)/g" >>$f
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
-## vimf6_ansible_args: --diff --check
+## vimf6_ansible_args: --diff
 ## vimf6_ansible_args: --diff --check -vv
 ## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
 ## vimf6_ansible_nolocalsudo: yes
-## vimf6_ansible_nolocalsudo: no
 - hosts: localhost
   connection: local
-  #become: true
   gather_facts: no
   vars:
     _random: hehe

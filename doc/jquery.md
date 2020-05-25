@@ -7,3 +7,5 @@ e = $('#id_password'); (e.is(":hidden") || e.css("visibility") == "hidden" || e.
 $(this).attr('title') // attribute value
 $(this).text();
 $(this).html();
+
+jQuery.fn.jquery # show version
