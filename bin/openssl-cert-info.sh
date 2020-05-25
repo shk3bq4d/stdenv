@@ -24,34 +24,39 @@ _tempfile=$_tempdir/a
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
-[[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
-if [[ $# -eq 0 ]] || [[ $# -eq 1 && $1 == "-" ]]; then
+if [[ $# -gt 1 ]] && test -f "$@"; then
+	F="$@"
+	$0 "$F"
+	exit $?
+fi
+[[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
+if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
     MODE=file
     NAME=$_tempdir/b
     cat - > $NAME
 else
-    NAME=$1
+    NAME="$1"
     [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
     NAME="$( echo -n $NAME | sed -r \
         -e 's/^#//' \
         -e 's/(^\s+|\s+$)//g' \
         -e 's/^.*(https?:..)([^ ]+?).*$/\2/'
         )"
-	if [[ $NAME = *:* ]]; then
-		PORT="$( echo -n $PORT | sed -r \
+	if [[ "$NAME" = *:* ]]; then
+		PORT="$( echo -n "$PORT" | sed -r \
 			-e 's/.*://' \
 			)"
-		NAME="$( echo -n $NAME | sed -r \
+		NAME="$( echo -n "$NAME" | sed -r \
 			-e 's/:.*//' \
 			)"
 	fi
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
-       IP=$NAME
-    echo "$NAME -> $(dig -t a +short $NAME | tail -1)"
+       IP="$NAME"
+    echo "$NAME -> $(dig -t a +short "$NAME" | tail -1)"
 elif [[ $MODE = connect ]]; then
-    IP=$(dig -t a +short $NAME @$3 | tail -1)
+    IP=$(dig -t a +short "$NAME" @$3 | tail -1)
     echo "$NAME @$3 -> $IP"
 fi
 
@@ -62,12 +67,12 @@ else
 fi
 {   if [[ $MODE = file ]]; then
         echo "cat $NAME" >&2
-        cat $NAME
+        cat "$NAME"
     else
-        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME 2>&1 | less"  >&2
-        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME -starttls smtp 2>&1 | less # for STARTTLS SMTP"  >&2
+        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' 2>&1 | less"  >&2
+        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -starttls smtp 2>&1 | less # for STARTTLS SMTP"  >&2
         echo | \
-            /usr/bin/openssl s_client -connect $IP:$PORT -servername $NAME 2>&1
+            /usr/bin/openssl s_client -connect $IP:$PORT -servername "$NAME" 2>&1
     fi
 } | tee $_tempfile |
     sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
