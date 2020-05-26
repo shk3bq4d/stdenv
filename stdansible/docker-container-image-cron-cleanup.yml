@@ -13,5 +13,5 @@
       become: true
       cron:
         name: docker container cleaup
-        job: docker ps -q -f status=exited | xargs -r docker rm; docker images -q |xargs docker rmi
+        job: docker ps -q -f status=exited | xargs -r docker rm; #docker images -q |xargs docker rmi
         special_time: "{{ 'hourly' if ansible_hostname == 'dec17' else 'weekly' }}"

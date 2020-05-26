@@ -41,6 +41,7 @@ RUN \
 		python2.7 \
 		python3-pip \
 		rsync \
+		screen \
 		software-properties-common \
 		sudo \
 		sysstat \
