@@ -502,6 +502,7 @@ backup heptio ark
 @end=sh@
 
 kubectl rollout undo deployments MYDEP --to-revision 1
+kubectl rollout restart deployment -n namespace deploymentname
 
 #  CLI
 kubectl controls the Kubernetes cluster manager.
