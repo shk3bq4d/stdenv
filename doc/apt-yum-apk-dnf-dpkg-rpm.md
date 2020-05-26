@@ -30,6 +30,8 @@ yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x available
 yum list installed 'http*'
 yum info elasticsearch # show version
+yum whatprovides */ldapsearch && yum clean all
+yum whatprovides ldapwhoami  && yum clean all # openldap-clients
 yum whatprovides ack       && yum clean all
 yum whatprovides ack       && yum clean all # moreutils
 yum whatprovides ts       && yum clean all # moreutils
