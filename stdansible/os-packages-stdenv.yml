@@ -29,6 +29,7 @@
           - i3lock
           - unattended-upgrades
           - python-backports.ssl-match-hostname # ansible docker module for python2
+          - ldap-utils
           - redshift
           # xmllint
           - libxml2-utils
