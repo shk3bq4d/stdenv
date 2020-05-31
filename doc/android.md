@@ -177,3 +177,17 @@ Search
 
 
 https://android.com/find # ring search find lost devices
+
+# xiaomi
+IMEI1: 8604 7904 4786 916
+IMEI2: 8604 7904 5136 913
+SN: 22848/49XS01974
+COO 32GB
+https://download.lineageos.org/lavender # not exists yet
+https://www.lineageoslog.com/17.1/lavender
+https://forum.xda-developers.com/redmi-note-7/development/rom-lineageos-16-t3968501
+https://www.cyanogenmods.org/forums/topic/download-lineageos-17-redmi-note-7/
+https://files.orangefox.download/OrangeFox-Stable/lavender/
+https://forum.xda-developers.com/showpost.php?p=76885728&postcount=3
+https://status.lineageos.org/
+
