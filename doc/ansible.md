@@ -1193,6 +1193,7 @@ localhost | SUCCESS => {
 
 # adhoc
 ansible localhost --playbook-dir ~/stdansible -m include_role -a name=citrix-client-run -e file=$PWD/bip # execute single role
+ansible localhost -m shell -a "cmd=whoami" -vvv
 ansible localhost -m setup -a "gather_subset=all"      | grep -E ""
 ansible localhost -m setup -a "gather_subset=min"      | grep -E ""
 ansible localhost -m setup -a "gather_subset=hardware" | grep -E ""

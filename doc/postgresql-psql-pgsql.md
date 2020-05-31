@@ -52,6 +52,7 @@ PGPASSWORD=auoehtnuhoeauaoetnuhoena psql \
 	-f my.sq
 
 pg_dumpall -U django -oc
+pg_dump    -U django -d myschema
 postgres postgres -f -
 
 psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups where group_id = 9;"
@@ -82,3 +83,18 @@ end transaction; -- or commit;
 
 create database docvault1304 with template docvault owner docvault;
 create database mattermostdb504 with template mattermost owner sa;
+
+select * from "escape_reserved_name_in_column_or_table_name";
+
+
+# count for each table (may be slow on big databases, see https://stackoverflow.com/questions/2596670/how-do-you-find-the-row-count-for-all-your-tables-in-postgres )
+select table_schema,
+       table_name,
+       (xpath('/row/cnt/text()', xml_count))[1]::text::int as row_count
+from (
+  select table_name, table_schema,
+         query_to_xml(format('select count(*) as cnt from %I.%I', table_schema, table_name), false, true, '') as xml_count
+  from information_schema.tables
+  where table_schema = 'public' --<< change here for the schema you want
+) t;
+

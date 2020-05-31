@@ -64,5 +64,14 @@ if [[ ! -f $BIN ]]; then
     rm terraform_"$terraform_version"_linux_amd64.zip || true
 fi
 
+case $(hostname -f) in \
+apr16*)
+    if [[ "$PWD" = */dcn/iaac/* ]]; then
+        export http_proxy=http://127.0.0.1:9843
+        export https_proxy=$http_proxy
+    fi
+    ;;
+esac
+
 ~/bin/terraform-$terraform_version "$@"
 exit $?
