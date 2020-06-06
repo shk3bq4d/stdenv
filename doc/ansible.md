@@ -2581,3 +2581,16 @@ setup gather_subset=all_ipv4_addresses
       with_items: "{{ mydict }}"                              # register iteration dict
       loop_control:                                           # register iteration dict
         index_var: my_idx2                                    # register iteration dict
+
+
+serial:      # serial throttle parrallel at play          level
+throttle:    # serial throttle parrallel at block or task level
+
+
+YAML single quote escaping: 'bipip''hehe''youpi' -> bipbip'hehe'youpi # https://yaml.org/spec/current.html#id2534365
+
+role_name                The name of the role currently being executed.
+role_path                The path to the dir of the currently running role
+ansible_play_name        The name of the currently executed play. Added in 2.8.
+inventory_hostname       The inventory name for the ‘current’ host being iterated over in the play
+inventory_hostname_short The short version of inventory_hostname

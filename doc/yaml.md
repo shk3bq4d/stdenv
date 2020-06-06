@@ -116,3 +116,6 @@ block_mapping: http://www.yaml.org/spec/1.2/spec.html#id2798057
             rH['data'][os.path.basename(f)] = literal_unicode(unicode(fd.read()))
     print(yaml.dump(rH, default_flow_style=False))
 ```
+
+
+YAML single quote escaping: 'bipip''hehe''youpi' -> bipbip'hehe'youpi # https://yaml.org/spec/current.html#id2534365
