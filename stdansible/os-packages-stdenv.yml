@@ -1,5 +1,6 @@
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
 ## vimf6_ansible_args: --diff -vvv
+## vimf6_ansible_nolocalsudo: no
 ## vimf6_ansible_nolocalsudo: yes
 ---
 - hosts: localhost
@@ -64,5 +65,6 @@
           - nethogs
           - units
           - bsd-mailx
+          - git-crypt
         state: present
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
