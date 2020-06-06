@@ -22,6 +22,7 @@
         name:
         - "python-pip"
         - "python3-pip"
+        - "python3-venv"
       become: true
 
     - name: stat ~/.local/bin/pip2
@@ -111,6 +112,7 @@
       pip:
         name:
         - ansible
+        - ansible-lint
         - docker
         - bs4 # beautiful soup 4
         - fahrplan # cff sbb timetable
@@ -145,4 +147,5 @@
         - azure-cli
         state: latest
         virtualenv: ~/.virtualenvs/az-cli
+        virtualenv_command: /usr/bin/python3.6 -m venv
 
