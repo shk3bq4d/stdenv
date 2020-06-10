@@ -429,13 +429,18 @@ for_window [class="Vncviewer"] border normal
 for_window [class="VisualVM*"] border normal
 for_window [class="keepassxc"] border normal
 for_window [class="keepassxc"] floating enable
-                   #citrix-viewer_citrixvboxlocal_1559750403653_93075 (Linked Base for citrix-viewer_citrixvboxlocal_1559750403653_93075 and citrix-clone) [Running] - Oracle VM VirtualBox
-for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] border 1pixel
-#for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] workspace "12   !   citrix   "
 for_window [class="VirtualBox Machine"] floating enable
+
+# citrix
+for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] border 1pixel
 for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] floating disable
 for_window [class="Wfica"] fullscreen disable
 for_window [class="Wfica"] floating disable
+for_window [class="Wfica"]               move container to workspace $ws0
+for_window [title=".*ITTS.Desktop....*"] fullscreen disable
+for_window [title=".*ITTS.Desktop....*"] move container to workspace $ws0
+for_window [class="Wfica_ErrorOrInfo"] floating enable
+
 for_window [class="Gitk"] fullscreen enable
 for_window [class="Gitk"] border normal
 for_window [class="Kodi"] fullscreen enable
