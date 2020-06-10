@@ -2594,3 +2594,17 @@ role_path                The path to the dir of the currently running role
 ansible_play_name        The name of the currently executed play. Added in 2.8.
 inventory_hostname       The inventory name for the ‘current’ host being iterated over in the play
 inventory_hostname_short The short version of inventory_hostname
+
+
+    RedHat = 'RedHat', Fedora = 'RedHat', CentOS = 'RedHat', Scientific = 'RedHat', # ansible_os_family
+    SLC = 'RedHat', Ascendos = 'RedHat', CloudLinux = 'RedHat', PSBM = 'RedHat', # ansible_os_family
+    OracleLinux = 'RedHat', OVS = 'RedHat', OEL = 'RedHat', Amazon = 'RedHat', # ansible_os_family
+    XenServer = 'RedHat', Ubuntu = 'Debian', Debian = 'Debian', Raspbian = 'Debian', Slackware = 'Slackware', SLES = 'Suse', # ansible_os_family
+    SLED = 'Suse', openSUSE = 'Suse', SuSE = 'Suse', SLES_SAP = 'Suse', Gentoo = 'Gentoo', Funtoo = 'Gentoo', # ansible_os_family
+    Archlinux = 'Archlinux', Manjaro = 'Archlinux', Mandriva = 'Mandrake', Mandrake = 'Mandrake', # ansible_os_family
+    Solaris = 'Solaris', Nexenta = 'Solaris', OmniOS = 'Solaris', OpenIndiana = 'Solaris', # ansible_os_family
+    SmartOS = 'Solaris', AIX = 'AIX', Alpine = 'Alpine', MacOSX = 'Darwin', # ansible_os_family
+    FreeBSD = 'FreeBSD', HPUX = 'HP-UX' # ansible_os_family
+
+
+'/bip/hehe.txt' | basename | splitext | first --> 'hehe' # get filename without extension

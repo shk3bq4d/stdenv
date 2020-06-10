@@ -137,4 +137,7 @@ for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
     [ -f $f ] && source $f
 done
 is_zsh && unsetopt null_glob
+if [[ $EUID -eq 0 ]]; then
+    cd /var/log
+fi
 # /* ex: set filetype=sh: */

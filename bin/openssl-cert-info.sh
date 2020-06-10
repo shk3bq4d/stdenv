@@ -24,7 +24,7 @@ _tempfile=$_tempdir/a
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
-if [[ $# -gt 1 ]] && test -f "$@"; then
+if [[ $# -gt 1 ]] && [[ -f "$@" ]]; then
 	F="$@"
 	$0 "$F"
 	exit $?
