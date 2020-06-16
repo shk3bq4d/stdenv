@@ -103,8 +103,8 @@ echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_2
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_3
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
-echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -starttls smtp -showcerts # -starttls for upgraded connection
-printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -starttls smtp | openssl x509 -enddate -noout
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp -showcerts # -starttls for upgraded connection
+printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -crlf -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 
 # node.js
@@ -231,3 +231,6 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 1.3.6.1.5.5.7.1.24 = DER:30:03:02:01:05
 ```
+
+
+docker run --rm -ti drwetter/testssl.sh https://www.google.com # ssl check tls verify
