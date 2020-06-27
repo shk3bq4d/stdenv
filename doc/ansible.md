@@ -2608,3 +2608,5 @@ inventory_hostname_short The short version of inventory_hostname
 
 
 '/bip/hehe.txt' | basename | splitext | first --> 'hehe' # get filename without extension
+
+https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py # filter source code

@@ -587,7 +587,7 @@ timeoutSeconds: Number of seconds after which the probe times out. Defaults to 1
 successThreshold: Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness. Minimum value is 1.
 failureThreshold: When a Pod starts and the probe fails, Kubernetes will try failureThreshold times before giving up. Giving up in case of liveness probe means restarting the Pod. In case of readiness probe the Pod will be marked Unready. Defaults to 3. Minimum value is 1.
 ```yaml
-          livenessProbe:
+          livenessProbe: # at the container level, not the pod
             initialDelaySeconds: 5
             periodSeconds: 1
             failureThreshold: 40
@@ -598,7 +598,7 @@ failureThreshold: When a Pod starts and the probe fails, Kubernetes will try fai
               httpHeaders:
                 - name: Host
                   value: KubernetesLivenessProbe
-          readinessProbe:
+          readinessProbe: # at the container level, not the pod
             initialDelaySeconds: 1
             periodSeconds: 4
             timeout: 5
@@ -698,10 +698,13 @@ docker run --rm -it babar cat /hehe/hihi;
 
 # labels
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
-kgp -Al app=sfw-cron # labels
-kgp -Al app=sfw-server # labels
-kgp -Al app=sfw-web-app # labels
-kgp -Al app=stp # labels
+kgp -Al app=sfw-cron            -o name # labels
+kgp -Al app=sfw-server          -o name # labels
+kgp -Al app=sfw-web-app         -o name # labels
+kgp -Al app=stp                 -o name # labels
+kgp -Al app=sf-kube-okta-assist -o name # labels
+kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
+while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
 
 # rolloute
