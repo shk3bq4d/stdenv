@@ -3919,5 +3919,6 @@ Click @ next to the search box to query for your most recent @mentions and words
 
 
 changelog: https://docs.mattermost.com/administration/changelog.html
+upgrade notes: https://docs.mattermost.com/administration/important-upgrade-notes.html
 release: https://github.com/mattermost/mattermost-server/releases/tag/v5.22.0
 docker : https://hub.docker.com/r/mattermost/mattermost-enterprise-edition/tags?page=1&name=5.22.0

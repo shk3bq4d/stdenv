@@ -39,6 +39,7 @@
           - libjavascriptcoregtk-1.0-0
           # keepass kpcli
           - kpcli
+          - iotop
           # golang
           - golang
           # virtualbox
