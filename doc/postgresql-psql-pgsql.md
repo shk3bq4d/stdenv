@@ -98,3 +98,8 @@ from (
   where table_schema = 'public' --<< change here for the schema you want
 ) t;
 
+# regexp
+~ (Matches regular expression, case sensitive)
+~* (Matches regular expression, case insensitive)
+!~ (Does not match regular expression, case sensitive)
+!~* (Does not match regular expression, case insensitive)

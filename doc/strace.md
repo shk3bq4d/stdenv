@@ -10,6 +10,7 @@ strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
 grep -E execve.*usr.bin.ssh /tmp/ssh.out.*
 
 sudo strace -s 255 -ffttT $(pgrep lighttp | sed -r -e 's/.*/-p \0/') 2>&1 | grep zabbixweb
+strace -o /tmp/out -y -e trace=file $(pgrep apache2 | sed -r -e 's/.*/-p \0/')
 
 lastcomm -  print out information about previously executed commands.
 
