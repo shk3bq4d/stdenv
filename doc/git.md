@@ -603,3 +603,5 @@ git config          credential.helper store # ask git to save local https creden
 git config oh-my-zsh.hide-status 1
 
 git rebase --rebase-merges
+
+commit messages first line is 50 characters or less. When a longer message is needed, you start a blank line and the emaining text should be wrapped at 72 characters.

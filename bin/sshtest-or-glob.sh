@@ -11,8 +11,9 @@
 
 set -euo pipefail
 
-exec > >(tee -a ~/.tmp/sshtest-or-glob.log)
+exec > >(tee -a ~/.tmp/log/sshtest-or-glob.log)
 exec 2>&1
+echo "$(date) $@"
 
 ARG1="$1"
 shift

@@ -6,7 +6,8 @@ older_than:1y
 older_than:1w
 newer_than:1d
 newer_than:1m
-
+before:2016/11/02
+after:2016/11/02
 
 IP adresses: Details at bottom of pages
 

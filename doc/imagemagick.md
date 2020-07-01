@@ -80,3 +80,5 @@ convert -density 300 -define pdf:fit-page=A4 FREE-Girl-On-Horse.jpg girl-on-hors
 i=~/global/apache-tomcat/webapps/ROOT/WEB-INF/www/fwdata/images//mbordertitle/w8h8_c8fbfef_bf8f9fb.png; test -f $i || { echo $i | sed -r -e 's/.*w8h8_c(.*)_b(.*).png/\1 \2/' | while read a b; do convert -size 8x8 gradient:"#${a}-#${b}" PNG8:"$i"; done; }
 
 convert -size 100x100 xc:white canvas.jpg # create dummy image of fxied resolution
+
+convert -flatten in.png out.png # convert transparent to white background (whatsapp)

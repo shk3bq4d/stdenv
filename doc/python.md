@@ -862,6 +862,7 @@ python -m json.tool [FILENAME] # pretty print
 # http://stackoverflow.com/questions/2878084/sort-a-list-of-dicts-by-dict-values
 import operator
 L.sort(key=operator.itemgetter('title','title_url','id'))
+L.sort(key=operator.attrgetter('title.subelement','title_url','id'))
 
 python -m unittest discover # recursively executes all test
 python -m unittest search   # run test of module search.py

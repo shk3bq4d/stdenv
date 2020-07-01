@@ -178,3 +178,5 @@ order by jour, ref
 2014.11.17 	 bip 	 2      	 6
 
 select * from fec_ limit 1;
+
+DROP TABLE [IF EXISTS] [schema_name.] table_name;
