@@ -234,11 +234,11 @@ bindcode  $mod+Shift+22 exec ~/bin/mri3_window_to_new_workspace.sh
 #bindsym  $mod+Control+l workspace next
 # code:43 => sym: 0x68, symbol:h
 # 2020.06.14 I'm adding focus "other direction" to keep focus on same part of the screen. But for reason I can't understand I am now inversing left.py with right.py
-#bindcode $mod+Control+44  exec mri3_move_container_left.py
-bindcode  $mod+Control+44  exec mri3_move_container_right.py; focus left
+bindcode $mod+Control+44  exec mri3_move_container_left.py
+#bindcode  $mod+Control+44  exec mri3_move_container_right.py; focus left
 # code:46 => sym: 0x6c, symbol:l
-#bindcode $mod+Control+33  exec mri3_move_container_right.py
-bindcode  $mod+Control+33  exec mri3_move_container_left.py; focus right
+bindcode $mod+Control+33  exec mri3_move_container_right.py
+#bindcode  $mod+Control+33  exec mri3_move_container_left.py; focus right
 
 # code:43 => sym: 0x68, symbol:h
 bindcode $mod+Shift+Control+44  exec mri3_move_workspace_left.py
