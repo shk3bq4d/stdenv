@@ -16,7 +16,11 @@ DIR=~/bin
 set -x
 if hash keepassxc &>/dev/null; then
     case $(hostname -f) in \
-    $WORK_PC1F)
+	apr16.ly.lan)
+		echo "FATAL: to be thought out how to do with team-A, team-B corona"
+		exit 1
+		;;
+    ${WORK_PC1F}-not-matching)
 		echo "FATAL: disabled during corona"
 		exit 1
 		;;
