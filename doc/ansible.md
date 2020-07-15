@@ -2610,3 +2610,6 @@ inventory_hostname_short The short version of inventory_hostname
 '/bip/hehe.txt' | basename | splitext | first --> 'hehe' # get filename without extension
 
 https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py # filter source code
+
+Force a task to run in check mode, even when the playbook is called without --check. This is called check_mode: yes.
+Force a task to run in normal mode and make changes to the system, even when the playbook is called with --check. This is called check_mode: no.

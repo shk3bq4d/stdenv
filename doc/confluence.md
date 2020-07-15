@@ -2408,3 +2408,7 @@ update cwd_user set lower_email_address = lower(email_address) where user_name l
 
 
 https://www.atlassian.com/trust/security/advisories
+https://hub.docker.com/r/atlassian/confluence-server
+https://confluence.atlassian.com/doc/confluence-release-notes-327.html
+7.4 is LTS (EOL Date: Apr 21, 2022)
+* end of life policy: https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
