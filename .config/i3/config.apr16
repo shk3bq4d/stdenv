@@ -18,8 +18,8 @@ workspace 10 output $or
 workspace 11 output $or
 workspace 12 output $or
 workspace 13 output $or
-exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
 '
+#exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
 #exec xrandr --output "$oc" --primary
 
 export STDHOME_TOGGLE='

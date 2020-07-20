@@ -67,8 +67,10 @@ fi
 
 case $(hostname -f) in \
 apr16*)
-    if [[ "$PWD" = */dcn/iaac/* ]]; then
-        export http_proxy=http://127.0.0.1:9843
+    if [[ "$PWD" = */dcn/iaac* ]]; then
+        #export http_proxy=http://127.0.0.1:9843
+        #export http_proxy=socks5://127.0.0.1:29844
+        export http_proxy=127.0.0.1:29843
         export https_proxy=$http_proxy
     fi
     ;;

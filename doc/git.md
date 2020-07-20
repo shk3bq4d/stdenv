@@ -458,7 +458,7 @@ git config --local user.email "jeff.malone.com"
 
 git checkout master && git reset --hard 24e4306 && git pull # repair ide-infra
 
-git config pull rebase true
+git config pull.rebase true
 
 if [ -z "$(git status --porcelain)" ]; # working directory clean                 https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
 if [ -n "$(git status --porcelain)" ]; # uncommitted change in current directory https://unix.stackexchange.com/questions/155046/determine-if-git-working-directory-is-clean-from-a-script
