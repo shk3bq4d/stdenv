@@ -103,3 +103,5 @@ from (
 ~* (Matches regular expression, case insensitive)
 !~ (Does not match regular expression, case sensitive)
 !~* (Does not match regular expression, case insensitive)
+
+docker exec -u 999 -it postgres psql -U bitbucket bitbucketdb

@@ -49,3 +49,9 @@ ssl_protocols SSLv2 SSLv3 TLSv1.1 TLSv1.2 TLSv1.3;
 
 /usr/sbin/nginx -v # version
 /sbin/nginx     -v # version
+
+
+     proxy_set_header  Host             oos.collab.local;
+     proxy_pass https://oos;
+     proxy_pass_request_headers on;
+     proxy_redirect https://oos.collab.local https://oos.io.burp.com;
