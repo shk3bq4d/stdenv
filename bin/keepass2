@@ -14,16 +14,16 @@ for wid in $wids; do
 done
 DIR=~/bin
 set -x
+echo "work pc is ${WORK_PC1F}"
 if hash keepassxc &>/dev/null; then
     case $(hostname -f) in \
 	apr16.ly.lan)
         export QT_SCALE_FACTOR=1.5
-		true
-		;;
-    ${WORK_PC1F}-not-matching)
-        export QT_SCALE_FACTOR=1.5
 		echo "FATAL: to be thought out how to do with team-A, team-B corona"
 		exit 1
+		;;
+	${WORK_PC1F})
+        export QT_SCALE_FACTOR=1.5
 		;;
     *)
         export QT_SCALE_FACTOR=2
