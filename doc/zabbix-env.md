@@ -319,3 +319,70 @@ https://www.zabbix.com/documentation/4.0/manual/config/items/item/custom_interva
 
 # opsgenie action
 /etc/opsgenie/zabbix2opsgenie -triggerName='{EVENT.NAME}' -triggerId='{TRIGGER.ID}' -triggerStatus='{TRIGGER.STATUS}' -triggerSeverity='{TRIGGER.SEVERITY}' -triggerDescription='{TRIGGER.DESCRIPTION}' -triggerUrl='{TRIGGER.URL}' -triggerValue='{TRIGGER.VALUE}' -triggerHostGroupName='{TRIGGER.HOSTGROUP.NAME}' -hostName='{HOST.NAME}' -ipAddress='{IPADDRESS}' -eventId='{EVENT.ID}' -date='{DATE}' -time='{TIME}' -itemKey='{ITEM.KEY}' -itemValue='{ITEM.VALUE}' -recoveryEventStatus='{EVENT.RECOVERY.STATUS}' -teams=sfitdn
+
+https://ma.ttias.be/finding-biggest-data-storage-consumers-zabbix/
+For the history_uint table (holds all integer values):
+```sql
+set sql_big_selects=1;
+SELECT COUNT(history.itemid), history.itemid, i.name, i.key_, h.host
+FROM history_uint AS history
+LEFT JOIN items AS i ON i.itemid = history.itemid
+LEFT JOIN hosts AS h ON i.hostid = h.hostid
+GROUP BY history.itemid
+ORDER BY COUNT(history.itemid) DESC
+LIMIT 100;
+```
+For the history table (holds all float & double values):
+
+```sql
+set sql_big_selects=1;
+SELECT COUNT(history.itemid), history.itemid, i.name, i.key_, h.host
+FROM history AS history
+LEFT JOIN items AS i ON i.itemid = history.itemid
+LEFT JOIN hosts AS h ON i.hostid = h.hostid
+GROUP BY history.itemid
+ORDER BY COUNT(history.itemid) DESC
+LIMIT 100;
+```
+
+For the history_text table (holds all text values):
+
+```sql
+set sql_big_selects=1;
+SELECT COUNT(history.itemid), history.itemid, i.name, i.key_, h.host
+FROM history_text AS history
+LEFT JOIN items AS i ON i.itemid = history.itemid
+LEFT JOIN hosts AS h ON i.hostid = h.hostid
+GROUP BY history.itemid
+ORDER BY COUNT(history.itemid) DESC
+LIMIT 100;
+
+-- https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html
+set sql_big_selects=1;
+select _count, _type, i.name, i.key_, h.host from (
+SELECT COUNT(1) as _count, 'uint'   as _type,  8 * count(1) as _sort, itemid FROM history_uint GROUP BY itemid UNION
+SELECT COUNT(1) as _count, 'double' as _type,  8 * count(1) as _sort, itemid FROM history      GROUP BY itemid UNION
+SELECT COUNT(1) as _count, 'text'   as _type, 48 * count(1) as _sort, itemid FROM history_text GROUP BY itemid
+) history
+LEFT JOIN items AS i ON i.itemid = history.itemid
+LEFT JOIN hosts AS h ON i.hostid = h.hostid
+ORDER BY _sort DESC
+LIMIT 100;
+```
+
+# SQL
+```sql
+select name from hstgrp limit 10; -- host groups hostgroups hostsgroups
+```
+
+# zabbix grafana plugin
+https://alexanderzobnin.github.io/grafana-zabbix/guides/templating/
+{*} returns list of all available Host Groups
+{*}{*} all hosts in Zabbix
+{Network}{*} returns all hosts in group Network
+{Linux servers}{*}{*} returns all applications from hosts in Linux servers group
+{Linux servers}{backend01}{CPU}{*} returns all items from backend01 belonging to CPU application.
+{host group}{host}{application}{item name}
+
+/^(?!.*network).*$/i # negate network hostgroup
+
