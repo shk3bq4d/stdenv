@@ -1,4 +1,3 @@
-hotspot: md7dbva5czpea
 https://www.dedoimedo.com/computers/linux-iphone-6s-ios-11.html
 sudo apt-get install ideviceinstaller python-imobiledevice libimobiledevice-utils libimobiledevice6 libplist3 python-plist ifuse usbmuxd
 idevicepair pair
