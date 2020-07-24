@@ -40,7 +40,7 @@ else
     NAME="$( echo -n $NAME | sed -r \
         -e 's/^#//' \
         -e 's/(^\s+|\s+$)//g' \
-        -e 's/^.*(https?:..)([^ ]+?).*$/\2/'
+        -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
         )"
 	if [[ "$NAME" = *:* ]]; then
 		PORT="$( echo -n "$PORT" | sed -r \

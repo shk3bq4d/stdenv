@@ -112,15 +112,20 @@
       pip:
         name:
         - ansible
+        - ansible[azure]
         - ansible-lint
         - docker
+        - kubernetes
         - bs4 # beautiful soup 4
+        - dnspython # for ansible dig lookup
         - fahrplan # cff sbb timetable
         - fontawesome # mri3server
         - i3ipc
         - jmespath # ansible json_query filter dependency
         - kubernetes-validate # ansible kubernetes
         - lxml
+        - msrest      # ansible azure DNS record
+        - msrestazure # ansible azure DNS record
         - openshift # ansible kubernetes
         - passlib # generate hashes
         - packaging # blobfuse role

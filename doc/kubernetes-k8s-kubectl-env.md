@@ -703,6 +703,7 @@ kgp -Al app=sfw-server          -o name # labels
 kgp -Al app=sfw-web-app         -o name # labels
 kgp -Al app=stp                 -o name # labels
 kgp -Al app=sf-kube-okta-assist -o name # labels
+kgp -Al app=nginx-ingress       -o name # labels
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo

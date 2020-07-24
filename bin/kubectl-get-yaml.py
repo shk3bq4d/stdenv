@@ -53,7 +53,7 @@ def walk(d):
     elif isinstance(d, dict):
         keys_to_delete = []
         for k,v in d.iteritems():
-            if k in ['status', 'resourceVersion', 'selfLink', 'uid', 'generation', 'creationTimestamp']:
+            if k in ['status', 'resourceVersion', 'selfLink', 'uid', 'generation', 'creationTimestamp', 'kubectl.kubernetes.io/last-applied-configuration']:
                 keys_to_delete.append(k)
                 continue
             walk(v)

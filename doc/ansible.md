@@ -2552,6 +2552,27 @@ setup gather_subset=all_ipv4_addresses
       {{ output }}
   with_items: "{{ myelem }}"
 
+fancy yaml construction
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    a:
+      - aa
+      - bb
+      - c
+  tasks:
+    - set_fact:
+        e: |
+          {% set hehe %}
+          {% for i in a %}
+          - youpi:  {{ i }}
+          {% endfor %}
+          {% endset %}
+          {{ hehe | from_yaml }}
+    - debug:
+        var: e
+
 
 - hosts: localhost
   connection: local
