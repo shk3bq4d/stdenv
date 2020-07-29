@@ -129,6 +129,7 @@
         - openshift # ansible kubernetes
         - passlib # generate hashes
         - packaging # blobfuse role
+        - pywinrm # ansible winrm
         - pyzmail36 # smtp
         - scapy
         - selenium

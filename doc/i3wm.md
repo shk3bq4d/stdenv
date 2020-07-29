@@ -1,7 +1,7 @@
 ~/git/github/shk3bq4d/i3-gaps-builder/
 https://github.com/Airblader/i3
 https://github.com/i3/i3
-https://github.com/i3/i3/blob/next/RELEASE-NOTES-4.18
+https://github.com/i3/i3/blob/next/RELEASE-NOTES-4.18.2
 
 # installation
 cd /tmp
