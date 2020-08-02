@@ -105,3 +105,8 @@ from (
 !~* (Does not match regular expression, case insensitive)
 
 docker exec -u 999 -it postgres psql -U bitbucket bitbucketdb
+
+
+```sql
+select to_timestamp(timestamp), type, affecteduser, case when type = 'file_changed' then subjectparams else file end as file from oc_activity where timestamp > 1596031681 and subject like '%_self' and type in ('file_changed', 'file_created', 'file_deleted') order by affecteduser, file, timestamp;
+```

@@ -1,5 +1,6 @@
 Align/               https://github.com/vim-scripts/Align.git
 AnsiEsc/             https://github.com/vim-scripts/AnsiEsc.vim.git
+ansible-vim/         https://github.com/pearofducks/ansible-vim
 bufexplorer/         https://github.com/jlanzarotta/bufexplorer.git
 colorschemes/        https://github.com/flazz/vim-colorschemes.git
 dockerfile/          https://github.com/ekalinin/Dockerfile.vim.git
