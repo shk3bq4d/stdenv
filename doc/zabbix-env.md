@@ -359,7 +359,9 @@ LIMIT 100;
 
 -- https://dev.mysql.com/doc/refman/8.0/en/storage-requirements.html
 set sql_big_selects=1;
-select _count, _type, i.name, i.key_, h.host from (
+select _count, _type, i.name, i.key_, h.host,
+concat('https://zabbix.group.local/items.php?form=update&hostid=', h.hostid, '&itemid=', i.itemid) as url
+from (
 SELECT COUNT(1) as _count, 'uint'   as _type,  8 * count(1) as _sort, itemid FROM history_uint GROUP BY itemid UNION
 SELECT COUNT(1) as _count, 'double' as _type,  8 * count(1) as _sort, itemid FROM history      GROUP BY itemid UNION
 SELECT COUNT(1) as _count, 'text'   as _type, 48 * count(1) as _sort, itemid FROM history_text GROUP BY itemid
@@ -367,7 +369,7 @@ SELECT COUNT(1) as _count, 'text'   as _type, 48 * count(1) as _sort, itemid FRO
 LEFT JOIN items AS i ON i.itemid = history.itemid
 LEFT JOIN hosts AS h ON i.hostid = h.hostid
 ORDER BY _sort DESC
-LIMIT 100;
+LIMIT 200;
 ```
 
 # SQL
