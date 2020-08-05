@@ -789,3 +789,5 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get
 kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
 
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
+
+kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job 

@@ -16,5 +16,7 @@ if [[ ! -t 0 || ! -t 1 ]]; then
     exit 1
 fi
 ARG="."
+n=1
+[[ $# -gt 0 ]] && [[ $1 =~ ^[0-9]+$ ]] && n=$1 && shift
 [[ $# -gt 0 ]] && ARG="$@"
-vim -R ~/.tmp/vim/output/$(ls -tr1 ~/.tmp/vim/output | grep -v vim-last-vimf6.sh | grep $ARG | tail -1)
+vim -R ~/.tmp/vim/output/$(ls -tr1 ~/.tmp/vim/output | grep -v vim-last-vimf6.sh | grep -E $ARG | tail -$n | head -n 1)

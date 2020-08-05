@@ -2634,3 +2634,8 @@ https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py
 
 Force a task to run in check mode, even when the playbook is called without --check. This is called check_mode: yes.
 Force a task to run in normal mode and make changes to the system, even when the playbook is called with --check. This is called check_mode: no.
+
+
+  connection: local
+  vars: # connection local
+    ansible_python_interpreter: "{{ ansible_playbook_python }}" # connection local
