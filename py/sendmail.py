@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 def logging_conf(
         level='INFO', # DEBUG
-        use='stdout' # "stdout syslog" "stdout syslog file"
+        use='stdout file' # "stdout syslog" "stdout syslog file"
         ):
     import logging.config
     script_directory, script_name = os.path.split(__file__)

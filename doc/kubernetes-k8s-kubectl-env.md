@@ -725,8 +725,9 @@ https://microk8s.io/ # minikube replacement native ubuntu (snap) installer
 * https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#podspec-v1-core
 * https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
 
-kubectl get events -n mynamespace get events -w
-kubectl get event --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
+kubectl get events --sort-by=.metadata.creationTimestamp -A
+kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace get events -w
+kubectl get event --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
 
 
 # jsonpath

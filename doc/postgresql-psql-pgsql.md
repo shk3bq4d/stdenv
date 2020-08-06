@@ -56,7 +56,16 @@ pg_dump    -U django -d myschema
 postgres postgres -f -
 
 psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups where group_id = 9;"
+
+docker exec -t postgres sh -c 'apt update && apt install -y vim'
 docker exec -it postgres pg_dumpall -U docvault | gzip -c > /data/pgdump-$(date +'%Y.%m.%d-%H.%M.%S')-all.dump.gz
+docker exec -u 999 -it postgres pg_dump -U confluence -d confluencedb 
+echo -e '$include /etc/inputrc\nset editing-mode vi\nset keymap vi-command' | docker exec -i postgres sh -c 'cat - >  /var/lib/postgresql/.inputrc'
+docker exec postgres cat /var/lib/postgresql/.psqlrc
+echo -e '\\set lid 294913\n\\set ad 2195457' | docker exec -i postgres sh -c 'cat - >> /var/lib/postgresql/.psqlrc'
+sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -" -e EDITOR=vim -u 999 -it postgres bash -itc "psql -U confluence confluencedb"
+sudo docker cp $RCD/.vimrc  postgres:/var/lib/postgresql/.vimrc
+truncate table auditrecord , audit_affected_object, audit_changed_value;
 
 
 # backups backup
@@ -109,4 +118,48 @@ docker exec -u 999 -it postgres psql -U bitbucket bitbucketdb
 
 ```sql
 select to_timestamp(timestamp), type, affecteduser, case when type = 'file_changed' then subjectparams else file end as file from oc_activity where timestamp > 1596031681 and subject like '%_self' and type in ('file_changed', 'file_created', 'file_deleted') order by affecteduser, file, timestamp;
+
+-- https://wiki.postgresql.org/wiki/Disk_Usage all tables disk usage
+WITH RECURSIVE pg_inherit(inhrelid, inhparent) AS
+    (select inhrelid, inhparent
+    FROM pg_inherits
+    UNION
+    SELECT child.inhrelid, parent.inhparent
+    FROM pg_inherit child, pg_inherits parent
+    WHERE child.inhparent = parent.inhrelid),
+pg_inherit_short AS (SELECT * FROM pg_inherit WHERE inhparent NOT IN (SELECT inhrelid FROM pg_inherit))
+SELECT table_schema
+    , TABLE_NAME
+    , row_estimate
+    , pg_size_pretty(total_bytes) AS total
+    , pg_size_pretty(index_bytes) AS INDEX
+    , pg_size_pretty(toast_bytes) AS toast
+    , pg_size_pretty(table_bytes) AS TABLE
+  FROM (
+    SELECT *, total_bytes-index_bytes-COALESCE(toast_bytes,0) AS table_bytes
+    FROM (
+         SELECT c.oid
+              , nspname AS table_schema
+              , relname AS TABLE_NAME
+              , SUM(c.reltuples) OVER (partition BY parent) AS row_estimate
+              , SUM(pg_total_relation_size(c.oid)) OVER (partition BY parent) AS total_bytes
+              , SUM(pg_indexes_size(c.oid)) OVER (partition BY parent) AS index_bytes
+              , SUM(pg_total_relation_size(reltoastrelid)) OVER (partition BY parent) AS toast_bytes
+              , parent
+          FROM (
+                SELECT pg_class.oid
+                    , reltuples
+                    , relname
+                    , relnamespace
+                    , pg_class.reltoastrelid
+                    , COALESCE(inhparent, pg_class.oid) parent
+                FROM pg_class
+                    LEFT JOIN pg_inherit_short ON inhrelid = oid
+                WHERE relkind IN ('r', 'p')
+             ) c
+             LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+  ) a
+  WHERE oid = parent
+) a
+ORDER BY total_bytes DESC;
 ```
