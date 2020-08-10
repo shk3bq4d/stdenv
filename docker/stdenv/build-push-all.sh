@@ -21,6 +21,10 @@ set -euo pipefail
 
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 
+
+mrecho() {
+	echo "$(date) $@"
+}
 #[[ -n ${VIMF6+1} ]] && echo running from vim-f6
 
 # exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
@@ -31,13 +35,18 @@ DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 #
 docker login
 for i in apt py stdenv; do
+	mrecho compiling $i
 	cd $DIR/$i
 	t=shk3bq4d/stdenv:$i
-	docker build -t $t .
-	docker push $t
-
+	docker build -t $t "$@" .
+	mrecho waiting on previous push
+	wait
+	mrecho waited
+	docker push $t &
 done
-
-echo EOF
+mrecho final waiting on previous push
+wait
+mrecho final waited
+mrecho EOF
 exit 0
 

@@ -1,0 +1,25 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+## vimf6_ansible_nolocalsudo: yes
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    user_plugin_directory: "{{ '~/.terraform.d/plugins' | expanduser }}"
+  tasks:
+    - name: Ensure user plugins directory exists
+      file:
+        path: "{{ user_plugin_directory }}"
+        state: directory
+
+    - name: Download and extract zip file
+      with_items:
+        - https://github.com/fourplusone/terraform-provider-jira/releases/download/v0.1.13/terraform-provider-jira_linux_amd64.zip
+      unarchive:
+        src: "{{ item }}"
+        dest: "{{ user_plugin_directory }}"
+        remote_src: yes
+
+

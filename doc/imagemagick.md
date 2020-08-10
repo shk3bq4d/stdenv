@@ -82,3 +82,7 @@ i=~/global/apache-tomcat/webapps/ROOT/WEB-INF/www/fwdata/images//mbordertitle/w8
 convert -size 100x100 xc:white canvas.jpg # create dummy image of fxied resolution
 
 convert -flatten in.png out.png # convert transparent to white background (whatsapp)
+
+
+convert +append img1.png img2.png img3.png out.png # horizontal concatenation
+convert -append img1.png img2.png img3.png out.png # vertical concatenation

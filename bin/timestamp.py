@@ -32,7 +32,7 @@ def logging_conf(
 def go(args):
     # https://docs.python.org/2/library/argparse.html
     parser = argparse.ArgumentParser(description="Try to human format a date")
-    parser.add_argument("ts", type=str, nargs='+', help="timestampe")
+    parser.add_argument("ts", type=str, nargs='*', help="timestampe", default=[dt.utcnow().strftime('%s')])
     script_directory, script_name = os.path.split(__file__)
     script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
     ar = parser.parse_args(args)

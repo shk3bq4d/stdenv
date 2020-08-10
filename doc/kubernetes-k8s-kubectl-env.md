@@ -725,8 +725,9 @@ https://microk8s.io/ # minikube replacement native ubuntu (snap) installer
 * https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#podspec-v1-core
 * https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
 
-kubectl get events -n mynamespace get events -w
-kubectl get event --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
+kubectl get events --sort-by=.metadata.creationTimestamp -A
+kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace get events -w
+kubectl get event --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
 
 
 # jsonpath
@@ -789,3 +790,5 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get
 kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
 
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
+
+kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job 

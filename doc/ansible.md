@@ -2636,3 +2636,8 @@ Force a task to run in check mode, even when the playbook is called without --ch
 Force a task to run in normal mode and make changes to the system, even when the playbook is called with --check. This is called check_mode: no.
   when: not ansible_check_mode
   ignore_errors: '{{ ansible_check_mode }}'
+
+
+  connection: local
+  vars: # connection local
+    ansible_python_interpreter: "{{ ansible_playbook_python }}" # connection local

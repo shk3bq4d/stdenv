@@ -4,6 +4,7 @@
 export VIMF6=1
 
 [[ -z "$1" ]] && echo "Inception A" && exit 1
+current_epoch=$(date +%s) # duration
 SCRIPT="$1"
 LOG="$2"
 #exec > >(tr -d '\r' | tee "$LOG")
@@ -13,7 +14,8 @@ SCRIPT_DIR=$(dirname "$SCRIPT")
 SCRIPT_NAME=$(basename "$SCRIPT")
 export PYTHONUNBUFFERED=hehe
 function myexit() {
-    echo "vimf6.sh by extension exit code is $1" # to review if we have case exit corde or real interpreter
+    duration=$(( $(date +%s) - $current_epoch ))
+    echo "vimf6.sh by extension exit code is $1, duration is ${duration}s" # to review if we have case exit corde or real interpreter
     exit $1
 }
 
@@ -205,12 +207,19 @@ case $SCRIPT in \
     # trying for ansible
     if grep -qE "^[- ] hosts:" $SCRIPT; then
         SCRIPT=$(realpath -e $SCRIPT)
+        FORCE_NO_SUDO=0
         cd $(dirname $SCRIPT)
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
-            ansible_args="--diff --check"
-            echo "Running ansible in check mode"
+            if [[ $PWD = */iaac* ]]; then
+                echo "Running ansible in default iaac mode"
+                FORCE_NO_SUDO=1
+                ansible_args="--diff --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod"
+            else
+                ansible_args="--diff --check"
+                echo "Running ansible in check mode"
+            fi
         fi
         while read key value; do
             #[[ "$key" == "ansible"* ]] && echo upper
@@ -225,7 +234,7 @@ case $SCRIPT in \
         #export ANSIBLE_STDOUT_CALLBACK=unixy
         #export ANSIBLE_STDOUT_CALLBACK=oneline
         # export ANSIBLE_DISPLAY_OK_HOSTS=no
-        if grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
+        if [[ $FORCE_NO_SUDO -eq 0 ]] && grep -wq become $SCRIPT && ! grep -w vimf6_ansible_nolocalsudo: $SCRIPT | head -n 1 | grep -wqiE '(yes|true|1)'; then
             sudo true
             set -x
             # the eval allows --start-at-task "multiple word" constructs
