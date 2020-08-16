@@ -104,7 +104,7 @@ re.I re.IGNORECASE
 re.L re.LOCALE
 re.M re.MULTILINE
 re.U re.UNICODE
-re.VERBOSE
+re.X re.VERBOSE
 re.search(r'\bis\b', your_string) # whole word words boundary boundaries
 https://docs.python.org/2/library/re.html
 (?iLmsux)
@@ -116,6 +116,14 @@ s: re.S (dot matches all),
 u: re.U (Unicode dependent),
 x: and re.X (verbose),
 for the entire regular expression. (The flags are described in Module Contents.) This is useful if you wish to include the flags as part of the regular expression, instead of passing a flag argument to the re.compile() function.
+
+pattern = r"""                                               # verbose multi line comments regexp, re.X re.VERBOSE
+	[a-z]    # letter                                        # verbose multi line comments regexp, re.X re.VERBOSE
+	[0-9]+   # digits                                        # verbose multi line comments regexp, re.X re.VERBOSE
+	"""                                                      # verbose multi line comments regexp, re.X re.VERBOSE
+pprint(re.search(pattern, '___a035535__-ueau', flags=re.X))  # verbose multi line comments regexp, re.X re.VERBOSE
+
+
 
 # format https://docs.python.org/3/library/string.html#formatspec
 # format str https://www.python.org/dev/peps/pep-3101/
