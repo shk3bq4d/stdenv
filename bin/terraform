@@ -46,7 +46,6 @@ terraform_version=0.12.26
 
 BIN="$HOME/bin/terraform-$terraform_version"
 
-
 if [[ ! -f $BIN ]]; then
     echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
@@ -75,6 +74,37 @@ apr16*)
     fi
     ;;
 esac
+
+ERED=$'\033[0;31m'    # red
+EBLUE=$'\033[0;34m'    # blue
+EOFF=$'\033[m'
+if [[ "$PWD" = */dcn/iaac* ]]; then
+    # if an executable file named terraform* exist in current directory
+    # verify that _MR_TF_DIR is set to the correct value which will guarantee
+    # that the current script caller is one of the terraform* script in CWD
+    PWD_TF_SCRIPTS="$(   find "$PWD" -maxdepth 1 -not -type d -name 'terraform*' -executable)"
+    NB_PWD_TF_SCRIPTS="$(find "$PWD" -maxdepth 1 -not -type d -name 'terraform*' -executable -printf '.' | wc -c)"
+    if [[ -n "$PWD_TF_SCRIPTS" ]]; then
+        if [[ "${_MR_TF_DIR:-}" != "$PWD" ]]; then
+            if [[ $NB_PWD_TF_SCRIPTS -eq 1 ]]; then
+                echo "${EBLUE}auto-executing $PWD_TF_SCRIPTS $@$EOFF"
+                exec "$PWD_TF_SCRIPTS" "$@"
+                exit $?
+            fi
+            >&2 echo "${ERED}FATAL ./terraform-{uat,prod}: NB scripts is $NB_PWD_TF_SCRIPTS, _MR_TF_DIR != PWD: ${_MR_TF_DIR:-} != ${PWD}$EOFF" && exit 1
+        fi
+    elif [[ ! -f "$PWD/start.sh" ]]; then
+        >&2 echo "${ERED}FATAL: not a file $PWD/start.sh$EOFF" && exit 1
+    else
+        if [[ "${_MR_TF_DIR:-}" != "$PWD" ]]; then
+            echo "${EBLUE}auto-sourcing ${PWD}start.sh$EOFF"
+            source start.sh
+        fi
+        if [[ "$_MR_TF_DIR" != "$PWD" ]]; then
+            >&2 echo "${ERED}FATAL start.sh: _MR_TF_DIR != PWD: $_MR_TF_DIR != ${PWD}$EOFF" && exit 1
+        fi
+    fi
+fi
 
 ~/bin/terraform-$terraform_version "$@"
 exit $?

@@ -196,3 +196,6 @@ xset r rate 250 60
 https://www.kaufmann.no/downloads/linux/ckbcomp.gz # scripts
 https://www.kaufmann.no/roland/dvorak/linux.html
 http://www.kaufmann.no/downloads/winnt/kbddvp-1_2_7-i386.exe
+
+loadkeys -d # restore keyboard to default
+loadkeys us-dvp
