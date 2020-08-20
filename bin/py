@@ -120,8 +120,7 @@ if __name__ == '__main__':
             go(sys.argv[1:])
         except BaseException as e:
             logging.exception('oups for %s', sys.argv)
-            #logging.error('oups for %s', sys.argv)
-            #raise type(e), type(e)(e), sys.exc_info()[2]
+            sys.exit(1)
 
 """.replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')).encode())
     os.chmod(fp, 0o0750)
