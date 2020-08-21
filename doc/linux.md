@@ -328,3 +328,5 @@ kazam # screen capture video -- record
 https://www.osetc.com/en/centos-7-rhel-7-how-to-change-the-system-keyboard-layout.html
 localectl list-keymaps | grep us
 localectl set-keyp ch-fr
+
+pulseaudio -k # restart pulse audio (will kill the service and system will restart it)
