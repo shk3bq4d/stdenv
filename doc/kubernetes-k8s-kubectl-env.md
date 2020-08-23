@@ -120,6 +120,7 @@ kubectl patch configmaps -n kube-system kube-dns --patch '{"data":{"upstreamName
 
 # use multiple kubeconfig files at the same time and view merged config
 KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --raw
+KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
 # Get the password for the e2e user
 kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}'
 kubectl config current-context              # Display the current-context
