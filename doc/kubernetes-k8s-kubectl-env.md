@@ -793,3 +793,5 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
 kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job 
+
+kubectl describe node # nice summary cpu memory requests

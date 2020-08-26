@@ -360,10 +360,10 @@ git checkout <SHA>^ -- <path-to-file> # "restore specific file as it was from hi
 
 
 # relative reference https://git-scm.com/book/en/v2/Git-Tools-Revision-Selectiohttps://git-scm.com/book/en/v2/Git-Tools-Revision-Selection
-git diff 'HEAD@{2.months.ago}'
-git show 'HEAD@{1.weeks.ago}':smart_class_variables_diffs_katello/identity/identity::users.json # cat
-master@{yesterday}
-HEAD@{5}
+git diff 'HEAD@{2.months.ago}' # date
+git show 'HEAD@{1.weeks.ago}':smart_class_variables_diffs_katello/identity/identity::users.json # cat date
+'master@{yesterday}' # date
+'HEAD@{5}'
 HEAD^
 HEAD^^^
 HEAD~3
@@ -605,3 +605,5 @@ git config oh-my-zsh.hide-status 1
 git rebase --rebase-merges
 
 commit messages first line is 50 characters or less. When a longer message is needed, you start a blank line and the emaining text should be wrapped at 72 characters.
+
+git config --global core.excludesfile ~/.gitignore_global
