@@ -1067,12 +1067,12 @@ sys.stderr.isatty()
 
 # read from prompt
 ```python
-from sys import version_info
-py3 = version_info[0] > 2 #creates boolean value for test that Python major version > 2
-if py3:
-  response = input("Prompt: Please enter your name: ")
-else:
-  response = raw_input("Prompt: Please enter your name: ")
+from sys import version_info # prompt
+py3 = version_info[0] > 2 #creates boolean value for test that Python major version > 2 prompt
+if py3: #prompt
+  response = input("Prompt: Please enter your name in python3: ")
+else: # prompt
+  response = raw_input("Prompt: Please enter your name in python2: ")
 ```
 
 # argparse
