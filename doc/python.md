@@ -882,7 +882,7 @@ python -m unittest search.SearchTestCase.test_google_g # run test of module sear
 
 x.update(y) # merges dict http://stackoverflow.com/questions/38987/how-to-merge-two-python-dictionaries-in-a-single-expression
 
-
+export PYTHONUNBUFFERED=1
 # unbuffered
 import os,sys
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)

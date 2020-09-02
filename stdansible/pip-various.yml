@@ -129,6 +129,7 @@
         - openshift # ansible kubernetes
         - passlib # generate hashes
         - packaging # blobfuse role
+        - pip
         - pywinrm # ansible winrm
         - pyzmail36 # smtp
         - scapy
@@ -146,6 +147,14 @@
         warn: no
       shell: >
         bash -c 'chown -R {{ mruser }}: ~{{ mruser }}/.local/{bin,lib/python*}'
+
+    - name: "Python3 az pip"
+      pip:
+        name:
+        - pip
+        state: latest
+        virtualenv: ~/.virtualenvs/az-cli
+        virtualenv_command: /usr/bin/python3.6 -m venv
 
     - name: "Python3 az"
       pip:

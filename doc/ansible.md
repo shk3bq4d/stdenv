@@ -2644,3 +2644,5 @@ Force a task to run in normal mode and make changes to the system, even when the
 
   pause: # prompt user
     prompt: prompt user. What would you like to do next ?
+
+    ansible-playbook --step # prompt after each task debug
