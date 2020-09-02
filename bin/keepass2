@@ -15,15 +15,28 @@ done
 DIR=~/bin
 set -x
 echo "work pc is ${WORK_PC1F}"
+CORONA_MASTER_PC=${WORK_PC1F}
+HOSTNAMEF=$(hostname -f)
 if hash keepassxc &>/dev/null; then
-    case $(hostname -f) in \
-	apr16.ly.lan)
+    case $HOSTNAMEF in \
+    apr16.ly.lan)
         export QT_SCALE_FACTOR=1.5
-		;;
-	${WORK_PC1F})
+        if $HOSTNAMEF == $CORONA_MASTER_PC; then
+            chmod 0600 ~/.keepass/mr.kdbx
+            ssh $WORK_PC1F chmod 0400 .keepass/mr.kdbx &
+        else
+            chmod 0400 ~/.keepass/mr.kdbx
+        fi
+        ;;
+    ${WORK_PC1F})
         export QT_SCALE_FACTOR=1.5
-		echo "FATAL: to be thought out how to do with team-A, team-B corona"; exit 1
-		;;
+        if $HOSTNAMEF == $CORONA_MASTER_PC; then
+            chmod 0600 ~/.keepass/mr.kdbx
+            ssh apr16.ly.lan chmod 0400 .keepass/mr.kdbx &
+        else
+            chmod 0400 ~/.keepass/mr.kdbx
+        fi
+        ;;
     *)
         export QT_SCALE_FACTOR=2
         export QT_SCALE_FACTOR=1
