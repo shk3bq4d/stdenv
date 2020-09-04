@@ -20,6 +20,11 @@ case $# in
 	exit $?
 	;;
 esac
+#vim -u NONE -d "$A" "$B"
+#export TERM=xterm
+#export TERM=rxvt-unicode-256color
+#export TERM=xterm-256color
+#export TERM=xterm
 vim -d "$A" "$B"
 
 	

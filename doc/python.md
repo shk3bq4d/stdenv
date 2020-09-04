@@ -882,7 +882,7 @@ python -m unittest search.SearchTestCase.test_google_g # run test of module sear
 
 x.update(y) # merges dict http://stackoverflow.com/questions/38987/how-to-merge-two-python-dictionaries-in-a-single-expression
 
-
+export PYTHONUNBUFFERED=1
 # unbuffered
 import os,sys
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
@@ -1067,12 +1067,12 @@ sys.stderr.isatty()
 
 # read from prompt
 ```python
-from sys import version_info
-py3 = version_info[0] > 2 #creates boolean value for test that Python major version > 2
-if py3:
-  response = input("Prompt: Please enter your name: ")
-else:
-  response = raw_input("Prompt: Please enter your name: ")
+from sys import version_info # prompt
+py3 = version_info[0] > 2 #creates boolean value for test that Python major version > 2 prompt
+if py3: #prompt
+  response = input("Prompt: Please enter your name in python3: ")
+else: # prompt
+  response = raw_input("Prompt: Please enter your name in python2: ")
 ```
 
 # argparse

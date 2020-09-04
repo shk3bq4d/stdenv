@@ -211,3 +211,12 @@ https://github.com/gekmihesg/ansible-openwrt
 https://docs.ansible.com/ansible/latest/modules/openwrt_init_module.html#openwrt-init-module
 https://docs.ansible.com/ansible/latest/modules/opkg_module.html#opkg-module
 https://www.digitec.ch/fr/s1/product/ubiquiti-edgerouter-x-routeurs-4678785?tagIds=7
+
+# edgerouter x
+https://ubnt.com/qsg/er-x # first start guide
+10.50.1.247
+mac: 74:83:c2:f9:12:91
+factory username+password: ubnt / ubnt
+https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka
+http://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-19.07.3-ramips-mt7621-ubnt-erx-sfp-initramfs-kernel.bin
+https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRouter-x/blob/master/openwrt-ramips-mt7621-ubnt-erx-initramfs-factory.tar

@@ -228,6 +228,7 @@ case $SCRIPT in \
             eval "export ANSIBLE_${key^^}=$value"
         done < <(head -n 50 $SCRIPT | sed -r -n -e 's/^.{,4}vimf6_ansible_env:\s*(.+)\s*[:=]\s*(.*?)/\1 \2/ p')
 
+        export PYTHONUNBUFFERED=1
         export ANSIBLE_STDOUT_CALLBACK=yaml
         #export ANSIBLE_STDOUT_CALLBACK=timer
         #export ANSIBLE_STDOUT_CALLBACK=dense
