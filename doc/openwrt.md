@@ -205,3 +205,12 @@ curl 'http://10.19.29.251/cgi-bin/luci/?status=1&_=0.8997745715767451' -H 'DNT: 
     ]
 }
 ```
+
+# edgerouter x
+https://ubnt.com/qsg/er-x # first start guide
+10.50.1.247
+mac: 74:83:c2:f9:12:91
+factory username+password: ubnt / ubnt
+https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka
+http://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-19.07.3-ramips-mt7621-ubnt-erx-sfp-initramfs-kernel.bin
+https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRouter-x/blob/master/openwrt-ramips-mt7621-ubnt-erx-initramfs-factory.tar
