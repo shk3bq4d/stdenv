@@ -116,6 +116,7 @@
         - ansible-lint
         - docker
         - kubernetes
+          #- pyapi-gitlab # ansible gitlab_project module
         - bs4 # beautiful soup 4
         - dnspython # for ansible dig lookup
         - fahrplan # cff sbb timetable

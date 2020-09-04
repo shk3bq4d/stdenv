@@ -205,3 +205,9 @@ curl 'http://10.19.29.251/cgi-bin/luci/?status=1&_=0.8997745715767451' -H 'DNT: 
     ]
 }
 ```
+
+https://openwrt.org/docs/guide-user/base-system/uci#:~:text=OpenWrt's%20central%20configuration%20is%20split,command%20line%20utility%20program%20uci%20.
+https://github.com/gekmihesg/ansible-openwrt
+https://docs.ansible.com/ansible/latest/modules/openwrt_init_module.html#openwrt-init-module
+https://docs.ansible.com/ansible/latest/modules/opkg_module.html#opkg-module
+https://www.digitec.ch/fr/s1/product/ubiquiti-edgerouter-x-routeurs-4678785?tagIds=7
