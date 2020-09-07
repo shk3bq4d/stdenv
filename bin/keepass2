@@ -16,14 +16,15 @@ DIR=~/bin
 set -x
 echo "work pc is ${WORK_PC1F}"
 CORONA_MASTER_PC=${WORK_PC1F}
+CORONA_MASTER_PC=apr16.ly.lan
 HOSTNAMEF=$(hostname -f)
 if hash keepassxc &>/dev/null; then
     case $HOSTNAMEF in \
     apr16.ly.lan)
         export QT_SCALE_FACTOR=1.5
-        if $HOSTNAMEF == $CORONA_MASTER_PC; then
+        if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
             chmod 0600 ~/.keepass/mr.kdbx
-            ssh $WORK_PC1F chmod 0400 .keepass/mr.kdbx &
+            ssh $WORK_PC1 chmod 0400 .keepass/mr.kdbx
         else
             chmod 0400 ~/.keepass/mr.kdbx
         fi
