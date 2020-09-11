@@ -607,3 +607,6 @@ git rebase --rebase-merges
 commit messages first line is 50 characters or less. When a longer message is needed, you start a blank line and the emaining text should be wrapped at 72 characters.
 
 git config --global core.excludesfile ~/.gitignore_global
+
+
+git push origin --delete refs/heads/branchname # delete branch with collision with tag name
