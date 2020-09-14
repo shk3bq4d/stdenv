@@ -134,6 +134,7 @@ sysctl -w net.ipv4.ip_forward=1
 cat  /proc/sys/net/ipv4/ip_forward
 # on client
 route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103 metric 99
+route add -net 192.168.0.0 netmask 255.255.255.0 metric 1 dev eno2
 
 # network config
 vi /etc/sysconfig/network-scripts/ifcfg-ens32 # centos or systemd https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-networkscripts-static-routes.html

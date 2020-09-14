@@ -220,3 +220,37 @@ factory username+password: ubnt / ubnt
 https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka
 http://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-19.07.3-ramips-mt7621-ubnt-erx-sfp-initramfs-kernel.bin
 https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRouter-x/blob/master/openwrt-ramips-mt7621-ubnt-erx-initramfs-factory.tar
+scp root@192.168.1.1:/etc/config/\* .
+
+# TL-WDR3600
+wdr3600password1.
+https://openwrt.org/toh/tp-link/tl-wdr3600
+**MR: the TFTP recovery from above linked worked**
+
+> ## TFTP auto recovery in revision 1.5
+> At least some revision 1.5 routers contains bootloader recovery TFTP client. To activate it press and hold WPS/Reset Button during powering on until WPS LED turns on. Connect computer to LAN1. Using TCPdump, you should see ARP requests from router having address 192.168.0.86 looking for address 192.168.0.66.
+> 
+> # tcpdump -ni eth0 arp
+> ARP, Request who-has 192.168.0.66 tell 192.168.0.86, length 46
+> Set up your computer to address 192.168.0.66, netmask /24 (255.255.255.0).
+> 
+> # ip addr add dev eth0 192.168.0.66/24
+> Using TCPdump, you should now see request for new firmware image:
+> 
+> # tcpdump -npi eth0 udp
+> IP 192.168.0.86.2195 > 192.168.0.66.69:  44 RRQ "wdr3600v1_tp_recovery.bin" octet timeout 5
+> Rename factory image to given name and put it into TFTP server root. → generic.flashing.tftp
+> 
+> ￼ In case you are flashing back original firmware, make sure original firmware image name does not contain word boot → back_to_stock_firmware.
+> 
+> # cp openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin wdr3600v1_tp_recovery.bin
+> # atftpd --no-fork --daemon .
+> After downloading, the flashing starts immediatelly. After cca. 1 minute, the router reboots automatically.
+
+**what I did was downloading the openwrt install file, rename it to wdr3600v1_tp_recovery.bin and start an atftpd daemon in a docker container with full net access and a volume with the file**
+```sh
+docker-ubuntu-18.04.sh --net=host -v $PWD:/workdir
+apt update && apt install atftpd
+cd /wordkir && atftpd --no-fork --daemon .
+```
+**a while later the device was answering to DHCP requests**
