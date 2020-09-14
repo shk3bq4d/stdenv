@@ -14,4 +14,4 @@ touch \$_Z_DATA
 export HISTFILE=/stdenv/root/.zsh_history-\$EUID
 " > /root/.$(hostname -f)_aliases
 
-/root/entrypoint.sh
+/root/entrypoint.sh "$@"
