@@ -31,7 +31,7 @@ if hash keepassxc &>/dev/null; then
         ;;
     ${WORK_PC1F})
         export QT_SCALE_FACTOR=1.5
-        if $HOSTNAMEF == $CORONA_MASTER_PC; then
+        if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
             chmod 0600 ~/.keepass/mr.kdbx
             ssh apr16.ly.lan chmod 0400 .keepass/mr.kdbx &
         else
