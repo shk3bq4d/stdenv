@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh expandtab :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 13 Jan 2020
+##
+
+set -euo pipefail
+
+vagrant_version=1.18.0
+vagrant_version=1.18.1
+vagrant_version=2.2.10
+#https://storage.googleapis.com/kubernetes-release/release/stable.txt
+
+BIN="$HOME/bin/vagrant-$vagrant_version"
+# https://kubernetes.io/docs/tasks/tools/install-vagrant/
+# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/vagrant
+# _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+
+if [[ ! -f $BIN ]]; then
+    if [[ ! -t 1 ]]; then
+        [[ $# -gt 1 ]] && [[ "$1" == "completion" ]] && exit 1
+        >&2 echo "FATAL: no tty and no such file $BIN when calling with $# args $@"
+        exit 1
+    fi
+    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    read _read
+    echo # read
+    case "${_read,,}" in \
+    y|Y|yes)
+        true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+    _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+
+    name=vagrant_${vagrant_version}_linux_amd64.zip
+    cd $_tempdir
+    curl -sLO "https://releases.hashicorp.com/vagrant/${vagrant_version}/$name"
+    unzip -o $name
+    find
+    mv -f vagrant $BIN
+    cleanup
+    chmod u+x $BIN
+fi
+
+~/bin/vagrant-$vagrant_version "$@"
+exit $?
