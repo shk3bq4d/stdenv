@@ -388,3 +388,5 @@ https://alexanderzobnin.github.io/grafana-zabbix/guides/templating/
 
 /^(?!.*network).*$/i # negate network hostgroup
 
+
+item units: unixtime (useful for unix timestamps vfs.file.time)
