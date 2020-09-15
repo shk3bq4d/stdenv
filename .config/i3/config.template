@@ -441,6 +441,7 @@ for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] floating disable
 for_window [class="Wfica"] fullscreen disable
 for_window [class="Wfica"] floating disable
 for_window [class="Wfica"]               move container to workspace $ws0
+for_window [title="Netflix - Google Chrome"] fullscreen enable
 for_window [title=".*ITTS.Desktop....*"] fullscreen disable
 for_window [title=".*ITTS.Desktop....*"] move container to workspace $ws0
 for_window [class="Wfica_ErrorOrInfo"] floating enable
