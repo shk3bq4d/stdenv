@@ -402,6 +402,7 @@ bindcode $mod+Shift+39  exec ~/bin/mri3_mod_shift_plus_o.sh # chromium chrome +o
 #for_window [class="Firefox"] border 1pixel
 #for_window [class="Eclipse"] border 1pixel
 #for_window [class="Eclipse"] floating enable
+for_window [class="Shutter"] floating enable
 #assign [class="tw-com-aten-ikvm-KVMMain" title="iKVM"] workspace $ws3
 #assign [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] workspace $ws3
 #for_window [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] floating enable
