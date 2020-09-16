@@ -25,7 +25,7 @@ may19*)
 esac
 case "$(hostname -f)" in \
 may19*)
-	~/bin/not_in_path/i3lock-pixelate.sh
+	~/bin/notinpath/i3lock-pixelate.sh
 	;;
 dec17*|may19*)
 	case "$(hostname -f)" in \

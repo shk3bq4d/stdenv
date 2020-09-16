@@ -62,6 +62,7 @@
           - whois
           # htop
           - htop
+          - scrot # command line screen capture utility used in i3lock-pixelate.sh
           - sshpass
           - nethogs
           - units
