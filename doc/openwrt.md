@@ -223,6 +223,8 @@ https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRoute
 scp root@192.168.1.1:/etc/config/\* .
 
 # TL-WDR3600
+ssh root@10.19.29.249
+cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 wdr3600password1.
 https://openwrt.org/toh/tp-link/tl-wdr3600
 **MR: the TFTP recovery from above linked worked**
