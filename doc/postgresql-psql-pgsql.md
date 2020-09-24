@@ -64,6 +64,7 @@ echo -e '$include /etc/inputrc\nset editing-mode vi\nset keymap vi-command' | do
 docker exec postgres cat /var/lib/postgresql/.psqlrc
 echo -e '\\set lid 294913\n\\set ad 2195457' | docker exec -i postgres sh -c 'cat - >> /var/lib/postgresql/.psqlrc'
 sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -" -e EDITOR=vim -u 999 -it postgres bash -itc "psql -U confluence confluencedb"
+sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -" -e EDITOR=vim -u 999 -it postgres bash -itc "psql -U jira jiradb"
 sudo docker cp $RCD/.vimrc  postgres:/var/lib/postgresql/.vimrc
 truncate table auditrecord , audit_affected_object, audit_changed_value;
 

@@ -923,6 +923,8 @@ with open('/tmp/_mr2.pickle', 'rb') as f:
 with open('/tmp/_mr2.pickle', 'wb') as f:
         pickle.dump(_cache, f)
 
+import json; json.load(reader) # parse json reader
+import json; json.loads(str) # parse json string
 import json; json.dumps(dict)
 import json; json.dumps(dict, indent=2) # pretty-print prettyprint
 
