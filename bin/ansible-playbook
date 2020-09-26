@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 26 Sep 2020
+##
+
+set -euo pipefail
+vaults_args=""
+if [[ -d secrets ]]; then
+    vaults_args="$(find secrets -maxdepth 1 -type f -name 'ansible-vault-*' |
+        sed -r -e 's,secrets/ansible-vault-(.*),--vault-id \1@\0,' |
+        tr '\n' ' '
+        )"
+fi
+DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+$DIR/../.local/bin/ansible-playbook $vaults_args "$@"
