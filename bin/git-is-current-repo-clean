@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -e
+git status --porcelain &>/dev/null || exit 1 # will exit with non-zero if not in a git repo
+! { git status --porcelain | grep -qE .; }
