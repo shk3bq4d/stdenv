@@ -26,3 +26,6 @@ jq '.bob = 3' bip.json
 msg: "{{ out.json['values'] | list | json_query('[*].{a:name,b:project.key}') | to_nice_yaml }}"
 
 kgcm -A -o json | jq -r '.items[] | select(.metadata.name=="server-mysql-password") | .data["MYSQL-PASSWORD"]'
+
+
+[.[] | select(test("\\."))] # filter array of string by a regular expression regex

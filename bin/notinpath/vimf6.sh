@@ -194,9 +194,13 @@ case $SCRIPT in \
             engine=dot
             ;;
     esac
-    svg=/tmp/${SCRIPT_NAME}.svg
+    svg=${SCRIPT_DIR}/${SCRIPT_NAME}.svg
+    png=${SCRIPT_DIR}/${SCRIPT_NAME}.png
+    jpg=${SCRIPT_DIR}/${SCRIPT_NAME}.jpg
     $engine -Tsvg -o$svg -v $SCRIPT
     nohup firefox $svg &>/dev/null &
+    nohup $engine -Tpng  -o$png -v $SCRIPT &>/dev/null &
+    nohup $engine -Tjpeg -o$jpg -v $SCRIPT &>/dev/null &
     exit 0
     ;;
 *svg)

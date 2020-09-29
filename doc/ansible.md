@@ -1203,14 +1203,15 @@ ansible localhost -m setup -a "gather_subset=oha"      | grep -E ""
 for i in min hardware network virtual oha all; do ansible localhost -m setup -a "gather_subset=$i" | sed -n -r -e "s/(ansible.*)/$i: \\1/"; done
 gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, apparmor, architecture, caps, chroot, cmdline, date_time, default_ipv4, default_ipv6, devices, distribution, distribution_major_version, distribution_release, distribution_version, dns, effective_group_ids, effective_user_id, env, facter, fibre_channel_wwn, fips, hardware, interfaces, is_chroot, iscsi, kernel, kernel_version, local, lsb, machine, machine_id, mounts, network, nvme, ohai, os_family, pkg_mgr, platform, processor, processor_cores, processor_count, python, python_version, real_user_id, selinux, service_mgr, ssh_host_key_dsa_public, ssh_host_key_ecdsa_public, ssh_host_key_ed25519_public, ssh_host_key_rsa_public, ssh_host_pub_keys, ssh_pub_keys, system, system_capabilities, system_capabilities_enforced, user, user_dir, user_gecos, user_gid, user_id, user_shell, user_uid, virtual, virtualization_role, virtualization_type
 
-ansible all -m yum -a "name=httpd state=present"
-ansible all -m apt -a "name=httpd state=present"
-ansible web -m service -a "name=httpd state=started"
-ansible web -m service -a "name=httpd state=restarted"
-ansible all -m file -a "path=/project/devops state=directory"
-ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"
-ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"
-ansible all -m user -a "name=ansible group=devops password=ansible123"
+ansible all -m yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ansible all -m apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ansible web -m service -a "name=httpd state=started"                        # oneliner one-liner adhoc ad-hoc
+ansible web -m service -a "name=httpd state=restarted"                        # oneliner one-liner adhoc ad-hoc
+ansible all -b -l '*.lan' -m service -a "name=rsyslog state=restarted"                        # oneliner one-liner adhoc ad-hoc
+ansible all -m file -a "path=/project/devops state=directory"                        # oneliner one-liner adhoc ad-hoc
+ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                        # oneliner one-liner adhoc ad-hoc
+ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"                        # oneliner one-liner adhoc ad-hoc
+ansible all -m user -a "name=ansible group=devops password=ansible123"                        # oneliner one-liner adhoc ad-hoc
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
 ansible web -m group -a "name=devops state=present"

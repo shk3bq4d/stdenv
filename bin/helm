@@ -30,6 +30,7 @@ set -euo pipefail
 helm_version=2.5.1
 helm_version=3.0.3
 helm_version=3.3.0
+helm_version=3.3.4
 
 BIN="$HOME/bin/helm-$helm_version"
 
