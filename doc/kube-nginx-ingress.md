@@ -13,3 +13,8 @@ keti -n $(kgp -Al app=nginx-ingress -o custom-columns=ns:.metadata.namespace,nam
 
 kgp -Al k8s-app=fluentd-logging # labels
 kgp -Al app=kured               # labels
+
+
+# tcp service
+https://medium.com/@ahmedwaleedmalik/exposing-tcp-and-udp-services-in-kubernetes-using-nginx-ingress-9b8fd639c576
+https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/
