@@ -3,5 +3,13 @@
 
 set -euo pipefail
 
+GREP_PATTERN="."
+
+[[ $# -gt 0 ]] && GREP_PATTERN="$@"
+
 sed -r -n \
-    -e 's/^ *resource +"([^"]+)" +"([^"]+)".*/-target \1.\2/ p' *.tf
+    -e 's/^ *resource +"([^"]+)" +"([^"]+)".*/-target \1.\2/ p' \
+    -e 's/^ *(module) +"([^"]+)".*/-target \1.\2/ p' \
+    *.tf \
+    | sort \
+    | grep -iE $GREP_PATTERN
