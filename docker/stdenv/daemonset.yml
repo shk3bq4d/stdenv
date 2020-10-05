@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stdenv
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    k8s-app: stdenv
+  name: stdenv
+  namespace: stdenv
+spec:
+  selector:
+    matchLabels:
+      name: stdenv
+  template:
+    metadata:
+      labels:
+        k8s-app: stdenv
+        name: stdenv
+    spec:
+      containers:
+        - env:
+            - name: MR_DAEMON_SET
+              value: stdenv
+          image: shk3bq4d/stdenv:stdenv
+          imagePullPolicy: Always
+          name: stdenv
+          resources:
+            limits:
+              cpu: "1"
+              memory: 800Mi
+            requests:
+              cpu: 50m
+              memory: 600Mi
+      restartPolicy: Always
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
