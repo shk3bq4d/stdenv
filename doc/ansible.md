@@ -2538,6 +2538,15 @@ setup gather_subset=all_ipv4_addresses
       {% endfor %}                                           # list comprehension
       {{ ip_list }}                                          # list comprehension
 
+
+      {% set __ = {} %}                                                                                  # dict comprehension
+      {% for key in sf_letsencrypt_zone_names %}                                                         # dict comprehension
+      {% set zone_name = key is string | ternary(key,                                 key['name']) %}    # dict comprehension
+      {% set rg        = key is string | ternary(sf_letsencrypt_zone_ressource_group, key['rg'])   %}    # dict comprehension
+      {% set _ = __.update({zone_name: rg}) %}                                                           # dict comprehension
+      {% endfor %}                                                                                       # dict comprehension
+      {{ __ }}                                                                                           # dict comprehension
+
 # double loop
 - debug:
     msg: "{{ item }}"

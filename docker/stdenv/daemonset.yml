@@ -9,6 +9,7 @@ kind: DaemonSet
 metadata:
   labels:
     k8s-app: stdenv
+    dummy: change me if you need to rollout
   name: stdenv
   namespace: stdenv
 spec:
@@ -35,6 +36,10 @@ spec:
             requests:
               cpu: 50m
               memory: 600Mi
+          command:
+          - tail
+          - -f
+          - /dev/null
       restartPolicy: Always
   updateStrategy:
     rollingUpdate:
