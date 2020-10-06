@@ -9,7 +9,7 @@ kind: DaemonSet
 metadata:
   labels:
     k8s-app: stdenv
-    dummy: change me if you need to rollout
+    dummy: change-me-if-you-need-to-rollout
   name: stdenv
   namespace: stdenv
 spec:
