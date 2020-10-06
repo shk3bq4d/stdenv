@@ -37,3 +37,6 @@ lvresize -l+512 -r /dev/vg_system/lv_opt
 lvresize --size +1G --resizefs /dev/VolGroup00/varlv
 lvresize --size +1G --resizefs /dev/vg_system/lv_var
 printf "fix\nfix\nquit\n" | parted ---pretend-input-tty /dev/sda print
+
+
+vgremove
