@@ -610,3 +610,6 @@ git config --global core.excludesfile ~/.gitignore_global
 
 
 git push origin --delete refs/heads/branchname # delete branch with collision with tag name
+
+GIT_WORK_TREE=~/git/blabla       # environment variable directory
+GIT_WORK_DIR=$GIT_WORK_TREE}.git # environment variable directory
