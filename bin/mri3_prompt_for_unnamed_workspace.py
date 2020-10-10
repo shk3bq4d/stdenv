@@ -124,7 +124,14 @@ def go2(args=[], only_for_unnamed=True):
     ws_number = words[0]
     logger.info('ws_number is {}'.format(ws_number))
 
-    proposalsH = {'comm':None,'whatsapp':None,'doc':None,'vpn':'~/bin/vpn-start.sh', 'bg':'~/bin/bg-start.sh', 'netflix': '~/bin/netflix-nf.sh'}
+    proposalsH = {
+        'comm':None,
+        'whatsapp':None,
+        'doc':None,
+        'vpn':None, #'~/bin/vpn-start.sh',
+        'bg':None, #'~/bin/bg-start.sh',
+        'netflix': '~/bin/netflix-nf.sh'
+        }
     # i3 isn't yet provided with those .bashrc env var
     if True or \
         os.environ.get('HOSTNAMEF', '') not in [os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC2F', ''), os.environ.get('WORK_PC3F', '')]:
