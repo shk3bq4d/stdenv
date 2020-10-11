@@ -67,6 +67,9 @@ contains(concat(' ',@class,' '),' {0} ')
 following-sibling::*[1]//*[@class='linesMLine']
 following-sibling::*[1]//*[@class='linesTeam']
 following-sibling::*[2 and .//*[text()='Draw']]//*[@class='linesMLine']
+//nd[@ref="203936110"]/following-sibling::nd[1]
+//nd[@ref="203936110"]/preceding-sibling::nd[1]
+//nd[@ref="203936110"]/following-sibling::nd[1]|//nd[@ref="203936110"]/preceding-sibling::nd[1]
 //h2[contains(@class, 'event-group-level1')]/ancestor::li[last()]//tr[contains(@class,'lightBlueCell')]
 .//*[@id='HomepageUpcomingContainer']//tbody/tr
 //*[@id='selected_submenu']//a
