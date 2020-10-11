@@ -1147,9 +1147,62 @@ class REST(enum.Enum):
 
 # typing
 https://python.readthedocs.io/en/stable/library/typing.html
+https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
 https://docs.python.org/3.6/library/typing.html
 ```sh
 pip install mypy
 mypy mycode.py
 ```
-from typing import NoReturn; def foo() -> NoReturn: # function does not terminate or alwasy throws an exception
+```python
+
+from typing import List, Set, Dict, Tuple, Optional
+
+from typing import NoReturn; def foo() -> NoReturn: # function does not terminate or alwasy throws an exception, typing
+def hehe(a: typing.Union[int, float]) -> None:
+def hehe(a: typing.List[int]) -> None:
+def foo() -> None: # typing void
+
+# https://stackoverflow.com/questions/43957034/specifying-a-type-to-be-a-list-of-numbers-ints-and-or-floats typing
+from typing import Union, Sequence # typing list
+Num = Union[int, float] # typing list int or float
+def quick_sort(arr: Sequence[Num]) -> Sequence[Num]: typing list
+def quick_sort(arr: Sequence[Num]) -> Sequence[Num]: typing list
+```
+
+## Built-in types
+```python
+from typing import List, Set, Dict, Tuple, Optional
+
+# For simple built-in types, just use the name of the type
+x: int = 1
+x: float = 1.0
+x: bool = True
+x: str = "test"
+x: bytes = b"test"
+
+# For collections, the name of the type is capitalized, and the
+# name of the type inside the collection is in brackets
+x: List[int] = [1]
+x: Set[int] = {6, 7}
+
+# Same as above, but with type comment syntax
+x = [1]  # type: List[int]
+
+# For mappings, we need the types of both keys and values
+x: Dict[str, float] = {'field': 2.0}
+
+# For tuples of fixed size, we specify the types of all the elements
+x: Tuple[int, str, float] = (3, "yes", 7.5)
+
+# For tuples of variable size, we use one type and ellipsis
+x: Tuple[int, ...] = (1, 2, 3)
+
+# Use Optional[] for values that could be None
+x: Optional[str] = some_function()
+# Mypy understands a value can't be None in an if-statement
+if x is not None:
+    print(x.upper())
+# If a value can never be None due to some invariants, use an assert
+assert x is not None
+print(x.upper())
+```

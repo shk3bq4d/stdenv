@@ -25,7 +25,11 @@ vimf6.sh)
     echo "Inception B"
     exit 0
     ;;
-*py)  mypy $SCRIPT; myexit $?;;
+*py)
+    export PYPTHONPATH=${PYPTHONPATH:-}:~/py
+    mypy $SCRIPT;
+    myexit $?
+    ;;
 esac
 echo "($(basename $0)): unimplemented case for script $SCRIPT"
 exit 1
