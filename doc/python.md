@@ -1145,4 +1145,11 @@ class REST(enum.Enum):
     delete = "delete" # enum
 
 
-
+# typing
+https://python.readthedocs.io/en/stable/library/typing.html
+https://docs.python.org/3.6/library/typing.html
+```sh
+pip install mypy
+mypy mycode.py
+```
+from typing import NoReturn; def foo() -> NoReturn: # function does not terminate or alwasy throws an exception
