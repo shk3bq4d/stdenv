@@ -11,6 +11,10 @@ wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP
 # writes and rotates 10 files of max 1Mb
 tcpdump -i ens160 -C 1 -W 10 -w /tmp/salut host 10.36.220.10 and dst port 443
 
+/usr/sbin/tcpdump -i any -s 0 -w /root/arp.cap arp
+rsync-remote-root.sh pi@pi-chambrecharlotte:/root/arp.cap ~/tmp
+wireshark ~/tmp/arp.cap &
+
 # rsyslog
 tcpdump -i eth0 -X dst port 514
 
@@ -124,3 +128,5 @@ This primitive allows you to filter on either Ethernet or IP broadcasts or multi
 
 <expr> relop <expr>
 This primitive allows you to create complex filter expressions that select bytes or ranges of bytes in packets. Please see the pcap-filter man page at http://www.tcpdump.org/manpages/pcap-filter.7.html for more details.
+
+

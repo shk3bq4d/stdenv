@@ -43,6 +43,7 @@ import re
 import unittest
 import argparse
 import logging
+from typing import Sequence, Union, Iterator, List, Tuple, no_type_check, Any, Optional
 
 from pprint import pprint, pformat
 
@@ -50,16 +51,16 @@ logger = logging.getLogger(__name__)
 
 class __NAME__(unittest.TestCase):
     #def __init__(self, methodName='runTest'): pass
-    def tearDown(self): pass
-    def setUp(self): pass
+    def tearDown(self) -> None: pass
+    def setUp(self) -> None: pass
 
     @classmethod
-    def setUpClass(cls): pass
+    def setUpClass(cls) -> None: pass
 
     @classmethod
-    def tearDownClass(cls): pass
+    def tearDownClass(cls) -> None: pass
 
-    def test_queue_summary_alter(self):
+    def test_queue_summary_alter(self) -> None:
         self.assertIn(   'a', 'abcde', msg='a is supposed to be in abcde')
         self.assertNotIn('z', 'abcde', msg='z is not supposed to be in abcde')
         self.assertNotEqual('expected', 'actual', msg='expected is first argument')
@@ -79,7 +80,7 @@ def logging_conf(
         level='INFO', # DEBUG
         use='stdout', # "stdout syslog" "stdout syslog file"
         filepath=None,
-        ):
+        ) -> None:
     import logging.config
     script_directory, script_name = os.path.split(__file__)
     # logging.getLogger('sh.command').setLevel(logging.WARN)
@@ -100,7 +101,7 @@ def logging_conf(
     try: logging.getLogger('sh.command').setLevel(logging.WARN)
     except: pass
 
-def go(args):
+def go(args) -> None:
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
