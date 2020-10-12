@@ -1161,6 +1161,10 @@ from typing import NoReturn; def foo() -> NoReturn: # function does not terminat
 def hehe(a: typing.Union[int, float]) -> None:
 def hehe(a: typing.List[int]) -> None:
 def foo() -> None: # typing void
+@typing.no_type_check
+def do_not_check_me_bro():
+
+	a = 7 # type: ignore         <-- ignore single line
 
 # https://stackoverflow.com/questions/43957034/specifying-a-type-to-be-a-list-of-numbers-ints-and-or-floats typing
 from typing import Union, Sequence # typing list
