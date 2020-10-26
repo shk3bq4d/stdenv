@@ -86,3 +86,7 @@ convert -flatten in.png out.png # convert transparent to white background (whats
 
 convert +append img1.png img2.png img3.png out.png # horizontal concatenation
 convert -append img1.png img2.png img3.png out.png # vertical concatenation
+
+
+https://github.com/Matthias-Wandel/jhead
+jhead -ft * # set file system last modification time to value set in exif data

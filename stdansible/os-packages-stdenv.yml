@@ -25,6 +25,7 @@
           - inkscape
           - gpick
           - jq
+          - jhead # https://github.com/Matthias-Wandel/jhead jpeg exif writer
           - ack-grep
           - keepassxc
           - i3lock
