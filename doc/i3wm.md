@@ -63,3 +63,7 @@ vi -R $(ls -1t /run/user/$EUID/i3/errorlog.2489 | head -n1 )
 https://www.reddit.com/r/i3wm/comments/edd5fx/fullscreen_mode_in_i3_automatically_set_firefox/
 https://www.reddit.com/r/i3wm/comments/e9pgou/no_more_full_screen_video_panes_in_chromefirefox/
 https://github.com/i3/i3/issues/2107
+
+i3 move workspace to output DP-2   # apr16 bottom below
+i3 move workspace to output HDMI-2 # apr16 top above
+i3 rename workspace to '"0   $   "' # apr16 citrix workspace to correct screen

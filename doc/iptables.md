@@ -41,3 +41,26 @@ do
     done
   done
 done
+
+
+iptables -A INPUT -p tcp -m tcp --dport 10050 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 10514 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 12201 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 27017 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 5044 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 9000 -j ACCEPT
+
+# pause graylog processing
+iptables -I INPUT 1 -p tcp -m multiport --dports 5044,10514,12201 -j DROP
+iptables -I INPUT 1 -p tcp -m tcp --dport 5044,10514,12201 -j DROP # gelf
+iptables -I INPUT 1 -p tcp -m tcp --dport 12201 -j DROP # gelf
+iptables -I INPUT 1 -p tcp -m tcp --dport 5044  -j DROP # filebeat
+iptables -I INPUT 1 -p tcp -m tcp --dport 10514 -j DROP # tcp syslog
+iptables -D INPUT 1
+iptables -D INPUT   -p tcp -m multiport --dports 5044,10514,12201 -j DROP
+iptables -D INPUT   -p tcp -m tcp --dport 12201 -j DROP
+iptables -D INPUT   -p tcp -m tcp --dport 5044  -j DROP
+iptables -D INPUT   -p tcp -m tcp --dport 10514  -j DROP
