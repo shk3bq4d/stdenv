@@ -530,6 +530,12 @@ def current_output_workspaces():
 
 def renumber_workspaces():
     all_workspaces = copy.copy(get_root().workspaces())
+
+    # exclude citrix apr16 desktop
+    for k, w in enumerate(copy.copy(all_workspaces)):
+        if w.name == '0   $   ':
+            all_workspaces.pop(k)
+
     used_numbers = []
     spaces = 3 * ' '
     i3 = i3ipc.Connection()
@@ -540,7 +546,7 @@ def renumber_workspaces():
             logger.info("Not renaming %s (noop)", new_name)
             continue
         command = 'rename workspace "{}" to "{}"'.format(w.name, new_name)
-        logger.info('executing %s as old name was %s', command, w.name)
+        logger.info('executing %s as old name was _%s_', command, w.name)
         result = i3.command(command)
         logger.info(result)
 
@@ -548,9 +554,9 @@ if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
     if 'VIMRUNTIME' in os.environ:
-        unittest.main()
-        #logging_conf()
-        #renumber_workspaces()
+        #unittest.main()
+        logging_conf()
+        renumber_workspaces()
     else:
         logging_conf()
         try:

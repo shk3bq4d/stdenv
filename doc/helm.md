@@ -8,7 +8,10 @@ helm repo list
 helm repo update
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm inspect
-helm ls
+helm ls -A
+helm history  -n sfw-production sfw-web-app
+helm history  -n sfw-production sfw-server
+helm rollback -n sfw-production sfw-server 39
 helm package MYPACKAGE # creates the .tgz as well as copy the .tgz to ~/.heml/repository/local/
 helm upgrade --set replicaCount=2 ....
 helm upgrade -f bip.yaml releasename packagename
