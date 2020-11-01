@@ -2657,4 +2657,8 @@ Force a task to run in normal mode and make changes to the system, even when the
 
     ansible-playbook --step # prompt after each task debug
 
-https://github.com/ansible-collections/community.general
+* https://github.com/ansible-collections/community.general
+* https://github.com/ansible-collections/kubernetes.core      # future
+* https://github.com/ansible-collections/community.kubernetes # legacy
+https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/
+https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/helm_module.html
