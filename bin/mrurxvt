@@ -230,6 +230,7 @@ fi
 ;;
 esac
 set +e
+TSSH="$(mri3_focused_window_ssh_target.py)"
 TCD="$(mri3_focused_window_cwd.py)"
 CD=""
 set -e
@@ -285,6 +286,8 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
 
     #MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
     MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
+elif [[ $# -eq 0 ]] && [[ -n "$TSSH" ]]; then
+    MR_TERM=urxvt MR_URXVT_CMD="ssh $TSSH" urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
 else
     MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
 fi

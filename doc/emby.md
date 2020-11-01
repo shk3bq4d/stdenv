@@ -1,3 +1,12 @@
+# top url
+http://jemby.ly.lan:8096/web/index.html
+
+# API
+## python modules
+* https://github.com/yonderbread/python-emby     clearly not ready, started in october 2020
+* https://github.com/mezz64/pyEmby               28 commits,  4 contributors, 10 tags, started in 2016, 2 releases in 2018, zero in 2019, one in 2020
+* https://github.com/andy29485/embypy            160 commits, 2 contributors, 3 tags. I think it's python 3.3 only...
+
 ~/bin/refresh-emby-lib.sh
 @begin=sh@
 curl -vX POST -H "Content-Length: 0" -H 'x-emby-authorization: MediaBrowser Client="Emby Mobile", Device="Chrome", DeviceId="e92ff4f01cc5a1b8399980ba46348a03b256ce93", Version="3.2.20.0", Token="0f933879758443ee9bb38d9767ff02a3"' http://jemby.ly.lan:8096/emby/ScheduledTasks/Running/6330ee8fb4a957f33981f89aa78b030f
