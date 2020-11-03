@@ -2658,3 +2658,8 @@ Force a task to run in normal mode and make changes to the system, even when the
     ansible-playbook --step # prompt after each task debug
 
 https://github.com/ansible-collections/community.general
+https://github.com/ansible-collections/kubernetes.core
+https://github.com/ansible-collections/community.kubernetes/
+
+linux:!corp
+linux:&corp

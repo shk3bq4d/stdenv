@@ -29,3 +29,6 @@ kgcm -A -o json | jq -r '.items[] | select(.metadata.name=="server-mysql-passwor
 
 
 [.[] | select(test("\\."))] # filter array of string by a regular expression regex
+
+cat uat.json| jq '[.resources[]| select(.type == "random_id") ] | length' # count
+terraform state pull | jq '.resources[]| select(.type == "azurerm_virtual_machine") | .instances[].attributes.name'

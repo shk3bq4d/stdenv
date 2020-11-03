@@ -1103,3 +1103,5 @@ for var in "$@"; do
 done
 myfunc "${ARRAY[@]}"
 ```
+
+A=$(</tmp/myfile) # built-in builtin read file into variable
