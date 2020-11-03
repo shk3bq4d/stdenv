@@ -6,6 +6,7 @@ curl -s https://raw.githubusercontent.com/helm/charts/master/stable/nginx-ingres
 helm search repo -l nginx-ingress
 
 https://github.com/kubernetes/ingress-nginx
+https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
 https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#enable-cors
 
 keti -n ingress-nginx nginx-ingress-controller-7fb5cfd89-hvqkm 

@@ -31,11 +31,16 @@ helm_version=2.5.1
 helm_version=3.0.3
 helm_version=3.3.0
 helm_version=3.3.4
+helm_version=3.4.0
 
 BIN="$HOME/bin/helm-$helm_version"
 
 
 if [[ ! -f $BIN ]]; then
+    if [[ ! -t 0 ]]; then
+        echo "FATAL: $BIN doesn't exist and stdin is not a TTY"
+        exit 1
+    fi
     echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
     echo # read

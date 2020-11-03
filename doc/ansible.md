@@ -2640,7 +2640,7 @@ inventory_hostname_short The short version of inventory_hostname
 
 '/bip/hehe.txt' | basename | splitext | first --> 'hehe' # get filename without extension
 
-https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py # filter source code
+* https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py # filter source code
 
 Force a task to run in check mode, even when the playbook is called without --check. This is called check_mode: yes.
 Force a task to run in normal mode and make changes to the system, even when the playbook is called with --check. This is called check_mode: no.
@@ -2657,9 +2657,11 @@ Force a task to run in normal mode and make changes to the system, even when the
 
     ansible-playbook --step # prompt after each task debug
 
-https://github.com/ansible-collections/community.general
-https://github.com/ansible-collections/kubernetes.core
-https://github.com/ansible-collections/community.kubernetes/
-
 linux:!corp
 linux:&corp
+
+* https://github.com/ansible-collections/community.general
+* https://github.com/ansible-collections/kubernetes.core      # future
+* https://github.com/ansible-collections/community.kubernetes # legacy
+https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/
+https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/helm_module.html
