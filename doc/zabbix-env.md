@@ -390,3 +390,11 @@ https://alexanderzobnin.github.io/grafana-zabbix/guides/templating/
 
 
 item units: unixtime (useful for unix timestamps vfs.file.time)
+item units: B (byte), Bps (bytes per second)
+item units: uptime
+
+
+last()   is the N   value and same as last(#1)
+last(#1) is the N   value and same as last()
+last(#2) is the N-1 value
+last(#3) is the N-2 value
