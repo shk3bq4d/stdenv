@@ -33,6 +33,9 @@ Thanks very much for your submission to Ansible. It sincerely means a lot to us 
 
 Thank you once again for this and your interest in Ansible!
 
+## polite no refuse call
+Before we hop on a call, could you please send me the error message and tell what exactly you are trying to do? I'll have a look at it and get back to you.
+
 
 ## email consultant français
 Bonjour,
