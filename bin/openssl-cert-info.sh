@@ -25,9 +25,9 @@ _tempfile=$_tempdir/a
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 
 if [[ $# -gt 1 ]] && [[ -f "$@" ]]; then
-	F="$@"
-	$0 "$F"
-	exit $?
+    F="$@"
+    $0 "$F"
+    exit $?
 fi
 [[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
 if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
@@ -42,14 +42,14 @@ else
         -e 's/(^\s+|\s+$)//g' \
         -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
         )"
-	if [[ "$NAME" = *:* ]]; then
-		PORT="$( echo -n "$PORT" | sed -r \
-			-e 's/.*://' \
-			)"
-		NAME="$( echo -n "$NAME" | sed -r \
-			-e 's/:.*//' \
-			)"
-	fi
+    if [[ "$NAME" = *:* ]]; then
+        PORT="$( echo -n "$PORT" | sed -r \
+            -e 's/.*://' \
+            )"
+        NAME="$( echo -n "$NAME" | sed -r \
+            -e 's/:.*//' \
+            )"
+    fi
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
@@ -80,9 +80,12 @@ fi
     grep -EA1 '^[^ ]|Subject Alternative Name' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
     sed -r \
         -e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
-        -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/"
+        -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/" \
+        -e "/certificate has expired/s/(.*)/${RED}\\0${OFF}/"
 
-    grep -i verify $_tempfile || true
+    { grep -i verify $_tempfile || true; } | \
+    sed -r \
+        -e "/certificate has expired/s/(.*)/${RED}\\0${OFF}/"
 
 cleanup
 exit 0

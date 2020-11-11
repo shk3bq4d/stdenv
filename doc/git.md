@@ -613,3 +613,6 @@ git push origin --delete refs/heads/branchname # delete branch with collision wi
 
 GIT_WORK_TREE=~/git/blabla       # environment variable directory
 GIT_WORK_DIR=$GIT_WORK_TREE}.git # environment variable directory
+
+
+git rebase; git merge --no-ff # "semi-linear merge" is the way we work
