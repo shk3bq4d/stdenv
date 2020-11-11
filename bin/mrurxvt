@@ -230,7 +230,10 @@ fi
 ;;
 esac
 set +e
-TSSH="$(mri3_focused_window_ssh_target.py)"
+TSSH=""
+if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then
+	TSSH="$(mri3_focused_window_ssh_target.py)"
+fi
 TCD="$(mri3_focused_window_cwd.py)"
 CD=""
 set -e
