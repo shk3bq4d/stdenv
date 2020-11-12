@@ -1212,6 +1212,7 @@ ansible all -m file -a "path=/project/devops state=directory"                   
 ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                        # oneliner one-liner adhoc ad-hoc
 ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"                        # oneliner one-liner adhoc ad-hoc
 ansible all -bm user -a "name=ansible group=devops password=ansible123"                        # oneliner one-liner adhoc ad-hoc
+ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
 ansible web -m group -a "name=devops state=present"
