@@ -1,0 +1,996 @@
+# ex: set filetype=sh expandtab ts=4 sw=4: #
+
+[ ${sudomr_hooks+x} ] && sudomr_hooks=()
+function sudomr() {
+    local f user commands mrhome NEWRCD
+    mrhome=$HOME
+    NEWRCD=$RCD
+    if [[ $# -gt 0 ]]; then
+        user="-u $1"
+        if [[ -n $SSHHOME ]]; then
+            NEWRCD=$(mktemp -d)/.sshrc.d
+            sudo cp -R $RCD $NEWRCD
+            f=$NEWRCD/../.sshrc
+            sudo cp $SSHHOME/.sshrc $f
+            sudo chown -R "$1" $NEWRCD/..
+        fi
+    fi
+
+    for hook in ${sudomr_hooks}; do
+        $hook
+    done
+
+    commands="
+export RCD=$NEWRCD
+source $NEWRCD/.bashrc
+export VIMINIT='so $NEWRCD/.vimrc'
+#export VIMRUNTIME=$NEWRCD/.vim
+export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
+"
+    if [[ -z $SSHHOME ]]; then
+        f=$(mktemp -d)/sudomr.bashrc
+        chmod a+rx $(dirname $f)
+        [[ -f $f ]] && rm -f $f
+        touch $f
+        chmod a+r $f
+    else
+        [[ -z $f ]] && f=$SSHHOME/.sshrc
+    fi
+    echo "$commands" | sudo tee -a $f >/dev/null
+    unalias . 2>/dev/null
+    is_zsh \
+    && sudo ${=user} bash --rcfile $f \
+    || sudo ${user}  bash --rcfile $f
+    if [[ -z $SSHHOME ]]; then
+        rm -f $f
+    else
+        if [[ "$RCD" != "$NEWRCD" ]]; then
+            echo rm -rf $NEWRCD
+        fi
+    fi
+}
+
+function abspath() {
+    cd "$(mrdirname "$1")"
+    echo -n "$PWD/$(mrbasename "$1")"
+}
+
+function mrargs() {
+    # does support spaces but not new lines when using following contruct
+    # mrargs * | while read i; do ls -l "$i"; sleep 2; done
+    if [[ -f "$@" || -d "$@" ]]; then
+        echo "$@"
+        return
+    fi
+    for v in "$@"; do
+        if [[ ! -f "$v" && ! -d "$v" ]]; then
+            >&2 echo "Does not exit $v"
+        fi
+    done
+    for v in "$@"; do
+        if [[ ! -f "$v" && ! -d "$v" ]]; then
+            return
+        fi
+    done
+    for v in "$@"; do
+        echo "$v"
+    done
+}
+
+function cpmr() {
+    local v $target
+    ts="$(date +'%Y.%m.%d-%H.%M')"
+    mrargs "$@" | while read v; do
+        [[ "${v}" == *".mrbkp20"* ]] && continue
+        target="${v}.mrbkp$ts"
+        cp -Rp "$v" "$target"
+    done
+}
+
+function pathprepend() {
+    [ ! -d "$1" ] && return 1
+    PATH="$1:$( \
+        echo $PATH | \
+            tr : '\n' | \
+            grep -vx "$1" | \
+            tr '\n' : | \
+            sed -r -e 's/:$//'
+            )"
+    #!echo $PATH2
+    export PATH
+}
+
+function pathappend() {
+    [ ! -d "$1" ] && return 1
+    PATH="$( \
+        echo $PATH | \
+            tr : '\n' | \
+            grep -vx "$1" | \
+            tr '\n' : | \
+            sed -r -e 's/:$//'
+            ):$1"
+    export PATH
+}
+
+function mrbasename() {
+    local a
+    a="$1"
+    while [[ "$a" == */ ]]; do
+        a="${a:0:${#a}-1}"
+    done
+    a="${a##*/}"
+    [[ $# -gt 1 ]] && a="${a%$2}"
+    echo "$a"
+}
+
+function mrdirname() {
+    local a
+    a="$1"
+    if [[ "$a" != */* ]]; then
+        echo .
+        return
+    fi
+    while [[ "$a" == */ ]]; do
+        a="${a:0:${#a}-1}"
+    done
+    a="${a%/*}"
+    if [[ -z "$a" ]]; then
+        echo "/"
+    else
+        echo "$a"
+    fi
+}
+
+function py()         { RET="$(~/bin/py "$@")";         rehash; [[ $? -eq 0 && -f "$RET" ]] && $EDITOR "$RET"; }
+function newsh()      { RET="$(~/bin/newsh "$@")";      rehash; [[ $? -eq 0 && -f "$RET" ]] && $EDITOR "$RET"; }
+function newansible() { RET="$(~/bin/newansible "$@")";         [[ $? -eq 0 && -f "$RET" ]] && $EDITOR "$RET"; }
+function newjava()    { RET="$(~/bin/newjava    "$@")";         [[ $? -eq 0 && -f "$RET" ]] && $EDITOR "$RET"; }
+
+function cdf() {
+    local c
+    if [[ $# -eq 0 ]]; then
+        echo "FATAL: no args specified"
+        return 1
+    fi
+    test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
+    for arg in "$@"; do
+        c="$(find . -mindepth 2 -ipath '*'"$arg"'*' -print -quit)"
+        test -z "$c" && continue
+        echo "${RED}$c${NONE}"
+        cd  "$(dirname "$c")"
+        return 0
+    done
+    echo "FATAL: not found $@"
+    return 1
+}
+
+function cdd() {
+    local DIR
+    local idx
+    #set -x
+    idx=2
+    is_zsh && idx=1
+    if [[ $# -eq 0 ]]; then
+        #DIR=$(history | tail -2 | head -n 1 | sed -r -e 's/\s+$//' -e 's/(.* )//g')
+        DIR=$(history | tail -${idx} | head -n 1 | awk-print-last.sh)
+        eval DIR=$DIR # http://stackoverflow.com/questions/3963716/how-to-manually-expand-a-special-variable-ex-tilde-in-bash
+    else
+        DIR="$@"
+    fi
+    while [[ -n "$DIR" ]] && [[ "$DIR" != "/" ]]; do
+        if [[ -d "$DIR" ]]; then
+            cd "$DIR"
+            #set +x
+            return 0
+        fi
+        DIR="$(dirname "$DIR")"
+    done
+    #set +x
+    return 1
+}
+
+function ssh() {
+    local BIN OPTS f p
+    p="$PATH"
+    test $UNAME = freebsd && test -f /usr/local/bin/ssh && p="/usr/local/bin:$PATH"
+    BIN=ssh
+    OPTS="-t"
+
+    if [[ $# -eq 1 ]] && [[ -f $HOME/.sshrc ]]; then
+        case "$1" in \
+        galaxy*|xoom|s3mini|motog|huawei19)
+            if hash sshpass 2>/dev/null; then
+                f=$HOME/.words/$1
+                if [[ -f $f ]]; then
+                    BIN=sshpass
+                    OPTS="$OPTS -f$f ssh"
+                else
+                    echo "you may set your password in $f"
+                fi
+            else
+                echo "~/bin/dot.bashfunctions install sshpass"
+            fi
+            ;;
+        minikube|charlotte|$WORK_PC1|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.25*|10.19.29.60|piproj)
+            ;;
+        *)
+            hash sshrc 2>/dev/null && BIN=sshrc
+            ;;
+        esac
+    fi
+    case "$1" in \
+        minikube)
+            TERM=xterm
+            ;;
+    esac
+    case TERM in
+        rxvt-unicode-256color)
+            TERM=xterm-256color
+            ;;
+        *)
+            ;;
+    esac
+    PATH="$p" TERM=$TERM command $BIN $(echo $OPTS) "$@"
+}
+
+tomr () {
+    dir=~/mnt/h/bob/uploads
+    if [[ -z "$1" ]]; then
+        cd $dir
+    else
+        cp $* $dir
+    fi
+}
+
+mrfind () {
+    local out
+    local k
+    local s
+    local sep
+    sep=$'\n'
+    out=
+    k=0
+    s=0
+    for arg in "$@"
+    do
+        # separate arguments with NULL character
+        if [[ k -ne 0 ]]; then out="${out}${sep}"; fi
+        k=1
+
+        # as soon as argument's not a FILE/DIR
+        if [[ s -eq 0 ]] && [[ ! -a "${arg}" ]]; then
+            s=1
+            out="${out}-xdev${sep}"
+        fi
+        out="${out}${arg}"
+    done
+    if [[ -z "${out}" ]]; then
+        out="-xdev"
+    fi
+    out="${out}${sep}-nowarn${sep}-regextype${sep}posix-extended"
+
+    echo "${out}" | xargs -d "${sep}" --verbose /usr/bin/find 2>&1| grep -v "Permission denied"
+}
+
+if [[ ${UNAME:-} = freebsd ]]; then
+    function cdl () {
+        local param
+        local extra
+        if [[ $# -gt 0 ]]; then
+               param="*"$1"*"
+            extra=
+        else
+            param="*"
+            extra="-and -not -name .git"
+        fi
+        # find -name "*" finds hidden file
+        DIR="$(find . -mindepth 1 -maxdepth 1 -type d -name "$param" $(echo $extra) -print0 | xargs -0 ls -1td | head -n 1)"
+        if [[ -n "$DIR" ]]; then
+            cd "$DIR"
+        else
+            return 1
+        fi
+    }
+    function last () {
+        NEWEST="$(find . -mindepth 1 -maxdepth 1 -name "*${*}*" -type f -print0 | xargs -0 ls -1td | head -n 1)"
+        mrbasename "$NEWEST"
+    }
+else
+    function cdl () {
+        local param
+        local extra
+        if [[ $# -gt 0 ]]; then
+               param="*"$1"*"
+            extra=
+        else
+            param="*"
+            extra="-and -not -name .git"
+        fi
+        # find -name "*" finds hidden file
+        DIR="$(find . -mindepth 1 -maxdepth 1 -type d -name "$param" $(echo $extra) -printf '%T@ %p\n' | sort -k 1nr | head -1 | sed 's/^[^ ]* //')"
+        if [[ -n "$DIR" ]]; then
+            cd "$DIR"
+        else
+            return 1
+        fi
+    }
+    function last () {
+        local n NEWEST DIR
+        n=1
+        if [[ $# -gt 0 ]] && [[ "$1" =~ "^[0-9]+" ]]; then
+            n=$(( 1 + $1 ))
+            shift
+        fi
+        DIR=.
+        if [[ $# -gt 0 ]] && [[ -d "$@" ]]; then
+            DIR="$@"
+        fi
+        if [[ $# -gt 0 ]] && [[ "$1" == *"/"* ]]; then
+            DIR="$(dirname "$1")"
+        fi
+        NEWEST=$(find $DIR -maxdepth 1 -ipath "*${@}*" -type f -printf '%T@ %p\0' | \
+            sort -rnz | xargs -0rn1 2>/dev/null | tail -n +$n | head -n1 | cut -d' ' -f2-)
+        if [[ $DIR == . ]]; then
+            mrbasename "$NEWEST"
+        else
+            echo "$NEWEST"
+        fi
+    }
+fi
+function cdl_old () {
+    # doesn't work on zsh and poorly on freebsd
+    local param
+    param=*/
+    [[ -n "$1" ]] && param=*${*}*/
+    case $UNAME in \
+    freebsd)
+        cd "$(ls -dt -1                           ${param} | head -1 2>/dev/null)"
+        ;;
+    *)
+        cd "$(ls -dt -1 --group-directories-first ${param} | head -1 2>/dev/null)"
+        ;;
+    esac
+}
+
+function viw () {
+    local f
+    f=$(command which $1)
+    if [[ -f $f ]]; then
+        $EDITOR $(command which $1)
+    else
+        echo "FATAL: not a file: $1"
+        return 1
+    fi
+}
+
+function catw () {
+    cat $(command which $1)
+}
+
+function vif ()
+{    file=$(find . -type f | egrep -v '\.swp$' | egrep -i $* | head -n 1)
+    if [[ -z $file ]]; then
+        echo "couldn't find anyfile"
+        return 1
+    fi
+
+    $EDITOR $file
+}
+
+function cdw () {
+    cd $(dirname $(command which $1))
+}
+
+function vil () {
+    #params=$*
+    local file
+    file="$(last $@)"
+    [[ -z "$file" ]]   && echo "ERROR -z $file" && return 1
+    [[ ! -f "$file" ]] && echo "ERROR ! -f $file. Likely the filename has space and my awk is buggy" && return 1
+    [[ ! -r "$file" ]] && echo "ERROR ! -r $file" && return 1
+    if [[ -z "$file" ]] || [[ ! -f "$file" ]] || [[ ! -r "$file" ]]; then
+        echo "ERROR file is $file"
+        return 1
+    fi
+    $EDITOR "$file"
+}
+
+function vi_last_grep() {
+    local DIR
+    HISTTIMEFORMAT=""
+    if [[ $# -eq 0 ]]; then
+        CMD=$(history | cut -c 8- | grep -E '^(sed|ack|./grepjs.sh)( |$)' | tail -1 )
+        #eval DIR=$DIR # http://stackoverflow.com/questions/3963716/how-to-manually-expand-a-special-variable-ex-tilde-in-bash
+    else
+        CMD="$@"
+    fi
+    echo "last cmd was $CMD"
+    case "$CMD" in \
+    grep*|./grepjs.sh*)
+        command -v vim &>/dev/null && vi_args=vim || vi_args=vi
+        output=$(eval $CMD | head -n 1)
+        echo "output is $output"
+        file=${output/:*/}
+        vi_args="$vi_args $file"
+        leftover=${output:${#file}+1}
+        linenumber=${leftover/:*/}
+        echo "file is $file"
+        echo "linenumber is _${linenumber}_"
+        [[ $linenumber =~ ^[0-9]+$ ]] && echo "number" || echo "NOT A NUMBER"
+        [[ $linenumber =~ ^[0-9]+$ ]] && vi_args="$vi_args +$linenumber"
+        echo $vi_args
+        eval $vi_args
+        ;;
+    ack*)
+        echo "unimplemented for ack $CMD"
+        return 1
+        ;;
+    *)
+        echo "unimplemented for * $CMD"
+        return 1
+        ;;
+    esac
+}
+
+function clip () {
+    xclip -i -selection clipboard $*
+    xclip -o -selection clipboard | head -n 10
+}
+
+function p2f () {
+    local f ext
+    f=$(mktemp -p ~/tmp/ p2f.XXXXX)
+    rm -f $f # freaking noclobber
+    xclip -o -selection clipboard > $f
+    ext=
+    case $(file -ib $f) in \
+        application/xml*) ext=xml;;
+        text/html*) ext=html;;
+        text/plain*)
+            if cat $f | prettify-json &>/dev/null; then
+                ext=json
+            else
+                ext=txt
+            fi
+            ;;
+    esac
+    if [[ -n $ext ]]; then
+        if mv $f $f.$ext; then
+            f=$f.$ext
+        fi
+    fi
+
+    ls -la $f
+    echo -n $f | xclip -i -selection clipboard
+    echo "Filepath has been copied to clipboard"
+}
+
+function p2v () {
+    local vi
+    local file
+    vi=$EDITOR
+    [[ ! -t 1 ]] && vi=gvim
+
+
+    file=$(mktemp -t "p2v.alias.XXXXXXXXXXX")
+    set +o noclobber
+    xclip -o -selection clipboard >$file
+    set -o noclobber
+    $vi -- $file
+}
+
+function cwd_gitted() {
+    local a
+    if [[ -n ${GIT_DIR:+1} ]]; then
+        [[ -f ${GIT_DIR}/index  ]] && return 0
+    fi
+    a="$PWD"
+    while [[ "$a" != "/" ]] && [[ "$a" != "." ]]; do
+        [[ -d "$a/.git" ]] && return 0
+        a="$(mrdirname "$a")"
+    done
+    return 1
+}
+
+function git_root_dir() {
+    local a
+    if [[ -n ${GIT_DIR:+1} ]]; then
+        [[ -f ${GIT_DIR}/index  ]] && echo "${GIT_DIR}" && return 0
+    fi
+    a="$PWD"
+    while [[ "$a" != "/" ]] && [[ "$a" != "." ]]; do
+        [[ -d "$a/.git" ]] && echo "$a" && return 0
+        a="$(mrdirname "$a")"
+    done
+    return 1
+}
+
+function locate() {
+    local args gargs
+
+    if [[ -t 1 ]]; then
+        gargs=--color=always
+    else
+        gargs=
+    fi
+    args="$@"
+    case $UNAME in \
+    freebsd)
+        command locate -i         "$@"  | grep -Ei $gargs "$@" | mrless
+        ;;
+    *)
+        command locate -i --regex "$@" | grep -Ei $gargs "^|$@" | mrless
+        ;;
+    esac
+}
+
+function http_proxy_dockerhost3142() { http_proxy "172.17.0.1:3142";}
+function http_proxy_none() { http_proxy "";}
+function http_proxy() {
+    local a
+    a="$@"
+    [[ -n "${a}" && ! "${a}" =~ .*://* ]] && a="http://${a}"
+    set -x
+    export http_proxy="${a}"
+    export https_proxy="${a}"
+    set +x
+}
+
+function git_reset_dir_work_tree() {
+    unset GIT_DIR
+    unset GIT_WORK_TREE
+}
+
+function ps_parent() {
+    local PID
+    [[ $# -eq 0 ]] && PID="$1" || PID="$$"
+    [[ -z "$PID" ]] && PID="$BASHPID"
+    [[ -z "$PID" ]] && PID=$(bash -c 'cut -d " " -f 4 /proc/$PPID/stat')
+    [[ -z "$PID" ]] && echo "Fatal couldnt get PID" && return 1
+    while [[ $PID -ne 0 ]]; do
+        printf "%-7s" "$PID"
+        cat /proc/$PID/cmdline | xargs -0 echo
+        PID=$(cut -d ' ' -f 4 /proc/$PID/stat)
+    done
+}
+
+function ks_k8s() {
+    case $HOSTNAMEF in \
+    *-k8s-master*) true ;;
+    *) return ;;
+    esac
+    [[ $EUID -eq 0 ]] \
+    && alias kubectl="     kubectl --kubeconfig=/root/admin.conf" \
+    || alias kubectl="sudo kubectl --kubeconfig=/root/admin.conf"
+    eval $(kubectl completion bash)
+    alias kaf='kubectl apply -f'
+    alias kb='kubectl --context=bravo.clusters.greypay.net'
+    alias kc='kubectl --context=charlie.clusters.greypay.net'
+    alias kccc='kubectl config current-context'
+    alias kcdc='kubectl config delete-context'
+    alias kcp='kubectl cp'
+    alias kcsc='kubectl config set-context'
+    alias kcuc='kubectl config use-context'
+    alias kdcm='kubectl describe configmap'
+    alias kdd='kubectl describe deployment'
+    alias kdel='kubectl delete'
+    alias kdelcm='kubectl delete configmap'
+    alias kdeld='kubectl delete deployment'
+    alias kdelf='kubectl delete -f'
+    alias kdeli='kubectl delete ingress'
+    alias kdelno='kubectl delete node'
+    alias kdelns='kubectl delete namespace'
+    alias kdelp='kubectl delete pods'
+    alias kdels='kubectl delete svc'
+    alias kdelsec='kubectl delete secret'
+    alias kdi='kubectl describe ingress'
+    alias kdno='kubectl describe node'
+    alias kdns='kubectl describe namespace'
+    alias kdp='kubectl describe pods'
+    alias kds='kubectl describe svc'
+    alias kdsec='kubectl describe secret'
+    alias kecm='kubectl edit configmap'
+    alias ked='kubectl edit deployment'
+    alias kei='kubectl edit ingress'
+    alias keno='kubectl edit node'
+    alias kens='kubectl edit namespace'
+    alias kep='kubectl edit pods'
+    alias kes='kubectl edit svc'
+    alias keti='kubectl exec -ti'
+    alias kga='kubectl get all'
+    alias kgaa='kubectl get all --all-namespaces'
+    alias kgcm='kubectl get configmaps'
+    alias kgd='kubectl get deployment'
+    alias kgdw='kgd --watch'
+    alias kgdwide='kgd -o wide'
+    alias kgi='kubectl get ingress'
+    alias kgno='kubectl get nodes'
+    alias kgns='kubectl get namespaces'
+    alias kgp='kubectl get pods'
+    alias kgpl='kgp -l'
+    alias kgpw='kgp --watch'
+    alias kgpwide='kgp -o wide'
+    alias kgrs='kubectl get rs'
+    alias kgs='kubectl get svc'
+    alias kgsec='kubectl get secret'
+    alias kgsw='kgs --watch'
+    alias kgswide='kgs -o wide'
+    alias kl='kubectl logs'
+    alias klf='kubectl logs -f'
+    alias kp='kubectl --context=prod.clusters.greypay.net'
+    alias kpf='kubectl port-forward'
+    alias krh='kubectl rollout history'
+    alias krsd='kubectl rollout status deployment'
+    alias kru='kubectl rollout undo'
+    alias ks='kubectl --context=staging.clusters.greypay.net'
+    alias ksd='kubectl scale deployment'
+}
+
+function kafka_mr() {
+    export KAFKA_JMX_OPTS=" "
+    KAFKA_BIN_DIR="$(dirname $({ command locate -e kafka-console-consumer.sh | grep -E 'bin.kafka-console-consumer.sh$'; echo /opt/kafka/bin/mrdefault; } | head -n 1))"
+    export PATH="$KAFKA_BIN_DIR:$PATH"
+    ZK=" --zookeeper $({ command locate -e kafka | grep -E config/server.properties$;  echo /opt/kafka/config/server.properties; } | head -n 1 | xargs grep -Po '(?<=^zookeeper.connect=).*') "
+    BL2=" --broker-list localhost:9092 "
+    BL3=" $(netstat -n | sed -n -r -e '/9092/s/^.+\s(\S+:9092)\s.*/\1/ p' | sort -u | xargs echo | tr ' ' , )"
+    BL=" --broker-list $BL3"
+    BSS=" --new-consumer --bootstrap-server $BL3"
+    echo "
+PATH:           $PATH
+KAFKA_BIN_DIR:  $KAFKA_BIN_DIR
+KAFKA_JMX_OPTS: $KAFKA_JMX_OPTS
+ZK:             $ZK
+BL2:            $BL2
+BL:             $BL
+BSS:            $BSS
+         " | grep -iE --color=always '^|kafka'
+}
+
+function stdworkon() {
+    if [[ $# -ne 1 ]]; then
+        echo "FATAL: nb args not equal to 1. Ex: stdworkon private"
+        return 1
+    fi
+    local d="$STDHOME_DIRNAME/../std$1/.git"
+    if [[ ! -d "$d" ]]; then
+        echo "FATAL: not a dir $d"
+        return 1
+    fi
+    d="$(readlink -f "$d")"
+    echo "export GIT_DIR=\"$d\""
+    export GIT_DIR="$d"
+}
+
+function .() {
+    if [[ $# -eq 0 ]]; then
+        cd ..
+    else
+        source "$@"
+    fi
+}
+
+SSH_ENV=$HOME/.ssh/environment
+
+function mr_ssh_add {
+    return
+    local f
+    local t
+    for f in \
+        $HOME/.ssh/id_rsa \
+        $HOME/.ssh/jexternalssh \
+        ; do
+        test -f $f || continue
+         /usr/bin/ssh-add -l | grep -w $f &>/dev/null && continue
+         t="-t 43200"
+         case $f in \
+             *jexternalssh) t="";;
+         esac
+         echo -n "ssh-add dot.bashfunctions $HOSTNAMEF $t: "
+         echo
+         is_zsh \
+         && /usr/bin/ssh-add ${=t} $f \
+         || /usr/bin/ssh-add ${t}  $f
+     done
+}
+
+function start_agent {
+    if [[ -d $(dirname $SSH_ENV) && ! -f /.dockerenv ]]; then
+        echo "Initialising new SSH agent..."
+        [[ -f ${SSH_ENV} ]] && rm -f ${SSH_ENV}
+        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > ${SSH_ENV}
+        echo succeeded
+        chmod 600 ${SSH_ENV}
+        source ${SSH_ENV} > /dev/null
+    fi
+}
+
+function start_agent_if_not_started {
+    if [ -f "${SSH_ENV}" ]; then
+        source ${SSH_ENV} > /dev/null
+        #ps ${SSH_AGENT_PID} doesn't work under cywgin
+        case $UNAME in \
+        cygwin*)
+            ps -p ${SSH_AGENT_PID} -s       | grep -qx ssh-agent || {
+                 start_agent;
+            }
+            ;;
+        freebsd*)
+            ps -p ${SSH_AGENT_PID} -o comm= | grep -qx ssh-agent || {
+                 start_agent;
+            }
+            ;;
+        *)
+            ps -q ${SSH_AGENT_PID} -o comm= | grep -qx ssh-agent || {
+                 start_agent;
+            }
+            ;;
+        esac
+    else
+         start_agent;
+    fi
+}
+
+function mrless() {
+    less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init "$@"
+}
+
+function aliashelp() {
+    # hardcoded for zsh
+    arg1=$1
+    empty=""
+    [[ $# -le 1 ]] && p2=. || p2=""
+    shift
+
+    { alias;
+      alias -g;
+    } | grep -iE "^\\S*$arg1" | grep "${p2}$@" | mrless
+    return
+    [[ $# -eq 0 ]] && { alias -g; alias; } && return
+    [[ $# -ge 2 ]] && g=$2 || g=.
+    case $1 in \
+    g*)
+        alias | grep git | grep -i $g | mrless
+        ;;
+    r*|z*)
+        alias -g | grep -Ei $g | mrless
+        ;;
+    esac
+}
+
+function pwdc() {
+    local mr
+    if [[ -a "$1" ]]; then
+        mr="$(readlink -f "$1")"
+    elif [[ "$1" == "/"* ]]; then
+        mr="$1"
+    else
+        mr="$(pwd)/$1"
+    fi
+    if [[ -n "$SSH_CLIENT" ]]; then
+        echo "$(hostname -f):$mr"
+    elif hash -v xclip &>/dev/null; then
+        echo -n "$mr" | xclip -i -selection "clipboard"
+    else
+        echo "$mr"
+    fi
+}
+
+dehumanise() {
+    # https://stackoverflow.com/questions/26621647/convert-human-readable-to-bytes-in-bash
+  #for v in "${@:-$(</dev/stdin)}"
+  #do
+    #echo $v | awk \
+  cat "$@" | awk \
+      'BEGIN{IGNORECASE = 1}
+       function printpower(n,b,p) {printf "%u\n", n*b^p; next}
+       /[0-9]$/{print $1;next};
+       /K(iB)?$/{printpower($1,  2, 10)};
+       /M(iB)?$/{printpower($1,  2, 20)};
+       /G(iB)?$/{printpower($1,  2, 30)};
+       /T(iB)?$/{printpower($1,  2, 40)};
+       /KB$/{    printpower($1, 10,  3)};
+       /MB$/{    printpower($1, 10,  6)};
+       /GB$/{    printpower($1, 10,  9)};
+       /TB$/{    printpower($1, 10, 12)}'
+  #done
+}
+
+if hash less &>/dev/null; then
+    export MANPAGER="less -sR"
+    function less() {
+        #alias less='less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init'
+        if [[ $# -eq 1  && -f "$1" ]] && \
+            command find "$1" -type f -and -size -2M 2>/dev/null | command grep -qE .;
+        then
+            for i in \
+                /usr/share/source-highlight/src-hilite-lesspipe.sh \
+                /usr/bin/src-hilite-lesspipe.sh \
+                ;
+            do
+                if [[ -f $i ]]; then
+                    LESSOPEN="| $i %s" less -M --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init "$@"
+                    return
+                fi
+            done
+        fi
+        command less -M --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init "$@"
+    }
+fi
+function systemd_mr_unitfiles() {
+
+    [[ $# -eq 0 ]] && G=. || G="$1"
+    find \
+        /usr/lib/systemd/system/ \
+        /etc/systemd/system/ \
+        -type f -name '*.service' \
+        2>/dev/null |
+        grep -E "$G"
+}
+
+function bc() {
+    #[[ -t 0 ]] && echo tty || echo NOTTY
+    #[[ $# -eq 0 ]] && echo noarg || echo ARGS
+    #[[ "$@" =~ ^[0-9].* ]] && echo digit || echo NODIGIT
+    if [[ ! -t 0 ]]; then
+        # echo 5+5 | bc
+        command bc -ql | sed -r -e '/\./s/0+$//'
+    elif [[ $# -eq 0 ]]; then
+        # bc
+        command bc -ql
+    else
+        # bc 5+5
+        command bc -ql <<< "$@" | sed -r -e '/\./s/0+$//'
+    fi
+}
+
+lowercase(){
+    echo "$1" | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/"
+}
+
+os_detection() {
+    OS=$(lowercase $(uname))
+    KERNEL=$(uname -r)
+    MACH=$(uname -m)
+    if [[ "{$OS}" == "windowsnt" ]]; then
+        OS=windows
+    elif [[ "{$OS}" == "darwin" ]]; then
+        OS=mac
+    else
+        OS=$(uname)
+        if [[ "${OS}" = "SunOS" ]] ; then
+            OS=Solaris
+            ARCH=$(uname -p)
+            OSSTR="${OS} ${REV}(${ARCH} $(uname -v))"
+        elif [[ "${OS}" = "AIX" ]] ; then
+            OSSTR="${OS} $(oslevel) ($(oslevel -r))"
+        elif [[ "${OS}" = "Linux" ]] ; then
+            if [[ -f /etc/redhat-release ]] ; then
+                DistroBasedOn='RedHat'
+                DIST=$(cat /etc/redhat-release |sed s/\ release.*//)
+                PSEUDONAME=$(cat /etc/redhat-release | sed s/.*\(// | sed s/\)//)
+                REV=$(cat /etc/redhat-release | sed s/.*release\ // | sed s/\ .*//)
+            elif [[ -f /etc/SuSE-release ]] ; then
+                DistroBasedOn='SuSe'
+                PSEUDONAME=$(cat /etc/SuSE-release | tr "\n" ' '| sed s/VERSION.*//)
+                REV=$(cat /etc/SuSE-release | tr "\n" ' ' | sed s/.*=\ //)
+            elif [[ -f /etc/mandrake-release ]] ; then
+                DistroBasedOn='Mandrake'
+                PSEUDONAME=$(cat /etc/mandrake-release | sed s/.*\(// | sed s/\)//)
+                REV=$(cat /etc/mandrake-release | sed s/.*release\ // | sed s/\ .*//)
+            elif [[ -f /etc/debian_version ]] ; then
+                DistroBasedOn='Debian'
+                if [[ -f /etc/lsb-release ]]; then
+                    DIST=$(cat /etc/lsb-release | grep '^DISTRIB_ID' | awk -F=  '{ print $2 }')
+                    PSEUDONAME=$(cat /etc/lsb-release | grep '^DISTRIB_CODENAME' | awk -F=  '{ print $2 }')
+                    REV=$(cat /etc/lsb-release | grep '^DISTRIB_RELEASE' | awk -F=  '{ print $2 }')
+                else
+                    DIST=$(grep -Po '(?<=NAME=")([^"]*)' /etc/os-release)
+                    PSEUDONAME=$(grep -Po '(?<=PRETTY_NAME=")([^"]*)' /etc/os-release)
+                    REV=$(cat /etc/debian_version)
+                fi
+            fi
+            if [[ -f /etc/UnitedLinux-release ]] ; then
+                DIST="${DIST}[$(cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//)]"
+            fi
+            OS=$(lowercase $OS)
+            DistroBasedOn=$(lowercase $DistroBasedOn)
+        fi
+    fi
+    printf '%-13s %s\n' OS "$OS"
+    printf '%-13s %s\n' DIST "$DIST"
+    printf '%-13s %s\n' DistroBasedOn "$DistroBasedOn"
+    printf '%-13s %s\n' PSEUDONAME "$PSEUDONAME"
+    printf '%-13s %s\n' REV "$REV"
+    printf '%-13s %s\n' KERNEL "$KERNEL"
+    printf '%-13s %s\n' MACH "$MACH"
+    echo ""
+}
+
+uname_os_detection() {
+    os_detection
+}
+
+githubkeys() {
+    curl -L https://github.com/shk3bq4d.keys
+}
+
+mrcd() {
+    local d
+    for var in "$@"; do
+        if [[ -d "$var" ]]; then
+            cd "$var"
+        else
+            d="$(find . -type d -iname '*'"$var"'*' | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- | head -n 1)"
+            test -z "$d" && echo "stopped at $var" && return
+            cd "$d"
+        fi
+    done
+}
+
+cut_terminal_width() {
+    sed -u -r -e 's/\t/        /g' | cut -c-$COLUMNS
+}
+
+nginx_color() {
+    test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
+    sed -u -r \
+       -e "s/(\" )([23][0-9][0-9])/\\1$EGREEN\\2$ENONE/" \
+       -e "s/(\" )([4][0-9][0-9])/\\1$ERED\\2$ENONE/" \
+       -e "s/(\" )([5][0-9][0-9])/\\1$EBGRED$EWHITE\\2$ENONE/" \
+        "$@"
+}
+
+curl_http_headers() {
+    curl -sD - -o /dev/null "$@" | mrless
+}
+
+alias bin='nocorrect mrcd ~/bin $*'
+alias cddoc='nocorrect mrcd ~/doc $*'
+alias dl='nocorrect mrcd ~/Downloads $*'
+alias music='nocorrect mrcd ~/Music $*'
+alias pic='nocorrect mrcd ~/Pictures $*'
+alias gi='nocorrect mrcd ~/git $*'
+alias h='nocorrect mrcd ~ $*'
+
+! hash az 2>/dev/null && hash docker 2>/dev/null && alias az='docker run -it mcr.microsoft.com/azure-cli az $*'
+
+rawurlencode() {
+  local string="${1}"
+  local strlen=${#string}
+  local encoded=""
+  local pos c o
+
+  for (( pos=0 ; pos<strlen ; pos++ )); do
+     c=${string:$pos:1}
+     case "$c" in
+        [-_.~a-zA-Z0-9] ) o="${c}" ;;
+        [/] ) o="${c}" ;; # MR: I choose to keep / as is
+        * )               printf -v o '%%%02x' "'$c"
+     esac
+     encoded+="${o}"
+  done
+  echo "${encoded}"    # You can either set a return variable (FASTER)
+  REPLY="${encoded}"   #+or echo the result (EASIER)... or both... :p
+}
+
+rawurldecode() {
+  printf -v REPLY '%b' "${1//%/\\x}" # You can either set a return variable (FASTER)
+
+  echo "${REPLY}"  #+or echo the result (EASIER)... or both... :p
+}
+
+netstat-tlnp() {
+    echo "sudo netstat -tlnp"
+    local SUDO POST
+    SUDO="sudo"
+    POST="$@"
+    test $# -eq 0 && POST="^"
+    sudo true || SUDO=""
+    export GREP_COLORS="mt=09;31"
+
+    $SUDO netstat -tlnp | GREP_COLORS="mt=34" grep --color=always -P '^|(?<=:)(21|22|25|53|80|8080|8443|443|10050|10051) ' | grep --color=always -E "$POST" -- | mrless
+}
+alias tr_upper_lower="tr '[:upper:]' '[:lower:]' $*"
+alias tr_lower_upper="tr '[:lower:]' '[:upper:]' $*"
+
+true # last statement must return true
