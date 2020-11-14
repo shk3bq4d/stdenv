@@ -10,5 +10,5 @@ unset GIT_WORK_TREE
     cd $repo
     git commit -am "auto commit $(date)" || true
 done
-#~/bin/stdhome-pull.sh
-#~/bin/stdhome-push.sh
+~/bin/stdhome-pull.sh
+~/bin/stdhome-push.sh

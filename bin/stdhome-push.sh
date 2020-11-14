@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 set -ex
-DIR="$( cd -P "$( dirname $(readlink  -f "${BASH_SOURCE[0]}" ) )/.." && pwd )"
-f=$DIR/bin/dot.bashfunctions
+f=~/bin/dot.bashfunctions
 if [[ -f $f ]]; then
     source $f
     start_agent_if_not_started
@@ -11,7 +10,6 @@ fi
 unset GIT_DIR
 unset GIT_WORK_TREE
 
-cd $DIR
 [[ ! -d ~/.ssh/c ]] && mkdir ~/.ssh/c
 [[ -f ~/.ssh/config ]] && chmod g-rwx,o-rwx ~/.ssh/config
 branch=stdhome
@@ -23,7 +21,7 @@ for remote in $(git remote show); do
         git push $remote $branch
     fi
 done
-$DIR/bin/stdothers.sh | grep -vE 'stdks' | while read repo; do
+~/bin/stdothers.sh | grep -vE 'stdks' | while read repo; do
     set -x
     cd $repo
     branch=$(basename $repo noexternalcheckout)
