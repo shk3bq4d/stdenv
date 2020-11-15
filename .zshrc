@@ -6,7 +6,8 @@ export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
 if [[ -f ~/.antigenrc ]]; then
-	source ~/.antigenrc
+# ansible line-in-file upstream role requires source ~/.antigenrc to be at indent zero
+source ~/.antigenrc
 else
 	export ZSH=$HOME/.oh-my-zsh
 	# Set name of the theme to load. Optionally, if you set this to "random"
@@ -143,7 +144,7 @@ compdef "ssh-no-host-checking"=ssh
 compdef ssh-vagrant=ssh
 #complete_function ssh-no-host-checking ssh
 
-case $UNAME in \
+case "$UNAME" in \
 freebsd)
     alias grep='nocorrect grep --line-buffered -a --color=auto'
     alias -g X="|tr '\n' '\0' | xargs -0 -o"
@@ -244,7 +245,7 @@ command_not_found_handler() {
     return 1
 }
 function now_millis() {
-    case $UNAME in \
+    case "$UNAME" in \
     freebsd)
         echo "$(($(date +%s)*1000))"
         ;;
@@ -388,7 +389,7 @@ reset_rprompt() {
 setopt no_share_history # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
 
 #alias ll='ls -lhFa'
-test $UNAME = freebsd || unalias ll # defined as a function in .bashrc
+test "$UNAME" = freebsd || unalias ll # defined as a function in .bashrc
 
 if true; then
     # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode
