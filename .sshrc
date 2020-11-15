@@ -1,5 +1,10 @@
-if [[ -h ~/.bashrc ]] && [[ -f ~/bin/stdhome-install.sh ]]; then
-    exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
+if [[ -f ~/.stdenv_aliases ]]; then
+	if [[ -f ~/.zshrc ]]; then
+		exec zsh
+	else
+		# retrieves and executes user shell
+		exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
+	fi
     return
 fi
 if [[ -z $SSHHOME ]]; then
