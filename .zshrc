@@ -121,9 +121,9 @@ alias ah='nocorrect aliashelp'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'
-"git-clone.py"() {
-    command git-clone.py $@ &&
-    cd $(cat ~/.tmp/git-clone.py.txt)
+"git-clone-mr.py"() {
+    command git-clone-mr.py $@ &&
+    cd $(cat ~/.tmp/git-clone-mr.py.txt)
 }
 "kubectl-get-yaml.py"() {
     local mrcolorsafe
