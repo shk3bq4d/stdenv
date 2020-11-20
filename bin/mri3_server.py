@@ -18,7 +18,11 @@ import getpass
 import socket
 import signal
 import json
-import cgi
+try:
+    import cgi
+    cgi.escape('test')
+except:
+    import html as cgi
 import errno
 import re
 import argparse

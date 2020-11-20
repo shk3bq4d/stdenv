@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import psutil
@@ -19,7 +19,7 @@ p = psutil.Process(int(m))
 children = p.children(recursive=True)
 #pprint(children[0].create_time())
 children = sorted(children, key=lambda x: -x.create_time())
-with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_cwd.log'), 'wb') as f:
+with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_cwd.log'), 'w') as f:
     #for child in children:
     #    f.write(pformat(child.as_dict()))
     for child in children:
