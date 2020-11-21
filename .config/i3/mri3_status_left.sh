@@ -8,7 +8,7 @@ LOG=/dev/null
 date >> $LOG
 echo $PATH >> $LOG
 case $(hostname -f) in \
-apr16.ly.lan|dec17.ly.lan|acer2011.ly.lan|*)
+apr16.ly.lan|dec17.ly.lan|acer2011.ly.lan|nov20.ly.lan)
 	f=~/.config/i3/i3blocks-$(hostname -f).conf
 	test -f "$f" || f=~/.config/i3/i3blocks-default.conf
 	i3blocks -c $f |tee -a $LOG

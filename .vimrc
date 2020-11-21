@@ -625,12 +625,15 @@ if version >= 500
         endif
         w!
         "silent !chmod +x %:p
-        let a:output= $RCD . "/.tmp/vim/output/" . strftime("%Y.%m.%d-%H.%M.%S") . "-" . expand("%:t") . ".tmp"
-        let g:mrf6oldbuffer=a:output
+        "
+        let l:output= "bi"
+        let l:output= $RCD . "/.tmp/vim/output/" . strftime("%Y.%m.%d-%H.%M.%S") . "-" . expand("%:t") . ".tmp"
+
+        let g:mrf6oldbuffer=l:output
         silent !clear
-        ":exec "silent !%:p 2>&1 \| tee" a:output
-        :exec "silent !" . $RCD . "/bin/notinpath/vimf6.sh %:p " . a:output
-        :exec "pedit! +setlocal\\ buftype=nofile\\ ft= " . a:output
+        ":exec "silent !%:p 2>&1 \| tee" l:output
+        :exec "silent !" . $RCD . "/bin/notinpath/vimf6.sh %:p " . l:output
+        :exec "pedit! +setlocal\\ buftype=nofile\\ ft= " . l:output
         if v:true
             noautocmd wincmd p " go to window up
             :2000000           " simulate go to end of file by going to line 2000000
@@ -648,12 +651,12 @@ if version >= 500
         endif
         w!
         "silent !chmod +x %:p
-        let a:output= $RCD . "/.tmp/vim/output/" . strftime("%Y.%m.%d-%H.%M.%S") . "-" . expand("%:t") . ".tmp"
-        let g:mrf6oldbuffer=a:output
+        let l:output= $RCD . "/.tmp/vim/output/" . strftime("%Y.%m.%d-%H.%M.%S") . "-" . expand("%:t") . ".tmp"
+        let g:mrf6oldbuffer=l:output
         silent !clear
-        ":exec "silent !%:p 2>&1 \| tee" a:output
-        :exec "silent !" . $RCD . "/bin/notinpath/vimf5.sh %:p " . a:output
-        :exec "pedit! +setlocal\\ buftype=nofile\\ ft= " . a:output
+        ":exec "silent !%:p 2>&1 \| tee" l:output
+        :exec "silent !" . $RCD . "/bin/notinpath/vimf5.sh %:p " . l:output
+        :exec "pedit! +setlocal\\ buftype=nofile\\ ft= " . l:output
         if v:true
             noautocmd wincmd p " go to window up
             :2000000           " simulate go to end of file by going to line 2000000
