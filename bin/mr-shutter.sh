@@ -9,10 +9,12 @@
 ## Author: Jeff Malone, 02 Nov 2017
 ##
 
-if true; then
+if hash shutter 2>/dev/null; then
 	nohup shutter --remove_cursor --select &>/dev/null &
-	exit 0
+elif hash flameshot 2>/dev/null; then
+	flameshot gui
 fi
+exit 0
 
 set -euo pipefail
 
