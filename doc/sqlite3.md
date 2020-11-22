@@ -180,3 +180,8 @@ order by jour, ref
 select * from fec_ limit 1;
 
 DROP TABLE [IF EXISTS] [schema_name.] table_name;
+```
+```bash
+sqlite3 some.db .schema > schema.sql
+sqlite3 some.db .dump > dump.sql
+```

@@ -30,10 +30,16 @@ with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), '
             f.write(cmd[:80])
             f.write('\n')
         sys.exit(0)
-    if len(children) == 0:
-        f.write('--------------------- len children is 0\n')
+    ssh_children = []
+    for c in children:
+        if c.cmdline()[0] not in ['ssh']: continue
+        if '-W' in c.cmdline(): continue # Requests that standard input and output on the client be forwarded to host on port over the secure channel.
+        ssh_children.append(c)
+    if len(ssh_children) == 0:
+        f.write('--------------------- len ssh_children is 0\n')
         sys.exit(0)
-    child = children[0]
+    #for c in ssh_children: print(c.cmdline())
+    child = ssh_children[0]
     cmdA = child.cmdline()
     cmd0 = cmdA[0]
     if cmd0 not in ['ssh']:
@@ -41,7 +47,7 @@ with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), '
         sys.exit(0)
     cmdA.pop(0) # remove cmd0
     while True:
-        if cmdA[0] in ['-t']:
+        if cmdA[0] in ['-t', '-q', '-A', '-x']:
             f.write('skipping no arg argument {}\n'.format(cmdA[0]))
             cmdA.pop(0)
             continue

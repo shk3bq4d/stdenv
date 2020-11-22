@@ -30,29 +30,37 @@ cat << 'HERE_DOCUMENT' | sed -r -e "s/FILENAME/$(basename $f .yml)/g" >>$f
 ## vimf6_ansible_args: --diff --check -vv
 ## vimf6_ansible_args: --diff -i ./.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
 ## vimf6_ansible_nolocalsudo: yes
-- hosts: localhost
+- hosts:
+    - localhost
   connection: local
   gather_facts: no
   vars:
-    _random: hehe
+    mydict:
+      key1: value1
+      keyB: valueB
+      keyThree: value three
+    mylist:
+       - one
+       - zwei
+       - 3
     filename: FILENAME
+
   tasks:
-    - shell: "echo \"aa\\nbb\\ncc\""
+
+    - setup:
+        gather_subset: min
+      when: no
+
+    - shell: date
       register: myvar
-    - debug: var=myvar
-    - debug: var=ansible_env.SUDO_USER
-    - debug: var=ansible_env.HOSTNAMEF
-    - debug: var=ansible_env.UNOETHUEOUOETHUN
+
     - debug:
-        msg: "key:{{ item.key }}, value:{{ item.value }}"
-      with_dict:
-        a: the letter A
-        b: the letter B
+        var: myvar.stdout
+
     - debug:
-        msg: "item:{{ item }}"
-      with_items:
-        - the first element
-        - the second element
+        msg: |
+          my dict is
+          {{ mydict | to_nice_yaml }}
 HERE_DOCUMENT
 # @end=yaml@
 

@@ -2666,3 +2666,5 @@ linux:&corp
 * https://github.com/ansible-collections/community.kubernetes # legacy
 https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/
 https://docs.ansible.com/ansible/2.10/collections/community/kubernetes/helm_module.html
+
+bip is version("6.4.2", ">") # version_compare filter, actually not a filter
