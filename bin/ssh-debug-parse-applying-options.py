@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -75,7 +75,7 @@ def myrun(cmd):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     #logger.info(cmd)
     while True:
-        line = p.stdout.readline()
+        line = p.stdout.readline().decode()
         line = re.sub(r'\r?\n$', '', line)
         if line == '' and p.poll() != None:
             break
@@ -97,7 +97,7 @@ def filereader(filename):
     if not os.path.isfile(filename):
         logger.warn('Ignoring unexisting file %s. Likely a ssh-vvv from another machine', filename)
         return
-    with open(filename, 'rb') as f:
+    with open(filename, 'r') as f:
         while True:
             linenumber = linenumber + 1
             line = f.readline()
@@ -347,7 +347,7 @@ def dump(host, ip, port, keysH, config_filelist, applied_options, errors):
 
     if len(keysH) > 0:
         print('\nAuth:')
-    for k,v in keysH.iteritems():
+    for k,v in keysH.items():
         v = copy.deepcopy(v._asdict())
         v['Source'] = '' if v['Source'] == '' else '({})'.format(v['Source'])
         v['Result'] += ':'
