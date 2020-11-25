@@ -1,3 +1,52 @@
+# version history
+## https://www.nginx.com/blog/nginx-1-18-1-19-released/
+At NGINX, we maintain two branches in the NGINX Open Source code repository,
+   named mainline and stable:
+
+Mainline is the active development branch where the latest features and bug
+fixes get added. It is denoted by an odd number in the second part of the
+version number, for example 1.19.0.  Stable receives fixes for high‑severity
+bugs, but is not updated with new features. It is denoted by an even number in
+the second part of the version number, for example 1.18.0.
+```sh
+curl -s https://nginx.org/en/CHANGES-1.18 | sed -n -r -e '/^Changes with nginx/s/(.*nginx )(.*)/\2/ p'
+```
+* https://nginx.org/en/CHANGES-1.14
+  1.14.0                                        17 Apr 2018
+  1.14.1                                        06 Nov 2018
+  1.14.2                                        04 Dec 2018
+* https://nginx.org/en/CHANGES-1.16
+  1.16.1                                        13 Aug 2019
+  1.16.0                                        23 Apr 2019
+  1.15.12                                       16 Apr 2019
+  1.15.11                                       09 Apr 2019
+  1.15.10                                       26 Mar 2019
+  1.15.9                                        26 Feb 2019
+  1.15.8                                        25 Dec 2018
+  1.15.7                                        27 Nov 2018
+  1.15.6                                        06 Nov 2018
+  1.15.5                                        02 Oct 2018
+  1.15.4                                        25 Sep 2018
+  1.15.3                                        28 Aug 2018
+  1.15.2                                        24 Jul 2018
+  1.15.1                                        03 Jul 2018
+  1.15.0                                        05 Jun 2018
+* https://nginx.org/en/CHANGES-1.18
+  1.18.0                                        21 Apr 2020
+  1.17.10                                       14 Apr 2020
+  1.17.9                                        03 Mar 2020
+  1.17.8                                        21 Jan 2020
+  1.17.7                                        24 Dec 2019
+  1.17.6                                        19 Nov 2019
+  1.17.5                                        22 Oct 2019
+  1.17.4                                        24 Sep 2019
+  1.17.3                                        13 Aug 2019
+  1.17.2                                        23 Jul 2019
+  1.17.1                                        25 Jun 2019
+  1.17.0                                        21 May 2019
+
+https://nginx.org/en/security_advisories.html # CVE
+
 http://nginx.org/en/docs/http/ngx_http_headers_module.html
 
 
