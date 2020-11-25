@@ -1224,6 +1224,8 @@ sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-p
 ansible -i inventory.yml HOSTNAME -m authorized_key -a "user=ansible exclusive=no comment=id_rsa_ansible key='$(cat ~/.ssh/id_rsa_ansible.pub)'"
 ansible -i inventory.yml "green:&linux" -m shell -a "cat /proc/loadavg" # cpu usage
 ansible -i inventory.yml "green:&linux" -m shell -a "netstat -tn | wc -l" # network connections number
+ansible -m shell -vba 'rpm -q kernel' 'azure:&uat:&linux'
+ansible -m shell -vba 'package-cleanup --oldkernels --count=2' 'azure:&uat:&linux'
 
 when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
