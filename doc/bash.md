@@ -1078,7 +1078,7 @@ read _read
 echo # read
 case "${_read,,}" in \
 y|yes) true ;; # read
-*)   false;; # read
+*)   echo "ABORTING"; exit 1;; # read
 esac # read
 
 echo -e "\e[1mbold\e[0m" # ansi escape color

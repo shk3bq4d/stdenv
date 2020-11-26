@@ -7,7 +7,7 @@ dpkg -S $(which tail) # whatprovides core-utils
 dpkg -L python # list files that were installed per package
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip                                                2" 360
-apt-file search ts | grep -E '/ts$' # whatprovides in all packages
+apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
 iproute2: /sbin/ip
 apt list --upgradable
@@ -132,3 +132,9 @@ sed -e '/mirrorlist=.*/d' -e 's/#baseurl=/baseurl=/' -e "s/\$releasever/7.4.1708
 
 # clean boot
 dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -E 'linux-(cloud|headers|image|modules|tools)-' | xargs sudo apt-get -y purge #no space left on device (/boot) on apt-get: here is how to clean
+
+# remove old kernel
+sudo package-cleanup -y --oldkernels --count=1
+ansible -m shell -vba 'yum list installed kernel'                 jump\*                | grep -E '^changed|^kernel'
+ansible -m shell -vba 'package-cleanup -y --oldkernels --count=2' 'azure:&prod:&linux'
+
