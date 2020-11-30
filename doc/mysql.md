@@ -59,6 +59,10 @@ select Host, User, password from mysql.user \G; -- vertical line alignement (the
 
 desc c01_templatecachequeries;
 show index from c01_templatecachequeries;
+
+
+Alter table Empolyee disable constraint pk_EmpNumer;
+SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
 ```
 
 
