@@ -203,7 +203,7 @@ case $SCRIPT in \
     nohup $engine -Tjpeg -o$jpg -v $SCRIPT &>/dev/null &
     exit 0
     ;;
-*svg)
+*svg|*htm|*html)
     nohup firefox $SCRIPT &>/dev/null &
     exit 0
     ;;

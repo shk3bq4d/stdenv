@@ -398,3 +398,6 @@ last()   is the N   value and same as last(#1)
 last(#1) is the N   value and same as last()
 last(#2) is the N-1 value
 last(#3) is the N-2 value
+
+
+{$DUMMY_SLOW_TIMEOUT_SECONDS} # macro
