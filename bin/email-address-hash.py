@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -40,7 +40,7 @@ def go(args):
     script_directory, script_name = os.path.split(__file__)
     script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
     ar = parser.parse_args(args)
-    h = hashlib.sha512(ar.identifier).hexdigest()
+    h = hashlib.sha512(ar.identifier.encode()).hexdigest()
     print("""123r4p+{}{}@gmail.com
 {}-{}@abc1.ch
 password:
@@ -52,8 +52,6 @@ Abcd12.-{}
         ))
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
     logging_conf()
     try:
