@@ -2111,7 +2111,8 @@ Give me the power of 2! (or 5):
 {{ myvar | pow(5) }}
 {{ myvar | root }}
 {{ myvar | root(5) }}
-loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}"
+json_query != jq -> https://jmespath.org/specification.html#and-expressions
+loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}" 
 loop: "{{ domain_definition | json_query('domain.server[*].name') }}"
 loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
 msg: "{{ domain_definition | json_query('domain.server[?cluster==`cluster1`].port') | join(', ') }}"
