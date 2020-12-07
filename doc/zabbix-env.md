@@ -401,3 +401,20 @@ last(#3) is the N-2 value
 
 
 {$DUMMY_SLOW_TIMEOUT_SECONDS} # macro
+
+
+# preprocessing javascript web.page.get
+```js
+var k;
+var magic = "\r\n\r\n"; //empty line
+var magic2 = "\n\n"; // HTTP says cr lf, but well if anybody messages
+
+k = value.indexOf(magic);
+if (k >= 0)
+{   value = value.substring(k + magic.length);
+}
+else if ((k = value.indexOf(magic2)) >= 0)
+{    value = value.substring(k + magic2.length);
+}
+return value;
+```
