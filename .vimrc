@@ -200,8 +200,8 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 :set title
 
 "au BufRead,BufNewFile */iaac*/*.yml set filetype=yaml.ansible
-au BufNewFile,BufRead *.yaml set expandtab cursorcolumn ts=2 sw=2
-au BufNewFile,BufRead *.yml set expandtab cursorcolumn ts=2 sw=2
+au BufNewFile,BufRead *.yaml set expandtab cursorcolumn ts=2 sw=2 noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yml  set expandtab cursorcolumn ts=2 sw=2 noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java
