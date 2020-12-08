@@ -801,3 +801,12 @@ az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-c
 kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job 
 
 kubectl describe node # nice summary cpu memory requests
+
+
+# service accounts
+* https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
+* https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+/var/run/secrets/kubernetes.io/serviceaccount/
+kubernetes.default.svc # API server reachability hosname/
+/var/run/secrets/kubernetes.io/serviceaccount
+curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/
