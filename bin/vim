@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+
+test -z "${UNAME:-}" && UNAME="$(uname)"
+
+OLDPATH="$PATH"
+export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
+EXPECTED_COMMAND="$(basename "$0")"
+test "${UNAME:-}" = freebsd && EXPECTED_COMMAND=vi # hardcod vim into vi
+BIN="$(which "$EXPECTED_COMMAND")"
+export PATH="$OLDPATH"
+eval "$BIN" "$@"
