@@ -388,7 +388,7 @@ reset_rprompt() {
 }
 setopt no_share_history # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
 
-test "$UNAME" = freebsd && alias ll='ls -lhFa'
+test "$UNAME" = freebsd && alias ll='ls -lhFa' || unalias ll
 
 if true; then
     # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode

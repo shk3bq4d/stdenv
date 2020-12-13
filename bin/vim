@@ -4,11 +4,16 @@
 set -euo pipefail
 
 test -z "${UNAME:-}" && UNAME="$(uname)"
+echo "$0 $@" > ~/.tmp/log/vim.exec
 
 OLDPATH="$PATH"
 export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
 EXPECTED_COMMAND="$(basename "$0")"
 test "${UNAME:-}" = freebsd && EXPECTED_COMMAND=vi # hardcod vim into vi
 BIN="$(which "$EXPECTED_COMMAND")"
-export PATH="$OLDPATH"
-eval "$BIN" "$@"
+if [[ -n "$BIN" ]]; then
+    export PATH="$OLDPATH"
+    "$BIN" "$@"
+else
+    $0 "$@"
+fi
