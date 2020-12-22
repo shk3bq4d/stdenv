@@ -17,6 +17,8 @@ helm upgrade --set replicaCount=2 ....
 helm upgrade -f bip.yaml releasename packagename
 helm get values    releasename
 helm get values -a releasename
+helm show values jetstack/cert-manager
+helm show values ingress-nginx/ingress-nginx
 helm rollback myrelease myversion
 helm package --sign
 helm search repo -l nginx-ingress
