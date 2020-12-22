@@ -5,7 +5,11 @@
 export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
-if [[ -f ~/.antigenrc ]]; then
+is_antigen() {
+	test -f ~/.antigenrc
+}
+
+if is_antigen; then
 # ansible line-in-file upstream role requires source ~/.antigenrc to be at indent zero
 source ~/.antigenrc
 else
@@ -67,18 +71,20 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-if [[ ! -f ~/.antigenrc ]]; then
+if ! is_antigen; then
 	plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl ansible zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
 	if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
 		plugins=(git-auto-fetch $plugins)
 		GIT_AUTO_FETCH_INTERVAL=1200
 	fi
+else
+	true
 fi
 # minikube # minikube init seams slowish
 # helm # doesn't complet
 typeset -U path
 test -n ${SSH_CLIENT:-} && path=(~/bin $path) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
-if [[ -f ~/.antigenrc ]]; then
+if is_antigen; then
 	true
 elif [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source $ZSH/oh-my-zsh.sh
@@ -236,6 +242,7 @@ alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
 
 alias findf='find . -type f'
 alias findd='find . -type d'
+ksns() { kubectl config set-context --current --namespace="$1" }
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files
 #AGNOSTER_STATUS_BG=yellow
@@ -422,8 +429,13 @@ else
 fi
 
 fpath=(~/.zsh/completion ~/.zsh/completion/*/ $fpath)
+kube-completion() {
+	source <(kubectl completion zsh)
+}
+#is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
 autoload -U compinit
 compinit
+
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 #source ~/.bash_completion

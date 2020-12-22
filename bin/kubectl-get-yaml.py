@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -52,8 +52,8 @@ def walk(d):
             walk(i)
     elif isinstance(d, dict):
         keys_to_delete = []
-        for k,v in d.iteritems():
-            if k in ['status', 'resourceVersion', 'selfLink', 'uid', 'generation', 'creationTimestamp', 'kubectl.kubernetes.io/last-applied-configuration']:
+        for k,v in d.items():
+            if k in ['status', 'resourceVersion', 'selfLink', 'uid', 'generation', 'creationTimestamp', 'kubectl.kubernetes.io/last-applied-configuration', 'managedFields']:
                 keys_to_delete.append(k)
                 continue
             walk(v)
@@ -66,8 +66,9 @@ def go(args):
     if '-o yaml' not in ' '.join(args):
         args = ['-o', 'yaml'] + args
 
-    y = unicode(kubectl(*args))
-    yH = yaml.load(y)
+    #y = unicode(kubectl(*args))
+    y = str(kubectl(*args))
+    yH = yaml.safe_load(y)
     walk(yH)
     s = yaml.dump(yH, default_flow_style=False)
     if color:
