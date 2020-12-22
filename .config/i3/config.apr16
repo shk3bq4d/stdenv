@@ -2,22 +2,24 @@
 export STDHOME_OUTPUTS='
 set $ol HDMI-2
 set $oc DP-2
-set $or DP-2
+set $or HDMI-1
 
+'
+bip='
 workspace 0  output $ol
-workspace 1  output $or
-workspace 2  output $or
-workspace 3  output $or
-workspace 4  output $or
-workspace 5  output $or
-workspace 6  output $or
-workspace 7  output $or
-workspace 8  output $or
-workspace 9  output $or
-workspace 10 output $or
-workspace 11 output $or
-workspace 12 output $or
-workspace 13 output $or
+workspace 1  output $oc
+workspace 2  output $oc
+workspace 3  output $oc
+workspace 4  output $oc
+workspace 5  output $oc
+workspace 6  output $oc
+workspace 7  output $oc
+workspace 8  output $oc
+workspace 9  output $oc
+workspace 10 output $oc
+workspace 11 output $oc
+workspace 12 output $oc
+workspace 13 output $oc
 '
 #exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
 #exec xrandr --output "$oc" --primary
@@ -28,18 +30,41 @@ bindsym --release $mod+v split toggle
 export STDHOME_FONT='
 font pango:Monospace Regular 14
 '
-STDHOME_FIRSTBAR_OUTPUT="output \$or"
+STDHOME_FIRSTBAR_OUTPUT="output \$oc"
 export STDHOME_FIRSTBAR_POSITION='top'
 export STDHOME_TAIL='
 bar {
-    id bar-right
+    id bar-top
     position bottom
     i3bar_command i3bar -t
     status_command ~/.config/i3/mri3_status_right.sh
     #status_command ~/.config/i3/mri3_status_left.sh
     output $ol
     strip_workspace_numbers yes
-    tray_output $or
+    tray_output $oc
+    #bindsym  button3 nop
+    bindsym  button4 nop
+    bindsym  button5 nop
+    separator_symbol " "
+    colors {
+        background #00000000
+        statusline #ffffff
+        separator #666666
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace  #333333 #28557700 #ffffff
+        inactive_workspace #33333300 #22222200 #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+}
+bar {
+    id bar-right
+    position bottom
+    i3bar_command i3bar -t
+    status_command ~/.config/i3/mri3_status_right.sh
+    #status_command ~/.config/i3/mri3_status_left.sh
+    output $or
+    strip_workspace_numbers yes
+    tray_output $oc
     #bindsym  button3 nop
     bindsym  button4 nop
     bindsym  button5 nop

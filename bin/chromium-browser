@@ -2,6 +2,7 @@
 
 #source ~/.std*aliases
 set -x
+ARGS=""
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
 	#if true; then # last exit day at KS
@@ -20,6 +21,7 @@ may19*)
 	;;
 apr16.ly.lan)
 	PROXYPAC="http://127.0.0.1:57155/proxy.pac.apr16.py"
+	ARGS="--disable-gpu"
 	~/bin/container-ip.sh
 	docker ps | awk-print1.sh | grep -qw mrlighttpd || ~/git/$(whoami)/docker/mrlighttpd/run.sh
 	;;
@@ -45,7 +47,7 @@ UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Ge
 BIN=/usr/bin/chromium
 test -f $BIN || BIN=/usr/bin/chromium-browser
 if [[ -z "$PROXYPAC" ]]; then
-	$BIN --profile-directory=r4p                           "$@" </dev/null &>/dev/null &
+	$BIN $ARGS --profile-directory=r4p                           "$@" </dev/null &>/dev/null &
 else
-	$BIN --profile-directory=r4p --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
+	$BIN $ARGS --profile-directory=r4p --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
 fi

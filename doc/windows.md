@@ -10,6 +10,7 @@ wmic process where "caption like 'zabbix%'" get caption,commandLine,processId
 wmic process where "caption like 'zabbix%'" get *
 wmic service where "name like 'zabbix%'"
 wmic service where "name like 'zabbix%'" get caption,processid,name,statuswmic service where "name like 'zabbix%'"
+sc query "Zabbix Agent 2"
 sc delete "Zabbix Agent"
 sc stop "Zabbix Agent 2"
 sc start "Zabbix Agent 2"

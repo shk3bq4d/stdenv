@@ -122,6 +122,7 @@ alias ah='nocorrect aliashelp'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'
+alias digs='dig +short'
 "git-clone-mr.py"() {
     command git-clone-mr.py $@ &&
     cd $(cat ~/.tmp/git-clone-mr.py.txt)

@@ -15,3 +15,5 @@ jQuery.fn.jquery # show version
 
 $(t).children().eq(1);     # grab the second child:
 $(t).children('td').eq(1); # grab the second child <td>:
+
+$('p:contains("mytext")').click() # p element that contains my text
