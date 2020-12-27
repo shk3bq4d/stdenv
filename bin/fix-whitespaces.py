@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -94,7 +94,7 @@ class FixWhitespacesTest(unittest.TestCase):
 def rr(i,j=None, k=None):
     if k is None:
         if j is None:
-            if isinstance(i, str) or isinstance(i, unicode):
+            if isinstance(i, str): # or isinstance(i, unicode):
                 return i.replace("\t", "\\t")
             return rr(*i)
         return "expected '{}', found '{}'".format(rr(j), rr(i))
