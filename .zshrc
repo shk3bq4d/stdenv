@@ -6,6 +6,7 @@ export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
 is_antigen() {
+	return 1
 	test -f ~/.antigenrc
 }
 
