@@ -63,7 +63,11 @@ show index from c01_templatecachequeries;
 
 Alter table Empolyee disable constraint pk_EmpNumer;
 SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
-```
-
 
 mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha
+CREATE TABLE bip (
+    Personid int NOT NULL AUTO_INCREMENT,
+    Age int,
+    PRIMARY KEY (Personid)
+);
+```
