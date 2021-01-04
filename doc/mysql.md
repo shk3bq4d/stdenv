@@ -66,3 +66,4 @@ SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
 ```
 
 
+mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha

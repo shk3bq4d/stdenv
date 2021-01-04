@@ -47,6 +47,7 @@ git clone https://$USER@gitlab.ksnet.nagra.com/CFC/managed-devices-tools.git
 git config --global user.name "Donald Duck"
 git config --global user.email "donald.duck@acme.it"
 git config --global core.sshCommand /usr/local/bin/ssh # openssh-portable include freebsd
+git config core.whitespace -blank-at-eol
 git add README.md
 git commit -m "add README"
 git push -u origin master
