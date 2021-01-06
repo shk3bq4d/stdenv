@@ -17,3 +17,5 @@ jail_register_ly1_host.py 10.1.1.125 jfw2016
 # dir
 /usr/local/etc/ezjail
 /usr/jails/jfwstaging/home/mr_user
+
+jail_stop.sh jzabbix && sudo ezjail-admin config -r norun jzabbix
