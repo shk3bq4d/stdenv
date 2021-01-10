@@ -3,6 +3,7 @@
 #source ~/.std*aliases
 set -x
 ARGS=""
+USE_FIREFOX=0
 case $(timeout 2 hostname -f) in \
 dec17.ly.lan)
 	#if true; then # last exit day at KS
@@ -44,10 +45,22 @@ UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrom
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
 #echo $PROXYPAC > /tmp/buou1
 #exit 0
-BIN=/usr/bin/chromium
-test -f $BIN || BIN=/usr/bin/chromium-browser
-if [[ -z "$PROXYPAC" ]]; then
-	$BIN $ARGS --profile-directory=r4p                           "$@" </dev/null &>/dev/null &
+if (( $USE_FIREFOX )); then
+	BIN=/usr/bin/firefox
+	#test -f $BIN || BIN=/usr/bin/chromium-browser
+	if [[ -z "$PROXYPAC" ]]; then
+		$BIN $ARGS -P r4p                           "$@" </dev/null &>/dev/null &
+	else
+		$BIN $ARGS -P r4p </dev/null &>/dev/null &
+		#$BIN $ARGS -P r4p --proxy-pac-url=$PROXYPAC "$@" #</dev/null &>/dev/null &
+	fi
+
 else
-	$BIN $ARGS --profile-directory=r4p --proxy-pac-url=$PROXYPAC "$@" </dev/null &>/dev/null &
+	BIN=/usr/bin/chromium
+	test -f $BIN || BIN=/usr/bin/chromium-browser
+	if [[ -z "$PROXYPAC" ]]; then
+		$BIN $ARGS --profile-directory=r4p                           "$@" #</dev/null &>/dev/null &
+	else
+		$BIN $ARGS --profile-directory=r4p --proxy-pac-url=$PROXYPAC "$@" #</dev/null &>/dev/null &
+	fi
 fi

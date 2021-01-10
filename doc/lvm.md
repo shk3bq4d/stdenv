@@ -38,6 +38,7 @@ lvresize --size +1G --resizefs /dev/VolGroup00/varlv
 lvresize --size +1G --resizefs /dev/mapper/VG_root-LV_usr
 lvresize --size +5G --resizefs /dev/mapper/VG_root-opt
 lvresize --size +1G --resizefs /dev/vg_system/lv_var
+lvresize --size +1G --resizefs /dev/mapper/rootvg-varlv
 printf "fix\nfix\nquit\n" | parted ---pretend-input-tty /dev/sda print
 
 

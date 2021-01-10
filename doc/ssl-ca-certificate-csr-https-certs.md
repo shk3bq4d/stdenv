@@ -61,6 +61,7 @@ systemctl reload httpd
 
 
 # java
+```sh
 ls -la  /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts
 keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass changeit | grep -i engineer
 
@@ -72,6 +73,9 @@ keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
 keytool -import -trustcacerts -file KS-CFC-Root_KS-CFC-Root.crt -alias KS-CFC-Root -keystore ks-cacerts2.jks -storepass HqBcm
 keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS-CFC-Issuing-01 -keystore ks-cacerts.jks -storepass HqBcm
 /e/me/global/java/FwBrowse/nbproject/build-impl.xml
+```
+
+```xml
 <signjar
           jar="${dist.jar}"
           storepass="fdlskjffjdsaf"
@@ -80,12 +84,17 @@ keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS
           tsaurl="http://timestamp.digicert.com"
           alias="myalias"
           />
+```
+
+```sh
 jarsigner -verify /e/me/local/appsdata/apache-tomcat/projects/fw/build/WEB-INF/lib/FwServlet.jar
 jarsigner.exe -verify -verbose -certs $(cygpath -wa /java/FwBrowse/dist/FwBrowse.jar)  | less
 jarsigner -keystore /e/me/certs/mykeystore.jks -tsa http://timestamp.digicert.com bip.jar myalias
 for i in *jar; do printf "%-30s %s\n" $i "$(jarsigner -verify $i)"; done
+```
 
 # retrieve certifcate from server
+```sh
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_1
  -no_ssl3                   Just disable SSLv3
  -no_tls1                   Just disable TLSv1
@@ -106,25 +115,33 @@ echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp -showcerts # -starttls for upgraded connection
 printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -crlf -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
+```
 
 # node.js
+```sh
 export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/source/anchors/myca.crt
+```
 
 # git https
+```sh
 GIT_SSL_NO_VERIFY=true
 
 LDAPTLS_REQCERT=never ldapwhoami -v -x -H ldaps://10.0.1.15 -D myuser@domain # ldaps no verify ldapsearch
 
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
+```
 
 # verify validation (full chain must be in onefile)
+```sh
 host=www.google.com; a=$(mktemp); python -c "import ssl; print(ssl.get_server_certificate(('$host', 443)))" |tee $a; openssl verify -verbose -CAfile ~/myca.crt $a
+```
 
 
 # windows
 certmgr.msc
 
 # vagrant
+```
 config.vm.box_download_insecure = true # certs https
 
 
@@ -133,6 +150,7 @@ config.vm.box_download_insecure = true # certs https
 create_cert.sh
 
 certmgr.msc
+```
 
 # keytool jks jdk8 to jdk6,jdk7
 ```sh
@@ -148,6 +166,7 @@ insures that hostname is FQDN and hostname -f returns correct value
 hostnamectl set-hostname mymachine-001.mydomain.local
 
 
+# standards
 http://stackoverflow.com/questions/20065304/what-is-the-differences-between-begin-rsa-private-key-and-begin-private-key
 http://stackoverflow.com/questions/10783366/how-to-generate-pkcs1-rsa-keys-in-pem-format
 
@@ -196,34 +215,43 @@ PKCS #15   1.1   Cryptographic Token Information Format Standard  Defines a stan
 #define PEM_STRING_CMS      "CMS"
 
 
+```sh
 pip install --trusted-host pypi.python.org  ldap3 # no validate python pip
 
 openssl rsa -aes256 -in adminmru.key -out adminmru-key.key # add change passphrase key password
+```
 
 # pfx
+```sh
 openssl pkcs12 -in client_ssl.pfx -out client_ssl.pem -clcerts # extract CL certs (but not CA certs) from pfx
 openssl pkcs12 -in client_ssl.pfx -out root.pem -cacerts       # extract CA certs (but not CL certs) from pfx
 openssl pkcs12 -export -out domain.name.pfx -inkey domain.name.key -in domain.name.crt -in intermediate.crt -in rootca.crt # to pfx
 openssl pkcs12 -export -out out.pfx -inkey key.pem -in root.crt -in intermediate.crt -in mycert.pem
 openssl pkcs7 -print_certs  -in p2f.LweE3.p7b # microsoft CA
+```
 
 
 # listen https
+```sh
 openssl s_server -key /etc/ssl/private/nginx-selfsigned.key -cert /root/a.crt -cert_chain /root/b.crt -accept 443 -www
 socat openssl-listen:12345,reuseaddr,cert=test.pem,verify=0,fork stdio
 ncat -lvnp 12345 --ssl
 ncat -lvnp 443 --ssl --ssl-cert /etc/ssl/certs/nginx-selfsigned.crt --ssl-key /etc/ssl/private/nginx-selfsigned.key
 socat openssl-listen:12345,reuseaddr,cert=test.pem,verify=0,fork stdio
+```
 
 # wrap
+```sh
 ssh-keygen -f hehe
 date > data
 ssh-public-key-converter.sh hehe
 openssl rsautl -encrypt -pkcs -pubin -inkey ./hehe.pub.PKCS8 -in data -out data.secure
 openssl rsautl -decrypt -in data.secure -inkey hehe > data.unwrapped
+```
 
 # OSCP must-staple
 https://scotthelme.co.uk/ocsp-must-staple/
+
 ```ini
 [ v3_req ]
 basicConstraints = CA:FALSE
@@ -233,4 +261,20 @@ subjectAltName = @alt_names
 ```
 
 
+```sh
 docker run --rm -ti drwetter/testssl.sh https://www.google.com # ssl check tls verify
+```
+
+# chain extraction
+```sh
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0 && n==0) print}'         # print stdin first certificate (n == 0)
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0 && n==1) print}'         # print stdin second certificate (n == 1)
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0 && n==2) print}'         # print stdin third certificate (n == 2)
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0 && (n==0||n==2)) print}' # print stdin first and third certificate
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0 && n>0) print}'          # print stdin second onwards certificate (n > 0)
+awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if(length($0) > 0) print > "cert" n ".pem"}' # print stdin certificate into separate files https://serverfault.com/questions/391396/how-to-split-a-pem-file
+
+openssl pkey -in foo.pem -out foo-key.pem # Extract key
+openssl crl2pkcs7 -nocrl -certfile foo.pem | openssl pkcs7 -print_certs -out foo-certs.pem # Extract all the certicates
+openssl x509 -in foo.pem -outform DER -out first-cert.der # Extract the textually first certificate as DER
+```
