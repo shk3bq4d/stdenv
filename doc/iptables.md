@@ -64,3 +64,11 @@ iptables -D INPUT   -p tcp -m multiport --dports 5044,10514,12201 -j DROP
 iptables -D INPUT   -p tcp -m tcp --dport 12201 -j DROP
 iptables -D INPUT   -p tcp -m tcp --dport 5044  -j DROP
 iptables -D INPUT   -p tcp -m tcp --dport 10514  -j DROP
+
+# changes default table policy
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
