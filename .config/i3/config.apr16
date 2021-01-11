@@ -81,6 +81,8 @@ bar {
 }
 exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id ~/bin/startup/mrredshift.sh
+for_window [class="Wfica"]               move container to output $ol
+for_window [title=".*ITTS.Desktop....*"] move container to output $ol
 '
 
 export gaps_inner=8

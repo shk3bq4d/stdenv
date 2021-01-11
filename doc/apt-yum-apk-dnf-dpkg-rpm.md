@@ -43,6 +43,7 @@ yum whatprovides mongodump && yum clean all # mongodb-org-tools
 yum whatprovides dos2unix  && yum clean all # dos2unix
 yum clean all
 yum history # log
+yum-complete-transaction # compares /var/lib/yum-transaction-all-* and /var/lib/yum-transaction-done-* and finishes work
 
 yum-config-manager --disable base,extras,updates
 
@@ -112,6 +113,7 @@ inetutils-ping: /bin/ping
 
 
 sudo yum reinstall --downloadonly --downloaddir=/home/adminmru zabbix-agent
+yum reinstall kernel-3.10.0-1160.11.1.el7
 
 # FreeBSD PKG
 pkg info -D zoneminder

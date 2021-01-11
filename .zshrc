@@ -244,6 +244,8 @@ alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
 alias findf='find . -type f'
 alias findd='find . -type d'
 ksns() { kubectl config set-context --current --namespace="$1" }
+ksns() { kubectl config set-context --current --namespace="$1" }
+alias kubectl-create-job-from-cronjob='kubectl create job --from=cronjob/cronjob'
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files
 #AGNOSTER_STATUS_BG=yellow

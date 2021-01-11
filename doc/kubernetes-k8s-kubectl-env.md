@@ -810,3 +810,6 @@ kubectl describe node # nice summary cpu memory requests
 kubernetes.default.svc # API server reachability hosname/
 /var/run/secrets/kubernetes.io/serviceaccount
 curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/
+
+
+kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob

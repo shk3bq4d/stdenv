@@ -34,7 +34,8 @@ $WORK_PC1F)
         "
     ;;
 esac
-compton -b --dbus $extra --config $f
+compton --dbus --config $f
+#compton -b --dbus $extra --experimental-backends --config $f
 echo true > ~/.tmp/compton-enabled
 xwininfo -root -tree \
   | sed -n 's/^ *    \(0x[[:xdigit:]]*\).*/\1/p' \

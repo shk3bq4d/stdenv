@@ -2628,6 +2628,7 @@ YAML single quote escaping: 'bipip''hehe''youpi' -> bipbip'hehe'youpi # https://
 
 role_name                The name of the role currently being executed.
 role_path                The path to the dir of the currently running role
+playbook_dir             The path to the directory of the playbook that was passed to the ansible-playbook command line.
 ansible_play_name        The name of the currently executed play. Added in 2.8.
 inventory_hostname       The inventory name for the ‘current’ host being iterated over in the play
 inventory_hostname_short The short version of inventory_hostname

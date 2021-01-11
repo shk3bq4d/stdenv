@@ -72,3 +72,7 @@ iptables -P OUTPUT DROP
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
+
+# snapserver k8s
+iptables -I FORWARD 1 -p tcp -m tcp --destination 10.19.29.0/24 -j ACCEPT
+iptables -I FORWARD 1 -p udp --destination 10.19.29.0/24 -j ACCEPT
