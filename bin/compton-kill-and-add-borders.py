@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import shutil
 import sys
@@ -18,7 +18,7 @@ if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
     text_color = '#000000'
 border_config = border
 
-with open(os.path.expanduser('~/.tmp/compton-enabled'), 'wb') as f:
+with open(os.path.expanduser('~/.tmp/compton-enabled'), 'w') as f:
     f.write('false')
 i3 = i3ipc.Connection()
 if True:
@@ -57,7 +57,7 @@ try:
 except:
     pass
 shutil.move(configtmp_fp, config_fp)
-with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'wb') as f:
+with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'w') as f:
     f.write(border_config)
 
 config_fp = os.path.expanduser('~/.config/i3/compton.conf')
