@@ -19,5 +19,6 @@ if [[ -d secrets ]]; then
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+source ~/.virtualenvs/ansible-2.10/bin/activate
 set -x
-$DIR/../.local/bin/ansible-playbook $vaults_args "$@"
+ansible-playbook $vaults_args "$@"

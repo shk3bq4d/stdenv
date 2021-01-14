@@ -98,6 +98,9 @@ def sendmail(to, subject, body, fr=None, cc=[], bcc=[], attachments=[], html=Non
         )
 
     logger.info('mail_from: %s', mail_from)
+    logger.info('smtp_login: %s', smtp_login)
+    logger.info('password: %s', smtp_password)
+
 
     ret=pyzmail.send_mail(payload, mail_from, rcpt_to, smtp_host, \
             smtp_port=smtp_port, smtp_mode=smtp_mode, \

@@ -979,6 +979,22 @@ rawurldecode() {
   echo "${REPLY}"  #+or echo the result (EASIER)... or both... :p
 }
 
+ping-up-down() {
+    local up nextup
+    state="unkown"
+    nextstate="$state"
+    while read line;
+    do
+        [[ "$line" == *"1 packets received"* ]] && nextstate="up" # busybox ping
+        [[ "$line" == *" 0% packet loss"* ]]    && nextstate="up" # ubuntu 20.04 ping
+        [[ "$line" == *"100% packet loss"* ]]   && nextstate="down"
+        [[ "$line" == *"0 packets received"* ]] && nextstate="down"
+        [[ "$state" != "$nextstate" ]] && echo "$(date) machine is $nextstate"
+        state="$nextstate"
+    done < <( while :; do ping -c1 "$@"; sleep 1; done )
+    echo ping command stopped
+}
+
 netstat-tlnp() {
     echo "sudo netstat -tlnp"
     local SUDO POST

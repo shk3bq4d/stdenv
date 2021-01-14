@@ -331,3 +331,11 @@ localectl list-keymaps | grep us
 localectl set-keyp ch-fr
 
 pulseaudio -k # restart pulse audio (will kill the service and system will restart it)
+
+# ipv6
+
+#disable ipv6
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv6.conf.eth0.disable_ipv6 = 1

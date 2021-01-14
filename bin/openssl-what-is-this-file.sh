@@ -35,7 +35,8 @@ if grep -qE "^-----BEGIN RSA PRIVATE KEY-----$" "$F"; then
 	mrtest "RSA PKCS#1 private key 2048 in pem format"  "openssl rsa  -inform pem -in $F -noout -text | grep 'Private-Key: (2048 bit)'"
 	mrtest "RSA PKCS#1 private key 4096 in pem format"  "openssl rsa  -inform pem -in $F -noout -text | grep 'Private-Key: (4096 bit)'"
 else
-	mrtest "x509 in pem format" openssl x509 -inform pem -in "$F" -noout -text
+	mrtest "x509 in PEM format" openssl x509 -inform pem -in "$F" -noout -text
+	mrtest "x509 in DER format" openssl x509 -inform der -in "$F" -noout -text
 	mrtest "RSA x.509 private key 2048 in pem format"  "openssl rsa  -inform pem -in $F -noout -text | grep 'Private-Key: (2048 bit)'"
 	mrtest "RSA x.509 private key 4096 in pem format"  "openssl rsa  -inform pem -in $F -noout -text | grep 'Private-Key: (4096 bit)'"
 fi

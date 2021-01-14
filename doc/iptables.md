@@ -1,7 +1,7 @@
 # stop incoming ping
-iptables -I INPUT 1 -p ICMP --icmp-type 8 -j DROP
+iptables -I INPUT 1 -p ICMP --icmp-type 8 -j DROP # stop incoming ping
 # restore it
-iptables -D INPUT   -p ICMP --icmp-type 8 -j DROP
+iptables -D INPUT   -p ICMP --icmp-type 8 -j DROP # restore stopped incoming ping
 
 # list
 sudo iptables -L
