@@ -989,9 +989,10 @@ ping-up-down() {
         [[ "$line" == *" 0% packet loss"* ]]    && nextstate="up" # ubuntu 20.04 ping
         [[ "$line" == *"100% packet loss"* ]]   && nextstate="down"
         [[ "$line" == *"0 packets received"* ]] && nextstate="down"
+        [[ "$line" == *"Network is unreachable"* ]] && nextstate="network is down"
         [[ "$state" != "$nextstate" ]] && echo "$(date) machine is $nextstate"
         state="$nextstate"
-    done < <( while :; do ping -c1 "$@"; sleep 1; done )
+    done < <( while :; do ping -c1 "$@" 2>&1; sleep 1; done )
     echo ping command stopped
 }
 
