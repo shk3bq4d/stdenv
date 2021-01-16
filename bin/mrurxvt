@@ -10,7 +10,7 @@ set -x
 OUTDIR=~/.tmp/mrurxvt/
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-for i in ~/.std*_aliases; do
+for i in ~/.*_aliases; do
     source $i
 done
 case $HOSTNAMEF in \
@@ -59,8 +59,12 @@ method=dev
 method=noise
 method=noisehue
 method=${methods[$idx]}
+if (( ${MR_URXVT_FORCEWHITE:-0} )); then method=fullwhite; fi
 f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
+fullwhite)
+    convert -size 100x100 xc:white $f
+	;;
 noise)
     a=$(( ( RANDOM % 2 ) ))
     convert -size 32x32 xc:   +noise Random -virtual-pixel tile  -blur 0x3 -auto-level \

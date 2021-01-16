@@ -19,3 +19,14 @@ kgp -Al app=kured               # labels
 # tcp service
 https://medium.com/@ahmedwaleedmalik/exposing-tcp-and-udp-services-in-kubernetes-using-nginx-ingress-9b8fd639c576
 https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/
+
+kubectl get ingress.extensions
+kubectl get certificates.cert-manager.io
+kubectl get certificaterequests.cert-manager.io
+kubectl get certificatesigningrequests.certificates.k8s.io
+
+#staging
+https://acme-staging-v02.api.letsencrypt.org/directory
+#prod
+https://acme-v02.api.letsencrypt.org/directory
+

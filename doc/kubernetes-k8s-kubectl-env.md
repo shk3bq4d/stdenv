@@ -437,6 +437,7 @@ spec:
 @end=yaml@
 kubectl create -f ~/tmp/dep.yaml
 kubectl scale --replicas=3 deployment/kud
+kubectl scale -n mariadb-galera statefulset/mariadb-galera --replicas 3
 kubectl get pods -Lapp
 kubectl get pods -Lapp -l app=kud
 # create deployment
@@ -473,6 +474,7 @@ curl -XDELETE http://127.0.0.1:8001/api/v1/namespaces/default/pods/kud-85ffdf5b5
 kubectl get pod --v=9 # --v=9 list the CURL command todo
 
 kubectl run game --image game --dry-run -o json # creates the json to be sent
+kubectl run nginx-helloworld  --image nginx --restart=Never --dry-run=client -o yaml # creates the yaml of the pod ressource (pod definition "minimal" template)
 
 docker run -d --name busy busybox sleep 3600
 docker exec -ti busy ps -ef
@@ -733,8 +735,8 @@ https://microk8s.io/ # minikube replacement native ubuntu (snap) installer
 * https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
 
 kubectl get events --sort-by=.metadata.creationTimestamp -A
-kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace get events -w
-kubectl get event --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
+kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace -w
+kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
 
 
 # jsonpath
