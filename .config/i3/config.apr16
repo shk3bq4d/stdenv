@@ -24,6 +24,11 @@ workspace 13 output $oc
 #exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
 #exec xrandr --output "$oc" --primary
 
+export STDHOME_FLOATING_LEFT=960
+export STDHOME_FLOATING_TOP=34
+export STDHOME_FLOATING_WIDTH=$(( 5120 - 2 * $STDHOME_FLOATING_LEFT ))
+export STDHOME_FLOATING_HEIGHT=$(( 2160 - $STDHOME_FLOATING_TOP - 8))
+
 export STDHOME_TOGGLE='
 bindsym --release $mod+v split toggle
 '

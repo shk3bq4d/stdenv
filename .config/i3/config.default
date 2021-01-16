@@ -12,6 +12,11 @@ set $or default
 exec xrandr --output "$oc" --primary
 '
 
+export STDHOME_FLOATING_LEFT=200
+export STDHOME_FLOATING_TOP=40
+export STDHOME_FLOATING_WIDTH=1600
+export STDHOME_FLOATING_HEIGHT=1600
+
 export STDHOME_TOGGLE='
 # bip bip
 #bindsym --release $mod+v split toggle
