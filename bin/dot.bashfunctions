@@ -980,19 +980,28 @@ rawurldecode() {
 }
 
 ping-up-down() {
-    local up nextup
+    local up nextup up down nonetwork timeout args
     state="unkown"
     nextstate="$state"
+    test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
+    up="${EGREEN:-}host is up${OFF:-}"
+    down="${ERED:-}host is down${OFF:-}"
+    nonetwork="${ERED:-}network is down${OFF:-}"
+    timeout=10
+    args="$@"
+    case "$args" in \
+    *aria.ly.lan) timeout=30;;
+    esac
     while read line;
     do
-        [[ "$line" == *"1 packets received"* ]] && nextstate="up" # busybox ping
-        [[ "$line" == *" 0% packet loss"* ]]    && nextstate="up" # ubuntu 20.04 ping
-        [[ "$line" == *"100% packet loss"* ]]   && nextstate="down"
-        [[ "$line" == *"0 packets received"* ]] && nextstate="down"
-        [[ "$line" == *"Network is unreachable"* ]] && nextstate="network is down"
-        [[ "$state" != "$nextstate" ]] && echo "$(date) machine is $nextstate"
+        [[ "$line" == *"1 packets received"* ]] && nextstate="$up" # busybox ping
+        [[ "$line" == *" 0% packet loss"* ]]    && nextstate="$up" # ubuntu 20.04 ping
+        [[ "$line" == *"100% packet loss"* ]]   && nextstate="$down"
+        [[ "$line" == *"0 packets received"* ]] && nextstate="$down"
+        [[ "$line" == *"Network is unreachable"* ]] && nextstate="$nonetwork"
+        [[ "$state" != "$nextstate" ]] && echo "$(date) $nextstate"
         state="$nextstate"
-    done < <( while :; do ping -c1 "$@" 2>&1; sleep 1; done )
+    done < <( while :; do ping -W $timeout -c1 "$args" 2>&1 || break; sleep 1; done )
     echo ping command stopped
 }
 

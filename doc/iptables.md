@@ -54,7 +54,8 @@ iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 9000 -j ACCEPT
 
 # pause graylog processing
-iptables -I INPUT 1 -p tcp -m multiport --dports 5044,10514,12201 -j DROP
+iptables -I INPUT 1 -p tcp -m multiport --dports 5044,10514,12201 -j DROP #nginx
+iptables -I INPUT 1 -p tcp -m multiport --dports 5045,10515,12202 -j DROP #graylog
 iptables -I INPUT 1 -p tcp -m tcp --dport 5044,10514,12201 -j DROP # gelf
 iptables -I INPUT 1 -p tcp -m tcp --dport 12201 -j DROP # gelf
 iptables -I INPUT 1 -p tcp -m tcp --dport 5044  -j DROP # filebeat

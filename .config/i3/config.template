@@ -174,7 +174,7 @@ bindcode $mod+40  layout default
 # toggle tiling / floating
 bindsym  $mod+Shift+space floating toggle
 #bindsym  $mod+space floating enable move position 200px 900px
-bindsym  $mod+Control+Shift+space floating toggle move position $STDHOME_FLOATING_LEFT px $STDHOME_FLOATING_TOP px resize set $STDHOME_FLOATING_WIDTH px $STDHOME_FLOATING_HEIGHT px
+bindsym  $mod+Control+Shift+space floating toggle , move output primary , resize set $STDHOME_FLOATING_WIDTH px $STDHOME_FLOATING_HEIGHT px , move position $STDHOME_FLOATING_LEFT px $STDHOME_FLOATING_TOP px
 
 # change focus between tiling / floating windows
 bindsym  $mod+space focus mode_toggle
