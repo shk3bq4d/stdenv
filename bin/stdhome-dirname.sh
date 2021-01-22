@@ -22,7 +22,7 @@ else
 	; do
 		[[ -d "$i" ]] && echo "$(dirname "$i")/stdhome" && exit 0
 	done
-	find ~ -type d -name stdhome -or -name stdenv -print -exit | while read i; do
+	find ~ -type d -name stdhome -or -name stdenv -print -quit | while read i; do
 		echo "$(dirname "$i")/stdhome"
 		exit 0
 	done

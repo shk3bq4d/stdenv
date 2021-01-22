@@ -1019,4 +1019,11 @@ netstat-tlnp() {
 alias tr_upper_lower="tr '[:upper:]' '[:lower:]' $*"
 alias tr_lower_upper="tr '[:lower:]' '[:upper:]' $*"
 
+kubectl-create-job-from-cronjob() {
+    local a1
+    a1="$1"
+    shift
+    kubectl create job "--from=cronjob/$a1" "manual-$a1" "$@"
+}
+
 true # last statement must return true

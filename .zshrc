@@ -6,22 +6,22 @@ export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
 is_antigen() {
-	return 1
-	test -f ~/.antigenrc
+    return 1
+    test -f ~/.antigenrc
 }
 
 if is_antigen; then
 # ansible line-in-file upstream role requires source ~/.antigenrc to be at indent zero
 source ~/.antigenrc
 else
-	export ZSH=$HOME/.oh-my-zsh
-	# Set name of the theme to load. Optionally, if you set this to "random"
-	# it'll load a random theme each time that oh-my-zsh is loaded.
-	# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+    export ZSH=$HOME/.oh-my-zsh
+    # Set name of the theme to load. Optionally, if you set this to "random"
+    # it'll load a random theme each time that oh-my-zsh is loaded.
+    # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-	ZSH_THEME="mr"
-	#set -x
-	test -f ~/.oh-my-zsh/custom/themes/${ZSH_THEME}.zsh-theme || ZSH_THEME="agnoster"
+    ZSH_THEME="mr"
+    #set -x
+    test -f ~/.oh-my-zsh/custom/themes/${ZSH_THEME}.zsh-theme || ZSH_THEME="agnoster"
 fi
 #set +x
 #ZSH_THEME="agnoster"
@@ -73,20 +73,20 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if ! is_antigen; then
-	plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl ansible zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
-	if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
-		plugins=(git-auto-fetch $plugins)
-		GIT_AUTO_FETCH_INTERVAL=1200
-	fi
+    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl ansible zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
+    if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
+        plugins=(git-auto-fetch $plugins)
+        GIT_AUTO_FETCH_INTERVAL=1200
+    fi
 else
-	true
+    true
 fi
 # minikube # minikube init seams slowish
 # helm # doesn't complet
 typeset -U path
 test -n ${SSH_CLIENT:-} && path=(~/bin $path) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 if is_antigen; then
-	true
+    true
 elif [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source $ZSH/oh-my-zsh.sh
 else
@@ -245,7 +245,6 @@ alias findf='find . -type f'
 alias findd='find . -type d'
 ksns() { kubectl config set-context --current --namespace="$1" }
 ksns() { kubectl config set-context --current --namespace="$1" }
-alias kubectl-create-job-from-cronjob='kubectl create job --from=cronjob/cronjob'
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files
 #AGNOSTER_STATUS_BG=yellow
@@ -433,7 +432,7 @@ fi
 
 fpath=(~/.zsh/completion ~/.zsh/completion/*/ $fpath)
 kube-completion() {
-	source <(kubectl completion zsh)
+    source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
 autoload -U compinit
@@ -455,7 +454,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 if [[ -n "${MR_URXVT_CMD:-}" ]]; then
     #command ${=MR_URXVT_CMD}
     eval ${=MR_URXVT_CMD}
-	exit $?
-	# && echo success || echo failure
-	# sshrc seems to always end with success
+    exit $?
+    # && echo success || echo failure
+    # sshrc seems to always end with success
 fi

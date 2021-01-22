@@ -25,6 +25,8 @@
 # http://bazaar.canonical.com/
 --ignore-directory=is:.bzr
 
+--ignore-directory=is:.terraform
+
 # Codeville
 # http://freecode.com/projects/codeville
 --ignore-directory=is:.cdv
