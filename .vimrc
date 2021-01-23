@@ -200,9 +200,9 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 ":auto BufEnter * let &titlestring = "vi" . strpart(v:servername, 3, 1) . " %t     " . expand("%:p:h:h:t") . "\\" . expand("%:p:h:t") . " %=%l/%L-%P "
 :set title
 
-"au BufRead,BufNewFile */iaac*/*.yml set filetype=yaml.ansible
-au BufNewFile,BufRead *.yaml set expandtab cursorcolumn sts=2 ts=2 sw=2 noautoindent nocindent nosmartindent
-au BufNewFile,BufRead *.yml  set expandtab cursorcolumn sts=2 ts=2 sw=2 noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yaml set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yml  set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
+au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
 au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java
