@@ -73,7 +73,7 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if ! is_antigen; then
-    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl ansible zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
+    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
     if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
         plugins=(git-auto-fetch $plugins)
         GIT_AUTO_FETCH_INTERVAL=1200
@@ -144,6 +144,8 @@ complete_function() {
     local f=$1; shift
     compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
   }
+complete_function ksns                      kubectl get namespace
+complete_function kubectl-create-job-from-cronjob kubectl get cronjob
 complete_function kubectl-get-yaml.py       kubectl get
 complete_function kubectl-watch-pods.sh     kubectl get pods
 complete_function kubectl-watch-events.sh   kubectl get events
@@ -243,7 +245,6 @@ alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
 
 alias findf='find . -type f'
 alias findd='find . -type d'
-ksns() { kubectl config set-context --current --namespace="$1" }
 ksns() { kubectl config set-context --current --namespace="$1" }
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files

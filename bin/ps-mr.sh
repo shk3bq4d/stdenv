@@ -6,13 +6,13 @@ _tempfile=
 function cleanup() { [[ -f "$_tempfile" ]] && rm -f $_tempfile; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 ONLYPID=0
 if [[ $# -gt 0 ]]; then
-	_tempfile=$(mktemp); 
+	_tempfile=$(mktemp);
 	for var in "$@"; do
 		if [[ "$var" == "-p" ]]; then
 			ONLYPID=1
 		else
 			echo "$var" >> $_tempfile
-			PIPE="grep -F -f $_tempfile"
+			PIPE="grep -i --color=always -F -f $_tempfile"
 		fi
 	done
 fi
