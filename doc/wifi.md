@@ -2,6 +2,10 @@ nm-applet
 sudo iwlist scan
 sudo iwlist scan | grep -Ei 'address|channel|quality|essid|quality'
 
+sudo wpa_cli scan
+sudo wpa_cli scan_results
+~/bin/wifi-networks.sh
+
 https://askubuntu.com/questions/967355/wifi-unstable-after-17-10-update
 
 
