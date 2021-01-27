@@ -2125,6 +2125,10 @@ loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
 {{ myvar | ipv6 }}
 {{ '192.0.2.1/24' | ipaddr('address') }}
 {{ output | parse_cli('path/to/spec') }}
+(ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('prefix') -> 8 like in /8 of the subnet
+(ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('host/prefix')    # 10.1.5.6/8
+(ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('network/prefix') # 10.0.0.0/8
+
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
 - "^(?P<name>Ethernet\\d\\/\\d*)"
