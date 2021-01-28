@@ -10,7 +10,11 @@ set -x
 OUTDIR=~/.tmp/mrurxvt/
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
-for i in ~/.*_aliases; do
+for i in \
+    ~/.bash_aliases \
+    ~/.${HOSTNAMEF}_aliases  \
+    ~/.std*_aliases \
+	; do
     source $i
 done
 case $HOSTNAMEF in \
