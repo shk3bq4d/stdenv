@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 11 Jan 2021
-##
+## ##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT] ##configures whatever action
+with whatever config ##    REMOTEHOST: remote host where to ssh ##
+REMOTEPORT: JMX port (default: 12345) ## ## Author: Jeff Malone, 11 Jan 2021 ##
 
 set -euo pipefail
 
-source ~/.virtualenvs/ansible-2.10/bin/activate
+
+set +u; source ~/.virtualenvs/ansible-2.10/bin/activate; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
 $(basename "$0") "$@"
 ret=$?
 

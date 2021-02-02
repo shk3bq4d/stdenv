@@ -1026,4 +1026,11 @@ kubectl-create-job-from-cronjob() {
     kubectl create job "--from=cronjob/$a1" "manual-$a1" "$@"
 }
 
+crontab-single-entry-in-three-minutes() {
+    #     45  7  2  2 Tue  USER   test `date +\%Y` == 2021 && MYCOMMAND
+    echo  "#min hou dom mon dow user command"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m %a')      test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m %a') USER test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+}
+
 true # last statement must return true

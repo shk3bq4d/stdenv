@@ -20,6 +20,8 @@ set -euo pipefail
 # for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i in path: $PATH && exit 1; done
 
 # DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+#
+ANSI_CODE='\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]'
 
 if [[ -n ${VIMF6+1} ]]; then # && echo running from vim-f6
     cat - << 'EOF'
@@ -104,6 +106,6 @@ Do you want to perform these actions?
 EOF
 else
     cat "$@"
-fi | sed -r -n -e '/^\s+[+~\-]/ p'
+fi | sed -r -n -e "/^( |$ANSI_CODE)*[+~\-]/ p"
 
 

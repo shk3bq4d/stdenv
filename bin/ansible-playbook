@@ -19,6 +19,6 @@ if [[ -d secrets ]]; then
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-source ~/.virtualenvs/ansible-2.10/bin/activate
+set +u; source ~/.virtualenvs/ansible-2.10/bin/activate; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
 set -x
 ansible-playbook $vaults_args "$@"
