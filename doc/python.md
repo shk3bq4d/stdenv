@@ -23,6 +23,7 @@ hashlib.md5("Nobody inspects the spammish repetition".encode()).hexdigest()
 hashlib.sha1("Nobody inspects the spammish repetition".encode()).hexdigest()
 hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
 
+functools.partial # bind freeze some portion of a fuctions arguments or keywords. 
 
 # UTF-8 IO
 @begin=python@
@@ -950,6 +951,7 @@ from ruamel import yaml; yaml.dump({})
 import yaml; yaml.dump({}) # dump as string
 import yaml; yaml.dump({}, fd) # dump into file descriptor fd
 import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.safe_load(f)
+import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.load(f, Loader=yaml.FullLoader)
 import yaml; yaml.safe_dump({}, default_flow_style=False)
 from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python2
 from io       import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python3

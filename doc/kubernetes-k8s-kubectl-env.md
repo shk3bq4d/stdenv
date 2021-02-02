@@ -810,6 +810,7 @@ kubectl describe node # nice summary cpu memory requests
 * https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
 * https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 /var/run/secrets/kubernetes.io/serviceaccount/
+/var/run/secrets/kubernetes.io/serviceaccount/namespace
 kubernetes.default.svc # API server reachability hosname/
 /var/run/secrets/kubernetes.io/serviceaccount
 curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/
