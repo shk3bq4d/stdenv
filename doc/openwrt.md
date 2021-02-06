@@ -9,7 +9,7 @@ wget http://downloads.lede-project.org/releases/17.01.4/targets/ipq806x/generic/
 cp -p lede-17.01.4-ipq806x-C2600-squashfs-factory.bin ArcherC2600_1.0_tp_recovery.bin
 sudo systemctl stop NetworkManager
 sudo killall dnsmasq
-@begin=sh@
+```sh
 #!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
@@ -34,7 +34,7 @@ sudo dnsmasq -i $IFNAME --dhcp-range=192.168.0.86,192.168.0.155 \
 
 echo EOF
 exit 0
-@end=sh@
+```
 sudo ifconfig eno2 192.168.1.89
 browser to http://192.168.1.1
 # current version is Powered by LuCI lede-17.01 branch (git-17.290.79498-d3f0685) / LEDE Reboot 17.01.4 r3560-79f57e422d
@@ -48,7 +48,9 @@ went to https://www.reddit.com/r/openwrt/comments/6afbxh/wireless_is_disabled_or
 and
 ssh to box and run "iw phy0 info", then reenable interface on GUI
 
+```sh
 curl 'http://10.19.29.251/cgi-bin/luci/?status=1&_=0.8997745715767451' -H 'DNT: 1' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,fr;q=0.8' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/73.0.3683.86 Chrome/73.0.3683.86 Safari/537.36' -H 'Accept: */*' -H 'Referer: http://10.19.29.251/cgi-bin/luci/' -H 'Cookie: sysauth=ac182ba23a11f1fb6fcfc74596be7d61' -H 'Connection: keep-alive' --compressed
+```
 ```json
 {
     "conncount": 11,
@@ -234,12 +236,21 @@ https://bugs.openwrt.org/index.php?do=details&task_id=3450&string=mtk_soc_eth&ty
 https://bugs.openwrt.org/index.php?do=details&task_id=2628
 https://forum.openwrt.org/t/ramips-mt7621-freewrt-20-12-master-branch-based/82672/18
 
-# TL-WDR3600
+# TL-WDR3600 ap-galetas-east
+https://openwrt.org/toh/tp-link/tl-wdr3600
 ssh root@10.19.29.249
 cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 wdr3600password1.
-https://openwrt.org/toh/tp-link/tl-wdr3600
 **MR: the TFTP recovery from above linked worked**
+wget http://downloads.openwrt.org/releases/19.07.6/targets/ath79/generic/openwrt-19.07.6-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+
+## ap-salon
+https://openwrt.org/toh/tp-link/tp-link_archer_c2600_v1
+http://downloads.openwrt.org/releases/19.07.6/targets/ipq806x/generic/openwrt-19.07.6-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
+
+## linksys WRT54gl
+https://openwrt.org/toh/linksys/wrt54g
+better not touch the OS at all, currently Backfire (10.03.1-rc4, r24045)
 
 > ## TFTP auto recovery in revision 1.5
 > At least some revision 1.5 routers contains bootloader recovery TFTP client. To activate it press and hold WPS/Reset Button during powering on until WPS LED turns on. Connect computer to LAN1. Using TCPdump, you should see ARP requests from router having address 192.168.0.86 looking for address 192.168.0.66.
