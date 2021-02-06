@@ -339,3 +339,20 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 net.ipv6.conf.eth0.disable_ipv6 = 1
+
+
++ umask 007
++ umask -S
+u=rwx,g=rwx,o=
++ touch umask-f-007
++ mkdir umask-d-007
++ umask 027
++ umask -S
+u=rwx,g=rx,o=
++ touch umask-f-027
++ mkdir umask-d-027
++ ls -ld umask-d-007 umask-d-027 umask-f-007 umask-f-027
+drwxrwx--- umask-d-007
+-rw-rw---- umask-f-007
+drwxr-x--- umask-d-027
+-rw-r----- umask-f-027

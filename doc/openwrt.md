@@ -222,6 +222,18 @@ http://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-19.0
 https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRouter-x/blob/master/openwrt-ramips-mt7621-ubnt-erx-initramfs-factory.tar
 scp root@192.168.1.1:/etc/config/\* .
 
+## upgrade
+https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka#terminal_upgrade_process
+
+### 2021-02-02
+wget http redirect failed when downloading from device, had to download from apr16 then scp the file
+http://downloads.openwrt.org/releases/19.07.6/targets/ramips/mt7621/openwrt-19.07.6-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin # upgrade
+
+## reboot network bug
+https://bugs.openwrt.org/index.php?do=details&task_id=3450&string=mtk_soc_eth&type%5B0%5D=&sev%5B0%5D=&pri%5B0%5D=&due%5B0%5D=&reported%5B0%5D=&cat%5B0%5D=&status%5B0%5D=open&percent%5B0%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=
+https://bugs.openwrt.org/index.php?do=details&task_id=2628
+https://forum.openwrt.org/t/ramips-mt7621-freewrt-20-12-master-branch-based/82672/18
+
 # TL-WDR3600
 ssh root@10.19.29.249
 cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
@@ -256,3 +268,10 @@ apt update && apt install atftpd
 cd /wordkir && atftpd --no-fork --daemon .
 ```
 **a while later the device was answering to DHCP requests**
+
+
+https://github.com/openwrt/openwrt
+
+
+# ubiquiti anifi ap pro
+https://openwrt.org/toh/ubiquiti/unifi_appro
