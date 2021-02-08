@@ -356,3 +356,9 @@ drwxrwx--- umask-d-007
 -rw-rw---- umask-f-007
 drwxr-x--- umask-d-027
 -rw-r----- umask-f-027
+
+
+
+IFNAME=enp0s31f6
+sudo ip address flush dev $IFNAME
+sudo ip address add 192.168.1.254/24 dev $IFNAME

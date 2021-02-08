@@ -2,7 +2,7 @@
 ps | grep -v grep | grep dnsmasq | awk '{print $1'} | xargs kill -SIGHUP
 
 
-# may 2018 tp-link archer c2600 v1.0
+# may 2018 tp-link archer c2600 v1.0 ap-salon
 https://openwrt.org/toh/tp-link/tp-link_archer_c2600_v1
 https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 wget http://downloads.lede-project.org/releases/17.01.4/targets/ipq806x/generic/lede-17.01.4-ipq806x-C2600-squashfs-factory.bin
@@ -285,4 +285,6 @@ https://github.com/openwrt/openwrt
 
 
 # ubiquiti anifi ap pro
-https://openwrt.org/toh/ubiquiti/unifi_appro
+https://openwrt.org/toh/ubiquiti/unifi_appro # sucks
+https://openwrt.org/toh/ubiquiti/unifiac     # much better
+https://web.archive.org/web/20201011085042if_/https://dl.ui.com/unifi/firmware/U7PG2/3.7.58.6385/BZ.qca956x.v3.7.58.6385.170508.0957.bin
