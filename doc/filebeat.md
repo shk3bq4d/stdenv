@@ -1,9 +1,14 @@
 output.file:
   path: "/tmp/filebeat"
   filename: filebeat
-  #rotate_every_kb: 10000
-  #number_of_files: 7
-  #permissions: 0600
+
+output:
+  file:
+	path: "/tmp/filebeat"
+	filename: filebeat
+	#rotate_every_kb: 10000
+	#number_of_files: 7
+	#permissions: 0600
 
 
 # https://www.elastic.co/guide/en/beats/filebeat/master/rate-limit.html
