@@ -19,7 +19,7 @@ fi
 set -x
 apt update
 apt upgrade -y
-apt autoremove
+apt autoremove -y
 set +x
 echo ""
 

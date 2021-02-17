@@ -1,3 +1,4 @@
+```sh
 curl -s http://localhost:8500/v1/catalog/service/download | jq  -e -r '.[].ServiceEnableTagOverride'
 python -m json.tool my_json.json # json prettifyer
 python -m json.tool
@@ -32,3 +33,17 @@ kgcm -A -o json | jq -r '.items[] | select(.metadata.name=="server-mysql-passwor
 
 cat uat.json| jq '[.resources[]| select(.type == "random_id") ] | length' # count
 terraform state pull | jq '.resources[]| select(.type == "azurerm_virtual_machine") | .instances[].attributes.name'
+
+```
+```sh
+az acr list -o json |
+  jq -r '.[] | .loginServer + " " + .name + " " + .resourceGroup + " " + .id' |
+  while read server name rg id; do
+    subscription=$(cut -d / -f3 <<< "$id")
+    echo "============="
+    echo "server: $server"
+    echo "name: $name"
+    echo "rg: $rg"
+    echo "id: $id"
+  done
+```

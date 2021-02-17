@@ -28,3 +28,6 @@ datetime Alias for date
 
 # date nanoseconds
 %{TIMESTAMP_ISO8601:timestamp;date;yyyy-MM-dd'T'HH:mm:ss.SSSSSS}\d{3}
+
+# regexp in grok
+(?<param1>.*?)

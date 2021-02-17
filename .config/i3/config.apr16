@@ -93,3 +93,4 @@ for_window [title=".*ITTS.Desktop....*"] move container to output $ol
 
 export gaps_inner=8
 export bar_height=26
+export STDHOME_MOVE_WORKSPACE_DIRECTION="up"
