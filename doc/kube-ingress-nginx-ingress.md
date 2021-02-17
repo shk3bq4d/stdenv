@@ -21,6 +21,8 @@ https://medium.com/@ahmedwaleedmalik/exposing-tcp-and-udp-services-in-kubernetes
 https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/
 
 kubectl get ingress.extensions
+kubectl get ingresses.networking.k8s.io
+kubectl get orders.acme.cert-manager.io
 kubectl get certificates.cert-manager.io
 kubectl get certificaterequests.cert-manager.io
 kubectl get certificatesigningrequests.certificates.k8s.io
