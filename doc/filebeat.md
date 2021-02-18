@@ -10,6 +10,7 @@ output:
 	#number_of_files: 7
 	#permissions: 0600
 
+# https://www.elastic.co/guide/en/ecs/current/ecs-field-reference.html
 
 # https://www.elastic.co/guide/en/beats/filebeat/master/rate-limit.html
 ```yaml
@@ -23,6 +24,8 @@ processors:
       ignore_missing: false
       fail_on_error: true
 ```
+# https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html
+# https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # processor conditions
 https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html#conditions
 Conditionsedit
