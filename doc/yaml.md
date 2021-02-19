@@ -1,4 +1,4 @@
-https://learnxinyminutes.com/docs/yaml/
+kkkkkkkkkkk
 
 ```yaml
 array:
@@ -29,12 +29,15 @@ items:
       price:     133.7
       quantity:  1
 
-bill-to:  &id001
+bill-to:  &id001 # the full bill-to dictionary can be refered with *id001 anchor reference
     street: | # multiline are kept as multiline but dedented. Ends with new line
             123 Tornado Alley
             Suite 16
     city:   East Centerville
     state:  KS
+
+foo: &bar original  # the string/scalar `original` with anchor bar can be referenced with *bar
+bar: *bar           # reference to scalar `original`
 
 ship-to:  *id001
 
