@@ -1105,3 +1105,10 @@ myfunc "${ARRAY[@]}"
 ```
 
 A=$(</tmp/myfile) # built-in builtin read file into variable
+
+
+# pipebuffer
+tail -f /var/log/foo | stdbuf -o0 cut
+tail -f /var/log/foo | grep --line-buffered
+tail -f /var/log/foo | sed -u
+tail -f /var/log/foo | python -u
