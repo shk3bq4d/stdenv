@@ -37,3 +37,13 @@ display_rotate=3
 
 # temperature probe sonde https://www.ebay.com/itm/1M-1-2-5-10-DS18B20-Waterproof-Sensor-Digital-Probe-Thermometer-Thermal-Arduino-/283278069158
 Probe's wire received is Red, Yellow and Black, conncet your probe as Output lead : Red (VCC), Yellow(DATA), Black(GND) : )
+
+
+
+```sh
+systemctl set-default graphical.target
+ln -fs /lib/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+sed /etc/lightdm/lightdm.conf -i -e 's/^\(#\|\)autologin-user=.*/autologin-user=pi/'
+# https://gist.github.com/petehamilton/5412334
+sudo apt-get install unclutter # unclutter hides the mouse
+```
