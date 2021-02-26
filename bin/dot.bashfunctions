@@ -1033,10 +1033,14 @@ crontab-single-entry-in-three-minutes() {
     echo "now in UTC          is $(date --utc +'%H:%M:%S')"
     dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     echo  "#min hou dom mon dow user command"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m') $dow      MYCOMMAND"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m') $dow USER MYCOMMAND"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m') $dow      test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m') $dow USER test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow      MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow USER MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow      test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow USER test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow      MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow USER MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow      test \`date +\\%Y\` == $(date +%Y) && MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow USER test \`date +\\%Y\` == $(date +%Y) && MYUTC"
 }
 
 jq-versions() {

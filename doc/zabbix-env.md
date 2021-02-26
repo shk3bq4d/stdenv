@@ -311,6 +311,7 @@ sudo tail -f /var/log/zabbix/zabbix_agentd.log | grep -vE '__zbx_zbx_setproctitl
 docker pull zabbix/zabbix-appliance:ubuntu-4.0.17
 https://hub.docker.com/r/zabbix/zabbix-appliance
 https://hub.docker.com/r/zabbix/zabbix-server-mysql
+https://hub.docker.com/r/zabbix/zabbix-proxy-sqlite3
 
 docker run --name some-zabbix-appliance -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:tag
 docker run --name zabbix -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:ubuntu-4.0.17

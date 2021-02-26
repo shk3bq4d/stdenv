@@ -6,7 +6,7 @@ import os
 import sys
 from pprint import pprint
 
-
+os.umask (0o27)
 
 def usage():
     print("""
@@ -47,6 +47,7 @@ from typing import Sequence, Union, Iterator, List, Tuple, no_type_check, Any, O
 
 from pprint import pprint, pformat
 
+os.umask (0o27)
 logger = logging.getLogger(__name__)
 
 class __NAME__(unittest.TestCase):

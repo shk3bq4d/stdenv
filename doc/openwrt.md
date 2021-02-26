@@ -288,3 +288,7 @@ https://github.com/openwrt/openwrt
 https://openwrt.org/toh/ubiquiti/unifi_appro # sucks
 https://openwrt.org/toh/ubiquiti/unifiac     # much better
 https://web.archive.org/web/20201011085042if_/https://dl.ui.com/unifi/firmware/U7PG2/3.7.58.6385/BZ.qca956x.v3.7.58.6385.170508.0957.bin
+
+
+# DNS snooping with dnsmasq --log-queries=extra
+/usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf.cfg01411c -d -x /var/run/dnsmasq/dnsmasq.cfg01411c.pid --log-queries=extra 2>&1 | grep 10.19.29.83

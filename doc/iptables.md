@@ -81,3 +81,26 @@ iptables -P OUTPUT ACCEPT
 # snapserver k8s
 iptables -I FORWARD 1 -p tcp -m tcp --destination 10.19.29.0/24 -j ACCEPT
 iptables -I FORWARD 1 -p udp --destination 10.19.29.0/24 -j ACCEPT
+
+# transparent redirection
+
+## assuming eth0 as external and eth1 as internal (lan, 192.168.1.0/24) interface, here are two sample iptables rules for redirecting http traffic:
+iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j DNAT --to 192.168.1.1:3128
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3128
+
+iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 10.202.10.69:5353
+iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-port 5353
+
+iptables -t nat -A PREROUTING -p tcp --dport [port] -j DNAT --to [home-ip]:[port]
+iptables -t nat -A POSTROUTING -d [home-ip] -j MASQUERADE
+
+iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 10.202.10.69:5353
+iptables -t nat -A POSTROUTING -p udp -d 10.202.10.69 -j MASQUERADE
+iptables -t nat -A PREROUTING -p tcp --dport 53 -j DNAT --to 10.202.10.69:5353
+iptables -t nat -A POSTROUTING -p tcp -d 10.202.10.69 -j MASQUERADE
+
+
+iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 10.202.10.69:5353
+iptables -t nat -A POSTROUTING -p udp -d 10.202.10.69 -j MASQUERADE
+
+iptables -t nat -A PREROUTING -p udp --dport 53 -j LOG --log-prefix "mygrepword" --log-level 6
