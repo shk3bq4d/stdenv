@@ -422,5 +422,25 @@ return value;
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2Frelease%2F5.0 # changelog
 
+```sh
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
+
+zabbix_sender -z localhost -s fakehost_testprefix -k "service.discovery" -o \
+'[
+{ "{#SERVICE.NAME}":        "s1",
+  "{#SERVICE.DISPLAYNAME}": "s one",
+  "{#SERVICE.STARTUPNAME}": "automatic"
+}
+,{"{#SERVICE.NAME}":        "s2",
+  "{#SERVICE.DISPLAYNAME}": "s two",
+  "{#SERVICE.STARTUPNAME}": "manual"
+}
+]'
+```
+
+
+# 
+net.tcp.port[<ip>,port] # either simple check or zabbix agent checks if TCP connection is possible
+net.tcp.service[service,<ip>,<port>] # either simple check or zabbix agent checks if one one ssh, ldap, smtp, ftp, http, pop, nntp, imap, tcp, https, telnet service is possible, see how this works: https://www.zabbix.com/documentation/current/manual/appendix/items/service_check_details
+https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/simple_checks

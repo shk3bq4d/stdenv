@@ -203,7 +203,7 @@ function ssh() {
                 f=$HOME/.words/$1
                 if [[ -f $f ]]; then
                     BIN=sshpass
-                    OPTS="$OPTS -f$f ssh"
+                    OPTS="-f$f ssh $OPTS"
                 else
                     echo "you may set your password in $f"
                 fi
