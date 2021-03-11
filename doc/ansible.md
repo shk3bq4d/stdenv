@@ -2088,8 +2088,8 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ list1 | unique }}
 {{ list1 | union(list2) }}
 {{ list1 | intersect(list2) }}
-{{ list1 | difference(list2) }}
-{{ list1 | symmetric_difference(list2) }}
+{{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2):
+{{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
 {{ dict | dict2items }}
 {{ files | dict2items(key_name='file', value_name='path') }}
 {{ tags | items2dict }}
