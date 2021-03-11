@@ -176,6 +176,7 @@ freebsd)
     alias -g 'X1@'='|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
     ;;
 esac
+alias -g HF="$(hostname -f)"
 alias -g XV="|xargs bash -c '</dev/tty vim \$@' ignoreme"
 alias -g XC="|xclip-tee.sh"
 alias git='nocorrect git'

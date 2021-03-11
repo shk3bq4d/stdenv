@@ -4,7 +4,7 @@
 set -euo pipefail
 
 test -z "${UNAME:-}" && UNAME="$(uname)"
-echo "$0 $@" > ~/.tmp/log/vim.exec
+test -d ~/.tmp/log && echo "$0 $@" > ~/.tmp/log/vim.exec
 
 OLDPATH="$PATH"
 export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
