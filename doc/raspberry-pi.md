@@ -47,3 +47,10 @@ sed /etc/lightdm/lightdm.conf -i -e 's/^\(#\|\)autologin-user=.*/autologin-user=
 # https://gist.github.com/petehamilton/5412334
 sudo apt-get install unclutter # unclutter hides the mouse
 ```
+
+# hardware reboot
+echo s | sudo tee /proc/sysrq-trigger
+echo u | sudo tee /proc/sysrq-trigger
+echo b | sudo tee /proc/sysrq-trigger
+
+# https://github.com/raspberrypi/linux/issues/4047

@@ -426,6 +426,10 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
 
+# actions
+/etc/opsgenie/zabbix2opsgenie -triggerName='{EVENT.NAME}' -triggerId='{TRIGGER.ID}' -triggerStatus='{TRIGGER.STATUS}' -triggerSeverity='{TRIGGER.SEVERITY}' -triggerDescription='{TRIGGER.DESCRIPTION}' -triggerUrl='{TRIGGER.URL}' -triggerValue='{TRIGGER.VALUE}' -triggerHostGroupName='{TRIGGER.HOSTGROUP.NAME}' -hostName='{HOST.NAME}' -ipAddress='{IPADDRESS}' -eventId='{EVENT.ID}' -date='{DATE}' -time='{TIME}' -itemKey='{ITEM.KEY}' -itemValue='{ITEM.VALUE}' -recoveryEventStatus='{EVENT.RECOVERY.STATUS}' -teams=ALL
+/usr/lib/zabbix/externalscripts/log.sh '{DATE}' '{TIME}' '{TRIGGER.SEVERITY}' '{TRIGGER.STATUS}' '{EVENT.NAME}'
+
 zabbix_sender -z localhost -s fakehost_testprefix -k "service.discovery" -o \
 '[
 { "{#SERVICE.NAME}":        "s1",
@@ -444,3 +448,4 @@ zabbix_sender -z localhost -s fakehost_testprefix -k "service.discovery" -o \
 net.tcp.port[<ip>,port] # either simple check or zabbix agent checks if TCP connection is possible
 net.tcp.service[service,<ip>,<port>] # either simple check or zabbix agent checks if one one ssh, ldap, smtp, ftp, http, pop, nntp, imap, tcp, https, telnet service is possible, see how this works: https://www.zabbix.com/documentation/current/manual/appendix/items/service_check_details
 https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/simple_checks
+
