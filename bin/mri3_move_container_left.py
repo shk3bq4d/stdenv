@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -65,8 +65,6 @@ def logging_conf(
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
 
     logging_conf(use='stdout syslog')
     try:

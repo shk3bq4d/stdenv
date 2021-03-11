@@ -362,3 +362,16 @@ drwxr-x--- umask-d-027
 IFNAME=enp0s31f6
 sudo ip address flush dev $IFNAME
 sudo ip address add 192.168.1.254/24 dev $IFNAME
+
+# battery
+```sh
+# method 1)
+cat /sys/class/power_supply/BAT0/capacity
+# method 2)
+find /sys/class/power_supply/BAT0/ -type f | xargs -tn1 cat
+# method 3)
+upower -i /org/freedesktop/UPower/devices/battery_BAT0
+# method 4)
+upower -i `upower -e | grep 'BAT'`
+# further methods -> https://ostechnix.com/how-to-check-laptop-battery-status-in-terminal-in-linux/
+```

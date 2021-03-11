@@ -203,6 +203,8 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 au BufNewFile,BufRead *.yaml set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml  set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
+autocmd FileType yaml setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
+autocmd FileType yaml.ansible setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
 au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java

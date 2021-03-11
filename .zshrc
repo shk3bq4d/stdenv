@@ -125,6 +125,7 @@ for c in \
     ; do
     eval "alias $c='nocorrect $c'"
 done
+alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'

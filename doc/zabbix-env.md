@@ -424,3 +424,7 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2
 
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
+
+# actions
+/etc/opsgenie/zabbix2opsgenie -triggerName='{EVENT.NAME}' -triggerId='{TRIGGER.ID}' -triggerStatus='{TRIGGER.STATUS}' -triggerSeverity='{TRIGGER.SEVERITY}' -triggerDescription='{TRIGGER.DESCRIPTION}' -triggerUrl='{TRIGGER.URL}' -triggerValue='{TRIGGER.VALUE}' -triggerHostGroupName='{TRIGGER.HOSTGROUP.NAME}' -hostName='{HOST.NAME}' -ipAddress='{IPADDRESS}' -eventId='{EVENT.ID}' -date='{DATE}' -time='{TIME}' -itemKey='{ITEM.KEY}' -itemValue='{ITEM.VALUE}' -recoveryEventStatus='{EVENT.RECOVERY.STATUS}' -teams=ALL
+/usr/lib/zabbix/externalscripts/log.sh '{DATE}' '{TIME}' '{TRIGGER.SEVERITY}' '{TRIGGER.STATUS}' '{EVENT.NAME}'
