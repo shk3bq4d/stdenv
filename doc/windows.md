@@ -153,3 +153,10 @@ systeminfo | find "System Boot Time:"
 
 nslookup -type=ptr 1.2.3.4 # dig -x reverse DNS lookup
 ping -a 1.2.3.4 # dig -x reverse DNS lookup. The trouble with ping instead of nslookup is that ping may resolve from other method than DNS. See https://serverfault.com/a/352556
+
+
+echo bip &::  this is a comment as ampersand add a new command and ::  at the beginning of a command is a comment
+echo bip &REM this is a comment as ampersand add a new command and REM at the beginning of a command is a comment
+shutdown /l &:: log off
+shutdown /l /f /t 0 &:: force log off
+mstsc /v server:port &:: rdp remote desktop protocol
