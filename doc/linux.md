@@ -340,7 +340,10 @@ net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 net.ipv6.conf.eth0.disable_ipv6 = 1
 
+# systctl
+cat /proc/sys/net/ipv4/{tcp_keepalive_time,tcp_tw_reuse,tcp_tw_recycle}
 
+# umask
 + umask 007
 + umask -S
 u=rwx,g=rwx,o=
