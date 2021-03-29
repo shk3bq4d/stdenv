@@ -1,6 +1,7 @@
 # /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
 Start-Service -Name "MpsSvc" # start firewall service
+get-aduser -Filter 'Name -like "*oper"'
 get-service "wuauserv"       -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize # windows update
 get-service "Zabbix Agent 2"
 get-service "Zabbix Agent 2" -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize
