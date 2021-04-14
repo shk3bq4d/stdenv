@@ -273,6 +273,10 @@ endif
 :imap <F6> <Esc>:call MrF6()<CR><CR>
 :map  <F5>      :call MrF5()<CR><CR>
 :imap <F5> <Esc>:call MrF5()<CR><CR>
+":map  <F4>      :exec "silent !~/bin/sendkeys-citrix-and-return.sh '" .  getline('.') . "'"<CR>:redraw!<CR>
+":map  <F4>      :.w !xargs ~/bin/sendkeys-citrix-and-return.sh<CR>:redraw!<CR>
+:map  <F4>      :.w !~/bin/sendkeys-citrix-stdin.sh<CR>:redraw!<CR>
+":imap <F4> <Esc>:call MrF5()<CR><CR>
 :nmap <F3> :AnsiEsc<CR><CR>
 ":nmap <F7> :pc!<CR>:let a:x=`date +'%Y'`<CR>:w<CR>:silent !chmod +x %:p<CR>:execute "silent !%:p 2>&1 \| tee /tmp/" . x . ".tmp"<CR>:pedit! +:42343234 /tmp/%:t.tmp<CR>:redraw!<CR><CR>
 
