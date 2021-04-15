@@ -230,7 +230,9 @@ case $SCRIPT in \
             #[[ "$key" == "ansible"* ]] && key=${key^^}
             echo "export ANSIBLE_${key^^}=$value"
             eval "export ANSIBLE_${key^^}=$value"
-        done < <(head -n 50 $SCRIPT | sed -r -n -e 's/^.{,4}vimf6_ansible_env:\s*(.+)\s*[:=]\s*(.*?)/\1 \2/ p')
+            echo "export ${key^^}=$value"
+            eval "export ${key^^}=$value"
+        done < <(head -n 50 $SCRIPT | sed -r -n -e 's/^.{,4}vimf6_ansible_env:\s*(.+)\s*[:= ]\s*(.*?)/\1 \2/ p')
 
         export PYTHONUNBUFFERED=1
         export ANSIBLE_STDOUT_CALLBACK=yaml

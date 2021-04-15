@@ -2,14 +2,14 @@
 ps | grep -v grep | grep dnsmasq | awk '{print $1'} | xargs kill -SIGHUP
 
 
-# may 2018 tp-link archer c2600 v1.0
+# may 2018 tp-link archer c2600 v1.0 ap-salon
 https://openwrt.org/toh/tp-link/tp-link_archer_c2600_v1
 https://openwrt.org/docs/guide-user/installation/generic.flashing.tftp
 wget http://downloads.lede-project.org/releases/17.01.4/targets/ipq806x/generic/lede-17.01.4-ipq806x-C2600-squashfs-factory.bin
 cp -p lede-17.01.4-ipq806x-C2600-squashfs-factory.bin ArcherC2600_1.0_tp_recovery.bin
 sudo systemctl stop NetworkManager
 sudo killall dnsmasq
-@begin=sh@
+```sh
 #!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
@@ -34,7 +34,7 @@ sudo dnsmasq -i $IFNAME --dhcp-range=192.168.0.86,192.168.0.155 \
 
 echo EOF
 exit 0
-@end=sh@
+```
 sudo ifconfig eno2 192.168.1.89
 browser to http://192.168.1.1
 # current version is Powered by LuCI lede-17.01 branch (git-17.290.79498-d3f0685) / LEDE Reboot 17.01.4 r3560-79f57e422d
@@ -48,7 +48,9 @@ went to https://www.reddit.com/r/openwrt/comments/6afbxh/wireless_is_disabled_or
 and
 ssh to box and run "iw phy0 info", then reenable interface on GUI
 
+```sh
 curl 'http://10.19.29.251/cgi-bin/luci/?status=1&_=0.8997745715767451' -H 'DNT: 1' -H 'Accept-Encoding: gzip, deflate' -H 'Accept-Language: en-US,en;q=0.9,fr;q=0.8' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/73.0.3683.86 Chrome/73.0.3683.86 Safari/537.36' -H 'Accept: */*' -H 'Referer: http://10.19.29.251/cgi-bin/luci/' -H 'Cookie: sysauth=ac182ba23a11f1fb6fcfc74596be7d61' -H 'Connection: keep-alive' --compressed
+```
 ```json
 {
     "conncount": 11,
@@ -222,12 +224,33 @@ http://downloads.openwrt.org/releases/19.07.3/targets/ramips/mt7621/openwrt-19.0
 https://github.com/stman/OpenWRT-19.07.2-factory-tar-file-for-Ubiquiti-EdgeRouter-x/blob/master/openwrt-ramips-mt7621-ubnt-erx-initramfs-factory.tar
 scp root@192.168.1.1:/etc/config/\* .
 
-# TL-WDR3600
+## upgrade
+https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka#terminal_upgrade_process
+
+### 2021-02-02
+wget http redirect failed when downloading from device, had to download from apr16 then scp the file
+http://downloads.openwrt.org/releases/19.07.6/targets/ramips/mt7621/openwrt-19.07.6-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin # upgrade
+
+## reboot network bug
+https://bugs.openwrt.org/index.php?do=details&task_id=3450&string=mtk_soc_eth&type%5B0%5D=&sev%5B0%5D=&pri%5B0%5D=&due%5B0%5D=&reported%5B0%5D=&cat%5B0%5D=&status%5B0%5D=open&percent%5B0%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=
+https://bugs.openwrt.org/index.php?do=details&task_id=2628
+https://forum.openwrt.org/t/ramips-mt7621-freewrt-20-12-master-branch-based/82672/18
+
+# TL-WDR3600 ap-galetas-east
+https://openwrt.org/toh/tp-link/tl-wdr3600
 ssh root@10.19.29.249
 cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 wdr3600password1.
-https://openwrt.org/toh/tp-link/tl-wdr3600
 **MR: the TFTP recovery from above linked worked**
+wget http://downloads.openwrt.org/releases/19.07.6/targets/ath79/generic/openwrt-19.07.6-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+
+## ap-salon
+https://openwrt.org/toh/tp-link/tp-link_archer_c2600_v1
+http://downloads.openwrt.org/releases/19.07.6/targets/ipq806x/generic/openwrt-19.07.6-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
+
+## linksys WRT54gl
+https://openwrt.org/toh/linksys/wrt54g
+better not touch the OS at all, currently Backfire (10.03.1-rc4, r24045)
 
 > ## TFTP auto recovery in revision 1.5
 > At least some revision 1.5 routers contains bootloader recovery TFTP client. To activate it press and hold WPS/Reset Button during powering on until WPS LED turns on. Connect computer to LAN1. Using TCPdump, you should see ARP requests from router having address 192.168.0.86 looking for address 192.168.0.66.
@@ -256,3 +279,16 @@ apt update && apt install atftpd
 cd /wordkir && atftpd --no-fork --daemon .
 ```
 **a while later the device was answering to DHCP requests**
+
+
+https://github.com/openwrt/openwrt
+
+
+# ubiquiti anifi ap pro
+https://openwrt.org/toh/ubiquiti/unifi_appro # sucks
+https://openwrt.org/toh/ubiquiti/unifiac     # much better
+https://web.archive.org/web/20201011085042if_/https://dl.ui.com/unifi/firmware/U7PG2/3.7.58.6385/BZ.qca956x.v3.7.58.6385.170508.0957.bin
+
+
+# DNS snooping with dnsmasq --log-queries=extra
+/usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf.cfg01411c -d -x /var/run/dnsmasq/dnsmasq.cfg01411c.pid --log-queries=extra 2>&1 | grep 10.19.29.83

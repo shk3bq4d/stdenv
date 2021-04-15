@@ -30,7 +30,10 @@ set -euo pipefail
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
 mrarg=
-[[ $# -eq 0 ]] && mrarg="--all-namespaces"
+if [[ $# -eq 0 ]]; then
+	echo "No arg provided, listening to all namespaces"
+	mrarg="--all-namespaces"
+fi
 
 while :;
 do

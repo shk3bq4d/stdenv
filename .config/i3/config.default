@@ -4,6 +4,7 @@ export STDHOME_MOD="Mod4"
 export STDHOME_FIRSTBAR_OUTPUT="output \$ol
 tray_output \$ol
 "
+export STDHOME_MOVE_WORKSPACE_DIRECTION="right"
 export STDHOME_FIRSTBAR_POSITION="top"
 export STDHOME_OUTPUTS='
 set $ol default

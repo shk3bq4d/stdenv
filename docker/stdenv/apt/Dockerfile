@@ -40,6 +40,7 @@ RUN \
 		python-pip \
 		python2.7 \
 		python3-pip \
+		rename \
 		rsync \
 		screen \
 		software-properties-common \

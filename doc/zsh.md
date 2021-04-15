@@ -62,3 +62,7 @@ compaudit; less ~/.zcompdump
 myargs="-e hehe"; ls ${=myargs} <= dequote arguments with the equal
 
 git config oh-my-zsh.hide-status 1
+
+
+${myvar:l} # l lowercase lower-case
+${myvar:u} # u uppercase upper-case

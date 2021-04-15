@@ -203,6 +203,8 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 au BufNewFile,BufRead *.yaml set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml  set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
+autocmd FileType yaml setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
+autocmd FileType yaml.ansible setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
 au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java
@@ -271,6 +273,10 @@ endif
 :imap <F6> <Esc>:call MrF6()<CR><CR>
 :map  <F5>      :call MrF5()<CR><CR>
 :imap <F5> <Esc>:call MrF5()<CR><CR>
+":map  <F4>      :exec "silent !~/bin/sendkeys-citrix-and-return.sh '" .  getline('.') . "'"<CR>:redraw!<CR>
+":map  <F4>      :.w !xargs ~/bin/sendkeys-citrix-and-return.sh<CR>:redraw!<CR>
+:map  <F4>      :.w !~/bin/sendkeys-citrix-stdin.sh<CR>:redraw!<CR>
+":imap <F4> <Esc>:call MrF5()<CR><CR>
 :nmap <F3> :AnsiEsc<CR><CR>
 ":nmap <F7> :pc!<CR>:let a:x=`date +'%Y'`<CR>:w<CR>:silent !chmod +x %:p<CR>:execute "silent !%:p 2>&1 \| tee /tmp/" . x . ".tmp"<CR>:pedit! +:42343234 /tmp/%:t.tmp<CR>:redraw!<CR><CR>
 

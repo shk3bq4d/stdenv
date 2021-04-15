@@ -1,7 +1,7 @@
 # ex: set expandtab ts=4 sw=4:
 [ -z "$PS1" ] && return
 [ -z "$RCD" ] && export RCD=$HOME
-
+umask 027
 # handles urxvt resize bug
 # https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing and,
 # better explained https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing

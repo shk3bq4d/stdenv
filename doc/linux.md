@@ -339,3 +339,42 @@ net.ipv6.conf.all.disable_ipv6 = 1
 net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 net.ipv6.conf.eth0.disable_ipv6 = 1
+
+# systctl
+cat /proc/sys/net/ipv4/{tcp_keepalive_time,tcp_tw_reuse,tcp_tw_recycle}
+
+# umask
++ umask 007
++ umask -S
+u=rwx,g=rwx,o=
++ touch umask-f-007
++ mkdir umask-d-007
++ umask 027
++ umask -S
+u=rwx,g=rx,o=
++ touch umask-f-027
++ mkdir umask-d-027
++ ls -ld umask-d-007 umask-d-027 umask-f-007 umask-f-027
+drwxrwx--- umask-d-007
+-rw-rw---- umask-f-007
+drwxr-x--- umask-d-027
+-rw-r----- umask-f-027
+
+
+
+IFNAME=enp0s31f6
+sudo ip address flush dev $IFNAME
+sudo ip address add 192.168.1.254/24 dev $IFNAME
+
+# battery
+```sh
+# method 1)
+cat /sys/class/power_supply/BAT0/capacity
+# method 2)
+find /sys/class/power_supply/BAT0/ -type f | xargs -tn1 cat
+# method 3)
+upower -i /org/freedesktop/UPower/devices/battery_BAT0
+# method 4)
+upower -i `upower -e | grep 'BAT'`
+# further methods -> https://ostechnix.com/how-to-check-laptop-battery-status-in-terminal-in-linux/
+```

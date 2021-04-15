@@ -203,7 +203,7 @@ function ssh() {
                 f=$HOME/.words/$1
                 if [[ -f $f ]]; then
                     BIN=sshpass
-                    OPTS="$OPTS -f$f ssh"
+                    OPTS="-f$f ssh $OPTS"
                 else
                     echo "you may set your password in $f"
                 fi
@@ -211,7 +211,7 @@ function ssh() {
                 echo "~/bin/dot.bashfunctions install sshpass"
             fi
             ;;
-        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.25*|10.19.29.60|piproj)
+        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.2[4-5][1-9]|10.19.29.60|piproj|ap-*)
             ;;
         *)
             hash sshrc 2>/dev/null && BIN=sshrc
@@ -1027,10 +1027,47 @@ kubectl-create-job-from-cronjob() {
 }
 
 crontab-single-entry-in-three-minutes() {
+    local dow
     #     45  7  2  2 Tue  USER   test `date +\%Y` == 2021 && MYCOMMAND
+    echo "now local time zone is $(date +'%H:%M:%S')"
+    echo "now in UTC          is $(date --utc +'%H:%M:%S')"
+    dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     echo  "#min hou dom mon dow user command"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m %a')      test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
-    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m %a') USER test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow      MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow USER MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow      test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m'      ) $dow USER test \`date +\\%Y\` == $(date +%Y) && MYCOMMAND"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow      MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow USER MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow      test \`date +\\%Y\` == $(date +%Y) && MYUTC"
+    echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow USER test \`date +\\%Y\` == $(date +%Y) && MYUTC"
+}
+
+jq-versions() {
+    ! which -a jq &>/dev/null && echo "No jq in path $PATH" && return
+    which -a jq | while read line; do
+        if $line --help | grep -q stedolan.github.io; then
+            echo "$line : $($line --version) stedolan.github.io"
+        else
+            echo "$line : $($line --version) other version WIP"
+        fi
+    done
+}
+
+yq-versions() {
+    ! which -a yq &>/dev/null && echo "No yq in path $PATH" && return
+    which -a yq | while read line; do
+        if $line --help 2>&1| grep -q github.com/kislyuk/yq; then
+            echo "$line : $($line --version 2>&1) https://github.com/kislyuk/yq not the one we'd like"
+        elif $line 2>&1| grep -q "compare          yq x"; then
+            echo "$line : $($line --version 2>&1) http://mikefarah.github.io/yq/ V3"
+        elif $line 2>&1| grep -q "Apply expression to each document in each yaml file given in sequence"; then
+            echo "$line : $($line --version 2>&1) http://mikefarah.github.io/yq/ V4"
+        else
+            echo "$line : $($line --version 2>&1) unidentified version"
+        fi
+        set +x
+    done
 }
 
 true # last statement must return true

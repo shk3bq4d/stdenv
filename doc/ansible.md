@@ -1205,15 +1205,21 @@ ansible localhost -m setup -a "gather_subset=oha"      | grep -E ""
 for i in min hardware network virtual oha all; do ansible localhost -m setup -a "gather_subset=$i" | sed -n -r -e "s/(ansible.*)/$i: \\1/"; done
 gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, apparmor, architecture, caps, chroot, cmdline, date_time, default_ipv4, default_ipv6, devices, distribution, distribution_major_version, distribution_release, distribution_version, dns, effective_group_ids, effective_user_id, env, facter, fibre_channel_wwn, fips, hardware, interfaces, is_chroot, iscsi, kernel, kernel_version, local, lsb, machine, machine_id, mounts, network, nvme, ohai, os_family, pkg_mgr, platform, processor, processor_cores, processor_count, python, python_version, real_user_id, selinux, service_mgr, ssh_host_key_dsa_public, ssh_host_key_ecdsa_public, ssh_host_key_ed25519_public, ssh_host_key_rsa_public, ssh_host_pub_keys, ssh_pub_keys, system, system_capabilities, system_capabilities_enforced, user, user_dir, user_gecos, user_gid, user_id, user_shell, user_uid, virtual, virtualization_role, virtualization_type
 
+- name: gather fact ansible_date_time                     # setup gather_subset fact
+  when: ansible_date_time is not defined                  # setup gather_subset fact
+  setup:                                                  # setup gather_subset fact
+    gather_subset: setup_gather_subset.ansible_date_time  # setup gather_subset fact
+
+ansible corp -m shell -a "cmd=needs-restarting -r" -vvv                  # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
-ansible web -bm service -a "name=httpd state=started"                        # oneliner one-liner adhoc ad-hoc
-ansible web -bm service -a "name=httpd state=restarted"                        # oneliner one-liner adhoc ad-hoc
-ansible '*.lan' -bm service -a "name=rsyslog state=restarted"                        # oneliner one-liner adhoc ad-hoc
-ansible all -m file -a "path=/project/devops state=directory"                        # oneliner one-liner adhoc ad-hoc
-ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                        # oneliner one-liner adhoc ad-hoc
-ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"                        # oneliner one-liner adhoc ad-hoc
-ansible all -bm user -a "name=ansible group=devops password=ansible123"                        # oneliner one-liner adhoc ad-hoc
+ansible web -bm service -a "name=httpd state=started"                    # oneliner one-liner adhoc ad-hoc
+ansible web -bm service -a "name=httpd state=restarted"                  # oneliner one-liner adhoc ad-hoc
+ansible '*.lan' -bm service -a "name=rsyslog state=restarted"            # oneliner one-liner adhoc ad-hoc
+ansible all -m file -a "path=/project/devops state=directory"            # oneliner one-liner adhoc ad-hoc
+ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneliner one-liner adhoc ad-hoc
+ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneliner one-liner adhoc ad-hoc
+ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
@@ -2082,8 +2088,8 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ list1 | unique }}
 {{ list1 | union(list2) }}
 {{ list1 | intersect(list2) }}
-{{ list1 | difference(list2) }}
-{{ list1 | symmetric_difference(list2) }}
+{{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2):
+{{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
 {{ dict | dict2items }}
 {{ files | dict2items(key_name='file', value_name='path') }}
 {{ tags | items2dict }}

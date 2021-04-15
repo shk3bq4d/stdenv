@@ -375,7 +375,7 @@ unlock()            { _lock u; }   # drop a lock
 ### BEGIN OF SCRIPT ###
 
 # Simplest example is avoiding running multiple instances of script.
-exlock_now || exit 1
+! exlock_now && echo "FATAL: apparent concurrent run, please check $LOCKFILE" && exit 1
 . ~/bin/dot.lockfunctions; exlock_now || exit 1
 
 # Remember! Lock file is removed when one of the scripts exits and it is
@@ -1105,3 +1105,10 @@ myfunc "${ARRAY[@]}"
 ```
 
 A=$(</tmp/myfile) # built-in builtin read file into variable
+
+
+# pipebuffer
+tail -f /var/log/foo | stdbuf -o0 cut
+tail -f /var/log/foo | grep --line-buffered
+tail -f /var/log/foo | sed -u
+tail -f /var/log/foo | python -u
