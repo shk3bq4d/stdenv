@@ -50,6 +50,8 @@ ORDER BY (data_length + index_length) DESC;
 
 
 
+concat_ws("concat with first arg as word separator", "first word", "second word", ...)
+concat("first word", "second word")
 
 
 INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
@@ -58,7 +60,27 @@ INSERT INTO table_name VALUES (value1, value2, value3, ...);
 select Host, User, password from mysql.user \G; -- vertical line alignement (the \G at the end of the query does the trick)
 
 desc c01_templatecachequeries;
-show index from c01_templatecachequeries;
+
+show index from table_name from db_name; -- index indices
+show index from db_name.table_name; -- index indices
+select distinct table_name, index_name from information_schema.statistics where table_schema = `schema_name`; -- index indices
+select distinct table_name, index_name from information_schema.statistics where table_name in ("bip", "bop"); -- index indices
+
+create table bip as select * from bop limit 0; -- clone table without indices
+create table bip as select * from bop;         -- clone table without indices
+create table bip like bop;                     -- clone table with primary key index, without data, with partitions
+show create table bip; -- table DDL (withouth index)
+show table status; -- quickly see if tables have indice/index, are partitioned, when they've been created and updated
+
+select "random select query to be further editor in $EDITOR as it contains backslash e" \e;
+pager  vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -;
+pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init;
+pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init --chop-long-lines; -- truncate lines instead of wrapping
+
+select UNIX_TIMESTAMP(); -- now
+select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
+SELECT UNIX_TIMESTAMP('2021-11-27 12:35:03.123456') AS Result; -- as a float
+select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https://www.w3schools.com/sql/func_mysql_date_format.asp
 
 
 Alter table Empolyee disable constraint pk_EmpNumer;
@@ -70,4 +92,20 @@ CREATE TABLE bip (
     Age int,
     PRIMARY KEY (Personid)
 );
+timestamp(DATE_SUB(NOW(), INTERVAL 30 MINUTE))
+SELECT * FROM x WHERE ts BETWEEN NOW() - INTERVAL 30 MINUTE AND NOW();
+
+
+alter table `bip` partition by range (clock) (partition p0 values less than (0) engine = innodb); -- (re-)init partitioning for empty table. WARN: will destroy current partitions
+ALTER TABLE `bip` PARTITION BY RANGE (clock) (
+PARTITION p2021_04_14 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-15 00:00:00")) ENGINE = InnoDB,
+PARTITION p2021_04_15 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-16 00:00:00")) ENGINE = InnoDB
+);
+ALTER TABLE `bip` add PARTITION (partition p2021_04_15 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-16 00:00:00")) ENGINE = InnoDB);
+ALTER TABLE `bip` add PARTITION (partition future VALUES LESS THAN maxvalue ENGINE = InnoDB);
+alter table `bip` reorganize partition future into (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb, partition future values less than maxvalue engine = innodb);
+ALTER TABLE e2 REMOVE PARTITIONING; -- halt stop drop
+
+RENAME TABLE foo TO foo_old, foo_new To foo; -- swap exchange switch tables
 ```
+

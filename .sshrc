@@ -1,5 +1,5 @@
 if [[ -f ~/.stdenv_aliases ]]; then
-	if [[ -f ~/.zshrc ]]; then
+	if [[ -f ~/.zshrc ]] && hash -v zsh &>/dev/null; then
 		exec zsh
 	else
 		# retrieves and executes user shell
