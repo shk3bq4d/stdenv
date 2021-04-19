@@ -97,15 +97,25 @@ SELECT * FROM x WHERE ts BETWEEN NOW() - INTERVAL 30 MINUTE AND NOW();
 
 
 alter table `bip` partition by range (clock) (partition p0 values less than (0) engine = innodb); -- (re-)init partitioning for empty table. WARN: will destroy current partitions
-ALTER TABLE `bip` PARTITION BY RANGE (clock) (
-PARTITION p2021_04_14 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-15 00:00:00")) ENGINE = InnoDB,
-PARTITION p2021_04_15 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-16 00:00:00")) ENGINE = InnoDB
-);
-ALTER TABLE `bip` add PARTITION (partition p2021_04_15 VALUES LESS THAN (UNIX_TIMESTAMP("2021-04-16 00:00:00")) ENGINE = InnoDB);
-ALTER TABLE `bip` add PARTITION (partition future VALUES LESS THAN maxvalue ENGINE = InnoDB);
-alter table `bip` reorganize partition future into (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb, partition future values less than maxvalue engine = innodb);
-ALTER TABLE e2 REMOVE PARTITIONING; -- halt stop drop
 
-RENAME TABLE foo TO foo_old, foo_new To foo; -- swap exchange switch tables
+alter table `bip` partition by range (clock) (
+  partition p2021_04_14 values less than (unix_timestamp("2021-04-15 00:00:00")) engine = innodb,
+  partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb
+  );
+
+alter table `bip` add partition (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb);
+alter table `bip` add partition (partition future values less than maxvalue engine = innodb);
+alter table `bip` reorganize partition future into (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb, partition future values less than maxvalue engine = innodb);
+alter table e2 remove partitioning; -- halt stop drop
+select count(1) from trends_uint partition(p2020_05);
+
+rename table foo to foo_old, foo_new to foo; -- swap exchange switch tables
+
+show variables like 'lock_wait_timeout'; -- see session duration for aquiring table / metadata lock
+set lock_wait_timeout=10;
+
+select id, db, command, time, state, info from information_schema.processlist;
+show processlist;
+show full processlist; -- see full query
 ```
 
