@@ -160,3 +160,5 @@ echo bip &REM this is a comment as ampersand add a new command and REM at the be
 shutdown /l &:: log off
 shutdown /l /f /t 0 &:: force log off
 mstsc /v server:port &:: rdp remote desktop protocol
+
+win+. # emoji helper

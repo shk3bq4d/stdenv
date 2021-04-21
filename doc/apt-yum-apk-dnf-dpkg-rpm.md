@@ -35,6 +35,7 @@ yum info elasticsearch # show version
 yum whatprovides */ldapsearch && yum clean all
 yum whatprovides ldapwhoami  && yum clean all # openldap-clients
 yum whatprovides ack       && yum clean all
+yum whatprovides uuencode  && yum clean all # sharutils
 yum whatprovides ack       && yum clean all # moreutils
 yum whatprovides ts       && yum clean all # moreutils
 yum whatprovides dig       && yum clean all # bind-utils
