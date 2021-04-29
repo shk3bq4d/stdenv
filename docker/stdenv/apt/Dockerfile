@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN \
@@ -35,10 +35,7 @@ RUN \
 		p7zip-full \
 		p7zip-rar \
 		puppet-lint \
-		pylint \
 		pylint3 \
-		python-pip \
-		python2.7 \
 		python3-pip \
 		rename \
 		rsync \
@@ -56,7 +53,7 @@ RUN \
 	&& true
 
 RUN true \
-	&& mkdir -p /stdenv/root /stdenv/user \
+	&& mkdir -p /stdenv/root /stdenv/user /stdenv/user/.tmp/log \
 	&& useradd -u 1000 -d /home/user             -m     user -s /usr/bin/zsh \
 	&& touch /root/.zshrc /home/user/.zshrc \
 	&& chown user: /home/user/.zshrc /stdenv/user/ \

@@ -68,10 +68,10 @@ if [[ -n "${STDENV_RUNAS:-}" ]]; then
 	cd "$(eval echo ~$STDENV_RUNAS)"
 	if [[ $# -gt 0 ]]; then
 		mrecho "runas exec"
-		sudo -Eiu $STDENV_RUNAS bash -c "exec $@"
+		sudo -iu $STDENV_RUNAS bash -c "exec $@"
 	else
 		mrecho "runas zsh"
-		sudo -Eiu $STDENV_RUNAS zsh
+		sudo -iu $STDENV_RUNAS zsh
 	fi
 else
 	cd /root
