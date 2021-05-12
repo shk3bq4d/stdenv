@@ -12,6 +12,17 @@ RUN true \
 		sh \
 		sshuttle \
 		psutil \
+	&& sudo -i -u user \
+	    pip3 install --no-warn-script-location -U --user \
+		pip \
+		wheel \
+		setuptools \
+	&& sudo -i -u user \
+	    pip3 install --no-warn-script-location --user \
+		requests \
+		sh \
+		sshuttle \
+		psutil \
 	&& true
 
 ENTRYPOINT ["/root/entrypoint.sh"]

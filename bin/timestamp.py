@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
@@ -32,7 +32,7 @@ def logging_conf(
 def go(args):
     # https://docs.python.org/2/library/argparse.html
     parser = argparse.ArgumentParser(description="Try to human format a date")
-    parser.add_argument("ts", type=str, nargs='*', help="timestampe", default=[dt.utcnow().strftime('%s')])
+    parser.add_argument("ts", type=str, nargs='*', help="timestampe", default=[dt.utcnow().strftime('%s'), dt.now().strftime('%s')])
     script_directory, script_name = os.path.split(__file__)
     script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
     ar = parser.parse_args(args)
@@ -50,9 +50,6 @@ def do(bip):
         pass
 
 if __name__ == '__main__':
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
-
     logging_conf()
     try:
         go(sys.argv[1:])

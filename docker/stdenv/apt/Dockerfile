@@ -53,9 +53,10 @@ RUN \
 	&& true
 
 RUN true \
-	&& mkdir -p /stdenv/root /stdenv/user /stdenv/user/.tmp/log \
+	&& mkdir -p /stdenv/root /stdenv/user \
 	&& useradd -u 1000 -d /home/user             -m     user -s /usr/bin/zsh \
 	&& touch /root/.zshrc /home/user/.zshrc \
+	&& mkdir -p /root/.tmp/log /stdenv/user/.tmp/log \
 	&& chown user: /home/user/.zshrc /stdenv/user/ \
 	&& true
 
