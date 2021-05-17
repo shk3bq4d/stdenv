@@ -456,3 +456,12 @@ select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as acc
 
 select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as account, last_valuehg.* from last_valuehg where hg like 'windows' and name like 'State of service%') a where account like '%stoneh%' limit 50;
 ```
+
+# context contextual macros
+[https://www.zabbix.com/documentation/current/manual/config/macros/user_macros_context]
+```bash
+{$LOW_SPACE_LIMIT}	User macro without context.
+{$LOW_SPACE_LIMIT:/tmp}	User macro with context (static string).
+{$LOW_SPACE_LIMIT:regex:"^/tmp$"}	User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
+{$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}	User macro with context (regular expression). Matches all strings prefixed with /var/log/.
+```

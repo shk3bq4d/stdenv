@@ -1232,8 +1232,8 @@ sudo ansible localhost -m authorized_key -a "user=mysql-backup key_options='no-p
 ansible -i inventory.yml HOSTNAME -m authorized_key -a "user=ansible exclusive=no comment=id_rsa_ansible key='$(cat ~/.ssh/id_rsa_ansible.pub)'"
 ansible -i inventory.yml "green:&linux" -m shell -a "cat /proc/loadavg" # cpu usage
 ansible -i inventory.yml "green:&linux" -m shell -a "netstat -tn | wc -l" # network connections number
-ansible -m shell -vba 'rpm -q kernel' 'azure:&uat:&linux'
-ansible -m shell -vba 'package-cleanup --oldkernels --count=2' 'azure:&uat:&linux'
+ansible -m shell -vba 'rpm -q kernel' 'azure:&uat:&linux' # list versions of installed kernel
+ansible -m shell -vba 'package-cleanup --oldkernels --count=2 --assumeyes' 'azure:&uat:&linux'
 
 when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -1243,7 +1243,7 @@ boolean: off,false => false
 
 https://docs.ansible.com/ansible/latest/modules/terraform_module.html
 https://github.com/ansible/ansible/blob/devel/lib/ansible/modules/cloud/misc/terraform.py
-https://alex.dzyoba.com/blog/terraform-ansible/
+https://alex.dzyoba.com/blog/terraform-ansible/ #
 
 https://docs.ansible.com/ansible/latest/modules/add_host_module.html
 ```yaml
@@ -2088,7 +2088,7 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ list1 | unique }}
 {{ list1 | union(list2) }}
 {{ list1 | intersect(list2) }}
-{{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2):
+{{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2), minus, list
 {{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
 {{ dict | dict2items }}
 {{ files | dict2items(key_name='file', value_name='path') }}

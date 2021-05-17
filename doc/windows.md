@@ -159,6 +159,7 @@ echo bip &::  this is a comment as ampersand add a new command and ::  at the be
 echo bip &REM this is a comment as ampersand add a new command and REM at the beginning of a command is a comment
 shutdown /l &:: log off
 shutdown /l /f /t 0 &:: force log off
+shutdown /r /t 18000 &:: restart machine in 5 hours
 mstsc /v server:port &:: rdp remote desktop protocol
 
 win+. # emoji helper

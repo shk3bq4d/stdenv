@@ -26,6 +26,8 @@
 --ignore-directory=is:.bzr
 
 --ignore-directory=is:.terraform
+--ignore-file=is:terraform.tfstate
+--ignore-file=is:terraform.tfstate.backup
 
 # Codeville
 # http://freecode.com/projects/codeville
