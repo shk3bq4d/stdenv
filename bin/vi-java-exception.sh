@@ -25,15 +25,17 @@ else
 fi
 
 echo "$ARGS" |
-    sed -r -e 's/(.* )?([a-zA-Z0-9_.]+)\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\(([a-zA-Z0-9_.]+):([0-9]+).*/\1 \2 \3 \4 \5 \6/' |
+    sed -r -e 's/(.* )?([a-zA-Z0-9_.]+)\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_]+)\(([a-zA-Z0-9_.]+):([0-9]+).*/\2 \3 \4 \5 \6/' |
     while read package classname function classfile linenumber; do
         package=$(echo "$package" | tr . /)
         if [[ -z "$classfile" ]]; then
             continue
         fi
-        files=$(find $PWD -type f -path *"/$package/$classfile")
+        files=$(find $PWD -type f -path "*/$package/$classfile")
         if [[ $( echo "$files" | wc -l ) -eq 1 ]]; then
-            echo youpi!
+            #cat >/dev/null # finishes to consume stdin
+            bash -c "</dev/tty vim \"$files\" +$linenumber"
+            exit $?
         else
             echo close enough!
             echo "$files"
