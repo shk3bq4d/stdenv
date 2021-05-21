@@ -29,6 +29,7 @@ processors:
       fail_on_error: true
 ```
 # https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html
+# https://www.elastic.co/guide/en/beats/filebeat/current/add-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/decode-json-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/processor-script.html
