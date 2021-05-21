@@ -7,6 +7,7 @@ if [[ -n "$STDHOME_DIRNAME" ]]; then
 else
 	test -z "${USER:-}" && USER=$(whoami)
 	for i in \
+		~/stdhome \
 		~/git/$USER/stdhome \
 		~/git/ly.abc1.ch/stdhome \
 		~/git/github/shk3bq4d/stdhome \
@@ -15,6 +16,7 @@ else
 		[[ -d "$i" ]] && echo "$i" && exit 0
 	done
 	for i in \
+		~/stdenv \
 		~/git/$USER/stdenv \
 		~/git/ly.abc1.ch/stdenv \
 		~/git/github/shk3bq4d/stdenv \
