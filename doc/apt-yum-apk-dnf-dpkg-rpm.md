@@ -30,6 +30,7 @@ sudo unattended-upgrade # apt implicitely applies security updates
 https://linux.die.net/man/5/yum.conf
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x available
+yum erase 'zabbix*' # purge
 yum list installed 'http*'
 yum info elasticsearch # show version
 yum whatprovides */ldapsearch && yum clean all
