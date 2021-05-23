@@ -222,7 +222,6 @@ set directory=$RCD/.tmp/vim/directory,.
 set backupdir=$RCD/.tmp/vim/backupdir,.
 set undodir=$RCD/.tmp/vim/undodir
 set undofile
-set viminfo+=n$RCD/.tmp/vim/viminfo
 
 "colorscheme desert
 if version >= 500
@@ -684,3 +683,4 @@ endif
 if &diff
 	set t_Co=8
 endif
+"set viminfo+=n$RCD/.tmp/vim/viminfo
