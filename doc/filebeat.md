@@ -14,6 +14,11 @@ output:
      json: # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-output-codec.html
        pretty: true
 
+# https://www.elastic.co/guide/en/beats/filebeat/current/configuring-output.html
+You configure Filebeat to write to a specific output by setting options
+in the Outputs section of the filebeat.yml config file. Only a single
+output may be defined.
+
 # https://www.elastic.co/guide/en/ecs/current/ecs-field-reference.html
 
 # https://www.elastic.co/guide/en/beats/filebeat/master/rate-limit.html
