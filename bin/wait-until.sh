@@ -24,6 +24,7 @@ target_epoch=$(date -d "$1" +%s)
 
 sleep_seconds=$(( $target_epoch - $current_epoch ))
 
+echo "Sleeping $sleep_seconds seconds until $1"
 sleep $sleep_seconds
 [[ $# -eq 2 ]] && sh -c "$2"
 exit 0
