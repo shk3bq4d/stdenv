@@ -495,6 +495,7 @@ bindcode $mod+27  exec --no-startup-id true
 bindcode $mod+Shift+27  exec --no-startup-id true
 exec --no-startup-id ~/bin/mri3_server_loop.sh 2>&1 | ts > ~/.tmp/log/i3_config_mri3_server.log
 exec --no-startup-id ~/bin/mrlsyncd.sh 2>&1 | ts > ~/.tmp/log/mrlsyncd.sh.log
+exec --no-startup-id ~/git/github/shk3bq4d/mrpyclip/clipboard-listener.py  2>&1 | ts > ~/.tmp/log/clipboard-listener.log
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)

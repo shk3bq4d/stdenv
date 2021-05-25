@@ -151,3 +151,16 @@ Keep in mind we're an engineering team and true helpdesk is not our forte.
 However, be sure that we will always try our best to help you, just as we expect you to help us in giving us the right info at the right time.
 
 If we feel an issue is raised without respecting guidelines, it may be closed without further due and you may need to reopen another one, with the proper information.
+
+## L1 not doing their job
+Hello Naveen,
+
+It is not obvious from the email trail what the problem is.
+
+What have you tried yourself with what results?
+
+Did you talk to other Service Desk people before escalading to level 3?
+
+Best regards,
+
+Marc

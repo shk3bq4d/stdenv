@@ -40,14 +40,17 @@ def go(args):
     script_directory, script_name = os.path.split(__file__)
     script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
     ar = parser.parse_args(args)
+    i = ar.identifier
+    i = re.sub(r'^h?t?t?p?s?:?/?/', '', i) # strip leading https://
+    i = re.sub(r'/.*$', '', i) # strip tailing /path
     h = hashlib.sha512(ar.identifier.encode()).hexdigest()
     print("""123r4p+{}{}@gmail.com
 {}-{}@abc1.ch
 password:
 Abcd12.-{}
 """.format(
-        ar.identifier, h[:8],
-        ar.identifier, h[:8],
+        i, h[:8],
+        i, h[:8],
         h[8:14]
         ))
 

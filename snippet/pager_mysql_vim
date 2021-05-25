@@ -1,0 +1,1 @@
+pager  vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -;

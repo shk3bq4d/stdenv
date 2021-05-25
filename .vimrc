@@ -222,7 +222,6 @@ set directory=$RCD/.tmp/vim/directory,.
 set backupdir=$RCD/.tmp/vim/backupdir,.
 set undodir=$RCD/.tmp/vim/undodir
 set undofile
-set viminfo+=n$RCD/.tmp/vim/viminfo
 
 "colorscheme desert
 if version >= 500
@@ -624,6 +623,12 @@ if has ('autocmd') " Remain compatible with earlier versions
 endif " has autocmd
 endif
 
+
+augroup sql " https://stackoverflow.com/questions/34841902/how-to-force-mysql-edit-command-to-use-vim-color-scheme
+    autocmd!
+    autocmd BufNew,BufEnter /tmp/sql* setlocal filetype=sql
+augroup END
+
 if version >= 500
     :function! MrF6()
         pc!
@@ -678,3 +683,4 @@ endif
 if &diff
 	set t_Co=8
 endif
+"set viminfo+=n$RCD/.tmp/vim/viminfo

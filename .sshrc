@@ -1,5 +1,5 @@
 if [[ -f ~/.stdenv_aliases ]]; then
-	if [[ -f ~/.zshrc ]]; then
+	if [[ -f ~/.zshrc ]] && hash zsh &>/dev/null; then
 		exec zsh
 	else
 		# retrieves and executes user shell
@@ -142,7 +142,7 @@ for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
     [ -f $f ] && source $f
 done
 is_zsh && unsetopt null_glob
-if [[ $EUID -eq 0 ]]; then
+if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then
     cd /var/log
 fi
 # /* ex: set filetype=sh: */

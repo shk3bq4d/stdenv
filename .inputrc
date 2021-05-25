@@ -25,3 +25,11 @@ set vi-cmd-mode-string \1\e[1 q\2
 # those two are for rxvt
 "\e[1~":beginning-of-line
 "\e[4~":end-of-line
+
+
+# set keymap vi
+# set meta-flag on
+# set input-meta on
+# set convert-meta off
+# set output-meta on
+# set bell-style none

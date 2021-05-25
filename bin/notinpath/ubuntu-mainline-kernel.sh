@@ -8,7 +8,10 @@ _tempdir=~/tmp/kernel-$(date +'%s')
 mkdir $_tempdir
 
 # https://kernel.ubuntu.com/~kernel-ppa/mainline/
-URL=https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11.10/amd64/
+URL=https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11.13/amd64/
+URL=https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12-rc8/amd64/
+URL=https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.12/amd64/
+URL=https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.11.16/amd64/
 
 cd $_tempdir
 curl -s $URL |
