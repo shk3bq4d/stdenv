@@ -4,9 +4,9 @@
 set -euo pipefail
 umask 027
 
-kubectl get ingress.extensions "$@"
-kubectl get ingresses.networking.k8s.io "$@"
-kubectl get orders.acme.cert-manager.io "$@"
-kubectl get certificates.cert-manager.io "$@"
-kubectl get certificaterequests.cert-manager.io "$@"
-kubectl get certificatesigningrequests.certificates.k8s.io "$@"
+kubectl get --show-kind=true ingress.extensions "$@"
+kubectl get --show-kind=true ingresses.networking.k8s.io "$@"
+kubectl get --show-kind=true orders.acme.cert-manager.io "$@"
+kubectl get --show-kind=true certificates.cert-manager.io "$@"
+kubectl get --show-kind=true certificaterequests.cert-manager.io "$@"
+kubectl get --show-kind=true certificatesigningrequests.certificates.k8s.io "$@"
