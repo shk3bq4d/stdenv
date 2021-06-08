@@ -164,6 +164,22 @@ function cdf() {
     return 1
 }
 
+function sed_auditd_logs() {
+    cat "$@" |
+        sed -r -e 's/(.*[^0-9])([12][0-9]{9}(\\.[0-9]{3})?)(.*)/aaa \2 \1 \4/' |
+        while read aaa two one four; do
+            #echo "aaa is $aaa"
+            #echo "two is $two"
+            #echo "one is $one"
+            #echo "four is $four"
+            if [[ "$aaa" == "aaa" ]]; then
+                echo "$(date -d @"$two") $one $two $four"
+            else
+                echo "$aaa $two $one $four"
+            fi
+        done
+}
+
 function cdd() {
     local DIR
     local idx
