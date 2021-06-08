@@ -4,6 +4,8 @@ think of rebooting if changing mode
 restorecon -r / # reapply on each file
 $ ls -lZ /data
 
+sestatus -b
+sestatus -b | grep httpd_can_network_connect
 
 # to not do as untested
 getsebool -a | grep zabbix

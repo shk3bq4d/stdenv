@@ -200,8 +200,9 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 ":auto BufEnter * let &titlestring = "vi" . strpart(v:servername, 3, 1) . " %t     " . expand("%:p:h:h:t") . "\\" . expand("%:p:h:t") . " %=%l/%L-%P "
 :set title
 
-au BufNewFile,BufRead *.yaml set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
-au BufNewFile,BufRead *.yml  set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yaml   set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yml    set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.yml.j2 set expandtab cursorcolumn sts=2 ts=2 sw=2 filetype=yaml " noautoindent nocindent nosmartindent
 au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
 autocmd FileType yaml setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
 autocmd FileType yaml.ansible setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim

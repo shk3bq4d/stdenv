@@ -154,6 +154,8 @@ complete_function kubectl-get-events-sort.sh         kubectl get events
 complete_function kubectl-debug-tail-pod.sh          kubectl get pods
 compdef "ssh-no-host-checking"=ssh
 compdef ssh-vagrant=ssh
+compdef zabbix-maintenance=ssh
+compdef zabbix-maintenance-off=ssh
 #complete_function ssh-no-host-checking ssh
 
 case "$UNAME" in \

@@ -2376,6 +2376,9 @@ select()
 selectattr()
 {{ users|selectattr("is_active") }}
 {{ users|selectattr("email", "none") }}
+{{ users|selectattr("email", "equalto", "bob@malone.com") }}
+{{ users|selectattr("email", "defined"))
+{{ users|rejectattr("email", "defined")) | selecattr
 slice(value, slices, fill_with=None)
 {%- for column in items|slice(3) %}
 sort(value, reverse=False, case_sensitive=False, attribute=None)
