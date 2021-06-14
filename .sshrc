@@ -141,6 +141,10 @@ is_zsh && setopt null_glob
 for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
     [ -f $f ] && source $f
 done
+for f in $SSHHOME/.sshrc.d/bin/*; do
+	# when /tmp is mount with noexec flag, none my useful scripts work
+	[ ! -x $f ] && eval "alias $(basename $f)=bash $f"
+done
 is_zsh && unsetopt null_glob
 if [[ $EUID -eq 0 ]]; then
     cd /var/log

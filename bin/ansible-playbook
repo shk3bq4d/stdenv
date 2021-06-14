@@ -19,6 +19,20 @@ if [[ -d secrets ]]; then
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-set +u; source ~/.virtualenvs/ansible-2.10/bin/activate; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
-set -x
-ansible-playbook $vaults_args "$@"
+for f in \
+    ~/.virtualenvs/ansible/bin/activate \
+    ~/.virtualenvs/ansible-2.10/bin/activate \
+    ; do
+    if [[ -f $f  ]]; then
+        set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
+        ansible-playbook $vaults_args "$@"
+        exit $?
+    fi
+done
+BIN=$(which -a ansible-playbook | tail -n +2 | head -n 1)
+if [[ -z "$BIN" ]]; then
+    echo "FATAL: could no find ansible-playbook outside of myself"
+    which -a ansible-playbook
+    exit 1
+fi
+$BIN $vaults_args "$@"
