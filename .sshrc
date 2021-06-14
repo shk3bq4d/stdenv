@@ -146,7 +146,7 @@ for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
 done
 for f in $SSHHOME/.sshrc.d/bin/*; do
 	# when /tmp is mount with noexec flag, none my useful scripts work
-	[ ! -x $f ] && eval "alias $(basename $f)=bash $f"
+	[ ! -x $f ] && eval "alias $(basename $f)='bash $f'"
 done
 is_zsh && unsetopt null_glob
 if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then
