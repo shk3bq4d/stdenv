@@ -122,6 +122,9 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
         fi
     fi
 fi
+if [[ $EUID -eq 0 ]] && [[ -d /opt/sf-scripts ]]; then
+	export PATH=$PATH:/opt/sf-scripts
+fi
 sshrc_ln() {
     target=/tmp/me
     if ln -sf $SSHHOME $target; then

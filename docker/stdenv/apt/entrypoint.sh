@@ -14,6 +14,8 @@ ARG:                   $@
 	"
 }
 
+APT_FLAG=/.apt-entrypoint
+
 function mrecho() {
 	[[ -n "${STDENV_DEBUG:-}" ]] && echo "$@" || true
 }
@@ -28,6 +30,7 @@ function _go() {
 	local OLD_USER_NAME OLD_USER_GROUPNAME
 	set -eu
 	[[ -n "${STDENV_DEBUG:-}" ]] && set -x || true
+	test -f $APT_FLAG && return
 
 	OLD_USER_NAME=user
 	OLD_USER_GROUPNAME=$OLD_USER_NAME
@@ -58,6 +61,7 @@ function _go() {
 	if [[ -n "${STDENV_USER_GROUPNAME:-}" ]]; then
 		groupmod -n $STDENV_USER_GROUPNAME $OLD_USER_GROUPNAME 2>&1 | mrcat
 	fi
+	touch $APT_FLAG
 	set +x
 	mrecho done
 }

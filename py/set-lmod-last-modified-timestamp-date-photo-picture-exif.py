@@ -19,14 +19,18 @@ logger = logging.getLogger(__name__)
 from PIL import Image
 def get_date_taken(path):
     magic_value = 36867
-    exif = Image.open(path)._getexif()
+    try:
+        exif = Image.open(path)._getexif()
+    except BaseException as e:
+        logger.warn("couldn't extract EXIF on %s due to %s", path, e)
+        return None
     if exif is None: return None
     date_str = exif.get(magic_value, None)
     if date_str is None: return None
     try:
         return datetime.datetime.strptime(date_str, "%Y:%m:%d %H:%M:%S")
     except BaseException as e:
-        logger.warn("couldn't parse %s due to %s", date_str, e)
+        logger.warn("couldn't parse %s for file %s due to %s", date_str, path, e)
         return None
 
 def logging_conf(
@@ -80,7 +84,6 @@ def process(f):
 if __name__ == '__main__':
     logging_conf()
     if 'VIMF6' in os.environ:
-        sys.argv.append(os.path.expanduser('~/Pictures/rumo-2010.jpeg'))
         sys.argv.append(os.path.expanduser('~/Pictures/2021-06-01_06-47.png'))
         sys.argv.append(os.path.expanduser('~/tmp/IMG_4283.JPEG'))
     try:
