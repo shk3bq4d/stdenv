@@ -1112,3 +1112,6 @@ tail -f /var/log/foo | stdbuf -o0 cut
 tail -f /var/log/foo | grep --line-buffered
 tail -f /var/log/foo | sed -u
 tail -f /var/log/foo | python -u
+
+
++test -t 0 && TTY_FLAG="-t"

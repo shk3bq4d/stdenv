@@ -25,7 +25,7 @@ sudo gpasswd -d user group # remove existing uer to existing group
 id username # list group of existing user
 cut -d: -f1 /etc/passwd # list all users on system
 cut -d: -f1 /etc/group # list all groups on system
-(echo body text; uuencode ~/path_to_file.jpg attachment_name.jpg ) | mailx -s "email prive $i" -t 123r4p+doclinux87f90a32@gmail.com # email with attachment
+(echo body text; uuencode ~/path_to_file.jpg attachment_name.jpg ) | mailx -S smtp=MYSMTPSERVER -s "email prive $i" -t 123r4p+doclinux87f90a32@gmail.com # email with attachment
 dhclient -r; sleep 10; dhclient # renew dhcp
 ln -is TARGET LINKNAME
 sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child processes 3266

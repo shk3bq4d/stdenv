@@ -122,6 +122,9 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
         fi
     fi
 fi
+if [[ $EUID -eq 0 ]] && [[ -d /opt/sf-scripts ]]; then
+	export PATH=$PATH:/opt/sf-scripts
+fi
 sshrc_ln() {
     target=/tmp/me
     if ln -sf $SSHHOME $target; then
@@ -146,7 +149,7 @@ for f in $SSHHOME/.sshrc.d/bin/*; do
 	[ ! -x $f ] && eval "alias $(basename $f)=bash $f"
 done
 is_zsh && unsetopt null_glob
-if [[ $EUID -eq 0 ]]; then
+if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then
     cd /var/log
 fi
 # /* ex: set filetype=sh: */

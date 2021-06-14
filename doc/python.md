@@ -929,7 +929,8 @@ import json; json.loads(str) # parse json string
 import json; json.dumps(dict)
 import json; json.dumps(dict, indent=2) # pretty-print prettyprint
 
-import urllib; urllib.quote('/test', safe='') # escape uricomponent encode
+import urllib; urllib.quote(      '/test', safe='') # escape uricomponent encode python2
+import urllib; urllib.parse.quote('/test', safe='') # escape uricomponent encode python3
 
 try:
     import urlparse

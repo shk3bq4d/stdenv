@@ -30,11 +30,13 @@ sudo unattended-upgrade # apt implicitely applies security updates
 https://linux.die.net/man/5/yum.conf
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x available
+yum erase 'zabbix*' # purge
 yum list installed 'http*'
 yum info elasticsearch # show version
 yum whatprovides */ldapsearch && yum clean all
 yum whatprovides ldapwhoami  && yum clean all # openldap-clients
 yum whatprovides ack       && yum clean all
+yum whatprovides uuencode  && yum clean all # sharutils
 yum whatprovides ack       && yum clean all # moreutils
 yum whatprovides ts       && yum clean all # moreutils
 yum whatprovides dig       && yum clean all # bind-utils
@@ -137,7 +139,7 @@ sed -e '/mirrorlist=.*/d' -e 's/#baseurl=/baseurl=/' -e "s/\$releasever/7.4.1708
 dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | grep -E 'linux-(cloud|headers|image|modules|tools)-' | xargs sudo apt-get -y purge #no space left on device (/boot) on apt-get: here is how to clean
 
 # remove old kernel
-sudo package-cleanup -y --oldkernels --count=1
+sudo package-cleanup -y --oldkernels --count=2
 ansible -m shell -vba 'yum list installed kernel'                 jump\*                | grep -E '^changed|^kernel'
 ansible -m shell -vba 'package-cleanup -y --oldkernels --count=2' 'azure:&prod:&linux'
 

@@ -449,3 +449,19 @@ net.tcp.port[<ip>,port] # either simple check or zabbix agent checks if TCP conn
 net.tcp.service[service,<ip>,<port>] # either simple check or zabbix agent checks if one one ssh, ldap, smtp, ftp, http, pop, nntp, imap, tcp, https, telnet service is possible, see how this works: https://www.zabbix.com/documentation/current/manual/appendix/items/service_check_details
 https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/simple_checks
 
+```sql
+select * from last_value where host like '%lan' and name like '%uptime%';
+
+select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as account, last_valuehg.* from last_valuehg where hg like 'windows' and name like 'State of service%') a where not account like '%localsystem%' and not account like '%nt authority%' and account <> '' limit 10;
+
+select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as account, last_valuehg.* from last_valuehg where hg like 'windows' and name like 'State of service%') a where account like '%stoneh%' limit 50;
+```
+
+# context contextual macros
+[https://www.zabbix.com/documentation/current/manual/config/macros/user_macros_context]
+```bash
+{$LOW_SPACE_LIMIT}	User macro without context.
+{$LOW_SPACE_LIMIT:/tmp}	User macro with context (static string).
+{$LOW_SPACE_LIMIT:regex:"^/tmp$"}	User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
+{$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}	User macro with context (regular expression). Matches all strings prefixed with /var/log/.
+```
