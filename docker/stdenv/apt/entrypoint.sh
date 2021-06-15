@@ -14,6 +14,8 @@ ARG:                   $@
 	"
 }
 
+APT_FLAG=/.apt-entrypoint
+
 function mrecho() {
 	[[ -n "${STDENV_DEBUG:-}" ]] && echo "$@" || true
 }
@@ -28,6 +30,7 @@ function _go() {
 	local OLD_USER_NAME OLD_USER_GROUPNAME
 	set -eu
 	[[ -n "${STDENV_DEBUG:-}" ]] && set -x || true
+	test -f $APT_FLAG && return
 
 	OLD_USER_NAME=user
 	OLD_USER_GROUPNAME=$OLD_USER_NAME
@@ -58,6 +61,7 @@ function _go() {
 	if [[ -n "${STDENV_USER_GROUPNAME:-}" ]]; then
 		groupmod -n $STDENV_USER_GROUPNAME $OLD_USER_GROUPNAME 2>&1 | mrcat
 	fi
+	touch $APT_FLAG
 	set +x
 	mrecho done
 }
@@ -68,10 +72,10 @@ if [[ -n "${STDENV_RUNAS:-}" ]]; then
 	cd "$(eval echo ~$STDENV_RUNAS)"
 	if [[ $# -gt 0 ]]; then
 		mrecho "runas exec"
-		sudo -Eiu $STDENV_RUNAS bash -c "exec $@"
+		sudo -iu $STDENV_RUNAS bash -c "exec $@"
 	else
 		mrecho "runas zsh"
-		sudo -Eiu $STDENV_RUNAS zsh
+		sudo -iu $STDENV_RUNAS zsh
 	fi
 else
 	cd /root

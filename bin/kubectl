@@ -14,7 +14,8 @@ set -euo pipefail
 kubectl_version=1.18.0
 kubectl_version=1.18.1
 kubectl_version=1.18.5
-kubectl_version=1.19.4
+kubectl_version=1.21.1
+kubectl_version=1.19.11
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 BIN="$HOME/bin/kubectl-$kubectl_version"

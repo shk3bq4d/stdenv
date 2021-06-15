@@ -115,9 +115,9 @@ kubectl run nettools -n mrdbg --image ianneub/network-tools -o yaml --command --
 kubectl run stdenv --generator=run-pod/v1 --image shk3bq4d/stdenv:stdenv -o yaml --command -- tail -f /dev/null
 kubectl run kubectl --image bitnami/kubectl --command -- tail -f /dev/null
 kaf https://raw.githubusercontent.com/shk3bq4d/stdenv/stdenv/docker/stdenv/daemonset.yml
+kubectl exec -it stdenv -- zsh
 kubectl get pod -n stdenv --no-headers | awk '{ print $1 }' | xargs -tn1 -I@ kubectl exec -n stdenv @ -- curl -s http://whatismyip.akamai.com/
 kubectl run mysql-client --generator=run-pod/v1 --image arey/mysql-client --command -- mysql -h
-kubectl exec -it stdenv zsh
 
 kgsec -n fluentd docker-registry -o jsonpath='{.data.*}' | base64 -d
 
@@ -817,3 +817,7 @@ curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Aut
 
 
 kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
+
+# cert-manager plugin
+https://cert-manager.io/docs/usage/kubectl-plugin/
+curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.3.1/kubectl-cert_manager-linux-amd64.tar.gz

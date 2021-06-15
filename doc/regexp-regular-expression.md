@@ -168,3 +168,5 @@ Special constructs (non-capturing)
 
 re.search(r'\bmyword\b', mH['name']): # python word boundary
 re.match(r'^debug1: (?P<mygroup1>.+) line ([0-9]+): Applying options for (.*)', s).groupdict() # python named group
+
+^(?i)this regex will be case insensitive

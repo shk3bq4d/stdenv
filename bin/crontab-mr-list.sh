@@ -27,7 +27,10 @@ process_source() {
 	fi
 }
 if [[ $EUID -ne 0 ]]; then
-	sudo $0 "$@"
+	sudo bash $0 "$@"
+	#    ^
+	#    |
+	#    this bash is for when doing sshrc and this scripts sits on the /tmp mount with noexec option
 	exit 0
 fi
 
