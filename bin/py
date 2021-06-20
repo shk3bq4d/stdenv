@@ -124,7 +124,7 @@ if __name__ == '__main__':
         try:
             go(sys.argv[1:])
         except BaseException as e:
-            logging.exception('oups for %s', sys.argv)
+            logger.exception('oups for %s', sys.argv)
             sys.exit(1)
 
 """.replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')).encode())
