@@ -2384,7 +2384,7 @@ slice(value, slices, fill_with=None)
 sort(value, reverse=False, case_sensitive=False, attribute=None)
 {% for item in iterable|sort %}
 {% for item in iterable|sort(attribute='date') %}
-string(object)
+bip|string
 striptags(value)
 sum(iterable, attribute=None, start=0)
 Total: {{ items|sum(attribute='price') }}

@@ -60,7 +60,9 @@ https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/
 yum install yum-plugin-versionlock # pin
 yum versionlock add puppet # pin
 yum versionlock list # pin
+yum versionlock status # find latest available version (that would not be installed)
 yum versionlock delete 0:openldap-2.4.39-8.el6.* # pin
+
 ```
 
 # snap
@@ -143,3 +145,15 @@ sudo package-cleanup -y --oldkernels --count=2
 ansible -m shell -vba 'yum list installed kernel'                 jump\*                | grep -E '^changed|^kernel'
 ansible -m shell -vba 'package-cleanup -y --oldkernels --count=2' 'azure:&prod:&linux'
 
+# yum exclude
+```sh
+yum update --exclude=kernel* # interactively
+```
+
+```ini
+[main]
+cachedir=/var/cache/yum/$basearch/$releasever
+keepcache=0
+debuglevel=2
+logfile=/var/log/yum.log
+exclude=kernel* redhat-release* # space separated list excludes in /etc/yum.repo.d file

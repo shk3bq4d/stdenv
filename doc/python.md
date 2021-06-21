@@ -52,6 +52,7 @@ time.sleep(1)
 import sys
 sys.stdout.write('.')
 
+import jinja2; jinja2.__version__ # test module version
 
 from lxml import html, etree
 doc = html.fromstring(t)

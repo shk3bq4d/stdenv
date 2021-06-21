@@ -122,3 +122,11 @@ block_mapping: http://www.yaml.org/spec/1.2/spec.html#id2798057
 
 
 YAML single quote escaping: 'bipip''hehe''youpi' -> bipbip'hehe'youpi # https://yaml.org/spec/current.html#id2534365
+
+
+https://yaml-multiline.info/
+Block Style Indicator: The block style indicates how newlines inside the block should behave. If you would like them to be kept as newlines, use the literal style, indicated by a pipe (|). If instead you want them to be replaced by spaces, use the folded style, indicated by a right angle bracket (>). (To get a newline using the folded style, leave a blank line by putting two newlines in. Lines with extra indentation are also not folded.) # multiline
+
+Block Chomping Indicator: The chomping indicator controls what should happen with newlines at the end of the string. The default, clip, puts a single newline at the end of the string. To remove all newlines, strip them by putting a minus sign (-) after the style indicator. Both clip and strip ignore how many newlines are actually at the end of the block; to keep them all put a plus sign (+) after the style indicator. # multiline
+
+Indentation Indicator: Ordinarily, the number of spaces you're using to indent a block will be automatically guessed from its first line. You may need a block indentation indicator if the first line of the block starts with extra spaces. In this case, simply put the number of spaces used for indentation (between 1 and 9) at the end of the header. # multiline
