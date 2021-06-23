@@ -1,9 +1,12 @@
+```sh
 strace $(pgrep zabbix_server | sed -e 's/^/ -p /' | tr -d '\n') 2>&1
 
 
 strace -s 99999 -ffttTo /tmp/strace.out CMD
 strace -s 99999 -ffttTo /tmp/strace.out puppet apply                                   --modulepath=/puppet-envs/modules --config /workdir/shared/puppet.conf -e ""
 strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f network-config-tui.sh)
+strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f negotiate)
+strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -f negotiate | sed -r -e 's/.*/-p \0/')
 
 rm -f /tmp/ssh.out.* 
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
@@ -13,6 +16,7 @@ sudo strace -s 255 -ffttT $(pgrep lighttp | sed -r -e 's/.*/-p \0/') 2>&1 | grep
 strace -o /tmp/out -y -e trace=file $(pgrep apache2 | sed -r -e 's/.*/-p \0/')
 
 lastcomm -  print out information about previously executed commands.
+```
 
 # http://www.brendangregg.com/DTrace/DTrace-cheatsheet.pdf
 finding Probes

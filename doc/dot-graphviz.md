@@ -1,11 +1,15 @@
+alternative plantuml
+
 layout:
  circo dot fdp neato nop nop1 nop2 osage patchwork sfdp twopi
 
+ ```bash
 http://www.webgraphviz.com/
 https://graphviz.gitlab.io/_pages/doc/info/attrs.html
 https://www.tonyballantyne.com/graphs.html
+```
 
-```dot
+```ini
 digraph graphname {
 	rankdir=LR;
 	 a -> b -> c;

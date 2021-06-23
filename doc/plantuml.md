@@ -49,3 +49,13 @@ ls_out_gelf --> k_gelf
 k_gelf --> g_gelf
 @enduml
 curl http://localhost:8081/svg/IomgoKnBJ2vHKCh9JoykIIpEK5Aevk9CX0dd5CTdviKNLnO3fJ64qrDpqb05yqjB8AArN71XfUp4jEn4L6EpCLMb5oLM0Yr1LPSEKuVi3WLTNJiKon2kmIO5OuFbe1Pd8qGWLW00 > a.svg
+
+
+
+@startuml
+participant Bob
+actor Alice
+
+Bob -> Alice : hello
+Alice -> Bob : Is it ok?
+@enduml

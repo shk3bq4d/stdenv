@@ -197,9 +197,17 @@ case $SCRIPT in \
     svg=${SCRIPT_DIR}/${SCRIPT_NAME}.svg
     png=${SCRIPT_DIR}/${SCRIPT_NAME}.png
     jpg=${SCRIPT_DIR}/${SCRIPT_NAME}.jpg
-    $engine -Tsvg -o$svg -v $SCRIPT
-    nohup firefox $svg &>/dev/null &
+    txt=${SCRIPT_DIR}/${SCRIPT_NAME}.txt
+    wrl=${SCRIPT_DIR}/${SCRIPT_NAME}.wrl
+    #$engine -Tsvg -o$svg -v $SCRIPT
+    #nohup firefox $svg &>/dev/null &
+    set -x
+    #nohup $engine -Tx11  -v $SCRIPT #&>/dev/null &
+    nohup neato -Tvrml -o$wrl -v $SCRIPT -Gdimen=3 -Gdim=3#&>/dev/null &
+    #nohup $engine -Tplain-ext  -o$txt -v $SCRIPT #&>/dev/null &
+    exit 0
     nohup $engine -Tpng  -o$png -v $SCRIPT &>/dev/null &
+    nohup $engine -Tjpeg -o$jpg -v $SCRIPT &>/dev/null &
     nohup $engine -Tjpeg -o$jpg -v $SCRIPT &>/dev/null &
     exit 0
     ;;
@@ -214,7 +222,7 @@ case $SCRIPT in \
         FORCE_NO_SUDO=0
         cd $(dirname $SCRIPT)
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
-        ansible_args="$(sed -r -n -e '/vimf6_ansible_args:/s/.*:// p' $SCRIPT | head -n 1)"
+        ansible_args="$(sed -r -n -e '/vimf6_ansible_args: /s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
             if [[ $PWD = */iaac* ]]; then
                 echo "Running ansible in default iaac mode"
@@ -302,11 +310,14 @@ $HOME/.Xdefaults)
     fi
     ;;
 *.plantuml)
-    f=~/.tmp/bip.svg
+    f=~/tmp/bip.svg
     echo $f
     date
-    cat $SCRIPT | docker run --rm -i think/plantuml > $f
-    chromium-browser --incognito --new-window --app=file://$f
+    cat $SCRIPT | docker run --rm -i think/plantuml -txt
+    if true; then
+        cat $SCRIPT | docker run --rm -i think/plantuml > $f
+        chromium-browser --incognito --new-window --app=file://$f
+    fi
     date
     exit 0
     echo "please ensure to have run
