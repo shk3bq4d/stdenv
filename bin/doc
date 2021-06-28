@@ -34,7 +34,7 @@ esac
 
 filelist() {
 	find -L $DOCDIR -maxdepth 2 -\( -name "*$1*.md" -or -name "*$1*.yml" -or -name "*$1*.yaml" -\) -print0 | sort -z
-    [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/README.md" -print0 | sort -z
+    [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/*README*.md" -print0 | sort -z
 }
 filelistcount() {
     filelist "$@" | tr -cd '\0' | wc -c
@@ -42,7 +42,7 @@ filelistcount() {
 
 if [[ -z "$ARG1" ]]; then
     if [[ -e $KANBANDIR ]]; then
-        ls -thor $DOCDIR/*.md $KANBANDIR/*/README.md
+        ls -thor $DOCDIR/*.md $KANBANDIR/*/*README*.md
     else
         ls -thor $DOCDIR/*.md
     fi
