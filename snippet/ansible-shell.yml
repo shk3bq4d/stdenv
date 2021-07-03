@@ -1,0 +1,11 @@
+- name: Execute
+  shell:
+    cmd: date > /tmp/out
+	chdir: /tmp
+	creates: /tmp/out
+	removes: /tmp/out
+  args:
+    stdin: "{{ salut | to_json }}"
+    stdin_add_newline: no
+	executable: /bin/bash
+	warn: no
