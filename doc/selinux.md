@@ -58,3 +58,10 @@ chcon -Rv -t httpd_sys_content_t /var/www/
 $ ls -ldZ .ssh/ .ssh/authorized_keys
 drwx------. zabbix-mysql-backup zabbix-mysql-backup system_u:object_r:ssh_home_t:s0  .ssh/
 -rw-------. zabbix-mysql-backup zabbix-mysql-backup system_u:object_r:ssh_home_t:s0  .ssh/authorized_keys
+
+
+# https://mgrepl.fedorapeople.org/man_selinux/Fedora18/zabbix.html
+chcon -t zabbix_agent_exec_t     $(which zabbix_agent2) # couldn't listen to 10050 anymore
+#chcon -t unconfined_exec_t $(which zabbix_agent2) # does not work for restoring
+restorecon $(which zabbix_agent2 ) # cancel changes
+ps -eZ | grep unconfined_service_t
