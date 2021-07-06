@@ -38,6 +38,7 @@ processors:
 # https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/decode-json-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/processor-script.html
+# https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-modules.html
 # processor conditions
 https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html#conditions
 Conditionsedit
