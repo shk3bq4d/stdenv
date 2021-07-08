@@ -42,7 +42,7 @@ if [[ ! -f $BIN ]]; then
 
     name=vagrant_${vagrant_version}_linux_amd64.zip
     cd $_tempdir
-    curl -sLO "https://releases.hashicorp.com/vagrant/${vagrant_version}/$name"
+    curl -4 -sLO "https://releases.hashicorp.com/vagrant/${vagrant_version}/$name"
     unzip -o $name
     find
     mv -f vagrant $BIN

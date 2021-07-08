@@ -119,3 +119,4 @@ show processlist;
 show full processlist; -- see full query
 ```
 
+alter database craft character set utf8 collate utf8_general_ci;
