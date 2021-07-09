@@ -13,6 +13,8 @@ smbclient -NL fw12 # list share with no password
 smbclient -N \\\\jsmb4\\mrfirstshare -c "ls"
 smbclient -N \\\\jsmb4\\mrfirstshare -c "mkdir tsys"
 smbclient -N \\\\jsmb4\\mrfirstshare -c "cd tsys; ls"
+smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; ls"
+smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; mget *gz"
 
 sudo mount -t cifs //fw12/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain
 sudo mount -t cifs //$host/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain
