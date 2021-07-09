@@ -17,6 +17,7 @@ exec() {
 	#echo $DIR2
 	ROOT=$(git_root_dir)
 	GITBRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+	test $GITBRANCH = HEAD && GITBRANCH=$(<$ROOT/.git/HEAD)
 	URL=$(git config remote.origin.url)
 	H=$(git log -1 --format='%H' $FILE)
 	if [[ $URL == http* ]]; then

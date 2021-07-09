@@ -1210,7 +1210,8 @@ gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, appa
   setup:                                                  # setup gather_subset fact
     gather_subset: setup_gather_subset.ansible_date_time  # setup gather_subset fact
 
-ansible corp -m shell -a "cmd=needs-restarting -r" -vvv                  # oneliner one-liner adhoc ad-hoc
+ansible linux  -m shell -a "needs-restarting -r" -v                      # oneliner one-liner adhoc ad-hoc
+ansible linux -bm shell -a "needs-restarting -r" -s                      # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible web -bm service -a "name=httpd state=started"                    # oneliner one-liner adhoc ad-hoc
@@ -1220,6 +1221,8 @@ ansible all -m file -a "path=/project/devops state=directory"            # oneli
 ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneliner one-liner adhoc ad-hoc
 ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneliner one-liner adhoc ad-hoc
 ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
+ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
+ansible linux -om debug -a var=ansible_host                              # oneliner one-liner adhoc ad-hoc
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b

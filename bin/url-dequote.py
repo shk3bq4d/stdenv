@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
-import urllib
+import urllib.parse
 import os
 import sys
 import re
@@ -50,13 +50,16 @@ def go(args):
     for k, url in enumerate(ar.URL):
         if k > 0: print('\n\n')
         print(url)
-        urlA = urllib.splitquery(url)
-        print(urlA[0])
-        for q in urlA[1].split('&'):
-            k, v = q.split('=', 1)
-            v = urllib.unquote_plus(v)
-            rH[k] = v
-            if p: print('{}: {}'.format(k, v))
+        urlA = urllib.parse.urlparse(url)
+        for u in urlA:
+            if '=' in u:
+                for q in u.split('&'):
+                    k, v = q.split('=', 1)
+                    v = urllib.parse.unquote_plus(v)
+                    rH[k] = v
+                    if p: print('{}: {}'.format(k, v))
+            elif u:
+                print(u)
 
     if ar.python_dict:
         pprint(rH)
@@ -82,6 +85,5 @@ if __name__ == '__main__':
         go(sys.argv[1:])
     except BaseException as e:
         #logging.exception('oups for %s', sys.argv)
-        logging.error('oups for %s', sys.argv)
-        raise type(e), type(e)(e), sys.exc_info()[2]
+        logging.exception('oups for %s', sys.argv)
 
