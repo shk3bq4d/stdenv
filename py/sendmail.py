@@ -43,7 +43,7 @@ def sendmail(to, subject, body, fr=None, cc=[], bcc=[], attachments=[], html=Non
     if fr is None:
         fr = smtp_login
     sender=(fr,fr)
-    logger.info('sender: %s', sender)
+    logger.info(f'from:{fr} to:{to} subject:{subject} server:{smtp_login}@{smtp_mode}://{smtp_host}:{smtp_port}')
 
     text_content=body
     if isinstance(to, list):
