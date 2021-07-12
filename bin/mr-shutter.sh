@@ -9,10 +9,10 @@
 ## Author: Jeff Malone, 02 Nov 2017
 ##
 
-if hash shutter 2>/dev/null; then
-	nohup shutter --remove_cursor --select &>/dev/null &
-elif hash flameshot 2>/dev/null; then
+if hash flameshot 2>/dev/null; then
 	flameshot gui
+elif hash shutter 2>/dev/null; then
+	nohup shutter --remove_cursor --select &>/dev/null &
 fi
 exit 0
 
