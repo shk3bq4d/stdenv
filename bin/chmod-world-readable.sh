@@ -16,7 +16,7 @@ for var in "$@"; do
 done
 
 if [[ $EUID -ne 0 ]]; then
-    if ! find "$@" -not -uid $EUID 2>/dev/null ||
+    if ! find "$@" -not -uid $EUID &>/dev/null ||
         find "$@" -not -uid $EUID | grep -qE ^; then
         echo "one ore more files not owned by $EUID, restarting script with sudo access"
         sudo $0 "$@"
