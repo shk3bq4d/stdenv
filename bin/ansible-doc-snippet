@@ -5,8 +5,10 @@ set -euo pipefail
 umask 027
 
 # activate venv if existing
+set +u
 test -f ~/.virtualenvs/ansible-2.10/bin/activate &&
  source ~/.virtualenvs/ansible-2.10/bin/activate
+set -u
 
 # get friendly less function
 test -f ~/bin/dot.bashfunctions &&
