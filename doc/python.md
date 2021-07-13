@@ -874,7 +874,8 @@ import operator
 L.sort(key=operator.itemgetter('title','title_url','id'))
 L.sort(key=operator.attrgetter('title.subelement','title_url','id'))
 
-python -m unittest discover # recursively executes all test
+python -m unittest discover           # recursively executes all test
+python3 -m unittest discover -p "*py" # maybe only test_\*py pattern are loaded otherwise
 python -m unittest search   # run test of module search.py
 python -m unittest search.SearchTestCase.test_google_g # run test of module search.py class SearchTestCast funtion test_google_g
 # http://blog.aaronboman.com/programming/testing/2016/02/11/how-to-write-tests-in-python-project-structure/

@@ -84,3 +84,6 @@ README.txt    Project's readme
 # execute single test https://stackoverflow.com/questions/1873995/run-a-single-test-method-with-maven
 mvn test '-Dtest=TestMrSquash#testBookedCourtsPlayer'
 mvn -pl <module-name> -Dit.test=TestCircle#xyz integration-test
+
+
+<dependency><groupId>org.yaml</groupId><artifactId>snakeyaml</artifactId><version>1.21</version></dependency>
