@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh expandtab :
+#
+# https://cert-manager.io/docs/usage/kubectl-plugin/
+# curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.4.0/kubectl-cert_manager-linux-amd64.tar.gz
+# tar xzf kubectl-cert-manager.tar.gz
+# sudo mv kubectl-cert_manager /usr/local/bin
+
+set -euo pipefail
+
+version=1.4.0
+#https://storage.googleapis.com/kubernetes-release/release/stable.txt
+
+BIN="$HOME/bin/kubectl-cert_manager-$version"
+
+
+if [[ ! -f $BIN ]]; then
+    if [[ ! -t 1 ]]; then
+        [[ $# -gt 1 ]] && [[ "$1" == "completion" ]] && exit 1
+        >&2 echo "FATAL: no tty and no such file $BIN when calling with args $@"
+        exit 1
+    fi
+    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    read _read
+    echo # read
+    case "${_read,,}" in \
+    y|Y|yes)
+        true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+    cd ~/.tmp
+    curl -sLO "https://github.com/jetstack/cert-manager/releases/download/v$version/kubectl-cert_manager-linux-amd64.tar.gz"
+    tar xzf kubectl-cert_manager-linux-amd64.tar.gz
+    mv kubectl-cert_manager $BIN
+    chmod u+x $BIN
+    cd ~/bin
+    ln -fs $(basename $BIN) kubectl-cert_manager
+fi
+
+kubectl-cert_manager "$@"
+exit $?
