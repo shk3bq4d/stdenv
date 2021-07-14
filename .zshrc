@@ -127,6 +127,7 @@ for c in \
 done
 alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
+alias ap='ansible-playbook'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'

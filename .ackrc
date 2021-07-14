@@ -39,6 +39,8 @@
 --ignore-directory=is:~.dot
 --ignore-directory=is:~.nib
 --ignore-directory=is:~.plst
+--ignore-directory=molecule/default/roles/graylog-ansible-role
+--ignore-directory=is:roles-external
 
 # Git
 # http://git-scm.com/
