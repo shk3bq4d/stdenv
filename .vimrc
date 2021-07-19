@@ -210,6 +210,7 @@ au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java
 au BufNewFile,BufRead *.js set filetype=javascript
+au BufNewFile,BufRead *.js.j2 set filetype=javascript
 au BufNewFile,BufRead *.item set filetype=xml
 au BufNewFile,BufRead *.viz set filetype=dot
 au BufNewFile,BufRead *.wsdl set filetype=xml
