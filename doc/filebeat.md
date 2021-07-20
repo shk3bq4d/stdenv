@@ -203,3 +203,4 @@ processors:
 
 
 https://github.com/elastic/beats/ # source code
+https://www.elastic.co/downloads/beats/winlogbeat # version
