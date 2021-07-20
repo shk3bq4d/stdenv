@@ -25,7 +25,7 @@ set -x
             git checkout -b "$branch" &>/dev/null || git checkout "$branch"
             git branch -D master || true
         fi
-        git fetch $remote $branch
+        git fetch $remote #$branch
     done
     git remote show | grep -q . && \
         git merge -m automerge $(git remote show | sed -r -e "s/$/\\/$branch/")
