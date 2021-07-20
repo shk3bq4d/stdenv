@@ -16,6 +16,7 @@ do not forget space before
 
 # queries
 http://docs.graylog.org/en/2.1/pages/queries.html
+```sh
 _exists_:FortinetDeviceName
 NOT message:"since the source password has not been changed"
 ssh login        # Messages that include the term ssh or login:
@@ -57,7 +58,7 @@ http_response_code:<=400   # lower than
 http_response_code:(>=400 AND <500)
 
 && || : \ / + - ! ( ) { } [ ] ^ " ~ * ? # The following characters must be escaped with a backslash:
-
+```
 
 
 https://github.com/Graylog2/graylog2-server/blob/master/graylog2-server/src/main/java/org/graylog2/rest/models/system/inputs/extractors/requests/OrderExtractorsRequest.java # browse to find declaration for the API
@@ -79,11 +80,13 @@ stream 1:n conditions
 
 # blocking index file
 starts by rebooting the node
+```sh
 ## move first index out of the queue
 systemctl stop graylog-server.service ; mv $(ls -1 /var/lib/graylog-server/journal/messagejournal-0 | head -n2) /var;  systemctl start graylog-server.service
 
 ## replay
 systemctl stop graylog-server.service; cd /var; mv $(basename $(ls -1 *.log* | head -n 1) .log)* /var/lib/graylog-server/journal/messagejournal-0; systemctl start graylog-server.service
+```
 
 ## backup
 see `doc mongodb`
@@ -114,5 +117,7 @@ signup
 https://docs.graylog.org/en/3.1/pages/changelog.html
 
 
-curl -s http://localhost:9200/graylog_392/_mapping | jq '.[].mappings.properties | length' # number fields in one index
-curl -s http://localhost:9200/graylog_392/_mapping | jq '.[].mappings.properties | keys' # number fields in one index
+```sh
+curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties | length' # number fields in one index
+curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties | keys' # number fields in one index
+```
