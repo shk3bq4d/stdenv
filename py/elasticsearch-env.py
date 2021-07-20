@@ -173,7 +173,7 @@ def go(args) -> None:
     if 0:
         url = "_template"
         print_yaml(http(url))
-    if 1:
+    if 0:
         idx = "gl_okta"
         idx = "gl_ansible"
         n = idx + "-template"
@@ -186,12 +186,16 @@ def go(args) -> None:
             print(i)
             uH[i] = uH.get(i, {})
             uH = uH[i]
-        uH["limit"] = 1050
+        uH["limit"] = 50
 
         print_yaml(oH[n])
 
         rH = http(url, method="PUT", data=oH[n])
         pprint(rH)
+    if 1:
+        print_yaml(http("gl_ansible_2/_mapping"))
+        print_yaml(http("gl_ansible_3/_mapping"))
+
 
 if __name__ == '__main__':
     logging_conf()
