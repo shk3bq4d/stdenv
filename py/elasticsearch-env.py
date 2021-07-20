@@ -149,6 +149,9 @@ def graylog_per_index_fields():
         rH[index_name] = list(mappingH[index_name]['mappings']['properties'].keys())
     return rH
 
+def print_yaml(i):
+    print(yaml.safe_dump(i))
+
 def go(args) -> None:
     #pprint(node_names())
     try:
@@ -165,8 +168,30 @@ def go(args) -> None:
         url = '_cluster/health'
         url = '_cat/shards'
         pprint(http(url))
-    if 1:
+    if 0:
         print(yaml.safe_dump(graylog_per_index_fields()))
+    if 0:
+        url = "_template"
+        print_yaml(http(url))
+    if 1:
+        idx = "gl_okta"
+        idx = "gl_ansible"
+        n = idx + "-template"
+        url = "_template/" + n
+        oH = http(url)
+        sH = oH[n]['settings']
+        uH = sH
+        k = "index.mapping.total_fields"
+        for i in k.split("."):
+            print(i)
+            uH[i] = uH.get(i, {})
+            uH = uH[i]
+        uH["limit"] = 1050
+
+        print_yaml(oH[n])
+
+        rH = http(url, method="PUT", data=oH[n])
+        pprint(rH)
 
 if __name__ == '__main__':
     logging_conf()
