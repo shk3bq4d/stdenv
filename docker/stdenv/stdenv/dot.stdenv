@@ -10,7 +10,7 @@ true \
     && git config --global user.name "Jeff Malone" \
     && git config --global user.email "jeff@stdenv.stdenv" \
     && cd ~ \
-    && mkdir -p ~/.ssh/c \
+    && mkdir -p ~/.ssh/c ~/.tmp/log \
     && cd ~ \
     && git clone --no-checkout https://github.com/shk3bq4d/stdenv.git ~/stdenv \
     && cd ~/stdenv \

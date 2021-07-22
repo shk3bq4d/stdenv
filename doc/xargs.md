@@ -9,3 +9,5 @@
 
 xargs -d '\n'             ## GNU line separator while read line
 | tr '\n' '\0' | xargs -0 ##     line separator while read line
+
+xargs $ARGS bash -c '</dev/tty vim $@' ignoreme # when -o is not available
