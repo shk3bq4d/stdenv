@@ -134,20 +134,75 @@ def active_graylog_indices():
             re.match(r'^gl.index.failure.\d+$',  name) is not None or \
             False:
             continue
-        short_name, number = re.match('(.*)_(\d+)$', name).groups()
+        matcher = re.match('(.*)_(\d+)$', name)
+        if matcher is None: continue
+        short_name, number = matcher.groups()
         max_numberH[short_name] = max(max_numberH.get(short_name, -1), int(number))
     rA = []
     for k, v in max_numberH.items():
         rA.append(f'{k}_{v}')
     return sorted(rA)
 
+def index_mapping(index_name):
+    index_name = safe_index_name(index_name)
+    return http(f'{index_name}/_mapping')
+
+def index_settings(index_name):
+    index_name = safe_index_name(index_name)
+    return http(f'{index_name}/_settings')
+
+def fields_in_index(index_name):
+    mappingH = index_mapping(index_name)
+    return list(mappingH[index_name]['mappings']['properties'].keys())
+
 def graylog_per_index_fields():
-    rH = {}
-    for index_name in active_graylog_indices():
-        # curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties | length' # number fields in one index
-        mappingH = http(f'{index_name}/_mapping')
-        rH[index_name] = list(mappingH[index_name]['mappings']['properties'].keys())
-    return rH
+    return {index_name: fields_in_index(index_name) for index_name in active_graylog_indices()}
+
+def safe_index_name(index_name):
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+    original_index_name = index_name
+    index_name = index_name.lower()
+    index_name = re.sub(r'[\/*?"<>| ,#\']+', '_', index_name) # remove illegal chars
+    index_name = re.sub(r'^\.\.?$', '', index_name) # . .. are illegals
+    index_name = re.sub(r'^[-_+]', '', index_name) # remove illegal starting chars
+    index_name = re.sub(r'_+', '_', index_name) # replace consecutive _ with single one
+    index_name = index_name[:255] # trim max length warning doesn't work on bytes for multi-byte char
+    if not index_name:
+        raise BaseException(f"Illegal index name {origin_index_name}")
+    return index_name
+
+def cluster_settings():
+    return http('_cluster/settings')
+
+def cluster_health():
+    return http('_cluster/health')
+
+def root():
+    return http('/')
+
+def delete_index(index_name):
+    index_name = safe_index_name(index_name)
+    return http("/" + index_name, method="DELETE")
+
+def post_document(index_name, doc):
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html
+    index_name = safe_index_name(index_name)
+    return http(f"/{index_name}/_doc", method="POST", data=doc)
+
+def create_index(index_name):
+    index_name = safe_index_name(index_name)
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+    defaults = \
+    {
+      "settings": {
+        "index": {
+          "number_of_shards": 1,
+          "number_of_replicas": 1
+        }
+      }
+    }
+    data = defaults
+    return http("/" + index_name, method="PUT", data=data)
 
 def print_yaml(i):
     print(yaml.safe_dump(i))
@@ -174,27 +229,99 @@ def go(args) -> None:
         url = "_template"
         print_yaml(http(url))
     if 0:
-        idx = "gl_okta"
         idx = "gl_ansible"
+        idx = "gl_okta"
+        #idx = "rumo"
         n = idx + "-template"
         url = "_template/" + n
         oH = http(url)
+        if 0:
+            print_yaml(oH[n])
+            return
         sH = oH[n]['settings']
         uH = sH
         k = "index.mapping.total_fields"
         for i in k.split("."):
-            print(i)
             uH[i] = uH.get(i, {})
             uH = uH[i]
         uH["limit"] = 50
 
         print_yaml(oH[n])
+        #pprint(oH[n])
 
-        rH = http(url, method="PUT", data=oH[n])
-        pprint(rH)
-    if 1:
+        if 0:
+            rH = http(url, method="PUT", data=oH[n])
+            pprint(rH)
+    if 0:
         print_yaml(http("gl_ansible_2/_mapping"))
         print_yaml(http("gl_ansible_3/_mapping"))
+    if 0: print_yaml(cat_indices())
+    if 0: print_yaml(http("gl_okta_1/_settings"))
+    if 0:
+        idx = "rumo"
+        n = idx + "-template"
+        url = "_template/" + n
+        templateH = \
+        {
+         'index_patterns': ['rumo*'],
+         'order': -1,
+         'settings': {'index': {
+                                'mapping': {'total_fields': {'limit': 50}}}}}
+        rH = http(url, method="PUT", data=templateH)
+        print_yaml(rH)
+    if 0:
+        print_yaml(delete_index("rumo"))
+        print_yaml(create_index("rumo"))
+        print_yaml(http("rumo/_settings"))
+    if 0: print_yaml(post_document("rumo", dict(coucou="hehe")))
+    if 0: print_yaml(graylog_per_index_fields())
+    if 0:
+        for i in range(55):
+            print(f"loop {i}")
+            print_yaml(post_document("rumo", {f"coucou-{i}": 5}))
+    if 0: print_yaml(fields_in_index("rumo"))
+    if 0: print_yaml(http("_template/rumo-template", method="DELETE"))
+    if 0: print_yaml(delete_index("rumo"))
+    if 0:
+        n = "bip-rumo-custom-template"
+        url = "_template/" + n
+        templateH = \
+        {
+         'index_patterns': ['bip_*'],
+         'mappings': {'properties':{'rumo_hehe0': {'type': 'keyword'}}},
+         'settings': {'index': { 'mapping': {'total_fields': {'limit': 20}}}}
+        }
+        print_yaml(templateH)
+        rH = http(url, method="PUT", data=templateH)
+        print_yaml(rH)
+    if 0: print_yaml(index_mapping("bip_4"))
+    if 0:
+        n = "bip-rumo-custom-template"
+        url = "_template/" + n
+        rH = http(url)
+        print_yaml(rH)
+    if 0:
+        index_name = "bip_4"
+        for i in range(55):
+            print(f"loop {i}")
+            print_yaml(post_document(index_name, {f"coucou-{i}": 5}))
+    if 0:
+        n = "bip-rumo-custom-template"
+        url = "_template/" + n
+        rH = http(url, method="DELETE")
+        print_yaml(rH)
+    if 0:
+        index_name = "graylog_397"
+        index_name = safe_index_name(index_name)
+        print_yaml(index_settings(index_name))
+        #print_yaml(index_mapping(index_name))
+        #index_name = "*"
+        print_yaml(http(f"{index_name}/_settings/index.mapping.total_fields.limit"))
+    if 1:
+        #print_yaml(cluster_settings())
+        #print_yaml(cluster_health())
+        #print_yaml(root())
+        print_yaml(http("_cluster/health"))
 
 
 if __name__ == '__main__':
