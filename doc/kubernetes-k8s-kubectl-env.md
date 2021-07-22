@@ -17,6 +17,7 @@ podname.namespace.podorsvc.cluster.local # dns # name
 
 minikube     Minikube is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day.
 # https://kubernetes.io/docs/setup/minikube/#quickstart
+```sh
 minikube start --vm-driver=virtualbox
 kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.10 --port=8080
 kubectl expose deployment hello-minikube --type=NodePort # create a service
@@ -27,9 +28,11 @@ kubectl delete deployment hello-minikube
 minikube stop # stop VM
 minikube addons list
 minikube addons enable ingress
+```
 
 
 # minikube
+```sh
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.28.1/minikube-linux-amd64 && chmod +x minikube
 minikube status
 minikube service
@@ -44,10 +47,12 @@ minikube config -h
 eval $(minikube docker-env)
 
 ~/.minikube/config/config.json
+```
 https://darkowlzz.github.io/post/minikube-config/
 
 # kubectl
 https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+```sh
 curl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o ~/bin/kubectl && chmod u+x ~/bin/kubectl
 version=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt); cd ~/bin && curl -L https://storage.googleapis.com/kubernetes-release/release/$version/bin/linux/amd64/kubectl -o kubectl-$version && chmod u+x kubectl-$version && ln -is kubectl-$version kubectl
 ~/.kube/config
@@ -69,7 +74,7 @@ kubectl proxy
 kubectl create ns kafka
 kubectl get pv,pvc,pod --all-namespaces
 kubectl cp ~/go/src/bip/consumer kafka/mrgolang:/tmp
-kubectl get pv -o json | jq '.items[].metadata.annotations."http://gluster.kubernetes.io/heketi-volume-id (gluster.kubernetes.io/heketi-volume-id)"
+kubectl get pv -o json | jq '.items[].metadata.annotations."http://gluster.kubernetes.io/heketi-volume-id (gluster.kubernetes.io/heketi-volume-id)"'
 
 kubectl logs -f -n kafka --timestamps=true mrgolang
 kubectl logs -f -n kafka --timestamps=true podname --since=3h
@@ -124,20 +129,33 @@ kgsec -n fluentd docker-registry -o jsonpath='{.data.*}' | base64 -d
 kubectl config view # Show Merged kubeconfig settings.
 
 kubectl patch configmaps -n kube-system kube-dns --patch '{"data":{"upstreamNameservers": "[\"10.19.29.1\"]"}}' # microk8s
+```
 
 # use multiple kubeconfig files at the same time and view merged config
+```sh
 KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --raw
 KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
+```
+
 # Get the password for the e2e user
+```sh
 kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}'
 kubectl config current-context              # Display the current-context
 kubectl config use-context my-cluster-name  # set the default context to my-cluster-name
+```
+
 # add a new cluster to your kubeconf that supports basic auth
+```sh
 kubectl config set-credentials kubeuser/foo.kubernetes.com --username=kubeuser --password=kubepassword
+```
+
 # set a context utilizing a specific username and namespace.
+```sh
 kubectl config set-context gce --user=cluster-admin --namespace=foo \
   && kubectl config use-context gce
+```
 
+```yaml
 echo "
 apiVersion: v1
 kind: Pod
@@ -156,7 +174,6 @@ spec:
     - my-kafka
 " | kubectl create -f -
 
-@begin=yaml@
 echo '
 apiVersion: v1
 kind: Pod
@@ -172,9 +189,7 @@ spec:
       - -c
       - "exec tail -f /dev/null"
 ' | kubectl create -f -
-@end=yaml@
 
-@begin=yaml@
 Echo '
 apiVersion: v1
 kind: Pod
@@ -190,8 +205,8 @@ spec:
       - -c
       - "exec tail -f /dev/null"
 ' | kubectl create -f -
-@end=yaml@
-@begin=yaml@
+
+
 echo "
 apiVersion: v1
 kind: Service
@@ -261,9 +276,10 @@ spec:
         persistentVolumeClaim:
           claimName: wp-pv-claim
 " | kubectl create -n rumotest -f -
-@end=yaml@
+```
 
 # julien debug my minikube ~JUL18
+```sh
 kubectl describe deployment -n kafka
 kubectl get pvc --all-namespaces
 kubectl get deployment -n kafka
@@ -303,6 +319,7 @@ helm list --kube-context bravo.clusters.greypay.net
 helm list --kube-context minikube
 helm repo list
 helm install --kube-context minikube incubator/prometheus --name prometheus --namespace monitoring -f prometheus-jst/values.yaml
+```
 
 # proxy
 http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
@@ -320,7 +337,7 @@ CRD  customer ressource definition
 
 
 # PVC yaml
-@begin=yaml@
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -398,7 +415,7 @@ spec:
      resources:
        requests:
          storage: 1Gi
-@end=yaml@
+```
 
 #fluentd
 https://github.com/fluent/fluentd-kubernetes-daemonset/issues/46
@@ -417,7 +434,7 @@ kubectl get services
 curl http://192.168.99.100:31395
 
 # create deployment
-@begin=yaml@
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -435,15 +452,14 @@ spec:
       containers:
       - name: kud
         image: nginx
-@end=yaml@
+```
 kubectl create -f ~/tmp/dep.yaml
 kubectl scale --replicas=3 deployment/kud
 kubectl scale -n mariadb-galera statefulset/mariadb-galera --replicas 3
 kubectl get pods -Lapp
 kubectl get pods -Lapp -l app=kud
 # create deployment
-@begin=sh@
-@begin=yaml@
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -455,7 +471,9 @@ spec:
   type: NodePort
   selector:
     app: kud
-@end=yaml@
+```
+
+```sh
 kubectl get endpoints
 watch 'kubectl get endpoints | grep kud-svc' # same number of endpoints as number of replicas
 kubectl scale --replicas=4 deployment/kud
@@ -509,7 +527,7 @@ kubectl label node minikube app=kude
 
 # sysdig guide monitoring
 backup heptio ark
-@end=sh@
+```
 
 kubectl rollout undo deployments MYDEP --to-revision 1
 kubectl rollout restart deployment -n namespace deploymentname
@@ -707,6 +725,7 @@ docker run --rm -it babar cat /hehe/hihi;
 # ko
 
 # labels
+```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
 kgp -Al app=sfw-cron            -o name # labels
 kgp -Al app=sfw-server          -o name # labels
@@ -717,6 +736,7 @@ kgp -Al app=nginx-ingress       -o name # labels
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
+```
 
 # rolloute
 kubectl rollout status -n kube-system daemonset/fluentd
@@ -745,6 +765,7 @@ kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespa
 kgp -n fabric-ci-665 --no-headers -o jsonpath='{.items[*].metadata.name}'
 kgp -n fabric-ci-665 --no-headers -o jsonpath='{.items[*].metadata.name}' | xargs -n1 echo
 kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' # list containers by pod
+kubectl get -A certificates.cert-manager.io -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name} {.spec.secretName}{"\n"}{end}' | while read namespace name secretname; do
 kubectl --kubeconfig admin.conf get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.status.startTime}{" "}{.metadata.name}{end}' | sort
 kubectl get po --all-namespaces -o custom-columns=NAME:.metadata.name,NS:.metadata.namespace,IP:.status.podIP
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
@@ -795,15 +816,16 @@ data:
   ssl-protocols: "TLSv1.3 TLSv1.2"
 ```
 
-
+```sh
 kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
 kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
 
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
-kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job 
+kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job
 
 kubectl describe node # nice summary cpu memory requests
+```
 
 
 # service accounts
@@ -813,11 +835,15 @@ kubectl describe node # nice summary cpu memory requests
 /var/run/secrets/kubernetes.io/serviceaccount/namespace
 kubernetes.default.svc # API server reachability hosname/
 /var/run/secrets/kubernetes.io/serviceaccount
+```sh
 curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/
 
 
 kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
+```
 
 # cert-manager plugin
 https://cert-manager.io/docs/usage/kubectl-plugin/
+```sh
 curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.3.1/kubectl-cert_manager-linux-amd64.tar.gz
+```
