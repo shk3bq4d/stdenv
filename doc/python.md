@@ -1098,8 +1098,10 @@ args = parser.parse_args() # arg_parse
 print args.accumulate(args.integers) # arg_parse
 ```
 
+```sh
 python -m SimpleHTTPServer 8000
-python3 -m http.server 8000
+python3 -m http.server 8000 # SimpleHTTPServer
+```
 
 pydoc mypackage
 pydoc requests
