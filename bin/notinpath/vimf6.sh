@@ -7,6 +7,7 @@ export VIMF6=1
 current_epoch=$(date +%s) # duration
 SCRIPT="$1"
 LOG="$2"
+test -d ~/.tmp/vim/output || mkdir -p ~/.tmp/vim/output
 #exec > >(tr -d '\r' | tee "$LOG")
 exec > >(tee "$LOG")
 exec 2>&1
