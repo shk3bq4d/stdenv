@@ -317,11 +317,16 @@ def go(args) -> None:
         #print_yaml(index_mapping(index_name))
         #index_name = "*"
         print_yaml(http(f"{index_name}/_settings/index.mapping.total_fields.limit"))
-    if 1:
+    if 0:
         #print_yaml(cluster_settings())
         #print_yaml(cluster_health())
         #print_yaml(root())
         print_yaml(http("_cluster/health"))
+    if 0:
+        #print_yaml(fields_in_index("rumo"))
+        print_yaml(active_graylog_indices())
+        print_yaml(fields_in_index("gl_ansible_12"))
+        print_yaml(index_mapping("gl_ansible_12"))
 
 
 if __name__ == '__main__':
