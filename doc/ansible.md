@@ -63,6 +63,13 @@
     module: ec2
     group: ['mygroup']
     id: hostvars[inventory_hostname]['ec2_id']
+
+- slurp:
+    src: /tmp/my-slurp-file
+  register: slurp_var
+- debug: # slurp
+    var: slurp_var['content'] | b64decode
+
 ```
 
 ansible-galaxy            install -r requirements.yml
@@ -1213,6 +1220,7 @@ gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, appa
 ansible linux  -m shell -a "needs-restarting -r" -v                      # oneliner one-liner adhoc ad-hoc
 ansible linux -bm shell -a "needs-restarting -r" -s                      # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible web -bm service -a "name=httpd state=started"                    # oneliner one-liner adhoc ad-hoc
 ansible web -bm service -a "name=httpd state=restarted"                  # oneliner one-liner adhoc ad-hoc
@@ -2123,7 +2131,7 @@ Give me the power of 2! (or 5):
 {{ myvar | root }}
 {{ myvar | root(5) }}
 json_query != jq -> https://jmespath.org/specification.html#and-expressions
-loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}" 
+loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}"
 loop: "{{ domain_definition | json_query('domain.server[*].name') }}"
 loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
 msg: "{{ domain_definition | json_query('domain.server[?cluster==`cluster1`].port') | join(', ') }}"
