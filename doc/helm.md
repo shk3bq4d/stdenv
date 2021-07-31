@@ -29,6 +29,7 @@ helm fetch && helm template ... | kubectl apply -f - # tiller less deployment
 mv bip.tgz ./repo/
 helm repo index ./repo/
 
+helm plugin install https://github.com/databus23/helm-diff # 
 
 # security tiller
 remove clusterIP
