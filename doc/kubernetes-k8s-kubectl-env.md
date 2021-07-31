@@ -764,6 +764,7 @@ kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespa
 ```sh
 kgp -n fabric-ci-665 --no-headers -o jsonpath='{.items[*].metadata.name}'
 kgp -n fabric-ci-665 --no-headers -o jsonpath='{.items[*].metadata.name}' | xargs -n1 echo
+kgsec -n ns bip -o jsonpath="{ .metadata.annotations }" | jq -r .'["cert-manager.io/alt-names"]'
 kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' # list containers by pod
 kubectl get -A certificates.cert-manager.io -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name} {.spec.secretName}{"\n"}{end}' | while read namespace name secretname; do
 kubectl --kubeconfig admin.conf get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.status.startTime}{" "}{.metadata.name}{end}' | sort
