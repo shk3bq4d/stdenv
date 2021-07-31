@@ -1,1 +1,1 @@
-export STDHOME_FONT='*font: xft:DejaVuSansMono:size=16:antialias=true,xft:Inconsolata\ for\ Powerline:size=16'
+export STDHOME_FONT='*font: xft:DejaVuSansMono:size=20:antialias=true,xft:Inconsolata\ for\ Powerline:size=20'

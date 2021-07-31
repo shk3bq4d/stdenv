@@ -171,10 +171,10 @@ freebsd)
     ;;
 *)
     alias grep='nocorrect grep --line-buffered -a --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
-    alias -g X="| xargs --open-tty --verbose --no-run-if-empty -d '\n'"
-    alias -g XX='|xargs --open-tty --verbose --no-run-if-empty'
-    alias -g 'X@'='|xargs --open-tty --verbose --no-run-if-empty -I@'
-    alias -g X1='|xargs --open-tty --verbose --no-run-if-empty -n 1'
+    alias -g X="| xargs                --open-tty --verbose --no-run-if-empty -d '\n'"
+    alias -g XX='|xargs                --open-tty --verbose --no-run-if-empty'
+    alias -g 'X@'='|xargs              --open-tty --verbose --no-run-if-empty -I@'
+    alias -g X1='|xargs                --open-tty --verbose --no-run-if-empty -n 1'
     alias -g 'X@1'='|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
     alias -g 'X1@'='|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
     ;;
