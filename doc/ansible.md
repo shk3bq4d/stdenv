@@ -2679,6 +2679,7 @@ Force a task to run in normal mode and make changes to the system, even when the
   ignore_errors: '{{ ansible_check_mode }}'
 
 
+vimf6_ansible_args: -e ansible_connection=local
   connection: local
   vars: # connection local
     ansible_python_interpreter: "{{ ansible_playbook_python }}" # connection local
