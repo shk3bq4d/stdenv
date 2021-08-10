@@ -848,3 +848,17 @@ https://cert-manager.io/docs/usage/kubectl-plugin/
 ```sh
 curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.3.1/kubectl-cert_manager-linux-amd64.tar.gz
 ```
+
+# debug
+```sh
+kubectl debug -it filebeat-ktwjx --image=busybox --target=filebeat-ktwjx # in alpha in version 1.22 https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
+
+
+kubectl debug node/mynodename -it --image=busybox # host FS mounted in /host don't forget to delete pod afterwords
+kubectl debug mypod --copy-to=my-debugger --set-image=\*=busybox -it
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod                                        --container=filebeat -- sh
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod                                        --container=filebeat -- cat /etc/filebeat.yml
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=busybox                 --container=filebeat -- sh
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=debian                  --container=filebeat -- bash
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=shk3bq4d/stdenv:stdenv  --container=filebeat -- zsh
+```

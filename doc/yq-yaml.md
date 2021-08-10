@@ -17,3 +17,6 @@ ln -is /snap/yq/current/bin/yq ~/bin/
 
                 if [[ $resource_type == secrets ]]; then
                     yq e '.data.* = "REDACTED"' -i $instance_filename
+
+
+| yq e -P # json to yaml
