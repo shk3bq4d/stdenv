@@ -2672,6 +2672,7 @@ inventory_hostname_short The short version of inventory_hostname
 '/bip/hehe.txt' | basename | splitext | first --> 'hehe' # get filename without extension
 
 * https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py # filter source code
+* https://raw.githubusercontent.com/ansible/ansible/devel/lib/ansible/plugins/filter/core.py # filter source code, openable in vim
 
 Force a task to run in check mode, even when the playbook is called without --check. This is called check_mode: yes.
 Force a task to run in normal mode and make changes to the system, even when the playbook is called with --check. This is called check_mode: no.
@@ -2685,9 +2686,15 @@ vimf6_ansible_args: -e ansible_connection=local
     ansible_python_interpreter: "{{ ansible_playbook_python }}" # connection local
 
   pause: # prompt user
+    echo: no # prompt user, use echo: no for password entries
     prompt: prompt user. What would you like to do next ?
 
+  pause: # sleeps waits
+    minutes: 5 # pause sleeps waits
+    seconds: 5 # pause sleeps waits
+
     ansible-playbook --step # prompt after each task debug
+    
 
 linux:!corp
 linux:&corp
