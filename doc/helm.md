@@ -30,6 +30,7 @@ mv bip.tgz ./repo/
 helm repo index ./repo/
 
 helm plugin install https://github.com/databus23/helm-diff # 
+helm diff revision -n kube-system blob-csi-driver 1
 
 # security tiller
 remove clusterIP
