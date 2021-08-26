@@ -3,6 +3,10 @@ exec > >(logger -i -t "$(basename $0)" )  # linux or freebsd, see next line
 exec > >(logger --id=$$ -t "$(basename $0)" ) # linux as it sends ppid which is more robust
 exec 2>&1
 
+# ubuntu graylog script
+exec  > >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-empty --id=$$ -p user.info  --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null ))
+exec 2> >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-empty --id=$$ -p user.error --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null ))
+
 echo bip > /dev/tcp/graylog-internal.greypay.net/1514
 
 echo hehe | logger -p emerg # write to every console, with default config on Ubuntu xenial 16.04
@@ -10,8 +14,10 @@ echo hehe | logger
 
 # /etc/rsyslog.d/50-default.conf
 ## writes to file and do not process further lines (the second line does the trick)
-user.*				-/var/log/user.log 
+```bash
+user.*				-/var/log/user.log
 & ~
+```
 
 
 # Facility

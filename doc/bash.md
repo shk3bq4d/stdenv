@@ -24,7 +24,7 @@
 [ -L FILE ]    True if FILE exists and is a symbolic link.
 [ -N FILE ]    True if FILE exists and has been modified since it was last read.
 [ -S FILE ]    True if FILE exists and is a socket.
-[ FILE1 -nt FILE2 ]    True if FILE1 has been changed more recently than FILE2, or if FILE1 exists and FILE2 does not.
+[ FILE1 -nt FILE2 ]    True if FILE1 is newer / has been changed more recently than FILE2, or if FILE1 exists and FILE2 does not.
 [ FILE1 -ot FILE2 ]    True if FILE1 is older than FILE2, or is FILE2 exists and FILE1 does not.
 [ FILE1 -ef FILE2 ]    True if FILE1 and FILE2 refer to the same device and inode numbers.
 [ -o OPTIONNAME ]    True if shell option "OPTIONNAME" is enabled.
@@ -528,6 +528,10 @@ echo "$(date) Fin du job. Il y a $(find $OUT -maxdepth 1 -type f | wc -l ) fichi
 exec > >(tee logfile.txt)
 exec 2>&1
 
+# redirect whole script to file and console
+exec > >(tee -a /dev/console logfile.txt)
+exec 2>&1
+
 # redirect whole script to syslog
 exec > >(tee >(logger  -i     -t "$(basename $0)" -p user.info )) # linux or freebsd, see next line
 exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info )) # linux as it sends ppid which is more robust
@@ -888,11 +892,10 @@ if ! [[ $yournumber =~ $re ]] ; then
    echo "error: Not a number" >&2; exit 1
 fi
 
-_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
-_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
-_tempfiles=();function my_mktemp() {local f;f="$(mktemp)";$_tempfiles+=($f);echo "$f";};myfile=$(my_mktemp); function cleanup() { local f;for f in "${!_tempfiles[@]}"; do [[ -n "${f:-}" && -f "$f" ]] && rm -f $f || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+_tempfiles=();function my_mktemp() {local f;f="$(mktemp)";$_tempfiles+=($f);echo "$f";};myfile=$(my_mktemp); function cleanup() { local f;for f in "${!_tempfiles[@]}"; do [[ -n "${f:-}" && -f "$f" ]] && rm -f $f || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 true
-cleanup
 exit 0
 
 #!/usr/bin/env bash
