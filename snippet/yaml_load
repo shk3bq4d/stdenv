@@ -1,0 +1,4 @@
+import yaml
+
+with open('/tmp/bip.yml', 'rb') as f:
+	rH = yaml.load(f, Loader=yaml.FullLoader)

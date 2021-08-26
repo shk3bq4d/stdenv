@@ -1,0 +1,4 @@
+import yaml
+
+with open(fp, 'wb') as fd:
+	yaml.safe_dump(dataH, fd, default_flow_style=False)
