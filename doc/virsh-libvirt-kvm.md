@@ -1,3 +1,5 @@
+ssh mrhyp history
+ssh mrhyp virt-manager
 sudo virt-manager
 virsh domiflist altlinux3.0
 virsh dominfo

@@ -22,3 +22,20 @@ for arg in "$@"; do
 	echo "jar $arg has $count signed files"
 done
 
+for arg in "$@"; do 
+	echo "$arg"
+	jarsigner -certs -verify -verbose "$arg" |
+		grep -EA2 "entry was signed on|>>> Signer|will expire" |
+		while read line; do
+			case "$line" in \
+			--)
+				echo ""
+				;;
+			*"entry was signed"*) echo -n "$line ";;
+			"X.509"*) echo -n "$line ";;
+			*"is valid"*) echo -n "$line ";;
+			*"will expire"*) echo -n "$line ";;
+			esac
+		done | sort | uniq -c
+	#jarsigner -certs -verify -verbose "$arg" | less
+done
