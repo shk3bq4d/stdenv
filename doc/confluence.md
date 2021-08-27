@@ -1,6 +1,14 @@
 changelog upgrade version latest update # https://confluence.atlassian.com/doc/confluence-release-notes-327.html
 upgrade version latest update # https://www.atlassian.com/software/confluence/download-archives
 
+# LTS
+A Long Term Support release is a feature release that gets backported critical
+security updates and critical bug fixes during its entire two-year support
+window. If you can only upgrade once a year, consider upgrading to a Long Term
+Support release
+* 21  April 2020 Confluence 7.4  https://confluence.atlassian.com/doc/confluence-7-4-release-notes-994312218.html
+* 17 August 2021 Confluence 7.13 https://confluence.atlassian.com/doc/confluence-7-13-release-notes-1044114085.html
+
 www_confluence_help.sh
 http://confluence/renderer/notationhelp.action?section=all
 

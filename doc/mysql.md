@@ -120,3 +120,9 @@ show full processlist; -- see full query
 ```
 
 alter database craft character set utf8 collate utf8_general_ci;
+
+# regexp
+```sql
+-- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
+regexp_replace(expr, pat, repl[, pos[, occurrence[, match_type]]])
+```

@@ -14,7 +14,9 @@ Shift+O "Tools - Selection - **By Color Select**"
 
 **Remove Selection** " Control + Mouse"
 **Free Select**: f
-**Rectangle Select**: R
+**Rectangle Select**: r
 **Rectangle Select**: Tools, Selection Tools, Rectangle
 
 **Crop to selection**: Image - Crop to selection
+
+Image - Canvas Size

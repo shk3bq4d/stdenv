@@ -28,6 +28,7 @@ pngcheck
 
 
 # geometry
+```bash
 % Interpret width and height as a percentage of the current size.
 !  Resize to width and height exactly, loosing original aspect ratio.
 < Resize only if the image is smaller than the geometry specification.
