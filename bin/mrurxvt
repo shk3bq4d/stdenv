@@ -254,7 +254,8 @@ fi
 echo "cd now is $CD"
 set -x
 ~/bin/notinpath/mrxmodmap.sh &
-#MR_TERM=urxvt urxvt $CD -sl 65535 -bg white "$@"
+BIN=urxvt
+#MR_TERM=urxvt $BIN $CD -sl 65535 -bg white "$@"
 if [[ "$@" == *VT100.allowSendEvents* ]]; then
     #echo "args is $@"
     # args is -bg #000000 -fg #EEBBCC -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -font 6x13 -e /usr/bin/perl -e            my $pipe=shift;
@@ -295,12 +296,16 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
     echo "grep having shifted $i elements lead to $@"
     echo "grep while intermediate_args is $intermediate_args"
 
-    #MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
-    MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
+    #MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
+    MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
 elif [[ $# -eq 0 ]] && [[ -n "$TSSH" ]]; then
-    MR_TERM=urxvt MR_URXVT_CMD="ssh $TSSH" urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
+    MR_TERM=urxvt MR_URXVT_CMD="ssh $TSSH" $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
 else
-    MR_TERM=urxvt urxvt $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+	if false && hash alacritty 2>/dev/null; then
+		MR_TERM=urxvt alacritty "$@"
+	else
+	    MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+	fi
 fi
 
 exit 0

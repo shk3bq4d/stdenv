@@ -33,3 +33,6 @@ ffmpeg -ss 0 -t 100 -i source.m4v -vcodec copy -acodec copy part1.m4v
 avconv -i input.avi -vcodec copy -acodec copy -ss 00:00:00 -t 00:30:00 output1.avi
 
 avconv -ss 0 -i source.m4v -t 100 -vcodec copy -acodec copy part1.m4v
+
+
+mplayer  -loop 0 -rootwin -ao null -vo x11 -noconsolecontrols ~/videos/myvideo.mp4 # background video

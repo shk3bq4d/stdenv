@@ -186,22 +186,22 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 !13 emmagenta \e[30m "\033[1;35m"
 !14 emcyan    \e[30m "\033[1;36m"
 !15 emwhite   \e[30m "\033[1;37m" or black if terminal in day mode
-*color0:                  S_base02
-*color1:                  S_red
-*color2:                  S_green
-*color3:                  S_yellow
-*color4:                  S_blue
-*color5:                  S_magenta
-*color6:                  S_cyan
-*color7:                  S_base2
-*color9:                  S_orange
-*color8:                  S_base03
-*color10:                 S_base01
-*color11:                 S_base00
-*color12:                 S_base0
-*color13:                 S_violet
-*color14:                 S_base1
-*color15:                 S_base3
+*color0: #073642
+*color1: #dc322f
+*color2: #859900
+*color3: #b58900
+*color4: #268bd2
+*color5: #d33682
+*color6: #2aa198
+*color7: #eee8d5
+*color8: #002b36
+*color9: #cb4b16
+*color10: #586e75
+*color11: #657b83
+*color12: #839496
+*color13: #6c71c4
+*color14: #93a1a1
+*color15: #fdf6e3
 
 ! appears to fix Home and End in VI (but not ZSH) on rumopc
 ! https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working#Readline

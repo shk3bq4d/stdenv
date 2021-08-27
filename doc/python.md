@@ -212,6 +212,11 @@ Replacing %x and %o and converting the value to different bases:
 'int: 42;  hex: 0x2a;  oct: 0o52;  bin: 0b101010'
 Using the comma as a thousands separator:
 
+f'{myvar:#x}' # int as hex with leading 0x
+f'{myvar:#04x}' # int as hex with leading 0x and 0 prefixed until with (including 0x) is 4 char width
+f'{myvar:x}'  # int as hex with no leading 0x
+f'{myvar:x}'  # int as hex with no leading 0x
+
 >>>
 >>> '{:,}'.format(1234567890)
 '1,234,567,890'
@@ -1073,6 +1078,9 @@ sys.stdin.isatty()
 sys.stdout.isatty()
 sys.stderr.isatty()
 
+import random
+random.randint(min_inclusive, max_inclusive)
+
 # read from prompt
 ```python
 from sys import version_info # prompt
@@ -1217,3 +1225,5 @@ if x is not None:
 assert x is not None
 print(x.upper())
 ```
+
+

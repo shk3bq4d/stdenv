@@ -4,6 +4,8 @@
 set -euo pipefail
 umask 027
 
+cd # executing from ~/tmp caused be some trouble
+
 # activate venv if existing
 set +u
 test -f ~/.virtualenvs/ansible-2.10/bin/activate &&
