@@ -9,16 +9,20 @@ username=hehe
 password=I.can.Has.K4t!
 domain=kboum.net
 
+```sh
 smbclient -NL fw12 # list share with no password
 smbclient -N \\\\jsmb4\\mrfirstshare -c "ls"
 smbclient -N \\\\jsmb4\\mrfirstshare -c "mkdir tsys"
 smbclient -N \\\\jsmb4\\mrfirstshare -c "cd tsys; ls"
 smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; ls"
 smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; mget *gz"
+smbclient -N \\\\fw12\\public -c "cd e/hehe/certs; rename haha.jks haha.jks-until-2021"
+smbclient -N \\\\fw12\\public -c "cd e/hehe/certs; put haha_keystore.jks haha.jks "
 
 sudo mount -t cifs //fw12/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain
 sudo mount -t cifs //$host/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain
 ~/bin/notinpath/smb-samba-mount-cifs.sh
+```
 
 Usage: smbclient service <password>
   -R, --name-resolve=NAME-RESOLVE-ORDER     Use these name resolution services
