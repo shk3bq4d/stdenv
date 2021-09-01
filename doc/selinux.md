@@ -15,6 +15,7 @@ setsebool -P httpd_can_network_connect on
 
 https://www.mangeek.com/2017/03/using-zabbix-3-2-with-centos-and-selinux/
 Edit your zabbix systemd startup because it’s currently broken and the PID file is pointing at /run instead of /var/run: vi /usr/lib/systemd/system/zabbix-agent.service
+```bash
 yum install policycoreutils-python
 systemctl start zabbix-agent.service
 grep "denied.*zabbix_agent" /var/log/audit/audit.log | audit2allow -M zabbix_agent
@@ -25,6 +26,9 @@ getsebool -a # list all options
 
 
 semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
+
+semanage export #  print local deviation
+```
 
 
 # AVC Access Vector Cache

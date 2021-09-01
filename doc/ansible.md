@@ -1231,6 +1231,7 @@ ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneli
 ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
 ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
 ansible linux -om debug -a var=ansible_host                              # oneliner one-liner adhoc ad-hoc
+ansible linux -bm file -a "path=/etc/profile.d/tmout.sh state=absent"    # oneliner one-liner adhoc ad-hoc remove shell session timeout
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
@@ -2709,3 +2710,21 @@ bip is version("6.4.2", ">") # version_compare filter, actually not a filter
 
 
 "{{ mylist | select }}" # removes empty element from a list
+  url: "http://example.com/users/foo/resources/bar"
+
+tasks:
+    - debug:
+        msg: "matched pattern 1"
+        when: url is match("http://example.com/users/.*/resources/") # regexp regular expression
+
+    - debug:
+        msg: "matched pattern 2"
+      when: url is search("/users/.*/resources/.*") # regexp regular expression
+
+    - debug:
+        msg: "matched pattern 3"
+      when: url is search("/users/") # regexp regular expression
+
+    - debug:
+        msg: "matched pattern 4"
+      when: url is regex("example.com/\w+/foo") # regexp regular expression

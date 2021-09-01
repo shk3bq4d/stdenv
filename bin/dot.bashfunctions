@@ -1059,6 +1059,10 @@ crontab-single-entry-in-three-minutes() {
     echo "$(date -d "-3 minute ago" +'%_M    %_H  %_d  %_m' --utc) $dow USER test \`date +\\%Y\` == $(date +%Y) && MYUTC"
 }
 
+ls-seconds.sh() {
+  ls -l --time-style +"%Y.%m.%d %H:%M:%S" "$@"
+}
+
 jq-versions() {
     ! which -a jq &>/dev/null && echo "No jq in path $PATH" && return
     which -a jq | while read line; do
