@@ -2695,7 +2695,7 @@ vimf6_ansible_args: -e ansible_connection=local
     seconds: 5 # pause sleeps waits
 
     ansible-playbook --step # prompt after each task debug
-    
+
 
 linux:!corp
 linux:&corp
@@ -2728,3 +2728,20 @@ tasks:
     - debug:
         msg: "matched pattern 4"
       when: url is regex("example.com/\w+/foo") # regexp regular expression
+
+
+https://github.com/mitogen-hq/mitogen # ansible speed
+
+
+- with_dict: "{{ mydict }}"                                                                     # iterate over with_dict's result with single/individual input/item and output/result
+  shell:                                                                                        # iterate over with_dict's result with single/individual input/item and output/result
+    cmd: echo "{{ item.value }}"                                                                # iterate over with_dict's result with single/individual input/item and output/result
+  register: dict_result                                                                         # iterate over with_dict's result with single/individual input/item and output/result
+- vars:                                                                                         # iterate over with_dict's result with single/individual input/item and output/result
+    individual_result: "{{ dict_result.results | selectattr('item', 'equalto', item) | first }} # iterate over with_dict's result with single/individual input/item and output/result
+  debug:                                                                                        # iterate over with_dict's result with single/individual input/item and output/result
+    msg: |-                                                                                     # iterate over with_dict's result with single/individual input/item and output/result
+      input:  {{ item }}                                                                        # iterate over with_dict's result with single/individual input/item and output/result
+      output: {{ individual_result }}                                                           # iterate over with_dict's result with single/individual input/item and output/result
+  when: individual_result.changed                                                 # for example # iterate over with_dict's result with single/individual input/item and output/result
+  with_dict: "{{ mydict }}"                                                                     # iterate over with_dict's result with single/individual input/item and output/result
