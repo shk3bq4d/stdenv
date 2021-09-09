@@ -378,3 +378,5 @@ upower -i /org/freedesktop/UPower/devices/battery_BAT0
 upower -i `upower -e | grep 'BAT'`
 # further methods -> https://ostechnix.com/how-to-check-laptop-battery-status-in-terminal-in-linux/
 ```
+
+vi /var/mail/$(whoami) # read cron outputs or other local mails
