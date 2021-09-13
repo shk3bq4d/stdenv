@@ -1073,6 +1073,7 @@ class ValidationError(Exception):
 
 import platform; platform.node(); # hostname computer name
 import socket; socket.gethostname(); # hostname computer name
+import socket; socket.gethostbyname(domain_name); # DNS dig resolution
 
 sys.stdin.isatty()
 sys.stdout.isatty()
