@@ -7,8 +7,9 @@ CYGWIN*)
 *)	
 	f=$(echo ~/.tmp/container_ip)
 	ips --no-internet | \
-		grep -Evw 'lo|docker[0-9]+|(c|vir)br[0-9]+' | \
+		grep -Evw '^(lo|docker[0-9]+|(c|vir)br[0-9]+)' | \
 		awk-print2.sh | \
+		head -n 1 | \
 		tr -d '\n' | \
 		tee $f |
 		grep -E . || echo "no ip" >&2
