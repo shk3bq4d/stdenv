@@ -187,6 +187,8 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 :nnoremap :q+ :q!
 :nnoremap :wq+ :wq!
 :nnoremap :w+ :w!
+" case insensitive sort to match behavior /bin/sort on my system
+:nnoremap :sort :sort i
 :noremap ° ~
 :nnoremap ä "
 :nnoremap à `

@@ -465,3 +465,6 @@ select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as acc
 {$LOW_SPACE_LIMIT:regex:"^/tmp$"}	User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
 {$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}	User macro with context (regular expression). Matches all strings prefixed with /var/log/.
 ```
+
+
+zabbix-get-local.sh 'proc.num[filebeat,root,,/etc/filebeat/filebeat.yml]'
