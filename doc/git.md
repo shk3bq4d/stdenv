@@ -617,3 +617,4 @@ GIT_WORK_DIR=$GIT_WORK_TREE}.git # environment variable directory
 
 
 git rebase; git merge --no-ff # "semi-linear merge" is the way we work
+git log --pretty=fuller # AuthorDate: Sun Aug 29 21:24:24 2021 +0200        CommitDate: Fri Sep 3 08:25:34 2021 +0200

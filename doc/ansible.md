@@ -2728,3 +2728,6 @@ tasks:
     - debug:
         msg: "matched pattern 4"
       when: url is regex("example.com/\w+/foo") # regexp regular expression
+
+
+ANSIBLE_FORCE_COLOR=true ansible-playbook myplaybook.yml -Dl myhost 2>&1 | ts | tee -a ~/.tmp/log/my.log # screen tmux
