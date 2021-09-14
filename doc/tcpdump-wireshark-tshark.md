@@ -28,6 +28,9 @@ jpimap: tcpdump capture file (little-endian) - version 2.4 (Ethernet, capture le
 sudo apt install tcpick
 tcpick -C -yP -r jpimap
 
+# SSH corp
+/usr/sbin/tcpdump -i eth0 -c 10 -s 0 -vv -w myfile "ip and tcp and ( host 196.0.66.249 and port 22 )"
+
 # gpg search keys
 sudo tcpdump -i lo -c 100 -s 0 -vv -w - "ip and tcp and host 127.0.12.12"
 

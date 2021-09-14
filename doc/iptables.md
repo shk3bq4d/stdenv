@@ -106,6 +106,9 @@ iptables -t nat -I OUTPUT 0 -p udp --dport 53 -j LOG --log-prefix "grepme output
 iptables -t nat -A OUTPUT   -p udp --dport 53 -j DNAT --to 10.202.10.69:5353 # <-- this redirect to dnsmasq worked for me
 ```
 
+iptables -I INPUT 1 -p tcp -m tcp --dport 22 -m state ! --state ESTABLISHED,RELATED -j LOG --log-prefix "IPT ACT=accept DIR=ingress " --log-level 7 # debug specific destination port
+iptables -I INPUT 2 -p tcp -m tcp --source 196.0.66.249 -j ACCEPT
+iptables -I INPUT 3 -p udp -m udp --source 196.0.66.249 -j ACCEPT
 
 TABLES
        There  are currently five independent tables (which tables are present at any time depends on the kernel configuration options and which mod‐

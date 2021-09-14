@@ -926,6 +926,16 @@ uname_os_detection() {
     os_detection
 }
 
+OS="$(os_detection)"
+case "$OS" in \
+*debian*)
+    alias dmesg="dmesg -HLauto"
+    ;;
+*redhat*)
+   alias dmesg='dmesg -T --color --follow'
+   ;;
+esac
+
 githubkeys() {
     curl -L https://github.com/shk3bq4d.keys
 }
