@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+
+BIN=$(which -a $(basename "$0") | grep -vE "^$DIR" | head -n 1)
+
+if [[ -z "$BIN" ]]; then
+	echo "FATAL: no $(basename $0) on the system"
+	exit 1
+fi
+
+export QT_SCALE_FACTOR=1.5
+nohup "$BIN" </dev/null &>/dev/null &
