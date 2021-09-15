@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -116,6 +117,7 @@ for c in \
     ps-mr.sh \
     screen \
     setxkbmap \
+    docker \
     ssh \
     sshfs \
     vagrant \
