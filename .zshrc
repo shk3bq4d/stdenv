@@ -251,8 +251,8 @@ alias -g P21='|awk "{ print \$2 \" \" \$1 }"'
 alias -g P31='|awk "{ print \$3 \" \" \$1 }"'
 alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
 
-alias findf='find . -type f'
-alias findd='find . -type d'
+alias findf='find . -type d -name .git -prune -o -type f -print'
+alias findd='find . -type d -name .git -prune -o -type d -print'
 ksns() { kubectl config set-context --current --namespace="$1" }
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files
