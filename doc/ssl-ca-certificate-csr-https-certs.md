@@ -11,6 +11,7 @@ update-ca-trust force-enable                 # Enable the dynamic CA configurati
 cd /etc/pki/ca-trust/source/anchors/
 cat - > myca.crt
 update-ca-trust extract                      # activate (and also takes care of /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts)
+# -> generates different files in ./pki/ca-trust/extracted/ based on infos from some configuration file
 
 # alpine
 apk update && apk add ca-certificates
