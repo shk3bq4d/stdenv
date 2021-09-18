@@ -221,7 +221,9 @@ case $SCRIPT in \
     if grep -qE "^[- ] hosts:" $SCRIPT; then
         SCRIPT=$(realpath -e $SCRIPT)
         FORCE_NO_SUDO=0
-        cd $(dirname $SCRIPT)
+        #cd $(dirname $SCRIPT)
+        cddir="$(sed -r -n -e '/vimf6_cd: /s/.*:// p' $SCRIPT | head -n 1)"
+        test -n "$cddir" && cd $cddir || cd $(dirname $SCRIPT)
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args: /s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
