@@ -129,7 +129,7 @@ for c in \
 done
 alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
-alias ap='ansible-playbook'
+alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'
@@ -222,7 +222,7 @@ alias -g GI='2>&1|grep --line-buffered --color=auto -iaE'
 alias -g GI1='2>/dev/null|GI'
 alias -g GI2='2>&1 >/dev/null|GI'
 
-alias -g V='2>&1|vim -R -'
+alias -g V='2>&1|sed-remove-ansi-colors.sh|vim -R -'
 alias -g V1='2>/dev/null|V'
 alias -g V2='2>&1 >/dev/null|V'
 
