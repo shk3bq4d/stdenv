@@ -882,17 +882,17 @@ os_detection() {
         elif [[ "${OS}" = "Linux" ]] ; then
             if [[ -f /etc/redhat-release ]] ; then
                 DistroBasedOn='RedHat'
-                DIST=$(cat /etc/redhat-release |sed s/\ release.*//)
-                PSEUDONAME=$(cat /etc/redhat-release | sed s/.*\(// | sed s/\)//)
-                REV=$(cat /etc/redhat-release | sed s/.*release\ // | sed s/\ .*//)
+                DIST=$(cat /etc/redhat-release |sed 's/ release.*//')
+                PSEUDONAME=$(cat /etc/redhat-release | sed 's/.*(//' | sed 's/)//')
+                REV=$(cat /etc/redhat-release | sed 's/.*release //' | sed 's/ .*//')
             elif [[ -f /etc/SuSE-release ]] ; then
                 DistroBasedOn='SuSe'
-                PSEUDONAME=$(cat /etc/SuSE-release | tr "\n" ' '| sed s/VERSION.*//)
-                REV=$(cat /etc/SuSE-release | tr "\n" ' ' | sed s/.*=\ //)
+                PSEUDONAME=$(cat /etc/SuSE-release | tr "\n" ' '| sed 's/VERSION.*//')
+                REV=$(cat /etc/SuSE-release | tr "\n" ' ' | sed 's/.*= //')
             elif [[ -f /etc/mandrake-release ]] ; then
                 DistroBasedOn='Mandrake'
-                PSEUDONAME=$(cat /etc/mandrake-release | sed s/.*\(// | sed s/\)//)
-                REV=$(cat /etc/mandrake-release | sed s/.*release\ // | sed s/\ .*//)
+                PSEUDONAME=$(cat /etc/mandrake-release | sed 's/.*(//' | sed 's/)//')
+                REV=$(cat /etc/mandrake-release | sed 's/.*release //' | sed 's/ .*//')
             elif [[ -f /etc/debian_version ]] ; then
                 DistroBasedOn='Debian'
                 if [[ -f /etc/lsb-release ]]; then
@@ -906,7 +906,7 @@ os_detection() {
                 fi
             fi
             if [[ -f /etc/UnitedLinux-release ]] ; then
-                DIST="${DIST}[$(cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//)]"
+                DIST="${DIST}[$(cat /etc/UnitedLinux-release | tr "\n" ' ' | sed 's/VERSION.*//')]"
             fi
             OS=$(lowercase $OS)
             DistroBasedOn=$(lowercase $DistroBasedOn)

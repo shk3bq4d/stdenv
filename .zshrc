@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -116,6 +117,7 @@ for c in \
     ps-mr.sh \
     screen \
     setxkbmap \
+    docker \
     ssh \
     sshfs \
     vagrant \
@@ -127,7 +129,7 @@ for c in \
 done
 alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
-alias ap='ansible-playbook'
+alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook'
 alias cp='nocorrect cp -ip'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'
@@ -220,7 +222,7 @@ alias -g GI='2>&1|grep --line-buffered --color=auto -iaE'
 alias -g GI1='2>/dev/null|GI'
 alias -g GI2='2>&1 >/dev/null|GI'
 
-alias -g V='2>&1|vim -R -'
+alias -g V='2>&1|sed-remove-ansi-colors.sh|vim -R -'
 alias -g V1='2>/dev/null|V'
 alias -g V2='2>&1 >/dev/null|V'
 
@@ -249,8 +251,8 @@ alias -g P21='|awk "{ print \$2 \" \" \$1 }"'
 alias -g P31='|awk "{ print \$3 \" \" \$1 }"'
 alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
 
-alias findf='find . -type f'
-alias findd='find . -type d'
+alias findf='find . -type d -name .git -prune -o -type f -print'
+alias findd='find . -type d -name .git -prune -o -type d -print'
 ksns() { kubectl config set-context --current --namespace="$1" }
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files
