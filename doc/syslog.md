@@ -65,3 +65,6 @@ Ski Haus Delta reports temperature < low_warning (36)
 6	Informational	info	Normal operational messages that require no action.	An application has started, paused or ended successfully.
 Ski Haus Delta reports temperature 60
 7	Debug	debug	Information useful to developers for debugging the application.
+
+# Paloalto to graylog
+log format IETF
