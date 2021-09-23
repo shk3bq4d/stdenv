@@ -1,4 +1,6 @@
-import yaml
+	import yaml
 
-with open(fp, 'wb') as fd:
-	yaml.safe_dump(dataH, fd, default_flow_style=False)
+	dataH = dict(ok=535)
+	filepath = '/tmp/habon.yml'
+	with open(filepath, 'wb') as fd:
+		yaml.safe_dump(dataH, fd, default_flow_style=False)
