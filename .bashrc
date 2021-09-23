@@ -285,7 +285,6 @@ elif hash ack &>/dev/null; then
 fi
 alias ducks='du -cksh -- * | sort -rh | head -11'
 alias mdkir=mkdir
-alias feh='feh -p --auto-zoom -. -B black'
 alias finda='find /{bin,etc,home,lib,opt,sbin,tmp,var,usr}'
 alias lynx='lynx -vikeys -cfg=$RCD/lynx.cfg $*'
 alias mrclear='clear; echo -e "\e[3J"'

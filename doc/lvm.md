@@ -36,6 +36,7 @@ lvresize -l+512 -r /dev/vg_system/lv_opt
 
 lvresize --size +1G   --resizefs /dev/VolGroup00/varlv
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_data
+lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_var
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_usr
 lvresize --size +400M --resizefs /dev/mapper/VG_root-LV_usr
 lvresize --size +5G   --resizefs /dev/mapper/VG_root-opt

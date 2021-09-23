@@ -20,5 +20,5 @@ kubectl get -A --show-kind=true certificatesigningrequests.certificates.k8s.io "
 echo "
 kubectl delete certificaterequest XYZ
 # https://cert-manager.io/docs/usage/kubectl-plugin/
-kubectl cert-manager renew ABC
+kubectl cert-manager renew letsencrypt-prod.blabla.bip.bop.com # certificate.cert-manager.io/
 "
