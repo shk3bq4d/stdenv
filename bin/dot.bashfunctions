@@ -541,7 +541,12 @@ function locate() {
 }
 
 function http_proxy_dockerhost3142() { http_proxy "172.17.0.1:3142";}
-function http_proxy_none() { http_proxy "";}
+function http_proxy_none() {
+    unset http_proxy
+    unset https_proxy
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+}
 function http_proxy() {
     local a
     a="$@"
