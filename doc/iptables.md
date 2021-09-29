@@ -3,7 +3,7 @@ iptables -I INPUT 1 -p ICMP --icmp-type 8 -j DROP # stop incoming ping
 # restore it
 iptables -D INPUT   -p ICMP --icmp-type 8 -j DROP # restore stopped incoming ping
 
-# stop outpust
+# stop output
 sudo iptables -I INPUT 1 -p tcp --src 91.216.32.0/24 -j DROP
 sudo iptables -I INPUT 1 -p tcp --src 172.31.11.0/24 -j ACCEPT
 

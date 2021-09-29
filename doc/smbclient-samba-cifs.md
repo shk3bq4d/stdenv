@@ -18,6 +18,7 @@ smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; ls"
 smbclient -N \\\\fw12\\public -c "cd e/hehe/fw_fresh; mget *gz"
 smbclient -N \\\\fw12\\public -c "cd e/hehe/certs; rename haha.jks haha.jks-until-2021"
 smbclient -N \\\\fw12\\public -c "cd e/hehe/certs; put haha_keystore.jks haha.jks "
+smbclient -N \\\\fw12\\public -c "cd e/hehe/certs; rm haha.jks "
 
 sudo mount -t cifs //fw12/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain
 sudo mount -t cifs //$host/d$ ~/bip2 -o vers=3.0,username=hehe,password=$(gtk-decrypt ~/.mypassword),domain=mydomain

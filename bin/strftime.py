@@ -31,7 +31,7 @@ for format in [
     ('%z', 'UTC offset in the form +HHMM or -HHMM.'),
     ('%Z', 'Time zone name (empty string if the object is naive).'),
     ('%%', 'A literal \'%\' character.'),
-	('%m/%b/%y %I:%M %p', ''),
+	('%d/%b/%y %I:%M %p', ''),
 	('%Y.%m.%d', ''),
 	('%Y.%m.%d %H:%M:%S', ''),
 	('%Y-%m-%dT%H:%M:%S.%f%z', ''),

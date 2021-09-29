@@ -4,13 +4,13 @@ This cheat sheet describes my usage/implementation of virtualenv with virtualenv
 
 Quick Reference
 
-@begin=sh@
+```sh
 $ echo $WORKON_HOME
 /Users/benjamin/.virtualenvs
 
 $ echo $PROJECT_HOME
 /Users/benjamin/Repos/git/
-@end=sh@
+```
 
 
 
@@ -76,12 +76,12 @@ virtualenv
 virtualenvwrapper
 Appendix: .bash_profile
 
-@begin=sh@
+```sh
 venv.init -p $(which python3) ENVNAME
 venv.init -p $(which python3.5) fpedialog
-@end=sh@
+```
 
-@begin=sh@
+```sh
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Repos/git/
@@ -102,11 +102,12 @@ alias venv.lssp="lssitepackages"
 alias venv.proj="mkproject"
 alias venv.setproj="setvirtualenvproject"
 alias venv.wipe="wipeenv"
-@end=sh@
+```
 
-@begin=python@
+```python
 # venv activation
 import os
 activate_this_file = '{}/.virtualenvs/{}/bin/activate_this.py'.format(os.environ['HOME'], 'vsphere')
-execfile(activate_this_file, dict(__file__=activate_this_file))
-@end=python@
+#execfile(activate_this_file, dict(__file__=activate_this_file)) python2
+exec(compile(open(activate_this_file, "rb").read(), activate_this_file, 'exec'), dict(__file__=activate_this_file))
+```
