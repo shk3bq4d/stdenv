@@ -183,6 +183,7 @@ freebsd)
 esac
 alias -g HF="$(hostname -f)"
 alias -g XV="|xargs bash -c '</dev/tty vim \$@' ignoreme"
+alias -g LXV="-l XV" # like in ack PATTERN -l XV"
 alias -g XC="|xclip-tee.sh"
 alias git='nocorrect git'
 
