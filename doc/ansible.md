@@ -2731,6 +2731,8 @@ tasks:
 
 
 ANSIBLE_FORCE_COLOR=true ansible-playbook myplaybook.yml -Dl myhost 2>&1 | ts | tee -a ~/.tmp/log/my.log # screen tmux
+wait-until.sh "tomorrow 05:55"; ANSIBLE_FORCE_COLOR=true ansible-playbook myplaybook.yml -Dl myhost 2>&1 | ts | tee -a ~/.tmp/log/my.log # screen tmux
+
 
 https://github.com/mitogen-hq/mitogen # ansible speed
 
