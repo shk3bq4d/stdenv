@@ -20,6 +20,7 @@ in the Outputs section of the filebeat.yml config file. Only a single
 output may be defined.
 
 # https://www.elastic.co/guide/en/ecs/current/ecs-field-reference.html
+https://github.com/elastic/ecs
 
 # https://www.elastic.co/guide/en/beats/filebeat/master/rate-limit.html
 ```yaml

@@ -1,4 +1,5 @@
 --ignore-ack-defaults
+--pager=less -RSX
 #--color-lineno=rgb013
 #--color-filename=rgb004 bold
 #--color-match=rgb555 on_rgb500
