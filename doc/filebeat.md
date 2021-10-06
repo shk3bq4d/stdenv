@@ -1,4 +1,5 @@
-# /* ex: set cursorcolumn fenc=utf-8 expandtab ts=2 sw=2 : */
+#  ex: set cursorcolumn fenc=utf-8 expandtab ts=2 sw=2 :
+```yaml
 output.file:
   path: "/tmp/filebeat"
   filename: filebeat
@@ -13,6 +14,9 @@ output:
     codec:
      json: # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-output-codec.html
        pretty: true
+#    format: # only one of json or format can be used
+#      string: 'path: %{[url.path]} original: %{[url.original]}'
+ ```
 
 # https://www.elastic.co/guide/en/beats/filebeat/current/configuring-output.html
 You configure Filebeat to write to a specific output by setting options

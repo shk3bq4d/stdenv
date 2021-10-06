@@ -447,7 +447,7 @@ kube-completion() {
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
 autoload -U compinit
 compinit
-alias ecs="vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml"
+alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
