@@ -1078,6 +1078,24 @@ ls-seconds.sh() {
   ls -l --time-style +"%Y.%m.%d %H:%M:%S" "$@"
 }
 
+watch-command-change() {
+    local previous
+    previous=""
+    while :; do
+        current=$(eval "$@")
+        if [[ "$previous" != "$current" ]]; then
+            if [[ "$current" == *\n* ]]; then
+                echo -e "--\n$(date +'%Y.%m.%d %H:%M:%S'):"
+                echo "$current"
+            else
+                echo "$(date +'%Y.%m.%d %H:%M:%S'): $current"
+            fi
+        fi
+        previous="$current"
+        sleep 1
+    done
+}
+
 jq-versions() {
     ! which -a jq &>/dev/null && echo "No jq in path $PATH" && return
     which -a jq | while read line; do

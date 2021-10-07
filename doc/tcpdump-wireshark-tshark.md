@@ -5,6 +5,7 @@ tcpdump -i vtnet0 -X host 10.50.219.121 and not dst port 65530 and not dst port 
 /usr/sbin/tcpdump -i eth0 -c 100 -s 0 ip and tcp and "( host 195.94.110.221)"
 /usr/sbin/tcpdump -i eth0 -c 100 -s 0 -w /root/packetcapture.cap ip and tcp and "( host $(dig +short inTouch2 ) )"
 /usr/sbin/tcpdump -i eth0 -c 100 -s 0 -w /root/packetcapture.cap ip and tcp and "( host inTouch2 )"
+tcpdump -i ens160 arp | grep 10.101.6.85 | ts
 wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
