@@ -21,7 +21,7 @@ HOSTNAMEF=$(hostname -f)
 if hash keepassxc &>/dev/null; then
     case $HOSTNAMEF in \
     apr16.ly.lan)
-        export QT_SCALE_FACTOR=1.5
+        export QT_SCALE_FACTOR=1.33
         if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
             chmod 0600 ~/.keepass/mr.kdbx
             ssh $WORK_PC1 chmod 0400 .keepass/mr.kdbx

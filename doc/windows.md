@@ -1,6 +1,9 @@
 # windows 10 iso download
 https://www.microsoft.com/en-us/download/details.aspx?id=56485
 
+tasklist | findstr /i Zabbix
+taskkill /f /t zabbix_agentd.exe
+
 
 WMIC PROCESS get Caption,Commandline,Processid 2>&1 | vi -
 WMIC /OUTPUT:"C:\ProcessList.txt" process where processid=8196 get Caption,Commandline,Processid

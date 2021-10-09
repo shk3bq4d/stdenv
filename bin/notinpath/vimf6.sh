@@ -221,9 +221,9 @@ case $SCRIPT in \
     if grep -qE "^[- ] hosts:" $SCRIPT; then
         SCRIPT=$(realpath -e $SCRIPT)
         FORCE_NO_SUDO=0
-        #cd $(dirname $SCRIPT)
+        cd $(dirname $SCRIPT)
         cddir="$(sed -r -n -e '/vimf6_cd: /s/.*:// p' $SCRIPT | head -n 1)"
-        test -n "$cddir" && cd $cddir || cd $(dirname $SCRIPT)
+        test -n "$cddir" && cd $cddir
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args: /s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
@@ -246,7 +246,7 @@ case $SCRIPT in \
         done < <(head -n 50 $SCRIPT | sed -r -n -e 's/^.{,4}vimf6_ansible_env:\s*(.+)\s*[:= ]\s*(.*?)/\1 \2/ p')
 
         export PYTHONUNBUFFERED=1
-        export ANSIBLE_STDOUT_CALLBACK=yaml
+        #export ANSIBLE_STDOUT_CALLBACK=yaml
         #export ANSIBLE_STDOUT_CALLBACK=timer
         #export ANSIBLE_STDOUT_CALLBACK=dense
         #export ANSIBLE_STDOUT_CALLBACK=unixy

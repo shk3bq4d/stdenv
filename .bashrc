@@ -77,7 +77,6 @@ if [[ -z $HOSTNAMEF ]]; then
     fi
 fi
 [[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/}
-export ANSIBLE_STDOUT_CALLBACK=debug
 export PYTHONIOENCODING="UTF-8"
 export PYTHONDONTWRITEBYTECODE="True"
 if [[ -d /usr/share/terminfo ]]; then
