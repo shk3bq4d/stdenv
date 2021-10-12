@@ -1015,9 +1015,9 @@ ping-up-down() {
     state="unkown"
     nextstate="$state"
     test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
-    up="${EGREEN:-}host is up${OFF:-}"
-    down="${ERED:-}host is down${OFF:-}"
-    nonetwork="${ERED:-}network is down${OFF:-}"
+    up="${EGREEN:-}host is up${ENONE:-}"
+    down="${ERED:-}host is down${ENONE:-}"
+    nonetwork="${ERED:-}network is down${ENONE:-}"
     timeout=10
     args="$@"
     case "$args" in \
