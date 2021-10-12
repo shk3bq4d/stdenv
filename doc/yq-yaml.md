@@ -26,4 +26,9 @@ yq e '.azure_sf_domains[]' - # Cannot index array with '*'
 
 yq e -i '.bip2 = "hehe"'   bip.yml # write, edit in place an existing and non-empty document
 yq e -n '.bip2 = "hehe"' > bip.yml # write, edit with empty or non-existing document
+
+
+yq eval -i 'sortKeys(..)' file1.yml # diff
+yq eval -i 'sortKeys(..)' file2.yml # diff
+diff file1.yml file2.yml # diff
 ```
