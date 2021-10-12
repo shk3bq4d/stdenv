@@ -1142,6 +1142,22 @@ def pairwise(iterable):
     next(b, None)
     return itertools.izip(a, b) # <- this is python2 for 3 replace "itertool.izip" with solely "zip" (no itertool)
 ```
+https://stackoverflow.com/questions/1011938/loop-that-also-accesses-previous-and-next-values
+```python
+from itertools import tee, islice, chain, izip
+
+def previous_and_next(some_iterable):
+    prevs, items, nexts = tee(some_iterable, 3)
+    prevs = chain([None], prevs)
+    nexts = chain(islice(nexts, 1, None), [None])
+    return izip(prevs, items, nexts)
+# Then use it in a loop, and you'll have previous and next items in it:
+
+mylist = ['banana', 'orange', 'apple', 'kiwi', 'tomato']
+
+for previous, item, nxt in previous_and_next(mylist):
+    print "Item is now", item, "next is", nxt, "previous is", previous
+```
 
 os.mkdir()     # mkdir makedir
 os.makedirs()  # mkdir -p 

@@ -1290,8 +1290,10 @@ with_first_found # doesn't actually loop, but takes first existing file exists
         - "prerequisites-{{ ansible_distribution }}.yml"
         - "prerequisites-{{ ansible_os_family }}.yml"
       skip: true
-  loop_control:
-    loop_var: prerequisites_file
+  loop_control:                  # loop_control label index_var loop_var
+    loop_var: prerequisites_file # loop_control label index_var loop_var
+    index_var: my_idx            # loop_control label index_var loop_var
+    label:     "{{ index.key }}" # loop_control label index_var loop_var
 
 - shell: /usr/bin/foo
   chdir: /tmp

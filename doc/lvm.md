@@ -45,6 +45,7 @@ lvresize --size +1G   --resizefs /dev/vg_system/lv_var
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-varlv
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-varlv
 printf "fix\nfix\nquit\n" | parted ---pretend-input-tty /dev/sda print
+lvresize --size +20G   --resizefs /dev/mapper/ubuntu--vg-lv_var_lib_docker
 
 
 vgremove
