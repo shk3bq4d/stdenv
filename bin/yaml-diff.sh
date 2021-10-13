@@ -36,6 +36,7 @@ for file in "$@"; do
         yq eval -P -i 'sortKeys(..)' "$newdirname/$filename"
     else
         yq eval --output-format=json 'sortKeys(..)' "$file" |
+            trim-json-multiline |
             yq e -P - >"$newdirname/$filename"
             # replace with cat if you'd like to compare as JSON (helps with white chars)
             # cat >"$newdirname/$filename"

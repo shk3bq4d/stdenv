@@ -1,0 +1,19 @@
+#!/usr/bin/env -S jq -cf
+# https://stackoverflow.com/questions/4303128/how-to-use-multiple-arguments-for-awk-with-a-shebang-i-e
+# https://stackoverflow.com/a/44526894
+
+# Define walk function (standard library only for jq 1.6 and newer, currently unreleased)
+def walk(f):
+  . as $in
+  | if type == "object" then
+      reduce keys_unsorted[] as $key
+        ( {}; . + { ($key):  ($in[$key] | walk(f)) } ) | f
+  elif type == "array" then map( walk(f) ) | f
+  else f
+  end;
+
+walk(
+  if type == "string" then
+    (sub("(^|[\n])[[:space:]]+"; "\n"; "gm") | sub("[[:space:]]+([\n]|$)"; "\n"; "gm") | sub("[[:space:]]+\\Z"; ""))
+  else . end
+)
