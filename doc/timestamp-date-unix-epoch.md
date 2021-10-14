@@ -7,3 +7,6 @@ Sep 28 2021 01:33:21      date +'%b %d %Y %H:%M:%S'
 Sep 28 2021 01:33:21      sed -r -e "s/^[A-Z][a-z]{2} [ 0-9]?[0-9].{14}/$(date +'%b %d %Y %H:%M:%S')/"
 
 %m/%b/%y %I:%M %p    09/Sep/21 09:33 AM
+
+Math.round(Date.now() / 1000) # javascript get  timestamp
+new Date(1534191480)          # javascript from timestamp

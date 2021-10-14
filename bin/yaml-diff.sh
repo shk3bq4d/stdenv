@@ -20,14 +20,18 @@ function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// 
 _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" && -d "$_tempdir" ]] && rm -rf $_tempdir || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 
 files0() {
-    find "$_tempdir" -type f -print0
+    #find "$_tempdir" -type f -print0
+    cat $ordered_file_list
 }
+ordered_file_list=$_tempdir/args
 
 for file in "$@"; do
     filename="$(basename "$file")"
     orig_dirname="$(realpath "$(dirname "$file")")"
     newdirname="${_tempdir}${orig_dirname}"
     mkdir -p "$newdirname"
+    new_filename="$newdirname/$filename"
+    printf '%s\0' "$new_filename" >> $ordered_file_list
     if false; then
         # I've got some differences with
         # key y: and 'y':
@@ -37,15 +41,16 @@ for file in "$@"; do
     else
         yq eval --output-format=json 'sortKeys(..)' "$file" |
             trim-json-multiline |
-            yq e -P - >"$newdirname/$filename"
+            yq e -P - >"$new_filename"
             # replace with cat if you'd like to compare as JSON (helps with white chars)
-            # cat >"$newdirname/$filename"
+            # cat >"$new_filename"
     fi
 done
 
 
 if [[ $(files0 | grep -zc ^) -le 1 ]]; then
     echo "FATAL: could only find one file, did you specify twice the identical file?"
+    files0 | xargs -0 -n1 echo
     exit 1
 fi
 

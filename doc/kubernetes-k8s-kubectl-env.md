@@ -863,4 +863,6 @@ kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod                           
 kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=busybox                 --container=filebeat -- sh
 kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=debian                  --container=filebeat -- bash
 kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=shk3bq4d/stdenv:stdenv  --container=filebeat -- zsh
-```
+
+log.file.path: /var/log/containers/{{ pod_name }}_{{ namespace }}_{{ container_name }}-{{ container_id }}.log
+  ```

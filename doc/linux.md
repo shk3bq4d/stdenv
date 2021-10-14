@@ -126,12 +126,20 @@ curl http://beyondgrep.com/ack-2.14-single-file > /bin/ack && chmod 0755 !#:3
 ip addr sh
 
 
+systctl -w net.ipv4.tcp_keepalive_time=1800
+systctl -w net.ipv4.tcp_tw_reuse=1
+systctl -w net.ipv4.tcp_tw_recycle=1
+cat /proc/sys/net/ipv4/tcp_keepalive_time
+cat /proc/sys/net/ipv4/tcp_tw_reuse
+cat /proc/sys/net/ipv4/tcp_tw_recycle
+
+
 # routing (router if: tun0 is 192.168.20.19, enp0s8 is 192.168.56.103. client if:  on 192.168.56.0 network)
 # on router
 iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
 iptables -A FORWARD -i enp0s8 -j ACCEPT
 sysctl -w net.ipv4.ip_forward=1
-cat  /proc/sys/net/ipv4/ip_forward
+cat  /proc/sys/net/ipv4/ip_forward # sysctl
 # on client
 route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103 metric 99
 route add -net 192.168.0.0 netmask 255.255.255.0 metric 1 dev eno2
