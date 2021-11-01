@@ -47,3 +47,5 @@ az acr list -o json |
     echo "id: $id"
   done
 ```
+
+curl -s http://omahaproxy.appspot.com/all.json | jq -r '.[] | select(.os=="win") | .versions[] | select(.channel=="stable") | .current_version' # chrome version

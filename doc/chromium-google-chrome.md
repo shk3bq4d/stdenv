@@ -1694,3 +1694,5 @@ policies policy https://www.chromium.org/administrators/policy-list-3
 
 
 --enable-features=CookiesWithoutSameSiteMustBeSecure,SameSiteByDefaultCookies
+
+curl -s http://omahaproxy.appspot.com/all.json | jq -r '.[] | select(.os=="win") | .versions[] | select(.channel=="stable") | .current_version'
