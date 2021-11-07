@@ -126,7 +126,7 @@ vimf6.sh)
         fi
     }
     ant_output() {
-        cat "$@" | sed -r -e '/^$/ d' | python -c "
+        cat "$@" | sed -r -e '/^$/ d' | python3 -c "
 # @begin=python@
 # removes ant blocks that have no output
 import fileinput
@@ -271,7 +271,7 @@ case $SCRIPT in \
     else
         #echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
         echo '# /* e''x: set filetype=python */'
-        python -c "
+        python3 -c "
 import yaml
 import pprint
 with open('$SCRIPT', 'rb') as f:

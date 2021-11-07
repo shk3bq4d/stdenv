@@ -1,10 +1,4 @@
 
-
-one Maintenance may contain several periods and affect Hosts or Groups (of Hosts)
-
-IT Services: example: C015 - N*
-click, edit (context menu), time (tab)
-
 https://www.zabbix.com/documentation/3.2/manual/api/
 https://www.zabbix.com/documentation/2.4/manual/api/reference/maintenance/get
 https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary
@@ -71,7 +65,7 @@ Works only for string and text fields.
 searchByAny boolean If set to true return results that match any of the criteria given in the filter or search parameter instead of all of them.
 
 Default: false.
-searchWildcardsEnabled  boolean If set to true enables the use of “*” as a wildcard character in the search parameter.
+searchWildcardsEnabled  boolean If set to true enables the use of "\*" as a wildcard character in the search parameter.
 
 Default: false.
 sortfield   string/array    Sort the result by the given properties. Refer to a specific API get method description for a list of properties that can be used for sorting. Macros are not expanded before sorting.
@@ -162,6 +156,7 @@ Send only to: ServiceNow API
 # https://www.zabbix.com/documentation/2.2/manual/appendix/items/activepassive
 # https://www.zabbix.org/wiki/Docs/protocols/zabbix_agent/2.2
 # test passive agent https://www.zabbix.com/documentation/3.2/manual/appendix/items/activepassive
+```bash
 nc -v 10.63.121.118 10050
 agent.version
 #or oneliner but probably doesn't wait enough
@@ -181,6 +176,7 @@ Z=zabbixmaster; H=$(hostname -f);D="{\"request\":\"active checks\",\"host\":\"$H
 wget http://www.zabbix.com/downloads/3.2.0/zabbix_agents_3.2.0.win.zip && 7za x zabbix_agents_3.2.0.win.zip
 p="/cygdrive/c/Program Files/zabbix-agent/"; "$p/bin/win64/zabbix_agentd.exe" --install --config "$(cygpath -wa "$p/conf/zabbix_agentd.win.conf")"
 net start "Zabbix Agent"
+```
 
 IDEAS
 fuzzytime # check drifting machines https://www.zabbix.com/documentation/3.2/manual/appendix/triggers/functions
@@ -188,8 +184,10 @@ fuzzytime # check drifting machines https://www.zabbix.com/documentation/3.2/man
 https://www.zabbix.org/wiki/Start_with_SNMP_traps_in_Zabbix
 
 # custom check
+```bash
 $ cat /etc/zabbix/zabbix_agentd.d/reboot-needed.conf
 UserParameter=kernel.reboot,test $(ls -t1 /boot/vmlinuz-?\.* | head -1) == /boot/vmlinuz-$(uname -r) && echo "NO" || echo "YES"
+```
 
 
 http://cavaliercoder.com/blog/testing-zabbix-actions.html # push item data so as to fire trigger and test subsequent action
@@ -197,26 +195,33 @@ http://cavaliercoder.com/blog/testing-zabbix-actions.html # push item data so as
 - create corresponding trigger
 - push item value:
 
+```bash
 zabbix_sender -z localhost -s fakehost_testprefix -k mykey0 -o 0 # use host of zabbix_proxy instead of localhost if relevant
 /usr/bin/zabbix_sender -vv -z PROXY -s TARGET_HOST -k MY.ITEM.KEY -o 0
+```
 
 # trigger
 https://www.zabbix.com/documentation/3.2/manual/appendix/triggers/functions
 https://www.zabbix.com/documentation/3.2/manual/config/triggers/expression
+```bash
 {fakehost_testprefix:mykey0.last(0)} > 0
 {10.7.254.1:fgVpnTunEntStatus[VPN-SU-0002-01].last(0)}=1
 count(#4, 200, ne)  >= 2
 {Template OS security:security.meltdown.regexp(^OK$)}=1
 {SFTP-Backup server deadman switch:zsets.mss.watchdog[{#ZFSDATASET},{$SFTP_WATCHDOG_NB_DAYS_EXISTING},{$SFTP_WATCHDOG_NB_DAYS_NONE}].last()}=-2 and {SFTP-Backup server deadman switch:zsets.mss.watchdog[{#ZFSDATASET},{$SFTP_WATCHDOG_NB_DAYS_EXISTING},{$SFTP_WATCHDOG_NB_DAYS_NONE}].delta()}=0
+```
 
 # calculated trigger
 https://www.zabbix.com/documentation/3.2/manual/config/items/itemtypes/calculated
+```bash
 last("vpn02.group.local:fgVpnTunEntInOctets[C010DB]")
 diff("vpn02.group.local:fgVpnTunEntInOctets[C010DB]")
+```
 
 # webscenario
 The steps are periodically executed by Zabbix server in a pre-defined order. If a host is monitored by proxy, the steps are executed by the proxy.
 https://www.zabbix.com/documentation/3.2/manual/web_monitoring/example
+```bash
 login POST https://58.81.25.12/login/
 input type="hidden" name="csrfmiddlewaretoken" value="blabla"
 csrfmiddlewaretoken:WXCy8ZlwsjC3brPSt6kiPU9a7bssAEzQy9J63TDScF1NSOuj7jsVC6g4dyVqvCNJ
@@ -239,6 +244,7 @@ vi /etc/zabbix/zabbix_server.conf
 DebugLevel=4
 service zabbix-server restart
 tail -f /var/log/zabbix/zabbix_server.log | grep -C0 -E 'process_httptest|web scenario'
+```
 
 
 
@@ -259,10 +265,10 @@ java -jar schemaSpy_5.0.0.jar -t pgsql -host localhost:5432 -db zabbix -s public
 
 psql -U zabbix -h localhost
 myPasswordFSD0.fs8
-@begin=sql@
+```sql
 select * from rights left join groups on rights.id = groups.groupid;
 select usrgrp.name as usrgrp_name, groups.name as hg_name, permission from rights left join groups on rights.id = groups.groupid left join usrgrp on rights.groupid = usrgrp.usrgrpid order by usrgrp.name, groups.name;
-@end=sql@
+```
 
 
 https://atlassian.hq.k.grp/confluence/pages/viewpage.action?pageId=112557332 # MSS Zabbix template git CI/CD workflow rules merge request
@@ -277,9 +283,9 @@ key: jmx.discovery
 {IDE MTU:vfs.file.contents[/sys/class/net/{#IFNAME}/mtu].prev()}<>{IDE MTU:vfs.file.contents[/sys/class/net/{#IFNAME}/mtu].last()}
 {IDE MTU:vfs.file.contents[/sys/class/net/{#IFNAME}/mtu].delta(55)}=0
 
-@begin=javascript@
+```js
 javascript:var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k = bA.length - 1; k >= 0; --k) {bA[k].checked = true;} // template import select all box
-@end=javascript@
+```
 
 
 yum install zabbix-get
@@ -380,6 +386,7 @@ select name from hstgrp limit 10; -- host groups hostgroups hostsgroups
 
 # zabbix grafana plugin
 https://alexanderzobnin.github.io/grafana-zabbix/guides/templating/
+```bash
 {*} returns list of all available Host Groups
 {*}{*} all hosts in Zabbix
 {Network}{*} returns all hosts in group Network
@@ -402,6 +409,7 @@ last(#3) is the N-2 value
 
 
 {$DUMMY_SLOW_TIMEOUT_SECONDS} # macro
+```
 
 
 # preprocessing javascript web.page.get
@@ -425,8 +433,10 @@ https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2
 ```sh
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
+```
 
 # actions
+```bash
 /etc/opsgenie/zabbix2opsgenie -triggerName='{EVENT.NAME}' -triggerId='{TRIGGER.ID}' -triggerStatus='{TRIGGER.STATUS}' -triggerSeverity='{TRIGGER.SEVERITY}' -triggerDescription='{TRIGGER.DESCRIPTION}' -triggerUrl='{TRIGGER.URL}' -triggerValue='{TRIGGER.VALUE}' -triggerHostGroupName='{TRIGGER.HOSTGROUP.NAME}' -hostName='{HOST.NAME}' -ipAddress='{IPADDRESS}' -eventId='{EVENT.ID}' -date='{DATE}' -time='{TIME}' -itemKey='{ITEM.KEY}' -itemValue='{ITEM.VALUE}' -recoveryEventStatus='{EVENT.RECOVERY.STATUS}' -teams=ALL
 /usr/lib/zabbix/externalscripts/log.sh '{DATE}' '{TIME}' '{TRIGGER.SEVERITY}' '{TRIGGER.STATUS}' '{EVENT.NAME}'
 
@@ -445,8 +455,10 @@ zabbix_sender -z localhost -s fakehost_testprefix -k "service.discovery" -o \
 
 
 # 
+```bash
 net.tcp.port[<ip>,port] # either simple check or zabbix agent checks if TCP connection is possible
 net.tcp.service[service,<ip>,<port>] # either simple check or zabbix agent checks if one one ssh, ldap, smtp, ftp, http, pop, nntp, imap, tcp, https, telnet service is possible, see how this works: https://www.zabbix.com/documentation/current/manual/appendix/items/service_check_details
+```
 https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/simple_checks
 
 ```sql
@@ -464,7 +476,10 @@ select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as acc
 {$LOW_SPACE_LIMIT:/tmp}	User macro with context (static string).
 {$LOW_SPACE_LIMIT:regex:"^/tmp$"}	User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
 {$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}	User macro with context (regular expression). Matches all strings prefixed with /var/log/.
-```
 
 
 zabbix-get-local.sh 'proc.num[filebeat,root,,/etc/filebeat/filebeat.yml]'
+```
+
+
+triggers evaluation period ime https://www.zabbix.com/documentation/current/manual/config/triggers
