@@ -209,3 +209,6 @@ processors:
 
 https://github.com/elastic/beats/ # source code
 https://www.elastic.co/downloads/beats/winlogbeat # version
+
+
+[filebeat] squid module cannot parse CONNECT request because "extract_page failed": filebeat[3796]: ERROR [processor.javascript] console/console.go:54 extract_page failed for 'eu-v20.events.data.microsoft.com:443' https://github.com/elastic/beats/issues/24260
