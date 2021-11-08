@@ -115,10 +115,10 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
         timeout 5 df -h | grep -wE '^/(snap|run|sys)'
         if sudo -n true; then
             sudo netstat -tlnp
-            sudo last -daxFn 20
+            sudo last -axFn 20
         else
             netstat -tln
-            command last -daxFn 20
+            command last -axFn 20
         fi
     fi
 fi

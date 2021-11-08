@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import psutil
@@ -19,7 +19,7 @@ p = psutil.Process(int(m))
 children = p.children(recursive=True)
 #pprint(children[0].create_time())
 children = sorted(children, key=lambda x: -x.create_time())
-with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), 'ab') as f:
+with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), 'a') as f:
     #for child in children:
     #    f.write(pformat(child.as_dict()))
     if 0:
@@ -32,6 +32,7 @@ with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), '
         sys.exit(0)
     ssh_children = []
     for c in children:
+        if len(c.cmdline()) == 0: continue
         if c.cmdline()[0] not in ['ssh']: continue
         if '-W' in c.cmdline(): continue # Requests that standard input and output on the client be forwarded to host on port over the secure channel.
         ssh_children.append(c)

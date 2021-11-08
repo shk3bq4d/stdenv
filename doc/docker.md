@@ -2,8 +2,11 @@ https://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/
 https://docs.docker.com/engine/reference/builder/
 man dockerfile # apt install docker-doc
 /var/lib/docker/volumes/
-docker export adoring_kowalevski > contents.tar
-docker export e2309cd22c4b | tar -x
+docker export CONTAINER_NAME > contents.tar
+docker export CONTAINER_NAME | tar -x
+docker save IMANGE_NAME > contents.tar
+docker save IMAGE_NAME | tar -x
+docker save IMAGE_NAME | tar -x; # see dockerfile-from-image.sh
 c=bb6bf; d=$(mktemp -d); cd $d && docker export $c | tar x
 
 $ find $PWD | grep 57b823f5669f

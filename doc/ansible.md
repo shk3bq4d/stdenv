@@ -1819,28 +1819,28 @@ ansible_play_hosts_all                     List of all the hosts that were targe
 
 # variables precedence priority order vars
 Variable precedence: Where should I put a variable?
-* command line values (eg “-u user”)
-* role defaults [1]
-* inventory file or script group vars [2]
-* inventory group_vars/all [3]
-* playbook group_vars/all [3]
-* inventory group_vars/* [3]
-* playbook group_vars/* [3]
-* inventory file or script host vars [2]
-* inventory host_vars/* [3]
-* playbook host_vars/* [3]
-* host facts / cached set_facts [4]
-* play vars
-* play vars_prompt
-* play vars_files
-* role vars (defined in role/vars/main.yml)
-* block vars (only for tasks in block)
-* task vars (only for the task)
-* include_vars
-* set_facts / registered vars
-* role (and include_role) params
-* include params
-* extra vars (always win precedence)
+* command line values (eg “-u user”)        # precedence
+* role defaults [1]                         # precedence
+* inventory file or script group vars [2]   # precedence
+* inventory group_vars/all [3]              # precedence
+* playbook group_vars/all [3]               # precedence
+* inventory group_vars/* [3]                # precedence
+* playbook group_vars/* [3]                 # precedence
+* inventory file or script host vars [2]    # precedence
+* inventory host_vars/* [3]                 # precedence
+* playbook host_vars/* [3]                  # precedence
+* host facts / cached set_facts [4]         # precedence
+* play vars                                 # precedence
+* play vars_prompt                          # precedence
+* play vars_files                           # precedence
+* role vars (defined in role/vars/main.yml) # precedence
+* block vars (only for tasks in block)      # precedence
+* task vars (only for the task)             # precedence
+* include_vars                              # precedence
+* set_facts / registered vars               # precedence
+* role (and include_role) params            # precedence
+* include params                            # precedence
+* extra vars (always win precedence)        # precedence
 
 ```yaml
 - stat:
@@ -2655,7 +2655,7 @@ YAML single quote escaping: 'bipip''hehe''youpi' -> bipbip'hehe'youpi # https://
 
 role_name                The name of the role currently being executed.
 role_path                The path to the dir of the currently running role
-playbook_dir             The path to the directory of the playbook that was passed to the ansible-playbook command line.
+playbook_dir             The path to the directory of the playbook that was passed to the ansible-playbook command line. _path path_ _path_
 ansible_play_name        The name of the currently executed play. Added in 2.8.
 inventory_hostname       The inventory name for the ‘current’ host being iterated over in the play
 inventory_hostname_short The short version of inventory_hostname
