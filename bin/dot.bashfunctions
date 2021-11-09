@@ -1122,5 +1122,21 @@ yq-versions() {
         set +x
     done
 }
+python-http-server() {
+    local port
+    test $# -eq 1 && PORT="$1" || PORT=8000
+    if hash python3 &>/dev/null; then
+        set -x
+        python3 -m http.server $PORT
+        set +x
+    elif hash python &>/dev/null; then
+        set -x
+        python -m SimpleHTTPServer $PORT
+        set +x
+    else
+        echo "FATAL: no python in PATH"
+        exit 1
+    fi
+}
 
 true # last statement must return true
