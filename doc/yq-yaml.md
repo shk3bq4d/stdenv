@@ -1,6 +1,5 @@
 sudo snap install yq
-http://mikefarah.github.io/yq/
-http://mikefarah.github.io/yq/read/
+https://mikefarah.gitbook.io/yq/
 
 ```bash
 ln -is /snap/yq/current/bin/yq ~/bin/
@@ -31,4 +30,11 @@ yq e -n '.bip2 = "hehe"' > bip.yml # write, edit with empty or non-existing docu
 yq eval -i 'sortKeys(..)' file1.yml # diff
 yq eval -i 'sortKeys(..)' file2.yml # diff
 diff file1.yml file2.yml # diff
+
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).spec.volumes[]|select(.persistentVolumeClaim).persistentVolumeClaim' - # kubernetes k8s get all PVCs tied to pods
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - # all pods with pvc
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - | while IFS=": " read a b; do echo "a=$a b=$b"; done # all pods with pvc bash iteration
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:0,.name:0}|keys()|join(" ")' - | while read namespace name; do echo "namespace=$namespace name=$name"; done # all pods with pvc bash iteration
 ```
+
+

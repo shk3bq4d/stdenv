@@ -865,4 +865,9 @@ kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=debian     
 kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=shk3bq4d/stdenv:stdenv  --container=filebeat -- zsh
 
 log.file.path: /var/log/containers/{{ pod_name }}_{{ namespace }}_{{ container_name }}-{{ container_id }}.log
+
+
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).spec.volumes[]|select(.persistentVolumeClaim).persistentVolumeClaim' - # kubernetes k8s get all PVCs tied to pods
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - # all pods with pvc
+kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - | while IFS=": " read a b; do echo "a=$a b=$b"; done # all pods with pvc bash iteration
   ```

@@ -69,8 +69,8 @@ fi
         echo "cat $NAME" >&2
         cat "$NAME"
     else
-        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' 2>&1 | less"  >&2
-        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -starttls smtp 2>&1 | less # for STARTTLS SMTP"  >&2
+        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -showcerts                2>&1 | less"  >&2
+        echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -showcerts -starttls smtp 2>&1 | less # for STARTTLS SMTP"  >&2
         echo | \
             /usr/bin/openssl s_client -connect $IP:$PORT -servername "$NAME" 2>&1
     fi
