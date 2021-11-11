@@ -1,4 +1,15 @@
+/* ex: set filetype=javascript fenc=utf-8 expandtab ts=4 sw=4 : */
 
+```markdown
+* https://jquery.com/download/
+* https://code.jquery.com/jquery-3.6.0.js
+* https://code.jquery.com/jquery-3.6.0.min.js
+You can also use the slim build, which excludes the ajax and effects modules:
+* https://code.jquery.com/jquery-3.6.0.slim.js
+* https://code.jquery.com/jquery-3.6.0.slim.min.js
+```
+
+```js
 $('#pwd').val('setvalue');
 $('#id_password').is(":visible") // sometimes not enough
 $('[name="remember_me"]').prop('checked', true);
@@ -17,3 +28,8 @@ $(t).children().eq(1);     # grab the second child:
 $(t).children('td').eq(1); # grab the second child <td>:
 
 $('p:contains("mytext")').click() # p element that contains my text
+
+
+$(document).ready(function() { });
+  $( "tr" ).odd().addClass("odd");
+  $( "tr" ).even().addClass("even");

@@ -209,6 +209,7 @@ processors:
 
 https://github.com/elastic/beats/ # source code
 https://www.elastic.co/downloads/beats/winlogbeat # version
+https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.15.2-windows-x86_64.zip
 
 
 - timestamp:

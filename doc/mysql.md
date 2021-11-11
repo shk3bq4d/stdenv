@@ -126,3 +126,22 @@ alter database craft character set utf8 collate utf8_general_ci;
 -- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
 regexp_replace(expr, pat, repl[, pos[, occurrence[, match_type]]])
 ```
+
+
+# Mysql binary logs
+myslq-bin.003172
+myslq-bin.index
+https://dba.stackexchange.com/questions/41050/is-it-safe-to-delete-mysql-bin-files
+
+```ini
+# /etc/my.cnf.d/server.cnf or /etc/my.cnf
+[mysqld]
+expire_logs_days=3
+```
+
+```sql
+set global expire_logs_days = 3;
+purge binary logs to 'mysql-bin.000223';
+show variables where variable_name like 'expire%';
+show variables where variable_name = 'expire_logs_days';
+```
