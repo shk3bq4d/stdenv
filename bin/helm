@@ -13,6 +13,7 @@ helm_version=3.4.1
 helm_version=3.5.4
 helm_version=3.6.3
 helm_version=3.7.0
+helm_version=3.7.1
 
 BIN="$HOME/bin/helm-$helm_version"
 
