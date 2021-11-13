@@ -105,6 +105,11 @@ if [[ $FIRSTLINE =~ ^#!.* ]]; then
     myexit $?
 fi
 
+# special ans/zabbix/templates/*.yml.j2 treatmeant
+if [[ "$SCRIPT" == *"/ans/zabbix/templates/"*".yml.j2" ]]; then
+    SCRIPT="${SCRIPT%.j2}"
+fi
+
 # by extension
 case "$SCRIPT" in \
 vimf6.sh)

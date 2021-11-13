@@ -31,6 +31,8 @@ helm repo index ./repo/
 
 helm plugin install https://github.com/databus23/helm-diff # 
 helm diff revision -n kube-system blob-csi-driver 1
+helm plugin list
+helm plugin update diff
 
 # security tiller
 remove clusterIP

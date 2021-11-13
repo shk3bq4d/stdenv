@@ -60,11 +60,9 @@ disown
 string substitution
 foo="  "
 
-# replace first blank only
-bar=${foo/ /.} # pseudo-regexp pattern replacement
+bar=${foo/ /.} # pseudo-regexp pattern replacement, replace first blank only, substitution
 
-# replace all blanks
-bar=${foo// /.} # pseudo-regexp pattern replacement
+bar=${foo// /.} # pseudo-regexp pattern replacement, replace all blanks, substitution
 
 for i in a b c ; do echo "coucuo $i"; done # iterate
 for i in $(echo "P1D
@@ -412,8 +410,8 @@ b=${tmp%_*}
 
 Substring Removal
 
-${string#substring}  #Deletes shortest match of $substring from front of $string.
-${string##substring} #Deletes longest match of $substring from front of $string.
+${string#substring}  #Deletes shortest match of $substring from front of $string. substitution
+${string##substring} #Deletes longest match of $substring from front of $string. substitution
 
 stringZ=abcABC123ABCabc
 #       |----|          shortest
@@ -427,11 +425,11 @@ echo ${stringZ##a*C}     # abc
 
 # You can parameterize the substrings.
 X='a*C'
-echo ${stringZ#$X}      # 123ABCabc
-echo ${stringZ##$X}     # abc
+echo ${stringZ#$X}      # 123ABCabc    substitution
+echo ${stringZ##$X}     # abc          substitution
                         # As above.
 
-${string%substring} # Deletes shortest match of $substring from back of $string.
+${string%substring} # Deletes shortest match of $substring from back of $string. substitution
 For example:
 # Rename all filenames in $PWD with "TXT" suffix to a "txt" suffix.
 # For example, "file1.TXT" becomes "file1.txt" . . .
@@ -446,7 +444,7 @@ for i in $(ls *.$SUFF)
         #+ starting from the right-hand-side of the variable $i . . .
       done ### This could be condensed into a "one-liner" if desired.
 
-${string%%substring} # Deletes longest match of $substring from back of $string.
+${string%%substring} # Deletes longest match of $substring from back of $string. substitution
 
       stringZ=abcABC123ABCabc
 #                    ||     shortest
