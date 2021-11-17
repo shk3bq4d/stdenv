@@ -483,3 +483,6 @@ zabbix-get-local.sh 'proc.num[filebeat,root,,/etc/filebeat/filebeat.yml]'
 
 
 triggers evaluation period ime https://www.zabbix.com/documentation/current/manual/config/triggers
+
+typeperf -qx   # performance counter perf counter perf_counter windows
+typeperf -qxa  # performance counter perf counter perf_counter windows

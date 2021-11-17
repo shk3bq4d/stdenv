@@ -70,6 +70,7 @@ snap install yq
 
 # APK
 apk: dig => bind-tools
+apk: file => file
 # cat /etc/alpine-release
 3.3.3
 # echo 'http://dl-cdn.alpinelinux.org/alpine/v3.2/main' >> /etc/apk/repositories

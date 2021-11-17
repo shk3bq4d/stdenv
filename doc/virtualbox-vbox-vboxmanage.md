@@ -16,6 +16,7 @@ vboxmanage startvm "xp1 Clone" --type headless
 vboxmanage discardstate projectlibre
 vboxmanage showvminfo
 vboxmanage showvminfo minikube G ssh
+vboxmanage unregistervm vmname # destroy delete unprovision
 
 
 

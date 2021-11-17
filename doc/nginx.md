@@ -44,6 +44,10 @@ curl -s https://nginx.org/en/CHANGES-1.18 | sed -n -r -e '/^Changes with nginx/s
   1.17.2                                        23 Jul 2019
   1.17.1                                        25 Jun 2019
   1.17.0                                        21 May 2019
+https://nginx.org/en/CHANGES-1.20
+  1.20.2                                        16 Nov 2021
+  1.20.1                                        25 May 2021
+  1.20.0                                        20 Apr 2021
 
 https://nginx.org/en/security_advisories.html # CVE
 
