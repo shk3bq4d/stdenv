@@ -1,5 +1,6 @@
 ssh mrhyp history
 ssh mrhyp virt-manager
+ssh -t mrhyp sudo virsh start charlotte
 sudo virt-manager
 virsh domiflist altlinux3.0
 virsh dominfo

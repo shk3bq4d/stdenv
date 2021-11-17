@@ -17,7 +17,7 @@ To execute a script at shutdown
 
 
 # oneliners
-@begin=sh@
+```bash
 sudo apt-get upgrade # system update
 sudo useradd -d /home/testuser -m testuser # user create
 sudo usermod -a -G group username # add existing user to existing group
@@ -29,10 +29,11 @@ cut -d: -f1 /etc/group # list all groups on system
 dhclient -r; sleep 10; dhclient # renew dhcp
 ln -is TARGET LINKNAME
 sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child processes 3266
-@end=sh@
+```
 
 
-Debian versions
+## Debian versions
+```bash
 1.2 rex        1996-12-12
 1.3 bo        1997-06-05
 2.0 hamm    1998-07-24
@@ -69,6 +70,7 @@ Version     Code name     Release date                                     Suppo
 13.04       Raring Ringtail  2013-04-25   Older version, yet still supported: 2014-01
 13.10       Saucy Salamander 2013-10-17   Current stable version: 2014-07
 14.04 LTS   Trusty Tahr      2014-04-17   Future release: 2019-04
+```&
 
 dmesg
 
@@ -146,6 +148,7 @@ route add -net 192.168.0.0 netmask 255.255.255.0 metric 1 dev eno2
 
 # network config
 vi /etc/sysconfig/network-scripts/ifcfg-ens32 # centos or systemd https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-networkscripts-static-routes.html
+```ini
 TYPE=Ethernet
 BOOTPROTO=static
 DEFROUTE=yes
@@ -171,8 +174,11 @@ DNS1=10.3.28.13
 DNS2=6.1.0.33
 # centos gateway to be set in /etc/sysconfig/network like
 GATEWAY=213.244.194.1
-
+```
+```sh
 vi /etc/network/interfaces #ubuntu14
+```
+```ini
 auto eth1
 iface eth1 inet static
     address 10.3.28.2
@@ -182,13 +188,15 @@ iface eth1 inet static
     broadcast 10.3.28.255
     dns-search mydomain.local
     dns-nameservers 10.3.28.13 6.1.0.33
+```
 
 
-
+```sh
 route add -net 10.0.0.0 netmask 255.0.0.0 gw 172.172.29.4.1 dev eth1
 NEWHOSTNAME=sonarqube3 && sudo hostnamectl set-hostname $NEWHOSTNAME && sudo sed -i -r -e '/^127.0.1.1 / d' /etc/hosts && echo "127.0.1.1 ${NEWHOSTNAME}.pamo.local ${NEWHOSTNAME}" | sed -r -e 's/\.pa(mo\.)/.ru\1/' | sudo tee -a /etc/hosts;
 
 yum whatprovides '*bin/dig'
+```
 
 
 #/etc/dhcp/dhclient.conf
@@ -253,7 +261,7 @@ sudo mount -o rw,uid=$(id -u) /dev/sde1 /mnt/sde1  # mount sdcard as current use
 # setuid from python script
 # https://stackoverflow.com/questions/24541427/setuid-setgid-wrapper-for-python-script
 $ cat scriptwrap.c
-@begin=c@
+```js
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -262,8 +270,10 @@ int main(int argc, char *argv[]) {
     setgid(getegid());
     return execv("/home/user/tmp/bip.py", argv);
 }
-@end=sh@
+```
 $ cat /home/user/tmp/bip.py
+
+```python
 #!/usr/bin/env python2
 import os
 
@@ -271,6 +281,7 @@ print "uid: %s" % os.getuid()
 print "euid: %s" % os.getgid()
 print "gid: %s" % os.geteuid()
 print "egid: %s" % os.getegid()
+```
 gcc scriptwrap.c -o scriptwrap && sudo chown root scriptwrap && sudo chmod u+s scriptwrap
 
 # wireless
