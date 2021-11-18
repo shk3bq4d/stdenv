@@ -50,3 +50,4 @@ lvresize --size +20G   --resizefs /dev/mapper/ubuntu--vg-lv_var_lib_docker
 
 
 vgremove
+vgextend - Add physical volumes to a volume group
