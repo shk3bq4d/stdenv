@@ -148,6 +148,11 @@ route add -net 192.168.0.0 netmask 255.255.255.0 metric 1 dev eno2
 
 # network config
 vi /etc/sysconfig/network-scripts/ifcfg-ens32 # centos or systemd https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-networkscripts-static-routes.html
+```sh
+NEWIP=10.101.6.197; sed -r -i -e "s/^IPADDR=.*/IPADDR=$NEWIP/" /etc/sysconfig/network-scripts/ifcfg-eth0
+```
+
+
 ```ini
 TYPE=Ethernet
 BOOTPROTO=static
@@ -399,3 +404,5 @@ upower -i `upower -e | grep 'BAT'`
 ```
 
 vi /var/mail/$(whoami) # read cron outputs or other local mails
+
+echo -e "\n$(date) hellot" | sudo tee -a /dev/console

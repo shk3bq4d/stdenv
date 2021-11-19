@@ -1,3 +1,13 @@
+# image restore
+```bash
+pvscan
+vgimport VG_root
+vgchange -ay VG_root
+mount /dev/mapper/VG_root-LV_root /mnt
+NEWIP=10.101.6.195; sed -r -i -e "s/^IPADDR=.*/IPADDR=$NEWIP/" /mnt/etc/sysconfig/network-scripts/ifcfg-eth0
+grep -E '^IPADDR' /mnt/etc/sysconfig/network-scripts/ifcfg-eth0
+#reboot
+```
 
 # https://www.system-rescue.org/manual/PXE_network_booting/
 
