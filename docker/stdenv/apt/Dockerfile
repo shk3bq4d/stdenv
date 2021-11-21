@@ -58,6 +58,7 @@ RUN true \
 	&& touch /root/.zshrc /home/user/.zshrc \
 	&& mkdir -p /root/.tmp/log /stdenv/user/.tmp/log \
 	&& chown user: /home/user/.zshrc /stdenv/user/ \
+	&& date > /.dockerenv-apt \
 	&& true
 
 # && sed -i -r -e "s,^%sudo\\s.*,%sudo ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \

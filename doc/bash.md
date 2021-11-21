@@ -60,9 +60,9 @@ disown
 string substitution
 foo="  "
 
-bar=${foo/ /.} # pseudo-regexp pattern replacement, replace first blank only, substitution
+bar=${foo/ /.} # pseudo-regexp, more like glob, pattern replacement, replace first blank only, substitution
 
-bar=${foo// /.} # pseudo-regexp pattern replacement, replace all blanks, substitution
+bar=${foo// /.} # pseudo-regex, more like glob,  pattern replacement, replace all blanks, substitution
 
 for i in a b c ; do echo "coucuo $i"; done # iterate
 for i in $(echo "P1D
