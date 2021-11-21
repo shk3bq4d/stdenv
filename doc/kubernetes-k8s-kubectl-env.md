@@ -837,7 +837,9 @@ kubectl describe node # nice summary cpu memory requests
 kubernetes.default.svc # API server reachability hosname/
 /var/run/secrets/kubernetes.io/serviceaccount
 ```sh
-curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/
+curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/api/v1/namespaces/stdenv/pods
+https://stackoverflow.com/questions/52995962/kubernetes-namespace-default-service-account
+kubectl --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt --token /var/run/secrets/kubernetes.io/serviceaccount/token --server=https://kubernetes.default.svc/ --namespace=$(</var/run/secrets/kubernetes.io/serviceaccount/namespace) get pod # probably not yet correct
 
 
 kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
