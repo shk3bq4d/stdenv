@@ -173,6 +173,7 @@ Options:
 
 shell, command no change when exit code is 0 change_when: false -> # http://www.middlewareinventory.com/blog/ansible-changed_when-and-failed_when-examples/
 
+condition | ternary('if_cond_true', 'if_cond_false', 'if_cond_null')
 "{{ 'ternary operator jinja' if expose_service == 'true' else 'ClusterIP' }}"
 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html

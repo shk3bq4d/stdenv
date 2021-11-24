@@ -1,4 +1,5 @@
 # APT
+```sh
 apt-get changelog pkgname
 sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
@@ -6,7 +7,7 @@ dpkg -S /bin/ls # whatprovides in installed packages
 dpkg -S $(which tail) # whatprovides core-utils
 dpkg -L python # list files that were installed per package
 apt-file search date # apt-get install apt-file && apt-file update
-apt-file search /sbin/ip | grep -Ew ip                                                2" 360
+apt-file search /sbin/ip | grep -Ew ip
 apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
 iproute2: /sbin/ip
@@ -21,13 +22,21 @@ netstat : apt install net-tools
 apt update && apt install -y netcat curl wget net-tools; curl http://localhost; nc -v localhost 80
 dpkg -S $(which dig) # dnsutils: /usr/bin/dig
 
+aptitude why PACKAGE # describe why package was installed
+
+/var/log/apt/history.log
+```
+
 ## APT security updates
+```sh
 apt-get upgrade -s | grep -i security # list security updates
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
+```
 
 # YUM
 https://linux.die.net/man/5/yum.conf
+```sh
 yum provides PROG
 yum --showduplicates list httpd | expand # http://unix.stackexchange.com/questions/151689/how-can-i-instruct-yum-to-install-a-specific-version-of-package-x available
 yum erase 'zabbix*' # purge
@@ -46,12 +55,15 @@ yum whatprovides mongodump && yum clean all # mongodb-org-tools
 yum whatprovides dos2unix  && yum clean all # dos2unix
 yum clean all
 yum history # log
+yum history redo force-reinstall TRANSACTION_ID1 TRANSACTION_ID2
+yum reinstall glibc openssl-libs dbus linux-firmware gnutls systemd
 yum-complete-transaction # compares /var/lib/yum-transaction-all-* and /var/lib/yum-transaction-done-* and finishes work
 
 yum-config-manager --disable base,extras,updates
 
 rpm -qa | grep rsyslog
 rpm -q kernel # list versions
+```
 
 https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/
 
@@ -100,6 +112,7 @@ sudo yum install -y nmap-ncat #nc netcat
 sudo yum install -y which
 
 # Fedora DNF
+```sh
 dnf provides /bin/find
 dnf install neomutt offlineimap notmuch perl-Email-Sender perl-MailTools perl-Mail-Box -y 
 dnf copr enable flatcap/neomutt -y
@@ -120,8 +133,10 @@ inetutils-ping: /bin/ping
 
 sudo yum reinstall --downloadonly --downloaddir=/home/adminmru zabbix-agent
 yum reinstall kernel-3.10.0-1160.11.1.el7
+```
 
 # FreeBSD PKG
+```sh
 pkg info -D zoneminder
 
 apt install --reinstall docker-ce
@@ -130,9 +145,7 @@ apt-cache madison docker-ce # list available version
 needs-restarting -r # yum reboot check if necessary
 test -f /var/run/reboot-required # apt check restart necessary
 
-aptitude why PACKAGE # describe why package was installed
-
-/var/log/apt/history.log
+```
 
 # mrhyp
 sed -e '/mirrorlist=.*/d' -e 's/#baseurl=/baseurl=/' -e "s/\$releasever/7.4.1708/g" -e "s/mirror.centos.org\\/centos/vault.centos.org/g" -i /etc/yum.repos.d/CentOS-Base.repo

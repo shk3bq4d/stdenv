@@ -6,6 +6,7 @@ journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMP
 
 systemd_mr_unitfiles
 
+https://www.freedesktop.org/software/systemd/man/systemd.service.html#ExecStop=
 https://www.freedesktop.org/software/systemd/man/systemd.service.html # unit spec
 https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boot-on-systemd-linux
  vi /etc/systemd/system/SERVICENAME.service
