@@ -9,5 +9,11 @@ if [[ -z "$BIN" ]]; then
 	exit 1
 fi
 
-export QT_SCALE_FACTOR=1.5
-nohup "$BIN" </dev/null &>/dev/null &
+case $(hostname -f) in \
+apr16*) export QT_SCALE_FACTOR=3;;
+may19*) export QT_SCALE_FACTOR=2;;
+*)      export QT_SCALE_FACTOR=1.5;;
+esac
+sudo -n true 2>/dev/null || echo "enter your sudo password"
+sudo true
+sudo nohup "$BIN" </dev/null &>/dev/null &

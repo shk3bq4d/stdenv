@@ -230,23 +230,49 @@ https://openwrt.org/toh/ubiquiti/ubiquiti_edgerouter_x_er-x_ka#terminal_upgrade_
 ### 2021-02-02
 wget http redirect failed when downloading from device, had to download from apr16 then scp the file
 http://downloads.openwrt.org/releases/19.07.6/targets/ramips/mt7621/openwrt-19.07.6-ramips-mt7621-ubnt-erx-squashfs-sysupgrade.bin # upgrade
+https://downloads.openwrt.org/releases/21.02.1/targets/ramips/mt7621/openwrt-21.02.1-ramips-mt7621-ubnt_edgerouter-x-squashfs-sysupgrade.bin
 
 ## reboot network bug
 https://bugs.openwrt.org/index.php?do=details&task_id=3450&string=mtk_soc_eth&type%5B0%5D=&sev%5B0%5D=&pri%5B0%5D=&due%5B0%5D=&reported%5B0%5D=&cat%5B0%5D=&status%5B0%5D=open&percent%5B0%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=
 https://bugs.openwrt.org/index.php?do=details&task_id=2628
 https://forum.openwrt.org/t/ramips-mt7621-freewrt-20-12-master-branch-based/82672/18
 
+# Ubiquitu UniFi AC PRO
+**model not to be confused with similary named AP PRO (AP -> AC)**
+2021 salon ap-salon-centre.ly.lan 10.19.29.252
+Model	Ubiquiti UniFi-AC-PRO
+Architecture	Qualcomm Atheros QCA956X ver 1 rev 0
+https://openwrt.org/toh/ubiquiti/unifiac
+https://downloads.openwrt.org/releases/19.07.8/targets/ath79/generic/openwrt-19.07.8-ath79-generic-ubnt_unifiac-pro-squashfs-sysupgrade.bin
+https://downloads.openwrt.org/releases/21.02.1/targets/ath79/generic/openwrt-21.02.1-ath79-generic-ubnt_unifiac-pro-squashfs-sysupgrade.bin
+
 # TL-WDR3600 ap-galetas-east
+2021: galetas EAST (parent+charlotte) 10.19.29.249 ap-galetas-east.ly.lan
+Model	TP-Link TL-WDR3600 v1
+Architecture	Atheros AR9344 rev 2
 https://openwrt.org/toh/tp-link/tl-wdr3600
 ssh root@10.19.29.249
 cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+https://downloads.openwrt.org/releases/21.02.1/targets/ath79/generic/openwrt-21.02.1-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 wdr3600password1.
 **MR: the TFTP recovery from above linked worked**
 wget http://downloads.openwrt.org/releases/19.07.6/targets/ath79/generic/openwrt-19.07.6-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 
-## ap-salon
-https://openwrt.org/toh/tp-link/tp-link_archer_c2600_v1
+## Archer C2600
+TP-Link Archer C2600
+ARMv7 Processor rev 0 (v7l)
+
+### instance 1
+2020: salon
+2021: internet router. hostname: 10.19.29.1 ly1.ly.lan
+
+### instance 2
+2021: bureau marc. hostname: 10.19.29.250ap-bureau-marc.ly.lan
+
+### doc and upgrade files
+https://openwrt.org/toh/tp-link/archer_c2600_v1
 http://downloads.openwrt.org/releases/19.07.6/targets/ipq806x/generic/openwrt-19.07.6-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
+https://downloads.openwrt.org/releases/21.02.1/targets/ipq806x/generic/openwrt-21.02.1-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
 
 ## linksys WRT54gl
 https://openwrt.org/toh/linksys/wrt54g

@@ -5,7 +5,7 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 
-ssh \
+scp \
     -o StrictHostKeyChecking=no \
     -o CheckHostIP=no \
     -o UserKnownHostsFile=/dev/null \

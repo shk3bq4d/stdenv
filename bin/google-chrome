@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#source ~/.std*aliases
+set -x
+ARGS="--allow-legacy-extension-manifests --debug-print"
+SCALE="1.4"
+case $(timeout 2 hostname -f) in \
+may19*)
+	SCALE=1.16
+	;;
+esac
+ARGS=" --force-device-scale-factor=$SCALE $ARGS "
+UA=""
+UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/ 71.0.3578.98 Safari/537.36"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"
+UA="Mozilla/5.0 (hihi)"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36"
+f=~/bin/notinpath/chrome-win-stable-latest-version.sh-chromium-browser
+if [[ -f $f ]] && grep -qEx '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' $f; then
+	UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$(< $f) Safari/537.36"
+fi
+UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+BIN=/usr/bin/google-chrome
+$BIN $ARGS --user-agent="$UA" "$@" #</dev/null &>/dev/null &

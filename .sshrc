@@ -113,9 +113,10 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
         bash ips --no-internet
         uptime
         timeout 5 df -h | grep -wE '^/(snap|run|sys)'
-        if sudo -n true; then
+        if sudo -n true 2>/dev/null; then
             sudo netstat -tlnp
             sudo last -axFn 20
+			sudomr
         else
             netstat -tln
             command last -axFn 20

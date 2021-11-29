@@ -70,12 +70,13 @@ Version     Code name     Release date                                     Suppo
 13.04       Raring Ringtail  2013-04-25   Older version, yet still supported: 2014-01
 13.10       Saucy Salamander 2013-10-17   Current stable version: 2014-07
 14.04 LTS   Trusty Tahr      2014-04-17   Future release: 2019-04
-```&
+```
 
+```bash
 dmesg
 
-ifconfig eth0 10.19.29.54
-route add default gw 10.19.29.1
+ifconfig eth0 10.19.29.54 netmask 255.255.255.0 # ifconfig route gateway
+route add default gw 10.19.29.1 #                 ifconfig route gateway
 
 # capture short lived process excluding existing the pid that matches the same grep
 while :; do ps -eo pid,command | grep java | egrep -vw '542|562|651|21437|grep' >>mrlog; done

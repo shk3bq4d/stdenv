@@ -873,3 +873,12 @@ kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolu
 kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - # all pods with pvc
 kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - | while IFS=": " read a b; do echo "a=$a b=$b"; done # all pods with pvc bash iteration
   ```
+
+# Restart as much as possible
+```bash
+sudo systemctl restart kubelet                    # restart all
+kubectl rollout restart daemonset/kube-proxy      # restart all
+kubectl rollout restart daemonset/kube-flannel-ds # restart all
+kubectl rollout restart deployments/coredns       # restart all
+vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver, controller, scheduler
+```
