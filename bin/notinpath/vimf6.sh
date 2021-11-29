@@ -221,7 +221,7 @@ case $SCRIPT in \
     nohup firefox $SCRIPT &>/dev/null &
     exit 0
     ;;
-*yml)
+*.yml|*.yaml)
     # trying for ansible
     if grep -qE "^[- ] hosts:" $SCRIPT; then
         SCRIPT=$(realpath -e $SCRIPT)
@@ -279,6 +279,7 @@ case $SCRIPT in \
         myexit $_exit
     else
         #echo "($(basename $0)): unimplemented case for YAML script $SCRIPT"
+        # alternative could have been yq --output-format=json e . $SCRIPT
         echo '# /* e''x: set filetype=python */'
         python3 -c "
 import yaml

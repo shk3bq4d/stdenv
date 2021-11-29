@@ -1243,4 +1243,7 @@ assert x is not None
 print(x.upper())
 ```
 
-
+```python
+def _my_recursive_iterator_function(): # yield from https://stackoverflow.com/questions/38254304/can-generators-be-recursive 
+	yield from _my_recursive_iterator_function # https://stackoverflow.com/questions/38254304/can-generators-be-recursive
+```

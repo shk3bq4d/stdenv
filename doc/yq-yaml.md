@@ -19,7 +19,8 @@ ln -is /snap/yq/current/bin/yq ~/bin/
                     yq e '.data.* = "REDACTED"' -i $instance_filename
 
 
-| yq e -P # json to yaml
+| yq e -P                         # json to yaml
+yq --output-format=json e . $YAML # yaml to json
 
 yq e '.azure_sf_domains[]' - # Cannot index array with '*'
 

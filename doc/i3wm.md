@@ -55,6 +55,8 @@ xwininfo
 i3-save-tree --workspace  0 > ~/tmp/2x2.json
 i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
 
+i3-msg '[workspace="workspace_name"]' move workspace to output output_index # https://unix.stackexchange.com/questions/397269/i3wm-how-to-move-workspaces-between-monitors
+
 # errors
 less /run/user/1000/i3/errorlog.2489
 vi -R $(ls -1t /run/user/$EUID/i3/errorlog.2489 | head -n1 )

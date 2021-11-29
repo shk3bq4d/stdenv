@@ -181,15 +181,31 @@ def go(args):
         #remove_single_child_containers(i3.get_tree().find_focused())
         remove_single_child_containers(None)
 
-    if 1:
+    if 0:
         grid_layout()
+    if 1:
+        #debug(i3.get_tree())
+        for w in workspaces():
+            if is_workspace_focused_within_output(w):
+                print(w.name)
+        #pprint(output_names())
+        #pprint(workspace_names())
+        #pprint(output_names())
+        #pprint(vars(outputs()[0]))
+        #pprint(outputs()[0])
+        return
+    if 0:
+        #for i in traverse_all_elem(only_visible=True):
+        pass
 
 def debug(e, recursive=True, indent='', _rA=None, _print=True):
     #pprint(vars(e.props))
     pprint(vars(e))
+    return
     if _rA is None:
         _rA = []
     if e is not None:
+        #if e.focused: _rA.append('focused:')
         if len(e.marks) == 0:
             mmarks = ''
         else:
@@ -209,7 +225,7 @@ def debug(e, recursive=True, indent='', _rA=None, _print=True):
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
     else:
-        _rA.append(u'{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
+        rA.append(u'{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
         if recursive:
             for n in e.nodes:
                 debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
@@ -232,6 +248,14 @@ def is_workspace(n):
 
 def is_workspace_focused(n):
     return focused().workspace().num == n.num
+
+def is_workspace_focused_within_output(n):
+    if n.type != 'workspace':
+        raise BaseException('not a workspace')
+    return is_con_focused_within_parent(n)
+
+def is_con_focused_within_parent(n):
+    return n.parent.focus.index(n.id) == 0
 
 def traverse_all_elem(start_from=None, only_visible=False):
     rA = []
@@ -528,6 +552,69 @@ def current_output_workspaces():
             rA.append(workspace)
     return rA
 
+def get_output(o):
+    if o.type == 'output': return o
+    return get_output(o.parent)
+
+def get_output_name(o):
+    return get_output(o).name
+
+def workspacereplies():
+    oA = i3ipc.Connection().get_workspaces()
+    #oA = filter(lambda x: x.active, oA)
+    return list(oA)
+
+def workspacereply_names():
+    return list(map(lambda x: x.name, workspaces()))
+
+VIRTUAL_OUTPUT_NAME = '__i3'
+def outputs(skip_virtual=True):
+    def _outputs_inner(elem):
+        for n in elem.nodes:
+            if n.type == 'output':
+                if skip_virtual and n.name == VIRTUAL_OUTPUT_NAME:
+                    continue
+                yield n
+                # prune search as I guess an output can't have another output as parent
+                continue
+            elif n.type in ['dockarea', 'workspace', 'con']:
+                # prune search as I guess those types can't have an output as children
+                continue
+            yield from _outputs_inner(n)
+
+    return [x for x in _outputs_inner(get_root())]
+
+def output_names(skip_virtual=True):
+    return list(map(lambda x: x.name, outputs(skip_virtual=skip_virtual)))
+
+SCRATCH_WORKSPACE_NAME = '__i3_scratch'
+def workspaces(skip_scratch=True):
+    def _workspaces_inner(elem):
+        for n in elem.nodes:
+            if n.type == 'workspace':
+                if skip_scratch and n.name == SCRATCH_WORKSPACE_NAME:
+                    continue
+                yield n
+                # prune search as I guess a workspace can't have another workspace as parent
+                continue
+            if n.type == 'dockarea':
+                # prune search as I guess those types can't have an container as children
+                continue
+            yield from _workspaces_inner(n)
+
+    return [x for x in _workspaces_inner(get_root())]
+
+def workspace_names(skip_scratch=True):
+    return list(map(lambda x: x.name, workspaces(skip_scratch=skip_scratch)))
+
+def outputreplies():
+    oA = i3ipc.Connection().get_outputs()
+    oA = filter(lambda x: x.active, oA)
+    return list(oA)
+
+def outputreply_names():
+    return list(map(lambda x: x.name, outputs()))
+
 def renumber_workspaces():
     all_workspaces = copy.copy(get_root().workspaces())
 
@@ -553,7 +640,7 @@ def renumber_workspaces():
 if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
-    if 'VIMRUNTIME' in os.environ:
+    if 'VIMRUNTIME' in os.environ and False:
         #unittest.main()
         logging_conf()
         renumber_workspaces()

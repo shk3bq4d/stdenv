@@ -19,6 +19,6 @@ f=~/bin/notinpath/chrome-win-stable-latest-version.sh-chromium-browser
 if [[ -f $f ]] && grep -qEx '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' $f; then
 	UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/$(< $f) Safari/537.36"
 fi
-UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+false && UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 BIN=/usr/bin/google-chrome
 $BIN $ARGS --user-agent="$UA" "$@" #</dev/null &>/dev/null &
