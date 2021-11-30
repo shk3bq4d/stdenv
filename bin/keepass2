@@ -15,8 +15,8 @@ done
 DIR=~/bin
 set -x
 echo "work pc is ${WORK_PC1F}"
-CORONA_MASTER_PC=${WORK_PC1F}
 CORONA_MASTER_PC=apr16.ly.lan
+CORONA_MASTER_PC=${WORK_PC1F}
 HOSTNAMEF=$(hostname -f)
 if hash keepassxc &>/dev/null; then
     case $HOSTNAMEF in \
