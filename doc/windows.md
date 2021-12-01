@@ -167,3 +167,7 @@ shutdown /r /t 18000 &:: restart machine in 5 hours
 mstsc /v server:port &:: rdp remote desktop protocol
 
 win+. # emoji helper
+
+ncpa.cpl # network cards connections
+eventvwr.msc # events viewer
+services.msc # services
