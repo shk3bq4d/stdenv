@@ -53,6 +53,6 @@ az acr list -o json |
 curl -s http://omahaproxy.appspot.com/all.json | jq -r '.[] | select(.os=="win") | .versions[] | select(.channel=="stable") | .current_version' # chrome version
 
 cat ~/tmp/bip.json | jq -r  '[ .resources[]| select(.type == "azuread_service_principal") | .instances[] | .attributes.display_name == "my_name" ] | index(true)'                                                                                                                            # retrieves the (first) index of elements that match a condition within a list, https://coderedirect.com/questions/337575/getting-the-object-array-index-in-jq
-cat ~/tmp/bip.json | jq -r '([ .resources[]| select(.type == "azuread_service_principal") | .instances[] | .attributes.display_name == "my_name" ] | index(true)) as $myindex | .resources[]| select(.type == "azuread_service_principal") | .instances[$myindex].attributes.application_id' # retrieves the (first) index of elements that match a condition within a list, https://coderedirect.com/questions/337575/getting-the-object-array-index-in-jq, intermediary variables
+cat ~/tmp/bip.json | jq -r '([ .resources[]| select(.type == "azuread_service_principal") | .instances[] | .attributes.display_name == "my_name" ] | index(true)) as $myindex | .resources[]| select(.type == "azuread_service_principal") | .instances[$myindex].attributes.application_id'  retrieves the (first) index of elements that match a condition within a list, https://coderedirect.com/questions/337575/getting-the-object-array-index-in-jq, intermediary variables
 
 ```
