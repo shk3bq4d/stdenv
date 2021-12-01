@@ -7,4 +7,27 @@ bindir=$HOME/.virtualenvs/az-cli/bin
 f=$bindir/activate
 ! test -f $f && echo "FATAL: not a file $f" && exit 1
 source $f
-$bindir/az "$@"
+
+should_add_subscription() {
+    [[ $# -eq 0 ]] && return 1
+    [[ "$@" == *--help* ]] && return 1
+
+    return 0
+}
+
+POSTARG=""
+case $0 in \
+*az-sfops)
+    should_add_subscription "$@" && POSTARG="$POSTARG --subscription 0433448c-cf06-421d-ba53-dee879d6087a"
+    ;;
+*az-sfopsb)
+    #TENANT=d7ef61ac-0d19-436a-9159-13ff8a3408a2;;
+    should_add_subscription "$@" && POSTARG="$POSTARG --subscription ba7dcad5-11f6-400a-897c-856f33bb9637"
+    ;;
+*) true ;;
+esac
+
+#$bindir/az -t $TENANT "$@"
+#export ARM_TENANT_ID=$TENANT
+#export ARM_SUBSCRIPTION_ID="$S"
+$bindir/az "$@" $POSTARG

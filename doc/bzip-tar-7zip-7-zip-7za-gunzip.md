@@ -1,6 +1,8 @@
 
 tar -ztvf bip.tar.gz # list file in .tar.gz
 
+tar cvJf myarchive.tar.xz files-or-folder-to-compress # create xz archive, tar (child): compress: Cannot exec: No such file or directory tar (child): Error is not recoverable: exiting now
+
 
 ```bash
  # disk usage through ncdu or ducks alias
