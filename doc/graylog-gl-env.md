@@ -6,6 +6,9 @@
 no need for graylog nodes to recognize each other
 mongodb needs to have a replicasetCreated on the masternode. That node will then contact the other ones.
 
+https://www.graylog.org/releases # changelog
+https://docs.graylog.org/docs/changelog # releases
+
 
 # extractors
 are configured per inputs

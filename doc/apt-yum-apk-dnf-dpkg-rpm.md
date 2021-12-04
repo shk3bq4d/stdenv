@@ -53,7 +53,8 @@ yum whatprovides locate    && yum clean all # mlocate
 yum whatprovides snmpwalk  && yum clean all # net-snmp-utils
 yum whatprovides mongodump && yum clean all # mongodb-org-tools
 yum whatprovides dos2unix  && yum clean all # dos2unix
-yum clean all
+yum clean all # cache purge
+yum clean all && yum update # upgrade cache purge
 yum history # log
 yum history redo force-reinstall TRANSACTION_ID1 TRANSACTION_ID2
 yum reinstall glibc openssl-libs dbus linux-firmware gnutls systemd

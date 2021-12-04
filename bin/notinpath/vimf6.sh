@@ -223,21 +223,21 @@ case $SCRIPT in \
     ;;
 *.yml|*.yaml)
     # trying for ansible
-    if grep -qE "^[- ] hosts:" $SCRIPT; then
+    if grep -qE "^[- ] hosts:" $SCRIPT && [[ "$SCRIPT" != */inventory.yml ]]; then
         SCRIPT=$(realpath -e $SCRIPT)
         FORCE_NO_SUDO=0
         cd $(dirname $SCRIPT)
         cddir="$(sed -r -n -e '/vimf6_cd: /s/.*:// p' $SCRIPT | head -n 1)"
         test -n "$cddir" && cd $cddir
         case $PWD in \
-        */ans/zabbix) cd ..;;
-        */ans/zabbix/templates) cd ../..;;
+        */ans/zabbix) cd ..; echo "new pwd is $PWD";;
+        */ans/zabbix/templates) cd ../..; echo "new pwd is $PWD";;
         esac
         #ansible-playbook $SCRIPT --ask-become-pass --diff --check
         ansible_args="$(sed -r -n -e '/vimf6_ansible_args: /s/.*:// p' $SCRIPT | head -n 1)"
         if test -z "$ansible_args"; then
-            if [[ $PWD = */iaac* ]]; then
-                echo "Running ansible in default iaac mode"
+            if [[ $PWD = */?aac* ]]; then
+                echo "Running ansible in default iaac/haac mode"
                 FORCE_NO_SUDO=1
                 ansible_args="--diff --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod"
             else

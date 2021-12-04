@@ -402,6 +402,8 @@ docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt2
 
 DinD docker ind docker
 
+docker update --restart=no your-container # https://amalgjose.com/2018/04/18/disable-auto-restart-policy-of-docker-container/
+
 # ubuntu docker 18.06.1 -> 18.09.0
 The following packages were automatically installed and are no longer required:
 libllvm4.0 libllvm5.0 libxcb-xrm0 runc ubuntu-fan

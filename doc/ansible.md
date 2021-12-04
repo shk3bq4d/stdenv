@@ -2752,3 +2752,6 @@ https://github.com/mitogen-hq/mitogen # ansible speed
       output: {{ individual_result }}                                                           # iterate over with_dict's result with single/individual input/item and output/result
   when: individual_result.changed                                                 # for example # iterate over with_dict's result with single/individual input/item and output/result
   with_dict: "{{ mydict }}"                                                                     # iterate over with_dict's result with single/individual input/item and output/result
+
+
+play keyword order https://docs.ansible.com/ansible/latest/user_guide/playbooks_strategies.html#ordering-execution-based-on-inventory
