@@ -1,3 +1,6 @@
+sudo -n true # do not ask for password
+sudo -k # force expiration of current user cached password (will reask nexttime)
+
 sudo -u mongod whomai
 sudo -u mongod bash
 sudo -u mongod sh -c 'echo $HOME'
