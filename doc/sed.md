@@ -19,6 +19,7 @@ sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' # delete all trailing blank lines at end o
 
 sed -e "s/\b\(.\)/\u\1/g" # GUN: capitalize/uppercase first letter of each word
 
+sed -r -e 's/^\s+|\s+$//g' # trim stript spaces
 
 sed -e '/TERMINATE/,$d' # the lines before TERMINATE:
 

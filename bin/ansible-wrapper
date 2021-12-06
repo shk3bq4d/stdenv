@@ -4,7 +4,7 @@
 set -euo pipefail
 
 
-set +u; source ~/.virtualenvs/ansible-2.10/bin/activate; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
+set +u; source ~/.virtualenvs/ansible/bin/activate; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
 $(basename "$0") "$@"
 ret=$?
 
