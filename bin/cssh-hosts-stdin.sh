@@ -15,7 +15,7 @@ fi
 cat $_tempdir/b
 
 echo -n "Are you sure you want to proceed (yN): " # read
-read _read
+</dev/tty read _read
 echo # read
 case "${_read,,}" in \
 y|yes) true ;; # read
