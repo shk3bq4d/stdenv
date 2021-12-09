@@ -117,14 +117,24 @@ set lock_wait_timeout=10;
 select id, db, command, time, state, info from information_schema.processlist;
 show processlist;
 show full processlist; -- see full query
-```
 
 alter database craft character set utf8 collate utf8_general_ci;
+
+select nvl(null,7); # coalesce
+select nvl('',8); # coalesce
+select isnull(null); -> 1
+select isnull(''); -> 0
+select isnull('a'); -> 0
+select isnull(5); -> 0
+select if(null is null, "was null", "wasnt null");
+select if(5 is null, "was null", "wasnt null");
+
+```
 
 # regexp
 ```sql
 -- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
-regexp_replace(expr, pat, repl[, pos[, occurrence[, match_type]]])
+regexp_replace(original_value, pattern, replacement[, pos[, occurrence[, match_type]]])
 ```
 
 

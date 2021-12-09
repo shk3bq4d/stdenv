@@ -39,3 +39,7 @@ pip #noop dry-run dryrun simulate noactions: TOUGH LUCK, NO SUCH THING https://s
 
 https://www.wheelodex.org/projects/cffi/
 https://github.com/montag451/pypi-mirror/issues/16 multiple --platform --abi
+
+
+pip install --target=/tmp --only-binary=:all: cffi cryptography --abi cp38 --abi cp36 --platform manylinux_2_12_x86_64 --platform manylinux_2_24_x86_64 --python-version 38 --implementation cp
+pip install --target=/tmp --only-binary=:all: cffi cryptography --platform manylinux2010_x86_64
