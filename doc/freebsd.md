@@ -52,3 +52,10 @@ $ freebsd-version
 10.3-RELEASE-p10
 $ uname -mrs
 FreeBSD 10.3-RELEASE-p7 amd64
+
+# 10.3 to 13 upgrade
+upgrade to 12 never took place
+https://docs.freebsd.org/en/books/handbook/cutting-edge/
+```sh
+freebsd-update fetch
+```
