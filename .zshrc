@@ -214,11 +214,11 @@ alias -g C='2>&1|cat'
 alias -g C1='2>/dev/null|C'
 alias -g C2='2>&1 >/dev/null|C'
 
-alias -g G='2>&1|grep --line-buffered --color=auto -aE'
+alias -g G='2>&1|grep --line-buffered --color=auto -aE --'
 alias -g G1='2>/dev/null|G'
 alias -g G2='2>&1 >/dev/null|G'
 
-alias -g GI='2>&1|grep --line-buffered --color=auto -iaE'
+alias -g GI='2>&1|grep --line-buffered --color=auto -iaE --'
 alias -g GI1='2>/dev/null|GI'
 alias -g GI2='2>&1 >/dev/null|GI'
 
@@ -243,6 +243,7 @@ alias -g P7='|awk "{ print \$7 }"'
 alias -g P8='|awk "{ print \$8 }"'
 alias -g P9='|awk "{ print \$9 }"'
 
+
 alias -g P12='|awk "{ print \$1 \" \" \$2 }"'
 alias -g P13='|awk "{ print \$1 \" \" \$3 }"'
 alias -g P23='|awk "{ print \$2 \" \" \$3 }"'
@@ -250,6 +251,9 @@ alias -g P23='|awk "{ print \$2 \" \" \$3 }"'
 alias -g P21='|awk "{ print \$2 \" \" \$1 }"'
 alias -g P31='|awk "{ print \$3 \" \" \$1 }"'
 alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
+
+alias -g Y='|json-to-yaml.sh'
+alias -g S='|sed -r -e'
 
 alias findf='find . -type d -name .git -prune -o -type f -print'
 alias findd='find . -type d -name .git -prune -o -type d -print'
