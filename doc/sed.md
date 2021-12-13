@@ -130,3 +130,5 @@ tr -dc '[[:print:]]'          # removes non-printables
 ‘[:upper:]’ Upper-case letters: in the ‘C’ locale and ASCII character encoding, this is A B C D E F G H I J K L M N O P Q R S T U V W X Y Z.
 
 ‘[:xdigit:]’ Hexadecimal digits: 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f.
+
+sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.content.after;' # well watch out for end of line style

@@ -58,4 +58,15 @@ upgrade to 12 never took place
 https://docs.freebsd.org/en/books/handbook/cutting-edge/
 ```sh
 freebsd-update fetch
+freebsd-update install
+freebsd-version
+uname -mrs
+reboot
+freebsd-update -r 13.0-RELEASE upgrade
+/usr/sbin/freebsd-update install
+15:07:52 646 root@charl.ly.lan:/usr/home/me
+$ /usr/sbin/freebsd-update install
+Installing updates...
+Kernel updates have been installed.  Please reboot and run
+"/usr/sbin/freebsd-update install" again to finish installing updates.
 ```

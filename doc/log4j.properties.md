@@ -1,3 +1,6 @@
+CVE-2021-44228
+# log4j 1
+```ini
 log4j.rootLogger=TRACE, stdout, mr0
 
 log4j.logger.com.tensorsys.validator.Fin=DEBUG
@@ -16,3 +19,4 @@ log4j.appender.mr0.layout.ConversionPattern=%d [%t] %-5p %-16c{1} %m%n
 log4j.appender.stdout.layout.ConversionPattern=%d{HH:mm:ss,SSS} %-5p %c{1}.%M(%L): %m%n # method and line number
 log4j.appender.mr0.threshold=TRACE
 log4j.appender.mr0.keep=2
+```
