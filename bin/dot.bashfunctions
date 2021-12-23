@@ -24,7 +24,7 @@ function sudomr() {
 export RCD=$NEWRCD
 source $NEWRCD/.bashrc
 export VIMINIT='so $NEWRCD/.vimrc'
-#export VIMRUNTIME=$NEWRCD/.vim
+#export VIMF6=$NEWRCD/.vim
 export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
 "
     if [[ -z $SSHHOME ]]; then

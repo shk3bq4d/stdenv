@@ -42,3 +42,4 @@ for format in [
 print('{:20s} {:30s} {}'.format("", datetime.datetime.utcnow().isoformat('T'), "datetime.datetime.utcnow().isoformat('T')"))
 print('{:20s} {:30s} {}'.format("", datetime.datetime.utcnow().isoformat('T')[:-3] + 'Z', "datetime.datetime.utcnow().isoformat('T')[:-3] + 'Z'"))
 print('{:20s} {:30s} {}'.format("", '{:.23}Z'.format(datetime.datetime.utcnow().isoformat('T')), "'{:.23}Z'.format(datetime.datetime.utcnow().isoformat('T'))"))
+print('{:20s} {:30s} {}'.format("", '{}Z'.format(datetime.datetime.utcnow().isoformat('T', timespec='milliseconds')), "'{}Z'.format(datetime.datetime.utcnow().isoformat('T', timespec='milliseconds'))"))

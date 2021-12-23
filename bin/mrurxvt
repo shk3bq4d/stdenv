@@ -231,6 +231,19 @@ blending)
     fi
     ;;
 esac
+case $f in \
+*/noise*) $0 "$@"; exit 0;;
+*/noise-eda8a7-a7b8ee-fbbf91.jpg) $0 "$@"; exit 0;;
+#*/plasma*) $0 "$@"; exit 0;;
+#*/blending*) $0 "$@"; exit 0;;
+#*/semiradial*) $0 "$@"; exit 0;;
+#*/2spot*) $0 "$@"; exit 0;;
+#*/triangleresize*) $0 "$@"; exit 0;;
+#*/swirl*) $0 "$@"; exit 0;;
+#*/Inverse*) $0 "$@"; exit 0;;
+#*/mean*) $0 "$@"; exit 0;;
+#*/Shepards*) $0 "$@"; exit 0;;
+esac
 if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
     # see ~/bin/mrurxvt-generate-cache.sh for reference
     exit 0

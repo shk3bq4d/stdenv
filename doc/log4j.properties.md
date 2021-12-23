@@ -1,4 +1,16 @@
-CVE-2021-44228
+https://logging.apache.org/log4j/2.x/
+
+# CVE-2021-45105
+fixed by log4j 2.17.0
+
+
+# CVE-2021-44228
+LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
+https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%3A%2F%2Fgithub.com.mcas.ms%2FNeo23x0%2Flog4shell-detector%3FMcasTsid%3D28375&McasCSRF=6b197ad6d78755470a1863ee40c4a42026a4e1740491092c8d72b121bbc6afc8
+
+# CVE-2021-45046
+fixed by log4j 2.16.0
+
 # log4j 1
 ```ini
 log4j.rootLogger=TRACE, stdout, mr0

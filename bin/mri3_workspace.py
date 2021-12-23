@@ -70,7 +70,7 @@ def go(args):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
-    if 'VIMRUNTIME' in os.environ: args = ['1']
+    if 'VIMF6' in os.environ: args = ['1']
     parser = argparse.ArgumentParser(description="Switch to workspace or create a new one following preferred order")
     parser.add_argument("WORKSPACE", type=str, nargs='?', help="workspace to switch to")
     #parser.add_argument("-i", "--in-place", help="saves output in place", action="store_true")

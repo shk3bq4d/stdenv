@@ -7,6 +7,7 @@
 
 set -euo pipefail
 umask 027
+export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 
 for var in "$@"; do
     if [[ ! -e "$var" ]]; then
@@ -26,9 +27,11 @@ fi
 
 BACKUP_PERMS="./$(basename "$0" .sh).backup.$(date +%s)"
 find "$@" -print0 | xargs -0 ls -ld > $BACKUP_PERMS
-chmod a+r $BACKUP_PERMS
+test -n "${SUDO_UID:-}" && chown $SUDO_UID $BACKUP_PERMS
+test -n "${SUDO_GID:-}" && chgrp $SUDO_GID $BACKUP_PERMS
 
-find "$@" -type d -print0 | xargs -0 chmod o+rx
-find "$@" -type f -print0 | xargs -0 chmod o+r
+find "$@" -type d -! -perm -o+rx -print0 | xargs -rt0 chmod o+rx
+find "$@" -type f -! -perm -o+r  -print0 | xargs -rt0 chmod o+r
 
 echo DONE
+exit 0
