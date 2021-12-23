@@ -206,8 +206,12 @@ au BufNewFile,BufRead *.yaml   set expandtab cursorcolumn sts=2 ts=2 sw=2 " noau
 au BufNewFile,BufRead *.yml    set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml.j2 set expandtab cursorcolumn sts=2 ts=2 sw=2 filetype=yaml " noautoindent nocindent nosmartindent
 au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
-autocmd FileType yaml setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
-autocmd FileType yaml.ansible setl indentkeys-=<:> " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
+
+" https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
+" https://unix.stackexchange.com/questions/609612/disable-auto-tabs-when-putting-your-first-comment-in-a-yaml-files-with-vim-edito
+autocmd FileType yaml         setlocal indentkeys-=<:> indentkeys-=0#
+autocmd FileType yaml.ansible setlocal indentkeys-=<:> indentkeys-=0#
+
 au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java

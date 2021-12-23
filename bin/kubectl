@@ -20,6 +20,7 @@ kubectl_version=1.20.9
 kubectl_version=1.20.10
 kubectl_version=1.21.6
 kubectl_version=1.21.7
+kubectl_version=1.21.8
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 BIN="$HOME/bin/kubectl-$kubectl_version"

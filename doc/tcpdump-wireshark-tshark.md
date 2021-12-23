@@ -12,6 +12,8 @@ tcpdump -i ens160 arp | grep 10.101.6.85 | ts
 wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
+tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
+
 # writes and rotates 10 files of max 1Mb
 tcpdump -i ens160 -C 1 -W 10 -w /tmp/salut host 10.36.220.10 and dst port 443
 
