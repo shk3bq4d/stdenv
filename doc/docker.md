@@ -471,3 +471,8 @@ SYS_BOOT        Use reboot(2) and kexec_load(2), reboot and load a new kernel fo
 LEASE           Establish leases on arbitrary files (see fcntl(2)).
 WAKE_ALARM      Trigger something that will wake up the system.
 BLOCK_SUSPEND   Employ features that can block system suspend.
+
+
+FROM golang:1.16 AS builder # multistage
+touch build                 # multistage
+FROM
