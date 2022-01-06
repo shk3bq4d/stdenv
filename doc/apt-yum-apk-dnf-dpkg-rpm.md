@@ -13,6 +13,7 @@ apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
 iproute2: /sbin/ip
 apt list --upgradable
 apt list --installed
+apt purge
 apt list --installed | grep PACKAGE # current version info
 /etc/apt/sources.list
 /etc/apt/sources.list.d/
@@ -75,6 +76,9 @@ yum versionlock add puppet # pin
 yum versionlock list # pin
 yum versionlock status # find latest available version (that would not be installed)
 yum versionlock delete 0:openldap-2.4.39-8.el6.* # pin
+yum versionlock add # pin ALL PACKAGES
+yum versionlock delete '*' # unpin ALL PACKAGES
+yum versionlock clear      # unpin ALL packages
 
 ```
 

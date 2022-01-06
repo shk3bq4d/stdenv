@@ -118,6 +118,7 @@ for c in \
     setxkbmap \
     docker \
     ssh \
+    sshpass \
     sshfs \
     vagrant \
     viw \

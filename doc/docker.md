@@ -404,6 +404,8 @@ docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt2
 
 DinD docker ind docker
 
+docker logs --since=5m --timestamps
+
 docker update --restart=no your-container # edit disable onreboot https://amalgjose.com/2018/04/18/disable-auto-restart-policy-of-docker-container/
 
 # ubuntu docker 18.06.1 -> 18.09.0

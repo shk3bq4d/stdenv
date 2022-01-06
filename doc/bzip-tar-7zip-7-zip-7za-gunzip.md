@@ -19,10 +19,17 @@ zip file.zip filetocompress.txt
 
 docker cp $(which zip) my_container:/bin/
 docker cp $(which unzip) my_container:/bin/
-zip -vT myzip.jar # kind list files (instead it test integrity in verbose mode)
+zip -vT myzip.jar # kind list files ls (instead it test integrity in verbose mode)
+unzip -l myzip.jar #     list files ls
+rpm2cpio moxapi-7.10.5-1.x86_64.rpm|cpio -idmv
 
 
 unzip -j                       # junk part,     removes intermediate sub directory directories
 unzip --transform 's/^.*\///'  # not on centos7 removes intermediate sub directory directories
 --strip-components=1           #                removes intermediate sub directory directories
+
+
+xz myfile # compresses myfile
+kill -SIGUSR1 $(pgrep xz) # display progress
 ```
+
