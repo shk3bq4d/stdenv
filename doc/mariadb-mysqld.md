@@ -9,7 +9,7 @@ show tables;
 show tables like '%event%';
 desc mytable; -- show table schema
 create database bip;
-select Host, User, password from mysql.user;
+select user, host, password from mysql.user order by user, host;
 CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
 CREATE USER 'donald'@'%' IDENTIFIED BY 'duck';
 CREATE USER 'donald' IDENTIFIED BY 'duck';
@@ -159,11 +159,20 @@ https://dba.stackexchange.com/questions/41050/is-it-safe-to-delete-mysql-bin-fil
 [mysqld]
 expire_logs_days=3
 ```
+```sql
 optimize table auditlog; # bip
+--alter table trends_uint optimize partition p2021_12; do not use as it rebuilds entire table, use rebuild + analyze instead
+alter table trends_uint rebuild partition p2021_12; alter table trends_uint analyze partition p2021_12; 
+```
 
 ```sql
 set global expire_logs_days = 3;
 purge binary logs to 'mysql-bin.000223';
 show variables where variable_name like 'expire%';
 show variables where variable_name = 'expire_logs_days';
+show variables where variable_name = 'hostname'; -- ip address
+show variables where variable_name = 'port';
 ```
+
+# replication
+https://www.abelworld.com/mysql-slave-master-switch/

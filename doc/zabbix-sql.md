@@ -50,3 +50,13 @@ where t.triggerid=tt.triggerid and t.flags<>2 and h.hostid=i.hostid and i.itemid
 select count(1) from problem     where eventid   not in (select eventid   from events);
 select count(1) from trigger_tag where triggerid not in (select triggerid from triggers);
 select count(1) from items       where hostid    not in (select hostid    from hosts);
+select count(1) from functions   where itemid    not in (select itemid    from items);
+select count(1) from functions   where triggerid not in (select triggerid from triggers);
+select count(1) from hosts_groups where hostid not in (select hostid from hosts);
+select count(1) from hosts_groups where groupid not in (select groupid from hstgrp);
+
+
+
+select distinct t.triggerid,t.description,t.expression,t.error,t.priority,t.type,t.value,t.state,t.lastchange,t.status,t.recovery_mode,t.recovery_expression,t.correlation_mode,t.correlation_tag,t.opdata,t.event_name,null,null,null from hosts h,items i,functions f,triggers t where h.hostid=i.hostid and i.itemid=f.itemid and f.triggerid=t.triggerid and h.status in (0,1) and t.flags<>20;
+select count(1) from (select distinct t.triggerid,t.description,t.expression,t.error,t.priority,t.type,t.value,t.state,t.lastchange,t.status,t.recovery_mode,t.recovery_expression,t.correlation_mode,t.correlation_tag,t.opdata,t.event_name,null,null,null from hosts h,items i,functions f,triggers t where h.hostid=i.hostid and i.itemid=f.itemid and f.triggerid=t.triggerid and h.status in (0,1) and t.flags<>20) b;
+show index from hosts;
