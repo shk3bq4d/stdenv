@@ -317,7 +317,17 @@ https://web.archive.org/web/20201011085042if_/https://dl.ui.com/unifi/firmware/U
 
 
 # DNS snooping with dnsmasq --log-queries=extra
+```sh
 /usr/sbin/dnsmasq -C /var/etc/dnsmasq.conf.cfg01411c -d -x /var/run/dnsmasq/dnsmasq.cfg01411c.pid --log-queries=extra 2>&1 | grep 10.19.29.83
+```
 
 # DNS snooping via tcpdump
-tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
+```sh
+tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' # DNS queries on openwrt
+```
+
+# monitor wifi
+```sh
+/sbin/wifi status
+/sbin/wifi restart
+```
