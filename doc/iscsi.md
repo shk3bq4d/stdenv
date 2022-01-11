@@ -7,6 +7,7 @@ iscsiadm --mode node --targetname iqn.2014-06.ch.ly1:ly80lvmr0 --portal 10.19.29
 
 # charlotte
 iscsiadm -m discovery -d 6 -P 6 -t st -p charlotte
+sudo service ctld start
 service iscsictl restart
 /etc/ctl.conf
 # https://www.freebsd.org/doc/handbook/network-iscsi.html

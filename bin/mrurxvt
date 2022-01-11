@@ -231,6 +231,19 @@ blending)
     fi
     ;;
 esac
+case $f in \
+*/noise*) $0 "$@"; exit 0;;
+*/noise-eda8a7-a7b8ee-fbbf91.jpg) $0 "$@"; exit 0;;
+#*/plasma*) $0 "$@"; exit 0;;
+#*/blending*) $0 "$@"; exit 0;;
+#*/semiradial*) $0 "$@"; exit 0;;
+#*/2spot*) $0 "$@"; exit 0;;
+#*/triangleresize*) $0 "$@"; exit 0;;
+#*/swirl*) $0 "$@"; exit 0;;
+#*/Inverse*) $0 "$@"; exit 0;;
+#*/mean*) $0 "$@"; exit 0;;
+#*/Shepards*) $0 "$@"; exit 0;;
+esac
 if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
     # see ~/bin/mrurxvt-generate-cache.sh for reference
     exit 0
@@ -297,14 +310,14 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
     echo "grep while intermediate_args is $intermediate_args"
 
     #MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -xrm *.VT100.allowSendEvents:true -T CLUSTERSSH: localhost -e /usr/bin/perl -e            my $pipe=shift;
-    MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
+    MR_TERM=urxvt MR_BG=$f $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" -name mrclusterssh "$intermediate_args" "$@"
 elif [[ $# -eq 0 ]] && [[ -n "$TSSH" ]]; then
-    MR_TERM=urxvt MR_URXVT_CMD="ssh $TSSH" $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
+    MR_TERM=urxvt MR_BG=$f MR_URXVT_CMD="ssh $TSSH" $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
 else
 	if false && hash alacritty 2>/dev/null; then
-		MR_TERM=urxvt alacritty "$@"
+		MR_TERM=urxvt MR_BG=$f alacritty "$@"
 	else
-	    MR_TERM=urxvt $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+	    MR_TERM=urxvt MR_BG=$f $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
 	fi
 fi
 

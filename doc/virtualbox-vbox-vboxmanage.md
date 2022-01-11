@@ -13,6 +13,8 @@ vboxmanage modifyvm "xp1 Clone" --vrde on
 vboxmanage modifyvm "xp1 Clone" --vrdeport 6040
 vboxmanage modifyvm "xp1 Clone" --vrdeproperty VNCPassword=secret
 vboxmanage startvm "xp1 Clone" --type headless
+vboxmanage controlvm "xp1 Clone" acpipowerbutton # poweroff shutdown turn off
+vboxmanage controlvm "xp1 Clone" poweroff        # noacpi poweroff shutdown turn off
 vboxmanage discardstate projectlibre
 vboxmanage showvminfo
 vboxmanage showvminfo minikube G ssh

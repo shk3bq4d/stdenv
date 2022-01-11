@@ -124,3 +124,6 @@ https://docs.graylog.org/en/3.1/pages/changelog.html
 curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties | length' # number fields in one index
 curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties | keys' # number fields in one index
 ```
+
+https://www.graylog.org/post/graylog-update-for-log4j
+https://github.com/Graylog2/graylog2-server/pull/11786#issuecomment-994715935 # log4j

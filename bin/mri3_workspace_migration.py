@@ -171,7 +171,7 @@ def legacy(ar):
     os.system(os.path.expanduser('~/bin/mri3_prompt_for_unnamed_workspace.py'))
 
 if __name__ ==  "__main__":
-    if 'VIMRUNTIME' in os.environ:
+    if 'VIMF6' in os.environ:
         auto(use='stdout file syslog')
         unittest.main()
     else:
