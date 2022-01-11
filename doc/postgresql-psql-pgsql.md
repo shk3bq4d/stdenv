@@ -9,6 +9,7 @@ sudo -u postgres psql
 
 sELECT c.relname FROM pg_class c WHERE c.relkind = 'S'; # list sequences
 
+-v ON_ERROR_STOP=1
 
 @begin=sql@
 SELECT datname FROM pg_database WHERE datistemplate = false; -- list databases
@@ -68,6 +69,12 @@ sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumb
 sudo docker cp $RCD/.vimrc  postgres:/var/lib/postgresql/.vimrc
 truncate table auditrecord , audit_affected_object, audit_changed_value;
 
+PG_VERSION=10.19-1.pgdg90+1
+POSTGRES_DB=jiradb
+POSTGRES_PASSWORD=jira
+POSTGRES_USER=jira
+zcat jiradb-2022.01.09.sql.gz  | sudo docker exec -u 999 -t postgres bash -c 'PGPASSWORD=$POSTGRES_PASSWORD pg_restore -d$POSTGRES_DB -U$POSTGRES_USER'
+sudo docker exec -u 999 -it postgres bash -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -d$POSTGRES_DB -U$POSTGRES_USER'
 
 # backups backup
 https://github.com/wal-e/wal-e

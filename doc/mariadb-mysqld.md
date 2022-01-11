@@ -9,6 +9,7 @@ show tables;
 show tables like '%event%';
 desc mytable; -- show table schema
 create database bip;
+HOW GRANTS for someuser_dbuser@localhost;
 select user, host, password from mysql.user order by user, host;
 CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
 CREATE USER 'donald'@'%' IDENTIFIED BY 'duck';
@@ -128,6 +129,8 @@ show engine innodb status; -- as root, better for looking at locks
 select id, db, command, time, state, info from information_schema.processlist;
 show processlist;
 show full processlist; -- see full query
+show privileges; -- dislay list of available privileges
+show grant for user@127.0.0.1;
 
 alter database craft character set utf8 collate utf8_general_ci;
 
