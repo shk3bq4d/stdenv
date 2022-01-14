@@ -194,7 +194,7 @@ bindcode $mod+53  sticky toggle
 # code:58 => sym: 0x6d, symbol:m
 # code:31 => sym: 0x69, symbol:i mod-i mod+i
 bindcode $mod+42 exec python3 ~/bin/mri3_container_commander.py
-bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command "move to workspace current && focus"
+bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command "move to workspace current, focus"
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave

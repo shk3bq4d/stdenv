@@ -78,3 +78,20 @@ refreshing the zone.
 
 
 blablawhatever.192.168.1.1.nip.io # nip.io is free service to have a hostname for any IPv4
+
+# nslookup
+```sh
+nslookup
+> set q=cname
+> server 8.8.8.8 # this line is optional if you'd like to query locally configured value
+> www.abc.com
+```
+# Using the host command
+
+host -t cname www.abc.com
+host -t cname www.example.com 8.8.8.8
+
+
+# Using the dig command
+dig www.abc.com cname
+dig @8.8.8.8 www.abc.com cname

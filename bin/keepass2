@@ -7,6 +7,7 @@ wids=$(xdotool search --class "keepass")
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then
+		i3 "[id=\"$wid\"] move to workspace current, focus" && exit 0
         if xdotool windowactivate $wid; then
             exit 0
         fi
