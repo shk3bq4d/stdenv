@@ -104,7 +104,7 @@ dbe = false;
 #
 # focus-exclude: set rules for window to not become transparent when out of focus
 focus-exclude = [
-    "class_g = 'Cairo-clock'" 
+    "class_g = 'Cairo-clock'"
     ,"name = 'Kodi'"
     ,"name = 'MPlayer'"
     ,"name ~= '^Opsgenie - Alerts - Chromium$'"
