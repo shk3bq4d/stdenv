@@ -2762,4 +2762,4 @@ file:                         # first timetouch heartbeat file creation
   path:                        /first/timetouch/heartbeat/file/creation
   state: touch                # first timetouch heartbeat file creation
   modification_time: preserve # first timetouch heartbeat file creation
-  access_time: preserve       # first timetouch heartbeat file creatio
+  access_time: preserve       # first timetouch heartbeat file creation
