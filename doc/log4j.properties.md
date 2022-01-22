@@ -38,3 +38,15 @@ log4j.appender.stdout.layout.ConversionPattern=%d{HH:mm:ss,SSS} %-5p %c{1}.%M(%L
 log4j.appender.mr0.threshold=TRACE
 log4j.appender.mr0.keep=2
 ```
+# https://stackoverflow.com/questions/35982475/how-to-use-current-date-pattern-in-log4j2-filename/35982557
+Remove the filename attribute. It worked for me. (got the solution from: https://issues.apache.org/jira/browse/LOG4J2-1859) Here is my working configuration
+
+    <RollingFile name="File" filePattern="${basePath}/api_test_execution_log_%d{yyyy-MM-dd}_%d{HH-mm-ss}_%i.log" immediateFlush="true">
+       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+
+       <Policies>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            <SizeBasedTriggeringPolicy size="32 MB" />
+            <OnStartupTriggeringPolicy/>
+       </Policies>
+    </RollingFile>

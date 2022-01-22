@@ -395,7 +395,8 @@ reset_rprompt() {
     unset timer
     export RPROMPT=""
 }
-setopt no_share_history # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
+setopt no_share_history   # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
+setopt inc_append_history # https://stackoverflow.com/questions/842338/how-do-i-tell-zsh-to-write-the-current-shells-history-to-my-history-file/842366
 
 test "$UNAME" = freebsd && alias ll='ls -lhFa' || unalias ll
 
