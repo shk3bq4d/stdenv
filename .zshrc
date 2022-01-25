@@ -2,6 +2,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
+#zmodload zsh/zprof # https://stevenvanbael.com/profiling-zsh-startup
 export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
@@ -435,20 +436,20 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 #source ~/.bash_completion
 compdef _path_commands viw catw lessw
-f=~/.zsh/completion/std/bash.az.completion
-if [[ -f $f ]]; then
-    # https://stackoverflow.com/questions/49273395/how-to-enable-command-completion-for-azure-cli-in-zsh
-    autoload -U +X bashcompinit && bashcompinit
-    source $f
-fi
+#f=~/.zsh/completion/std/bash.az.completion
+#if [[ -f $f ]]; then
+#    # https://stackoverflow.com/questions/49273395/how-to-enable-command-completion-for-azure-cli-in-zsh
+#    autoload -U +X bashcompinit && bashcompinit
+#    source $f
+#fi
 alias z='nocorrect _z 2>&1' # at the end is necessary as it is defined elsewhere
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
@@ -459,3 +460,4 @@ if [[ -n "${MR_URXVT_CMD:-}" ]]; then
     # && echo success || echo failure
     # sshrc seems to always end with success
 fi
+#zprof # https://stevenvanbael.com/profiling-zsh-startup

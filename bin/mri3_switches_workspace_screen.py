@@ -62,15 +62,15 @@ def go(args=[]):
         reply = workspace.command(command)
         first_reply = reply[0]
         if not first_reply.success:
-            logger.error(vars(first_reply))
+            logger.warn(vars(first_reply))
             pprint(vars(first_reply))
-            return
     #to_focus.remove(focused_workspace)
     #to_focus.append(focused_workspace)
 
     for workspace in to_focus:
         workspace.command('focus')
     focused_object.command('focus')
+    logger.info("Success")
 
 if __name__ ==  "__main__":
     auto(use='stdout file syslog')

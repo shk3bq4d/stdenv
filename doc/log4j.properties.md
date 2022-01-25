@@ -17,6 +17,12 @@ https://mcas-proxyweb.mcas.ms/certificate-checker?login=false&originalUrl=https%
 # CVE-2021-45105
 fixed by log4j 2.16.0
 
+# layout pattern patternlayout expansion
+https://logging.apache.org/log4j/2.x/manual/layouts.html#PatternLayout
+%C    # package + classname of the caller
+%c    # package + classname of the logger (so if fact it could be any arbitrary name, not specifically an existing package + name)
+%c{1} # class name
+
 # log4j 1
 ```ini
 log4j.rootLogger=TRACE, stdout, mr0
@@ -88,6 +94,64 @@ logger.app.appenderRef.mfref2.ref = myconsolename
 rootLogger.level = info
 rootLogger.appenderRef.stdout.ref = myconsolename
 rootLogger.appenderRef.tofile.ref = mr0name
+
+# delete files 1
+appender.b.strategy.action.type = Delete
+appender.b.strategy.action.basepath = logs
+appender.b.strategy.action.maxDepth = 1
+appender.b.strategy.action.a.type = IfAll
+appender.b.strategy.action.a.a.type = IfFileName
+appender.b.strategy.action.a.a.glob = ccc.*.log
+appender.b.strategy.action.a.b.type = IfLastModified
+appender.b.strategy.action.a.b.age  = 30s
+
+# delete files 2 more careful, yet dangerous with regex and properties
+property.logdir = logs
+property.a.create_pattern       =  ddd.%d{yyyy.MM.dd-HH.mm.ss}.log
+property.a.delete_regex_pattern =  ddd\\.20\\d{2}\\.\\d{2}.\\d{2}-\\d{2}\\.\\d{2}.\\d{2}\\.log
+appender.b.type = RollingFile
+appender.b.name = mr0
+appender.b.filePattern = ${logdir}/${a.create_pattern}
+appender.b.layout.type = PatternLayout
+appender.b.layout.pattern = %d [%t] %-5p %-16c{1} %m%n
+appender.b.policies.type = Policies
+appender.b.policies.time.type = TimeBasedTriggeringPolicy
+appender.b.policies.time.interval = 5
+appender.b.policies.time.modulate = true
+appender.b.strategy.type = DirectWriteRolloverStrategy
+appender.b.strategy.action.type = Delete
+appender.b.strategy.action.basepath = ${logdir}
+appender.b.strategy.action.maxDepth = 1
+appender.b.strategy.action.a.type = IfAll
+appender.b.strategy.action.a.a.type = IfFileName
+appender.b.strategy.action.a.a.regex = ${a.delete_regex_pattern}
+appender.b.strategy.action.a.b.type = IfLastModified
+appender.b.strategy.action.a.b.age  = 15s
+
+# delete files, keep at least 30 files no matter what, delete older then 5s
+property.logdir = logs
+property.a.create_pattern       =  sd2.%d{yyyy.MM.dd-HH.mm.ss}.log
+property.a.delete_regex_pattern =  sd2\\.20\\d{2}\\.\\d{2}.\\d{2}-\\d{2}\\.\\d{2}.\\d{2}\\.log
+appender.b.type = RollingFile
+appender.b.name = mr0
+appender.b.filePattern = ${logdir}/${a.create_pattern}
+appender.b.layout.type = PatternLayout
+appender.b.layout.pattern = %d [%t] %-5p %-16c{1} %m%n
+appender.b.policies.type = Policies
+appender.b.policies.time.type = TimeBasedTriggeringPolicy
+appender.b.policies.time.interval = 1
+appender.b.policies.time.modulate = true
+appender.b.strategy.type = DirectWriteRolloverStrategy
+appender.b.strategy.a.type = Delete
+appender.b.strategy.a.basepath = ${logdir}
+appender.b.strategy.a.maxDepth = 1
+appender.b.strategy.a.a.type = IfFileName
+appender.b.strategy.a.a.regex = ${a.delete_regex_pattern}
+appender.b.strategy.a.a.a.type = IfAccumulatedFileCount
+appender.b.strategy.a.a.a.exceeds = 30
+appender.b.strategy.a.a.a.a.type = IfLastModified
+appender.b.strategy.a.a.a.a.age  = 5s
+
 ```
 
 # https://stackoverflow.com/questions/35982475/how-to-use-current-date-pattern-in-log4j2-filename/35982557
