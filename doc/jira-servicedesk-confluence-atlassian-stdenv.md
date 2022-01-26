@@ -7,7 +7,7 @@ AND creator in (admintkr) # createdby
 AND creator in (currentUser()) # createdby
 and status not in (DONE)
 issuekey in issueHistory() order by lastViewed DESC # viewed recently
-assignee = currentUser() AND resolution = Unresolved AND status != dump AND project not in ("Blockchain Engineering") order by updated DESC
+assignee = currentUser() AND resolution = Unresolved AND status != dump AND status != Abandoned AND project not in ("Blockchain Engineering") order by updated DESC
 
 <MMH-7> # mention link issue ticket DOESNT WORK IN COMMENT, TO BE CONFIRMED ELSEWHERE
 MMH-7 # mention link issue ticket WORKS IN COMMENT

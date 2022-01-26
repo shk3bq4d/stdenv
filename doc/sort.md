@@ -2,6 +2,7 @@ cat testfile | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- # sort b
 sort -n # numeric doesn't work to well, use -V
 sort -V # better for numeric and string    -V, --version-sort natural sort of (version) numbers within text # human
 
+sort --key 2 # sort by second column
 sort -u ~/.tmp/bashrc-events --key 1.1,1.11
 tac ~/.tmp/bashrc-events | sort -u --key 1.1,1.11
 
