@@ -1,0 +1,17 @@
+# this script should be sourced
+
+_runonce_check() {
+    local f
+    if [[ -z "${RUNONCEID:-}" ]]; then
+        echo "FATAL: RUNONCEID not set"
+        exit 1
+    fi
+    f=~/.tmp/runonce-$RUNONCEID
+    if [[ -f $f ]]; then
+        # exit silently to not clobber cron logs
+        exit 0
+    fi
+    touch $f
+}
+
+_runonce_check
