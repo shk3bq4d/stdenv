@@ -42,6 +42,7 @@ if ! git rev-parse --show-toplevel &>/dev/null; then
 fi
 
 _git_dir="$(git rev-parse --show-toplevel)/.git"
+! cd "$_git_dir/.." && fatal "can't cd to git root dir, something which is important in case current working directory did not exist ing $master_branch"
 
 cur_branch="$(git_current_branch)"
 master_branch=master

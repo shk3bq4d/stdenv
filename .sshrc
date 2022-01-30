@@ -1,10 +1,10 @@
 if [[ -f ~/.stdenv_aliases ]]; then
-	if [[ -f ~/.zshrc ]] && hash zsh &>/dev/null; then
-		exec zsh
-	else
-		# retrieves and executes user shell
-		exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
-	fi
+    if [[ -f ~/.zshrc ]] && hash zsh &>/dev/null; then
+        exec zsh
+    else
+        # retrieves and executes user shell
+        exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
+    fi
     return
 fi
 if [[ -z $SSHHOME ]]; then
@@ -110,21 +110,26 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
     CMDARGS="$(sed -r -e '1,/source .SSHHOME..sshrc;/ d' -e '$ s/;\s*exit$//' $SSHHOME/sshrc.bashrc)"
     #echo "cmdargs is $CMDARGS"
     if [[ -z $CMDARGS ]]; then
-        bash ips --no-internet
-        uptime
         timeout 5 df -h | grep -wE '^/(snap|run|sys)'
         if sudo -n true 2>/dev/null; then
             sudo netstat -tlnp
-            sudo last -axFn 20
-			sudomr
+            echo ""
+            # last -w display full username, but automation username is too long so I am not using it and truncating user instead
+            sudo last -axFn 20 | grep -vE "^${USER:0:8} .*logged in" | sed -r -e "/logged in/s/^(.+)/"$'\033[41m'$'\033[37m'"\\1"$'\033[0m'"/"
+            sudomr
         else
             netstat -tln
-            command last -axFn 20
+            echo ""
+            command last -axFn 20 | grep -vE "^${USER:0:8} .*logged in" | sed -r -e "/logged in/s/^(.+)/"$'\033[41m'$'\033[37m'"\\1"$'\033[0m'"/"
         fi
+        bash ips
+        echo ""
+        uptime
+        echo ""
     fi
 fi
 if [[ $EUID -eq 0 ]] && [[ -d /opt/sf-scripts ]]; then
-	export PATH=$PATH:/opt/sf-scripts
+    export PATH=$PATH:/opt/sf-scripts
 fi
 sshrc_ln() {
     target=/tmp/me
@@ -146,8 +151,8 @@ for f in $SSHHOME/.sshrc.d/.sshrc.std*; do
     [ -f $f ] && source $f
 done
 for f in $SSHHOME/.sshrc.d/bin/*; do
-	# when /tmp is mount with noexec flag, none my useful scripts work
-	[ ! -x $f ] && eval "alias $(basename $f)='bash $f'"
+    # when /tmp is mount with noexec flag, none my useful scripts work
+    [ ! -x $f ] && eval "alias $(basename $f)='bash $f'"
 done
 is_zsh && unsetopt null_glob
 if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then

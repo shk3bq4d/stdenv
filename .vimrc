@@ -464,6 +464,14 @@ func! MrSyntaxRange()
         " deal with it
     endtry
     try
+        call SyntaxRange#Include('```ps'    ,'```'    ,'powershell',    'NonText')
+        call SyntaxRange#Include('```powershell'    ,'```'    ,'powershell',    'NonText')
+    catch /^Vim\%((\a\+)\)\=:E117/
+        " deal with it
+    catch /^Vim\%((\a\+)\)\=:E484/
+        " deal with it
+    endtry
+    try
         call SyntaxRange#Include('```python'       ,'```'           ,'python'    ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it

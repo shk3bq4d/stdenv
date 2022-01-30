@@ -77,6 +77,10 @@ try:
     pkill('compton')
 except:
     pass
+try:
+    pkill('picom')
+except:
+    pass
 
 print(str(sh.Command('bash')(os.path.expanduser('~/bin/compton-background.sh'))))
 

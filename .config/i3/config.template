@@ -152,7 +152,7 @@ bindcode --release $mod+Shift+24  exec mri3_resize_window.py
 # code:55 => sym: 0x76, symbol:v
 bindcode --release $mod+60  exec mri3_toggle_orientation.py # <= 4.11-1
 # code:42 => sym: 0x67, symbol:g
-bindcode --release $mod+30  exec mri3_toggle_border.py # <= 4.11-1
+#bindcode --release $mod+30  exec mri3_toggle_border.py # <= 4.11-1
 #bindsym --release $mod+v split toggle # new since 4.12 # but doesn't have fancy resize border like I do
 
 # enter fullscreen mode for the focused container
@@ -194,7 +194,7 @@ bindcode $mod+53  sticky toggle
 # code:58 => sym: 0x6d, symbol:m
 # code:31 => sym: 0x69, symbol:i mod-i mod+i
 bindcode $mod+42 exec python3 ~/bin/mri3_container_commander.py
-bindcode $mod+Shift+42 exec python3 ~/bin/mri3_container_commander.py --command "move to workspace current && focus"
+bindcode $mod+Shift+42 exec "python3 ~/bin/mri3_container_commander.py --command \\"move to workspace current, focus\\""
 
 # switch to workspace
 # code:49 => sym: 0x60, symbol: grave
@@ -441,9 +441,11 @@ for_window [class="VirtualBox Machine"] floating enable
 for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] border 1pixel
 for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] floating disable
 for_window [title="Netflix - Google Chrome"] fullscreen enable
-for_window [title=".*ITTS.Desktop....*"] fullscreen disable
-for_window [class="Wfica"] fullscreen disable
-for_window [class="Wfica"] floating disable
+#for_window [title=".*ITTS.Desktop....*"] floating enable
+for_window [title=".*ITTS.Desktop....*"] fullscreen disable, move to workspace current
+########no_focus [title=".*ITTS.Desktop....*"]
+########for_window [class="Wfica"] fullscreen disable
+########for_window [class="Wfica"] floating disable
 #for_window [class="Wfica"]               move container to workspace $ws0
 #for_window [title=".*ITTS.Desktop....*"] move container to workspace $ws0
 for_window [class="Wfica_ErrorOrInfo"] floating enable
@@ -500,7 +502,7 @@ exec --no-startup-id ~/bin/clipboard-listener.py  2>&1 | ts > ~/.tmp/log/clipboa
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+30 mode "$mode_gaps"
+#bindsym $mod+Shift+30 mode "$mode_gaps"
 
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"

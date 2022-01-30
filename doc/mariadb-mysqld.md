@@ -9,6 +9,7 @@ show tables;
 show tables like '%event%';
 desc mytable; -- show table schema
 create database bip;
+HOW GRANTS for someuser_dbuser@localhost;
 select user, host, password from mysql.user order by user, host;
 CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
 CREATE USER 'donald'@'%' IDENTIFIED BY 'duck';
@@ -84,6 +85,7 @@ select "random select query to be further editor in $EDITOR as it contains backs
 pager  vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -;
 pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init;
 pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init --chop-long-lines; -- truncate lines instead of wrapping
+pager more
 
 select UNIX_TIMESTAMP(); -- now
 select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
@@ -128,6 +130,8 @@ show engine innodb status; -- as root, better for looking at locks
 select id, db, command, time, state, info from information_schema.processlist;
 show processlist;
 show full processlist; -- see full query
+show privileges; -- dislay list of available privileges
+show grant for user@127.0.0.1;
 
 alter database craft character set utf8 collate utf8_general_ci;
 
@@ -176,3 +180,8 @@ show variables where variable_name = 'port';
 
 # replication
 https://www.abelworld.com/mysql-slave-master-switch/
+
+# json query
+WARNING json_query can't be used to query string or int (scalars)
+use json_value instead
+https://mariadb.com/kb/en/json-functions/ -- json-query

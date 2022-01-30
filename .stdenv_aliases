@@ -7,7 +7,12 @@ sudomrenv() {
 	esac
 }
 sudomr_hooks+=('sudomrenv')
-STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
+#STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
+if [[ -d ~/git/$USER/stdhome ]]; then
+	STDHOME_DIRNAME="$HOME/git/$USER/stdhome"
+else
+	STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
+fi
 stdenvdir="$STDHOME_DIRNAME/../stdenv"
 alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
 alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"

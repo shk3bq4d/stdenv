@@ -3,6 +3,8 @@ https://www.microsoft.com/en-us/download/details.aspx?id=56485
 
 tasklist | findstr /i Zabbix
 taskkill /f /t zabbix_agentd.exe
+wmic path win32_process get caption,processid,commandline                  & rem tasklist with cli command line
+wmic path win32_process get caption,processid,commandline | findstr /i pac & tasklist with cli command line
 
 
 WMIC PROCESS get Caption,Commandline,Processid 2>&1 | vi -
