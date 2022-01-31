@@ -20,7 +20,7 @@ CLIP="$(xclip -o -selection primary 2>/dev/null | ~/bin/sed_remove_colors.sh | t
 #CLIP="${CLIP//#/}"
 #CLIP="${CLIP// .*/}"
 echo "clip is $CLIP"
-f=~/tmp/previous-mod-plus-o-clip
+f=~/.tmp/previous-mod-plus-o-clip
 PREVCLIP="$(< $f)"
 echo "$CLIP" > $f
 if [[ "$CLIP" != "$PREVCLIP" ]]; then # only open an URL once to avoid constant re-opening the same URL over and over

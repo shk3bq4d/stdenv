@@ -4,3 +4,4 @@
 set -euo pipefail
 
 yq e -P
+#| yq-kislyuk -y --indentless-lists

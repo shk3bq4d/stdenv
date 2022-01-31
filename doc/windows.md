@@ -173,3 +173,8 @@ win+. # emoji helper
 ncpa.cpl # network cards connections
 eventvwr.msc # events viewer
 services.msc # services
+
+# USB disk iso
+IMPORTANT: do this from a browser that has user agent linux
+access https://www.microsoft.com/en-ca/software-download/windows10
+and follow guidelines to download a file that was named Win10_21H2_English_x64.iso on 2022.01.31

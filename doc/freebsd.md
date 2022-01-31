@@ -70,3 +70,11 @@ Installing updates...
 Kernel updates have been installed.  Please reboot and run
 "/usr/sbin/freebsd-update install" again to finish installing updates.
 ```
+
+# pkg: repository meta /var/db/pkg/FreeBSD.meta has wrong version 2
+from http://sundivenetworks.com/archive/2020/repository-freebsd-meta-has-wrong-version.html
+```sh
+wget --no-check-certificate https://pkg.freebsd.org/FreeBSD:13:amd64/latest/All/pkg-1.17.5_1.txz
+pkg add -f pkg-1.17.5_1.txz
+pkg update
+```

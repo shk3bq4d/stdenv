@@ -74,7 +74,7 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if ! is_antigen; then
-    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
+    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl zsh-syntax-highlighting systemd) # zsh-syntax-highlighting must be the last
     if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
         plugins=(git-auto-fetch $plugins)
         GIT_AUTO_FETCH_INTERVAL=1200
