@@ -52,3 +52,29 @@ $ freebsd-version
 10.3-RELEASE-p10
 $ uname -mrs
 FreeBSD 10.3-RELEASE-p7 amd64
+
+# 10.3 to 13 upgrade
+upgrade to 12 never took place
+https://docs.freebsd.org/en/books/handbook/cutting-edge/
+```sh
+freebsd-update fetch
+freebsd-update install
+freebsd-version
+uname -mrs
+reboot
+freebsd-update -r 13.0-RELEASE upgrade
+/usr/sbin/freebsd-update install
+15:07:52 646 root@charl.ly.lan:/usr/home/me
+$ /usr/sbin/freebsd-update install
+Installing updates...
+Kernel updates have been installed.  Please reboot and run
+"/usr/sbin/freebsd-update install" again to finish installing updates.
+```
+
+# pkg: repository meta /var/db/pkg/FreeBSD.meta has wrong version 2
+from http://sundivenetworks.com/archive/2020/repository-freebsd-meta-has-wrong-version.html
+```sh
+wget --no-check-certificate https://pkg.freebsd.org/FreeBSD:13:amd64/latest/All/pkg-1.17.5_1.txz
+pkg add -f pkg-1.17.5_1.txz
+pkg update
+```

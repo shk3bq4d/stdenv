@@ -6,6 +6,13 @@ get-service "wuauserv"       -ComputerName remotePC1,remotePC2, remotePC3| forma
 get-service "Zabbix Agent 2"
 get-service "Zabbix Agent 2" -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize
 get-content '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.conf' # cat
+hostname | select-string -pattern '[abcx]' # grep
+
+[system.net.dns]::gethostbyname is deprecated
+[system.net.dns]::gethostentry($env:computername).hostname # fqdn hostname -f
+[system.net.dns]::gethostentry($env:computername).hostname -split("\.")
+([system.net.dns]::gethostentry($env:computername).hostname -split("\."))[0]
+([system.net.dns]::gethostentry($env:computername).hostname -match("\.([^.]+)"))[0]
 select-String '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.conf' -Pattern ^Server # grep
 get-content '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.log' -Tail 100 # tail
 get-content 'C:\Program Files\Zabbix Agent 2\zabbix_agent2.log' -Tail 100 # tail
@@ -19,3 +26,9 @@ shutdown.exe /l
 <# multiline comment start
 multiline comment continued
 multiline comment end #>
+
+# regex
+https://powershellexplained.com/2017-07-31-Powershell-regex-regular-expression/
+can be used with .net
+[regex].replace('\d+', hostname, '_')
+https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.match?view=net-6.0

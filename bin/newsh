@@ -34,7 +34,7 @@ echo \
 
 set -euo pipefail
 umask 027
-export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:~/bin
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 # function usage() { sed -r -n -e \"s/__SCRIPT__/\$(basename \$0)/\" -e '/^##/s/^..// p'   \$0 ; }
 

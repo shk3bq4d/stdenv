@@ -76,6 +76,7 @@ for line in filter(lambda x: len(x) > 0, map(lambda x: x.rstrip(), fileinput.inp
 for line in filter(None, map(str.rstrip, fileinput.input(files=None))):
 for line in filter(None, map(str.rstrip, fileinput.input(files="-"))):
 for line in filter(None, map(str.rstrip, fileinput.input())):
+"\n".join(filter(None, map(str.rstrip, fileinput.input(files="-"))))
 
 """
 from pprint import pprint; pprint(vars(obj))

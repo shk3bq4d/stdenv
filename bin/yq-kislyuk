@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+VENV_DIR="$HOME/.virtualenvs/yq-kislyuk"
+VENV_ACTIVATE="$VENV_DIR/bin/activate"
+
+if [[ ! -f "$VENV_ACTIVATE" ]]; then
+    set -x
+    python3 -m venv "$VENV_DIR" </dev/null
+    set +u; source "$VENV_ACTIVATE"; set -u
+    pip3 install yq </dev/null
+else
+    set +u; source "$VENV_ACTIVATE"; set -u
+fi
+
+yq "$@"

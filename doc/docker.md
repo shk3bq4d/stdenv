@@ -1,3 +1,5 @@
+https://github.com/docker/cli
+
 https://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/
 https://docs.docker.com/engine/reference/builder/
 man dockerfile # apt install docker-doc
@@ -402,7 +404,9 @@ docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt2
 
 DinD docker ind docker
 
-docker update --restart=no your-container # https://amalgjose.com/2018/04/18/disable-auto-restart-policy-of-docker-container/
+docker logs --since=5m --timestamps
+
+docker update --restart=no your-container # edit disable onreboot https://amalgjose.com/2018/04/18/disable-auto-restart-policy-of-docker-container/
 
 # ubuntu docker 18.06.1 -> 18.09.0
 The following packages were automatically installed and are no longer required:
@@ -469,3 +473,8 @@ SYS_BOOT        Use reboot(2) and kexec_load(2), reboot and load a new kernel fo
 LEASE           Establish leases on arbitrary files (see fcntl(2)).
 WAKE_ALARM      Trigger something that will wake up the system.
 BLOCK_SUSPEND   Employ features that can block system suspend.
+
+
+FROM golang:1.16 AS builder # multistage
+touch build                 # multistage
+FROM

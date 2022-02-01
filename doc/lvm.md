@@ -34,6 +34,8 @@ sudo pvdisplay | grep -E "PE Size|Free PE"
 sudo lvdisplay | grep -E "LV Path|LV Size"
 lvresize -l+512 -r /dev/vg_system/lv_opt
 
+CONTAINER_NAME=hehe; docker pause $CONTAINER_NAME && lvresize --size +40G --resizefs /dev/mapper/rootvg-data && docker unpause $CONTAINER_NAME && echo success
+
 lvresize --size +1G   --resizefs /dev/VolGroup00/varlv
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_data
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_var

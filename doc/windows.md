@@ -3,6 +3,8 @@ https://www.microsoft.com/en-us/download/details.aspx?id=56485
 
 tasklist | findstr /i Zabbix
 taskkill /f /t zabbix_agentd.exe
+wmic path win32_process get caption,processid,commandline                  & rem tasklist with cli command line
+wmic path win32_process get caption,processid,commandline | findstr /i pac & tasklist with cli command line
 
 
 WMIC PROCESS get Caption,Commandline,Processid 2>&1 | vi -
@@ -171,3 +173,8 @@ win+. # emoji helper
 ncpa.cpl # network cards connections
 eventvwr.msc # events viewer
 services.msc # services
+
+# USB disk iso
+IMPORTANT: do this from a browser that has user agent linux
+access https://www.microsoft.com/en-ca/software-download/windows10
+and follow guidelines to download a file that was named Win10_21H2_English_x64.iso on 2022.01.31

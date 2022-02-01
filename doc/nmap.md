@@ -21,3 +21,13 @@ cd ~/.nmap
 git clone https://github.com/vulnersCom/nmap-vulners scripts
 mv scripts/http-vulners-regex.json nselib/data/
 nmap -d -p443,7443,7444,80 --script http-vulners-regex MYDOMAIN --script-args 'paths={"/"}'
+
+sudo nmap -Pn 10.102.10.91 10.102.10.92 10.102.10.93
+for i in 10.102.10.91 10.102.10.92 10.102.10.93 10.102.10.91 10.102.10.92 10.102.10.93; do
+	echo $i
+	sudo nmap -O $i
+	dig +short -x $i || echo no default dns
+	for dns in 10.{102,103}.1.{1,8}; do
+		dig +short -x $i @$ns || echo no dns @$dns
+	done
+done

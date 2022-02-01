@@ -2,6 +2,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
+#zmodload zsh/zprof # https://stevenvanbael.com/profiling-zsh-startup
 export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
@@ -73,7 +74,7 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if ! is_antigen; then
-    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl zsh-syntax-highlighting) # zsh-syntax-highlighting must be the last
+    plugins=(git zsh-autosuggestions history-substring-search vi-mode-mr z kubectl zsh-syntax-highlighting systemd) # zsh-syntax-highlighting must be the last
     if [[ $HOSTNAMEF == $WORK_PC1F ]]; then
         plugins=(git-auto-fetch $plugins)
         GIT_AUTO_FETCH_INTERVAL=1200
@@ -118,6 +119,7 @@ for c in \
     setxkbmap \
     docker \
     ssh \
+    sshpass \
     sshfs \
     vagrant \
     viw \
@@ -195,17 +197,9 @@ alias -g L1='2>/dev/null|L'
 alias -g L2='2>&1 >/dev/null|L'
 
 alias -g H='2>&1|head'
-alias -g H1='2>/dev/null|H'
-alias -g H2='2>&1 >/dev/null|H'
 
 alias -g T='2>&1|tail'
-alias -g T1='2>/dev/null|T'
-alias -g T2='2>&1 >/dev/null|T'
 
-alias -g LAST1='"$(last 1)"'
-alias -g LAST2='"$(last 2)"'
-alias -g LAST3='"$(last 3)"'
-alias -g LAST4='"$(last 4)"'
 alias -g LAST5='"$(last 5)"'
 
 alias -g OY='-o yaml'
@@ -215,12 +209,16 @@ alias -g C1='2>/dev/null|C'
 alias -g C2='2>&1 >/dev/null|C'
 
 alias -g G='2>&1|grep --line-buffered --color=auto -aE'
-alias -g G1='2>/dev/null|G'
-alias -g G2='2>&1 >/dev/null|G'
-
 alias -g GI='2>&1|grep --line-buffered --color=auto -iaE'
-alias -g GI1='2>/dev/null|GI'
-alias -g GI2='2>&1 >/dev/null|GI'
+
+for i in {1..9}; do
+    alias -g G$i="G -C$i"
+    alias -g GI$i="GI -C$i"
+    alias -g T$i="T -n $i"
+    alias -g H$i="H -n $i"
+    alias -g LAST$i="'$(last $i)'"
+    alias -g P$i="|awk '{ print \$$i }"
+done
 
 alias -g V='2>&1|sed-remove-ansi-colors.sh|vim -R -'
 alias -g V1='2>/dev/null|V'
@@ -233,16 +231,6 @@ alias -g N2='2>/dev/null'
 alias -g NH='&>/dev/null &'
 
 
-alias -g P1='|awk "{ print \$1 }"'
-alias -g P2='|awk "{ print \$2 }"'
-alias -g P3='|awk "{ print \$3 }"'
-alias -g P4='|awk "{ print \$4 }"'
-alias -g P5='|awk "{ print \$5 }"'
-alias -g P6='|awk "{ print \$6 }"'
-alias -g P7='|awk "{ print \$7 }"'
-alias -g P8='|awk "{ print \$8 }"'
-alias -g P9='|awk "{ print \$9 }"'
-
 alias -g P12='|awk "{ print \$1 \" \" \$2 }"'
 alias -g P13='|awk "{ print \$1 \" \" \$3 }"'
 alias -g P23='|awk "{ print \$2 \" \" \$3 }"'
@@ -250,6 +238,9 @@ alias -g P23='|awk "{ print \$2 \" \" \$3 }"'
 alias -g P21='|awk "{ print \$2 \" \" \$1 }"'
 alias -g P31='|awk "{ print \$3 \" \" \$1 }"'
 alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
+
+alias -g Y='|json-to-yaml.sh'
+alias -g S='|sed -r -e'
 
 alias findf='find . -type d -name .git -prune -o -type f -print'
 alias findd='find . -type d -name .git -prune -o -type d -print'
@@ -405,7 +396,8 @@ reset_rprompt() {
     unset timer
     export RPROMPT=""
 }
-setopt no_share_history # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
+setopt no_share_history   # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
+setopt inc_append_history # https://stackoverflow.com/questions/842338/how-do-i-tell-zsh-to-write-the-current-shells-history-to-my-history-file/842366
 
 test "$UNAME" = freebsd && alias ll='ls -lhFa' || unalias ll
 
@@ -444,20 +436,20 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 #source ~/.bash_completion
 compdef _path_commands viw catw lessw
-f=~/.zsh/completion/std/bash.az.completion
-if [[ -f $f ]]; then
-    # https://stackoverflow.com/questions/49273395/how-to-enable-command-completion-for-azure-cli-in-zsh
-    autoload -U +X bashcompinit && bashcompinit
-    source $f
-fi
+#f=~/.zsh/completion/std/bash.az.completion
+#if [[ -f $f ]]; then
+#    # https://stackoverflow.com/questions/49273395/how-to-enable-command-completion-for-azure-cli-in-zsh
+#    autoload -U +X bashcompinit && bashcompinit
+#    source $f
+#fi
 alias z='nocorrect _z 2>&1' # at the end is necessary as it is defined elsewhere
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
@@ -468,3 +460,4 @@ if [[ -n "${MR_URXVT_CMD:-}" ]]; then
     # && echo success || echo failure
     # sshrc seems to always end with success
 fi
+#zprof # https://stevenvanbael.com/profiling-zsh-startup

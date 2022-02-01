@@ -71,3 +71,6 @@ i3 move workspace to output HDMI-2 # apr16 top above
 i3 rename workspace to '"0   $   "' # apr16 citrix workspace to correct screen
 
 pip install i3ipc # python https://github.com/altdesktop/i3ipc-python
+
+less /run/user/3000/i3/errorlog.4108
+cd /run/user/$(id -u)/i3/

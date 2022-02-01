@@ -75,11 +75,23 @@ def go(args) -> None:
 def process(f):
     d = get_date_taken(f)
     logger.info("%s %s", f, d)
-    if d is not None:
+    if d is None:
+        logger.info("ignored %s as no EXIF data", f)
+    else:
+        current_time = os.path.getmtime(f)
         unix_timestamp = int(d.strftime('%s'))
+        if current_time == unix_timestamp:
+            logger.info("NOOP exif and file lmod time already in sync at %s %s", d, f)
+            return
         access_time = unix_timestamp
         modification_time = unix_timestamp
         os.utime(f, (access_time, modification_time))
+        logger.info("SUCCESS modified %s from %s to %s",
+            f,
+            datetime.datetime.fromtimestamp(current_time),
+            d
+            )
+
 
 if __name__ == '__main__':
     logging_conf()

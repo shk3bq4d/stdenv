@@ -6,9 +6,11 @@ mysql  -u root -proot          # short password no equal
 show databases;
 use DATABASENAME;
 show tables;
+show tables like '%event%';
 desc mytable; -- show table schema
 create database bip;
-select Host, User, password from mysql.user;
+HOW GRANTS for someuser_dbuser@localhost;
+select user, host, password from mysql.user order by user, host;
 CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
 CREATE USER 'donald'@'%' IDENTIFIED BY 'duck';
 CREATE USER 'donald' IDENTIFIED BY 'duck';
@@ -18,13 +20,20 @@ GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';
 GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES; # if modified PRIVILEGES through an insert update or delete statement instead of a grant, revoke, set password or rename user
 
+begin; update low_priority problem set r_eventid=640652792 where  eventid=640652792 limit 5;
+
 create user 'mrowncloud'@'localhost' identified by 'habon123.';
 drop user mrowncloud;
 grant all on mrowncloud.* to mrowncloud;
+create user root_ansible@127.0.0.1 identified by 'square-root-minus-one';
+grant all privileges on *.* to root_ansible@127.0.0.1 with grant option; flush privileges;
+grant all on zabbix20211230.* to root_ansible@127.0.0.1;
+grant all on zabbix20211230.* to root_ansible@localhost;
 
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'MyNewPass';
 ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
 ```
 
@@ -76,6 +85,7 @@ select "random select query to be further editor in $EDITOR as it contains backs
 pager  vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -;
 pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init;
 pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init --chop-long-lines; -- truncate lines instead of wrapping
+pager more
 
 select UNIX_TIMESTAMP(); -- now
 select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
@@ -114,17 +124,32 @@ rename table foo to foo_old, foo_new to foo; -- swap exchange switch tables
 show variables like 'lock_wait_timeout'; -- see session duration for aquiring table / metadata lock
 set lock_wait_timeout=10;
 
+kill 35; -- kill session 35
+show engine innodb status; -- as root, better for looking at locks
+
 select id, db, command, time, state, info from information_schema.processlist;
 show processlist;
 show full processlist; -- see full query
-```
+show privileges; -- dislay list of available privileges
+show grant for user@127.0.0.1;
 
 alter database craft character set utf8 collate utf8_general_ci;
+
+select nvl(null,7); # coalesce
+select nvl('',8); # coalesce
+select isnull(null); -> 1
+select isnull(''); -> 0
+select isnull('a'); -> 0
+select isnull(5); -> 0
+select if(null is null, "was null", "wasnt null");
+select if(5 is null, "was null", "wasnt null");
+
+```
 
 # regexp
 ```sql
 -- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
-regexp_replace(expr, pat, repl[, pos[, occurrence[, match_type]]])
+regexp_replace(original_value, pattern, replacement[, pos[, occurrence[, match_type]]])
 ```
 
 
@@ -138,10 +163,25 @@ https://dba.stackexchange.com/questions/41050/is-it-safe-to-delete-mysql-bin-fil
 [mysqld]
 expire_logs_days=3
 ```
+```sql
+optimize table auditlog; # bip
+--alter table trends_uint optimize partition p2021_12; do not use as it rebuilds entire table, use rebuild + analyze instead
+alter table trends_uint rebuild partition p2021_12; alter table trends_uint analyze partition p2021_12; 
+```
 
 ```sql
 set global expire_logs_days = 3;
 purge binary logs to 'mysql-bin.000223';
 show variables where variable_name like 'expire%';
 show variables where variable_name = 'expire_logs_days';
+show variables where variable_name = 'hostname'; -- ip address
+show variables where variable_name = 'port';
 ```
+
+# replication
+https://www.abelworld.com/mysql-slave-master-switch/
+
+# json query
+WARNING json_query can't be used to query string or int (scalars)
+use json_value instead
+https://mariadb.com/kb/en/json-functions/ -- json-query

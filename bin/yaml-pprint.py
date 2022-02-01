@@ -38,7 +38,7 @@ def go(args):
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)
-    if 'VIMRUNTIME' in os.environ: args = ['HEHE', '-i']
+    if 'VIMF6' in os.environ: args = ['HEHE', '-i']
     parser = argparse.ArgumentParser(description="Python pprint a yaml file")
     parser.add_argument("FILENAME", type=str, nargs='+', help="file to process")
     ar = parser.parse_args(args)

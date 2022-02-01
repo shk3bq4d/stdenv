@@ -640,7 +640,7 @@ def renumber_workspaces():
 if __name__ == '__main__':
     #reload(sys)
     #sys.setdefaultencoding('utf-8')
-    if 'VIMRUNTIME' in os.environ and False:
+    if 'VIMF6' in os.environ and False:
         #unittest.main()
         logging_conf()
         renumber_workspaces()

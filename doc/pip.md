@@ -35,3 +35,11 @@ pip install --user ldap3=2.5.1 # https://github.com/cannatag/ldap3/issues/639 Fi
 pip #noop dry-run dryrun simulate noactions: TOUGH LUCK, NO SUCH THING https://stackoverflow.com/questions/29531094/how-to-make-pip-dry-run
 
 # A command line utility to display dependency tree of the installed Python packages https://github.com/naiquevin/pipdeptree
+
+
+https://www.wheelodex.org/projects/cffi/
+https://github.com/montag451/pypi-mirror/issues/16 multiple --platform --abi
+
+
+pip install --target=/tmp --only-binary=:all: cffi cryptography --abi cp38 --abi cp36 --platform manylinux_2_12_x86_64 --platform manylinux_2_24_x86_64 --python-version 38 --implementation cp
+pip install --target=/tmp --only-binary=:all: cffi cryptography --platform manylinux2010_x86_64

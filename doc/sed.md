@@ -1,7 +1,14 @@
-# /* ex: set filetype=sh: */
-
+```sh
       +rGNU  +rFreeBSD   -rGNU  -rFreeBSD
 \s    x      x           o      x
+
+
+pattern   normal -r
+\s        works  works
+\d        NOK    NOK
+[0-9]     works  works
++         NOK    works
+
 
 
 
@@ -19,6 +26,7 @@ sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' # delete all trailing blank lines at end o
 
 sed -e "s/\b\(.\)/\u\1/g" # GUN: capitalize/uppercase first letter of each word
 
+sed -r -e 's/^\s+|\s+$//g' # trim stript spaces
 
 sed -e '/TERMINATE/,$d' # the lines before TERMINATE:
 
@@ -51,9 +59,11 @@ rint between line 45 and 50
 sed -n '45,50p' filename
 
 http://www.gnu.org/software/sed/manual/html_node/Command-and-Option-Index.html#Command-and-Option-Index
+```
 
 
 #apply commands only on the first match
+```sh
 sed -r -e '0,/OTHRPRTY/{s/OTHRPRTY/youpiiiiiiiiiiiiiiiiiiii/}' $i
 
 sed -n '/USERNAME/,/-----$/ p' #print between two regexp
@@ -63,17 +73,11 @@ sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase
 sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace
 
 
+```
 
 #skip first and last line
+```sh
 sed '1d; $d'
-
-
-pattern   normal -r
-\s        works  works
-\d        NOK    NOK
-[0-9]     works  works
-+         NOK    works
-
 
 
 sed -r \
@@ -86,9 +90,11 @@ sed -r \
     -e '/OCRDOCUMENTS.*PARTENAIRE/{s/arrowhead=none/arrowhead=crowodot/;s/arrowtail=crowodot/arrowtail=none/;s/dir=back//;s/(\S+) -> (\S+)/\2->\1/}' \
     -e 's/:[we]//g' \
     diagrams/summary/relationships.real.large.dot > /d/viz/scanocr.large.viz
+```
 
 
 # switch two lines
+```sh
 sed -e '
 /^Paco/ {
 :notdone
@@ -105,12 +111,16 @@ sed -r -e "s/(\\w+\\s+)(\\w+\\s+)(\\w+\\s+)(.*)/$(echo -ne "$RED")\\1$(echo -ne 
 sed -r -e s/[\d001-\d020]//g' # removes non-printables
 tr -dc '[[:print:]]'          # removes non-printables
 
+```
+
 # sed character classes
+```sh
 ‘[:alnum:]’ Alphanumeric characters: ‘[:alpha:]’ and ‘[:digit:]’; in the ‘C’ locale and ASCII character encoding, this is the same as ‘[0-9A-Za-z]’.
 
 ‘[:alpha:]’ Alphabetic characters: ‘[:lower:]’ and ‘[:upper:]’; in the ‘C’ locale and ASCII character encoding, this is the same as ‘[A-Za-z]’.
 
 ‘[:blank:]’ Blank characters: space and tab.
+'[^[:blank:]]*' # notblank invert invers character class
 
 ‘[:cntrl:]’ Control characters. In ASCII, these characters have octal codes 000 through 037, and 177 (DEL). In other character sets, these are the equivalent characters, if any.
 
@@ -129,3 +139,6 @@ tr -dc '[[:print:]]'          # removes non-printables
 ‘[:upper:]’ Upper-case letters: in the ‘C’ locale and ASCII character encoding, this is A B C D E F G H I J K L M N O P Q R S T U V W X Y Z.
 
 ‘[:xdigit:]’ Hexadecimal digits: 0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f.
+
+sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.content.after;' # well watch out for end of line style
+```

@@ -227,3 +227,39 @@ https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.15.2-window
 
 
 [filebeat] squid module cannot parse CONNECT request because "extract_page failed": filebeat[3796]: ERROR [processor.javascript] console/console.go:54 extract_page failed for 'eu-v20.events.data.microsoft.com:443' https://github.com/elastic/beats/issues/24260
+
+
+
+```yaml
+filebeat.inputs:
+    - type: log # inputs https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html
+      fields_under_root: true # inputs
+      fields: # inputs
+        stdenv.filebeat.debug: 1 # inputs
+      paths: # inputs
+        #- /tmp/filebeat-debug/auditd.log
+        - /tmp/filebeat-debug/auditd-python-compile.log # inputs
+
+- script: # javascript
+    lang: javascript
+    id: myjavascript
+      source: | # javascript
+        // ```js
+        function process(event) { # javascript
+            event.Tag("javascript");
+            event.Get("javascript");
+            event.Put("javascript", value);
+            event.Rename("javascript", string);
+            event.Delete("javascript"); # remove
+            event.Cancel();  // Flag the event as cancelled which causes the processor to drop event. javascript
+            event.Tag("javascript"); // Append a tag to the tags field if the tag does not already exist. Throws an exception if tags exists and is not a string or a list of strings. javascript
+            event.AppendTo("javascript", string);
+        } # javascript
+        // ```
+
+
+ - include_fields: # keep fields exclude only subset
+      when:
+        condition
+      fields: ["stdenv.filebeat.debug"] # include_fields exclude keep only subset
+```

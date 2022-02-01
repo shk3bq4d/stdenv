@@ -11,7 +11,7 @@ CYGWIN*)
 	;;
 esac
 
-[[ $# -ne 0 ]] && exit 0
+[[ $# -eq 0 ]] && exit 0 # if any argument, then fetch internet as well
 timeout=4
 mycurl() {
 	local URL="$@"

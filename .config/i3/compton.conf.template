@@ -67,18 +67,20 @@ opacity-rule = [
 
 # Fading
 fading = true;
-# fade-delta = 30;
-fade-in-step = 0.08;
-fade-out-step = 0.008;
+ fade-delta = 0;
+fade-in-step = 1;
+fade-out-step = 1;
 no-fading-openclose = true;
 fade-exclude = [
     "name = 'Kodi'"
     ,"name = 'MPlayer'"
+    ,"name = 'i3'"
     ,"name ~= '^TypeRacer - .*Chromium$'"
     ,"name ~= '^Opsgenie - Alerts - Chromium$'"
     , "name ~= ' Microsoft Teams.{1,5}Mozilla Firefox$'"
     ,"window_type = 'dmenu'"
     ,"class_g = 'mrdmenu'"
+    ,"class_g = 'dmenu'"
     ,"class_g = 'keepassxc'"
     ,"class_g = 'Wfica'"
     ,"class_g = 'citrix-viewer'"
@@ -104,7 +106,7 @@ dbe = false;
 #
 # focus-exclude: set rules for window to not become transparent when out of focus
 focus-exclude = [
-    "class_g = 'Cairo-clock'" 
+    "class_g = 'Cairo-clock'"
     ,"name = 'Kodi'"
     ,"name = 'MPlayer'"
     ,"name ~= '^Opsgenie - Alerts - Chromium$'"
