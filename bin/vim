@@ -10,7 +10,7 @@ test -d ~/.tmp/vim || mkdir -p ~/.tmp/vim
 OLDPATH="$PATH"
 export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
 EXPECTED_COMMAND="$(basename "$0")"
-test "${UNAME:-}" = freebsd && EXPECTED_COMMAND=vi # hardcod vim into vi
+#test "${UNAME:-}" = freebsd && EXPECTED_COMMAND=vi # hardcod vim into vi
 BIN="$(which "$EXPECTED_COMMAND")"
 if [[ -n "$BIN" ]]; then
     export PATH="$OLDPATH"
