@@ -233,6 +233,8 @@ blending)
 esac
 case $f in \
 */noise*) $0 "$@"; exit 0;;
+*/plasma*) $0 "$@"; exit 0;;
+*/plasma-fbbf91-a591fd-183.jpg) $0 "$@"; exit 0;;
 */noise-eda8a7-a7b8ee-fbbf91.jpg) $0 "$@"; exit 0;;
 #*/plasma*) $0 "$@"; exit 0;;
 #*/blending*) $0 "$@"; exit 0;;

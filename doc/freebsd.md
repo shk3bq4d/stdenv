@@ -78,3 +78,11 @@ wget --no-check-certificate https://pkg.freebsd.org/FreeBSD:13:amd64/latest/All/
 pkg add -f pkg-1.17.5_1.txz
 pkg update
 ```
+
+# jail upgrade from 10.3 to 13
+ezjail-admin update -s 10.3-RELEASE-p10 -U
+https://forums.freebsd.org/threads/ezjail-and-major-host-upgrades.52203/#post-292852
+mergemaster -p /zfs/jails/newjail
+mergemaster -UF -D /zfs/jails/newjail
+mergemaster -p /zfs/jails/jail1
+mergemaster -UF -D /zfs/jails/jail1 # and continue on for each jail
