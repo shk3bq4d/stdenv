@@ -16,6 +16,8 @@ if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
     border = 'pixel 9'
     border_color_focused = '#00ffff'
     text_color = '#000000'
+elif os.environ.get('HOSTNAMEF') == 'feb22.ly.lan':
+    border = 'pixel 5'
 border_config = border
 
 with open(os.path.expanduser('~/.tmp/compton-enabled'), 'w') as f:

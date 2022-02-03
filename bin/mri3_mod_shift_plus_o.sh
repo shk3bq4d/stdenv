@@ -5,7 +5,7 @@
 #exec 2>&1
 
 case $HOSTNAME in \
-	apr16)
+	apr16|feb22*)
 		URL=http://jlighttpd.ly.lan
 		;;
 	*)
