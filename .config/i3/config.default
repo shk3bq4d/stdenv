@@ -30,6 +30,8 @@ font pango:Monospace Regular 18
 
 export STDHOME_DMENU_ARGS='-i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#222222" -nf "#999999"'
 export STDHOME_TAIL=''
+export STDHOME_BORDER='pixel 9'
+#export STDHOME_BORDER='none'
 export bar_height=24
 export gaps_outer=0
 export gaps_inner=10

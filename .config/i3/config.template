@@ -66,9 +66,9 @@ $STDHOME_OUTPUTS
 #client.unfocused        #333333 #222222 #888888 #292d2e
 #client.urgent           #2f343a #900000 #ffffff #900000
 #client.focused          #ff8888 #ff0000 #ffffff #9900ff
-client.focused          #4c7899 #4c7899 #ffffff #ffff00 #ff0000
-client.focused_inactive #555555 #000000 #ffffff #484e50 #ff0000
-client.unfocused        #dddddd #aaaaaa #000000 #484e50 #ff0000
+client.focused           #DC322F #DC322F #ffffff #ffff00 #DC322F
+client.focused_inactive  #666666 #666666 #ffffff #ffff00 #666666
+client.unfocused         #aaaaaa #aaaaaa #ffffff #ffff00 #aaaaaa
 client.urgent           #0000cc #0000ff #ffffff #0000CC #ff0000
 
 #hide_edge_borders both
@@ -486,10 +486,11 @@ mode "pass-through" {
 
 # code:28 => sym: 0x74, symbol:t
 bindcode $mod+28  mode "pass-through"
-new_window none
+new_window ${STDHOME_BORDER}
 # youpi mouais
 #exec --no-startup-id compton  -i 0.8 -c -r 22 -z -o 0.3 -l -30 -t -30 --inactive-dim 0.4 -f -C -G -z
-exec --no-startup-id ~/bin/compton-background.sh
+# 2022.02.03 deactivate compton
+#exec --no-startup-id ~/bin/compton-background.sh
 
 # code:33 => sym: 0x70, symbol:p
 bindcode $mod+27  exec --no-startup-id true

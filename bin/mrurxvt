@@ -42,8 +42,8 @@ triangleresize
 Shepards
 Inverse
 mean
-plasma
-noise
+#plasma
+#noise
 noisehue
 )
 len=${#methods[@]}
@@ -232,6 +232,7 @@ blending)
     ;;
 esac
 case $f in \
+*/semiradial-a591fd-eda8a7-180.jpg) $0 "$@"; exit 0;; # too violet and poor contrast with green on violet
 */noise*) $0 "$@"; exit 0;;
 */plasma*) $0 "$@"; exit 0;;
 */plasma-fbbf91-a591fd-183.jpg) $0 "$@"; exit 0;;

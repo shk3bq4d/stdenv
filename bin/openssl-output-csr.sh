@@ -1,30 +1,35 @@
 #!/usr/bin/env bash
-# ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 13 Dec 2018
-##
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
 set -euo pipefail
 
-# function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
+ function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+_tempfile=""
+if [[ $# -eq 0 ]]; then
+    _tempfile=$(mktemp);
+    cat - |
+        sed -r \
+          -e '/^\s*$/ d' \
+          -e 's/^\s+|\s+$//g'  \
+        > $_tempfile
+    ARG=$_tempfile
+else
+    ARG="$@"
+fi
 
-# [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
+test -t 1 && tty_ouput=1 || tty_ouput=0
+colorize() {
+    if (( $tty_ouput )); then
+        grep --color=always -E '^|CN = [^,]+|X509v3 Subject Alternative Name|IP Address:.*|DNS:.*' -
+    else
+        cat -
+    fi
+}
 
-# [[ $# -lt 1 || $# -gt 2 ]] && echo FATAL: incorrect number of args && usage && exit 1
+openssl req -text -noout -verify -in "$ARG" 2>&1 |
+    sed -r -e '/(:[a-f0-9]{2}){5,}/ d' |
+    colorize |
+    less -M --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init
 
-# for i in sed which grep; do ! command -v $i &>/dev/null && echo FATAL: unexisting dependency $i && exit 1; done
-
-# DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-
-# exec > >(tee -a ~/log/$(basename $0 .sh).log)
-# exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
-# exec 2>&1
-
-# test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
-
-openssl req -text -noout -verify -in "$@" 2>&1 | grep --color=always -E '^|CN = [^,]+|X509v3 Subject Alternative Name|IP Address:.*|DNS:.*' | less -M --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init
+cleanup
+exit 0

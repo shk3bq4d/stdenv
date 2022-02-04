@@ -202,6 +202,7 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 ":auto BufEnter * let &titlestring = "vi" . strpart(v:servername, 3, 1) . " %t     " . expand("%:p:h:h:t") . "\\" . expand("%:p:h:t") . " %=%l/%L-%P "
 :set title
 
+"au BufCreate syntax on
 au BufNewFile,BufRead *.yaml   set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml    set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml.j2 set expandtab cursorcolumn sts=2 ts=2 sw=2 filetype=yaml " noautoindent nocindent nosmartindent
@@ -400,13 +401,6 @@ inoremap <ScrollWheelDown> <Nop>
 if version >= 500
 func! MrSyntaxRange()
     try
-        call SyntaxRange#Include('```nosyntax'         ,'```'       ,'nosyntax'       ,'NonText')
-    catch /^Vim\%((\a\+)\)\=:E117/
-        " deal with it
-    catch /^Vim\%((\a\+)\)\=:E484/
-        " deal with it
-    endtry
-    try
         call SyntaxRange#Include('```markdown'       ,'```'       ,'markdown'       ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it
@@ -509,6 +503,13 @@ func! MrSyntaxRange()
     endtry
     try
         call SyntaxRange#Include('```yaml'      ,'```'      ,'yaml',      'NonText')
+    catch /^Vim\%((\a\+)\)\=:E117/
+        " deal with it
+    catch /^Vim\%((\a\+)\)\=:E484/
+        " deal with it
+    endtry
+    try
+        call SyntaxRange#Include('```nosyntax'         ,'```'       ,'syntaxrangenosyntax'       ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it
     catch /^Vim\%((\a\+)\)\=:E484/

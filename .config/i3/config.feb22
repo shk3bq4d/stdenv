@@ -1,6 +1,6 @@
 # /* ex: set filetype=sh: */
 export STDHOME_OUTPUTS='
-set $ol DP-4
+set $ol DP-0
 set $oc DP-4
 set $or DP-4
 
@@ -25,7 +25,7 @@ workspace 13 output $oc
 #exec xrandr --output "$oc" --primary
 
 export STDHOME_FLOATING_LEFT=$(( 960 ))
-OFFSET_Y=0 # 2160
+OFFSET_Y=2160
 export STDHOME_FLOATING_TOP=$(( 34 + $OFFSET_Y ))
 export STDHOME_FLOATING_WIDTH=$(( 5120 - 2 * $STDHOME_FLOATING_LEFT ))
 export STDHOME_FLOATING_HEIGHT=$(( 2160 - ( $STDHOME_FLOATING_TOP  - $OFFSET_Y ) - 8))
@@ -34,40 +34,40 @@ export STDHOME_TOGGLE='
 bindsym --release $mod+v split toggle
 '
 export STDHOME_FONT='
-font pango:Monospace Regular 8
+font pango:Monospace Regular 14
 '
 STDHOME_FIRSTBAR_OUTPUT="output \$oc"
 export STDHOME_FIRSTBAR_POSITION='top'
 export STDHOME_TAIL='
-# bar {
-#     id bar-bottom
-#     position top
-#     i3bar_command i3bar -t
-#     status_command ~/.config/i3/mri3_status_right.sh
-#     #status_command ~/.config/i3/mri3_status_left.sh
-#     output $ol
-#     strip_workspace_numbers yes
-#     tray_output $oc
-#     #bindsym  button3 nop
-#     bindsym  button4 nop
-#     bindsym  button5 nop
-#     separator_symbol " "
-#     colors {
-#         background #00000000
-#         statusline #ffffff
-#         separator #666666
-#         focused_workspace  #4c7899 #285577 #ffffff
-#         active_workspace  #333333 #28557700 #ffffff
-#         inactive_workspace #33333300 #22222200 #ffffff
-#         urgent_workspace   #2f343a #900000 #ffffff
-#     }
-# }
+bar {
+    id bar-bottom
+    position bottom
+    i3bar_command i3bar -t
+    status_command ~/.config/i3/mri3_status_right.sh
+    #status_command ~/.config/i3/mri3_status_left.sh
+    output $ol
+    strip_workspace_numbers yes
+    tray_output $oc
+    #bindsym  button3 nop
+    bindsym  button4 nop
+    bindsym  button5 nop
+    separator_symbol " "
+    colors {
+        background #00000000
+        statusline #ffffff
+        separator #666666
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace  #333333 #28557700 #ffffff
+        inactive_workspace #33333300 #22222200 #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+}
 exec --no-startup-id x11vnc -display :0 -shared -forever
 exec --no-startup-id ~/bin/startup/mrredshift.sh
 for_window [class="Wfica"]               move container to output $ol
 for_window [title=".*ITTS.Desktop....*"] move container to output $ol
 '
 
-export gaps_inner=7
+export gaps_inner=8
 export bar_height=28
 export STDHOME_MOVE_WORKSPACE_DIRECTION="up"
