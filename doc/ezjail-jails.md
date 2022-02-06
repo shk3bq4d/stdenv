@@ -19,3 +19,13 @@ jail_register_ly1_host.py 10.1.1.125 jfw2016
 /usr/jails/jfwstaging/home/mr_user
 
 jail_stop.sh jzabbix && sudo ezjail-admin config -r norun jzabbix # disables enables
+
+```sh
+ezjail-admin update -s 10.3-RELEASE-p10 -U # 10.3 is SOURCE release, not target
+ls -1d /usr/jails/* | grep -vE 'basejail' | while read i; do sudo cp /root/pkg-1.17.5_1.txz $i/root/; done
+pkg-static add -f /root/pkg-1.17.5_1.txz
+pkg-static upgrade
+echo "jsmb4 jsslh jexternalssh jexternalhttps jcerts j404 jldap" | xargs -n1 echo | while read i; do yes | sudo ezjail-admin console -e "pkg-static add -f /root/pkg-1.17.5_1.txz" $i; done
+yes | sudo ezjail-admin console -e "pkg-static add -f /root/pkg-1.17.5_1.txz" jsquid
+sudo ezjail-admin console -e "pkg-static upgrade" jexternalssh
+```

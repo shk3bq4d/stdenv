@@ -1,3 +1,4 @@
+virt-manager-mrhyp.sh # <-- use that
 ssh mrhyp history
 ssh mrhyp virt-manager
 ssh -t mrhyp sudo virsh start charlotte

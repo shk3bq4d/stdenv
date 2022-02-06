@@ -86,3 +86,7 @@ mergemaster -p /zfs/jails/newjail
 mergemaster -UF -D /zfs/jails/newjail
 mergemaster -p /zfs/jails/jail1
 mergemaster -UF -D /zfs/jails/jail1 # and continue on for each jail
+
+*** You installed a new master.passwd file, so make sure that you run
+    '/usr/sbin/pwd_mkdb -p /etc/master.passwd'
+     to rebuild your password files
