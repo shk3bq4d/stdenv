@@ -329,3 +329,7 @@ http://vim.wikia.com/wiki/Learn_to_use_help
 
 # add-hoc reformat
 :'<,'>!bash -c 'cat - | while read i b; do printf "\%-30s \%s\n" $i "$b"; done'
+
+
+vim.basic is just plain vanilla Vim (as you can check with apt-file vim.basic or dpkg -S /usr/bin/vim.basic). # tiny
+vim.tiny, as the name implies, is a trimmed-down version of Vim (this question explains it further). # basic
