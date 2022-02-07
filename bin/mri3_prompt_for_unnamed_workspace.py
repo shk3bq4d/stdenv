@@ -3,6 +3,8 @@
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 from pprint import pprint
+from sh import dmenu
+import mri3_dmenu_params
 import mrstack
 import i3ipc
 import sys
@@ -64,30 +66,8 @@ names = [
 '!',
 '#']
 def mrdmenu(prompt, items):
-    if 0:
-        try:
-            from sh import rofi
-            #dmenu = rofi.bake('-dmenu').bake('-normal-window')
-            dmenu = rofi.bake('-dmenu')
-        except:
-            from sh import dmenu
-    else:
-        from sh import dmenu
-    import socket
-    fontH = dict(
-        acer2011=11,
-        dec17=14
-        )
-    monitor1 = socket.gethostname() in ['ru'+'mo-pc']
+    menu_args = mri3_dmenu_params.get()
 
-    # set default menu args for supported menus
-    menu_args = []
-    #menu_args += ['-i', '-p', prompt, '-f', '-b', '-fn']
-    menu_args += ['--class', 'mrdmenu', '-i', '-f', '-b', '-fn']
-    menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
-    if monitor1:
-        menu_args += ['-m', '1']
-    menu_args += ['-nb', '#FFFFFF', '-nf', '#000000']
     #menu_input = bytes(str.join('\n', items), 'UTF-8')
     menu_input = '\n'.join(items)
     l = str(max(1, min(50, len(items))))
@@ -117,6 +97,7 @@ def go2(args=[], only_for_unnamed=True):
     words = ws.split()
 
 
+    only_for_unnamed = False
     if only_for_unnamed and len(words) != 1 and not re.match(r'^\d+\s+(\d+|&amp;?|[$&%`#])$',ws.strip()):
         logger.info('len(words), {} != 1'.format(len(words)))
         return

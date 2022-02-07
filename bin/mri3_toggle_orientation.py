@@ -26,6 +26,8 @@ def t(w, cmd):
     w.command(cmd)
     if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
         w.command('border pixel 7')
+    elif os.environ.get('HOSTNAMEF') == 'feb22.ly.lan':
+        w.command('border pixel 4')
     else:
         w.command('border pixel 10')
 
