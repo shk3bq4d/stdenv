@@ -1,4 +1,4 @@
-@begin=javascript@
+```js
 setTimeout(function() {alert(1);}, 10)
 
 
@@ -15,13 +15,13 @@ try{
 catch(e){
     var xcb="http://stackoverflow.com/search?q=[js]+"+e.message;
     window.open(xcb, '_blank');
-	// https://github.com/gautamkrishnar/tcso/blob/master/javascript/tcso.js
+    // https://github.com/gautamkrishnar/tcso/blob/master/javascript/tcso.js
 }
-@end=javascript@
+```
 
 
 # https://stackoverflow.com/questions/12977661/is-there-a-way-to-suppress-jshint-warning-for-one-given-line
-@begin=javascript@
+```js
 // Code here will be linted with JSHint.
 // /* jshint ignore:start */
 // // Code here will be ignored by JSHint.
@@ -30,5 +30,8 @@ catch(e){
 // You can also ignore a single line with a trailing comment like this:
 //
 // ignoreThis(); // jshint ignore:line
-@end=javascript@
+```
+
+# notifications
+https://www.bennish.net/web-notifications.html
 

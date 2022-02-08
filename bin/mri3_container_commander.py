@@ -10,6 +10,7 @@ from argparse import ArgumentParser
 from subprocess import check_output
 from os.path import basename
 import socket
+import mri3_dmenu_params
 from sh import pgrep
 import os
 import re
@@ -60,35 +61,7 @@ parser.add_argument('--menu',
 if len(menu_args) and menu_args[0] == '--':
     menu_args = menu_args[1:]
 
-fontH = dict(
-    acer2011=11,
-    dec17=14
-    )
-small = socket.gethostname() in fontH.keys()
-monitor1 = socket.gethostname() in ['ru'+'mo-pc']
-
-col_nb = '#222222'
-col_nf = '#999999'
-if 1:
-    col_nb = '#FFFFFF'
-    col_nf = '#000000'
-if os.environ.get('HOSTNAMEF') == 'dec17.ly.lan':
-    try:
-        pgrep('compton')
-    except:
-        col_nb = '#FFFFFF'
-        col_nf = '#000000'
-# set default menu args for supported menus
-if basename(args.menu) == 'dmenu':
-    menu_args += ['--class', 'mrdmenu', '-i', '-f', '-b', '-fn']
-    menu_args += ['DejaVuSansMono-{}'.format(fontH.get(socket.gethostname(), 28))]
-    if monitor1:
-        menu_args += ['-m', '1']
-    menu_args += [ '-nb', col_nb, '-nf', col_nf]
-
-
-elif basename(args.menu) == 'rofi':
-    menu_args += [ '-show', '-dmenu' ]
+menu_args += mri3_dmenu_params.get(width=False)
 
 
 def find_group(container):
@@ -119,10 +92,10 @@ def show_container_menu(containers):
             window = '{:<15s} {}'.format(*windows)
         workspace = c.workspace().name.strip()
         workspace = re.sub(r'^\d+\s+(.*)', r'\1', workspace)
-        if small:
-            f = '{:<100s} {}'
-        else:
-            f = '{:<120s} {}'
+#       if small:
+#           f = '{:<100s} {}'
+#       else:
+        f = '{:<120s} {}'
         return f.format(
             window,
             workspace

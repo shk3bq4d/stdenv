@@ -3,6 +3,16 @@
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
 
+# https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format 
+```sh
+docopt == 0.6.1             # requirements Version Matching. Must be version 0.6.1
+keyring >= 4.1.1            # requirements Minimum version 4.1.1
+coverage != 3.5             # requirements Version Exclusion. Anything except version 3.5
+Mopidy-Dirble ~= 1.1        # requirements Compatible release. Same as >= 1.1, == 1.*
+pkg3>=1.0,<=2.0             # requirements
+ProjectB<1.3                # requirements
+```
+
 # http://sametmax.com/sept-petites-libs-qui-changent-la-vie-dun-dev-python/
 # ssh port forwarding https://stackoverflow.com/questions/11294919/port-forwarding-with-paramiko
 

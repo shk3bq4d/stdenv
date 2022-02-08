@@ -287,7 +287,8 @@ bindcode  $mod+Shift+21 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws12
 bindcode $mod+Shift+31  reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # code:27 => sym: 0x72, symbol:r
-bindcode $mod+Shift+32  exec sleep 10 && compton-i3-restart-reset-opacity.sh; restart
+#bindcode $mod+Shift+32  exec sleep 10 && compton-i3-restart-reset-opacity.sh; restart
+bindcode $mod+Shift+32  restart
 # exit i3 (logs you out of your X session)
 #bindsym  $mod+Shift+E exit
 

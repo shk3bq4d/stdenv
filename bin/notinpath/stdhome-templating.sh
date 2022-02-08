@@ -40,4 +40,5 @@ case ${FILENAME} in \
 	hash xrdb 2>/dev/null && xrdb -merge ~/.Xdefaults
 	;;
 esac
+echo "${STDHOME_BORDER}" > ~/.tmp/i3-new_window_border
 #diff ${FILENAME}.template ${FILENAME}

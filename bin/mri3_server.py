@@ -134,10 +134,10 @@ _remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(la
             getpass.getuser(),
             _machine
             )
-if _machine in ['dec17', 'acer2011']:
-    border_width=1
+if _machine in ['dec17', 'acer2011', 'feb22']:
+    border_width=1 # underline
 else:
-    border_width=3
+    border_width=3 # underline
 def remove_user_at_host(name):
     return re.sub(_remove_user_at_host, '', name)
 
@@ -176,7 +176,7 @@ def i3blocklet_name(name):
     pid = blockpid()
     if pid is None: return
     border = '#000000'
-    border_bottom=0
+    border_bottom=0 # underline
     short_text = None
     if 'urxvt' in name and re.match('^(\S{1,3}\s+)?urxvt', name):
         pre = post = ''

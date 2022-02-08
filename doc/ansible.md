@@ -2765,3 +2765,6 @@ file:                         # first timetouch heartbeat file creation
   state: touch                # first timetouch heartbeat file creation
   modification_time: preserve # first timetouch heartbeat file creation
   access_time: preserve       # first timetouch heartbeat file creation
+
+
+ipv4cidr | ansible.netcommon.nthhost(200) # ip calc netaddr
