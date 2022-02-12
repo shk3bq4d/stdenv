@@ -2416,7 +2416,8 @@ truncate(s, length=255, killwords=False, end='...', leeway=None)
 unique(value, case_sensitive=False, attribute=None)
 {{ ['foo', 'bar', 'foobar', 'FooBar']|unique }}
 upper(s)
-urlencode(value)
+urlencode(value) # encodeURIComponent
+urldecode(value) # encodeURIComponent
 urlize(value, trim_url_limit=None, nofollow=False, target=None, rel=None)
 {{ mytext|urlize(40, true) }}
 {{ mytext|urlize(40, target='_blank') }}
