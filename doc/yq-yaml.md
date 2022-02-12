@@ -40,6 +40,6 @@ kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolu
 yq e '.contexts[]|select(.name=="mycontext").context.namespace' ~/.kube/config
 yq e ".contexts[]| select(.name==((.|parent|parent).current-context)) |.context.namespace" ~/.kube/config
 yq e ".current-context, .contexts[]| select(.name==((.|parent|parent).current-context)) |.context.namespace" ~/.kube/config # union
+
+f=corp.yml; _path='.corp_certs__to_merge'; yq e "$_path"'|keys|.[]' $f | while read key; do yq e "$_path""[\"$key\"]" $f > ../../certs/ca/corp/$key; done
 ```
-
-

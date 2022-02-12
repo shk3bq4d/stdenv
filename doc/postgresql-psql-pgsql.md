@@ -103,6 +103,8 @@ create database mattermostdb504 with template mattermost owner sa;
 
 select * from "escape_reserved_name_in_column_or_table_name";
 
+select lower('HABON');
+
 
 # count for each table (may be slow on big databases, see https://stackoverflow.com/questions/2596670/how-do-you-find-the-row-count-for-all-your-tables-in-postgres )
 select table_schema,

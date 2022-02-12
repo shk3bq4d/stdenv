@@ -33,7 +33,7 @@ fi
 if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
     MODE=file
     NAME=$_tempdir/b
-    cat - > $NAME
+    cat - | sed -r -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
 else
     NAME="$1"
     [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect

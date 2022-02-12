@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #echo 'type ~# for direct info from SSH console'
 #sudo netstat -ntlpe | grep -E "(\S+\s+){6}$UID\s+"

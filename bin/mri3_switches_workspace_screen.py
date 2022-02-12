@@ -45,10 +45,15 @@ def go(args=[]):
     focused_object = mri3.focused()
     focused_workspace = mri3.focused().workspace()
     output_names = mri3.output_names()
+    excluded_outputs = []
+    if mri3.gethostname() == 'feb22':
+        excluded_outputs = ['DP-4']
+    output_names = list(set(output_names) - set(excluded_outputs))
     to_focus = []
 
     for workspace in mri3.workspaces():
         workspace_output_name = mri3.get_output_name(workspace)
+        if workspace_output_name in excluded_outputs: continue
         following_output_name = output_names[(output_names.index(workspace_output_name) + 1) % len(output_names)]
         command = f"move to output '{following_output_name}'"
         command = f"move workspace to output '{following_output_name}'"

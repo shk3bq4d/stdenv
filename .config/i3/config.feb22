@@ -1,7 +1,7 @@
 # /* ex: set filetype=sh: */
 export STDHOME_OUTPUTS='
-set $ol DP-0
-set $oc DP-4
+set $ol DP-2
+set $oc DP-0
 set $or DP-4
 
 '
@@ -37,15 +37,40 @@ export STDHOME_FONT='
 font pango:Monospace Regular 6
 '
 STDHOME_FIRSTBAR_OUTPUT="output \$oc"
-export STDHOME_FIRSTBAR_POSITION='top'
+export STDHOME_FIRSTBAR_POSITION='bottom'
 export STDHOME_TAIL='
 bar {
-    id bar-bottom
-    position bottom
+    id bar-second
+    position top
     i3bar_command i3bar -t
     status_command ~/.config/i3/mri3_status_right.sh
     #status_command ~/.config/i3/mri3_status_left.sh
     output $ol
+    strip_workspace_numbers yes
+    tray_output $oc
+    #bindsym  button3 nop
+    bindsym  button4 nop
+    bindsym  button5 nop
+    separator_symbol " "
+    colors {
+        background #00000000
+        statusline #ffffff
+        separator #666666
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace  #333333 #28557700 #ffffff
+        inactive_workspace #33333300 #22222200 #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+}
+bar {
+    id bar-third
+    position bottom
+    i3bar_command i3bar -t
+    font pango:Monospace Regular 4
+	height 20
+    status_command ~/.config/i3/mri3_status_right.sh
+    #status_command ~/.config/i3/mri3_status_left.sh
+    output $or
     strip_workspace_numbers yes
     tray_output $oc
     #bindsym  button3 nop

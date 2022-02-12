@@ -1,4 +1,6 @@
-date -d @1465016400 # unix epoch timestamp
+date -d @1465016400 # from unix epoch timestamp
+date +%s            # to unix epoch timestamp
+date +%s -d "2004-02-29 16:21:42" # to unix epoch timestamp => 1078068102
 python -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch timestamp
 
 RFC3339: 2014-03-10T05:40:00+00:00

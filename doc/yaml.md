@@ -130,3 +130,10 @@ Block Style Indicator: The block style indicates how newlines inside the block s
 Block Chomping Indicator: The chomping indicator controls what should happen with newlines at the end of the string. The default, clip, puts a single newline at the end of the string. To remove all newlines, strip them by putting a minus sign (-) after the style indicator. Both clip and strip ignore how many newlines are actually at the end of the block; to keep them all put a plus sign (+) after the style indicator. # multiline
 
 Indentation Indicator: Ordinarily, the number of spaces you're using to indent a block will be automatically guessed from its first line. You may need a block indentation indicator if the first line of the block starts with extra spaces. In this case, simply put the number of spaces used for indentation (between 1 and 9) at the end of the header. # multiline
+
+parent:
+  key1:               # empty so "null", # is a comment!
+  key2: ~             # also "null"
+  key3: null          # "null" explicitly ))
+  key4: !!null "null" # for the funs of "secondary tag handle: !!"
+  key5: "null"        # sorry, it is a string or !!str if you like ((

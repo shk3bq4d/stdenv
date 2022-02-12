@@ -1078,6 +1078,10 @@ ls-seconds.sh() {
   ls -l --time-style +"%Y.%m.%d %H:%M:%S" "$@"
 }
 
+ls-unix-timestamp.sh() {
+  ls -l --time-style +"%s" "$@"
+}
+
 watch-command-change() {
     local previous
     previous=""
@@ -1137,6 +1141,51 @@ python-http-server() {
         echo "FATAL: no python in PATH"
         exit 1
     fi
+}
+
+swap_files() {
+    local tmpfile
+    test $# -ne 2  && echo "FATAL: please provide exactly two files" && return 1
+    ! test -f "$1" && echo "FATAL: first  arg not a file $1" && return 1
+    ! test -f "$2" && echo "FATAL: second arg not a file $2" && return 1
+    tmpfile=".$1"
+    while [[ -f "$tmpfile" ]];
+    do
+        tmpfile="{$tmpfile}_"
+    done
+    ! mv "$1"       "$tmpfile" && echo "FATAL OUPS: step 1 couldn't mv $1       $tmpfile, fix it yourself" && exit 1
+    ! mv "$2"       "$1"       && echo "FATAL OUPS: step 2 couldn't mv $2       $1,       fix it yourself" && exit 1
+    ! mv "$tmpfile" "$2"       && echo "FATAL OUPS: step 3 couldn't mv $tmpfile $2,       fix it yourself" && exit 1
+
+    echo "Success"
+}
+
+
+swap_dir() {
+    local tmpdir
+    test $# -ne 2  && echo "FATAL: please provide exactly two directories" && return 1
+    ! test -d "$1" && echo "FATAL: first  arg not a dir $1" && return 1
+    ! test -d "$2" && echo "FATAL: second arg not a dir $2" && return 1
+    tmpdir=".$1"
+    while [[ -f "$tmpdir" ]];
+    do
+        tmpdir="{$tmpdir}_"
+    done
+    ! mv "$1"      "$tmpdir" && echo "FATAL OUPS: step 1 couldn't mv $1       $tmpdir, fix it yourself" && exit 1
+    ! mv "$2"      "$1"      && echo "FATAL OUPS: step 2 couldn't mv $2       $1,      fix it yourself" && exit 1
+    ! mv "$tmpdir" "$2"      && echo "FATAL OUPS: step 3 couldn't mv $tmpdir $2,       fix it yourself" && exit 1
+
+    echo "Success"
+}
+
+min() {
+    # https://stackoverflow.com/questions/10415064/how-to-calculate-the-minimum-of-two-variables-simply-in-bash
+    printf "%s\n" "$@" | sort -g | head -n1
+}
+
+max() {
+    # using sort's -r (reverse) option - using tail instead of head is also possible
+    printf "%s\n" "$@" | sort -rg | head -n1
 }
 
 true # last statement must return true

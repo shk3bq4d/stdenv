@@ -1,12 +1,14 @@
-/* ex: set filetype=java: */
+/* ex: set filetype=markdown: */
 # string format date
+```java
 	System.out.println(String.format("mrstub %tY.%<tm.%<td %<tH.%<tM.%<tS-%<tL", new Date()));
 String.format("%-10s   #left align
 String.format("%10s    #right align
 String.format("%,6d    #locale thousand grouping separator which counts as character count
 String.format("%03d    #007
+	```
 
-
+```nosyntax
 {@link java.math.BigDecimal#abs()}
 Tag & Parameter           Usage                                                Applies to
 @author John Smith        Describes an author.                                 Class, Interface, Enum
@@ -21,17 +23,22 @@ Tag & Parameter           Usage                                                A
 {@inheritDoc}             Copies the description from the overridden method.   Overriding Method
 {@link reference}         Link to other symbol.                                Class, Interface, Enum, Field, Method
 {@value #STATIC_FIELD}    Return the value of a static field.                  Static Field
+```
 
 
 # Web service
+```sh
 #ws import being part of jdk
 wsimport -keep  -s source C:\Users\me\global\apps\Talend-4.2.4\workspacemroffline\MG\process\FibuBooking.wsdl
 
 jar cf ..\jarname.jar .
+```
 
 
+```java
 new java.text.SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss").format(new java.util.Date())
 	=> 2001.07.04 AD at 12:08:56 PDT
+```
 
 G 	Era designator 			Text 				AD
 y 	Year 					Year 				1996; 96
@@ -299,3 +306,8 @@ docker run --rm -v $PWD:/myjar -it mausch/docker-groovysh bash bin/groovysh -cp 
 // import org.json.JSONObject;
 // c = "{\"id\":\"\"}";
 // j = new JSONObject(c);
+//
+
+~/java/stdenv/StdenvHttpConnection.java
+~/java/stdenv/StdenvHttpsConnection.java
+~/java/stdenv/StdenvSSLSocketConnection.java

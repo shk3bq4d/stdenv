@@ -381,7 +381,10 @@ bindcode $mod+31  exec ~/bin/p2v # c vim mod+c
 bindcode $mod+57  move scratchpad
 bindcode $mod+46  scratchpad show
 
-bindcode $mod+Shift+47  move workspace to output $STDHOME_MOVE_WORKSPACE_DIRECTION
+# +s 
+#bindcode $mod+Shift+47  move workspace to output $STDHOME_MOVE_WORKSPACE_DIRECTION
+bindcode $mod+Shift+47  move workspace to output up
+bindcode $mod+Shift+46  move workspace to output next
 workspace_auto_back_and_forth yes
 #popup_during_fullscreen <ignore|leave_fullscreen>
 popup_during_fullscreen leave_fullscreen

@@ -125,6 +125,21 @@ def stop_routing_allocation_transient(stop=True):
 def cat_indices():
     return http('_cat/indices')
 
+def index_failure_latest_index():
+    max_numberH = {}
+    for indexH in cat_indices():
+        name = indexH.get('index')
+        if re.match(r'^gl.index.failure.\d+$',  name) is None:
+            continue
+        matcher = re.match('(.*)_(\d+)$', name)
+        if matcher is None: continue
+        short_name, number = matcher.groups()
+        max_numberH[short_name] = max(max_numberH.get(short_name, -1), int(number))
+    rA = []
+    for k, v in max_numberH.items():
+        rA.append(f'{k}_{v}')
+    return sorted(rA)[0]
+
 def active_graylog_indices():
     max_numberH = {}
     for indexH in cat_indices():
@@ -180,6 +195,14 @@ def cluster_health():
 def root():
     return http('/')
 
+def get_message(index_name, message_id):
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-get.html
+    return http(f"/{index_name}/_doc/{message_id}")
+
+def search(index_name, query=None, _from=0, size=1):
+    params = {"from": _from, "size": size}
+    return http(f"/{index_name}/_search", method="GET", params=params, data=query)
+
 def delete_index(index_name):
     index_name = safe_index_name(index_name)
     return http("/" + index_name, method="DELETE")
@@ -231,7 +254,6 @@ def go(args) -> None:
     if 0:
         idx = "gl_ansible"
         idx = "gl_okta"
-        #idx = "rumo"
         n = idx + "-template"
         url = "_template/" + n
         oH = http(url)
@@ -257,76 +279,6 @@ def go(args) -> None:
         print_yaml(http("gl_ansible_3/_mapping"))
     if 0: print_yaml(cat_indices())
     if 0: print_yaml(http("gl_okta_1/_settings"))
-    if 0:
-        idx = "rumo"
-        n = idx + "-template"
-        url = "_template/" + n
-        templateH = \
-        {
-         'index_patterns': ['rumo*'],
-         'order': -1,
-         'settings': {'index': {
-                                'mapping': {'total_fields': {'limit': 50}}}}}
-        rH = http(url, method="PUT", data=templateH)
-        print_yaml(rH)
-    if 0:
-        print_yaml(delete_index("rumo"))
-        print_yaml(create_index("rumo"))
-        print_yaml(http("rumo/_settings"))
-    if 0: print_yaml(post_document("rumo", dict(coucou="hehe")))
-    if 0: print_yaml(graylog_per_index_fields())
-    if 0:
-        for i in range(55):
-            print(f"loop {i}")
-            print_yaml(post_document("rumo", {f"coucou-{i}": 5}))
-    if 0: print_yaml(fields_in_index("rumo"))
-    if 0: print_yaml(http("_template/rumo-template", method="DELETE"))
-    if 0: print_yaml(delete_index("rumo"))
-    if 0:
-        n = "bip-rumo-custom-template"
-        url = "_template/" + n
-        templateH = \
-        {
-         'index_patterns': ['bip_*'],
-         'mappings': {'properties':{'rumo_hehe0': {'type': 'keyword'}}},
-         'settings': {'index': { 'mapping': {'total_fields': {'limit': 20}}}}
-        }
-        print_yaml(templateH)
-        rH = http(url, method="PUT", data=templateH)
-        print_yaml(rH)
-    if 0: print_yaml(index_mapping("bip_4"))
-    if 0:
-        n = "bip-rumo-custom-template"
-        url = "_template/" + n
-        rH = http(url)
-        print_yaml(rH)
-    if 0:
-        index_name = "bip_4"
-        for i in range(55):
-            print(f"loop {i}")
-            print_yaml(post_document(index_name, {f"coucou-{i}": 5}))
-    if 0:
-        n = "bip-rumo-custom-template"
-        url = "_template/" + n
-        rH = http(url, method="DELETE")
-        print_yaml(rH)
-    if 0:
-        index_name = "graylog_397"
-        index_name = safe_index_name(index_name)
-        print_yaml(index_settings(index_name))
-        #print_yaml(index_mapping(index_name))
-        #index_name = "*"
-        print_yaml(http(f"{index_name}/_settings/index.mapping.total_fields.limit"))
-    if 0:
-        #print_yaml(cluster_settings())
-        #print_yaml(cluster_health())
-        #print_yaml(root())
-        print_yaml(http("_cluster/health"))
-    if 0:
-        #print_yaml(fields_in_index("rumo"))
-        print_yaml(active_graylog_indices())
-        print_yaml(fields_in_index("gl_ansible_12"))
-        print_yaml(index_mapping("gl_ansible_12"))
 
 
 if __name__ == '__main__':

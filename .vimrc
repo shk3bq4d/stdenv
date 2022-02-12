@@ -495,6 +495,13 @@ func! MrSyntaxRange()
         " deal with it
     endtry
     try
+        call SyntaxRange#Include('```java'      ,'```'      ,'java','NonText')
+    catch /^Vim\%((\a\+)\)\=:E117/
+        " deal with it
+    catch /^Vim\%((\a\+)\)\=:E484/
+        " deal with it
+    endtry
+    try
         call SyntaxRange#Include('```xml'       ,'```'       ,'xml'       ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it

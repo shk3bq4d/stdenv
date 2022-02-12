@@ -1,0 +1,58 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "geerlingguy/ubuntu2004"
+  config.vm.boot_timeout = 1800
+  #config.vm.box = "peru/ubuntu-18.04-desktop-amd64"
+  config.ssh.insert_key = false
+
+# config.vm.synced_folder '.', '/vagrant', type: "virtualbox"
+  config.vm.provider :virtualbox do |v|
+    v.memory = 2048
+    v.cpus = 2
+    v.gui = false
+    v.linked_clone = true
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
+    #v.customize ['setextradata', :id, 'GUI/ScaleFactor', '1.50']
+  end
+
+  config.vm.define "stdenv.vbox.local" do |node|
+    node.vm.hostname = "stdenv.vbox.local"
+    #node.vm.network :private_network, ip: "192.168.9.156"
+    config.vm.network "public_network"
+
+    #logs.vm.provision :ansible do |ansible|
+    # ansible.playbook = "provisioning/elk/playbook.yml"
+    # ansible.inventory_path = "provisioning/elk/inventory"
+    # ansible.become = true
+    #end
+  end
+
+  config.vm.provision "shell" do |shell|
+    shell.privileged = true
+    shell.inline = "getent group docker || groupadd -r docker; usermod -a -G docker vagrant"
+    shell.reset = true
+  end
+
+  config.vm.provision "ansible_local" do |ansible|
+    #ansible.compatibility_mode = "2.0"
+    ansible.playbook = "provision.yml"
+    ansible.config_file = "ansible.cfg"
+    ansible.galaxy_role_file = "requirements.yml"
+    ansible.galaxy_roles_path = "/home/vagrant/ansible-roles"
+    ansible.extra_vars = {
+      running_from_vagrant: "true"
+    }
+    #ansible.inventory_path = "provisioning/inventory"
+    ansible.become = false
+  end
+  #config.vm.define "bitbucket2" do |bitbucket2|
+    #bitbucket2.vm.hostname = "bitbucket2"
+    #bitbucket2.vm.network :private_network, ip: "192.168.9.91"
+  #end
+
+end

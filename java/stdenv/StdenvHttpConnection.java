@@ -1,16 +1,17 @@
 import java.net.*;
 import java.io.*;
-public class Bip
+public class StdenvHttpConnection
 {
 public static void main (String[] foAString)
 	throws Exception
  {
     URL url;
     HttpURLConnection connection = null;  
-	String targetURL = foAString[0];
+    String target = (foAString.length >= 1) ?  foAString[0] : "http://127.0.0.1";
+	System.out.printf("Trying to http GET %s\n", target);
     try {
       //Create connection
-      url = new URL(targetURL);
+      url = new URL(target);
       connection = (HttpURLConnection)url.openConnection();
       connection.setDoInput(true);
       connection.setDoOutput(true);

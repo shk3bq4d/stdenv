@@ -71,9 +71,16 @@ keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
 keytool -storepass "123456" -list -v -keystore ~/apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks
 keytool -storepass "123456"  -exportcert -alias webserver -v -keystore apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks -rfc > /tmp/out3
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
-keytool -import -trustcacerts -file KS-CFC-Root_KS-CFC-Root.crt -alias KS-CFC-Root -keystore ks-cacerts2.jks -storepass HqBcm
-keytool -import -trustcacerts -file KS-CFC-Issuing-01_KS-CFC-Root.crt  -alias KS-CFC-Issuing-01 -keystore ks-cacerts.jks -storepass HqBcm
+keytool -import -trustcacerts -file RF-ABC-Root_RF-ABC-Root.crt -alias RF-ABC-Root -keystore rs-cacerts2.jks -storepass HqBcm
+keytool -import -trustcacerts -file RF-ABC-Issuing-01_RF-ABC-Root.crt  -alias RF-ABC-Issuing-01 -keystore rs-cacerts.jks -storepass HqBcm
 /e/me/global/java/FwBrowse/nbproject/build-impl.xml
+
+java -Djavax.net.ssl.trustStore=/migration/cacerts-dir/cacerts StdenvSSLSocketConnection
+
+~/java/stdenv/StdenvHttpConnection.java
+~/java/stdenv/StdenvHttpsConnection.java
+~/java/stdenv/StdenvSSLSocketConnection.java
+
 ```
 
 ```xml
@@ -139,7 +146,7 @@ host=www.google.com; a=$(mktemp); python -c "import ssl; print(ssl.get_server_ce
 
 
 # windows
-certmgr.msc
+certmgr.msc # windows
 
 # vagrant
 ```

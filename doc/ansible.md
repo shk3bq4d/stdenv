@@ -1820,28 +1820,28 @@ ansible_play_hosts_all                     List of all the hosts that were targe
 
 # variables precedence priority order vars
 Variable precedence: Where should I put a variable?
-* command line values (eg “-u user”)        # precedence
-* role defaults [1]                         # precedence
-* inventory file or script group vars [2]   # precedence
-* inventory group_vars/all [3]              # precedence
-* playbook group_vars/all [3]               # precedence
-* inventory group_vars/* [3]                # precedence
-* playbook group_vars/* [3]                 # precedence
-* inventory file or script host vars [2]    # precedence
-* inventory host_vars/* [3]                 # precedence
-* playbook host_vars/* [3]                  # precedence
-* host facts / cached set_facts [4]         # precedence
-* play vars                                 # precedence
-* play vars_prompt                          # precedence
-* play vars_files                           # precedence
-* role vars (defined in role/vars/main.yml) # precedence
-* block vars (only for tasks in block)      # precedence
-* task vars (only for the task)             # precedence
-* include_vars                              # precedence
-* set_facts / registered vars               # precedence
-* role (and include_role) params            # precedence
-* include params                            # precedence
-* extra vars (always win precedence)        # precedence
+* command line values (eg “-u user”)        # precedence variables priority
+* role defaults [1]                         # precedence variables priority
+* inventory file or script group vars [2]   # precedence variables priority
+* inventory group_vars/all [3]              # precedence variables priority
+* playbook group_vars/all [3]               # precedence variables priority
+* inventory group_vars/* [3]                # precedence variables priority
+* playbook group_vars/* [3]                 # precedence variables priority
+* inventory file or script host vars [2]    # precedence variables priority
+* inventory host_vars/* [3]                 # precedence variables priority
+* playbook host_vars/* [3]                  # precedence variables priority
+* host facts / cached set_facts [4]         # precedence variables priority
+* play vars                                 # precedence variables priority
+* play vars_prompt                          # precedence variables priority
+* play vars_files                           # precedence variables priority
+* role vars (defined in role/vars/main.yml) # precedence variables priority
+* block vars (only for tasks in block)      # precedence variables priority
+* task vars (only for the task)             # precedence variables priority
+* include_vars                              # precedence variables priority
+* set_facts / registered vars               # precedence variables priority
+* role (and include_role) params            # precedence variables priority
+* include params                            # precedence variables priority
+* extra vars (always win precedence)        # precedence variables priority
 
 ```yaml
 - stat:

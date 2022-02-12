@@ -4,6 +4,7 @@
 #
 # https://github.com/acrisci/i3ipc-python
 
+import socket
 import os
 import math
 import sys
@@ -160,6 +161,9 @@ def logging_conf(
            'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
            #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
+
+def gethostname():
+    return socket.gethostname()
 
 def go(args):
     i3 = i3ipc.Connection()

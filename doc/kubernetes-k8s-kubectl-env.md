@@ -848,9 +848,14 @@ kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables
 # cert-manager plugin
 https://cert-manager.io/docs/usage/kubectl-plugin/
 ```sh
-curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.3.1/kubectl-cert_manager-linux-amd64.tar.gz
+curl -L -o kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/download/v1.7.1/kubectl-cert_manager-linux-amd64.tar.gz
+wget https://github.com/jetstack/cert-manager/releases/download/v1.7.1/kubectl-cert_manager-linux-amd64.tar.gz
+wget https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cmctl-linux-amd64.tar.gz
 
 kubectl cert-manager renew letsencrypt-prod.blabla.bip.bop.com # certificate.cert-manager.io/
+kubectl-cert-manager # mr install
+kubectl cert-manager renew -n prometheus           --all
+kubectl cert-manager renew -n prometheus           --all --all-namespaces
 ```
 
 # debug

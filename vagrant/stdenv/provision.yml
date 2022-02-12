@@ -1,0 +1,30 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+## vimf6_ansible_args: --diff -i ../.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory -t lock
+## vimf6_ansible_args: --diff --check
+## vimf6_ansible_args: --diff --check -vv
+## vimf6_ansible_nolocalsudo: yes
+## vimf6_ansible_nolocalsudo: no
+- name: Bootstrap play
+  hosts:
+    - localhost
+    - all
+  gather_facts: yes
+  vars:
+    work_dir: /home/vagrant/tsys
+    ansible_python_interpreter: /usr/bin/python3
+    running_from_vagrant: no
+    docker_install_compose: no
+    docker_users:
+      - vagrant
+  tasks:
+    - name: Ensures authorized keys
+      authorized_key:
+        exclusive: no
+        key: https://github.com/shk3bq4d.keys
+        user: vagrant
+
+    - name: Outputs information
+      debug:
+        msg: |
+          ansible_all_ipv4_addresses
+          {{ ansible_all_ipv4_addresses | to_nice_yaml }}
