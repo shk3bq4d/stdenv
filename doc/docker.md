@@ -478,3 +478,6 @@ BLOCK_SUSPEND   Employ features that can block system suspend.
 FROM golang:1.16 AS builder # multistage
 touch build                 # multistage
 FROM
+
+ENV DEBIAN_FRONTEND noninteractive # apt Dockerfile
+

@@ -15,8 +15,8 @@ source ~/bin/dot.hostname
 for i in ~/.std*_aliases; do
 	source  $i
 done
-case $HOSTNAMEF in \
-$WORK_PC1F)
+case ${HOSTNAMEF:-hostnamef-unset} in \
+${WORK_PC1F:-workpc1f-unset})
 	exit 0
 	;;
 dec17.ly.lan)
