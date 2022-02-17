@@ -26,7 +26,7 @@ workspace 13 output $oc
 
 export STDHOME_FLOATING_LEFT=$(( 960 ))
 OFFSET_Y=2160
-export STDHOME_FLOATING_TOP=$(( 34 + $OFFSET_Y ))
+export STDHOME_FLOATING_TOP=$(( 50 + $OFFSET_Y ))
 export STDHOME_FLOATING_WIDTH=$(( 5120 - 2 * $STDHOME_FLOATING_LEFT ))
 export STDHOME_FLOATING_HEIGHT=$(( 2160 - ( $STDHOME_FLOATING_TOP  - $OFFSET_Y ) - 8))
 
@@ -34,7 +34,7 @@ export STDHOME_TOGGLE='
 bindsym --release $mod+v split toggle
 '
 export STDHOME_FONT='
-font pango:Monospace Regular 6
+font pango:Monospace Regular 9
 '
 STDHOME_FIRSTBAR_OUTPUT="output \$oc"
 export STDHOME_FIRSTBAR_POSITION='bottom'
@@ -66,9 +66,9 @@ bar {
     id bar-third
     position bottom
     i3bar_command i3bar -t
-    font pango:Monospace Regular 4
-	height 20
-    status_command ~/.config/i3/mri3_status_right.sh
+    font pango:Monospace Regular 10
+	height 44
+    status_command ~/.config/i3/mri3_status_feb22_dp4.sh
     #status_command ~/.config/i3/mri3_status_left.sh
     output $or
     strip_workspace_numbers yes
@@ -94,7 +94,8 @@ exec --no-startup-id ~/bin/xrandr-feb22.sh
 #for_window [title=".*ITTS.Desktop....*"] move container to output $ol
 '
 
-export gaps_inner=4
-export STDHOME_BORDER="pixel 4"
+export gaps_inner=12
+export smart_gaps=""
+export STDHOME_BORDER="pixel 5"
 export bar_height=36
 export STDHOME_MOVE_WORKSPACE_DIRECTION="up"

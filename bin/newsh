@@ -42,6 +42,12 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 # [[ \$# -lt 1 || \$# -gt 2 ]] && echo \"FATAL: incorrect number of args\" && usage && exit 1
 
+# if [[ \$EUID -ne 0 ]]; then
+#     echo \"This script requires elevated privileges to run, switching to sudo\"
+#     sudo "\$0" "\$@"
+#     exit \$?
+# fi
+
 #   h - check for option -h without parameters; gives error on unsupported options;
 #   h: - check for option -h with parameter; gives errors on unsupported options;
 #   abc - check for options -a, -b, -c; gives errors on unsupported options;

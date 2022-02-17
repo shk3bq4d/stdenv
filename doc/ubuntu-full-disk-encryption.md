@@ -1,3 +1,14 @@
+livecd
+try ubuntu
+change keyboard layout
+connect to wifi
+terminal sudo
+apt update
+apt install openssh-server
+sudo passwd ubuntu # allow for short password
+ssh-copy-id ubuntu@newip # think about adding no host key checking options
+ssh-no-host-checking ubuntu@newip
+write down your passphrase in plaintext somewhere for copy pasting, you'll have to enter it 4 times at least
 # https://help.ubuntu.com/community/Full_Disk_Encryption_Howto_2019
 ```sh
 sudo -i
@@ -22,9 +33,17 @@ ls /dev/mapper/
 mkfs.ext4 -L boot /dev/mapper/LUKS_BOOT
 mkfs.vfat -F 16 -n EFI-SP ${DEVP}3
 pvcreate /dev/mapper/${DM}5_crypt
-vgcreate ubuntu-vg /dev/mapper/${DM}5_crypt
-lvcreate -L 16G -n swap_1 ubuntu-vg
-lvcreate -L 20G -n root ubuntu-vg
+vgcreate vg1 /dev/mapper/${DM}5_crypt
+lvcreate -L  8G -n swap_1         vg1
+lvcreate -L 10G -n root           vg1
+lvcreate -L  5G -n opt            vg1
+lvcreate -L 30G -n usr            vg1
+lvcreate -L 10G -n var            vg1
+lvcreate -L 10G -n var-log        vg1
+lvcreate -L 20G -n var-lib-docker vg1
+lvcreate -L 80G -n home           vg1
+ls -1 /dev/mapper/vg1-* | grep -v swap | xargs -rn1 mkfs.ext4
+
 # start installation, as soon as completed local user account run
 echo "GRUB_ENABLE_CRYPTODISK=y" >> /target/etc/default/grub
 # let installation complete, but do not reboot

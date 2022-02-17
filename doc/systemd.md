@@ -1300,3 +1300,5 @@ systemd(1), systemctl(1), systemd-analyze(1), journalctl(1), systemd-system.conf
            ├────────────────────────┼─────────────────────────────┤
            │/usr/lib/systemd/system │ Units of installed packages │
            └────────────────────────┴─────────────────────────────┘
+
+sudo systemctl reboot --firmware-setup # reboot to bios uefi

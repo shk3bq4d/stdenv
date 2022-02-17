@@ -1,3 +1,9 @@
 
 touch -d "2 days ago"
 date -d "2 days ago"
+date -d "2004-02-29 16:21:42"
+touch -d "1970-01-01 00:00:00"
+touch -d "2038-01-10 00:00:00"
+date -d "1970-01-01 00:00:00"
+date -d "2038-01-10 00:00:00"
+One second after 03:14:07 UTC 2038-01-19 this representation will overflow in what is known as the year 2038 problem.

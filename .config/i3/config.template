@@ -542,7 +542,7 @@ mode "$mode_gaps_outer" {
 }
 gaps outer ${gaps_outer}
 gaps inner ${gaps_inner}
-smart_gaps ${smart_gaps}
+${smart_gaps}
 ${smart_borders}
 hide_edge_borders ${hide_edge_borders}
 ${gaps_forwindow_border}

@@ -84,9 +84,60 @@ def logging_conf(
 
 wA = None
 fa = fontawesome.icons
+_hostname = mri3.gethostname()
+
+_gapsH = {}
+def set_gaps(i3, wid):
+    if _hostname not in ['feb22', 'feb22.ly.lan']: return
+    workspace = find_workspace(i3, wid)
+    o = mri3.get_output_name(workspace)
+    all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
+
+    nb_elems = len(all_elems)
+    key = '{}-{}'.format(o, workspace.name)
+    previous_nb_elems = _gapsH.get(key, -1)
+    if previous_nb_elems == nb_elems:
+        logger.info("%s previous == current == %d", key, previous_nb_elems)
+        return
+    logger.info("%s previous %d != current %d", key, previous_nb_elems, nb_elems)
+    _gapsH[key] = nb_elems
+
+    if o == 'DP-4':
+        h = 10
+        v = 0
+        i = 10
+        o = 0
+    elif nb_elems == 1:
+        h = 600
+        v = 0
+        i = 10
+        o = 10
+    elif nb_elems == 2:
+        h = 60
+        v = 0
+        i = 40
+        o = 10
+    else:
+        h = 10
+        v = 0
+        i = 10
+        o = 0
+    command = f"gaps inner current set {i}"
+    logger.info(command)
+    workspace.command(command)
+    command = f"gaps outer current set {o}"
+    logger.info(command)
+    workspace.command(command)
+    command = f"gaps horizontal current set {h}"
+    logger.info(command)
+    workspace.command(command)
+    command = f"gaps vertical current set {v}"
+    logger.info(command)
+    workspace.command(command)
+
 
 def on_window(i3, e):
-    logging.warn('on_window %s', e.change)
+    logging.warning('on_window %s', e.change)
     i3blocklet(i3, e)
     if e.change == 'close':
         wid = e.container.window
@@ -95,15 +146,17 @@ def on_window(i3, e):
             persist(wA)
     elif e.change == 'focus':
         #e.container.command('[class="[.]*"] border pixel 0')
-        #e.container.command('border pixel 6')
+        e.container.command('border pixel 6')
         #e.container.command('gaps inner current plus 40')
         #e.container.command('gaps outer current plus 40')
         wid = e.container.window
+        set_gaps(i3, wid)
+
         if wid in wA:
             wA.remove(wid)
         wA.append(wid)
         persist(wA)
-    logging.warn('/on_window %s', e.change)
+    logging.warning('/on_window %s', e.change)
 
 def blockpidcheck(pid):
     try:
@@ -302,7 +355,7 @@ def i3blocklet_name(name):
         os.kill(p, s)
 
 def on_workspace(i3, e):
-    logging.warn('on_workspace %s', e.change)
+    logging.warning('on_workspace %s', e.change)
     i3blocklet_name(focused_window_name(i3))
     mri3.remove_single_child_containers(None)
     return
@@ -326,7 +379,7 @@ def on_binding(i3, e):
         False:
         return
     c = '-'.join(b.mods)
-    logger.warn(c)
+    logger.warning(c)
     if 'shift-Mod4' == c:
         while len(wA) > 0:
             w = wA[0]
@@ -361,17 +414,17 @@ def exists(w):
     #pprint(xprop)
     return True
 
-def descendents_recursive(container, li=None):
+def descendants_recursive(container, li=None):
     if li is None:
         li = []
-    for d in container.descendents():
+    for d in container.descendants():
         if d not in li:
             li.append(d)
-            descendents_recursive(d, li)
+            descendants_recursive(d, li)
     return li
 
 def find_window_id(container, window_id):
-    for d in descendents_recursive(container):
+    for d in descendants_recursive(container):
         if d.window == window_id:
             return d
     return None
@@ -385,14 +438,14 @@ def find_workspace(i3, window_id):
 def focus(i3, window_id):
     workspace = find_workspace(i3, window_id)
     if workspace is not None:
-        for container in descendents_recursive(workspace):
+        for container in descendants_recursive(workspace):
             if container.type == 'con' and container.fullscreen_mode:
                 cmd = '[id="{}"] fullscreen'.format(container.window)
-                logger.warn(cmd)
+                logger.warning(cmd)
                 i3.command(cmd)
 
     cmd = '[id="{}"] focus'.format(window_id)
-    logger.warn(cmd)
+    logger.warning(cmd)
     i3.command(cmd)
 
 
@@ -406,7 +459,7 @@ def load():
     try:
         with open(pickle_fp, 'rb') as f:
             wA = pickle.load(f)
-        logger.warn('successfully loaded')
+        logger.warning('successfully loaded')
     except:
         logger.exception('error loading')
         wA = []
@@ -467,9 +520,9 @@ def handle_concurrent_process():
 
 
 def go(args):
-    logger.warn('go')
+    logger.warning('go')
     if not handle_concurrent_process():
-        logger.warn('/go aborting because of concurrent running process')
+        logger.warning('/go aborting because of concurrent running process')
         return
     i3 = i3ipc.Connection()
     load()
@@ -477,7 +530,7 @@ def go(args):
     i3.on('workspace', on_workspace)
     i3.on('binding', on_binding)
     i3.main()
-    logger.warn('/go')
+    logger.warning('/go')
 
 
 if __name__ == '__main__':

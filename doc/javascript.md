@@ -36,5 +36,5 @@ catch(e){
 ```
 
 # notifications
-https://www.bennish.net/web-notifications.html
+* https://www.bennish.net/web-notifications.html # alert
 

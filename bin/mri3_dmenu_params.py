@@ -41,7 +41,7 @@ def get(width=True, colors=True):
     fontH = dict(
         acer2011=11,
         dec17=14,
-        feb22=10,
+        feb22=14,
         )
     widthH = dict(
         feb22='-x 1700 -w 1720',

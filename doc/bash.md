@@ -1103,7 +1103,12 @@ for var in "$@"; do
     ARRAY+=('--var' "$var")
 done
 myfunc "${ARRAY[@]}"
-```
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script requires elevated privileges to run, switching to sudo"
+    sudo $0 $@
+   exit $?
+fi
 
 A=$(</tmp/myfile) # built-in builtin read file into variable
 
@@ -1116,3 +1121,4 @@ tail -f /var/log/foo | python -u
 
 
 +test -t 0 && TTY_FLAG="-t"
+```

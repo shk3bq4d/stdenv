@@ -409,3 +409,5 @@ upower -i `upower -e | grep 'BAT'`
 vi /var/mail/$(whoami) # read cron outputs or other local mails
 
 echo -e "\n$(date) hellot" | sudo tee -a /dev/console
+
+sudo systemctl reboot --firmware-setup # reboot to bios uefi

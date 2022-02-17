@@ -43,7 +43,9 @@ git_root_dir () {
 list() {
     git status -b --porcelain |
         grep -vE '^##' |
-        sed -r -e 's/^...//'
+        sed -r \
+            -e 's/^...//' \
+            -e 's/.* -> (.*)/\1/'
 }
 
 ! git_root_dir &>/dev/null && echo "FATAL: not a git repository" && exit 1
