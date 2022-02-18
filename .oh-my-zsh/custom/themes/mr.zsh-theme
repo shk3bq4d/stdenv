@@ -14,7 +14,7 @@
 # In addition, I recommend the
 # [Solarized theme](https://github.com/altercation/solarized/) and, if you're
 # using it on Mac OS X, [iTerm 2](https://iterm2.com/) over Terminal.app -
-# it has significantly better color fidelity.
+# it has significantly better red fidelity.
 #
 # If using with "light" variant of the Solarized color schema, set
 # SOLARIZED_THEME variable to "light". If you don't specify, we'll assume
@@ -89,7 +89,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+    prompt_segment white default "%(!.%{%F{yellow}%}.)%n@%m"
   fi
 }
 

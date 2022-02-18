@@ -411,3 +411,11 @@ vi /var/mail/$(whoami) # read cron outputs or other local mails
 echo -e "\n$(date) hellot" | sudo tee -a /dev/console
 
 sudo systemctl reboot --firmware-setup # reboot to bios uefi
+
+linux /boot/vmlinuz-3.2.0-24-generic root=UUID=bc6f8146-1523-46a6-8b\
+6a-64b819ccf2b7 ro  quiet splash
+initrd /boot/initrd.img-3.2.0-24-generic init=/bin/bash # to append to grub single user 
+sudo mount -o remount,rw /partition/identifier /mount/point
+sudo mount -o remount,rw /dev/mapper/centos-root /
+
+/sbin/reboot --force

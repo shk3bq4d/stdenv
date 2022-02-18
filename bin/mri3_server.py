@@ -113,10 +113,10 @@ def set_gaps(i3, wid):
         i = 10
         o = 10
     elif nb_elems == 2:
-        h = 60
+        h = 300
         v = 0
         i = 40
-        o = 10
+        o = 0
     else:
         h = 10
         v = 0
