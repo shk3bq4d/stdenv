@@ -929,6 +929,14 @@ ARRAY=() # creates an empty array
 ARRAY+=('foo') # append to an array
 ARRAY+=('bar')
 
+    readarray -t a  << EOF
+arrayelem0
+arrayelem1
+arrayelem2
+EOF
+random_index=$((0 + RANDOM % ${#myarray[@]}))
+echo ${myarray[$random_index]}
+
 
 # tunnel
 mkfifo /tmp/myfifo
