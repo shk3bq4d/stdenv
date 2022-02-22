@@ -244,6 +244,7 @@ alias -g S='|sed -r -e'
 
 alias findf='find . -type d -name .git -prune -o -type f -print'
 alias findd='find . -type d -name .git -prune -o -type d -print'
+alias glcbo='glol {,origin/}$(git_current_branch)'
 ksns() { kubectl config set-context --current --namespace="$1" }
 
 # https://github.com/robbyrussell/oh-my-zsh/pull/3434/files

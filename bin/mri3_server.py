@@ -110,8 +110,9 @@ def set_gaps(i3, wid):
     elif nb_elems == 1:
         h = 600
         v = 0
-        i = 10
-        o = 10
+        i = None
+        i = 40
+        o = 0
     elif nb_elems == 2:
         h = 300
         v = 0
@@ -122,19 +123,26 @@ def set_gaps(i3, wid):
         v = 0
         i = 10
         o = 0
-    command = f"gaps inner current set {i}"
-    logger.info(command)
-    workspace.command(command)
+    commandA = []
+
+    if i is not None:
+        command = f"gaps inner current set {i}"
+        logger.info(command)
+        commandA.append(command)
+
     command = f"gaps outer current set {o}"
     logger.info(command)
-    workspace.command(command)
+    commandA.append(command)
+
     command = f"gaps horizontal current set {h}"
     logger.info(command)
-    workspace.command(command)
+    commandA.append(command)
+
     command = f"gaps vertical current set {v}"
     logger.info(command)
-    workspace.command(command)
+    commandA.append(command)
 
+    workspace.command(";".join(commandA))
 
 def on_window(i3, e):
     logging.warning('on_window %s', e.change)

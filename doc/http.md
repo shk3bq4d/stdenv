@@ -203,6 +203,9 @@ Content-Type: application/x-www-form-urlencoded
 http://httpstat.us/500 # to return an HTTP 500
 http://httpstat.us/ # http only
 
+https://http-various-codes.k.abc1.ch/code/500
+https://http-various-codes.k.abc1.ch/code/500/anything-still-works
+https://http-various-codes.k.abc1.ch/code/465/code/205 # switches between 465 and 205
 
 
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options

@@ -265,7 +265,7 @@ cygwin*|msys*)
                 export LC_CTYPE="en_US.UTF-8"
             fi
         fi
-        export LC_TIME="en_DK.utf8"
+        export LC_TIME="en_DK.UTF-8"
     fi
     ;;
 esac
