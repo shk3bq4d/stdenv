@@ -1223,9 +1223,11 @@ ansible linux -bm shell -a "needs-restarting -r" -s                      # oneli
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
-ansible web -bm service -a "name=httpd state=started"                    # oneliner one-liner adhoc ad-hoc
-ansible web -bm service -a "name=httpd state=restarted"                  # oneliner one-liner adhoc ad-hoc
-ansible '*.lan' -bm service -a "name=rsyslog state=restarted"            # oneliner one-liner adhoc ad-hoc
+ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
+ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible myhost  -bm service -a "name=zabbix-agent2  state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible graylog -bm service -a "name=graylog-server state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible '*.lan' -bm service -a "name=rsyslog        state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible all -m file -a "path=/project/devops state=directory"            # oneliner one-liner adhoc ad-hoc
 ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneliner one-liner adhoc ad-hoc
 ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneliner one-liner adhoc ad-hoc
@@ -2769,3 +2771,6 @@ file:                         # first timetouch heartbeat file creation
 
 
 ipv4cidr | ansible.netcommon.nthhost(200) # ip calc netaddr
+
+query('') -> same as lookup but always return a list (so  same as lookup('', wantlist=True))
+q('')     -> same as query # lookup

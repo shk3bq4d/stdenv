@@ -1,1 +1,3 @@
 export STDHOME_FONT='*font: xft:DejaVuSansMono:size=12:antialias=true,xft:Inconsolata\ for\ Powerline:size=12'
+#export STDHOME_FONT='*font: xft:DejaVuSansMono:size=12:antialias=true,xft:Inconsolata\ for\ Powerline:size=12,xft:FontAwesome:size=12'
+#export STDHOME_FONT='*font: xft:Font\ Awesome:size=12'

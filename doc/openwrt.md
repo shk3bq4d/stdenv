@@ -245,6 +245,11 @@ Architecture	Qualcomm Atheros QCA956X ver 1 rev 0
 https://openwrt.org/toh/ubiquiti/unifiac
 https://downloads.openwrt.org/releases/19.07.8/targets/ath79/generic/openwrt-19.07.8-ath79-generic-ubnt_unifiac-pro-squashfs-sysupgrade.bin
 https://downloads.openwrt.org/releases/21.02.1/targets/ath79/generic/openwrt-21.02.1-ath79-generic-ubnt_unifiac-pro-squashfs-sysupgrade.bin
+cd /tmp && rm -f *bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ath79/generic/openwrt-21.02.2-ath79-generic-ubnt_unifiac-pro-squashfs-sysupgrade.bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ath79/generic/sha256sums
+cd /tmp && sha256sum -c sha256sums 2>&1 | grep *bin
+sysupgrade -v /tmp/*bin
 
 # TL-WDR3600 ap-galetas-east
 2021: galetas EAST (parent+charlotte) 10.19.29.249 ap-galetas-east.ly.lan
@@ -253,10 +258,15 @@ Architecture	Atheros AR9344 rev 2
 https://openwrt.org/toh/tp-link/tl-wdr3600
 ssh root@10.19.29.249
 cd /tmp && wget http://downloads.openwrt.org/releases/19.07.4/targets/ath79/generic/openwrt-19.07.4-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
-https://downloads.openwrt.org/releases/21.02.1/targets/ath79/generic/openwrt-21.02.1-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
 wdr3600password1.
 **MR: the TFTP recovery from above linked worked**
 wget http://downloads.openwrt.org/releases/19.07.6/targets/ath79/generic/openwrt-19.07.6-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+https://downloads.openwrt.org/releases/21.02.1/targets/ath79/generic/openwrt-21.02.1-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+cd /tmp && rm -f *bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ath79/generic/openwrt-21.02.2-ath79-generic-tplink_tl-wdr3600-v1-squashfs-sysupgrade.bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ath79/generic/sha256sums
+cd /tmp && sha256sum -c sha256sums 2>&1 | grep *bin
+sysupgrade -v /tmp/*bin
 
 ## Archer C2600
 TP-Link Archer C2600
@@ -273,6 +283,11 @@ ARMv7 Processor rev 0 (v7l)
 https://openwrt.org/toh/tp-link/archer_c2600_v1
 http://downloads.openwrt.org/releases/19.07.6/targets/ipq806x/generic/openwrt-19.07.6-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
 https://downloads.openwrt.org/releases/21.02.1/targets/ipq806x/generic/openwrt-21.02.1-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
+cd /tmp && rm -f *bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ipq806x/generic/openwrt-21.02.2-ipq806x-generic-tplink_c2600-squashfs-sysupgrade.bin
+cd /tmp && wget https://downloads.openwrt.org/releases/21.02.2/targets/ipq806x/generic/sha256sums
+cd /tmp && sha256sum -c sha256sums 2>&1 | grep *bin
+sysupgrade -v /tmp/*bin
 
 ## linksys WRT54gl
 https://openwrt.org/toh/linksys/wrt54g

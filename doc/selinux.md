@@ -56,6 +56,7 @@ SELINUXTYPE=targeted
 restorecon -FRvv ~/.ssh
 chcon -Rv -t ssh_home_t ~/.ssh
 chcon -Rv -t httpd_sys_content_t /var/www/
+chcon -Rv -t httpd_sys_content_t /data/www/html/manual_uploads
 chcon     -t httpd_tmp_t /mnt/resource/nginx
 
 

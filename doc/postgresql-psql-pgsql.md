@@ -4,7 +4,11 @@ sudo -u postgres psql
 \list or \l: list all databases
 \dt: list all tables in the current database
 \du list roles
-\connect database_name
+\d table -- describe table
+\d+ table -- describe table + storage + stats + description
+pg_dump -st tablename dbname -- show create table (ie: there is no such thing according to https://serverfault.com/questions/231952/is-there-an-equivalent-of-mysqls-show-create-table-in-postgres)
+\c       database_name -- use
+\connect database_name -- use
 \x # toggles expanded display (vertical alignment)
 
 sELECT c.relname FROM pg_class c WHERE c.relkind = 'S'; # list sequences
@@ -117,11 +121,6 @@ from (
   where table_schema = 'public' --<< change here for the schema you want
 ) t;
 
-# regexp
-~ (Matches regular expression, case sensitive)
-~* (Matches regular expression, case insensitive)
-!~ (Does not match regular expression, case sensitive)
-!~* (Does not match regular expression, case insensitive)
 
 docker exec -u 999 -it postgres psql -U bitbucket bitbucketdb
 
@@ -172,4 +171,26 @@ SELECT table_schema
   WHERE oid = parent
 ) a
 ORDER BY total_bytes DESC;
+```
+
+# regexp regular expression
+https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
+```sql
+~ (Matches regular expression, case sensitive)
+~* (Matches regular expression, case insensitive)
+!~ (Does not match regular expression, case sensitive)
+!~* (Does not match regular expression, case insensitive)
+replace(string text, from text, to text)
+regexp_replace # https://www.postgresql.org/docs/8.2/functions-matching.html
+regexp_replace('foobarbaz', 'b..', 'X', 'g') --> fooXX
+select (regexp_match('foobarbequebaz', 'bar.*que'))[1];
+regexp_match
+regexp_matches
+textregexeq -- regexp
+select * where 'abc' ~ '.b.' -- regexp_like
+select * where 'abc' similar to '%(b|d)%' -- pseudo-regexp_like SQL regular expressions are a curious cross between LIKE notation and common regular expression notation.
+update bandana set bandanavalue = regexp_replace(bandanavalue, '(<hostname>)[^<]*(</hostname>)', concat('\1', 'localhost', '\1')) where bandanakey = 'atlassian.confluence.smtp.mail.accounts';
+
+'concat' || 'withme'
+concat('bip', 'bop')
 ```

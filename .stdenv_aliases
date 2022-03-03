@@ -18,5 +18,8 @@ alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
 alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"
 alias cdstdenv="cd $stdenvdir"
 alias youtube-dl="youtube-dl --no-playlist --no-call-home --no-mtime"
+bggreen() {
+	printf '\033]11;#00ff77\007'
+}
 
 #export MR_URXVT_FORCEWHITE=0

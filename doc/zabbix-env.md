@@ -487,3 +487,7 @@ triggers evaluation period ime https://www.zabbix.com/documentation/current/manu
 
 typeperf -qx   # performance counter perf counter perf_counter windows
 typeperf -qxa  # performance counter perf counter perf_counter windows
+
+https://cdn.zabbix.com/zabbix/binaries/stable/5.4/5.4.10/zabbix_agent2-5.4.10-windows-amd64-openssl.msi
+
+

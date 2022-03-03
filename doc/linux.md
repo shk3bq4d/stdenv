@@ -419,3 +419,5 @@ sudo mount -o remount,rw /partition/identifier /mount/point
 sudo mount -o remount,rw /dev/mapper/centos-root /
 
 /sbin/reboot --force
+
+shutdown -c # cancels a planned shutdown

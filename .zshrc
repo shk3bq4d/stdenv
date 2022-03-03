@@ -110,17 +110,18 @@ for c in \
     castnow \
     command \
     doc \
-    kubectl \
+    docker \
     fahrplan \
+    helm \
+    kubectl \
     locate \
     minikube \
     ps-mr.sh \
     screen \
     setxkbmap \
-    docker \
     ssh \
-    sshpass \
     sshfs \
+    sshpass \
     vagrant \
     viw \
     watch \
