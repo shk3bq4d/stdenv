@@ -1,3 +1,4 @@
+```sh
 https://danielmiessler.com/study/tcpdump/
 tcpdump -i vtnet0 -X host 10.50.219.121 and not dst port 65530 and not dst port 443
 /usr/sbin/tcpdump -i vtnet0 -c 100 -s 0 -w /root/packetcapture.cap ip and tcp and ( host 10.19.29.220 and host 10.19.29.58)
@@ -13,6 +14,8 @@ wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
 tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
+tcpdump dst port 53 # DNS
+```
 
 # writes and rotates 10 files of max 1Mb
 tcpdump -i ens160 -C 1 -W 10 -w /tmp/salut host 10.36.220.10 and dst port 443

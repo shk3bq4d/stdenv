@@ -1233,6 +1233,7 @@ ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneli
 ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneliner one-liner adhoc ad-hoc
 ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
 ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneliner one-liner adhoc ad-hoc
+ansible all -bm user -a "name=myusername state=absent"                   # oneliner one-liner adhoc ad-hoc
 ansible linux -om debug -a var=ansible_host                              # oneliner one-liner adhoc ad-hoc
 ansible linux -bm file -a "path=/etc/profile.d/tmout.sh state=absent"    # oneliner one-liner adhoc ad-hoc remove shell session timeout
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
