@@ -22,7 +22,8 @@ feb22.ly.lan)
 	dmenu_run -l 30 $(~/bin/mri3_dmenu_params.py)
 	;;
 $WORK_PC1F)
-	dmenu_run --class mrdmenu -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#FFFFFF" -nf "#000000" -m 1
+	dmenu_run -l 30 $(~/bin/mri3_dmenu_params.py)
+	#dmenu_run --class mrdmenu -i -b -l 40 -fn  "DejaVuSansMono-28" -nb "#FFFFFF" -nf "#000000" -m 1
 	;;
 *)
 	dmenu_run -l 10 $(~/bin/mri3_dmenu_params.py)
