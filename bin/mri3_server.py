@@ -88,7 +88,7 @@ _hostname = mri3.gethostname()
 
 _gapsH = {}
 def set_gaps(i3, wid):
-    if _hostname not in ['feb22', 'feb22.ly.lan']: return
+    if _hostname not in ['feb22', 'feb22.ly.lan', 'may19', 'may19.sfcri.lan']: return
     workspace = find_workspace(i3, wid)
     o = mri3.get_output_name(workspace)
     all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
@@ -97,27 +97,34 @@ def set_gaps(i3, wid):
     key = '{}-{}'.format(o, workspace.name)
     previous_nb_elems = _gapsH.get(key, -1)
     if previous_nb_elems == nb_elems:
-        logger.info("%s previous == current == %d", key, previous_nb_elems)
+        logger.info("%s previous == current == %d on %s", key, previous_nb_elems, _hostname)
         return
-    logger.info("%s previous %d != current %d", key, previous_nb_elems, nb_elems)
+    logger.info("%s previous %d != current %d on %s", key, previous_nb_elems, nb_elems, _hostname)
     _gapsH[key] = nb_elems
 
-    if o == 'DP-4':
+    _excluded_screensH = {
+        'feb22.ly.lan':     ['DP-4'],
+        'may19.sfcri.lan': []
+        }
+
+    one_paramsH = {
+        'feb22.ly.lan':     [600,0,40,0],
+        'may19.sfcri.lan':  [800,0,40,0],
+        }
+    two_paramsH = {
+        'feb22.ly.lan':     [300,0,40,0],
+        'may19.sfcri.lan':  [350,0,40,0],
+        }
+
+    if o in _excluded_screensH.get(_hostname, []):
         h = 10
         v = 0
         i = 10
         o = 0
     elif nb_elems == 1:
-        h = 600
-        v = 0
-        i = None
-        i = 40
-        o = 0
+        h, v, i, o = one_paramsH.get(_hostname, [800,0,40,0])
     elif nb_elems == 2:
-        h = 300
-        v = 0
-        i = 40
-        o = 0
+        h, v, i, o = one_paramsH.get(_hostname, [300,0,40,0])
     else:
         h = 10
         v = 0

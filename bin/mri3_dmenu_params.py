@@ -42,13 +42,17 @@ def get(width=True, colors=True):
         acer2011=11,
         dec17=14,
         feb22=14,
+        may19=14,
         )
-    widthH = dict(
-        feb22='-x 1700 -w 1720',
+    widthH = {
+        'feb22':'-x 1700 -w 1720',
+        'may19.sfcri.lan': '-x 1700 -w 1720',
         )
-    colorsH = dict(
-        feb22='-nb #FFBBFF -nf #000000',
-        )
+    colorsH = {
+        'feb22':'-nb #FFBBFF -nf #000000',
+        'may19':'-nb #FFBBFF -nf #000000',
+        'may19.sfcri.lan':'-nb #FFBBFF -nf #000000',
+        }
     hostname = socket.gethostname()
     widthA  = widthH.get(hostname, '').split() if width else []
     colorsA = colorsH.get(hostname, '').split() if colors else []
