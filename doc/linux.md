@@ -421,3 +421,6 @@ sudo mount -o remount,rw /dev/mapper/centos-root /
 /sbin/reboot --force
 
 shutdown -c # cancels a planned shutdown
+
+kill -STOP 1234 # pause, interrupt programme resume continue
+kill -CONT 1234 # pause, interrupt programme resume continue

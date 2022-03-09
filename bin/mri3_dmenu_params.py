@@ -38,16 +38,16 @@ def get(width=True, colors=True):
 #   else:
 #       from sh import dmenu
     import socket
-    fontH = dict(
-        acer2011=11,
-        dec17=14,
-        feb22=14,
-        may19=14,
-        )
+    fontH = {
+            'acer2011': 11,
+            'dec17': 14,
+            'feb22': 14,
+            'may19.sfcri.lan': 18,
+        }
     widthH = {
         'feb22':'-x 1700 -w 1720',
         'may19.sfcri.lan': '-x 1700 -w 1720',
-        )
+        }
     colorsH = {
         'feb22':'-nb #FFBBFF -nf #000000',
         'may19':'-nb #FFBBFF -nf #000000',

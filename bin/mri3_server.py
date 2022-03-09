@@ -113,7 +113,7 @@ def set_gaps(i3, wid):
         }
     two_paramsH = {
         'feb22.ly.lan':     [300,0,40,0],
-        'may19.sfcri.lan':  [350,0,40,0],
+        'may19.sfcri.lan':  [400,0,40,0],
         }
 
     if o in _excluded_screensH.get(_hostname, []):
