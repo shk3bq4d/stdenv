@@ -1,3 +1,7 @@
+it is best to switch to instructions to haac/sh/ubuntu-fde.sh
+
+
+
 livecd
 try ubuntu
 change keyboard layout
