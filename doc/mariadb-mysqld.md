@@ -22,6 +22,10 @@ FLUSH PRIVILEGES; # if modified PRIVILEGES through an insert update or delete st
 
 begin; update low_priority problem set r_eventid=640652792 where  eventid=640652792 limit 5;
 
+select lower('UPPERCASE');
+select lcase('lowercase UPPERCASE');
+select upper('lowercase UPPERCASE');
+select ucase('lowercase UPPERCASE');
 create user 'mrowncloud'@'localhost' identified by 'habon123.';
 drop user mrowncloud;
 grant all on mrowncloud.* to mrowncloud;
@@ -166,7 +170,7 @@ expire_logs_days=3
 ```sql
 optimize table auditlog; # bip
 --alter table trends_uint optimize partition p2021_12; do not use as it rebuilds entire table, use rebuild + analyze instead
-alter table trends_uint rebuild partition p2021_12; alter table trends_uint analyze partition p2021_12; 
+alter table trends_uint rebuild partition p2021_12; alter table trends_uint analyze partition p2021_12;
 ```
 
 ```sql

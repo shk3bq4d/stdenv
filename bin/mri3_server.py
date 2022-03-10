@@ -85,10 +85,11 @@ def logging_conf(
 wA = None
 fa = fontawesome.icons
 _hostname = mri3.gethostname()
+_short_hostname = re.sub(r'([^.]+).*', r'\1', _hostname)
 
 _gapsH = {}
 def set_gaps(i3, wid):
-    if _hostname not in ['feb22', 'feb22.ly.lan', 'may19', 'may19.sfcri.lan']: return
+    if _short_hostname not in ['feb22', 'may19']: return
     workspace = find_workspace(i3, wid)
     o = mri3.get_output_name(workspace)
     all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
@@ -97,34 +98,34 @@ def set_gaps(i3, wid):
     key = '{}-{}'.format(o, workspace.name)
     previous_nb_elems = _gapsH.get(key, -1)
     if previous_nb_elems == nb_elems:
-        logger.info("%s previous == current == %d on %s", key, previous_nb_elems, _hostname)
+        logger.info("%s previous == current == %d on %s", key, previous_nb_elems, _short_hostname)
         return
-    logger.info("%s previous %d != current %d on %s", key, previous_nb_elems, nb_elems, _hostname)
+    logger.info("%s previous %d != current %d on %s", key, previous_nb_elems, nb_elems, _short_hostname)
     _gapsH[key] = nb_elems
 
     _excluded_screensH = {
-        'feb22.ly.lan':     ['DP-4'],
-        'may19.sfcri.lan': []
+        'feb22':     ['DP-4'],
+        'may19': []
         }
 
     one_paramsH = {
-        'feb22.ly.lan':     [600,0,40,0],
-        'may19.sfcri.lan':  [800,0,40,0],
+        'feb22':     [600,0,40,0],
+        'may19':  [800,0,40,0],
         }
     two_paramsH = {
-        'feb22.ly.lan':     [300,0,40,0],
-        'may19.sfcri.lan':  [400,0,40,0],
+        'feb22':     [300,0,40,0],
+        'may19':  [400,0,40,0],
         }
 
-    if o in _excluded_screensH.get(_hostname, []):
+    if o in _excluded_screensH.get(_short_hostname, []) or 'citrix' in workspace.name:
         h = 10
         v = 0
         i = 10
         o = 0
     elif nb_elems == 1:
-        h, v, i, o = one_paramsH.get(_hostname, [800,0,40,0])
+        h, v, i, o = one_paramsH.get(_short_hostname, [800,0,40,0])
     elif nb_elems == 2:
-        h, v, i, o = one_paramsH.get(_hostname, [300,0,40,0])
+        h, v, i, o = one_paramsH.get(_short_hostname, [300,0,40,0])
     else:
         h = 10
         v = 0
@@ -195,14 +196,13 @@ def blockpid():
             _lastpid.append(int(dirname))
     return _lastpid
 
-_machine = socket.gethostname()
 _remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(lan|local|net))?:?)'.format(
             getpass.getuser(),
-            _machine,
+            _short_hostname,
             getpass.getuser(),
-            _machine
+            _short_hostname
             )
-if _machine in ['dec17', 'acer2011', 'feb22']:
+if _short_hostname in ['dec17', 'acer2011', 'feb22']:
     border_width=1 # underline
 else:
     border_width=3 # underline
