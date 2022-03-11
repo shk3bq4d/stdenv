@@ -50,6 +50,15 @@ echo "flagfile is $flagfile"
     exec 2>&1
     trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 
+    echo "T is $T"
+    echo "to follow (with colors) execute"
+    echo "tail -f $logfile2"
+    echo "to follow (no colors) execute"
+    echo "tail -f $logfile1"
+    echo "to cancel, execute"
+    echo "rm -f $flagfile"
+    echo "args are $@"
+
     wait-until.sh "$T"
     ! test -f "$flagfile" && echo "FATAL: flagfile no longer exists" && ls -l "$flagfile" && exit 1
     export ANSIBLE_FORCE_COLOR=true
