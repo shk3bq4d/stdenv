@@ -1,5 +1,6 @@
 # /* ex: set filetype=markdown: */
 
+```sh
 
 :echo g:pathogen_disabled
 :echo hostname
@@ -8,8 +9,11 @@
 :Helptags " rebuild doc tags on pathogen
 :helptags ~/.vim/doc " rebuild doc tags for specified folder
 
+```
+
 
 # the following three modelines are for examples. modeline word is only here for grep purpose and not a valid vim config key
+```
 # /* ex: set nofoldenable modeline=: */
 # /* ex: set filetype=vim modeline=: */
 # ex: set filetype=vim modeline=:
@@ -20,19 +24,25 @@ split
 :sp
 C-W C-j go below
 C-W C-k go up
+```
 
 # delete lines containing regexp
+```
 :g/regexp/d
 
 :{range}sort u
+
+sort i # sort case insensitively 
 
 automatic syntax highlighting to a new file extension:
 syntax on
 filetype on
 au BufNewFile,BufRead *.lmx set filetype=xml
+```
 
 
 # header modeline magic
+```sh
 /* ex: set tabstop=8 expandtab: */
 // vim: noai:ts=4:sw=4
   -or-
@@ -43,9 +53,11 @@ au BufNewFile,BufRead *.lmx set filetype=xml
   -or-
 /* vim: set fdm=expr fde=getline(v\:lnum)=~'{'?'>1'\:'1': */
 # vim: set expandtab:
+```
 
 
 # vertical insert multi-line https://stackoverflow.com/questions/9549729/in-vim-how-do-i-effectively-insert-the-same-characters-across-multiple-lines
+```sh
 Move the cursor to the first character where to insert on firs line
 Enter visual block mode (CTRL-V-alternative CTRL-Q).
 Press j three times.
@@ -63,6 +75,7 @@ so in .vimrc i used :map <C-i> <C-q> # vertical blockwise visual mod
 filter external command on every lines
 :%!grep "pattern"
 :.!grep "pattern"
+```
 
 
 # display hidden chars
