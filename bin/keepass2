@@ -24,19 +24,23 @@ if hash keepassxc &>/dev/null; then
     apr16.ly.lan)
         export QT_SCALE_FACTOR=1.33
         if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
-            chmod 0600 ~/.keepass/mr.kdbx
-            ssh $WORK_PC1 chmod 0400 .keepass/mr.kdbx
+            #chmod 0600 ~/.keepass/mr.kdbx
+            #ssh $WORK_PC1 chmod 0400 .keepass/mr.kdbx
+			true
         else
-            chmod 0400 ~/.keepass/mr.kdbx
+            #chmod 0400 ~/.keepass/mr.kdbx
+			true
         fi
         ;;
     ${WORK_PC1F})
         export QT_SCALE_FACTOR=1.5
         if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
-            chmod 0600 ~/.keepass/mr.kdbx
-            ssh apr16.ly.lan chmod 0400 .keepass/mr.kdbx &
+            #chmod 0600 ~/.keepass/mr.kdbx
+            #ssh apr16.ly.lan chmod 0400 .keepass/mr.kdbx &
+			true
         else
-            chmod 0400 ~/.keepass/mr.kdbx
+            #chmod 0400 ~/.keepass/mr.kdbx
+			true
         fi
         ;;
     *)

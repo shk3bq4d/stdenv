@@ -156,6 +156,10 @@ select if(5 is null, "was null", "wasnt null");
 regexp_replace(original_value, pattern, replacement[, pos[, occurrence[, match_type]]])
 ```
 
+# safe mode
+```sql
+SET SQL_SAFE_UPDATES=0;
+
 
 # Mysql binary logs
 myslq-bin.003172
