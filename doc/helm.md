@@ -22,6 +22,7 @@ helm show values ingress-nginx/ingress-nginx
 helm rollback myrelease myversion
 helm package --sign
 helm search repo -l nginx-ingress
+helm upgrade --install blob-csi-driver blob-csi-driver/blob-csi-driver --version v1.9.0  --debug
 
 helm fetch && helm template ... | kubectl apply -f - # tiller less deployment
 
