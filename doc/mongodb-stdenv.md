@@ -73,7 +73,7 @@ cd /backup_mongo/latest/2018-11-06_04h00m.Tuesday/text; for i in *.json; do cat 
 ```js
 rs.status()
 rs.status().myState
-sA = rs.status().members; for (var k = 0, s = sA.length; k < s; ++k) {print('health: ' + sA[k].health + ', state: ' + sA[k].state + ', ' + sA[k].name);}
+sA = rs.status().members; for (var k = 0, s = sA.length; k < s; ++k) {print('health: ' + sA[k].health + ', state: ' + sA[k].stateStr + ', ' + sA[k].name);}
 ```
 
 # https://docs.mongodb.com/manual/reference/replica-states/
