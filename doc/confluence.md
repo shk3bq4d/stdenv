@@ -8,6 +8,26 @@ window. If you can only upgrade once a year, consider upgrading to a Long Term
 Support release
 * 21  April 2020 Confluence 7.4  https://confluence.atlassian.com/doc/confluence-7-4-release-notes-994312218.html
 * 17 August 2021 Confluence 7.13 https://confluence.atlassian.com/doc/confluence-7-13-release-notes-1044114085.html
+atlassian/confluence-server:7.4.15
+
+docker pull atlassian/confluence-server:7.4.15
+
+# EOL
+7.16 (EOL date: Jan 31, 2024)
+7.15 (EOL date: Nov 24, 2023)
+7.14 (EOL date: Oct 12, 2023)
+7.13 (EOL date: Aug 17, 2023) LTS
+7.12 (EOL date: Apr 13, 2023)
+7.11 (EOL date: Feb 2, 2023)
+7.10 (EOL date: Dec 15, 2022)
+7.9 (EOL date: Nov 10, 2022)
+7.8 (EOL date: Sep 29, 2022)
+7.7 (EOL date: Aug 19, 2022)
+7.6 (EOL date: June 30, 2022)
+7.5 (EOL date: May 20, 2022)
+7.4 (EOL date extended to Aug 18, 2022) LTS
+6.13 LTS
+6.6 LTS
 
 www_confluence_help.sh
 http://confluence/renderer/notationhelp.action?section=all
