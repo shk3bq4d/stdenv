@@ -14,7 +14,7 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
 
 _script_id() {
-    echo "$@" | sed -r -e "s/[ .&_]+/-/g" -e "s/^-+|-+$//g"
+    echo "$@" | sed -r -e "s/[ .&_\\/,+*%?]+/-/g" -e "s/^-+|-+$//g"
 }
 
 [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0

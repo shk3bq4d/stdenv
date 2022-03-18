@@ -127,3 +127,34 @@ curl -s http://els-host:9200/graylog_392/_mapping | jq '.[].mappings.properties 
 
 https://www.graylog.org/post/graylog-update-for-log4j
 https://github.com/Graylog2/graylog2-server/pull/11786#issuecomment-994715935 # log4j
+
+
+# alert
+--- [Event Definition] ---------------------------
+Title:       ${event_definition_title}
+Description: ${event_definition_description}
+Type:        ${event_definition_type}
+--- [Event] --------------------------------------
+Timestamp:            ${event.timestamp}
+Message:              ${event.message}
+Source:               ${event.source}
+Key:                  ${event.key}
+Priority:             ${event.priority}
+Alert:                ${event.alert}
+Timestamp Processing: ${event.timestamp}
+Timerange Start:      ${event.timerange_start}
+Timerange End:        ${event.timerange_end}
+Fields:
+${foreach event.fields field}  ${field.key}: ${field.value}
+${end}
+${if backlog}
+--- [Backlog] ------------------------------------
+Last messages accounting for this alert:
+${foreach backlog message} <- you can change message for the variable name
+${message} <- this is somekind of oneliner yaml/json
+${message.timestamp}               <-  this a default field, so not in fields
+${message.source}                  <-  this a default field, so not in fields
+${message.message}                 <-  this a default field, so not in fields
+${message.fields.winlog_event_id}  <-  this NOT a default field, so it's a key of "fields"
+${end}
+${end}
