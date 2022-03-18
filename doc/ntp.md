@@ -4,6 +4,8 @@ timedatectl set-ntp on
 sudo service ntp stop
 sudo ntpd -gq
 sudo service ntp start
+sudo chronyc tracking # centos
+sudo chronyc sources  # centos
 
 ssh -t myhost sudo date -us @$(date -u +%s)         
 
