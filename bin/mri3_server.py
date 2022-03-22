@@ -14,6 +14,7 @@ except:
     sys.path.append(os.path.expanduser('~/py'))
     import mri3
 import atexit
+import time
 import getpass
 import socket
 import signal
@@ -88,9 +89,8 @@ _hostname = mri3.gethostname()
 _short_hostname = re.sub(r'([^.]+).*', r'\1', _hostname)
 
 _gapsH = {}
-def set_gaps(i3, wid):
+def set_gaps(i3, workspace):
     if _short_hostname not in ['feb22', 'may19']: return
-    workspace = find_workspace(i3, wid)
     o = mri3.get_output_name(workspace)
     all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
 
@@ -166,7 +166,8 @@ def on_window(i3, e):
         #e.container.command('gaps inner current plus 40')
         #e.container.command('gaps outer current plus 40')
         wid = e.container.window
-        set_gaps(i3, wid)
+        workspace = find_workspace(i3, wid)
+        set_gaps(i3, workspace)
 
         if wid in wA:
             wA.remove(wid)
@@ -373,6 +374,10 @@ def on_workspace(i3, e):
     logging.warning('on_workspace %s', e.change)
     i3blocklet_name(focused_window_name(i3))
     mri3.remove_single_child_containers(None)
+    if e.change == 'focus':
+        logger.info("on_workspace A")
+        set_gaps(i3, e.current)
+        logger.info("on_workspace B")
     return
     print_separator()
     print('Got workspace event:')
@@ -499,7 +504,7 @@ def handle_concurrent_process():
             if pid_exists(old_pid):
                 if sys.stdin.isatty():
                     #sys.stdout.write
-                    r = input('An existing instance run with pid {}. Would you like to kill it (y) or abort: '.format(old_pid))
+                    r = input('An existing instance may be running with pid {} (info based on {}). Would you like to kill it (y) or abort: '.format(old_pid, pid_fp))
                     logger.info('input was %s', r)
                     if r.strip().lower() != 'y':
                         return False

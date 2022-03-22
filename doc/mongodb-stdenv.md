@@ -56,7 +56,7 @@ cfg.members[0].host = 'mongo-2c-02.dev.payday.net:27017'
 cfg.members[0].host = 'mongo-2c-02.dev.payday.net:27017'
 rs.reconfig(cfg, {force : true})
 
-rs.stepDown(60) # relinquish master and mark it as unelectable for 60 seconds
+rs.stepDown(600) # relinquish master and mark it as unelectable for 60 seconds
 rs.freeze(60) # mark it as unelectable for 60 seconds (useful before reboot)
 
 cfg = rs.conf(); for (var k = 0, s = cfg.members.length; k < s; ++k) {cfg.members[k].host=cfg.members[k].host.replace(':', '.prod.payday.net:');print(cfg.members[k].host);}; rs.reconfig(cfg);
@@ -105,3 +105,11 @@ db.createUser( { user: "accountAdmin01",
                           "readWrite"] },
                { w: "majority" , wtimeout: 5000 } )
 ```
+
+# upgrade
+https://docs.mongodb.com/manual/release-notes/4.2-upgrade-replica-set/
+db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } ); # so as to prevent new nodes being updated from doing anything silly with new features
+upgrade all the secondary nodes, one by one, ensure service was restarted
+rs.stepDown(600); on the master, to relinquish its master status
+upgrade the last node
+db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } ); # to the new, upgrade version
