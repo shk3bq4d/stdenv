@@ -557,7 +557,23 @@ def current_output_workspaces():
     return rA
 
 def get_output(o):
+    logger.info(f"get_output type {o.type} {o.name}")
     if o.type == 'output': return o
+    if o.type == 'workspace' and o.parent is None:
+        output_str = vars(o).get('ipc_data', {}).get('output', None)
+        pprint(vars(o))
+        pprint(vars(o).get('ipc_data', {}))
+        logger.info(f'output_str is {output_str}')
+        if output_str is not None:
+            logger.info('A')
+            i3 = i3ipc.Connection()
+            for output in i3.get_outputs():
+                logger.info(f'iterating output over {output.name} and comparing with {output_str}')
+                if output.name == output_str:
+                    return output
+            logger.info('B')
+        logger.info(f"Can't find output for {o.name}")
+        raise BaseException(f"Can't find output for {o.name}")
     return get_output(o.parent)
 
 def get_output_name(o):
