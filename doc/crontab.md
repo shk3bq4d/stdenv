@@ -96,3 +96,5 @@ exec /bin/bash --norc "$@"
 # user crontab location
 /var/spool/cron/crontabs/<user> # ubuntu debiant
 /var/spool/cron<user> # centos
+
+XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send -u critical "subject" "body"

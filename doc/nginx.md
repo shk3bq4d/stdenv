@@ -67,10 +67,10 @@ setsebool httpd_can_network_connect on -P
 http{
     server{
            location ~* ^/nginx/(.*)$ {
-                     proxy_pass http://127.0.0.1:8080/$1;
-                           proxy_redirect off;
-                              }
-            }
+           proxy_pass http://127.0.0.1:8080/$1;
+           proxy_redirect off;
+           }
+		}
 }
 # almost same but support query string
 http{
