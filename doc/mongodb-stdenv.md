@@ -30,8 +30,20 @@ mongo -u admin -pMYPASSWORD --authenticationDatabase admin -host rs01/localhost:
 mongoimport --db graylog --username=admin --password=MYPASSWORD --authenticationDatabase=admin --verbose --drop users.json
 ```
 
+# querifing unify controller
+```js
+db.site.findOne()
+db.site.find().forEach(function(i) { print(i.desc); })
+db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
+db.device.findOne(); # name, ip, mac, version, site_id, config_network.type, config_network.ip
+db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
+db.device.find().forEach(function(i) { print(i.name); })
+```
+
 # querying graylog
 ```sh
+db.collectionName.find().pretty() # show all elements in one collection
+
 db.streams.find()
 db.users.find()
 
