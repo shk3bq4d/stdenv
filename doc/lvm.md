@@ -52,5 +52,6 @@ printf "fix\nfix\nquit\n" | parted ---pretend-input-tty /dev/sda print
 lvresize --size +20G   --resizefs /dev/mapper/ubuntu--vg-lv_var_lib_docker
 
 
-vgremove
+lvremove # delete rm
+vgremove # delete rm
 vgextend - Add physical volumes to a volume group
