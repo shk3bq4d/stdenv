@@ -45,7 +45,13 @@ list() {
         grep -vE '^##' |
         sed -r \
             -e 's/^...//' \
-            -e 's/.* -> (.*)/\1/'
+            -e 's/.* -> (.*)/\1/' | while read line; do
+        if [[ -d "$line" ]]; then
+            find "$line" -type f;
+        else
+            echo "$line"
+        fi
+    done
 }
 
 ! git_root_dir &>/dev/null && echo "FATAL: not a git repository" && exit 1
@@ -54,6 +60,6 @@ if [[ -z "$(list)" ]]; then
     echo "no unstaged files"
     exit 1
 fi
-list
 cd $(git_root_dir)
+list
 vim $(list)
