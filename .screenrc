@@ -1,5 +1,6 @@
 # force execution of bash at startup
 shell $SHELL
+term rxvt-256color
 
 # Don't display the copyright page
 startup_message off
