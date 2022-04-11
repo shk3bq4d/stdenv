@@ -4,8 +4,6 @@ https://community.ui.com/questions/Add-proxy-support-to-controller-for-firmware-
 https://community.ui.com/questions/UniFi-controller-use-web-proxy-for-firmware-download/ebf6fc50-50b6-4a30-8912-3653d6c91b7a
 https://www.grufo.com/get_unifi_firmware.sh.txt
 
-unifi@netwc102p02:/usr/lib/unifi/dl/firmware/bundles.json
-
 
 ```sh
 #!/bin/bash
