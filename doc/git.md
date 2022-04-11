@@ -453,6 +453,7 @@ git show REV:./myfile.tx # relative maybe useful as CWD is not respected otherwi
 # change commit author
 export GIT_AUTHOR_NAME="Jeff Malone" GIT_AUTHOR_EMAIL="jeff@malone.com" GIT_COMMITTER_NAME="Jeff Malone" GIT_COMMITTER_EMAIL="jeff@malone.com"
 git commit --amend --reset-author
+git reset HEAD@{1} # repair an amend which should not have been an amend but a simple commit, https://stackoverflow.com/questions/1459150/how-to-undo-git-commit-amend-done-instead-of-git-commit,  @neaumusic: yes! HEAD~1 is exactly the same as HEAD^ and identifiers the parent of the current commit. HEAD@{1} on the other hand refers to the commit which HEAD pointed to before this one, i.e. they mean different commits when you checkout a different branch or amend a commit.
 
 git config --local user.name "Jeff Malone"
 git config --local user.email "jeff.malone.com"

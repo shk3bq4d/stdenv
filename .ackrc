@@ -26,6 +26,7 @@
 --ignore-directory=is:.bzr
 
 --ignore-directory=is:.terraform
+--ignore-directory=is:.mypy_cache
 --ignore-file=is:terraform.tfstate
 --ignore-file=is:terraform.tfstate.backup
 

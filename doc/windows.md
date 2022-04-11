@@ -1,6 +1,9 @@
 # windows 10 iso download
 https://www.microsoft.com/en-us/download/details.aspx?id=56485
 
+dir /w /s recursively_find_me
+dir /w /s | findstr /i recursively_find_me
+
 tasklist | findstr /i Zabbix
 taskkill /f /t zabbix_agentd.exe
 wmic path win32_process get caption,processid,commandline                  & rem tasklist with cli command line

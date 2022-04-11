@@ -693,7 +693,6 @@ function .() {
 SSH_ENV=$HOME/.ssh/environment
 
 function mr_ssh_add {
-    return
     local f
     local t
     for f in \
@@ -701,16 +700,16 @@ function mr_ssh_add {
         $HOME/.ssh/jexternalssh \
         ; do
         test -f $f || continue
-         /usr/bin/ssh-add -l | grep -w $f &>/dev/null && continue
-         t="-t 43200"
-         case $f in \
-             *jexternalssh) t="";;
-         esac
-         echo -n "ssh-add dot.bashfunctions $HOSTNAMEF $t: "
-         echo
-         is_zsh \
-         && /usr/bin/ssh-add ${=t} $f \
-         || /usr/bin/ssh-add ${t}  $f
+        /usr/bin/ssh-add -l | grep -qF "$(ssh-keygen -l -f "$f")" &>/dev/null && continue
+        t="-t 43200"
+        case $f in \
+            *jexternalssh) t="";;
+        esac
+        echo -n "ssh-add dot.bashfunctions $HOSTNAMEF $t: "
+        echo
+        is_zsh \
+        && /usr/bin/ssh-add ${=t} $f \
+        || /usr/bin/ssh-add ${t}  $f
      done
 }
 
@@ -1143,7 +1142,7 @@ python-http-server() {
     fi
 }
 
-swap_files() {
+swap_files() { # switch
     local tmpfile
     test $# -ne 2  && echo "FATAL: please provide exactly two files" && return 1
     ! test -f "$1" && echo "FATAL: first  arg not a file $1" && return 1
@@ -1161,7 +1160,7 @@ swap_files() {
 }
 
 
-swap_dir() {
+swap_dir() { # switch
     local tmpdir
     test $# -ne 2  && echo "FATAL: please provide exactly two directories" && return 1
     ! test -d "$1" && echo "FATAL: first  arg not a dir $1" && return 1

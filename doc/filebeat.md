@@ -263,3 +263,5 @@ filebeat.inputs:
         condition
       fields: ["stdenv.filebeat.debug"] # include_fields exclude keep only subset
 ```
+
+date -d "2006-01-02 15:04:05" +"%A" # filebeat timestamp reference day of week is Monday

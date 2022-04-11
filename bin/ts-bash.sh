@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 23 Nov 2018
-##
 
 set -euo pipefail
 TIMESTAMP_FORMAT='%Y-%m-%dT%H:%M:%S'
@@ -27,7 +19,7 @@ log() {
 fi
 
 while read line; do
-	log "$line"
+    log "$line"
 done
 
 exit 0
