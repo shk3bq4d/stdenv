@@ -45,6 +45,7 @@ lvresize --size +400M --resizefs /dev/mapper/VG_root-LV_usr
 lvresize --size +5G   --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root_home
 lvresize --size +3G   --resizefs /dev/mapper/rootvg-optlv
+lvresize --size +1G   --resizefs /dev/mapper/rootvg-data
 lvresize --size +1G   --resizefs /dev/vg_system/lv_var
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-varlv
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-varlv
@@ -53,5 +54,6 @@ lvresize --size +20G   --resizefs /dev/mapper/ubuntu--vg-lv_var_lib_docker
 
 
 lvremove # delete rm
+lvremove /dev/mapper/rootvg-blobfuse--cache # delete rm
 vgremove # delete rm
 vgextend - Add physical volumes to a volume group
