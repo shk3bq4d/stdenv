@@ -700,7 +700,7 @@ function mr_ssh_add {
         $HOME/.ssh/jexternalssh \
         ; do
         test -f $f || continue
-        /usr/bin/ssh-add -l | grep -qF "$(ssh-keygen -l -f "$f")" &>/dev/null && continue
+        /usr/bin/ssh-add -l | grep -qF "$(ssh-keygen -l -f "$f" | awk '{print $2}')" &>/dev/null && continue
         t="-t 43200"
         case $f in \
             *jexternalssh) t="";;
