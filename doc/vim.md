@@ -11,6 +11,7 @@
 
 ```
 
+:set foldmethod=indent YAML block zA za zc
 
 # the following three modelines are for examples. modeline word is only here for grep purpose and not a valid vim config key
 ```
