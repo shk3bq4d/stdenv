@@ -25,7 +25,7 @@ crontab_line_user() {
 }
 
 cleanup_crontab_file_stdin() {
-    grep -E "^\s*[@*0-9]"
+    grep -E "^\s*[@*0-9]" | grep -vF '# crontab-launch-entry-asap.sh'
 }
 
 source_type() {
