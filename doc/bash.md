@@ -41,6 +41,7 @@ nb nombre args argument count
 $# # dollar hash, argument count
 
 if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surround with quotes!!
+if ! [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # inverse regexp
 
 Expressions may be combined using the following operators, listed in decreasing order of precedence:
 
