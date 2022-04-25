@@ -6,7 +6,6 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" ]] && [[ -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
-backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
 
 cleanup_crontab_line() {
     if [[ "$(source_type "$@")" == *user ]]; then
@@ -25,7 +24,9 @@ crontab_line_user() {
 }
 
 cleanup_crontab_file_stdin() {
-    grep -E "^\s*[@*0-9]" | grep -vF '# crontab-launch-entry-asap.sh'
+    grep -E "^\s*[@*0-9]" |
+        grep -vF '# crontab-launch-entry-asap.sh' |
+        grep -vF 'RUNONCEID='
 }
 
 source_type() {
@@ -104,6 +105,7 @@ while :; do
 
     entry="$(sed -r -n "$_read p" < $_tempfile)"
     dateref="$(date +%s -d "-2 minute ago")"
+    backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
     dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     #echo "entry is $entry"
     #echo "user is $(crontab_line_user "$@" <<< "$entry")"
@@ -137,6 +139,7 @@ while :; do
         fi
         ;;
     esac
+    echo "===="
     echo "DONE, will execute at $(date -d @$dateref +'%H:%M'). A backup copy was saved in $backupfile"
 
     break
