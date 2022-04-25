@@ -42,10 +42,10 @@ newentry() {
     local entry
     entry="$1"
     shift
-    echo -n "$(date -d "-2 minute ago" +'%_M    %_H  %_d  %_m') $dow"
+    echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') $dow"
     echo -n " $(crontab_line_user "$@" <<< "$entry")"
     echo -n " test \`date +\\%Y\` == $(date +%Y) || exit; "
-    cleanup_crontab_line "$@" <<< "$entry"
+    cleanup_crontab_line "$@" <<< "$entry" | sed -r -e "s/$/# crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
 }
 
 consume_crontab() {
@@ -77,7 +77,6 @@ consume_crontab() {
 
 while :; do
     consume_crontab "$@" | cleanup_crontab_file_stdin > $_tempfile
-    dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     nb_lines="$(wc -l < $_tempfile)"
     cat -n $_tempfile
     echo -n "Which entry would you like to execute ? "
@@ -104,6 +103,8 @@ while :; do
 
 
     entry="$(sed -r -n "$_read p" < $_tempfile)"
+    dateref="$(date +%s -d "-2 minute ago")"
+    dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     #echo "entry is $entry"
     #echo "user is $(crontab_line_user "$@" <<< "$entry")"
     #exit 0
@@ -136,6 +137,7 @@ while :; do
         fi
         ;;
     esac
+    echo "DONE, will execute at $(date -d @$dateref +'%H:%M'). A backup copy was saved in $backupfile"
 
     break
 done
