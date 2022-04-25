@@ -116,7 +116,7 @@ while :; do
         crontab - < $_tempfile
         ;;
     user)
-        if id -un "$@" &>/dev/null; then
+        if crontab -l -u "$@" &>/dev/null; then
             {   crontab -l -u "$@" | tee $backupfile
                 newentry "$entry" "$@"
             } > $_tempfile
