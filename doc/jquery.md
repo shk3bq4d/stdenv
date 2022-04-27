@@ -19,6 +19,7 @@ $(this).attr('title') // attribute value
 $(this).text(); // read text
 $(this).text('write text');
 $(this).html();
+$(this).html('hehe<br />habon'); // setInnerHTML
 
 jQuery.fn.jquery # show version
 
