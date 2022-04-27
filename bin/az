@@ -3,6 +3,7 @@
 #
 
 set -e
+# apt install python3-azure-cli as a quick workaround
 bindir=$HOME/.virtualenvs/az-cli/bin
 f=$bindir/activate
 ! test -f $f && echo "FATAL: not a file $f" && exit 1

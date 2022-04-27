@@ -8,8 +8,7 @@ https://community.ui.com/questions/Monitoring-with-SNMP/1eabb0e5-793e-4891-9a45-
 https://community.ui.com/questions/SNMP-monitoring/e2d08888-c1be-43bf-a01c-10a2eab6b5c6
 https://www.reddit.com/r/Ubiquiti/comments/f9u0f8/snmpv3_on_unifi_controller/
 
-unifi@netwc102p02:/usr/lib/unifi/dl/firmware/bundles.json
-
+unifi@netwc400p90:/usr/lib/unifi/dl/firmware/bundles.json
 
 ```sh
 #!/bin/bash

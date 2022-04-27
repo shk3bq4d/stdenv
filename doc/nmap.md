@@ -5,9 +5,9 @@ yum install -y nmap
 
 
 nmap -p1-65535 canon
-sudo nmap -PN ly158
-sudo nmap -sn ly158
-sudo nmap -O ly158
+sudo nmap -Pn ly158 # skip ping and start heavier scan
+sudo nmap -sn ly158 # Ping Scan - disable port scan
+sudo nmap -O ly158  # Enable OS detection
 sudo nmap -sV cam1w
 
 sudo nmap -oN - --open -p22,80,443,3389,4100,4109,4300,5061,5222,8080,8443

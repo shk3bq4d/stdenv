@@ -4,6 +4,8 @@ journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
 journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMPANY-GLOBAL' | less
 
+~/.config/systemd/user/default.target.wants # home user unit files
+
 systemd_mr_unitfiles
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html#ExecStop=

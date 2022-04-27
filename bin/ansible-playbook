@@ -2,6 +2,13 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
+if [[ -n "${SUDO_USER:-}" ]]; then
+    USER="${SUDO_USER}"
+else
+    USER=$(id -un)
+fi
+HOME=$( eval echo ~$USER)
+echo HOME is $HOME, user is $USER
 vaults_args=""
 if [[ -d secrets ]]; then
     vaults_args="$(find secrets -maxdepth 1 -type f -name 'ansible-vault-*' |
@@ -12,8 +19,8 @@ fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 for f in \
-    ~/.virtualenvs/ansible/bin/activate \
-    ~/.virtualenvs/ansible-2.10/bin/activate \
+    $HOME/.virtualenvs/ansible/bin/activate \
+    $HOME/.virtualenvs/ansible-2.10/bin/activate \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
