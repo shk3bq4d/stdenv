@@ -3,6 +3,7 @@
 icon="$HOME/.xlock/icon.png"
 tmpbg='/tmp/screen.png'
 tmpbg='/tmp/screen.jpg'
+rm -f $tmpbg
 
 (( $# )) && { icon=$1; }
 

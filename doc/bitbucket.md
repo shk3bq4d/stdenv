@@ -7,7 +7,7 @@ https://www.atlassian.com/trust/security/advisories
 
 https://hub.docker.com/r/atlassian/bitbucket-server
 
-7.21 (EOL date: 2 March 2024)
+7.21 (EOL date: 2 March 2024) LTS
 7.20 (EOL date: 25 January 2024)
 7.19 (EOL date: 14 December 2023)
 7.18 (EOL date: 09 November 2023)
