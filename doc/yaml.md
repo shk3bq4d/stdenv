@@ -37,7 +37,8 @@ bill-to:  &id001 # the full bill-to dictionary can be refered with *id001 anchor
     state:  KS
 
 foo: &bar original  # the string/scalar `original` with anchor bar can be referenced with *bar
-bar: *bar           # reference to scalar `original`
+bip: *bar           # reference to anchor scalar `original` as value of bip
+<<:  *bar           # insert content of anchor bar as is, which wouldn't work too well in this cas as bar is a scalar
 
 ship-to:  *id001
 

@@ -7,6 +7,40 @@ CSI  container storage interface # spec'ed by CNCF
 CNI  container networking interface # spec'ed by CNCF
 gRPC (gRPC Remote Procedure Calls[1]) is an open source remote procedure call (RPC) system initially developed at Google
 
+# pod affinity
+https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-node-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/os
+            operator: In # In, NotIn, Exists, DoesNotExist, Gt and Lt
+            values:
+            - linux
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - my000.lan
+            - my001.lan
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: another-node-label-key
+            operator: In
+            values:
+            - another-node-label-value
+  containers:
+  - name: with-node-affinity
+    image: k8s.gcr.io/pause:2.0
+```
 
 # DNS
 POD   .NAMESPACE .TYPE .cluster.local
