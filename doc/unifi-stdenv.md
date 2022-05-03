@@ -1,5 +1,5 @@
 
-https://github.com/jacobalberty/unifi-docker/issues/536 # improve documentation for no proxy
+* https://github.com/jacobalberty/unifi-docker/issues/536 # improve documentation for no proxy
 https://community.ui.com/questions/Add-proxy-support-to-controller-for-firmware-downloads-etc-/b9d7bc5a-b60d-44da-ae74-09868161fdd9
 https://community.ui.com/questions/UniFi-controller-use-web-proxy-for-firmware-download/ebf6fc50-50b6-4a30-8912-3653d6c91b7a
 https://www.grufo.com/get_unifi_firmware.sh.txt
@@ -9,6 +9,10 @@ https://community.ui.com/questions/SNMP-monitoring/e2d08888-c1be-43bf-a01c-10a2e
 https://www.reddit.com/r/Ubiquiti/comments/f9u0f8/snmpv3_on_unifi_controller/
 
 unifi@netwc400p90:/usr/lib/unifi/dl/firmware/bundles.json
+
+jacobalberty/unifi:v7.0.25
+jacobalberty/unifi:v7.0.26 # does not exist as of 2022.05.01
+jacobalberty/unifi:v7.1.61
 
 ```sh
 #!/bin/bash

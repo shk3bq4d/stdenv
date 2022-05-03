@@ -38,6 +38,7 @@ db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
 db.device.findOne(); # name, ip, mac, version, site_id, config_network.type, config_network.ip
 db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
 db.device.find().forEach(function(i) { print(i.name); })
+db.setting.find().forEach(function(i) { if (!i.site_id) printjson(i.key); })
 ```
 
 # querying graylog

@@ -184,3 +184,11 @@ and follow guidelines to download a file that was named Win10_21H2_English_x64.i
 
 # windows
 certmgr.msc # certificate trust store
+
+
+# volume mute
+## put
+CreateObject("WScript.Shell").SendKeys(chr(173))
+## in volume-mute.vbs, and then call
+cscript.exe volume-mute.vbs
+
