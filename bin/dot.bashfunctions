@@ -1182,6 +1182,17 @@ min() {
     printf "%s\n" "$@" | sort -g | head -n1
 }
 
+allhash() {
+    local f
+    f="$1"
+    test $# -ne 1 && echo "FATAL: use a sole file as argument" && return 1
+    ! test -f "$f" && echo "not a file $f" && return 1
+    for i in sha1sum    sha224sum  sha256sum  sha384sum  sha512sum md5sum; do
+        hash $i 2>/dev/null || continue
+        printf "%-10s %-128s %s\n" $i $($i $f)
+    done
+}
+
 max() {
     # using sort's -r (reverse) option - using tail instead of head is also possible
     printf "%s\n" "$@" | sort -rg | head -n1
