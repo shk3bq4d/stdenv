@@ -50,6 +50,8 @@ echo "flagfile is $flagfile"
     exec 2>&1
     trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 
+    flagfile_lmod_before="$(date -r "$flagfile" "+%s")"
+
     echo "T is $T"
     echo "to follow (with colors) execute"
     echo "tail -f $logfile2"
@@ -61,6 +63,8 @@ echo "flagfile is $flagfile"
 
     wait-until.sh "$T"
     ! test -f "$flagfile" && echo "FATAL: flagfile no longer exists" && ls -l "$flagfile" && exit 1
+    flagfile_lmod_after="$(date -r "$flagfile" "+%s")"
+    test "$flagfile_lmod_before" -ne "$flagfile_lmod_after" && echo "FATAL: flagfile last mod time changed $flagfile_lmod_before != $flagfile_lmod_after" && exit 1
     export ANSIBLE_FORCE_COLOR=true
     set +e
     echo ansible-playbook "$@"
