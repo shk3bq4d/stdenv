@@ -1,6 +1,7 @@
 ```sh
 mysql  -u root --password=root # long  password with equal
 mysql  -u root -proot          # short password no equal
+mysql --version
 ```
 ```sql
 show databases;

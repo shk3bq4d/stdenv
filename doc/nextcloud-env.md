@@ -1,3 +1,7 @@
+* https://nextcloud.com/changelog/ # release
+
+https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
+
 # condensed config.sample.php 20.0.14
 docker run --rm -it nextcloud:20.0.14-apache cat /usr/src/nextcloud/config/config.sample.php
 <?php

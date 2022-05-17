@@ -1306,3 +1306,9 @@ systemd(1), systemctl(1), systemd-analyze(1), journalctl(1), systemd-system.conf
 sudo systemctl reboot --firmware-setup # reboot to bios uefi
 systemctl edit tomcat9
 /etc/systemd/system/tomcat9.service.d/override.conf
+
+man systemd.unit
+Requires=
+ExecStart=
+ExecStartPre=
+Wants=

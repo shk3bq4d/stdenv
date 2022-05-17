@@ -23,6 +23,14 @@ catch(e){
 ```
 
 
+# lint JSHINT
+
+```sh
+# https://github.com/jshint/jshint
+# https://hub.docker.com/r/eeacms/jshint
+docker run -it --rm -v $PWD:/code eeacms/jshint
+```
+
 # https://stackoverflow.com/questions/12977661/is-there-a-way-to-suppress-jshint-warning-for-one-given-line
 ```js
 // Code here will be linted with JSHint.
