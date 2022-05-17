@@ -2,6 +2,11 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
+if [[ -n "${STDENV_ANSIBLE_PLAYBOOK:-}" ]]; then
+    echo "recursion detected, aborting"
+    exit 1
+fi
+export STDENV_ANSIBLE_PLAYBOOK=1
 if [[ -n "${SUDO_USER:-}" ]]; then
     USER="${SUDO_USER}"
 else
