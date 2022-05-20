@@ -492,3 +492,5 @@ typeperf -qxa  # performance counter perf counter perf_counter windows
 https://cdn.zabbix.com/zabbix/binaries/stable/5.4/5.4.10/zabbix_agent2-5.4.10-windows-amd64-openssl.msi
 
 
+tc qdisc add    dev eth0 root netem loss 25% # start simulate ping loss
+tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss

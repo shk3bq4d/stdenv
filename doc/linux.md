@@ -425,3 +425,7 @@ shutdown -c # cancels a planned shutdown
 
 kill -STOP 1234 # pause, interrupt programme resume continue
 kill -CONT 1234 # pause, interrupt programme resume continue
+
+
+tc qdisc add    dev eth0 root netem loss 25% # start simulate ping loss
+tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
