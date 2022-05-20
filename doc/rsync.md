@@ -12,4 +12,4 @@ cp -R --attributes-only /data/ data # 0-size structure zero don't use rsync
 rsync -avrnR --prune-empty-dirs --exclude=".*" --include="*/" --include="*.sh" --include="*.py" --include="mr.key" --include="mr.kdbix" --exclude="*" --stats --progress --human-readable /home/user/. remote:hehe/
 
 
--a = --recursive --links --perms --times --group --owner --devices --specials
+-a = --recursive --links --perms --times --group --owner --devices --specials # archive
