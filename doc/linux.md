@@ -425,3 +425,6 @@ shutdown -c # cancels a planned shutdown
 
 kill -STOP 1234 # pause, interrupt programme resume continue
 kill -CONT 1234 # pause, interrupt programme resume continue
+
+sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4
+sudo vi /etc/systemd/resolved.conf # dns
