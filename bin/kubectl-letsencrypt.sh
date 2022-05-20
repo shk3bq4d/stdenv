@@ -4,7 +4,8 @@
 set -euo pipefail
 umask 027
 
-kubectl get -A --show-kind=true ingress.extensions "$@"
+#kubectl get -A --show-kind=true ingress.extensions "$@"
+kubectl get -A --show-kind=true ingress "$@"
 kubectl get -A --show-kind=true ingresses.networking.k8s.io "$@"
 kubectl get -A --show-kind=true orders.acme.cert-manager.io "$@" | grep -E --color=always "^|invalid"
 kubectl get -A --show-kind=true certificates.cert-manager.io "$@"| grep -E --color=always "^|True"
