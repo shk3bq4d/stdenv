@@ -95,3 +95,7 @@ host -t cname www.example.com 8.8.8.8
 # Using the dig command
 dig www.abc.com cname
 dig @8.8.8.8 www.abc.com cname
+
+# linux systemd config
+sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4 # linux systemd
+sudo vi /etc/systemd/resolved.conf # dns linux systemd
