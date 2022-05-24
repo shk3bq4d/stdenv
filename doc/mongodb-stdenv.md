@@ -31,13 +31,17 @@ mongoimport --db graylog --username=admin --password=MYPASSWORD --authentication
 ```
 
 # querifing unify controller
+```sh
+sudo docker exec -it mongo mongo 127.0.0.1/unifi
+```
 ```js
 db.site.findOne()
 db.site.find().forEach(function(i) { print(i.desc); })
 db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
-db.device.findOne(); # name, ip, mac, version, site_id, config_network.type, config_network.ip
+db.device.findOne(); // name, ip, mac, version, site_id, config_network.type, config_network.ip
 db.site.find().forEach(function(i) { print(i._id + " " + i.desc); })
 db.device.find().forEach(function(i) { print(i.name); })
+db.device.find().forEach(function(i) { print(i.ip + " " + i.name); })
 db.setting.find().forEach(function(i) { if (!i.site_id) printjson(i.key); })
 ```
 
