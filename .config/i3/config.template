@@ -383,7 +383,9 @@ bindcode $mod+46  scratchpad show
 
 # +s 
 #bindcode $mod+Shift+47  move workspace to output $STDHOME_MOVE_WORKSPACE_DIRECTION
+# +s :s
 bindcode $mod+Shift+47  move workspace to output up
+# +n :n
 bindcode $mod+Shift+46  move workspace to output next
 workspace_auto_back_and_forth yes
 #popup_during_fullscreen <ignore|leave_fullscreen>
