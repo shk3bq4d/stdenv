@@ -13,6 +13,9 @@ sudo iptables -I OUTPUT 1 --dst 10.101.6.18/32 -j DROP
 iptables -A forwarding_lan_rule -p tcp --src 10.19.29.69/32 -j DROP
 iptables -A forwarding_lan_rule -p udp --src 10.19.29.69/32 -j DROP
 
+# debug traffic
+iptables -t nat -I OUTPUT      1 -p udp --dport 161 -j LOG --log-prefix "grepme output "      --log-level 6
+sudo dmesg -w | grep "grepme output "
 
 # list
 sudo iptables -L

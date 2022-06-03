@@ -20,6 +20,7 @@ mongo --host MYHOST --port=27017 --quiet --eval "d=db.isMaster(); print( d['isma
 
 # blue
 ```sh
+mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf)
 mongo 127.0.0.1/graylog -u 'MYUSER' -p 'MYPASSWORD'
 mongo 172.18.9.77/graylog -u 'MYUSER' -p 'MYPASSWORD'
 mongo 172.18.9.140/graylog -u 'MYUSER' -p 'MYPASSWORD' --quiet --eval  "printjson(db.adminCommand('listDatabases'))"
