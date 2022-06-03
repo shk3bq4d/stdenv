@@ -1,4 +1,5 @@
 # /* ex: set filetype=md fenc=utf-8 expandtab ts=2 sw=2 : */
+* https://github.com/ansible/ansible/blob/stable-2.12/changelogs/CHANGELOG-v2.12.rst#release-summary
 * https://docs.ansible.com/ansible/latest/modules/template_module.html
 * https://docs.ansible.com/ansible/latest/modules/include_vars_module.html
 * https://docs.ansible.com/ansible/latest/modules/get_url_module.html
