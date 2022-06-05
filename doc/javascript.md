@@ -6,6 +6,7 @@ var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k =
 
 encodeURIComponent
 encodeURI()
+push() // append, extend
 
 
 "hehe".replace(/h/g, "_");
