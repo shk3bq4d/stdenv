@@ -1198,9 +1198,9 @@ max() {
     printf "%s\n" "$@" | sort -rg | head -n1
 }
 
-password_AZaz09() { local l; [[ "$#" -eq 1 ]] && l="$1" || l=20; tr -dc A-Za-z0-9 < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
-password_AF09()   { local l; [[ "$#" -eq 1 ]] && l="$1" || l=20; tr -dc A-F0-9    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
-password_af09()   { local l; [[ "$#" -eq 1 ]] && l="$1" || l=20; tr -dc a-f0-9    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
+password_AZaz09() { local l; [[ "$#" -eq 1 ]] && l="$1" || l=24; tr -dc A-Za-z0-9 < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
+password_AF09()   { local l; [[ "$#" -eq 1 ]] && l="$1" || l=32; tr -dc A-F0-9    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
+password_af09()   { local l; [[ "$#" -eq 1 ]] && l="$1" || l=32; tr -dc a-f0-9    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
 password__()      { local l; [[ "$#" -eq 1 ]] && l="$1" || l=24; tr -dc 'A-Za-z0-9_%$~&[{}(=*)+]!#-'    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
 
 true # last statement must return true
