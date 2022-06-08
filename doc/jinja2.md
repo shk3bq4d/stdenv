@@ -1,3 +1,6 @@
+end of line {# comments with non-suppressed \n character https://stackoverflow.com/a/68381198 +#}
+
+
 # http://jinja.pocoo.org/docs/2.10/templates/
 Template Designer Documentation
 This document describes the syntax and semantics of the template engine and will be most useful as reference to those creating Jinja templates. As the template engine is very flexible, the configuration from the application can be slightly different from the code presented here in terms of delimiters and behavior of undefined values.

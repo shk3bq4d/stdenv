@@ -158,3 +158,8 @@ ${message.message}                 <-  this a default field, so not in fields
 ${message.fields.winlog_event_id}  <-  this NOT a default field, so it's a key of "fields"
 ${end}
 ${end}
+
+# faulty upgrade
+```
+mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval 'db.cluster_config.insert([{"type":"org.graylog2.migrations.V20161122174500_AssignIndexSetsToStreamsMigration.MigrationCompleted","payload":{"index_set_id":"5f8716200e808e404377331a","completed_stream_ids":[],"failed_stream_ids":[]},"last_updated":ISODate("2022-06-03T12:34:56.789Z"),"last_updated_by":"d9ce2ebb-2811-4e13-aa57-508ef7068fd6"}])'
+```

@@ -29,6 +29,7 @@ curl -s http://localhost:9200/graylog_43 | python -m json.tool
 curl -XDELETE http://localhost:9200/graylog_43
 
 
+curl -sXPOST http://localhost:9200/_cluster/reroute?retry_failed=true
 ~/bin/notinpath/elastic-reroute.sh
 curl -XPOST 'localhost:9200/_cluster/reroute' -d '{
     "commands": [{
