@@ -118,7 +118,7 @@ Windows Key + Down – Snap current window to the bottom of the screen.
 
 # Expose:
 * Win + Tab
-* Win press + Left/Right Release + Win Release 
+* Win press + Left/Right Release + Win Release
 if done by accident (which happens all the time), press Esc
 
 # Bash windows
@@ -138,7 +138,7 @@ set to developer mode
 Start
 cmd
 bash
-4a) 
+4a)
 https://www.fosshub.com/ConEmu.html
 https://www.fosshub.com/ConEmu.html/ConEmuPack.161206.7z
 4b)  mintty steps # https://github.com/mintty/mintty/wiki/Tips#using-mintty-for-bash-on-ubuntu-on-windows-uow--windows-subsystem-for-linux-wsl
@@ -188,7 +188,13 @@ certmgr.msc # certificate trust store
 
 # volume mute
 ## put
+```sh
 CreateObject("WScript.Shell").SendKeys(chr(173))
 ## in volume-mute.vbs, and then call
 cscript.exe volume-mute.vbs
+```
 
+# telnet netcat
+```sh
+Test-NetConnection -Computername IP -Port PORT
+```
