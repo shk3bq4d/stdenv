@@ -434,3 +434,7 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
 sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4
 sudo vi /etc/systemd/resolved.conf # dns
 
+
+chage -l       myuser # check human status if password expired How to check the account status in Linux https://www.howtouselinux.com/post/how-to-fix-warning-your-password-has-expired-in-linux
+chage -M 99999 myuser # set user password to never expire
+chage -E -1    myuser # set user account  to never expire
