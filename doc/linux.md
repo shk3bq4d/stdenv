@@ -434,3 +434,9 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
 sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4
 sudo vi /etc/systemd/resolved.conf # dns
 
+
+pcmanfm # lightweight GUI file manager
+dolphin # GUI file manager
+thunar # GUI file manager
+double commander # GUI file manager
+nemo # GUI file manager
