@@ -144,3 +144,8 @@ $ strace -s 99999 -ffttTo /tmp/strace.out service zookeeper-server init
 2888 # internal port 1 (node to node)
 3888 # internal port 2 (leader election)
 
+
+# upgrade cluster procedure
+https://zookeeper.apache.org/doc/r3.7.1/releasenotes.html
+https://zookeeper.apache.org/releases.html#releasenotes
+https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.2.9/bk_rolling-upgrade/content/upgrade_zookeeper.html
