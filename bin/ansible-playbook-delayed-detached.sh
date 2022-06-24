@@ -67,6 +67,7 @@ echo "flagfile is $flagfile"
     test "$flagfile_lmod_before" -ne "$flagfile_lmod_after" && echo "FATAL: flagfile last mod time changed $flagfile_lmod_before != $flagfile_lmod_after" && trap '' SIGHUP SIGINT SIGQUIT SIGTERM EXIT && exit 1
     export ANSIBLE_FORCE_COLOR=true
     set +e
+    echo "pwd is $PWD"
     echo ansible-playbook "$@"
     ansible-playbook "$@"
     echo "exit code is $?"
