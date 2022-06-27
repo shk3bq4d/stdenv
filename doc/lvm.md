@@ -42,6 +42,7 @@ lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_data
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_var
 lvresize --size +1G   --resizefs /dev/mapper/VG_root-LV_usr
 lvresize --size +400M --resizefs /dev/mapper/VG_root-LV_usr
+lvresize --size +9G   --resizefs /dev/mapper/VG_root-LV_backup
 lvresize --size +5G   --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root_home
 lvresize --size +3G   --resizefs /dev/mapper/rootvg-optlv

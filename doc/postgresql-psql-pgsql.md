@@ -54,10 +54,10 @@ SELECT * FROM information_schema.tables where table_name='dbversion';
 psql -U zabbix -h localhost
 java -jar schemaSpy_5.0.0.jar -t pgsql -host localhost:5432 -db zabbix -s public -o /tmp/bip -u zabbix -p myPasswordFSD0.fs8 -dp postgresql-42.1.4.jar
 PGPASSWORD=auoehtnuhoeauaoetnuhoena psql \
-	-h hostname \
-	-U pgsqladmin@hostbip \
-	-d "database" \
-	-f my.sq
+    -h hostname \
+    -U pgsqladmin@hostbip \
+    -d "database" \
+    -f my.sq
 
 pg_dumpall -U django -oc
 pg_dump    -U django -d myschema
@@ -67,7 +67,7 @@ psql -U postgres -d device42 -c "select * from rowmgmt_password_view_edit_groups
 
 docker exec -t postgres sh -c 'apt update && apt install -y vim'
 docker exec -it postgres pg_dumpall -U docvault | gzip -c > /data/pgdump-$(date +'%Y.%m.%d-%H.%M.%S')-all.dump.gz
-docker exec -u 999 -it postgres pg_dump -U confluence -d confluencedb 
+docker exec -u 999 -it postgres pg_dump -U confluence -d confluencedb
 echo -e '$include /etc/inputrc\nset editing-mode vi\nset keymap vi-command' | docker exec -i postgres sh -c 'cat - >  /var/lib/postgresql/.inputrc'
 docker exec postgres cat /var/lib/postgresql/.psqlrc
 echo -e '\\set lid 294913\n\\set ad 2195457' | docker exec -i postgres sh -c 'cat - >> /var/lib/postgresql/.psqlrc'
@@ -200,4 +200,31 @@ update bandana set bandanavalue = regexp_replace(bandanavalue, '(<hostname>)[^<]
 
 'concat' || 'withme'
 concat('bip', 'bop')
+```
+
+```markdown
+# replication
+* https://github.com/lesovsky/ansible-postgresql-sr-on-el6
+* https://github.com/samdoran/ansible-role-pgsql-replication
+* https://github.com/EnterpriseDB/edb-ansible/tree/master/roles/setup_replication
+* https://severalnines.com/database-blog/postgresql-replication-setup-maintenance-using-ansible
+* https://www.opensourceforu.com/2019/02/devops-series-configuring-a-postgresql-master-slave-setup-using-ansible/
+* https://hub.docker.com/r/severalnines/clustercontrol
+* https://www.enterprisedb.com/postgres-tutorials/postgresql-replication-and-automatic-failover-tutorial#log-shipping
+* https://pgdash.io/blog/postgres-physical-replication.html#:~:text=Physical%20replication%20methods%20are%20used,)%2C%20typically%20on%20another%20machine.
+* https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling
+* https://www.postgresql.org/docs/current/different-replication-solutions.html
+* https://momjian.us/main/writings/pgsql/replication.pdf
+* https://postgres-r.org/documentation/terms
+* https://hevodata.com/learn/postgresql-streaming-replication/#meth2
+* https://www.digitalocean.com/community/tutorials/how-to-set-up-physical-streaming-replication-with-postgresql-12-on-ubuntu-20-04
+
+# failover
+* https://www.enterprisedb.com/blog/where-my-recoveryconf-file-postgresql-v12
+* https://www.enterprisedb.com/postgres-tutorials/how-manage-replication-and-failover-postgres-version-12-without-recoveryconf
+
+```
+```sql
+select client_addr, state from pg_stat_replication;
+select pg_is_in_recovery();
 ```
