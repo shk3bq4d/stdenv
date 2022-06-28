@@ -51,7 +51,7 @@ $ echo mntr | nc localhost 2185
               zk_pending_syncs    0               - only exposed by the Leader
               zk_open_file_descriptor_count 23    - only available on Unix platforms
               zk_max_file_descriptor_count 1024   - only available on Unix platforms
-              
+
 The output is compatible with java properties format and the content may change over time (new keys added). Your scripts should expect changes.
 
 ATTENTION: Some of the keys are platform specific and some of the keys are only exported by the Leader.
@@ -90,7 +90,8 @@ ssh_jail.sh jzookeeper /usr/local/bin/zkCli.sh get /neato/secret
 
 
 # strace init
-13:51:51 6 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminmru
+```sh
+13:51:51 6 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminop
 $ grep execve /tmp/strace.out.18*
 /tmp/strace.out.18871:13:50:08.982046 execve("/sbin/service", ["service", "zookeeper-server", "init"], [/* 58 vars */]) = 0 <0.000623>
 /tmp/strace.out.18873:13:50:09.000634 execve("/sbin/consoletype", ["/sbin/consoletype"], [/* 58 vars */]) = 0 <0.000208>
@@ -136,16 +137,28 @@ $ grep execve /tmp/strace.out.18*
 /tmp/strace.out.18927:13:50:09.619705 execve("/bin/rm", ["rm", "-rf", "/var/lib/zookeeper/version-2"], [/* 22 vars */]) = 0 <0.000315>
 /tmp/strace.out.18928:13:50:09.627574 execve("/bin/mkdir", ["mkdir", "-p", "/var/lib/zookeeper/version-2"], [/* 22 vars */]) = 0 <0.000334>
 
-13:51:57 7 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminmru
+13:51:57 7 root@t-infra-zk-idk-1046.dev.ks.local:/home/adminop
 $ strace -s 99999 -ffttTo /tmp/strace.out service zookeeper-server init
 
 
 2181 # external port
 2888 # internal port 1 (node to node)
 3888 # internal port 2 (leader election)
+```
 
 
 # upgrade cluster procedure
 https://zookeeper.apache.org/doc/r3.7.1/releasenotes.html
 https://zookeeper.apache.org/releases.html#releasenotes
 https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.2.9/bk_rolling-upgrade/content/upgrade_zookeeper.html
+* ssh to all nodes, retrieve follower or leader status via either
+zkServer.sh status | grep Mode
+echo stat | nc localhost 2181 | grep Mode
+* for each node, starting with followers, do
+ * your upgrade
+ * zkCli.sh create /my-upgrade-test-node from-node-$(hostname -f)
+ * (on another node check successful creation of node)
+   zkCli.sh get /my-upgrade-test-node
+   zkCli.sh delete /my-upgrade-test-node
+ * abort in case of any error
+
