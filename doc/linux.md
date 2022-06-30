@@ -414,7 +414,7 @@ sudo systemctl reboot --firmware-setup # reboot to bios uefi
 
 linux /boot/vmlinuz-3.2.0-24-generic root=UUID=bc6f8146-1523-46a6-8b\
 6a-64b819ccf2b7 ro  quiet splash
-initrd /boot/initrd.img-3.2.0-24-generic init=/bin/bash # to append to grub single user 
+initrd /boot/initrd.img-3.2.0-24-generic init=/bin/bash # to append to grub single user
 sudo mount -o remount,rw /partition/identifier /mount/point
 sudo mount -o remount,rw /dev/mapper/centos-root /
 
@@ -435,14 +435,12 @@ sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4
 sudo vi /etc/systemd/resolved.conf # dns
 
 
-<<<<<<< HEAD
 pcmanfm # lightweight GUI file manager
 dolphin # GUI file manager
 thunar # GUI file manager
 double commander # GUI file manager
 nemo # GUI file manager
-=======
+
 chage -l       myuser # check human status if password expired How to check the account status in Linux https://www.howtouselinux.com/post/how-to-fix-warning-your-password-has-expired-in-linux
 chage -M 99999 myuser # set user password to never expire
 chage -E -1    myuser # set user account  to never expire
->>>>>>> github/stdenv
