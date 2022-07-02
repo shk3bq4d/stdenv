@@ -4,3 +4,7 @@ print-lp-default.sh
 print-list-printers.sh
 lpq -a # list all jobs in print queue
 lprm 5  # rm removes job 5 from print queue
+
+http://localhost:631/
+http://localhost:631/admin
+http://localhost:631/printers
