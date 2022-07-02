@@ -26,6 +26,8 @@ ls -1d /usr/jails/* | grep -vE 'basejail' | while read i; do sudo cp /root/pkg-1
 pkg-static add -f /root/pkg-1.17.5_1.txz
 pkg-static upgrade
 echo "jsmb4 jsslh jexternalssh jexternalhttps jcerts j404 jldap" | xargs -n1 echo | while read i; do yes | sudo ezjail-admin console -e "pkg-static add -f /root/pkg-1.17.5_1.txz" $i; done
+echo "jsabnzbd-0-7-20" | xargs -n1 echo | while read i; do yes | sudo ezjail-admin console -e "pkg-static add -f /root/pkg-1.17.5_1.txz" $i; done
 yes | sudo ezjail-admin console -e "pkg-static add -f /root/pkg-1.17.5_1.txz" jsquid
 sudo ezjail-admin console -e "pkg-static upgrade" jexternalssh
+sudo ezjail-admin console -e "pkg-static upgrade" jsabnzbd-0-7-20
 ```
