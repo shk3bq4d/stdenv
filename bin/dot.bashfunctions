@@ -1182,6 +1182,15 @@ min() {
     printf "%s\n" "$@" | sort -g | head -n1
 }
 
+sed_ldapsearch() {
+    # merges wrapped lines
+    # https://richmegginson.livejournal.com/18726.html
+    # Disadvantage is that it reads the entire output into memory first. Not sure if that is the case with your version though..
+    sed ':a;$!{N;ba};s/\n //g'
+}
+
+
+
 allhash() {
     local f
     f="$1"
