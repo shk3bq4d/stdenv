@@ -481,3 +481,5 @@ FROM
 
 ENV DEBIAN_FRONTEND noninteractive # apt Dockerfile
 
+
+docker-compose up
