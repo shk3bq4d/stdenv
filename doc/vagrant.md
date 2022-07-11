@@ -1,3 +1,5 @@
+https://www.vagrantup.com/docs/vagrantfile
+
 # packaging
 http://vertis.io/2012/11/02/creating-a-vagrant-base-box-from-an-existing-vmdk.html
 
@@ -67,3 +69,5 @@ end
 config.vm.provision "shell", run: "always", inline: <<-SHELL
         mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` vagrant /vagrant
 SHELL
+
+config.vm.network "public_network", bridge: "Intel(R) 82579LM Gigabit Network Connection" # https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant
