@@ -194,3 +194,15 @@ https://www.abelworld.com/mysql-slave-master-switch/
 WARNING json_query can't be used to query string or int (scalars)
 use json_value instead
 https://mariadb.com/kb/en/json-functions/ -- json-query
+
+# query logging
+https://stackoverflow.com/questions/303994/log-all-queries-in-mysql
+## file logging
+```sql
+set global log_output = 'FILE';
+set global general_log_file='/Applications/MAMP/logs/mysql_general.log';
+set global general_log = 1; -- start logging
+set global general_log = 0; -- turn off logging
+```
+## table logging
+https://stackoverflow.com/a/14403905
