@@ -4,7 +4,7 @@ vboxmanage closemedium disk df32fae5-4df3-46ab-9d4f-09ab51d50617 --delete
 vboxmanage createhd --filename /lvmr0/vbox/vm/kubuntu1404base/kubuntu1404base.vdi --format VDI --size 204800
 vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 0 --type hdd --medium kubuntu1404base.vdi
 vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 1 --type dvddrive --medium /lvmr0/kubuntu-14.04.1-desktop-amd64.iso
-vboxmanage controlvm kubuntu1404base poweroff
+vboxmanage controlvm kubuntu1404base poweroff # stop 
 vboxmanage modifyvm kubuntu1404base --memory 1024
 vboxmanage guestproperty get xpbase vrdeport
 vboxmanage guestproperty set xptest vrdeport 6040
@@ -13,8 +13,8 @@ vboxmanage modifyvm "xp1 Clone" --vrde on
 vboxmanage modifyvm "xp1 Clone" --vrdeport 6040
 vboxmanage modifyvm "xp1 Clone" --vrdeproperty VNCPassword=secret
 vboxmanage startvm "xp1 Clone" --type headless
-vboxmanage controlvm "xp1 Clone" acpipowerbutton # poweroff shutdown turn off
-vboxmanage controlvm "xp1 Clone" poweroff        # noacpi poweroff shutdown turn off
+vboxmanage controlvm "xp1 Clone" acpipowerbutton # poweroff shutdown turn off stop
+vboxmanage controlvm "xp1 Clone" poweroff        # noacpi poweroff shutdown turn off stop
 vboxmanage discardstate projectlibre
 vboxmanage showvminfo
 vboxmanage showvminfo minikube G ssh
@@ -36,6 +36,7 @@ vboxmanage createvm --name $name --register --basedir $basedir
 vboxmanage modifyvm --memory ${ram} --nic1 $network --audio none --vrde on --vrdeport $vrdeport
 vboxmanage snapshot $name take "init_$(date +'%Y.%m.%d-%H.%M.%S')"
 vboxmanage snapshot foreman-centos72 take "Before dsestero-sonarqube install" --live
+vboxmanage snapshot foreman-centos72 restore "Before dsestero-sonarqube install"
 vm_headless $name
 
 ubuntu-xenial-16.04-cloudimg
