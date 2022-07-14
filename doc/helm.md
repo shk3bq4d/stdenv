@@ -180,3 +180,5 @@ Global Flags:
 ```sh
 helm template myrandomname . -f values-uat.yaml --debug
 ```
+
+https://helm.sh/docs/topics/kubernetes_apis/ # UPGRADE FAILED: current release manifest contains removed kubernetes api(s) for this kubernetes version and it is therefore unable to build the kubernetes objects for performing the diff
