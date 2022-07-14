@@ -6,6 +6,10 @@ journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMP
 
 ~/.config/systemd/user/default.target.wants # home user unit files
 
+systemctl show MYSERVICE --property ActiveState
+systemctl show MYSERVICE --property SubState
+systemctl show MYSERVICE | grep -i state
+
 systemd_mr_unitfiles
 
 https://www.freedesktop.org/software/systemd/man/systemd.service.html#ExecStop=
