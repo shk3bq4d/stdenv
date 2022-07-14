@@ -75,11 +75,11 @@ doc.xpath('/*')
 # process stdin line by line
 """
 import fileinput # stdin
-
-for line in fileinput.input(): # stdin
-    line = line.rstrip()
-    if line == '':
-        continue
+filepath = '-' # or empty, stdin
+for line in fileinput.input(filepath): # stdin
+    line = line.rstrip() # stdin
+    if line == '': # stdin
+        continue # stdin
 
 # or in onliner
 for line in filter(lambda x: len(x) > 0, map(lambda x: x.rstrip(), fileinput.input(files=None))):
