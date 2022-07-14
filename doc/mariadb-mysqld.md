@@ -2,6 +2,7 @@
 mysql  -u root --password=root # long  password with equal
 mysql  -u root -proot          # short password no equal
 mysql --version
+show variables like 'version';
 ```
 ```sql
 show databases;
@@ -155,6 +156,7 @@ select if(5 is null, "was null", "wasnt null");
 ```sql
 -- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
 regexp_replace(original_value, pattern, replacement[, pos[, occurrence[, match_type]]])
+select regexp_substr(headers, '(?<=Date: ).*') as c from email_sources; -- extract date from email header, https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr
 ```
 
 # safe mode
@@ -204,6 +206,20 @@ set global general_log_file='/var/log/mysql/query-logging.log';
 set global general_log = 1; -- start logging
 set global general_log = 0; -- turn off logging
 -- /\<\(insert\|replace\|delete\|update\)\>  vim search for update
+-- nohup sh -c 'tail -f /var/log/mysql/query-logging.log | ts >> /var/log/mysql/query.logging.log.ts' < /dev/null &>/dev/null & # for timestamp'ed logs
 ```
 ## table logging
 https://stackoverflow.com/a/14403905
+
+## vim mode
+echo 'set editing-mode vi' | docker exec -i mariadb tee -a /etc/inputrc
+echo 'set editing-mode vi' | tee -a /etc/inputrc
+
+## gzip'ed column
+db.sh --binary-as-hex --skip-column-names -B <<< "select data from blobs_storage where blob_id = '774'" | xxd -r -p | gunzip # gzip hex binary
+
+## with update
+```sql
+create table hehe (id int, value varchar(255)); insert into hehe values(1, 'one'), (2, 'two');
+with a as (select 1 id) update hehe inner join a on hehe.id = a.id set value ='updated';
+```
