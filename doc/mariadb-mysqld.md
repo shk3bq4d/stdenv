@@ -200,9 +200,10 @@ https://stackoverflow.com/questions/303994/log-all-queries-in-mysql
 ## file logging
 ```sql
 set global log_output = 'FILE';
-set global general_log_file='/Applications/MAMP/logs/mysql_general.log';
+set global general_log_file='/var/log/mysql/query-logging.log';
 set global general_log = 1; -- start logging
 set global general_log = 0; -- turn off logging
+-- /\<\(insert\|replace\|delete\|update\)\>  vim search for update
 ```
 ## table logging
 https://stackoverflow.com/a/14403905
