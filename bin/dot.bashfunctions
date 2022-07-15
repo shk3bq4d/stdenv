@@ -1215,7 +1215,7 @@ nc_v_127_0_0_1() { set -x; nc -v 127.0.0.1 "$@"; set +x; }
 
 db_docker_vim_mode() {
     local list
-    list="$(docker ps --format '{{ .Names }}')"
+    list="$(sudo docker ps --format '{{ .Names }}')"
     echo "$list" | grep -qx mariadb && echo 'set editing-mode vi' | sudo docker exec -i mariadb tee -a /etc/inputrc >/dev/null && echo "OK: mariadb"
     echo "$list" | grep -qx mysql   && echo 'set editing-mode vi' | sudo docker exec -i mysql   tee -a /etc/inputrc >/dev/null && echo "OK: mysql"
     echo "$list" | grep -qx postgres   && echo 'set editing-mode vi' | sudo docker exec -i postgres   tee -a /etc/inputrc >/dev/null && echo "OK: postgres"
