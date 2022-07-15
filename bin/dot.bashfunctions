@@ -1218,6 +1218,7 @@ db_docker_vim_mode() {
     list="$(docker ps --format '{{ .Names }}')"
     echo "$list" | grep -qx mariadb && echo 'set editing-mode vi' | sudo docker exec -i mariadb tee -a /etc/inputrc >/dev/null && echo "OK: mariadb"
     echo "$list" | grep -qx mysql   && echo 'set editing-mode vi' | sudo docker exec -i mysql   tee -a /etc/inputrc >/dev/null && echo "OK: mysql"
+    echo "$list" | grep -qx postgres   && echo 'set editing-mode vi' | sudo docker exec -i postgres   tee -a /etc/inputrc >/dev/null && echo "OK: postgres"
 }
 
 true # last statement must return true

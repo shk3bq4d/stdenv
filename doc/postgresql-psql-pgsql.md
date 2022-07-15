@@ -16,19 +16,19 @@ sELECT c.relname FROM pg_class c WHERE c.relkind = 'S'; # list sequences
 
 -v ON_ERROR_STOP=1
 
-@begin=sql@
-SELECT datname FROM pg_database WHERE datistemplate = false; -- list databases
-SELECT table_schema,table_name FROM information_schema.tables ORDER BY table_schema,table_name; -- list tables in current database
-CREATE USER tom WITH PASSWORD 'myPassword';
-CREATE DATABASE jerry;
-GRANT ALL PRIVILEGES ON DATABASE jerry to tom;
+```sql
+select datname from pg_database where datistemplate = false; -- list databases
+select table_schema,table_name from information_schema.tables order by table_schema,table_name; -- list tables in current database
+create user tom with password 'myPassword';
+create database jerry;
+grant all privileges on database jerry to tom;
 grant connect on database confdb to myuser;
 grant usage   on schema public   to myuser;
 grant select  on cwd_user        to myuser;
 grant select  on user_mapping    to myuser;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO user;
-GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO user;
-@end=sql@
+grant select on all tables in schema public to user;
+grant execute on all functions in schema public to user;
+```
 
 psql confdb myuser -c "select count(1) from cwd_user;"
 
@@ -71,6 +71,9 @@ docker exec -u 999 -it postgres pg_dump -U confluence -d confluencedb
 echo -e '$include /etc/inputrc\nset editing-mode vi\nset keymap vi-command' | docker exec -i postgres sh -c 'cat - >  /var/lib/postgresql/.inputrc'
 docker exec postgres cat /var/lib/postgresql/.psqlrc
 echo -e '\\set lid 294913\n\\set ad 2195457' | docker exec -i postgres sh -c 'cat - >> /var/lib/postgresql/.psqlrc'
+sudo docker exec -e DEBIAN_FRONTEND=noninteractive posgres sh -c "apt update && apt install less"
+pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init;
+pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init --chop-long-lines; -- truncate lines instead of wrapping
 sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -" -e EDITOR=vim -u 999 -it postgres bash -itc "psql -U confluence confluencedb"
 sudo docker exec -e PAGER="vim -c 'set buftype=nofile nomod nowrap nolist nonumber ft=sql syntax=sql' -" -e EDITOR=vim -u 999 -it postgres bash -itc "psql -U jira jiradb"
 sudo docker cp $RCD/.vimrc  postgres:/var/lib/postgresql/.vimrc
@@ -127,6 +130,7 @@ from (
 
 docker exec -u 999 -it postgres psql -U bitbucket bitbucketdb
 
+select "quoted_protected_column_escaped" from "my_table_name";
 
 ```sql
 select to_timestamp(timestamp), type, affecteduser, case when type = 'file_changed' then subjectparams else file end as file from oc_activity where timestamp > 1596031681 and subject like '%_self' and type in ('file_changed', 'file_created', 'file_deleted') order by affecteduser, file, timestamp;

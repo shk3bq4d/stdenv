@@ -143,12 +143,13 @@ def go(args) -> None:
     ar = parser.parse_args(args)
     s = process(ar.FILENAME)
     if 'VIMF6' in os.environ: print('``' + '`sql')
-    print(s)
-    if 'VIMF6' in os.environ: print('``' + '`')
+    sys.stdout.write(s)
+    if 'VIMF6' in os.environ: print('\n``' + '`')
 
 sql_reserved_words2 = """
 now
 date_sub
+functions
 """
 # https://www.drupal.org/docs/develop/coding-standards/list-of-sql-reserved-words
 sql_reserved_words = """

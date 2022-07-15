@@ -2377,3 +2377,9 @@ select oc_accounts.uid, json_extract_path(oc_accounts.data::json, 'email', 'valu
 select oc_accounts.uid, json_extract_path(oc_accounts.data::json, 'email', 'value'), gid from oc_accounts left join oc_group_user on oc_accounts.uid = oc_group_user.uid where gid = 'admin';
 select oc_accounts.uid, json_extract_path(oc_accounts.data::json, 'displayname', 'value') as displayname, json_extract_path(oc_accounts.data::json, 'email', 'value') as email, gid from oc_accounts left join oc_group_user on oc_accounts.uid = oc_group_user.uid where gid = 'admin';
 ```
+
+```sh
+docker exec -e OC_PASS=uaeoh..............EAU15353 -itu 33 nextcloud php occ user:add --password-from-env --display-name "John Majer" myuserid
+docker exec -itu 33 nextcloud php occ user:setting myuserid settings email bob@apple.com
+docker exec -itu 33 nextcloud php occ group:adduser "MYGROUP" "userid"
+```
