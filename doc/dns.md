@@ -13,6 +13,7 @@ ping -q -c 1 -t 1 your_host_here | grep PING | sed -e "s/).*//" | sed -e "s/.*(/
 getent hosts unix.stackexchange.com | cut -d' ' -f1 # 
 host unix.stackexchange.com | awk '/has address/ { print $4 }' # directly to DNS server
 nslookup unix.stackexchange.com | awk '/^Address: / { print $2 }' # directly to DNS server
+nslookup downloads.openwrt.org mydnsserver
 dig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 }' # directly to DNS server
 dig +tcp   +short unix.stackexchange.com
 dig +notcp +short unix.stackexchange.com
