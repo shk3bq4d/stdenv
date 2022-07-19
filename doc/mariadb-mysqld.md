@@ -134,7 +134,7 @@ kill 35; -- kill session 35
 show engine innodb status; -- as root, better for looking at locks
 
 select id, db, command, time, state, info from information_schema.processlist;
-show processlist;
+show processlist; -- list sessions connections
 show full processlist; -- see full query
 show privileges; -- dislay list of available privileges
 show grant for user@127.0.0.1;
@@ -206,7 +206,7 @@ set global general_log_file='/var/log/mysql/query-logging.log';
 set global general_log = 1; -- start logging
 set global general_log = 0; -- turn off logging
 -- /\<\(insert\|replace\|delete\|update\)\>  vim search for update
--- nohup sh -c 'tail -f /var/log/mysql/query-logging.log | ts >> /var/log/mysql/query.logging.log.ts' < /dev/null &>/dev/null & # for timestamp'ed logs
+-- nohup sh -c 'tail -f /var/log/mysql/query-logging.log | ts >> /var/log/mysql/query-logging.log.ts' < /dev/null &>/dev/null & # for timestamp'ed logs
 ```
 ## table logging
 https://stackoverflow.com/a/14403905
