@@ -141,6 +141,15 @@ show grant for user@127.0.0.1;
 
 alter database craft character set utf8 collate utf8_general_ci;
 
+show variables like '%char%'; -- character set
+-- character_set_client     | latin1                     |
+-- character_set_connection | latin1                     |
+-- character_set_database   | utf8mb4                    |
+-- character_set_filesystem | binary                     |
+-- character_set_results    | latin1                     |
+-- character_set_server     | utf8mb4                    |
+-- character_set_system     | utf8mb3
+
 select nvl(null,7); # coalesce
 select nvl('',8); # coalesce
 select isnull(null); -> 1

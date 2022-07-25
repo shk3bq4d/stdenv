@@ -1,5 +1,8 @@
 # /* ex: set filetype=sql fenc=utf-8 expandtab ts=4 sw=4 : */
 https://zabbix.group.local/tr_events.php?triggerid=1146099&eventid=640652792
+```bash
+~/git/git.zabbix.com/scm/zbx/zabbix/create/bin/gen_schema.pl mysql # create table database schema
+```
 
 select * from triggers       where triggerid=1146099 limit 1\G;
 select * from events         where eventid=640652792 limit 1\G;
