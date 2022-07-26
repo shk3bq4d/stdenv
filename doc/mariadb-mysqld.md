@@ -102,7 +102,6 @@ select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https
 Alter table Empolyee disable constraint pk_EmpNumer;
 SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
 
-mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha
 CREATE TABLE bip (
     Personid int NOT NULL AUTO_INCREMENT,
     Age int,
@@ -231,4 +230,8 @@ db.sh --binary-as-hex --skip-column-names -B <<< "select data from blobs_storage
 ```sql
 create table hehe (id int, value varchar(255)); insert into hehe values(1, 'one'), (2, 'two');
 with a as (select 1 id) update hehe inner join a on hehe.id = a.id set value ='updated';
+```
+
+```sh
+mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha
 ```
