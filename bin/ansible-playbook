@@ -3,7 +3,8 @@
 
 set -euo pipefail
 if [[ -n "${STDENV_ANSIBLE_PLAYBOOK:-}" ]]; then
-    echo "recursion detected, aborting"
+    echo "recursion detected, aborting. Which -a ansible-playbook"
+    which -a ansible-playbook
     exit 1
 fi
 export STDENV_ANSIBLE_PLAYBOOK=1
@@ -26,6 +27,8 @@ DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 for f in \
     $HOME/.virtualenvs/ansible/bin/activate \
     $HOME/.virtualenvs/ansible-2.10/bin/activate \
+    $DIR/../.virtualenvs/ansible/bin/activate \
+    $DIR/../.virtualenvs/ansible-2.10/bin/activate \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
