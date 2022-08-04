@@ -89,18 +89,7 @@ remove_colors() {
     sed -u -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2}){0,2})?[mGK]//g" "$@"
 }
 
-NONE="\033[0m"    # unsets color to term's fg color
-BOLD="\033[1m"
-OFF="\033[m"
-BLACK="\033[0;30m"    # black (or more likely white if terminal in day mode)
-RED="\033[0;31m"    # red
-GREEN="\033[0;32m"    # green
-ENONE=$'\033[0m'    # unsets color to term's fg color
-EBOLD=$'\033[1m'
 EOFF=$'\033[m'
-EBLACK=$'\033[0;30m'    # black (or more likely white if terminal in day mode)
-ERED=$'\033[0;31m'    # red
-EGREEN=$'\033[0;32m'    # green
 ECYAN=$'\033[0;36m'    # cyan
 
 while :; do
