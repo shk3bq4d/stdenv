@@ -72,6 +72,8 @@ sed -n '/USERNAME/,/-----$/ p' #print between two regexp
 sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase
 sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace
 
+sed -e '/search/a append this text after  the line matching my /search/ pattern'
+sed -e '/search/i insert this text before the line matching my /search/ pattern'
 
 ```
 

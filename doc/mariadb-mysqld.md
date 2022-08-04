@@ -233,5 +233,15 @@ with a as (select 1 id) update hehe inner join a on hehe.id = a.id set value ='u
 ```
 
 ```sh
-mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha
+mysqldump -h mariad.lan -u root -pblabla --single-transaction                       --databases haha # column-statistics is a mysql 8.0 thing, not compatible with mariadb
+mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha # column-statistics is a mysql 8.0 thing, not compatible with mariadb
+mysqldump --no-data
 ```
+
+# docker
+```sh
+https://github.com/docker-library/docs/tree/master/mariadb
+https://github.com/mariadb/mariadb-docker
+https://hub.docker.com/_/mariadb
+https://hub.docker.com/_/mysql
+```sh

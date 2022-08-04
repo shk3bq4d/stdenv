@@ -415,6 +415,13 @@ func! MrSyntaxRange()
         " deal with it
     endtry
     try
+        call SyntaxRange#Include('```php'    ,'```'    ,'php','NonText')
+    catch /^Vim\%((\a\+)\)\=:E117/
+        " deal with it
+    catch /^Vim\%((\a\+)\)\=:E484/
+        " deal with it
+    endtry
+    try
         call SyntaxRange#Include('```docker'    ,'```'    ,'Dockerfile','NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it
