@@ -23,10 +23,19 @@ crontab_line_user() {
     fi
 }
 
+filter() {
+    if [[ $# -eq 0 ]]; then
+        cat
+    else
+        grep -E --color=always "$@"
+    fi
+}
+
 cleanup_crontab_file_stdin() {
     grep -E "^\s*[@*0-9]" |
         grep -vF '# crontab-launch-entry-asap.sh' |
-        grep -vF 'RUNONCEID='
+        grep -vF 'RUNONCEID=' |
+        filter "$@"
 }
 
 source_type() {
@@ -51,7 +60,7 @@ newentry() {
 
 consume_crontab() {
     local f user
-    if [[ $# -eq 0 ]]; then
+    if [[ $# -eq 0 ]] || [[ -z "$1" ]]; then
         crontab -l
     elif id -un "$@" &>/dev/null; then
         user="$(id -un "$@")"
@@ -76,10 +85,20 @@ consume_crontab() {
     return 0
 }
 
+remove_colors() {
+    sed -u -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2}){0,2})?[mGK]//g" "$@"
+}
+
+EOFF=$'\033[m'
+ECYAN=$'\033[0;36m'    # cyan
+
 while :; do
-    consume_crontab "$@" | cleanup_crontab_file_stdin > $_tempfile
+    _user="${1:-}"
+    _grep="${2:-}"
+    [[ $_user == "me" ]] && _user=$(id -un)
+    consume_crontab "$_user" | cleanup_crontab_file_stdin "$_grep" > $_tempfile
     nb_lines="$(wc -l < $_tempfile)"
-    cat -n $_tempfile
+    cat -n $_tempfile  | sed -r -e "s/^([ 0-9]+)/$ECYAN\1$EOFF/"
     echo -n "Which entry would you like to execute ? "
 
     read _read
@@ -103,39 +122,39 @@ while :; do
     fi
 
 
-    entry="$(sed -r -n "$_read p" < $_tempfile)"
+    entry="$(remove_colors $_tempfile | sed -r -n "$_read p")"
     dateref="$(date +%s -d "-2 minute ago")"
     backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
     dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     #echo "entry is $entry"
     #echo "user is $(crontab_line_user "$@" <<< "$entry")"
     #exit 0
-    case "$(source_type "$@")" in \
+    case "$(source_type "$_user")" in \
     currentuser)
         {   crontab -l | tee $backupfile
-            newentry "$entry" "$@"
+            newentry "$entry" "$_user"
         } > $_tempfile
         crontab - < $_tempfile
         ;;
     user)
-        if crontab -l -u "$@" &>/dev/null; then
-            {   crontab -l -u "$@" | tee $backupfile
-                newentry "$entry" "$@"
+        if crontab -l -u "$_user" &>/dev/null; then
+            {   crontab -l -u "$_user" | tee $backupfile
+                newentry "$entry" "$_user"
             } > $_tempfile
-            crontab -u "$@" - < $_tempfile
+            crontab -u "$_user" - < $_tempfile
         else
-            {   sudo crontab -l -u "$@" | tee $backupfile
-                newentry "$entry" "$@"
+            {   sudo crontab -l -u "$_user" | tee $backupfile
+                newentry "$entry" "$_user"
             } > $_tempfile
-            sudo crontab -u "$@" - < $_tempfile
+            sudo crontab -u "$_user" - < $_tempfile
         fi
         ;;
     *)
-        cp "$@" $backupfile
+        cp "$_user" $backupfile
         if [[ -w "$@" ]]; then
-            newentry "$entry" "$@" >> "$@"
+            newentry "$entry" "$_user" >> "$_user"
         else
-            newentry "$entry" "$@" | sudo tee -a "$@" >/dev/null
+            newentry "$entry" "$_user" | sudo tee -a "$_user" >/dev/null
         fi
         ;;
     esac
