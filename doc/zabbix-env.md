@@ -431,6 +431,8 @@ return value;
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2Frelease%2F5.0 # changelog
 https://git.zabbix.com/scm/zbx/zabbix.git
+https://github.com/zabbix/zabbix
+git remote add github https://github.com/zabbix/zabbix
 
 ```sh
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"

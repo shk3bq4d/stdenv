@@ -24,7 +24,7 @@ select * from triggers       where triggerid=322523 limit 1\G;
 select *        from problem left join events eventsa on problem.eventid = eventsa.eventid where eventsa.eventid is null and problem.r_eventid is null limit 3\G -- unresolved problem where associated created event does not exists
 select count(1) from problem left join events eventsa on problem.eventid = eventsa.eventid where eventsa.eventid is null and problem.r_eventid is null;    -- total unresolved problem where associated created event does not exists
 create table _problem_20220106_nonexistingevent_case1 as select problem.* from problem left join events eventsa on problem.eventid = eventsa.eventid where eventsa.eventid is null and problem.r_eventid is null limit 1000000;
-select count(1) from problem where eventid in 
+select count(1) from problem where eventid in
 select count(1) from problem where r_eventid is null and not exists (select * from events where events.eventid = problem.eventid);
 begin; delete low_priority from problem where r_eventid is null and not exists (select * from events where events.eventid = problem.eventid);
 -- commit
@@ -63,3 +63,13 @@ select count(1) from hosts_groups where groupid not in (select groupid from hstg
 select distinct t.triggerid,t.description,t.expression,t.error,t.priority,t.type,t.value,t.state,t.lastchange,t.status,t.recovery_mode,t.recovery_expression,t.correlation_mode,t.correlation_tag,t.opdata,t.event_name,null,null,null from hosts h,items i,functions f,triggers t where h.hostid=i.hostid and i.itemid=f.itemid and f.triggerid=t.triggerid and h.status in (0,1) and t.flags<>20;
 select count(1) from (select distinct t.triggerid,t.description,t.expression,t.error,t.priority,t.type,t.value,t.state,t.lastchange,t.status,t.recovery_mode,t.recovery_expression,t.correlation_mode,t.correlation_tag,t.opdata,t.event_name,null,null,null from hosts h,items i,functions f,triggers t where h.hostid=i.hostid and i.itemid=f.itemid and f.triggerid=t.triggerid and h.status in (0,1) and t.flags<>20) b;
 show index from hosts;
+
+-- add primary key after upgrade to zabbix 6
+alter table history      add primary key (itemid,clock,ns);
+alter table history_log  add primary key (itemid,clock,ns);
+alter table history_text add primary key (itemid,clock,ns);
+alter table history_str  add primary key (itemid,clock,ns);
+alter table history_uint add primary key (itemid,clock,ns);
+
+-- activate mysql scheduler for k8s zabbix partitioning
+set global event_scheduler = on;

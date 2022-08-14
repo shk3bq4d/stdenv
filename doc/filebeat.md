@@ -265,3 +265,5 @@ filebeat.inputs:
 ```
 
 date -d "2006-01-02 15:04:05" +"%A" # filebeat timestamp reference day of week is Monday
+
+https://dissect-tester.jorgelbg.me/ 

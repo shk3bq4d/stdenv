@@ -929,3 +929,5 @@ kubectl rollout restart daemonset/kube-flannel-ds # restart all
 kubectl rollout restart deployments/coredns       # restart all
 vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver, controller, scheduler
 ```
+
+/var/lib/kubelet/config.yaml # cgroupDriver
