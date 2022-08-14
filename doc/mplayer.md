@@ -24,6 +24,9 @@ LEFT and RIGHT Seek backward/forward 10 seconds.
               ( and ) Adjust  audio  balance  in  favor of left/ right channel.
               m Mute sound.
 
+mplayer -delay
+
+mpv # delay
 
 # subvideo cut extract https://askubuntu.com/questions/56022/what-to-use-to-quickly-cut-audio-video
 ffmpeg -ss 00:00:00 -t 00:30:00 -i input.avi -vcodec copy -acodec copy output1.avi

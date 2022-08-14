@@ -171,6 +171,14 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --raw
 KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
 ```
 
+# renew kubernetes (expired) ssl certificates
+as root
+```sh
+kubeadm certs renew all
+KUBECONFIG=/etc/kubernetes/admin.conf kubectl get pod -A
+```
+you then have to restart a bunch of things, I found it easier to reboot
+
 # Get the password for the e2e user
 ```sh
 kubectl config view -o jsonpath='{.users[?(@.name == "e2e")].user.password}'
