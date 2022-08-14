@@ -232,6 +232,21 @@ create table hehe (id int, value varchar(255)); insert into hehe values(1, 'one'
 with a as (select 1 id) update hehe inner join a on hehe.id = a.id set value ='updated';
 ```
 
+# mysql schedule
+```sql
+-- activate mysql scheduler for k8s zabbix partitioning
+set global event_scheduler = on;
+show variables like 'event_scheduler';
+show create event e_zbx_part_mgmt\G;
+create or replace table debug_scheduler (id int not null auto_increment, value varchar(255), clock timestamp default now(), primary key (id));
+delimiter |
+create or replace event debug_scheduler on schedule every 5 second do begin insert into debug_scheduler (value) values (5); end |
+delimiter ;
+show events;
+select * from debug_scheduler order by id desc limit 10;
+drop event debug_scheduler; drop table debug_scheduler;
+```
+
 ```sh
 mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha
 ```
