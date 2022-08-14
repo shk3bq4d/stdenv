@@ -157,3 +157,6 @@ following-sibling::*[2 and .//*[text()='Draw']]//*[@class='linesMLine']
 .//tr[count(*)=7 or count(*)=6][./td[@class='OT_Col_FontSmall_BR']]
 //a[normalize-space(text())='Ma 10']/@href
 //div[./div/span[contains(text(), '32A Value Date and Original Amount')]]/div[contains(@id,'Stackvert')]/div[not(contains(@class, 'mask_text'))][1]//*[local-name()='input' or local-name()='textarea']
+
+string(//*[local-name()='SingleLogoutService']/@Location) # attribute text value
+string(//*[local-name()='SingleLogoutService']/@Location) # attribute text value

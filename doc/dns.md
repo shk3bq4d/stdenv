@@ -17,6 +17,8 @@ nslookup downloads.openwrt.org mydnsserver
 dig unix.stackexchange.com | awk '/^;; ANSWER SECTION:$/ { getline ; print $5 }' # directly to DNS server
 dig +tcp   +short unix.stackexchange.com
 dig +notcp +short unix.stackexchange.com
+ping -a w.x.y.z # ptr reverse lookup windows
+nslookup w.x.y.z # ptr reverse lookup windows
 ```
 
 

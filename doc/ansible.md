@@ -2780,3 +2780,5 @@ ipv4cidr | ansible.netcommon.nthhost(200) # ip calc netaddr
 
 query('') -> same as lookup but always return a list (so  same as lookup('', wantlist=True))
 q('')     -> same as query # lookup
+
+mode: 0o750 # permission octal 0755 0750 777 644 660 664 666

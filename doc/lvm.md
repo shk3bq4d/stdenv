@@ -60,3 +60,29 @@ lvremove # delete rm
 lvremove /dev/mapper/rootvg-blobfuse--cache # delete rm
 vgremove # delete rm
 vgextend - Add physical volumes to a volume group
+
+lvrename VG_root LV_data LV_backup # move rename mv
+
+# var downsizing
+zabbix-maintenance-on.sh
+docker stop mariadb
+systemctl stop polkit
+systemctl stop docker.socket
+systemctl stop docker.service
+systemctl stop containerd
+systemctl stop filebeat
+systemctl stop zabbix-agent2
+systemctl stop mdatp; systemctl disable mdatp; mv /etc/audisp/plugins.d/{mdatp.conf,.mdatp.conf-disabled} && service auditd restart;
+systemctl stop audit2why
+systemctl stop postfix
+systemctl stop nginx
+systemctl stop rsyslog
+systemctl stop atop
+systemctl stop chronyd
+service auditd stop;
+service crond stop;
+systemctl stop hypervkvpd
+systemctl stop mde_netfilter.socket
+systemctl stop systemd-journald.service
+systemctl stop systemd-journald.socket
+lvresize --size 14G --resizefs /dev/mapper/VG_root-LV_var
