@@ -191,3 +191,5 @@ keepcache=0
 debuglevel=2
 logfile=/var/log/yum.log
 exclude=kernel* redhat-release* # space separated list excludes in /etc/yum.repo.d file
+
+ubuntu-security-status --unavailable # unsupported packages
