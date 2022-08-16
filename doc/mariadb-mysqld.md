@@ -214,7 +214,7 @@ set global general_log_file='/var/log/mysql/query-logging.log';
 set global general_log = 1; -- start logging
 set global general_log = 0; -- turn off logging
 -- /\<\(insert\|replace\|delete\|update\)\>  vim search for update
--- nohup sh -c 'tail -f /var/log/mysql/query-logging.log | ts >> /var/log/mysql/query-logging.log.ts' < /dev/null &>/dev/null & # for timestamp'ed logs
+ nohup sh -c 'tail -f /var/log/mysql/query-logging.log | ts >> /var/log/mysql/query-logging.log.ts' < /dev/null &>/dev/null & # for timestamp'ed logs
 ```
 ## table logging
 https://stackoverflow.com/a/14403905
