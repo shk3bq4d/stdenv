@@ -431,9 +431,9 @@ git reset -p # unstages interactively
 # diff conveniency
 git diff --ignore-cr-at-eol # Ignore carriage-return at the end of line when doing a comparison. white blank spaces diff
 git diff --ignore-space-at-eol # Ignore changes in whitespace at EOL. white blank spaces diff
-git diff -b, --ignore-space-change # Ignore changes in amount of whitespace. This ignores whitespace at line end, and considers all other sequences of one or more whitespace characters to be equivalent. white blank spaces diff 
-git diff -w, --ignore-all-space # Ignore whitespace when comparing lines. This ignores differences even if one line has whitespace where the other line has none. white blank spaces diff 
-git diff --ignore-blank-lines #  white blank spaces diff 
+git diff -b, --ignore-space-change # Ignore changes in amount of whitespace. This ignores whitespace at line end, and considers all other sequences of one or more whitespace characters to be equivalent. white blank spaces diff
+git diff -w, --ignore-all-space # Ignore whitespace when comparing lines. This ignores differences even if one line has whitespace where the other line has none. white blank spaces diff
+git diff --ignore-blank-lines #  white blank spaces diff
 
 git diff --ignore-space-at-eol     # white blank spaces diff
 git diff --color-words # https://stackoverflow.com/questions/28551556/git-remove-leading-plus-minus-from-lines-in-diff
@@ -553,12 +553,14 @@ This option spends extra time to avoid mis-merges on unimportant matching lines.
 ## Recursive substrategy diff-algorithim
 This option allows specification of an explicit diff-algorithim. The diff-algorithims are shared with the git diff command.
 
+```sh
 ignore-*
 
     ignore-space-change
     ignore-all-space
     ignore-space-at-eol
     ignore-cr-at-eol
+```
 
 ## mark
 A set of options that target whitespace characters. Any line that matches the subset of the passed option will be ignored.
@@ -583,16 +585,20 @@ This option borrows from the `subtree` strategy. Where the strategy operates on 
 git revert --no-commit bf40f3df
 
 # https://stackoverflow.com/questions/4698759/converting-git-repository-to-shallow
+```sh
 git pull --depth 1
 git tag -d $(git tag -l)
 git gc --prune=all
+```
 # hide changes in specific, tracked files
 https://apiumhub.com/tech-blog-barcelona/gittip-skip-worktree/
+```sh
 [alias]
    hide = update-index –skip-worktree
    unhide = update-index –no-skip-worktree
    unhide-all = ls-files -v | grep -i ^S | cut -c 3- | xargs git update-index –no-skip-worktree
    hidden = ! git ls-files -v | grep ‘^S’ | cut -c3-
+   ```
 
 
 # worktree
@@ -619,3 +625,8 @@ GIT_WORK_DIR=$GIT_WORK_TREE}.git # environment variable directory
 
 git rebase; git merge --no-ff # "semi-linear merge" is the way we work
 git log --pretty=fuller # AuthorDate: Sun Aug 29 21:24:24 2021 +0200        CommitDate: Fri Sep 3 08:25:34 2021 +0200
+
+# rewrite history
+* https://stackoverflow.com/questions/59850631/how-to-remove-sensitive-data-from-a-file-in-github-history
+git filter-repo --replace-message ~/doc/stdsf-git-filter-repo-expressions.md --replace-text ~/doc/stdsf-git-filter-repo-expressions.md --mailmap ~/doc/stdsf-git-filter-repo-mailmap.md
+git-filter-repo --path ans/roles/sb-users --path sf/roles/sb-users
