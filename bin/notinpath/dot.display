@@ -1,0 +1,11 @@
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+get_display() {
+    if [[ -n "${DISPLAY:-}" ]]; then
+        echo "$DISPLAY"
+    else
+        # final grep -E . is to handle headless servers and exit function with an error code in case no display var was found
+        grep -hz '^DISPLAY=' /proc/*/environ 2>/dev/null | sort -z | uniq -cz | sort -zV | tr '\0' '\n' | head -n 1 | cut -d = -f 2 | grep -E .
+    fi
+}
+
+get_display

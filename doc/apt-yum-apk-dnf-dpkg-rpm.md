@@ -193,3 +193,5 @@ logfile=/var/log/yum.log
 exclude=kernel* redhat-release* # space separated list excludes in /etc/yum.repo.d file
 
 ubuntu-security-status --unavailable # unsupported packages
+apt-mark showhold # show held packages
+dpkg -l | grep '^rc' | awk '{print $2}' | xargs sudo apt-get purge # remove packages with residual config
