@@ -4,6 +4,7 @@
 set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 export DISPLAY=$(source ~/bin/notinpath/dot.display)
 
@@ -34,7 +35,8 @@ audio_is_mute() {
 }
 
 idle_time_greater_than_threshold() {
-    IDLE_TIME_THRESHOLD=$(( 1 * 1000 ))
+    IDLE_TIME_THRESHOLD=$(at-work.sh && echo 120 || echo 10 )
+    IDLE_TIME_THRESHOLD=$(( 60 * 1000 * $IDLE_TIME_THRESHOLD ))
     test "$(idle_time)" -gt $IDLE_TIME_THRESHOLD
 }
 
@@ -48,19 +50,21 @@ start_screen_saver() {
 }
 
 is_debug() {
-    false
+   false
 }
 
 debug() {
+    date
+    echo -n "at-work.sh                       "; at-work.sh                       && echo yes || echo no
     echo -n "idle_time_greater_than_threshold "; idle_time_greater_than_threshold && echo yes || echo no
     echo -n "screen_saver_on                  "; screen_saver_on                  && echo yes || echo no
     echo -n "audio_is_not_playing             "; audio_is_not_playing             && echo yes || echo no
     echo -n "audio_is_mute                    "; audio_is_mute                    && echo yes || echo no
-
 }
 
 
-is_debug && debug
+#is_debug && debug | tee ~/.tmp/dpms-auto-force.log
+             debug | tee ~/.tmp/dpms-auto-force.log
 if idle_time_greater_than_threshold; then
     if ! screen_saver_on; then
         if audio_is_not_playing || audio_is_mute; then
