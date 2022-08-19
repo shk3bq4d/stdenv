@@ -104,7 +104,7 @@ def unescape(txt):
     return r
 
 def write(txt, dt=datetime.datetime.now(), fp=FP):
-    with open('/tmp/a', 'ab') as f2:
+    with open('/tmp/a', 'a') as f2:
         f2.write('coucou')
     content = IN.format(
         dt,

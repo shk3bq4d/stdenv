@@ -307,6 +307,8 @@ alias egrep='egrep --color=auto -a --line-buffered'
 
 alias gcrd='git checkout $(git_root_dir)'
 alias ky='kubectl-get-yaml.py'
+alias kyp='kubectl-get-yaml.py pod'
+alias kyd='kubectl-get-yaml.py deployment'
 alias kg='kubectl get'
 
 alias venv="workon"

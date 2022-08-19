@@ -33,3 +33,8 @@ xz myfile # compresses myfile
 kill -SIGUSR1 $(pgrep xz) # display progress
 ```
 
+unxz is equivalent to xz --decompress.
+xzcat is equivalent to xz --decompress --stdout.
+lzma is equivalent to xz --format=lzma.
+unlzma is equivalent to xz --format=lzma --decompress.
+lzcat is equivalent to xz --format=lzma --decompress --stdout.

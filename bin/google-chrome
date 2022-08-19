@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #source ~/.std*aliases
-set -x
+#set -x
 ARGS="--allow-legacy-extension-manifests --debug-print"
 SCALE="1.4"
 case $(timeout 2 hostname -f) in \
@@ -21,4 +21,4 @@ if [[ -f $f ]] && grep -qEx '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' $f; then
 fi
 false && UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 BIN=/usr/bin/google-chrome
-$BIN $ARGS --user-agent="$UA" "$@" #</dev/null &>/dev/null &
+$BIN $ARGS --user-agent="$UA" "$@" </dev/null &>/dev/null &

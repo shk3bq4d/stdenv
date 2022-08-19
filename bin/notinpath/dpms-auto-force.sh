@@ -67,7 +67,9 @@ debug() {
              debug | tee ~/.tmp/dpms-auto-force.log
 if idle_time_greater_than_threshold; then
     if ! screen_saver_on; then
-        if audio_is_not_playing || audio_is_mute; then
+        if true; then
+            start_screen_saver
+        elif audio_is_not_playing || audio_is_mute; then
             start_screen_saver
         fi
     fi

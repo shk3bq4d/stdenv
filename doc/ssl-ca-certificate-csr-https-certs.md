@@ -286,3 +286,15 @@ openssl pkey -in foo.pem -out foo-key.pem # Extract key
 openssl crl2pkcs7 -nocrl -certfile foo.pem | openssl pkcs7 -print_certs -out foo-certs.pem # Extract all the certicates
 openssl x509 -in foo.pem -outform DER -out first-cert.der # Extract the textually first certificate as DER
 ```
+
+# ansible galaxy error
+## symptom
+```nosyntax
+[WARNING]: Skipping Galaxy server https://galaxy.ansible.com. Got an unexpected error when getting available versions of collection kubernetes.core: Unknown error when attempting to call Galaxy at 'https://galaxy.ansible.com/api/': <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate
+verify failed: unable to get local issuer certificate (_ssl.c:997)>
+ERROR! Unknown error when attempting to call Galaxy at 'https://galaxy.ansible.com/api/': <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:997)>
+```
+## solution
+```sh
+sudo update-ca-certificates --fresh
+```

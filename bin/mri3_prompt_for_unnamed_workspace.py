@@ -111,7 +111,8 @@ def go2(args=[], only_for_unnamed=True):
         'doc':None,
         'vpn':None, #'~/bin/vpn-start.sh',
         'bg':None, #'~/bin/bg-start.sh',
-        'netflix': '~/bin/netflix-nf.sh'
+        'netflix': '~/bin/notinpath/netflix-nf.sh',
+        'citrix': '~/bin/notinpath/workspace-citrix.sh',
         }
     # i3 isn't yet provided with those .bashrc env var
     if True or \
@@ -132,7 +133,7 @@ def go2(args=[], only_for_unnamed=True):
         prepend_real_number=True
         i3.command('rename workspace to ' + workspace_name(ws_number, output, prepend_real_number=prepend_real_number, append_english=True, quotes=True))
         if output.strip() and output not in mrstack_excludes:
-            mrstack.write('workspace: ' + unicode(output))
+            mrstack.write('workspace: ' + output)
         if proposalsH.get(output, None) is not None:
             i3.command('exec ' + proposalsH[output])
             #from sh import bash
