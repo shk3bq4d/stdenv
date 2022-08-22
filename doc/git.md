@@ -630,3 +630,4 @@ git log --pretty=fuller # AuthorDate: Sun Aug 29 21:24:24 2021 +0200        Comm
 * https://stackoverflow.com/questions/59850631/how-to-remove-sensitive-data-from-a-file-in-github-history
 git filter-repo --replace-message ~/doc/stdsf-git-filter-repo-expressions.md --replace-text ~/doc/stdsf-git-filter-repo-expressions.md --mailmap ~/doc/stdsf-git-filter-repo-mailmap.md
 git-filter-repo --path ans/roles/sb-users --path sf/roles/sb-users
+git filter-repo --path README.md --path guides/ --path tools/releases --invert-paths # exclude specific files

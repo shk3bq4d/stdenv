@@ -21,6 +21,7 @@ https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
 https://community.ui.com/releases/UniFi-Network-Application-7-1-66/cf1208d2-3898-418c-b841-699e7b773fd4
 https://community.ui.com/releases/UniFi-Network-Application-7-1-68/30df65ee-9adf-44da-ba0c-f30766c2d874
+https://community.ui.com/releases/UniFi-Network-Application-7-2-92/f1903cbc-4daa-4695-ac8c-7324bcff529a
 
 ```sh
 #!/bin/bash
@@ -50,53 +51,53 @@ fi
 if [ -f "bundles.json.new" ]; then
  # check bundles.json with our bundles.json.new file
  # remove if new bundles.json
-	BN=$(md5sum bundles.json.new)
+    BN=$(md5sum bundles.json.new)
  BO=$(md5sum bundles.json)
-	if [ "$BN" != "$BO" ]; then
- 	rm bundles.json.new
- 	NEWDL=1
+    if [ "$BN" != "$BO" ]; then
+    rm bundles.json.new
+    NEWDL=1
  fi
 fi
 
 if [ ! -f "bundles.json.new" ]; then
  # create new bundles.json file with our server for firmwar downloads...
-	cp bundles.json bundles.json.new
-	sed -i -e "s/https:\/\/dl.ubnt.com\/unifi\//http:\/\/$DLSERVER\//g" bundles.json.new
-	cp bundles.json.new bundles.json
+    cp bundles.json bundles.json.new
+    sed -i -e "s/https:\/\/dl.ubnt.com\/unifi\//http:\/\/$DLSERVER\//g" bundles.json.new
+    cp bundles.json.new bundles.json
 fi
 
 for U in $(awk -F '}' 'BEGIN{RS=",";}{print $1}' bundles.json.orig |grep url); do
 
  # extract download url from original json file
-	URL=$(echo $U|awk '{print $2}'|sed -e "s/\"//g")
+    URL=$(echo $U|awk '{print $2}'|sed -e "s/\"//g")
 
-	if [ "$URL" ]; then
+    if [ "$URL" ]; then
 
-	 CHECK=${URL: -11}
-	 OUTFILE=$(echo $URL|awk -F'/firmware/' '{print $2}')
-	 if [ "$CHECK" == "upgrade.tar" ]; then
-	  OUTDIR=$(echo $OUTFILE|awk -F'upgrade.tar' '{print $1}')
-	 else
-	  OUTDIR=$(echo $OUTFILE|awk -F'firmware.bin' '{print $1}')
-	 fi
+     CHECK=${URL: -11}
+     OUTFILE=$(echo $URL|awk -F'/firmware/' '{print $2}')
+     if [ "$CHECK" == "upgrade.tar" ]; then
+      OUTDIR=$(echo $OUTFILE|awk -F'upgrade.tar' '{print $1}')
+     else
+      OUTDIR=$(echo $OUTFILE|awk -F'firmware.bin' '{print $1}')
+     fi
   #echo "$P2/$OUTFILE"
 
   # create directory for downloads if not exists
-	 if [ ! -d "$P2/$OUTDIR" ]; then
-  	mkdir -p "$P2/$OUTDIR"
-	 fi
+     if [ ! -d "$P2/$OUTDIR" ]; then
+    mkdir -p "$P2/$OUTDIR"
+     fi
 
   # download firmware file to local webserver
- 	if [ ! -f "$P2/$OUTFILE" ]; then
-	  wget -q -O "$P2/$OUTFILE" $URL
- 	fi
+    if [ ! -f "$P2/$OUTFILE" ]; then
+      wget -q -O "$P2/$OUTFILE" $URL
+    fi
 
-	fi
+    fi
 
 done
 
 if [ "X$NEWDL" == "X1" ]; then
  # in case of new downloaded files restart unifi controller
-	systemctl restart unifi
+    systemctl restart unifi
 fi
 ```
