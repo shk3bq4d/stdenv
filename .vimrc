@@ -366,6 +366,7 @@ nnoremap <silent> <F12>      :BufExplorer<CR>
 imap     <silent> <F12> <Esc>:BufExplorer<CR>
 set nocp
 
+"let g:dbext_default_profile_ORA         = 'type=ORA:user=myusername:passwd=mypassword:host=myhost:dbname=mydb.mydomain.local'
 
 ":colorscheme desert256
 if s:sys == "Linux"
