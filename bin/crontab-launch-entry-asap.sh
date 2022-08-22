@@ -96,6 +96,7 @@ while :; do
     _user="${1:-}"
     _grep="${2:-}"
     [[ $_user == "me" ]] && _user=$(id -un)
+    [[ $_user == "" ]] && _user=$(id -un)
     consume_crontab "$_user" | cleanup_crontab_file_stdin "$_grep" > $_tempfile
     nb_lines="$(wc -l < $_tempfile)"
     cat -n $_tempfile  | sed -r -e "s/^([ 0-9]+)/$ECYAN\1$EOFF/"

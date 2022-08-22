@@ -442,6 +442,8 @@ kube-completion() {
 #compinit
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
+f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
+
 # show completion menu when number of options is at least 2
 zstyle ':completion:*' menu select=2
 #source ~/.bash_completion
