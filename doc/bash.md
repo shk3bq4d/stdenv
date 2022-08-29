@@ -522,6 +522,7 @@ while [ -e /proc/$! ]; do
 done
 echo "$(date) Fin du job. Il y a $(find $OUT -maxdepth 1 -type f | wc -l ) fichiers dans le repertoire"
 
+if [[ -d ~/.tmp/log ]]; then exec > >(tee ~/.tmp/log/$(basename $0 .sh).log); exec 2>&1; fi
 
 # redirect whole script
 exec > >(tee logfile.txt)

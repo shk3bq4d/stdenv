@@ -11,6 +11,7 @@ date -d "+1second"
 date -d "+1seconds"
 date -d "june 18 16" # june 18 of current year at 16
 date -d "aug 27" # august 27 of this year
+date -d "sat 5" # next saturday at 5 o'clock
 date -d "next saturday 8:00"
 date -d "2004-02-29 16:21:42"
 touch -d "1970-01-01 00:00:00"
