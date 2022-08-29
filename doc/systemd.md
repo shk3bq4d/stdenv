@@ -1316,3 +1316,7 @@ Requires=
 ExecStart=
 ExecStartPre=
 Wants=
+
+# target
+systemctl list-units --type target --state active # list current targets
+systemctl is-active user-defined.target # check if target is running
