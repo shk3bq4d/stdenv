@@ -24,12 +24,14 @@ target_epoch=$(date -d "$1" +%s)
 
 sleep_seconds=$(( $target_epoch - $current_epoch ))
 
+echo "" # forces new line before (as the display can be scrambled in my current screen (tmux) setting
 if [[ $sleep_seconds -lt 0 ]] && [[ $sleep_seconds -ge -86400 ]]; then
 	sleep_seconds=$(( $sleep_seconds + 86400 ))
+	echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$sleep_seconds second")"
+else
+	echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$1")"
 fi
 
-echo "" # forces new line before (as the display can be scrambled in my current screen (tmux) setting
-echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$1")"
 sleep $sleep_seconds
 [[ $# -eq 2 ]] && sh -c "$2"
 exit 0
