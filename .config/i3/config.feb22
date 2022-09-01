@@ -1,101 +1,272 @@
-# /* ex: set filetype=sh: */
-export STDHOME_OUTPUTS='
-set $ol DP-2
-set $oc DP-0
-set $or DP-4
+# /* ex: set filetype=apache fenc=utf-8 expandtab ts=4 sw=4 : */
+# ansible managed
 
-'
-bip='
-workspace 0  output $ol
-workspace 1  output $oc
-workspace 2  output $oc
-workspace 3  output $oc
-workspace 4  output $oc
-workspace 5  output $oc
-workspace 6  output $oc
-workspace 7  output $oc
-workspace 8  output $oc
-workspace 9  output $oc
-workspace 10 output $oc
-workspace 11 output $oc
-workspace 12 output $oc
-workspace 13 output $oc
-'
-#exec xrandr --output "$oc" --mode --auto --primary --output "$ol" --mode 1920x1200 --left-of DP-2
-#exec xrandr --output "$oc" --primary
+set $ol default
+set $oc default
+set $or default
+exec xrandr --output "$oc" --primary
 
-export STDHOME_FLOATING_LEFT=$(( 960 ))
-OFFSET_Y=2160
-export STDHOME_FLOATING_TOP=$(( 50 + $OFFSET_Y ))
-export STDHOME_FLOATING_WIDTH=$(( 5120 - 2 * $STDHOME_FLOATING_LEFT ))
-export STDHOME_FLOATING_HEIGHT=$(( 2160 - ( $STDHOME_FLOATING_TOP  - $OFFSET_Y ) - 8))
 
-export STDHOME_TOGGLE='
-bindsym --release $mod+v split toggle
-'
-export STDHOME_FONT='
+set $mod Mod4
+
+set $ws0 "0   $   "
+set $ws1 "1   &amp;   "
+set $ws2 "2   7   "
+set $ws3 "3   5   "
+set $ws4 "4   3   "
+set $ws5 "5   1   "
+set $ws6 "6   9   "
+set $ws7 "7   0   "
+set $ws8 "8   2   "
+set $ws9 "9   4   "
+set $ws10 "10   6   "
+set $ws11 "11   8   "
+set $ws12 "12   #   "
+
+show_marks yes
+
+client.focused           #DC322F #DC322F #ffffff #ffff00 #DC322F
+client.focused_inactive  #666666 #666666 #ffffff #ffff00 #666666
+client.unfocused         #aaaaaa #aaaaaa #ffffff #ffff00 #aaaaaa
+client.urgent            #0000cc #0000ff #ffffff #0000CC #ff0000
+
 font pango:Monospace Regular 9
-'
-STDHOME_FIRSTBAR_OUTPUT="output \$oc"
-export STDHOME_FIRSTBAR_POSITION='bottom'
-export STDHOME_TAIL='
-bar {
-    id bar-second
-    position top
-    i3bar_command i3bar -t
-    status_command ~/.config/i3/mri3_status_right.sh
-    #status_command ~/.config/i3/mri3_status_left.sh
-    output $ol
-    strip_workspace_numbers yes
-    tray_output $oc
-    #bindsym  button3 nop
-    bindsym  button4 nop
-    bindsym  button5 nop
-    separator_symbol " "
-    colors {
-        background #00000000
-        statusline #ffffff
-        separator #666666
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace  #333333 #28557700 #ffffff
-        inactive_workspace #33333300 #22222200 #ffffff
-        urgent_workspace   #2f343a #900000 #ffffff
-    }
-}
-bar {
-    id bar-third
-    position bottom
-    i3bar_command i3bar -t
-    font pango:Monospace Regular 10
-	height 44
-    status_command ~/.config/i3/mri3_status_feb22_dp4.sh
-    #status_command ~/.config/i3/mri3_status_left.sh
-    output $or
-    strip_workspace_numbers yes
-    tray_output $oc
-    #bindsym  button3 nop
-    bindsym  button4 nop
-    bindsym  button5 nop
-    separator_symbol " "
-    colors {
-        background #00000000
-        statusline #ffffff
-        separator #666666
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace  #333333 #28557700 #ffffff
-        inactive_workspace #33333300 #22222200 #ffffff
-        urgent_workspace   #2f343a #900000 #ffffff
-    }
-}
-#exec --no-startup-id x11vnc -display :0 -shared -forever
-exec --no-startup-id ~/bin/startup/mrredshift.sh
-exec --no-startup-id ~/bin/xrandr-feb22.sh
-#for_window [class="Wfica"]               move container to output $ol
-#for_window [title=".*ITTS.Desktop....*"] move container to output $ol
-'
 
-export gaps_inner=12
-export smart_gaps=""
-export STDHOME_BORDER="pixel 5"
-export bar_height=36
-export STDHOME_MOVE_WORKSPACE_DIRECTION="up"
+floating_modifier $mod
+
+bindsym  $mod+Return       exec ~/bin/mrurxvt
+bindsym  $mod+Shift+Return exec MRURXVT_SHIFT_RETURN=true ~/bin/mrurxvt
+bindsym  $mod+Control+Return exec mrurxvt-dvorak.sh
+bindsym  Print         exec mr-shutter.sh
+
+bindcode $mod+53 sticky toggle
+bindcode $mod+Shift+53 kill
+
+bindcode $mod+43  exec --no-startup-id ~/bin/notinpath/dmenu-run.sh # mod+d
+
+bindcode $mod+44 focus left
+bindcode $mod+Shift+44 move  left
+bindcode $mod+Control+44 exec mri3_move_container_left.py
+bindcode $mod+Shift+Control+44 exec mri3_move_workspace_left.py
+bindcode $mod+33 focus right
+bindcode $mod+Shift+33 move  right
+bindcode $mod+Control+33 exec mri3_move_container_right.py
+bindcode $mod+Shift+Control+33 exec mri3_move_workspace_right.py
+bindcode $mod+54 focus down
+bindcode $mod+Shift+54 move  down
+bindcode $mod+55 focus up
+bindcode $mod+Shift+55 move  up
+
+bindcode --release $mod+24 exec mri3_resize_window.py -
+bindcode --release $mod+Shift+24 exec mri3_resize_window.py
+
+bindcode --release $mod+60  exec mri3_toggle_orientation.py # <= 4.11-1
+
+bindcode $mod+29 fullscreen
+bindcode $mod+Shift+29 fullscreen global
+
+bindcode $mod+47 layout stacking
+bindcode $mod+59 layout tabbed
+bindcode $mod+40 layout default
+
+bindsym  $mod+Shift+space         floating toggle
+bindsym  $mod+Control+Shift+space floating toggle , move output primary , resize set 1520 px 1040 px , move position 200 px 32 px
+
+bindsym  $mod+space focus mode_toggle
+bindcode $mod+38  focus parent; exec mri3_flash_border.py
+
+bindcode $mod+42 exec  python3 ~/bin/mri3_container_commander.py
+bindcode $mod+Shift+42 exec "python3 ~/bin/mri3_container_commander.py --command \\"move to workspace current, focus\\""
+
+bindcode  $mod+49 exec python3 ~/bin/mri3_workspace_migration.py    '$ws0'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+49 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws0'         >>/tmp/hehe3.log 2>&1
+bindcode  $mod+10 exec python3 ~/bin/mri3_workspace_migration.py     '1   &amp   ' >>/tmp/hehe3.log 2>&1
+bindcode  $mod+Shift+10 exec python3 ~/bin/mri3_workspace_migration.py  -s '1   &amp   ' >>/tmp/hehe3.log 2>&1
+bindcode  $mod+11 exec python3 ~/bin/mri3_workspace_migration.py    '$ws2'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+11 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws2'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+12 exec python3 ~/bin/mri3_workspace_migration.py    '$ws3'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+12 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws3'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+13 exec python3 ~/bin/mri3_workspace_migration.py    '$ws4'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+13 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws4'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+14 exec python3 ~/bin/mri3_workspace_migration.py    '$ws5'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+14 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws5'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+15 exec python3 ~/bin/mri3_workspace_migration.py    '$ws6'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+15 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws6'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+16 exec python3 ~/bin/mri3_workspace_migration.py    '$ws7'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+16 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws7'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+17 exec python3 ~/bin/mri3_workspace_migration.py    '$ws8'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+17 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws8'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+18 exec python3 ~/bin/mri3_workspace_migration.py    '$ws9'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+18 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws9'         >>/tmp/hehe2.log 2>&1
+bindcode  $mod+19 exec python3 ~/bin/mri3_workspace_migration.py    '$ws10'        >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+19 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws10'        >>/tmp/hehe2.log 2>&1
+bindcode  $mod+20 exec python3 ~/bin/mri3_workspace_migration.py    '$ws11'        >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+20 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws11'        >>/tmp/hehe2.log 2>&1
+bindcode  $mod+21 exec python3 ~/bin/mri3_workspace_migration.py    '$ws12'        >>/tmp/hehe2.log 2>&1
+bindcode  $mod+Shift+21 exec python3 ~/bin/mri3_workspace_migration.py -s '$ws12'        >>/tmp/hehe2.log 2>&1
+
+bindcode  $mod+22 exec ~/bin/mri3_new_workspace.py
+bindcode  $mod+Shift+22 exec ~/bin/mri3_window_to_new_workspace.sh
+bindcode  $mod+Control+22 exec mri3_prompt_for_workspace.py >>/tmp/mri3_prompt3 2>&1
+
+bindcode $mod+31  exec ~/bin/p2v # c vim mod+c
+
+bindcode $mod+Shift+31  reload
+bindcode $mod+Shift+32  restart
+
+bar {
+  id dp0
+  strip_workspace_numbers yes
+  i3bar_command i3bar -t
+  position bottom
+  height 36
+  status_command i3blocks -c ~/.config/i3/i3blocks-haac-dp0.conf
+  output DP-0
+  bindsym button4 nop
+  bindsym button5 nop
+  bindsym button6 nop
+  bindsym button7 nop
+  bindsym button8 nop
+  bindsym button9 nop
+  separator_symbol -
+  colors {
+    background #00000000
+    statusline #ffffff
+    separator #666666
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #28557700 #ffffff
+    inactive_workspace #33333300 #22222200 #ffffff
+    urgent_workspace #2f343a #900000 #ffffff
+    binding_mode #ff0000 #900000 #ffffff
+  }
+}
+bar {
+  id dp2
+  strip_workspace_numbers yes
+  i3bar_command i3bar -t
+  position top
+  height 36
+  status_command i3blocks -c ~/.config/i3/i3blocks-haac-dp2.conf
+  output DP-2
+  bindsym button4 nop
+  bindsym button5 nop
+  bindsym button6 nop
+  bindsym button7 nop
+  bindsym button8 nop
+  bindsym button9 nop
+  separator_symbol -
+  colors {
+    background #00000000
+    statusline #ffffff
+    separator #666666
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #28557700 #ffffff
+    inactive_workspace #33333300 #22222200 #ffffff
+    urgent_workspace #2f343a #900000 #ffffff
+    binding_mode #ff0000 #900000 #ffffff
+  }
+}
+bar {
+  id dp4
+  strip_workspace_numbers yes
+  i3bar_command i3bar -t
+  position bottom
+  height 36
+  status_command i3blocks -c ~/.config/i3/i3blocks-haac-dp4.conf
+  output DP-4
+  bindsym button4 nop
+  bindsym button5 nop
+  bindsym button6 nop
+  bindsym button7 nop
+  bindsym button8 nop
+  bindsym button9 nop
+  separator_symbol -
+  colors {
+    background #00000000
+    statusline #ffffff
+    separator #666666
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #28557700 #ffffff
+    inactive_workspace #33333300 #22222200 #ffffff
+    urgent_workspace #2f343a #900000 #ffffff
+    binding_mode #ff0000 #900000 #ffffff
+  }
+}
+
+
+bindcode $mod+57  move scratchpad
+bindcode $mod+46  scratchpad show
+bindcode $mod+Shift+47  move workspace to output up
+bindcode $mod+Shift+46  move workspace to output next
+
+workspace_auto_back_and_forth yes
+
+popup_during_fullscreen leave_fullscreen
+force_focus_wrapping no
+
+focus_follows_mouse yes
+bindcode  $mod+52 exec ~/bin/touchpad-toggle.sh
+
+bindcode $mod+39  exec ~/bin/mri3_mod_plus_o.sh
+bindcode $mod+Shift+39  exec ~/bin/mri3_mod_shift_plus_o.sh
+
+for_window [class="Shutter"] floating enable
+assign [class="tw-com-aten-ikvm-KVMMain"] '   12: vnc_ipmi  '
+for_window [class="tw-com-aten-ikvm-KVMMain" title="iKVM"] resize set 2400 1800
+for_window [class="tw-com-aten-ikvm-KVMMain" title="keyboard"] floating enable
+for_window [title="mrtitlefloating"] floating enable
+for_window [class="xfreerdp"] border normal
+
+exec        --no-startup-id  ~/bin/notinpath/mri3-exec-once-hook.sh
+exec_always --no-startup-id  ~/bin/notinpath/mri3-exec-always-hook.sh
+for_window [class="Vncviewer"] border normal
+for_window [class="VisualVM*"] border normal
+for_window [class="keepassxc"] border normal
+for_window [class="keepassxc"] floating enable
+for_window [class="VirtualBox Machine"] floating enable
+
+for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] border 1pixel
+for_window [title="^citrix-viewer.*- Oracle VM VirtualBox$"] floating disable
+for_window [title="Netflix - Google Chrome"] fullscreen enable
+for_window [title=".*ITTS.Desktop....*"] fullscreen disable, move to workspace current
+for_window [class="Wfica_ErrorOrInfo"] floating enable
+
+for_window [class="Gitk"] fullscreen enable
+for_window [class="Gitk"] border normal
+for_window [class="Kodi"] fullscreen enable
+for_window [floating] border normal
+no_focus [window_role="pop-up"]
+
+exec --no-startup-id ~/bin/feh-background-stdenv.sh
+exec --no-startup-id ~/bin/startup/mrredshift.sh
+exec --no-startup-id ~/bin/capslock-to-esc.sh
+exec ~/bin/notinpath/mr-startup.sh
+
+exec --no-startup-id ~/bin/notinpath/mrxmodmap.sh
+
+exec mrparcellite
+
+mode "pass-through" {
+    bindcode $mod+28  mode "default"
+    bindcode $mod+29  mode "default"; fullscreen
+}
+
+bindcode $mod+28  mode "pass-through"
+new_window pixel 9
+bindcode $mod+27  exec --no-startup-id true
+bindcode $mod+Shift+27  exec --no-startup-id true
+
+exec --no-startup-id ~/bin/mri3_server_loop.sh 2>&1 | ts > ~/.tmp/log/i3_config_mri3_server.log
+exec --no-startup-id ~/bin/mrlsyncd.sh 2>&1 | ts > ~/.tmp/log/mrlsyncd.sh.log
+exec --no-startup-id ~/bin/clipboard-listener.py  2>&1 | ts > ~/.tmp/log/clipboard-listener.log
+
+gaps outer 0
+gaps inner 12
+smart_gaps on
+
+hide_edge_borders none
+#for_window [class="^.*"] border pixel 0
+for_window [instance="mrclusterssh"] border normal
+for_window [instance="mrbordernormal"] border normal
+
+exec --no-startup-id ~/bin/xrandr-feb22.sh
