@@ -54,6 +54,8 @@ db.setting.find().forEach(function(i) { if (!i.site_id) printjson(i.key); })
 ```sh
 db.collectionName.find().pretty() # show all elements in one collection
 
+db.ldap_settings.find().pretty(); # graylog ldap ad
+
 db.streams.find()
 db.users.find()
 

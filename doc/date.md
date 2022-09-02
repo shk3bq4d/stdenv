@@ -24,3 +24,6 @@ date -d "2006-01-02 15:04:05" +"%A" # filebeat timestamp reference day of week i
 
 Sun, 23 Jan 2000 01:23:45 JST # RFC 2822
 select str_to_date('Sat, 01 Dec 2012 05:49:45 +0000','%a, %d %b %Y %T') -- RFC 2822 mysql
+
+dmesg -T
+myvalue=600711.395348; date -u -d"1970-01-01 + $(date -u +%s) sec - $(cut -d' ' -f1 </proc/uptime) sec + $myvalue sec" +"%F %T.%N %Z" # dmesg

@@ -445,4 +445,7 @@ chage -l       myuser # check human status if password expired How to check the 
 chage -M 99999 myuser # set user password to never expire
 chage -E -1    myuser # set user account  to never expire
 
+
 mytr # my traceroute
+
+journalctl -o short-precise -k -b -1 # last boot dmesg https://unix.stackexchange.com/questions/181067/how-to-read-dmesg-from-previous-session-dmesg-0
