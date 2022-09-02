@@ -6,3 +6,5 @@ The LDAP RFC specifies that LDAP messages are ASN1 encoded. This means the messa
 # https://stackoverflow.com/questions/6195812/ldap-nested-group-membership
 # https://docs.microsoft.com/en-us/windows/win32/adsi/search-filter-syntax?redirectedfrom=MSDN
 (memberOf:1.2.840.113556.1.4.1941:=CN=active-directory-recursive-member,OU=Groups,OU=Security,DC=hehe,DC=com)
+
+sed ':a;$!{N;ba};s/\n //g' # ldapsearch
