@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
+#
+# restart by
+# pkill -f "python3 $HOME/bin/mri3_server.py"
 
 try:
     import cPickle as pickle
