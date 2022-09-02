@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh expandtab :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 13 Jan 2020
-##
 
 set -euo pipefail
 
@@ -23,6 +15,7 @@ kubectl_version=1.21.7
 kubectl_version=1.21.8
 kubectl_version=1.22.7
 kubectl_version=1.22.8
+kubectl_version=1.23.9
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 BIN="$HOME/bin/kubectl-$kubectl_version"
@@ -47,6 +40,7 @@ if [[ ! -f $BIN ]]; then
         exit 1
         ;;
     esac
+    test -d ~/.tmp || mkdir ~/.tmp
     cd ~/.tmp
     curl -sLO "https://storage.googleapis.com/kubernetes-release/release/v${kubectl_version}/bin/linux/amd64/kubectl"
     mv -f ~/.tmp/kubectl $BIN
