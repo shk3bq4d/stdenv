@@ -1696,3 +1696,7 @@ policies policy https://www.chromium.org/administrators/policy-list-3
 --enable-features=CookiesWithoutSameSiteMustBeSecure,SameSiteByDefaultCookies
 
 curl -s http://omahaproxy.appspot.com/all.json | jq -r '.[] | select(.os=="win") | .versions[] | select(.channel=="stable") | .current_version'
+
+# passwords no longer saving
+https://superuser.com/questions/573602/chrome-not-saving-passwords-and-not-auto-filling-existing-login-passwords
+rm -f ~/.config/chromium/*/Login\ Data{,-journal}
