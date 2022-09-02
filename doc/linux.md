@@ -444,3 +444,5 @@ nemo # GUI file manager
 chage -l       myuser # check human status if password expired How to check the account status in Linux https://www.howtouselinux.com/post/how-to-fix-warning-your-password-has-expired-in-linux
 chage -M 99999 myuser # set user password to never expire
 chage -E -1    myuser # set user account  to never expire
+
+mytr # my traceroute
