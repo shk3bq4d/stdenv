@@ -1312,11 +1312,16 @@ systemctl edit tomcat9
 /etc/systemd/system/tomcat9.service.d/override.conf
 
 man systemd.unit
+[Unit]
 Requires=
 ExecStart=
 ExecStartPre=
 Wants=
+After=
 
 # target
 systemctl list-units --type target --state active # list current targets
 systemctl is-active user-defined.target # check if target is running
+
+systemctl list-dependencies --after  shutdown.target
+systemctl list-dependencies --before shutdown.target
