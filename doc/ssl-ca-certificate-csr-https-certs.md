@@ -298,3 +298,5 @@ ERROR! Unknown error when attempting to call Galaxy at 'https://galaxy.ansible.c
 ```sh
 sudo update-ca-certificates --fresh
 ```
+
+keytool -list -v -keystore my.jks 2>&1 | grep -E 'Keystore|entry|Alias|chain length|Certificate.[0-9]+.:|Owner:|Issuer:|Valid from' | less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init # keytool list certificate expiration
