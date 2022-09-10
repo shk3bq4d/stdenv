@@ -447,3 +447,6 @@ chage -E -1    myuser # set user account  to never expire
 
 mytr # my traceroute
 journalctl -o short-precise -k -b -1 # last boot dmesg https://unix.stackexchange.com/questions/181067/how-to-read-dmesg-from-previous-session-dmesg-0
+
+find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|mnt|proc|sys)')              # find /
+find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|mnt|proc|sys)') -type f      # find /
