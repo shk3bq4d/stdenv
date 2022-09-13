@@ -82,3 +82,27 @@ CREATE DATABASE TestDB
 GO -- The previous two commands were not executed immediately. You must type GO on a new line to execute the previous commands:
 SELECT @@SERVERNAME, @@SERVICENAME
 GO
+
+
+-- lansweeper
+Select Top 100000 *
+From (Select tblassets.AssetID,
+      tblassets.AssetName,
+      tblassets.domain,
+      tblassets.fqdn,
+      Lower(Case
+        When PatIndex('%.%', tblassets.AssetName) = 0 Then tblassets.AssetName
+        Else SubString(tblassets.AssetName, 0, PatIndex('%.%',
+          tblassets.AssetName))
+      End) As short_name,
+      tsysassettypes.AssetTypename,
+      tsysassettypes.AssetTypeIcon10 As icon,
+      tblassets.IPAddress,
+      tblassets.Lastseen,
+      tblassets.Lasttried
+    From tblassets
+      Inner Join tblassetcustom On tblassets.AssetID = tblassetcustom.AssetID
+      Inner Join tsysassettypes On tsysassettypes.AssetType =
+          tblassets.Assettype) b
+Where b.short_name In ('apabc001p01')
+Order By b.lastseen
