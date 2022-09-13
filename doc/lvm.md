@@ -66,13 +66,17 @@ lvrename VG_root LV_data LV_backup # move rename mv
 # var downsizing
 zabbix-maintenance-on.sh
 docker stop mariadb
+systemctl stop vmtoolsd
+systemctl stop vgauthd
+systemctl stop nginx
 systemctl stop polkit
 systemctl stop docker.socket
 systemctl stop docker.service
 systemctl stop containerd
 systemctl stop filebeat
 systemctl stop zabbix-agent2
-systemctl stop mdatp; systemctl disable mdatp; mv /etc/audisp/plugins.d/{mdatp.conf,.mdatp.conf-disabled} && service auditd restart;
+#systemctl stop mdatp; systemctl disable mdatp; mv /etc/audisp/plugins.d/{mdatp.conf,.mdatp.conf-disabled} && service auditd restart;
+systemctl stop mdatp
 systemctl stop audit2why
 systemctl stop postfix
 systemctl stop nginx
@@ -85,4 +89,5 @@ systemctl stop hypervkvpd
 systemctl stop mde_netfilter.socket
 systemctl stop systemd-journald.service
 systemctl stop systemd-journald.socket
+umount /var/lib/docker # and all mount points that are below /var
 lvresize --size 14G --resizefs /dev/mapper/VG_root-LV_var
