@@ -458,7 +458,7 @@ zabbix_sender -z localhost -s fakehost_testprefix -k "service.discovery" -o \
 ```
 
 
-# 
+#
 ```bash
 net.tcp.port[<ip>,port] # either simple check or zabbix agent checks if TCP connection is possible
 net.tcp.service[service,<ip>,<port>] # either simple check or zabbix agent checks if one one ssh, ldap, smtp, ftp, http, pop, nntp, imap, tcp, https, telnet service is possible, see how this works: https://www.zabbix.com/documentation/current/manual/appendix/items/service_check_details
@@ -476,10 +476,10 @@ select * from (select lower(substr(regexp_substr(name, '\\([^\\)]+'), 2)) as acc
 # context contextual macros
 [https://www.zabbix.com/documentation/current/manual/config/macros/user_macros_context]
 ```bash
-{$LOW_SPACE_LIMIT}	User macro without context.
-{$LOW_SPACE_LIMIT:/tmp}	User macro with context (static string).
-{$LOW_SPACE_LIMIT:regex:"^/tmp$"}	User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
-{$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}	User macro with context (regular expression). Matches all strings prefixed with /var/log/.
+{$LOW_SPACE_LIMIT}  User macro without context.
+{$LOW_SPACE_LIMIT:/tmp} User macro with context (static string).
+{$LOW_SPACE_LIMIT:regex:"^/tmp$"}   User macro with context (regular expression). Same as {$LOW_SPACE_LIMIT:/tmp}.
+{$LOW_SPACE_LIMIT:regex:"^/var/log/.*$"}    User macro with context (regular expression). Matches all strings prefixed with /var/log/.
 
 
 zabbix-get-local.sh 'proc.num[filebeat,root,,/etc/filebeat/filebeat.yml]'
@@ -496,3 +496,41 @@ https://cdn.zabbix.com/zabbix/binaries/stable/5.4/5.4.10/zabbix_agent2-5.4.10-wi
 
 tc qdisc add    dev eth0 root netem loss 25% # start simulate ping loss
 tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
+
+
+# templates
+```yaml
+- {{ z.uuid('/var/run/reboot-required') }}
+  {{ z.tagstpl(['mytag', 'myvalue'], 'mytag2') }}
+  {{ z.dependent(main_key, "180d") }} # dependent items
+  key: vfs.file.exists[/var/run/reboot-required]
+  key: vfs.file.contents[/var/lib/update-notifier/updates-available]
+  value_type: FLOAT
+  value_type: CHAR
+  value_type: TEXT
+  value_type: LOG
+# value_type: INT <-- there is no INT, it's implicit if missing
+  priority: DISASTER
+  priority: HIGH
+  priority: WARNING
+  priority: INFO
+  priority: AVERAGE
+  type: CALCULATED
+  type: SNMP_AGENT
+  type: IPMI
+  type: HTTP_AGENT
+  type: SIMPLE
+  trends: '0'
+# priority: NOT_CLASSIFIED <-- there is no NOT_CLASSIFIED it's implicit if missig
+  preprocessing:
+  - {{ z.pp_hb('1d') }}
+  - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
+
+- {{ z.uuid('technology') }}
+  {{ z.dependent(main_key, "180d") }}
+  key: battery.technology
+  name: Battery Technology
+  value_type: CHAR
+  preprocessing:
+  - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
+```

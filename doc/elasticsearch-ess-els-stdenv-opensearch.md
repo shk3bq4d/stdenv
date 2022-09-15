@@ -6,6 +6,7 @@ http://bip.bop.net:9200/_plugin/head/
 watch -n 14 -d=c curl -a -k -fs -XGET --user user:pass https://p-es-02.example.local:9200/_cluster/health?pretty
 watch "curl -s 'http://localhost:9200/_cat/shards?v&s=index,shard' | grep -v STARTED"
 watch "curl -s 'http://localhost:9200/_cluster/health?pretty'"
+curl -s http://localhost:9200/_cat/nodes
 
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
@@ -23,7 +24,7 @@ curl -s http://localhost:9200/_cat/nodes
 curl -s http://localhost:9200/_cluster/state
 curl -s http://localhost:9200/_cluster/state | grep read_only
 curl -s http://localhost:9200/_cluster/state?pretty=true | grep -C4 read_only
-curl -s http://localhost:9200/_cat/shards | sort 
+curl -s http://localhost:9200/_cat/shards | sort
 curl -s http://localhost:9200/_cat/shards | sort | tail -n 24
 curl -s http://localhost:9200/graylog_43 | python -m json.tool
 curl -XDELETE http://localhost:9200/graylog_43
@@ -134,7 +135,9 @@ green  open   graylog_94 Gn-MZnKwQKqtu30zrpqogA   6   1      33224          170 
 
 
 total space used is:
+```nosyntax
  #index size * (1 + #replicas) * #nb_indices_kept * compression_ratio
+```
 updated config to
 Index prefix: graylog
 Shards: 4
@@ -179,6 +182,10 @@ having rotation based on size gives us peace of mind as per cluster's health liv
 curl -XPUT -d '{"index.blocks.read_only_allow_delete": null }' -H 'content-type: application/json' -s 'http://localhost:9200/_all/_settings' # remove readonly read-only
 ```
 
+# temporarily increase node_concurrent_recoveries
+```sh
+curl -XPUT -d '{"transient":{"cluster.routing.allocation.node_concurrent_recoveries":5}}' -H 'content-type: application/json' 'http://localhost:9200/_cluster/settings'
+```
 
 # ElasticsearchException[Elasticsearch exception [type=illegal_argument_exception, reason=Limit of total fields [1000] has been exceeded]]
 ```sh
@@ -188,17 +195,17 @@ curl -XPUT http://localhost:9200/graylog_371/_settings -d '{ "index.mapping.tota
 7.16.2 log4j 2.17.0
 6.8.22 log4j 2.17.0
 
-Elasticsearch	JDK	CVE IDs	Information Leak	Remote Code Execution	Complete Mitigation
-7.16.1 - 7.16.2	≥ 8	CVE-2021-44228, CVE-2021-45046	No	No	N/A (not vulnerable)
-7.0.0 - 7.16.0	≥ 9	CVE-2021-44228, CVE-2021-45046	No	No	N/A3 (not vulnerable)
-7.0.0 - 7.16.0	< 9	CVE-2021-44228, CVE-2021-45046	Yes	No	System property1
-6.8.21	≥ 8	CVE-2021-44228, CVE-2021-45046	No	No	N/A (not vulnerable)
-6.0.0 - 6.8.20	≥ 9	CVE-2021-44228, CVE-2021-45046	No	No	N/A3 (not vulnerable)
-6.4.0 - 6.8.20	< 9	CVE-2021-44228, CVE-2021-45046	Yes	No	System property1
-6.0.0 - 6.3.2	< 9	CVE-2021-44228, CVE-2021-45046	Yes	No	Remove JndiLookup2
-5.6.11 - 5.6.16	8	CVE-2021-44228, CVE-2021-45046	Yes	Yes	System property1
-5.0.0 - 5.6.10	8	CVE-2021-44228, CVE-2021-45046	Yes	Yes	Remove JndiLookup2
-< 5.0.0	any	CVE-2021-44228, CVE-2021-45046	No	No	N/A (not vulnerable)
+Elasticsearch   JDK CVE IDs Information Leak    Remote Code Execution   Complete Mitigation
+7.16.1 - 7.16.2 ≥ 8 CVE-2021-44228, CVE-2021-45046  No  No  N/A (not vulnerable)
+7.0.0 - 7.16.0  ≥ 9 CVE-2021-44228, CVE-2021-45046  No  No  N/A3 (not vulnerable)
+7.0.0 - 7.16.0  < 9 CVE-2021-44228, CVE-2021-45046  Yes No  System property1
+6.8.21  ≥ 8 CVE-2021-44228, CVE-2021-45046  No  No  N/A (not vulnerable)
+6.0.0 - 6.8.20  ≥ 9 CVE-2021-44228, CVE-2021-45046  No  No  N/A3 (not vulnerable)
+6.4.0 - 6.8.20  < 9 CVE-2021-44228, CVE-2021-45046  Yes No  System property1
+6.0.0 - 6.3.2   < 9 CVE-2021-44228, CVE-2021-45046  Yes No  Remove JndiLookup2
+5.6.11 - 5.6.16 8   CVE-2021-44228, CVE-2021-45046  Yes Yes System property1
+5.0.0 - 5.6.10  8   CVE-2021-44228, CVE-2021-45046  Yes Yes Remove JndiLookup2
+< 5.0.0 any CVE-2021-44228, CVE-2021-45046  No  No  N/A (not vulnerable)
 1Set the JVM option -Dlog4j2.formatMsgNoLookups=true on each node and restart each node. This is a complete mitigation where noted above. Elasticsearch has no known vulnerabilities to Thread Context Message and Context Lookup from CVE-2021-45046.
 
 2Removal of the JndiLookup class from the Log4j library. Instructions here.
