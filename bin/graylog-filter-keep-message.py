@@ -64,7 +64,7 @@ def go(args) -> None:
     # logger.debug(__file__)
     if 'VIMF6' in os.environ: args = [os.path.expanduser('~/tmpp/20220915/All-Messages-search-result (1).csv')]
     parser = argparse.ArgumentParser(description="This is the description of what I do")
-    parser.add_argument("FILENAME", type=str, default='-', help="file to process")
+    parser.add_argument("FILENAME", type=str, default='-', nargs='?', help="file to process")
     parser.add_argument("-i", "--in-place", help="saves output in place", action="store_true")
     script_directory, script_name = os.path.split(__file__)
     script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])

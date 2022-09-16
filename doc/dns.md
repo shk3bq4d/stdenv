@@ -10,7 +10,7 @@ https://www.madboa.com/geek/dig/
 ```sh
 python -c 'import socket; print socket.gethostbyname("www.example.com")'
 ping -q -c 1 -t 1 your_host_here | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"
-getent hosts unix.stackexchange.com | cut -d' ' -f1 # 
+getent hosts unix.stackexchange.com | cut -d' ' -f1
 host unix.stackexchange.com | awk '/has address/ { print $4 }' # directly to DNS server
 nslookup unix.stackexchange.com | awk '/^Address: / { print $2 }' # directly to DNS server
 nslookup downloads.openwrt.org mydnsserver
@@ -100,5 +100,24 @@ dig www.abc.com cname
 dig @8.8.8.8 www.abc.com cname
 
 # linux systemd config
+```sh
 sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4 # linux systemd
 sudo vi /etc/systemd/resolved.conf # dns linux systemd
+sudo resolvectl dns $iface x.y.z.t1 x.y.z.t2
+sudo systemctl edit systemd-resolved # debug
+```
+```ini
+[Service]
+Environment=SYSTEMD_LOG_LEVEL=debug
+```
+
+resolvectl status
+
+## *.local problem
+https://askubuntu.com/questions/1068131/ubuntu-18-04-local-domain-dns-lookup-not-working
+https://aws.amazon.com/premiumsupport/knowledge-center/route-53-local-domain/
+symptoms: "Dig - You are currently testing what happens when an mDNS query is leaked to DNS"
+```sh
+cd /etc/; sudo ln -sf ../run/systemd/resolve/resolv.conf # Change the DNS resolver from the local DNS stub listener to external DNS resolver
+cd /etc/systemd/; sudo sed -i -e 's/#DNSStubListener=yes/DNSStubListener=no/' resolved.conf
+sudo systemctl restart systemd-resolved

@@ -534,3 +534,7 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
   preprocessing:
   - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
 ```
+
+
+# proxy
+docker exec -it zabbix-proxy zabbix_proxy -R log_level_increase
