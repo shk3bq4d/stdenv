@@ -931,3 +931,5 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 ```
 
 /var/lib/kubelet/config.yaml # cgroupDriver
+
+echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot

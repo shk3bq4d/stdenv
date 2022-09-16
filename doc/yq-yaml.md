@@ -43,3 +43,5 @@ yq e ".current-context, .contexts[]| select(.name==((.|parent|parent).current-co
 
 f=corp.yml; _path='.corp_certs__to_merge'; yq e "$_path"'|keys|.[]' $f | while read key; do yq e "$_path""[\"$key\"]" $f > ../../certs/ca/corp/$key; done
 ```
+
+yq e '.myarray | map_values("")' # list to dict, https://mikefarah.gitbook.io/yq/operators/map
