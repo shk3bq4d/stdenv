@@ -217,13 +217,15 @@ https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.15.2-window
    test:
      - Dec 31 1999 23:59:59.999
      - Jul 15 2021 13:08:56.040
+     - 1663443523.289
    layouts:
-     - Jan  2 2006 15:04:05.999 # timestamp layout
-     - Mon Jan  2 2006 15:04:05.999 # timestamp layout
-     - Mon Jan 2 2006 15:04:05.999 # timestamp layout
-     - '2006-01-02T15:04:05Z'
-     - '2006-01-02T15:04:05.999Z'
-     - '2006-01-02T15:04:05.999-07:00'
+     - Jan  2 2006 15:04:05.999        # timestamp layout
+     - Mon Jan  2 2006 15:04:05.999    # timestamp layout
+     - Mon Jan 2 2006 15:04:05.999     # timestamp layout
+     - '2006-01-02T15:04:05Z'          # timestamp layout
+     - '2006-01-02T15:04:05.999Z'      # timestamp layout
+     - '2006-01-02T15:04:05.999-07:00' # timestamp layout
+     - UNIX                            # timestamp layout 1663443523.289
 
 
 [filebeat] squid module cannot parse CONNECT request because "extract_page failed": filebeat[3796]: ERROR [processor.javascript] console/console.go:54 extract_page failed for 'eu-v20.events.data.microsoft.com:443' https://github.com/elastic/beats/issues/24260
