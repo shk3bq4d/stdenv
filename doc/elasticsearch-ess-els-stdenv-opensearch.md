@@ -1,5 +1,7 @@
+```nosyntax
 http://bip.bop.net:9200/_plugin/kopf/
 http://bip.bop.net:9200/_plugin/head/
+```
 
 # monitor health
 ```sh
@@ -11,7 +13,9 @@ curl -s http://localhost:9200/_cat/nodes
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
 https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-indices.html
+https://www.elastic.co/guide/en/elasticsearch/reference/7.13/modules-cluster.html
 
+curl -s 'http://localhost:9200/_cluster/health?pretty'
 https://bip.bop.net/_snapshot/nfs_backups/
  curl -s 'http://localhost:9200/_cluster/settings?pretty'
 curl -s http://bip.po.net:9200/_snapshot
@@ -21,7 +25,10 @@ curl -s http://bip.po.net:9200/_snapshot/nfs_backups/_all | prettify-json
 curl -s http://localhost:9200/_cat/indices
 curl -s http://localhost:9200/_cluster/allocation/explain?pretty=true # explains unassigned shards
 curl -s http://localhost:9200/_cat/nodes
+curl -s http://localhost:9200/_cat/nodes\?format\=json | jq
+curl -s http://localhost:9200/_cat/nodes\?format\=json\&pretty\=true
 curl -s http://localhost:9200/_cluster/state
+curl -s http://localhost:9200/_cat/nodes\?format\=json | jq
 curl -s http://localhost:9200/_cluster/state | grep read_only
 curl -s http://localhost:9200/_cluster/state?pretty=true | grep -C4 read_only
 curl -s http://localhost:9200/_cat/shards | sort
@@ -156,8 +163,10 @@ having rotation based on size gives us peace of mind as per cluster's health liv
 # reboot cluster
 1. Go to graylog on the indice and perform a "Rotate active write index" maintenance on a URL like https://graylog/system/index_sets/58dd0e5036620c1b784346c5
 2. Verify cluster's health
+```sh
    curl -s 'http://localhost:9200/_cluster/health?pretty'  | grep status
    curl -s 'http://localhost:9200/_cat/shards?v&s=index,shard' | grep -v STARTED
+```
 3. Once green, deactivate shard allocation using either the deprecated
    cluster.routing.allocation.disable_allocation
    or the current
@@ -165,7 +174,7 @@ having rotation based on size gives us peace of mind as per cluster's health liv
    option
 ```sh
    ##deprecated a=true; curl -XPUT -d "{\"transient\":{\"cluster.routing.allocation.disable_allocation\":$a}}" 'http://localhost:9200/_cluster/settings'
-   b=none; curl -XPUT -H 'content-type: application/json' -d "{\"transient\":{\"cluster.routing.allocation.enable\":\"$b\"}}" 'http://localhost:9200/_cluster/settings'
+   b=primaries; curl -XPUT -H 'content-type: application/json' -d "{\"transient\":{\"cluster.routing.allocation.enable\":\"$b\"}}" 'http://localhost:9200/_cluster/settings'
 ```
 4. Reboot one node and wait for it to come and have its service up again
 5. Reactivate allocation
@@ -220,3 +229,14 @@ https://opensearch.org/ # amazon
 https://github.com/opensearch-project # amazon
 https://opensearch.org/docs/latest/
 https://github.com/opensearch-project/opensearch-build/issues/1117 # rpm yum centos7
+
+
+# shutdown node lifecycle
+API appeard in 7.15, not in 7.14 nor 7.13
+https://www.elastic.co/guide/en/elasticsearch/reference/current/put-shutdown.html
+https://www.elastic.co/guide/en/elasticsearch/reference/7.15/put-shutdown.html
+https://www.elastic.co/guide/en/elasticsearch/reference/7.17/put-shutdown.html
+```sh
+mynode="graylog-elasticsearch-data-1"; curl -XPUT http://localhost:9200/graylog_371/_settings -d '{ "index.mapping.total_fields.limit": 2000 }' -H 'content-type: application/json'
+graylog-elasticsearch-data-1
+```

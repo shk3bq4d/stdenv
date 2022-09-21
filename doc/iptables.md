@@ -68,17 +68,17 @@ iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 9000 -j ACCEPT
 
 # pause graylog processing
-iptables -I INPUT 1 -p tcp -m multiport --dports 5044,10514,12201 -j DROP #nginx
-iptables -I INPUT 1 -p tcp -m multiport --dports 5045,10515,12202 -j DROP #graylog
-iptables -I INPUT 1 -p tcp -m tcp --dport 5044,10514,12201 -j DROP # gelf
-iptables -I INPUT 1 -p tcp -m tcp --dport 12201 -j DROP # gelf
-iptables -I INPUT 1 -p tcp -m tcp --dport 5044  -j DROP # filebeat
-iptables -I INPUT 1 -p tcp -m tcp --dport 10514 -j DROP # tcp syslog
+iptables -I INPUT 1 -p tcp -m multiport --dports 5044,10514,12201 -j REJECT #nginx
+iptables -I INPUT 1 -p tcp -m multiport --dports 5045,10515,12202 -j REJECT #graylog
+iptables -I INPUT 1 -p tcp -m tcp --dport 5044,10514,12201 -j REJECT # gelf
+iptables -I INPUT 1 -p tcp -m tcp --dport 12201 -j REJECT # gelf
+iptables -I INPUT 1 -p tcp -m tcp --dport 5044  -j REJECT # filebeat
+iptables -I INPUT 1 -p tcp -m tcp --dport 10514 -j REJECT # tcp syslog
 iptables -D INPUT 1
-iptables -D INPUT   -p tcp -m multiport --dports 5044,10514,12201 -j DROP
-iptables -D INPUT   -p tcp -m tcp --dport 12201 -j DROP
-iptables -D INPUT   -p tcp -m tcp --dport 5044  -j DROP
-iptables -D INPUT   -p tcp -m tcp --dport 10514  -j DROP
+iptables -D INPUT   -p tcp -m multiport --dports 5044,10514,12201 -j REJECT
+iptables -D INPUT   -p tcp -m tcp --dport 12201 -j REJECT
+iptables -D INPUT   -p tcp -m tcp --dport 5044  -j REJECT
+iptables -D INPUT   -p tcp -m tcp --dport 10514  -j REJECT
 
 # changes default table policy
 iptables -P INPUT DROP

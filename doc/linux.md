@@ -450,3 +450,6 @@ journalctl -o short-precise -k -b -1 # last boot dmesg https://unix.stackexchang
 
 find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|mnt|proc|sys)')              # find /
 find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|mnt|proc|sys)') -type f      # find /
+echo b > /proc/sysrq-trigger | violent reboot
+
+ps -aef --forest # tree process list

@@ -535,4 +535,10 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
   - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
 ```
 
+<<<<<<< HEAD
 https://support.zabbix.com/browse/ZBX-16162 # Draw Graph line complete when Discarding values with Heartbeat, bug
+=======
+
+# proxy
+docker exec -it zabbix-proxy zabbix_proxy -R log_level_increase
+>>>>>>> github/stdenv

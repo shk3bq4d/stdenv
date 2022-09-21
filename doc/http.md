@@ -173,7 +173,7 @@ A 527 error indicates that the requests timeout or failed after the WAN connecti
 
 
 # quick serve HTTPS
-@begin=python@
+```python
 # taken from http://www.piware.de/2011/01/creating-an-https-server-in-python/
 # generate server.xml with the following command:
 #    openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
@@ -189,12 +189,12 @@ import ssl
 httpd = BaseHTTPServer.HTTPServer(('localhost', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
 httpd.socket = ssl.wrap_socket (httpd.socket, certfile='./server.pem', server_side=True)
 httpd.serve_forever()
-@end=python@
-@begin=html@
+```
+```html
 <html><head><script type="text/javascript">
 location.replace('https://85.184.255.102');
 </script></head><body></body></html>
-@end=html@
+```
 
 
 # common headers
@@ -203,7 +203,7 @@ Content-Type: application/x-www-form-urlencoded
 http://httpstat.us/500 # to return an HTTP 500
 http://httpstat.us/ # http only
 
-https://http-various-codes.k.abc1.ch/code/500
+http://http-various-codes.k.abc1.ch/code/500
 https://http-various-codes.k.abc1.ch/code/500/anything-still-works
 https://http-various-codes.k.abc1.ch/code/465/code/205 # switches between 465 and 205
 

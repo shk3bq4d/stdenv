@@ -24,6 +24,7 @@ RUN \
 		iftop \
 		ipcalc \
 		iputils-ping \
+		jq \
 		less \
 		locales-all \
 		locate \

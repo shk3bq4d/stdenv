@@ -775,6 +775,7 @@ kgp -Al app=sfw-web-app         -o name # labels
 kgp -Al app=stp                 -o name # labels
 kgp -Al app=sf-kube-okta-assist -o name # labels
 kgp -Al app=nginx-ingress       -o name # labels
+kubectl get pod -n $ns -l component=client,app=elasticsearch # bales
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
@@ -931,3 +932,5 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 ```
 
 /var/lib/kubelet/config.yaml # cgroupDriver
+
+echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot

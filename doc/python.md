@@ -77,9 +77,9 @@ doc.xpath('/*')
 import fileinput # stdin
 filepath = '-' # or empty, stdin
 for line in fileinput.input(filepath): # stdin
-    line = line.rstrip() # stdin
-    if line == '': # stdin
-        continue # stdin
+    line = line.rstrip() # stdin fileinput
+    if line == '': # stdin fileinput
+        continue # stdin fileinput
 
 # or in onliner
 for line in filter(lambda x: len(x) > 0, map(lambda x: x.rstrip(), fileinput.input(files=None))):
