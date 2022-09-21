@@ -52,7 +52,8 @@ newentry() {
     local entry
     entry="$1"
     shift
-    echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') $dow"
+    #echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') $dow"
+    echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') *" # don't use dow => https://stackoverflow.com/questions/34357126/why-crontab-uses-or-when-both-day-of-month-and-day-of-week-specified
     echo -n " $(crontab_line_user "$@" <<< "$entry")"
     echo -n " test \`date +\\%Y\` == $(date +%Y) || exit; "
     cleanup_crontab_line "$@" <<< "$entry" | sed -r -e "s/$/ # crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
