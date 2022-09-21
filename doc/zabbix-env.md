@@ -534,3 +534,5 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
   preprocessing:
   - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
 ```
+
+https://support.zabbix.com/browse/ZBX-16162 # Draw Graph line complete when Discarding values with Heartbeat, bug
