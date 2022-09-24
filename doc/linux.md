@@ -453,3 +453,6 @@ find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|mnt|proc|sys)') -type f    
 echo b > /proc/sysrq-trigger | violent reboot
 
 ps -aef --forest # tree process list
+
+upstart sysv service init init.d update-rc.d # https://askubuntu.com/a/20347
+
