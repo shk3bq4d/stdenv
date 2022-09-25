@@ -59,6 +59,8 @@ chcon -Rv -t httpd_sys_content_t /var/www/
 chcon -Rv -t httpd_sys_content_t /data/www/html/manual_uploads
 chcon     -t httpd_tmp_t /mnt/resource/nginx
 
+chcon -Rv -t ssh_home_t /var/www/.ssh
+chcon  -v -t user_home_dir_t /var/www # system_u:object_r:unlabeled_t:s0 beforehande
 
 
 $ ls -ldZ .ssh/ .ssh/authorized_keys
