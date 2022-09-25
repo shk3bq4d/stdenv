@@ -1,0 +1,1 @@
+kubectl-get-confimaps-data.sh
