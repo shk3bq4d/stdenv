@@ -42,6 +42,7 @@ convert awesome.png -fuzz 10% -transparent white  -resize '264x264!' -resize 128
 convert yoda-02.png -crop 170x170+50+0 -background transparent -vignette 20x65000 bip.png && command feh bip.png
 
 convert -resize 640x480 -depth 8 -colors 14 -background black -extent 640x480 ks3840x2160black.png grub.xpm # enlarge resample canvas
+convert -resize '!640x480' -colors 256 starry-cosmic-background-with-nebula_213524-326.jpg grub.png
 
 #f00                      #rgb
 #ff0000                   #rrggbb

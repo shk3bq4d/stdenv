@@ -1,5 +1,6 @@
 # ex: set expandtab ts=4 sw=4:
 [ -z "$PS1" ] && return
+[[ -z "$HOME" ]] && export HOME="$(cd && pwd)"
 [ -z "$RCD" ] && export RCD=$HOME
 umask 027
 # handles urxvt resize bug
@@ -108,8 +109,12 @@ HISTSIZE=200000
 HISTFILESIZE=400000
 HISTCONTROL=ignorespace
 HISTTIMEFORMAT="%Y.%m.%d %H:%M:%S "
+if [[ -z "$HISTFILE" ]]; then
+    HISTFILE=$HOME/.bash_history
+fi
 [[ -n "$SUDO_USER" && "$HISTFILE" != *_${SUDO_USER} && -w "${HISTFILE}_$SUDO_USER" ]] && HISTFILE="${HISTFILE}_$SUDO_USER"
 [[ -n "$HISTFILE" && -f "$HISTFILE" && ! -w "$HISTFILE" ]] && echo "non-writable HISTFILE $HISTFILE disabled" && unset HISTFILE
+[[ "$HISTFILE" == "/."* ]] && echo "WARN: HISTFILE at the root location $HISTFILE"
 
 
 # make less more friendly for non-text input files, see lesspipe(1)
