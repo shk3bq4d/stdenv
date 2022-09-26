@@ -238,3 +238,6 @@ select pg_is_in_recovery();
 select uid, json_extract_path(mycolumn::json, 'json-root', 'json-key') from oc_accounts limit 10; -- ::json is a cast
 select uid, json_extract_path(data::json, 'email', 'value') from oc_accounts limit 10; -- nextcloud
 select uid, json_extract_path(data::json, 'email', 'value') from oc_accounts where json_extract_path(data::json, 'email', 'value')::varchar like '"fa%' limit 20; -- please notice the leading " in the like operator right hand side member
+select name, json_extract_path_text(configuration::json, 'idp-entityId') from oc_user_saml_configurations;
+select name, jsonb_set(configuration::jsonb, '{idp-entityId}', '"___________________________"', false) from oc_user_saml_configurations;
+
