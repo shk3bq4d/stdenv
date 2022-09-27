@@ -3,6 +3,8 @@
 find . -type f -printf '%T@ %p\n' | sort -k 1nr | sed 's/^[^ ]* //' # https://superuser.com/questions/294161/unix-linux-find-and-sort-by-date-modified
 find /data/backups -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\0' | sort -zk 1nr | sed -z 's/^[^ ]* //'
 
+find /var/log/elasticsearch/ -maxdepth 1 -type f -regextype egrep -regex '.*/gc\.log\.[0-9]+' -mtime +1 -delete
+
 #return code to error if no match: not possible, but use something like
 if find /tmp -name something | egrep '.*'; then
 # which gives the desired result and is more convenient than

@@ -526,6 +526,7 @@ if [[ -d ~/.tmp/log ]]; then exec > >(tee ~/.tmp/log/$(basename $0 .sh).log); ex
 
 # redirect whole script
 exec > >(tee logfile.txt)
+exec > >(tee -a ~/.tmp/log/"$(basename "$0" .sh).log")
 exec 2>&1
 
 # redirect whole script to file and console
