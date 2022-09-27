@@ -443,6 +443,7 @@ if hash pip 2>/dev/null; then
        eval "$(pip completion --bash --disable-pip-version-check &>/dev/null)" #&>/dev/null
    fi
 fi
+test -f /var/run/reboot-required && echo "reboot needed .bashrc"
 #[[ -z $SSH_CLIENT && $EUID -ne 0 && -d ~/.tmp ]] && echo "$(date +'%Y.%m.%d %H:%M:%S') in" >> ~/.tmp/bashrc-events
 if [[ $EUID -ne 0 && -d ~/.tmp ]]; then
     test -f ~/.tmp/bashrc-events || touch ~/.tmp/bashrc-events
