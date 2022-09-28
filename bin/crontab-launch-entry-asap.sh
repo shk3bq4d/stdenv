@@ -9,9 +9,9 @@ _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" ]] && [[ -f "$_
 
 cleanup_crontab_line() {
     if [[ "$(source_type "$@")" == *user ]]; then
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9](\S+\s+){5})//"
+        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})//"
     else
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9](\S+\s+){5})\S+\s+//"
+        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S\s+(\S+\s+){4})\S+\s+//"
     fi
 }
 
@@ -19,7 +19,7 @@ crontab_line_user() {
     if [[ "$(source_type "$@")" == *user ]]; then
         return 0
     else
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9](\S+\s+){5})(\S+)\s+.*/\3/"
+        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})(\S+)\s+.*/\3/"
     fi
 }
 

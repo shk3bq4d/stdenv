@@ -9,3 +9,13 @@ while($row = $result->fetch_assoc()) { echo $row['name'] . "\n"; }
 $result->close();
 $mysqli->close();
 ```
+
+
+```php
+echo curl_exec(curl_init("http://localhost"));
+```
+
+```sh
+php -a # interactive mode
+php -r 'echo curl_exec(curl_init("http://localhost"));' # execute command from shell
+```
