@@ -1,13 +1,28 @@
 https://www.digitalocean.com/community/tutorials/how-to-set-up-time-synchronization-on-ubuntu-16-04
 timedatectl set-ntp no
 timedatectl set-ntp on
+timedatectl
+timedatectl show
+timedatectl status
+timedatectl timesync-status
+timedatectl show-timesync | sed -r -e 's/,/\n/g'
+timedatectl show-timesync | sed -r -n -e 's/NTPMessage=// p' -e 's/,/\n/g p'
 sudo service ntp stop
 sudo ntpd -gq
 sudo service ntp start
 sudo chronyc tracking # centos
 sudo chronyc sources  # centos
 
-ssh -t myhost sudo date -us @$(date -u +%s)         
+# timedatectl
+  status                   Show current time settings
+  show                     Show properties of systemd-timedated
+  set-time TIME            Set system time
+  set-timezone ZONE        Set system time zone
+  list-timezones           Show known time zones
+  set-local-rtc BOOL       Control whether RTC is in local time
+  set-ntp BOOL             Enable or disable network time synchronization
+
+ssh -t myhost sudo date -us @$(date -u +%s) # set remote system time easily
 
 
 /etc/systemd/timesyncd.conf
