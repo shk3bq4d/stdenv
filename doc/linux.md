@@ -435,11 +435,11 @@ sudo systemd-resolve --interface wlp0s20f3 --set-dns 8.8.4.4
 sudo vi /etc/systemd/resolved.conf # dns
 
 
-pcmanfm # lightweight GUI file manager
-dolphin # GUI file manager
-thunar # GUI file manager
-double commander # GUI file manager
-nemo # GUI file manager
+pcmanfm # lightweight GUI file manager explorer
+dolphin # GUI file manager explorer
+thunar # GUI file manager explorer
+double commander # GUI file manager explorer
+nemo # GUI file manager explorer
 
 chage -l       myuser # check human status if password expired How to check the account status in Linux https://www.howtouselinux.com/post/how-to-fix-warning-your-password-has-expired-in-linux
 chage -M 99999 myuser # set user password to never expire
