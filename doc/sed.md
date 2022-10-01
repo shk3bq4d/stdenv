@@ -149,7 +149,7 @@ sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.con
 ```sh
     sed -r -e '
         # is this is a comment for first sed
-        s/a/_/g
+        s/a/_/g # this apparently works as well
         # ok
         s/r/*/g
         # that is fantastic
