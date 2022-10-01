@@ -91,18 +91,8 @@ fa = fontawesome.icons
 _hostname = mri3.gethostname()
 _short_hostname = re.sub(r'([^.]+).*', r'\1', _hostname)
 
-def count_columns2(o):
-    r = 0
-    for s in o.nodes:
-        if mri3.is_window(s):
-            r = r + 1
-        elif s.orientation == 'vertical':
-            r = r + 1
-        else:
-            r = r + count_columns(s)
-    return r
-
 def count_columns(o):
+    # count number of top-columns on screens
     if mri3.is_window(o):           return 1
     if o.orientation == 'vertical': return 1
     r = 0
