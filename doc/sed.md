@@ -144,3 +144,16 @@ tr -dc '[[:print:]]'          # removes non-printables
 
 sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.content.after;' # well watch out for end of line style
 ```
+
+## comments
+```sh
+    sed -r -e '
+        # is this is a comment for first sed
+        s/a/_/g
+        # ok
+        s/r/*/g
+        # that is fantastic
+
+        s/c/xxxx/
+        '
+```

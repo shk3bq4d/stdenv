@@ -206,36 +206,61 @@ def debug(e, recursive=True, indent='', _rA=None, _print=True):
     #pprint(vars(e.props))
     pprint(vars(e))
     return
+
+def python_object_id(i):
+    # trying to extract 0x7f73b5787130 from <i3ipc.con.Con object at 0x7f73b5787130>
+    i = str(i)
+    m = re.search(' at (0x[0-9a-f]+)>', i)
+    if m:
+        return m.group(1)
+    return None
+
+def legacy_debug(e, recursive=True, indent='', _rA=None, _print=True, nb_recursion=0):
+    if type(recursive) == int:
+        if nb_recursion + 1 > recursive:
+            return
+        recursive_bool = True
+    else:
+        recursive_bool = recursive
     if _rA is None:
         _rA = []
     if e is not None:
+        if type(e) == list:
+            if nb_recursion != 0:
+                raise BaseException("That wasn't expected'")
+            for e2 in e:
+                legacy_debug(e2, recursive=recursive, indent=indent, _rA=[], _print=_print, nb_recursion=nb_recursion)
+            return
         #if e.focused: _rA.append('focused:')
         if len(e.marks) == 0:
             mmarks = ''
         else:
             mmarks = ' m:' + ','.join(e.marks)
-    if e == None:
+        python_id = " {}".format(python_object_id(e))
+    nb_recursion = nb_recursion + 1
+    if e is None:
         _rA.append(u'{indent}Python None'.format(indent=indent))
     elif is_window(e):
-        _rA.append(u'{indent}w:{window_class} "{name}" {id}{mmarks}'.format(mmarks=mmarks, indent=indent, **vars(e)))
+        _rA.append(u'{indent}w:{window_class} "{name}" {id}{mmarks}{pyid}'.format(mmarks=mmarks, pyid=python_id, indent=indent, **vars(e)))
     elif e.type in ['workspace', 'root', 'output'] or True:
         extra = ''
         if e.type in ['workspace', 'con'] and e.layout is not None: extra = '{} {}'.format(extra, e.layout)
         if e.type in ['workspace', 'con'] and e.orientation is not None: extra = '{} {}'.format(extra, e.orientation)
         if e.name is not None and e.name.lower() != 'none': extra = '{} "{}"'.format(extra, e.name)
         extra = extra.strip()
-        _rA.append(u'{indent}o:{type}: {extra} {id}{mmarks}'.format(mmarks=mmarks, extra=extra, indent=indent, **vars(e)))
-        if recursive:
+        _rA.append(u'{indent}o:{type}: {extra} {id}{mmarks}{pyid}'.format(mmarks=mmarks, pyid=python_id, extra=extra, indent=indent, **vars(e)))
+        if recursive_bool:
             for n in e.nodes:
-                debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
+                legacy_debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False, nb_recursion=nb_recursion)
     else:
         rA.append(u'{indent}container: {layout} {orientation}'.format(indent=indent, **vars(e)))
-        if recursive:
+        if recursive_bool:
             for n in e.nodes:
-                debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False)
+                legacy_debug(n, recursive=recursive, indent=indent + ' ', _rA=_rA, _print=False, nb_recursion=nb_recursion)
     r = '\n'.join(_rA)
     if _print:
         print(r)
+        return
     return r
 
 def is_window(w):

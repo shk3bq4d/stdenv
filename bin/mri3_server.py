@@ -91,13 +91,43 @@ fa = fontawesome.icons
 _hostname = mri3.gethostname()
 _short_hostname = re.sub(r'([^.]+).*', r'\1', _hostname)
 
+def count_columns2(o):
+    r = 0
+    for s in o.nodes:
+        if mri3.is_window(s):
+            r = r + 1
+        elif s.orientation == 'vertical':
+            r = r + 1
+        else:
+            r = r + count_columns(s)
+    return r
+
+def count_columns(o):
+    if mri3.is_window(o):           return 1
+    if o.orientation == 'vertical': return 1
+    r = 0
+    for s in o.nodes:
+        r = r + count_columns(s)
+    return r
+
 _gapsH = {}
 def set_gaps(i3, workspace):
-    if _short_hostname not in ['feb22', 'may19']: return
+    if _short_hostname not in ['feb22', 'may19', 'nov20']: return
     o = mri3.get_output_name(workspace)
-    all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
+    if 0:
+        all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
+        nb_elems = len(all_elems)
+    elif 0:
+        nb_elems = len(workspace.nodes)
+        if nb_elems == 1 and not mri3.is_window(workspace.nodes[0]):
+            nb_elems = len(workspace.nodes[0].nodes)
+            logger.info("nb_elems is B %d", nb_elems)
+        else:
+            logger.info("nb_elems is A %d", nb_elems)
+    else:
+        nb_elems = count_columns(workspace)
+        logger.info("nb_elems is C %d", nb_elems)
 
-    nb_elems = len(all_elems)
     key = '{}-{}'.format(o, workspace.name)
     previous_nb_elems = _gapsH.get(key, -1)
     if previous_nb_elems == nb_elems:
@@ -108,19 +138,22 @@ def set_gaps(i3, workspace):
 
     _excluded_screensH = {
         'feb22':     ['DP-4'],
-        'may19': []
+        'may19': [],
+        'nov20': ['eDP-1'], # eDP-1 is laptop main screen, so current sole use case is the pontou sleeping room dock-in
         }
 
     one_paramsH = {
         'feb22':     [600,0,40,0],
         'may19':  [800,0,40,0],
+        'nov20':  [400,0,10,0],
         }
-    two_paramsH = {
-        'feb22':     [300,0,40,0],
-        'may19':  [400,0,40,0],
-        }
+#   two_paramsH = {
+#       'feb22':     [300,0,40,0],
+#       'may19':  [400,0,40,0],
+#       'nov20':  [80,0,40,0],
+#       }
 
-    if o in _excluded_screensH.get(_short_hostname, []) or 'citrix' in workspace.name:
+    if o in _excluded_screensH.get(_short_hostname, []) or 'citrix' in workspace.name or 'global desktop' in workspace.name:
         h = 10
         v = 0
         i = 10
@@ -129,6 +162,7 @@ def set_gaps(i3, workspace):
         h, v, i, o = one_paramsH.get(_short_hostname, [800,0,40,0])
     elif nb_elems == 2:
         h, v, i, o = one_paramsH.get(_short_hostname, [300,0,40,0])
+        #h,v, i, o = two_paramsH.get(_short_hostname, [300,0,40,0])
     else:
         h = 10
         v = 0
@@ -163,7 +197,7 @@ def on_window(i3, e):
         if wid in wA:
             wA.remove(wid)
             persist(wA)
-    elif e.change == 'focus':
+    elif e.change in ['focus', 'move']:
         #e.container.command('[class="[.]*"] border pixel 0')
         e.container.command('border pixel 6')
         #e.container.command('gaps inner current plus 40')
