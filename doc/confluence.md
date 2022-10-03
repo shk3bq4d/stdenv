@@ -2431,6 +2431,12 @@ select * from cwd_user limit 1;
 select * from cwd_user where user_name like '%admin%' limit 50;
 update cwd_user set email_address       = 'bill@example.com'   where user_name like '%admin%';
 update cwd_user set lower_email_address = lower(email_address) where user_name like '%admin%';
+
+-- top 30 spaces by attachment size
+select * from (select s.spacekey, round(sum(longval) / 1024 / 1024) as attachments_size from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' group by s.spacekey order by 2 desc) b limit 30;
+select sum(attachments_size) from (select s.spacekey, round(sum(longval) / 1024 / 1024) as attachments_size from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' group by s.spacekey order by 2 desc) b limit 30;
+select s.spacekey, round(longval / 1024 / 1024) as attachments_size, c.title from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' order by longval desc limit 30;
+select s.spacekey, round(longval / 1024 / 1024) as attachments_size, c.title from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' and s.spacekey = 'MYKEY' order by longval desc limit 600;
 ```
 
 
@@ -2442,3 +2448,5 @@ https://confluence.atlassian.com/doc/confluence-release-notes-327.html
 * end of life policy: https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
 
 https://myhost/confluence/fixonly/fixlicense.action?licenseSubmitted=true
+
+#
