@@ -46,6 +46,7 @@ lvresize --size +512M --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root-LV_backup
 lvresize --size +5G   --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root_home
+#lvresize --size 1200M   --resizefs /dev/mapper/VG_root-LV_home --yes <-- schedules via crontab
 lvresize --size +3G   --resizefs /dev/mapper/rootvg-optlv
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-data
 lvresize --size +20G   --resizefs /dev/mapper/rootvg-varlv
