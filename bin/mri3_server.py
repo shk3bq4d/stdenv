@@ -100,6 +100,9 @@ def count_columns(o):
         r = r + count_columns(s)
     return r
 
+def excluded_screen_nov20(workspace):
+    return mri3.get_output(workspace).rect.width <= 2560
+
 _gapsH = {}
 def set_gaps(i3, workspace):
     if _short_hostname not in ['feb22', 'may19', 'nov20']: return
@@ -143,7 +146,11 @@ def set_gaps(i3, workspace):
 #       'nov20':  [80,0,40,0],
 #       }
 
-    if o in _excluded_screensH.get(_short_hostname, []) or 'citrix' in workspace.name or 'global desktop' in workspace.name:
+    if o in _excluded_screensH.get(_short_hostname, []) or \
+        _short_hostname == 'nov20' and excluded_screen_nov20(workspace) or \
+        'citrix' in workspace.name or \
+        'global desktop' in workspace.name or \
+        False:
         h = 10
         v = 0
         i = 10
