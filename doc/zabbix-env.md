@@ -535,10 +535,19 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
   - {{ z.pp_regex('(?m)^POWER_SUPPLY_TECHNOLOGY=(.*)',   '\\\\1') }}
 ```
 
-<<<<<<< HEAD
 https://support.zabbix.com/browse/ZBX-16162 # Draw Graph line complete when Discarding values with Heartbeat, bug
-=======
 
 # proxy
 docker exec -it zabbix-proxy zabbix_proxy -R log_level_increase
->>>>>>> github/stdenv
+
+
+```sql
+set global log_bin_trust_function_creators=1; -- "You do not have the SUPER privilege and binary logging is enabled", zabbix 5.4 -> 6.0 upgrade (or 6.0 to 6.2 I don't recall)
+```
+
+# high availibility cluster HA master slave repliac
+* https://www.zabbix.com/documentation/current/en/manual/concepts/server/ha
+```sh
+zabbix_server -R ha_status
+docker exec -it zabbix-server zabbix_server -R ha_status
+```

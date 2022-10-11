@@ -1325,3 +1325,5 @@ systemctl is-active user-defined.target # check if target is running
 
 systemctl list-dependencies --after  shutdown.target
 systemctl list-dependencies --before shutdown.target
+
+Restart= no	always	on-success	on-failure	on-abnormal	on-abort	on-watchdog https://www.freedesktop.org/software/systemd/man/systemd.service.html#

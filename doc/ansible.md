@@ -1233,6 +1233,7 @@ ansible web     -bm service -a "name=httpd          state=restarted"     # oneli
 ansible myhost  -bm service -a "name=zabbix-agent2  state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible graylog -bm service -a "name=graylog-server state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible '*.lan' -bm service -a "name=rsyslog        state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible linux   -bm service -a "name=systemd-logind state=restarted"     -e ansible_timeout=120 # oneliner one-liner adhoc ad-hoc in case dbus was restarted
 ansible all -m file -a "path=/project/devops state=directory"            # oneliner one-liner adhoc ad-hoc
 ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneliner one-liner adhoc ad-hoc
 ansible all -m file -a "path=/project/devops/abcd.txt  state=touch"      # oneliner one-liner adhoc ad-hoc
