@@ -313,7 +313,7 @@ $ rm -rf ../temp
 $ git worktree prune
 
 # debug connection with wrapper. Watch out ssh stderr seems to be parsed by git parent process
-@begin=sh@
+```sh
 ssh_wrapper=/tmp/my-ssh-wrapper
 cat > $ssh_wrapper << EOF
 #!/usr/bin/env bash
@@ -324,9 +324,11 @@ ssh -o LogLevel=DEBUG3 -o IdentityFile=$(get_private_key_filepath) \$@
 EOF
 chmod u+x $ssh_wrapper
 export GIT_SSH="$ssh_wrapper"
+```
 
 
 
+```sh
 git log newbranch..oldbranch # To show the commits in oldbranch but not in newbranch:
 git diff newbranch...oldbranch # To show the diff in the commits in oldbranch but not in newbranch:
 git log oldbranch ^newbranch --no-merges # show commit logs for all commits on oldbranch that are not on newbranch
@@ -357,7 +359,7 @@ git log --all --full-history -- **/thefile.* # "grep" history filename
 git log --all --full-history -- <path-to-file> # "grep" history exact filepath
 git show <SHA>:<path-to-file> # "cat raw file from history"
 git checkout <SHA>^ -- <path-to-file> # "restore specific file as it was from history
-@end=sh@
+```
 
 
 # relative reference https://git-scm.com/book/en/v2/Git-Tools-Revision-Selectiohttps://git-scm.com/book/en/v2/Git-Tools-Revision-Selection

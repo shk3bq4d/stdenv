@@ -1230,6 +1230,7 @@ ansible uat -bm yum -a "name=* state=latest"                             # oneli
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible linux   -bm service -a "name=filebeat       state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible myhost  -bm service -a "name=zabbix-agent2  state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible graylog -bm service -a "name=graylog-server state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible '*.lan' -bm service -a "name=rsyslog        state=restarted"     # oneliner one-liner adhoc ad-hoc
@@ -2560,6 +2561,7 @@ when: "'bip' in group_names"
     animals: "{{ animals|combine({'birds': {'cardinals': {'feathers': 'red'}}}, recursive=True) }}" # yq.jq
 ```
 debug: msg="{{ lookup('dig', 'example.com.')}}" # dns name resolution
+my_external_internet_ip_address_ipv4: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') }}"
 
 lookup('dict', users) # convert dict to list [item.key, item.value]
 msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
