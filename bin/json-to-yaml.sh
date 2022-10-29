@@ -3,5 +3,9 @@
 
 set -euo pipefail
 
-yq e -P
+if [[ $# -eq 0 ]]; then
+    yq e -P -
+else
+    yq e -P "$@"
+fi
 #| yq-kislyuk -y --indentless-lists

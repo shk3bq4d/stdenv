@@ -36,6 +36,8 @@ kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolu
 kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - # all pods with pvc
 kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:.name}' - | while IFS=": " read a b; do echo "a=$a b=$b"; done # all pods with pvc bash iteration
 kubectl get pods -Ao yaml | yq e '.items[]|select(.spec.volumes[].persistentVolumeClaim).metadata|{.namespace:0,.name:0}|keys()|join(" ")' - | while read namespace name; do echo "namespace=$namespace name=$name"; done # all pods with pvc bash iteration
+kubectl get pods -o jsonpath='{range .items[*]}{..metadata.name}{"\n"}{end}'
+kgp -Ao=jsonpath='{range .items[*].status.containerStatuses[*]}{.imageID}{"\n"}{end}' | sort -u
 
 yq e '.contexts[]|select(.name=="mycontext").context.namespace' ~/.kube/config
 yq e ".contexts[]| select(.name==((.|parent|parent).current-context)) |.context.namespace" ~/.kube/config
@@ -45,3 +47,6 @@ f=corp.yml; _path='.corp_certs__to_merge'; yq e "$_path"'|keys|.[]' $f | while r
 ```
 
 yq e '.myarray | map_values("")' # list to dict, https://mikefarah.gitbook.io/yq/operators/map
+
+
+yq '[.spec.containers[],.spec.initContainers[]]|flatten|.[].image' bip.yaml # concatenate list
