@@ -2,6 +2,7 @@
 psql -U postgres
 sudo -u postgres psql
 
+```sql
 \list or \l: list all databases
 \dt: list all tables in the current database
 \du list roles
@@ -11,8 +12,10 @@ pg_dump -st tablename dbname -- show create table (ie: there is no such thing ac
 \c       database_name -- use
 \connect database_name -- use
 \x # toggles expanded display (vertical alignment)
+show config_file; -- display filepath of main config file
 
-sELECT c.relname FROM pg_class c WHERE c.relkind = 'S'; # list sequences
+select c.relname from pg_class c where c.relkind = 'S'; # list sequences
+```
 
 -v ON_ERROR_STOP=1
 
@@ -233,6 +236,7 @@ select client_addr, state from pg_stat_replication;
 select pg_is_in_recovery();
 ```
 
+https://hub.docker.com/_/postgres
 # json
 ```sql
 select uid, json_extract_path(mycolumn::json, 'json-root', 'json-key') from oc_accounts limit 10; -- ::json is a cast
@@ -241,3 +245,7 @@ select uid, json_extract_path(data::json, 'email', 'value') from oc_accounts whe
 select name, json_extract_path_text(configuration::json, 'idp-entityId') from oc_user_saml_configurations;
 select name, jsonb_set(configuration::jsonb, '{idp-entityId}', '"___________________________"', false) from oc_user_saml_configurations;
 
+# sessions
+```
+select pid ,datname ,usename ,application_name ,client_hostname ,client_port ,backend_start ,query_start ,query ,state from pg_stat_activity where state in ('idle', 'active');
+```
