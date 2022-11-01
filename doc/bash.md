@@ -646,7 +646,7 @@ set -o pipefail # crash if programs in between pipes fail
 
 set -o noclobber
 
-echo $RANDOM
+echo $RANDOM # is an internal Bash function (not a constant) that returns a pseudorandom integer in the range 0 - 32767. It should not be used to generate an encryption key.
 # random value between 1 and 10 inclusive
 $(( ( RANDOM % 10 )  + 1 ))
 

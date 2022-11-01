@@ -1,3 +1,5 @@
+* https://github.com/mikefarah/yq/issues/462 # list indentation
+
 sudo snap install yq
 https://mikefarah.gitbook.io/yq/
 

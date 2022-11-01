@@ -341,6 +341,8 @@ https://www.reddit.com/r/linuxadmin/comments/9h3x84/ubuntu_vs_centos_should_i_st
 lspci | grep VGA # find out graphical card nvidia amd intel
 
 nice -n 15 clamscan && clamscan --stdout -v -ir /chroot/ # renice
+     nice -n +18 openssl dhparam -out /tmp/low-priority-process.pem 4096
+sudo nice -n -18 openssl dhparam -out /tmp/high-priority-requires-sudo-with-nice.pem 4096
 renice +2 $(pgrep blobfuse) # lower priority of process
 renice -2 $(pgrep blobfuse) # higher priority of process
 
