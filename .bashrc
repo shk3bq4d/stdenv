@@ -552,4 +552,6 @@ alias .='cd ..'
 alias vi-='vi -'
 alias bc='bc -l'
 alias dc=cd
+alias vgr=vim-git-rev.sh
+alias vgns=vim-git-not-staged.sh
 true # so prompt is green
