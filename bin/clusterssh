@@ -23,6 +23,11 @@ else
     sleep=$(max 5  $(( $nb_args / 2 )))
     echo "sleep is $sleep"
     { sleep $sleep; mri3_grid_layout.py; } &
-    { nohup /usr/bin/clusterssh -l automation -c ~/.clusterssh/cluster-sf "$@" &>/dev/null; } &
+	_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" ]] && [[ -f "$_tempfile" ]] && rm -f $_tempfile || true; }; #trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+	cat ~/.clusterssh/cluster-* > $_tempfile
+#cat $_tempfile
+    #{ nohup /usr/bin/clusterssh -l automation -c ~/.clusterssh/cluster-sf "$@" &>/dev/null; } &
+	#{ nohup /usr/bin/clusterssh $(ls -1 ~/.clusterssh/cluster-* | sed -r -e 's/^/-c /') "$@" &>/dev/null; } &
+	{ nohup /usr/bin/clusterssh -c $_tempfile "$@" &>/dev/null; rm $_tempfile; } &
     #/usr/bin/clusterssh -c ~/.clusterssh/cluster-sf "$@"
 fi

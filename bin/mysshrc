@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+# this script is called by ~/.clusterssh/config
+
+source ~/bin/dot.bashfunctions
+
+ssh "$@"
