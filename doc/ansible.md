@@ -2133,9 +2133,9 @@ loop: "{{ users | subelements('authorized') }}"
 {{ 101 | random(1, 10) }}
 {{ 101 | random(start=1, step=10) }}
 "{{ 60 | random(seed=inventory_hostname) }} * * * * root /script/from/cron"
-{{ ['a','b','c'] | shuffle }}
-{{ ['a','b','c'] | shuffle }}
-{{ ['a','b','c'] | shuffle(seed=inventory_hostname) }}
+{{ ['a','b','c'] | shuffle }} # randomize list
+{{ ['a','b','c'] | shuffle }} # randomize list
+{{ ['a','b','c'] | shuffle(seed=inventory_hostname) }} # randomize list
 Get the logarithm (default is e):
 {{ myvar | log }}
 {{ myvar | log(10) }}
