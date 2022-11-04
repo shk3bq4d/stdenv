@@ -2387,3 +2387,6 @@ docker exec -itu 33 nextcloud php occ encryption:fix-encrypted-version --path MY
 ```
 
 
+# What's the difference between NC hubs and NC versions?
+No difference, just a new name and starting from number 1. Internal it's called Nextcloud 25. Frank answered this question at the conference on Saturday.
+https://www.reddit.com/r/NextCloud/comments/xtlqzn/announcing_nextcloud_hub_3_brand_new_design_and/

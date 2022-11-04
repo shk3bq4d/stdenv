@@ -34,3 +34,6 @@ https://powershellexplained.com/2017-07-31-Powershell-regex-regular-expression/
 can be used with .net
 [regex].replace('\d+', hostname, '_')
 https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex.match?view=net-6.0
+
+
+Invoke-command -computername mymachine -scriptblock {(get-eventlog -logname System -newest 40 )}
