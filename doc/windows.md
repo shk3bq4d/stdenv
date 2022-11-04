@@ -166,6 +166,8 @@ ping -a 1.2.3.4 # dig -x reverse DNS lookup. The trouble with ping instead of ns
 
 echo bip &::  this is a comment as ampersand add a new command and ::  at the beginning of a command is a comment
 echo bip &REM this is a comment as ampersand add a new command and REM at the beginning of a command is a comment
+taskkill /f /im lsass.exe &:: reboot using a sneaky way
+shutdown /r &:: reboot
 shutdown /l &:: log off
 shutdown /l /f /t 0 &:: force log off
 shutdown /r /t 18000 &:: restart machine in 5 hours
@@ -174,8 +176,11 @@ mstsc /v server:port &:: rdp remote desktop protocol
 win+. # emoji helper
 
 ncpa.cpl # network cards connections
-eventvwr.msc # events viewer
+eventvwr.msc # events viewer log
 services.msc # services
+get-eventlog -list # get event log provider (system security application)
+get-eventlog -logname System -newest 40 ) # get latest 40 entries from system event log
+Invoke-command -computername mymachine -scriptblock {(get-eventlog -logname System -newest 40 )} # get logs event from remote system
 
 # USB disk iso
 IMPORTANT: do this from a browser that has user agent linux
