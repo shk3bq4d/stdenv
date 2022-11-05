@@ -12,7 +12,7 @@ on_skipped     Only invoke the debugger if the task is skipped
 [defaults]
 enable_task_debugger = True
 
-# environment variable
+# environment variable (only activate the debugger on failed tasks)
 ANSIBLE_ENABLE_TASK_DEBUGGER=True ansible-playbook -i hosts site.yml
 
 Enabling the debugger as a strategy
@@ -56,3 +56,5 @@ p task_vars  # print all variables available. Don't do that at it will spike 100
  u'ansible_architecture': u'x86_64',
  ...
 }
+p task.args.keys()
+p task_vars.keys() # more suitable that without the keys
