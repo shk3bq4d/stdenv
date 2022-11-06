@@ -456,7 +456,7 @@ compdef _path_commands viw catw lessw
 #    autoload -U +X bashcompinit && bashcompinit
 #    source $f
 #fi
-alias z='nocorrect _z 2>&1' # at the end is necessary as it is defined elsewhere
+alias z='nocorrect zshz 2>&1' # at the end is necessary as it is defined elsewhere
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 if [[ -n "${MR_URXVT_CMD:-}" ]]; then
