@@ -457,7 +457,7 @@ compdef _path_commands viw catw lessw
 #    source $f
 #fi
 alias z='nocorrect zshz 2>&1' # at the end is necessary as it is defined elsewhere
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' # apparently buggy in latest oh-my-zsh (grep complains about non-escaped dash characters)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 if [[ -n "${MR_URXVT_CMD:-}" ]]; then
