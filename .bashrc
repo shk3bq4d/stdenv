@@ -343,12 +343,12 @@ if [[ $UID -ne 0 && $UNAME != cygwin* && $UNAME != msys* ]]; then
 
     if [[ -z ${SSH_CLIENT+1} ]]; then # only start agent if not running inside SSH session
         start_agent_if_not_started
-        mr_ssh_add
+        mr_ssh_add || true
     else
         if [ -f "${SSH_ENV}" ]; then
              source ${SSH_ENV} > /dev/null
              # /usr/bin/ssh-add -l &>/dev/null || /usr/bin/ssh-add -t 43200
-             mr_ssh_add
+             mr_ssh_add || true
         fi
     fi
 fi
