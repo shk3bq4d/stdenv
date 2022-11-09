@@ -26,7 +26,7 @@ rsync-remote-root.sh pi@pi-chambrecharlotte:/root/arp.cap ~/tmp
 wireshark ~/tmp/arp.cap &
 
 # rsyslog
-tcpdump -i eth0 -X dst port 514
+tcpdump -i eth0 -X port 514
 
 
 
