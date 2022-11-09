@@ -32,6 +32,7 @@ curl -s http://localhost:9200/_cat/nodes\?format\=json | jq
 curl -s http://localhost:9200/_cluster/state | grep read_only
 curl -s http://localhost:9200/_cluster/state?pretty=true | grep -C4 read_only
 curl -s http://localhost:9200/_cat/shards | sort
+curl -s http://localhost:9200/_cat/shards | grep -vE 'STARTED' | sort
 curl -s http://localhost:9200/_cat/shards | sort | tail -n 24
 curl -s http://localhost:9200/graylog_43 | python -m json.tool
 curl -XDELETE http://localhost:9200/graylog_43

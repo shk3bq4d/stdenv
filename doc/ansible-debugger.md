@@ -33,8 +33,10 @@ This backwards-compatible method, which matches Ansible versions before 2.5, may
 p host
 p result._result
 p task.args
+p result._result['results'][0]['item']
 task.args['data'] = '{{ var1 }}'
 task.args['name'] = 'bash'
+task.vars['name'] = 'bash'
 task_vars['pkg_name'] = 'bash'
 update_task
 redo
@@ -51,10 +53,12 @@ quit                      q             Quit the debugger
 
 p task       # print task name
 p task.args  # print task arguments
-p task_vars  # print all variables available. Don't do that at it will spike 100% CPU for quite a while
+p task.vars  # print all local variables of task vars:
+p task_vars  # print all global variables available. Don't do that at it will spike 100% CPU for quite a while
 {u'ansible_all_ipv4_addresses': [u'192.0.2.10'],
  u'ansible_architecture': u'x86_64',
  ...
 }
 p task.args.keys()
+p task.vars.keys()
 p task_vars.keys() # more suitable that without the keys
