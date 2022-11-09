@@ -1226,4 +1226,24 @@ db_docker_vim_mode() {
     true
 }
 
+grep_systemd_unit() {
+    if [[ $# -eq 0 ]]; then
+        return 0
+    fi
+    find /etc/systemd /lib/systemd | grep -i "$@"
+    sudo grep -ir \
+        --color=always \
+        --include '*.service' \
+        --include '*.timer' \
+        --include '*.mount' \
+        --include '*.conf' \
+        --include '*.path' \
+        --include '*.socket' \
+        "$@" \
+        -- \
+        /etc/systemd \
+        /lib/systemd \
+
+}
+
 true # last statement must return true
