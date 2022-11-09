@@ -10,6 +10,8 @@ pattern   normal -r
 +         NOK    works
 
 
+sed --unbuffered
+sed -u # unbuffered
 
 
 sed -n -e '/TERMINATE/,$p' # will print the line matching TERMINATE till the end of the file: Explained: -n disables default behavior of sed of printing each line after executing its script on it, -e indicated a script to sed, /TERMINATE/,$ is an address (line) range selection meaning the first line matching the TERMINATE regular expression (like grep) to the end of the file ($), and p is the print command which prints the current line.
