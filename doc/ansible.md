@@ -2770,6 +2770,10 @@ play keyword order https://docs.ansible.com/ansible/latest/user_guide/playbooks_
 
 flatten | select | unique | sort | join(',')
 
+- setup:
+  gather_subset: min
+- copy:
+    dest: /tmp/bip.{{ ansible_date_time.iso8601_basic_short }} # path setup: gather_subset=min 
 
 # first timetouch heartbeat file creation
 file:                         # first timetouch heartbeat file creation
