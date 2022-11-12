@@ -551,3 +551,30 @@ set global log_bin_trust_function_creators=1; -- "You do not have the SUPER priv
 zabbix_server -R ha_status
 docker exec -it zabbix-server zabbix_server -R ha_status
 ```
+
+# saml
+https://www.zabbix.com/forum/zabbix-help/402079-microsoft-adfs-saml-idp-and-zabbix-5-0-guideline
+Hi,
+I haven't found any post so far where some one explains how to get AzureAD-SSO working with Zabbix. After a lot of sweat and tears I managed to get it working, so I'll post it here - as it is the first result on google when you search Azure AD SSO Zabbix:
+1. Make your Zabbix-Frontend work with SSL, if you haven't done so
+2. Create a new Enterprise-App in Azure. Entitiy-ID https://zabbix.yourcompany.org - Reply-URL: https://zabbix.yourcompany.org/index_sso.php
+3. Download the Federation-Metadata XML from Azure, open it in a text-editor and search for the x509 certificate (appears 3 times in the XML - do NOT download and use the certificate the Azure offers you for direct download)
+4. Create a file (/usr/share/zabbix/)conf/certs/idp.crt and insert the certificate as one single string without any "begin certificate" or line breaks or any other stuff
+5. (May be optional - but I did it): create a personal certificate and private key and put it in the same directory as sp.crt and sp.key (I linked the letsencrypt cert and key I also use for SSL... potentially not the best idea in hyper-secure environments)
+6. (May also be optional): uncomment the SSO part in /usr/share/zabbix/conf/zabbix.conf.php
+7. Login in Zabbix-FE, goto Administration, Authentication, SAML. Map the values from Azure -> Zabbix:
+-- Azure AD Identifier -> IdP Entity ID (https://sts.windows.net...)
+-- Azure Login URL -> SSO service URL (https://login.microsoftonline.com...)
+-- Claim name from Azure -> Username attribute (that one is tricky... zabbix will search for the internal technical name. Azure will show you these when you edit your claims. Eg: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" is the userprinicipalname (aka UPN, aka: Mailaddress in most scenarios)
+-- Identifier -> SP entity ID (https://zabbix.yourcompany.org in this example)
+8. Create a new user with the right field from Azure as Username (UPN/Mail)
+9. Don't forget to grant your user access-rights in Azure, if you have set User assignment required (default)
+10. Login with SSO and have a pint of beer
+
+
+bash-5.1$ grep -i sso /etc/zabbix/web/zabbix.conf.php
+$SSO['SP_KEY']         = file_exists('/etc/zabbix/web/certs/sp.key') ? '/etc/zabbix/web/certs/sp.key' : (file_exists(getenv('ZBX_SSO_SP_KEY')) ? getenv('ZBX_SSO_SP_KEY') : '');
+$SSO['SP_CERT']            = file_exists('/etc/zabbix/web/certs/sp.crt') ? '/etc/zabbix/web/certs/sp.crt' : (file_exists(getenv('ZBX_SSO_SP_CERT')) ? getenv('ZBX_SSO_SP_CERT') : '');
+$SSO['IDP_CERT']       = file_exists('/etc/zabbix/web/certs/idp.crt') ? '/etc/zabbix/web/certs/idp.crt' : (file_exists(getenv('ZBX_SSO_IDP_CERT')) ? getenv('ZBX_SSO_IDP_CERT') : '');
+$sso_settings = str_replace("'","\"",getenv('ZBX_SSO_SETTINGS'));
+$SSO['SETTINGS']       = (json_decode($sso_settings)) ? json_decode($sso_settings, true) : array();
