@@ -934,3 +934,21 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 /var/lib/kubelet/config.yaml # cgroupDriver
 
 echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot
+
+
+# dynamic self reference
+```yaml
+  env:
+  - name: MY_POD_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.name
+  - name: MY_POD_NAMESPACE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.namespace
+  - name: MY_POD_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.podIP
+```
