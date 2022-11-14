@@ -29,16 +29,16 @@ items:
       price:     133.7
       quantity:  1
 
-bill-to:  &id001 # the full bill-to dictionary can be refered with *id001 anchor reference
+bill-to:  &id001 # the full bill-to dictionary can be refered with *id001 anchor/link reference
     street: | # multiline are kept as multiline but dedented. Ends with new line
             123 Tornado Alley
             Suite 16
     city:   East Centerville
     state:  KS
 
-foo: &bar original  # the string/scalar `original` with anchor bar can be referenced with *bar
-bip: *bar           # reference to anchor scalar `original` as value of bip
-<<:  *bar           # insert content of anchor bar as is, which wouldn't work too well in this cas as bar is a scalar
+foo: &bar original  # the string/scalar `original` with anchor/link bar can be referenced with *bar
+bip: *bar           # reference to anchor/link scalar `original` as value of bip
+<<:  *bar           # insert content of anchor/link bar as is, which wouldn't work too well in this cas as bar is a scalar
 
 ship-to:  *id001
 

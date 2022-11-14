@@ -207,18 +207,21 @@ function cdd() {
 
 test -z "${UNAME:-}" && export UNAME="$(uname)"
 function ssh() {
-    local BIN OPTS f p
+    local BIN OPTS f p last_arg
     p="$PATH"
     test $UNAME = freebsd && test -f /usr/local/bin/ssh && p="/usr/local/bin:$PATH"
     BIN=ssh
     OPTS="-t"
+    last_arg="${@: -1}"
+    #echo "$(date) $0 $@" >> ~/.tmp/log/ssh.log
 
-    if [[ $# -eq 1 ]] && [[ -f $HOME/.sshrc ]]; then
-        case "$1" in \
+    # SetEnv=MrClusterSSH=coucou works with ~/.cluster/config to handle the "-l user" sometimes added by clusterssh
+    if [[ ( $# -eq 1 || "$@" == *"SetEnv=MrClusterSSH=coucou"* ) && ( -f $HOME/.sshrc ) ]]; then
+        case "$last_arg" in \
         docker-*) true;;
         galaxy*|xoom|s3mini|motog|huawei19)
             if hash sshpass 2>/dev/null; then
-                f=$HOME/.words/$1
+                f=$HOME/.words/$last_arg
                 if [[ -f $f ]]; then
                     BIN=sshpass
                     OPTS="-f$f ssh $OPTS"
@@ -236,7 +239,7 @@ function ssh() {
             ;;
         esac
     fi
-    case "$1" in \
+    case "$last_arg" in \
         minikube)
             TERM=xterm
             ;;
@@ -1224,6 +1227,26 @@ db_docker_vim_mode() {
     echo "$list" | grep -qx mysql   && echo 'set editing-mode vi' | sudo docker exec -i mysql   tee -a /etc/inputrc >/dev/null && echo "OK: mysql"
     echo "$list" | grep -qx postgres   && echo 'set editing-mode vi' | sudo docker exec -i postgres   tee -a /etc/inputrc >/dev/null && echo "OK: postgres"
     true
+}
+
+grep_systemd_unit() {
+    if [[ $# -eq 0 ]]; then
+        return 0
+    fi
+    find /etc/systemd /lib/systemd | grep -i "$@"
+    sudo grep -ir \
+        --color=always \
+        --include '*.service' \
+        --include '*.timer' \
+        --include '*.mount' \
+        --include '*.conf' \
+        --include '*.path' \
+        --include '*.socket' \
+        "$@" \
+        -- \
+        /etc/systemd \
+        /lib/systemd \
+
 }
 
 true # last statement must return true
