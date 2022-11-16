@@ -957,6 +957,7 @@ except:
 url = 'https://stackoverflow.com/questions/5074803/retrieving-parameters-from-a-url?a=4&b=2'
 parsed = urlparse.urlparse(url)
 print urlparse.parse_qs(parsed.query)['def']
+from urllib.parse import urlencode; urlencode(mydict) # to query string
 
 import textwrap; textwrap.dedent(s) #un-indent block of text unindent unident un-ident
 
