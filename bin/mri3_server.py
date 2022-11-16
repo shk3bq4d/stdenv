@@ -81,7 +81,7 @@ def logging_conf(
            },
        'handlers':{
            'stdout': {'level':level,'formatter': 'standard','class':'logging.StreamHandler','stream': 'ext://sys.stdout'},
-           'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': '/tmp/zabbix-kg_maintenance.log'}, #
+           'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': os.path.expanduser('~/.tmp/log/mri3-server.log')}, #
            'syslog': {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
@@ -187,7 +187,7 @@ def set_gaps(i3, workspace):
     workspace.command(";".join(commandA))
 
 def on_window(i3, e):
-    logging.warning('on_window %s', e.change)
+    logging.info('on_window %s', e.change)
     i3blocklet(i3, e)
     if e.change == 'close':
         wid = e.container.window
@@ -207,7 +207,7 @@ def on_window(i3, e):
             wA.remove(wid)
         wA.append(wid)
         persist(wA)
-    logging.warning('/on_window %s', e.change)
+    logging.info('/on_window %s', e.change)
 
 def blockpidcheck(pid):
     try:
@@ -589,7 +589,7 @@ def go(args):
 
 if __name__ == '__main__':
 
-    logging_conf(use='stdout syslog')
+    logging_conf(use='stdout file')
     try:
         go(sys.argv[1:])
     except BaseException as e:

@@ -1233,7 +1233,7 @@ grep_systemd_unit() {
     if [[ $# -eq 0 ]]; then
         return 0
     fi
-    find /etc/systemd /lib/systemd | grep -i "$@"
+    find /etc/systemd /lib/systemd ~/.config/systemd | grep -i "$@"
     sudo grep -ir \
         --color=always \
         --include '*.service' \
@@ -1246,6 +1246,7 @@ grep_systemd_unit() {
         -- \
         /etc/systemd \
         /lib/systemd \
+        ~/.config/systemd \
 
 }
 
