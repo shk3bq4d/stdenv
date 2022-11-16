@@ -210,13 +210,19 @@ def on_window(i3, e):
     logging.info('/on_window %s', e.change)
 
 def blockpidcheck(pid):
+    NULL = '\x00'
+    i3blocks_binary_name = 'i3blocks'
     try:
         with open('/proc/{}/cmdline'.format(pid), mode='rb') as fd:
-            content = fd.read().decode().split('\x00')[0]
+            cmdA = fd.read().decode().split(NULL)
     except Exception:
         return False
-    logger.debug('pid: %s, content: %s', pid,  content)
-    return content == 'i3blocks'
+    first_arg = cmdA[0]
+    if first_arg == i3blocks_binary_name:
+        logger.info('<- True pid: %s, first_arg: %s, full args: %s', pid,  first_arg, " ".join(cmdA))
+        return True
+    logger.debug('<- False pid: %s, first_arg: %s, full args: %s', pid,  first_arg, " ".join(cmdA))
+    return False
 
 _lastpid = None
 def blockpid():
@@ -377,6 +383,9 @@ def i3blocklet_name(name):
         border_right=0,
 
         )
+#   j = dict(
+#       full_text="salut"
+#       )
     # https://github.com/Airblader/i3
     # https://i3wm.org/docs/i3bar-protocol.html
     # { "full_text": "example", \
