@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 22 Sep 2018
-##
 
 set -euo pipefail
 
@@ -19,9 +11,9 @@ case ${HOSTNAMEF:-hostnamef-unset} in \
 ${WORK_PC1F:-workpc1f-unset})
 	exit 0
 	;;
-dec17.ly.lan)
+nov20.ly.lan)
 	#ips --no-internet | grep -q 'wlp58s0.*172.28'
-	ifconfig wlp58s0 | grep -qE "inet (10\.14\.2\.|192\.168\.168\.)" && exit 0
+	ifconfig wlp0s20f3 | grep -qE "inet (10\.14\.2\.|192\.168\.168\.)" && exit 0
 	;;
 esac
 exit 1
