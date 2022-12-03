@@ -162,7 +162,7 @@ certmgr.msc
 
 # keytool jks jdk8 to jdk6,jdk7
 ```sh
-jdk8/bin/keytool -importkeystore -srckeystore tensorsys.jks -destkeystore bip.p12 -srcstoretype JKS -deststoretype PKCS12 # in jdk8 converts JKS to PKCS12
+jdk8/bin/keytool -importkeystore -srckeystore mykeystore.jks -destkeystore bip.p12 -srcstoretype JKS -deststoretype PKCS12 # in jdk8 converts JKS to PKCS12
 openssl pkcs12 -info -in bip.p12 -nodes > TMPFILE # prints private key and certs in plain text
 # manually separate TMPFILE in a.key and bundle.crt
 openssl pkcs12 -export -out certificate.pfx -inkey a.key -in bundle.crt -name MYALIAS # reassamble a new pkcs12 with an actual alias. I wonder if this step is necessary

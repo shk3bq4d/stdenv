@@ -1017,7 +1017,7 @@ rawurldecode() {
 
 ping-up-down() {
     local up nextup down nonetwork timeout args
-    state="unkown"
+    state="unknown"
     nextstate="$state"
     test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
     up="${EGREEN:-}host is up${ENONE:-}"
@@ -1030,6 +1030,7 @@ ping-up-down() {
     esac
     while read line;
     do
+        [[ "$line" == PING* && $state == "unknown" ]] && echo "$line"
         [[ "$line" == *"1 packets received"* ]] && nextstate="$up" # busybox ping
         [[ "$line" == *" 0% packet loss"* ]]    && nextstate="$up" # ubuntu 20.04 ping
         [[ "$line" == *"100% packet loss"* ]]   && nextstate="$down"
