@@ -578,3 +578,6 @@ $SSO['SP_CERT']            = file_exists('/etc/zabbix/web/certs/sp.crt') ? '/etc
 $SSO['IDP_CERT']       = file_exists('/etc/zabbix/web/certs/idp.crt') ? '/etc/zabbix/web/certs/idp.crt' : (file_exists(getenv('ZBX_SSO_IDP_CERT')) ? getenv('ZBX_SSO_IDP_CERT') : '');
 $sso_settings = str_replace("'","\"",getenv('ZBX_SSO_SETTINGS'));
 $SSO['SETTINGS']       = (json_decode($sso_settings)) ? json_decode($sso_settings, true) : array();
+
+# functions
+dayofweek # Day of week in range of 1 to 7 (Mon - 1, Sun - 7). dayofweek()<6
