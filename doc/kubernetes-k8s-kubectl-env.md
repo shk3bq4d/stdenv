@@ -813,6 +813,7 @@ kubectl get -A certificates.cert-manager.io -o jsonpath='{range .items[*]}{.meta
 kubectl --kubeconfig admin.conf get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.status.startTime}{" "}{.metadata.name}{end}' | sort
 kubectl get po --all-namespaces -o custom-columns=NAME:.metadata.name,NS:.metadata.namespace,IP:.status.podIP
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
 kops get ig -o json | jq -r '.[]| .metadata.name + ": " + .spec.machineType'
 
 kubectl --kubeconfig ~root/admin.conf get namespaces # file config context
