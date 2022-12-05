@@ -55,9 +55,9 @@ if [[ -z "$(filelist $1)" ]] 2>/dev/null; then
                 echo "can't find $DOCDIR/*$ARG1*"
                 exit 1
         fi
-elif [[ "$ARG2" == "cat" ]]
-then
-    filelist $1 | $XARGS -0 cat
+#elif [[ "$ARG2" == "cat" ]]
+#then
+#    filelist $1 | $XARGS -0 cat
 elif [[ ! -z "$ARG2" ]]
 then
         #grep -i $ARG2 $3 $4 $5 $6 $7 $8 $9 $DOCDIR/*$ARG1*
