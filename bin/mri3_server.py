@@ -5,6 +5,7 @@
 # restart by
 # pkill -f "python3 $HOME/bin/mri3_server.py"
 
+from gi.repository import GLib
 try:
     import cPickle as pickle
 except:
@@ -22,11 +23,11 @@ import getpass
 import socket
 import signal
 import json
-try:
-    import cgi
-    cgi.escape('test')
-except:
-    import html as cgi
+#try:
+#    import cgi
+#    cgi.escape('test')
+#except:
+#    import html as cgi
 import errno
 import re
 import argparse
@@ -306,7 +307,7 @@ def i3blocklet_name(name):
         name = re.sub(r'^(?:(\S{1,3})\s+)?urxvt\s+(?:-\s*)?(.*)', '\\2', name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.startswith('\u231b'):
         border_bottom = border_width
         border = '#FFAF00'
@@ -314,49 +315,49 @@ def i3blocklet_name(name):
         name = name[1:].strip()
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Stack Overflow - Chromium'):
         border_bottom = border_width
         border = '#F48021'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-overflow'], spane)
         name = re.sub('(.*?) - Stack Overflow - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Stack Exchange - Chromium'):
         border_bottom = border_width
         border = '#304F9A'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-exchange'], spane)
         name = re.sub('(.*?) - Stack Exchange - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Wikipedia - Chromium'):
         border_bottom = border_width
         border = '#717171'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['wikipedia-w'], spane)
-        name = cgi.escape(name)
+        #name = cgi.escape(name)
         name = re.sub('(.*?) - Wikipedia - Chromium$', '\\1', name)
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Google Search - Chromium'):
         border_bottom = border_width
         border = '#4483F3'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['google'], spane)
-        name = re.sub('(.*?) - Google Search - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        name = re.sub('(.*?) - Google Search - Chromium$', '\\1', GLib.markup_escape_text(name))
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Chromium'):
         border_bottom = border_width
         border = '#679CF7'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['chrome'], spane)
         name = re.sub('(.*?) - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Mozilla Firefox'):
         border_bottom = border_width
         border = '#FE9400'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['firefox'], spane)
         name = re.sub('(.*?) - Mozilla Firefox$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.startswith('vim'):
         border_bottom = border_width
         border = '#0F9636'
@@ -364,8 +365,8 @@ def i3blocklet_name(name):
         name = re.sub('^vim - ', "".format(spanc, spane), name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        name = cgi.escape(name)
-        full_text = '{}  {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{}  {}'.format(short_text, GLib.markup_escape_text(name))
     else:
         full_text = name
 
@@ -375,6 +376,7 @@ def i3blocklet_name(name):
     #full_text = full_text.replace('&', '&amp;')
     j = dict(
         full_text=full_text.replace('"', "'"), # reader can't read espaced double quote
+        #full_text=GLib.markup_escape_text(full_text), # https://stackoverflow.com/questions/1760070/how-to-escape-characters-in-pango-markup
         markup='pango',
         border=border,
         border_bottom=border_bottom,
