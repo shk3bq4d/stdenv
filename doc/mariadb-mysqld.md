@@ -98,6 +98,8 @@ select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
 SELECT UNIX_TIMESTAMP('2021-11-27 12:35:03.123456') AS Result; -- as a float
 select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https://www.w3schools.com/sql/func_mysql_date_format.asp
 
+select now(); -- today date datetime
+
 
 Alter table Empolyee disable constraint pk_EmpNumer;
 SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
@@ -260,3 +262,5 @@ https://github.com/mariadb/mariadb-docker
 https://hub.docker.com/_/mariadb
 https://hub.docker.com/_/mysql
 ```sh
+
+
