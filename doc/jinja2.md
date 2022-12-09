@@ -1,3 +1,16 @@
+# debug
+```sh
+vi ~.virtualenvs/ansible/lib/python3.10/site-packages/ansible/template/__init__.py +1199
+```
+append something like (and also right before exception fails
+```python
+        print(">>>>>>>>>>>>")
+        print(data)
+        print("<<<<<<<<<<<<")
+```
+
+# other
+
 end of line {# comments with non-suppressed \n character https://stackoverflow.com/a/68381198 +#}
 
 

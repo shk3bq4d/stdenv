@@ -6,6 +6,8 @@ strace -s 99999 -ffttTo /tmp/strace.out CMD
 strace -s 99999 -ffttTo /tmp/strace.out puppet apply                                   --modulepath=/puppet-envs/modules --config /workdir/shared/puppet.conf -e ""
 strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f network-config-tui.sh)
 strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f negotiate)
+strace -s 99999 -fffttTo /tmp/strace.out -p $(pgrep grafana)
+strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u grafana   | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -f negotiate | sed -r -e 's/.*/-p \0/')
 
 rm -f /tmp/ssh.out.* 

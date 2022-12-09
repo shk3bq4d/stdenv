@@ -5,6 +5,7 @@
 # restart by
 # pkill -f "python3 $HOME/bin/mri3_server.py"
 
+from gi.repository import GLib
 try:
     import cPickle as pickle
 except:
@@ -22,11 +23,11 @@ import getpass
 import socket
 import signal
 import json
-try:
-    import cgi
-    cgi.escape('test')
-except:
-    import html as cgi
+#try:
+#    import cgi
+#    cgi.escape('test')
+#except:
+#    import html as cgi
 import errno
 import re
 import argparse
@@ -81,7 +82,7 @@ def logging_conf(
            },
        'handlers':{
            'stdout': {'level':level,'formatter': 'standard','class':'logging.StreamHandler','stream': 'ext://sys.stdout'},
-           'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': '/tmp/zabbix-kg_maintenance.log'}, #
+           'file':   {'level':level,'formatter': 'standard','class':'logging.FileHandler','filename': os.path.expanduser('~/.tmp/log/mri3-server.log')}, #
            'syslog': {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
 
@@ -136,7 +137,7 @@ def set_gaps(i3, workspace):
         }
 
     one_paramsH = {
-        'feb22':     [600,0,40,0],
+        'feb22':     [490,0,16,0],
         'may19':  [800,0,40,0],
         'nov20':  [400,0,10,0],
         }
@@ -187,7 +188,7 @@ def set_gaps(i3, workspace):
     workspace.command(";".join(commandA))
 
 def on_window(i3, e):
-    logging.warning('on_window %s', e.change)
+    logging.info('on_window %s', e.change)
     i3blocklet(i3, e)
     if e.change == 'close':
         wid = e.container.window
@@ -207,16 +208,22 @@ def on_window(i3, e):
             wA.remove(wid)
         wA.append(wid)
         persist(wA)
-    logging.warning('/on_window %s', e.change)
+    logging.info('/on_window %s', e.change)
 
 def blockpidcheck(pid):
+    NULL = '\x00'
+    i3blocks_binary_name = 'i3blocks'
     try:
         with open('/proc/{}/cmdline'.format(pid), mode='rb') as fd:
-            content = fd.read().decode().split('\x00')[0]
+            cmdA = fd.read().decode().split(NULL)
     except Exception:
         return False
-    logger.debug('pid: %s, content: %s', pid,  content)
-    return content == 'i3blocks'
+    first_arg = cmdA[0]
+    if first_arg == i3blocks_binary_name:
+        logger.info('<- True pid: %s, first_arg: %s, full args: %s', pid,  first_arg, " ".join(cmdA))
+        return True
+    logger.debug('<- False pid: %s, first_arg: %s, full args: %s', pid,  first_arg, " ".join(cmdA))
+    return False
 
 _lastpid = None
 def blockpid():
@@ -300,7 +307,7 @@ def i3blocklet_name(name):
         name = re.sub(r'^(?:(\S{1,3})\s+)?urxvt\s+(?:-\s*)?(.*)', '\\2', name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.startswith('\u231b'):
         border_bottom = border_width
         border = '#FFAF00'
@@ -308,49 +315,49 @@ def i3blocklet_name(name):
         name = name[1:].strip()
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Stack Overflow - Chromium'):
         border_bottom = border_width
         border = '#F48021'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-overflow'], spane)
         name = re.sub('(.*?) - Stack Overflow - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Stack Exchange - Chromium'):
         border_bottom = border_width
         border = '#304F9A'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['stack-exchange'], spane)
         name = re.sub('(.*?) - Stack Exchange - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Wikipedia - Chromium'):
         border_bottom = border_width
         border = '#717171'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['wikipedia-w'], spane)
-        name = cgi.escape(name)
+        #name = cgi.escape(name)
         name = re.sub('(.*?) - Wikipedia - Chromium$', '\\1', name)
-        full_text = '{} {}'.format(short_text, name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Google Search - Chromium'):
         border_bottom = border_width
         border = '#4483F3'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['google'], spane)
-        name = re.sub('(.*?) - Google Search - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        name = re.sub('(.*?) - Google Search - Chromium$', '\\1', GLib.markup_escape_text(name))
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Chromium'):
         border_bottom = border_width
         border = '#679CF7'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['chrome'], spane)
         name = re.sub('(.*?) - Chromium$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.endswith(' - Mozilla Firefox'):
         border_bottom = border_width
         border = '#FE9400'
         short_text = "{}{}'>{}{}".format(spanc, border, fa['firefox'], spane)
         name = re.sub('(.*?) - Mozilla Firefox$', '\\1', name)
-        name = cgi.escape(name)
-        full_text = '{} {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{} {}'.format(short_text, GLib.markup_escape_text(name))
     elif name.startswith('vim'):
         border_bottom = border_width
         border = '#0F9636'
@@ -358,8 +365,8 @@ def i3blocklet_name(name):
         name = re.sub('^vim - ', "".format(spanc, spane), name)
         name = remove_user_at_host(name)
         name = name.replace(os.path.expanduser('~'), '~')
-        name = cgi.escape(name)
-        full_text = '{}  {}'.format(short_text, name)
+        #name = cgi.escape(name)
+        full_text = '{}  {}'.format(short_text, GLib.markup_escape_text(name))
     else:
         full_text = name
 
@@ -369,6 +376,7 @@ def i3blocklet_name(name):
     #full_text = full_text.replace('&', '&amp;')
     j = dict(
         full_text=full_text.replace('"', "'"), # reader can't read espaced double quote
+        #full_text=GLib.markup_escape_text(full_text), # https://stackoverflow.com/questions/1760070/how-to-escape-characters-in-pango-markup
         markup='pango',
         border=border,
         border_bottom=border_bottom,
@@ -377,6 +385,9 @@ def i3blocklet_name(name):
         border_right=0,
 
         )
+#   j = dict(
+#       full_text="salut"
+#       )
     # https://github.com/Airblader/i3
     # https://i3wm.org/docs/i3bar-protocol.html
     # { "full_text": "example", \
@@ -589,7 +600,7 @@ def go(args):
 
 if __name__ == '__main__':
 
-    logging_conf(use='stdout syslog')
+    logging_conf(use='stdout file')
     try:
         go(sys.argv[1:])
     except BaseException as e:

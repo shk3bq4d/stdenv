@@ -7,5 +7,6 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 # https://hub.docker.com/r/gists/speedtest-cli
 # https://github.com/vgist/dockerfiles/tree/master/speedtest-cli
-docker run --rm gists/speedtest-cli
+docker ps &>/dev/null && SUDO="" || SUDO=sudo
+$SUDO docker run --rm gists/speedtest-cli
 exit 0

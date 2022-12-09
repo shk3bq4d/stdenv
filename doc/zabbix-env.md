@@ -7,6 +7,8 @@ https://www.zabbix.com/documentation/3.0/manual/appliance
 https://www.zabbix.com/release_notes # changelog rn
 
 https://github.com/ansible/ansible-modules-extras/blob/482b1a640e95274b1a6f41ec21efc333ac4076b5/monitoring/zabbix_maintenance.py
+https://github.com/zabbix/zabbix-docker/
+https://github.com/zabbix/zabbix-docker/tree/6.2/Dockerfiles/proxy-sqlite3/alpine
 
 
 Appendix 1. Reference commentary

@@ -33,7 +33,9 @@ POSIX	Description	ASCII	Unicode	Shorthand	Java
 https://puppet.com/docs/puppet/5.0/lang_data_regexp.html
 puppet sucks balls, use \A instead of ^ and \z instead of $
 
-ipadress (vim): \(\d\+\.\)\{3\}\d\{1,3\}
+# https://stackoverflow.com/questions/5284147/validating-ipv4-addresses-with-regexp
+ipv4 ipadress (vim): \(\d\+\.\)\{3\}\d\{1,3\}
+ipv4 ipadress (sed): ^((25[0-5]|(2[0-4]|1\d|[1-9]|)[0-9])\.?\b){4}$
 
 if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surrou
 bar=${foo/ /.} # pseudo-regexp pattern replacement

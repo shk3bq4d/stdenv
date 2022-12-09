@@ -1017,7 +1017,7 @@ rawurldecode() {
 
 ping-up-down() {
     local up nextup down nonetwork timeout args
-    state="unkown"
+    state="unknown"
     nextstate="$state"
     test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
     up="${EGREEN:-}host is up${ENONE:-}"
@@ -1030,6 +1030,7 @@ ping-up-down() {
     esac
     while read line;
     do
+        [[ "$line" == PING* && $state == "unknown" ]] && echo "$line"
         [[ "$line" == *"1 packets received"* ]] && nextstate="$up" # busybox ping
         [[ "$line" == *" 0% packet loss"* ]]    && nextstate="$up" # ubuntu 20.04 ping
         [[ "$line" == *"100% packet loss"* ]]   && nextstate="$down"
@@ -1229,13 +1230,35 @@ db_docker_vim_mode() {
     true
 }
 
+_grep_systemd_unit_directories() {
+    for i in \
+      /etc/systemd \
+      /lib/systemd \
+      ~/.config/systemd \
+      /etc/rc.d/init.d \
+      /etc/rc.d/rc0.d \
+      /etc/rc.d/rc1.d \
+      /etc/rc.d/rc2.d \
+      /etc/rc.d/rc3.d \
+      /etc/rc.d/rc4.d \
+      /etc/rc.d/rc5.d \
+      /etc/rc.d/rc6.d \
+    ; do
+      test -d $i && echo $i
+  done
+}
+
 grep_systemd_unit() {
     if [[ $# -eq 0 ]]; then
         return 0
     fi
-    find /etc/systemd /lib/systemd | grep -i "$@"
+    sudo -n true
+    find $(_grep_systemd_unit_directories) -print0 | grep -zi "$@" | xargs -0r ls -ld
     sudo grep -ir \
         --color=always \
+        --binary-files=without-match \
+        --include '*' \
+        --exclude '*.*' \
         --include '*.service' \
         --include '*.timer' \
         --include '*.mount' \
@@ -1244,8 +1267,7 @@ grep_systemd_unit() {
         --include '*.socket' \
         "$@" \
         -- \
-        /etc/systemd \
-        /lib/systemd \
+        $(_grep_systemd_unit_directories)
 
 }
 

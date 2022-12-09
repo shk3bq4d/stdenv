@@ -73,3 +73,5 @@ alter table history_uint add primary key (itemid,clock,ns);
 
 -- activate mysql scheduler for k8s zabbix partitioning
 set global event_scheduler = on;
+
+alter database zabbix character set utf8 collate utf8mb3_bin;

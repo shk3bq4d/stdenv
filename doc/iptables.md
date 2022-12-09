@@ -20,6 +20,7 @@ sudo dmesg -w | grep "grepme output "
 # list
 sudo iptables -L
 sudo iptables -L -t nat #sshuttles
+sudo iptables -L -n -v -x # packet counters
 
 # sshuttle add port rule
 1) find out your sshuttle listening port

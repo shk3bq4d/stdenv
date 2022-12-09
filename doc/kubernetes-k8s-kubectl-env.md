@@ -813,6 +813,7 @@ kubectl get -A certificates.cert-manager.io -o jsonpath='{range .items[*]}{.meta
 kubectl --kubeconfig admin.conf get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.status.startTime}{" "}{.metadata.name}{end}' | sort
 kubectl get po --all-namespaces -o custom-columns=NAME:.metadata.name,NS:.metadata.namespace,IP:.status.podIP
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
 kops get ig -o json | jq -r '.[]| .metadata.name + ": " + .spec.machineType'
 
 kubectl --kubeconfig ~root/admin.conf get namespaces # file config context
@@ -934,3 +935,31 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 /var/lib/kubelet/config.yaml # cgroupDriver
 
 echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot
+
+
+# dynamic self reference
+```yaml
+  env:
+  - name: MY_POD_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.name
+  - name: MY_POD_NAMESPACE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.namespace
+  - name: MY_POD_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.podIP
+```
+
+# download kubeadm
+https://dl.k8s.io/v1.22.16/bin/linux/amd64/kubeadm
+https://dl.k8s.io/v1.21.14/bin/linux/amd64/kubeadm
+https://dl.k8s.io/v1.20.15/bin/linux/amd64/kubeadm
+
+## download kubeadm 1.20 latest version
+```sh
+for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/linux/amd64/kubeadm || break; done
+```

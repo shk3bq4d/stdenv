@@ -24,6 +24,7 @@ https://community.ui.com/releases/UniFi-Network-Application-7-1-68/30df65ee-9adf
 https://community.ui.com/releases/UniFi-Network-Application-7-2-92/f1903cbc-4daa-4695-ac8c-7324bcff529a
 https://community.ui.com/releases/UniFi-Network-Application-7-2-94/2ab774d1-0f24-422e-accc-53b8200c10a7
 https://community.ui.com/releases/UniFi-Network-Application-7-2-95/7adebab5-8c41-4989-835d-ab60dba55255
+https://community.ui.com/releases/UniFi-Network-Application-7-3-76/85c75fc7-3e0f-4e99-aa90-7068af4f1141
 
 ```sh
 #!/bin/bash

@@ -45,7 +45,7 @@ echo "flagfile is $flagfile"
 } > $flagfile
 
 {
-    set -euo pipefail
+    set -euo pipefail;
     exec > >(stdbuf -o0 ts | tee $logfile2 | sed-remove-ansi-colors.sh | tee $logfile1)
     exec 2>&1
     trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT

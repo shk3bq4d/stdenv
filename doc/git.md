@@ -636,3 +636,5 @@ git filter-repo --path README.md --path guides/ --path tools/releases --invert-p
 
 less .git/logs/HEAD # ref tip head history
 git reflog          # ref tip head history
+
+git blame --ignore-rev XYZ

@@ -4,6 +4,8 @@
 #/usr/bin/keepass2 mr.kdbx  -preselect:mr.key &>/dev/null </dev/null &
 #DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 wids=$(xdotool search --class "keepass")
+~/bin/sshfs-keepass-apr16.sh || true
+~/bin/sshfs-keepass-apr16-sf.sh || true
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then
