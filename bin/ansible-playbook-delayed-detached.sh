@@ -72,7 +72,7 @@ echo "flagfile is $flagfile"
     ansible-playbook "$@"
     exit_code="$?"
     echo "exit code is $exit_code"
-    if [[ $exit_code -ne 0 ]] && [[ -d /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ ]] && touch -d "1 year ago" /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ansible-playbook-delayed-$ID
+    [[ $exit_code -ne 0 ]] && [[ -d /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ ]] && touch -d "1 year ago" /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ansible-playbook-delayed-$ID
     rm "$flagfile" &>/dev/null || true
     exit "$exit_code"
 } >/dev/null &
