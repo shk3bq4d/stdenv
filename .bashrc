@@ -13,7 +13,7 @@ umask 027
 #            of full screen lines that need to be written
 #[[ -z $SSH_CLIENT && -f ~/.config/i3/config ]] && echo 'welcome?' && tail -n 85 ~/.config/urxvt-resize-bug && echo ✇
 [[ -z $SSH_CLIENT && $TERM == rxvt* && -f ~/.config/i3/config && -f ~/.config/urxvt-resize-bug ]] && echo -n "$(<~/.config/urxvt-resize-bug)"
-is_zsh() {
+is_zsh() { # redundant with ~/bin/dot.bashfunctions, but also needed here
     test -n "${ZSH_VERSION:-}"
 }
 export UNAME="$(uname)"

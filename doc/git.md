@@ -247,6 +247,7 @@ export GIT_DIR=/home/jly200_user/gitfw/
 export GIT_WORK_TREE=/
 
 GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=tmp/id_rsa"
+export GIT_TRACE=1 # to work with GIT_SSH and GIT_SSH_COMMAND
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=$HOME/.ssh/id_rsa"
 
 @begin=sh@
