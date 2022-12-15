@@ -269,3 +269,8 @@ filebeat.inputs:
 date -d "2006-01-02 15:04:05" +"%A" # filebeat timestamp reference day of week is Monday
 
 https://dissect-tester.jorgelbg.me/ 
+
+# missing source field
+* https://github.com/Graylog2/graylog2-server/issues/13254
+* https://github.com/Graylog2/graylog2-server/pull/13897
+* https://www.elastic.co/guide/en/beats/filebeat/7.17/exported-fields-beat-common.html # deprecated

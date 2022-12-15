@@ -868,6 +868,7 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
 kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job
+kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
 
 kubectl describe node # nice summary cpu memory requests
 ```
@@ -886,7 +887,6 @@ https://stackoverflow.com/questions/52995962/kubernetes-namespace-default-servic
 kubectl --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt --token /var/run/secrets/kubernetes.io/serviceaccount/token --server=https://kubernetes.default.svc/ --namespace=$(</var/run/secrets/kubernetes.io/serviceaccount/namespace) get pod # probably not yet correct
 
 
-kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
 ```
 
 # cert-manager plugin
