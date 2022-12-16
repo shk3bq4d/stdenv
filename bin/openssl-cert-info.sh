@@ -77,7 +77,7 @@ fi
 } | tee $_tempfile |
     sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
     openssl x509 -noout -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1| \
-    grep -EA1 '^[^ ]|Subject Alternative Name' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
+    grep -EA1 '^[^ ]|Subject Alternative Name|ublic..ey:' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
     sed -r \
         -e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
         -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/" \
