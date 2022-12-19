@@ -75,3 +75,50 @@ alter table history_uint add primary key (itemid,clock,ns);
 set global event_scheduler = on;
 
 alter database zabbix character set utf8 collate utf8mb3_bin;
+
+
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
+select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 13586 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 13586 v) b;
+delete from trends_uint where itemid = 43245 limit 1;
+-- 1.82
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 19052 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-24' dt, 19076 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-27' dt, 19134 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-10-04' dt, 19236 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-10-12' dt, 19396 v) b;
+
+-- 1.80
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-22' dt, 32639 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-24' dt, 32675 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-27' dt, 32738 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-10-04' dt, 32871 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-10-12' dt, 33121 v) b;
+
+-- 1.81
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-22' dt, 13586 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-24' dt, 13598 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-27' dt, 13603 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-10-04' dt, 13635 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-10-12' dt, 13724 v) b;
+
+-- 2.80
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-22' dt, 19052 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-24' dt, 19076 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-27' dt, 19134 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-10-04' dt, 19236 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-10-12' dt, 19396 v) b;
+
+-- 2.81
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-22' dt, 19052 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-24' dt, 19076 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-27' dt, 19134 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-10-04' dt, 19236 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-10-12' dt, 19396 v) b;
+
+-- 2.82
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-22' dt, 19052 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-24' dt, 19076 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-27' dt, 19134 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-10-04' dt, 19236 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-10-12' dt, 19396 v) b;
