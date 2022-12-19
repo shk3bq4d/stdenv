@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ HOST_OR_FILE [PORT [DNSSERVER]]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 27 Mar 2018
-##
 
 set -euo pipefail
 
@@ -37,6 +29,10 @@ if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
 else
     NAME="$1"
     [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
+    if [[ $NAME =~ ^[0-9]{1,5}$ ]]; then
+        PORT=$NAME
+        NAME=127.0.0.1
+    fi
     NAME="$( echo -n $NAME | sed -r \
         -e 's/^#//' \
         -e 's/(^\s+|\s+$)//g' \
