@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ex: set filetype=sh :
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
 
@@ -23,28 +23,34 @@ if [[ $# -gt 1 ]] && [[ -f "$@" ]]; then
 fi
 [[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
 if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
+    >&2 echo "reading from stdin"
     MODE=file
     NAME=$_tempdir/b
     cat - | sed -r -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
 else
     NAME="$1"
-    [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
-    if [[ $NAME =~ ^[0-9]{1,5}$ ]]; then
-        PORT=$NAME
-        NAME=127.0.0.1
-    fi
-    NAME="$( echo -n $NAME | sed -r \
-        -e 's/^#//' \
-        -e 's/(^\s+|\s+$)//g' \
-        -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
-        )"
-    if [[ "$NAME" = *:* ]]; then
-        PORT="$( echo -n "$PORT" | sed -r \
-            -e 's/.*://' \
+    if [[ $# -eq 1 && -f "$NAME" ]]; then
+        MODE=file
+    else
+        MODE=connect
+        if [[ $NAME =~ ^[0-9]{1,5}$ ]]; then
+            # if name looks
+            PORT=$NAME
+            NAME=127.0.0.1
+        fi
+        NAME="$( echo -n $NAME | sed -r \
+            -e 's/^#//' \
+            -e 's/(^\s+|\s+$)//g' \
+            -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
             )"
-        NAME="$( echo -n "$NAME" | sed -r \
-            -e 's/:.*//' \
-            )"
+        if [[ "$NAME" = *:* ]]; then
+            PORT="$( echo -n "$PORT" | sed -r \
+                -e 's/.*://' \
+                )"
+            NAME="$( echo -n "$NAME" | sed -r \
+                -e 's/:.*//' \
+                )"
+        fi
     fi
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
