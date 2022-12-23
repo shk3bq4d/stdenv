@@ -9,6 +9,7 @@ mongodb needs to have a replicasetCreated on the masternode. That node will then
 https://go2docs.graylog.org/5-0/changelogs/changelog.html
 https://www.graylog.org/releases # changelog
 https://docs.graylog.org/docs/changelog # releases
+https://github.com/Graylog2/graylog2-server/tree/4.3.10/changelog/4.3.10
 
 https://go2docs.graylog.org/4-x/what_is_graylog/what_is_graylog_operations.html
 https://go2docs.graylog.org/4-x/changelogs/changelog.html
