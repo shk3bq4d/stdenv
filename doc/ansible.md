@@ -222,6 +222,7 @@ tasks:
 
       when: url is match("http://example.com/users/.*/resources/.*") # regex
       when: url is search("/users/.*/resources/.*") # regex
+      mylist | select('regex', '^mypattern')
 
 ```yaml
 - include: ....
