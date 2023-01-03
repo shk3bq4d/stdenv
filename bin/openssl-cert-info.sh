@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
-# ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ HOST_OR_FILE [PORT [DNSSERVER]]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 27 Mar 2018
-##
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
 
@@ -31,24 +23,34 @@ if [[ $# -gt 1 ]] && [[ -f "$@" ]]; then
 fi
 [[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
 if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
+    >&2 echo "reading from stdin"
     MODE=file
     NAME=$_tempdir/b
     cat - | sed -r -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
 else
     NAME="$1"
-    [[ $# -eq 1 && -f "$NAME" ]] && MODE=file || MODE=connect
-    NAME="$( echo -n $NAME | sed -r \
-        -e 's/^#//' \
-        -e 's/(^\s+|\s+$)//g' \
-        -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
-        )"
-    if [[ "$NAME" = *:* ]]; then
-        PORT="$( echo -n "$PORT" | sed -r \
-            -e 's/.*://' \
+    if [[ $# -eq 1 && -f "$NAME" ]]; then
+        MODE=file
+    else
+        MODE=connect
+        if [[ $NAME =~ ^[0-9]{1,5}$ ]]; then
+            # if name looks
+            PORT=$NAME
+            NAME=127.0.0.1
+        fi
+        NAME="$( echo -n $NAME | sed -r \
+            -e 's/^#//' \
+            -e 's/(^\s+|\s+$)//g' \
+            -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
             )"
-        NAME="$( echo -n "$NAME" | sed -r \
-            -e 's/:.*//' \
-            )"
+        if [[ "$NAME" = *:* ]]; then
+            PORT="$( echo -n "$PORT" | sed -r \
+                -e 's/.*://' \
+                )"
+            NAME="$( echo -n "$NAME" | sed -r \
+                -e 's/:.*//' \
+                )"
+        fi
     fi
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
@@ -77,7 +79,7 @@ fi
 } | tee $_tempfile |
     sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
     openssl x509 -noout -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1| \
-    grep -EA1 '^[^ ]|Subject Alternative Name' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
+    grep -EA1 '^[^ ]|Subject Alternative Name|ublic..ey:' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
     sed -r \
         -e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
         -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/" \

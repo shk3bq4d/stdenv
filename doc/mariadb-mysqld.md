@@ -97,6 +97,7 @@ select UNIX_TIMESTAMP(); -- now
 select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
 SELECT UNIX_TIMESTAMP('2021-11-27 12:35:03.123456') AS Result; -- as a float
 select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https://www.w3schools.com/sql/func_mysql_date_format.asp
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
 
 select now(); -- today date datetime
 

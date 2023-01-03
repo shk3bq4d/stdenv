@@ -1,5 +1,9 @@
 # ex: set filetype=sh expandtab ts=4 sw=4: #
 
+is_zsh() { # reduntant with ~/.bashrc, but sometimes needed
+    test -n "${ZSH_VERSION:-}"
+}
+
 [ ${sudomr_hooks+x} ] && sudomr_hooks=()
 function sudomr() {
     local f user commands mrhome NEWRCD

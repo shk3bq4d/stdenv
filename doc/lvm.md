@@ -92,3 +92,10 @@ systemctl stop systemd-journald.service
 systemctl stop systemd-journald.socket
 umount /var/lib/docker # and all mount points that are below /var
 lvresize --size 14G --resizefs /dev/mapper/VG_root-LV_var
+
+
+lvremove /dev/mapper/VG_data-LV_opt
+lvremove /dev/mapper/VG_data-LV_var
+lvremove /dev/mapper/VG_data-LV_data
+lvcreate --size 80G  -n LV_data VG_root
+mkfs.ext4 /dev/mapper/VG_root-LV_data
