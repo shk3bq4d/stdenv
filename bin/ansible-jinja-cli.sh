@@ -25,7 +25,16 @@ _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "
 cp "$1" "$_tempdir/in"
 f=~/git/sf/dcn/iaac-master/ans/roles/sf-zabbix-template/templates/macros.j2
 test -f "$f" && cp "$f" "$_tempdir"
-if ! ansible all -i "localhost," -m template -a "src='$_tempdir/in' dest=$_tempdir/out" --connection=local -e zabbix_version=6.2.5 -e group_template_uuid=abcd -e _template_uuid=abcd -e template_name=ansible-jinja-cli &>$_tempdir/err; then
+if ! ansible all -i "localhost," -m template -a "src='$_tempdir/in' dest=$_tempdir/out" --connection=local \
+    -e zabbix_version=6.2.5 \
+    -e group_template_uuid=abcd \
+    -e _template_uuid=abcd \
+    -e template_name=ansible-jinja-cli \
+    -e kube_filebeat_namespace=filebeat \
+    -e kube_filebeat_app_name=filebeat \
+    -e sf_environment=uat \
+    -e kube_filebeat_hosts='["hehe"]' \
+    &>$_tempdir/err; then
     cat $_tempdir/err
     exit 1
 fi
