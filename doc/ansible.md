@@ -2257,7 +2257,7 @@ when: some_string_value | bool
 msg: "{{ [1,2,3,4,5] | permutations | list }}"
 msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
 msg: "{{ [1,2,3,4,5] | combinations(2) | list }}"
-msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}"
+msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}" # cross-product multiply zip
 {{ myvar | type_debug }}
 - '"1.00 Bytes" == 1|human_readable'
 - '"1.00 bits" == 1|human_readable(isbits=True)'
