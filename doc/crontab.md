@@ -1,3 +1,6 @@
+crontab uses OR when both day of month and day of week specified # dow https://stackoverflow.com/questions/34357126/why-crontab-uses-or-when-both-day-of-month-and-day-of-week-specified
+
+```sh
 PATH=/home/myuser/bin:/usr/local/bin:/usr/bin:/cygdrive/c/ProgramData/Oracle/Java/javapath:/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/usr/lib/lapack
 PATH=/home/myuser/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin
 SHELL=/bin/bash
@@ -10,14 +13,15 @@ HOSTNAME=bip
 HOSTNAMEF=bip.ly.lan
 
 MAILTO="a@b.com,b@b.com"
-When your cron jobs have output, or, more importantly, when they fail, cron will send the output e-mail these addresses.
+# When your cron jobs have output, or, more importantly, when they fail, cron will send the output e-mail these addresses.
 
 PATH="/usr/bin:/sbin:/bin"
-Logged in to the user account whose crontab you're setting up, go ahead and echo $PATH and copy those contents into the PATH variable of your crontab. Remember, this isn't a real script file, so you can't implicitly append :$PATH.  After assigning PATH and MAILTO, setting up your crontab is much easier.
+# Logged in to the user account whose crontab you're setting up, go ahead and echo $PATH and copy those contents into the PATH variable of your crontab. Remember, this isn't a real script file, so you can't implicitly append :$PATH.  After assigning PATH and MAILTO, setting up your crontab is much easier.
 
 HOME="/path/to/app/root" The HOME variable tells which directory cron should execute the crontab commands from. Often times you'll have a user/crontab per project. If so, set the HOME variable to your project's root directory to avoid long, absolute paths to scripts or from having to 'cd /path/to/app/root && ...' for each job.
 
 SHELL="/bin/bash
+```
 
 
 

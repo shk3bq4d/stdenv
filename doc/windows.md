@@ -159,6 +159,7 @@ Invoke-WebRequest -Uri "https://blabla.com/pictures.iso" -OutFile "c:\lol.iso"
 
 # uptime
 systeminfo | find "System Boot Time:"
+systeminfo | find "System Boot Time:" &:: uptime
 
 nslookup -type=ptr 1.2.3.4 # dig -x reverse DNS lookup
 ping -a 1.2.3.4 # dig -x reverse DNS lookup. The trouble with ping instead of nslookup is that ping may resolve from other method than DNS. See https://serverfault.com/a/352556
