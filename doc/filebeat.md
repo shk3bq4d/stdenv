@@ -275,3 +275,5 @@ https://dissect-tester.jorgelbg.me/
 * https://github.com/Graylog2/graylog2-server/issues/13254
 * https://github.com/Graylog2/graylog2-server/pull/13897
 * https://www.elastic.co/guide/en/beats/filebeat/7.17/exported-fields-beat-common.html # deprecated
+
+timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/15871

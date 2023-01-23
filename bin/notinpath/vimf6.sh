@@ -308,12 +308,13 @@ $HOME/.Xdefaults)
     out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-${SCRIPT_NAME}.pdf
     #docker run -i narf/latex < $SCRIPT > $out
     image=mrlatex
-    if ! docker images $image | grep -wqE "^${image}"; then
+    docker ps &>/dev/null && SUDO= || SUDO=sudo
+    if ! $SUDO docker images $image | grep -wqE "^${image}"; then
         echo "Image not found $image, execute the following:"
-        echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/shk3bq4d/docker-latex/ && \\"
-        echo "    cd ~/git/shk3bq4d/docker-latex/ && ./build.sh"
+        echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/$(id -un)/docker-latex/ && \\"
+        echo "    cd ~/git/$(id -un)/docker-latex/ && ./build.sh"
         exit 1
-    elif docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
+    elif $SUDO docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
         echo $out
         nohup evince $out &>/dev/null </dev/null &
         exit 0
@@ -327,15 +328,16 @@ $HOME/.Xdefaults)
     f=~/tmp/bip.svg
     echo $f
     date
-    cat $SCRIPT | docker run --rm -i think/plantuml -txt
+    docker ps &>/dev/null && SUDO= || SUDO=sudo
+    cat $SCRIPT | $SUDO docker run --rm -i think/plantuml -txt
     if true; then
-        cat $SCRIPT | docker run --rm -i think/plantuml > $f
+        cat $SCRIPT | $SUDO docker run --rm -i think/plantuml > $f
         chromium-browser --incognito --new-window --app=file://$f
     fi
     date
     exit 0
     echo "please ensure to have run
-docker run -d -p 8081:8080 plantuml/plantuml-server:jetty
+$SUDO docker run -d -p 8081:8080 plantuml/plantuml-server:jetty
         "
         echo wget -O/tmp/bip.svg "http://localhost:8081/svg/$(cat $SCRIPT | base64 | tr -d '\n')"
     ;;
@@ -355,12 +357,13 @@ $HOME/.config/i3/config.*)
     exit 0
     ;;
 */Dockerfile)
+    docker ps &>/dev/null && SUDO= || SUDO=sudo
     if [[ -f $SCRIPT_DIR/build.sh ]]; then
-        bash $DIR/build.sh
+        $SUDO bash $DIR/build.sh
     elif [[ -f $SCRIPT_DIR/../build.sh ]]; then
-        bash $SCRIPT_DIR/../build.sh
+        $SUDO bash $SCRIPT_DIR/../build.sh
     else
-        docker build -f $SCRIPT $SCRIPT_DIR
+        $SUDO docker build -f $SCRIPT $SCRIPT_DIR
     fi
     exit 0
     ;;
