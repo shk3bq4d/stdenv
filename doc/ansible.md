@@ -1243,6 +1243,7 @@ ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneli
 ansible all -bm user -a "name=myusername state=absent"                   # oneliner one-liner adhoc ad-hoc
 ansible linux -om debug -a var=ansible_host                              # oneliner one-liner adhoc ad-hoc
 ansible linux -bm file -a "path=/etc/profile.d/tmout.sh state=absent"    # oneliner one-liner adhoc ad-hoc remove shell session timeout
+ansible        -m shell -a "date >> /tmp/bip4"                           # oneliner one-liner adhoc ad-hoc shell script
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
@@ -2257,7 +2258,7 @@ when: some_string_value | bool
 msg: "{{ [1,2,3,4,5] | permutations | list }}"
 msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
 msg: "{{ [1,2,3,4,5] | combinations(2) | list }}"
-msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}"
+msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}" # cross-product multiply zip
 {{ myvar | type_debug }}
 - '"1.00 Bytes" == 1|human_readable'
 - '"1.00 bits" == 1|human_readable(isbits=True)'

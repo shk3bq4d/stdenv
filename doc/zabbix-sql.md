@@ -132,3 +132,9 @@ with ab as (select itemid, clock, ns from history_uint where itemid = 30253 orde
 with ab as (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) delete from history_uint where (itemid, clock, ns) in ab limit 5;
 delete from history_uint where (itemid, clock, ns) = (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) limit 1; -- slow as hell
 delete from history_uint where (itemid, clock, ns) = (select itemid, clock, ns from history_uint where itemid = 43250 order by clock desc, ns desc limit 1) limit 1; -- slow as hell, 19 seconds on ly
+
+-- check backup k8s home
+docker run --rm -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql-zabbix-restore -v /mnt/k8s/local-storage-pv/mariadb/data-mariadb-mysql-backup-apr16:/backup -it mysql
+sudo docker exec -it mysql-zabbix-restore mysql
+sudo docker exec -it mysql-zabbix-restore bash
+zcat zabbix-6020000-6020013-2023.01.05-01.38.01.sql.gz | mysql -f

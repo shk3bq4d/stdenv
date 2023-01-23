@@ -1,6 +1,10 @@
 filetype:rtf
 site:.ch
 site:hoho.ch
+imagesize:3840x2160
+imagesize:1920x1080
+imagesize:1920x1200
+imagesize:2560x1600
 
 
 “search term”

@@ -9,3 +9,4 @@ set +e
 set -x
 sudo systemctl stop ctxlogd
 pkill ServiceRecord
+pkill wfica

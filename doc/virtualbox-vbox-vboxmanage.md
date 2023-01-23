@@ -21,6 +21,7 @@ vboxmanage showvminfo minikube G ssh
 vboxmanage unregistervm vmname # destroy delete unprovision
 
 
+vboxmanage list vms
 
 # create a VM
 # 1) determine type possible types are listed as

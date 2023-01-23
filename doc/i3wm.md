@@ -21,7 +21,9 @@ Mod+a select all
 i3 '[id="94475176160464"] focus'
 i3 '[id="127926281"] fullscreen'
 i3 '[id="127926281"] floating enable'
-~/bin/i3-get-window-criteria.sh
+i3 '[class="VirtualBox Machine"] floating disable'
+i3 '[class="VirtualBox Machine"] fullscreen'
+~/bin/mri3_get_window_criteria.sh
 
 
 # i3 blocks install
