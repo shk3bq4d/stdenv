@@ -637,5 +637,6 @@ git filter-repo --path README.md --path guides/ --path tools/releases --invert-p
 
 less .git/logs/HEAD # ref tip head history
 git reflog          # ref tip head history
+git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(reset) %<|(110)%gs %C(green)%s%C(reset) %C(auto)%d%C(reset)'
 
 git blame --ignore-rev XYZ

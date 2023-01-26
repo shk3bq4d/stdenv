@@ -6,6 +6,8 @@ https://mikefarah.gitbook.io/yq/
 ```bash
 ln -is /snap/yq/current/bin/yq ~/bin/
 
+yq e '.all.hosts += {"hehe":"habon"}' inventory.yml
+yq e '.. | select(key == "vmware_new_20210331").hosts += {"hehe":null}' inventory.yml
                 yq e '
                   ( del .metadata.annotations."kubectl.kubernetes.io/last-applied-configuration" ) |
                   ( del .metadata.resourceVersion ) |

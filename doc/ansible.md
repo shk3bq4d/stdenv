@@ -2567,6 +2567,9 @@ my_external_internet_ip_address_ipv4: "{{ lookup('dig', 'myip.opendns.com', '@re
 lookup('dict', users) # convert dict to list [item.key, item.value]
 msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
 
+/home/rumo/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/plugins/lookup/template.py
+lookup('template', "~/git/sf/dcn/iaac-master/ans/group_vars/grafana.yml", template_vars={'sf_scripts_dir':'bip'})
+
 
 yum update_cache=yes state=latest name='*'
 apt update_cache=yes state=latest name='*'
