@@ -187,7 +187,8 @@ def go(args):
 
     if 0:
         grid_layout()
-    if 1:
+    if 1: pprint(list(map(lambda x: x.name, workspaces())))
+    if 0:
         #debug(i3.get_tree())
         for w in workspaces():
             if is_workspace_focused_within_output(w):
