@@ -1,6 +1,7 @@
 # /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 
 Start-Service -Name "MpsSvc" # start firewall service
+Start-Process -FilePath sc.exe -ArgumentList 'config winlogbeat start= delayed-auto'
 get-aduser -Filter 'Name -like "*oper"'
 get-service "wuauserv"       -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize # windows update
 get-service "Zabbix Agent 2"
