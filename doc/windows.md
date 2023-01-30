@@ -25,6 +25,8 @@ sc start "Zabbix Agent 2"
 Get-Content "C:\Program Files\Zabbix Agent 2\zabbix_agent2.log.old" -Tail 30
 Get-Content "C:\Program Files\Zabbix Agent 2\zabbix_agent2.log" -Tail 30
 Get-content "C:\Program Files\winlogbeat\winlogbeat-20230126-1.ndjson" -Wait -Tail 5 # tail -f
+Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
+powershell.exe Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
 
 disable windows key
 google Microsoft Fix it 50465
