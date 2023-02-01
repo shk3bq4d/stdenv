@@ -51,6 +51,7 @@ source:exam?le.*
 ssh logni~
 source:exmaple.org~
 
+_index:graylog_8* AND _exists_: palo_field0 # search in specific index
 
 # Numeric fields support range queries. Ranges in square brackets are inclusive, curly brackets are exclusive and can even be combined:
 http_response_code:[500 TO 504]
