@@ -311,6 +311,7 @@ alias fgrep='fgrep --color=auto -a --line-buffered'
 alias egrep='egrep --color=auto -a --line-buffered'
 
 alias gcrd='git checkout $(git_root_dir)'
+alias grf="git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(reset) %<|(110)%gs %C(green)%s%C(reset) %C(auto)%d%C(reset)'"
 alias ky='kubectl-get-yaml.py'
 alias kyp='kubectl-get-yaml.py pod'
 alias kyd='kubectl-get-yaml.py deployment'

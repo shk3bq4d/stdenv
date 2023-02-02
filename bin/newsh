@@ -94,6 +94,9 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 # exec > >(tee >(logger --id=\$\$ -t \"\$(basename \$0)\" -p user.info ))
 # exec 2>&1
 
+# docker ps &>/dev/null && SUDO="" || SUDO=sudo
+# \$SUDO docker ps
+
 # test -z \"\${HOSTNAMEF:-}\" && HOSTNAMEF=\$(hostname -f)
 
 #echo -n \"Are you sure you want to proceed (yN): \"

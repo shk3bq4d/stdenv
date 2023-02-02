@@ -140,3 +140,29 @@ location ~* \.(gif|jpg|jpeg)$ {
   [ configuration E ]
 }
 ```
+
+# log format
+```sh
+http {
+	[..]
+    map $http_x_request_id $req_id {
+      default   $http_x_request_id;
+      ""        $request_id;
+    }
+    log_format main '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $request_length $request_time [$proxy_upstream_name] [$proxy_alternative_upstream_name] $upstream_addr $upstream_response_length $upstream_response_time $upstream_status $req_id';
+
+	set $proxy_upstream_name "proxy-default-proxy-upstream-name"; # not sure if can be set in there
+	server {
+		location ~* \.(?:manifest|webmanifest)$ {
+			set $proxy_alternative_upstream_name "manifest";
+		}
+
+		location ~ /\. {
+			set $proxy_alternative_upstream_name "deny-root-dot";
+		}
+
+		set $proxy_alternative_upstream_name "greenapp";
+		set $proxy_upstream_name "server-default-proxy-upstream-name";
+	}
+}
+```

@@ -24,6 +24,9 @@ sc stop "Zabbix Agent 2"
 sc start "Zabbix Agent 2"
 Get-Content "C:\Program Files\Zabbix Agent 2\zabbix_agent2.log.old" -Tail 30
 Get-Content "C:\Program Files\Zabbix Agent 2\zabbix_agent2.log" -Tail 30
+Get-content "C:\Program Files\winlogbeat\winlogbeat-20230126-1.ndjson" -Wait -Tail 5 # tail -f
+Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
+powershell.exe Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
 
 disable windows key
 google Microsoft Fix it 50465
@@ -159,6 +162,7 @@ Invoke-WebRequest -Uri "https://blabla.com/pictures.iso" -OutFile "c:\lol.iso"
 
 # uptime
 systeminfo | find "System Boot Time:"
+systeminfo | find "System Boot Time:" &:: uptime
 
 nslookup -type=ptr 1.2.3.4 # dig -x reverse DNS lookup
 ping -a 1.2.3.4 # dig -x reverse DNS lookup. The trouble with ping instead of nslookup is that ping may resolve from other method than DNS. See https://serverfault.com/a/352556

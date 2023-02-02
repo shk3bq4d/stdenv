@@ -1235,6 +1235,7 @@ ansible linux   -bm service -a "name=filebeat       state=restarted"     # oneli
 ansible myhost  -bm service -a "name=zabbix-agent2  state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible graylog -bm service -a "name=graylog-server state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible '*.lan' -bm service -a "name=rsyslog        state=restarted"     # oneliner one-liner adhoc ad-hoc
+ansible linux   -bm service -a "name=yum-cron       state=restarted enabled=yes" # oneliner one-liner adhoc ad-hoc
 ansible linux   -bm service -a "name=systemd-logind state=restarted"     -e ansible_timeout=120 # oneliner one-liner adhoc ad-hoc in case dbus was restarted
 ansible all -m file -a "path=/project/devops state=directory"            # oneliner one-liner adhoc ad-hoc
 ansible web -m copy -a "src=/etc/hosts dest=/tmp/hosts"                  # oneliner one-liner adhoc ad-hoc
@@ -1244,6 +1245,7 @@ ansible all -bm user -a "name=ansible group=devops password=ansible123"  # oneli
 ansible all -bm user -a "name=myusername state=absent"                   # oneliner one-liner adhoc ad-hoc
 ansible linux -om debug -a var=ansible_host                              # oneliner one-liner adhoc ad-hoc
 ansible linux -bm file -a "path=/etc/profile.d/tmout.sh state=absent"    # oneliner one-liner adhoc ad-hoc remove shell session timeout
+ansible        -m shell -a "date >> /tmp/bip4"                           # oneliner one-liner adhoc ad-hoc shell script
 ansible nmz\* -b -m shell -a "find /var/spool/rsyslog -type f -name \"fwdarc*\" -print -delete"
 ansible all -m setup
 ansible -m reboot -i inventory.yml -b
@@ -2258,7 +2260,7 @@ when: some_string_value | bool
 msg: "{{ [1,2,3,4,5] | permutations | list }}"
 msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
 msg: "{{ [1,2,3,4,5] | combinations(2) | list }}"
-msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}"
+msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}" # cross-product multiply zip
 {{ myvar | type_debug }}
 - '"1.00 Bytes" == 1|human_readable'
 - '"1.00 bits" == 1|human_readable(isbits=True)'
@@ -2566,6 +2568,9 @@ my_external_internet_ip_address_ipv4: "{{ lookup('dig', 'myip.opendns.com', '@re
 
 lookup('dict', users) # convert dict to list [item.key, item.value]
 msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
+
+/home/rumo/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/plugins/lookup/template.py
+lookup('template', "~/git/sf/dcn/iaac-master/ans/group_vars/grafana.yml", template_vars={'sf_scripts_dir':'bip'})
 
 
 yum update_cache=yes state=latest name='*'

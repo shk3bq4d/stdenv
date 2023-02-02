@@ -32,3 +32,6 @@ myvalue=600711.395348; date -u -d"1970-01-01 + $(date -u +%s) sec - $(cut -d' ' 
 last sunday of october dernier dimanche octobre DST heure hiver été suisse switzerland
 
 TZ=Europe/Zurich date # timezone
+
+
+date +'%Y-%m-%d %H:%M:%S,%N' | sed -r 's/(,...).*/\1/' # 2022-12-23 10:11:12,023 milliseconds

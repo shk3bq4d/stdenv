@@ -269,3 +269,8 @@ https://hub.docker.com/_/mysql
 ```sh
 
 
+# high-availibility master-slave HA
+```sql
+show slave status\G
+show master status\G
+```

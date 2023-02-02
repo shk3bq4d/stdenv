@@ -7,6 +7,7 @@ var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k =
 encodeURIComponent
 encodeURI()
 push() // append, extend
+["Banana", "Orange", "Apple", "Mango"].join(",") // merge split
 
 
 "hehe".replace(/h/g, "_");
@@ -29,7 +30,8 @@ catch(e){
 ```sh
 # https://github.com/jshint/jshint
 # https://hub.docker.com/r/eeacms/jshint
-docker run -it --rm -v $PWD:/code eeacms/jshint
+docker run -it --rm -v $PWD:/code eeacms/jshint # lint
+~/bin/javascript-lint.sh
 ```
 
 # https://stackoverflow.com/questions/12977661/is-there-a-way-to-suppress-jshint-warning-for-one-given-line
