@@ -441,6 +441,9 @@ zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_Registr
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
 ```
 
+# discovery
+uc ls --database /var/cache/duc/data /data -b --full-path -R -l 1  | grep -vE 'rumo_wrong|occ-fix' | awk 'BEGIN { print "{#SIZE},{#PATH}"}{ print $1 "," $2 }' |tee  /opt/sf-scripts/zabbix-shared/duc | head
+
 # actions
 ```bash
 /etc/opsgenie/zabbix2opsgenie -triggerName='{EVENT.NAME}' -triggerId='{TRIGGER.ID}' -triggerStatus='{TRIGGER.STATUS}' -triggerSeverity='{TRIGGER.SEVERITY}' -triggerDescription='{TRIGGER.DESCRIPTION}' -triggerUrl='{TRIGGER.URL}' -triggerValue='{TRIGGER.VALUE}' -triggerHostGroupName='{TRIGGER.HOSTGROUP.NAME}' -hostName='{HOST.NAME}' -ipAddress='{IPADDRESS}' -eventId='{EVENT.ID}' -date='{DATE}' -time='{TIME}' -itemKey='{ITEM.KEY}' -itemValue='{ITEM.VALUE}' -recoveryEventStatus='{EVENT.RECOVERY.STATUS}' -teams=ALL

@@ -1,5 +1,7 @@
 https://github.com/docker/cli
 
+https://docs.docker.com/engine/release-notes/
+
 https://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/
 https://docs.docker.com/engine/reference/builder/
 man dockerfile # apt install docker-doc
