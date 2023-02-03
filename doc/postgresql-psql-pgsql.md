@@ -14,6 +14,7 @@ pg_dump -st tablename dbname -- show create table (ie: there is no such thing ac
 \x # toggles expanded display (vertical alignment)
 show config_file; -- display filepath of main config file
 
+coalesce -- nvl
 select c.relname from pg_class c where c.relkind = 'S'; # list sequences
 ```
 
