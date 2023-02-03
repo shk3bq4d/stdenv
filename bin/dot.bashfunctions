@@ -1275,7 +1275,7 @@ grep_systemd_unit() {
 
 }
 
-unalias klf &>/dev/null
+alias klf &>/dev/null && unalias klf &>/dev/null
 klf() {
     local s
     s=$(kubectl get pod "$@" -o jsonpath='{.status.phase}')
