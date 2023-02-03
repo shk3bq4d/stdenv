@@ -1133,3 +1133,4 @@ tail -f /var/log/foo | python -u
 
 +test -t 0 && TTY_FLAG="-t"
 ```
+ulimit -f 40 # will limit generate files by current bash session and subshells to 40kb (think files generated with redirections >)
