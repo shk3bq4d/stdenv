@@ -158,7 +158,7 @@ function cdf() {
     fi
     test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
     for arg in "$@"; do
-        c="$(find . -mindepth 2 -ipath '*'"$arg"'*' -print -quit)"
+        c="$(find . -mindepth 2 -xdev -ipath '*'"$arg"'*' -print -quit)"
         test -z "$c" && continue
         echo "${RED}$c${NONE}"
         cd  "$(dirname "$c")"
@@ -353,7 +353,7 @@ else
         if [[ $# -gt 0 ]] && [[ "$1" == *"/"* ]]; then
             DIR="$(dirname "$1")"
         fi
-        NEWEST=$(find $DIR -maxdepth 1 -ipath "*${@}*" -type f -printf '%T@ %p\0' | \
+        NEWEST=$(find $DIR -maxdepth 1 -xdev -ipath "*${@}*" -type f -printf '%T@ %p\0' | \
             sort -rnz | xargs -0rn1 2>/dev/null | tail -n +$n | head -n1 | cut -d' ' -f2-)
         if [[ $DIR == . ]]; then
             mrbasename "$NEWEST"
