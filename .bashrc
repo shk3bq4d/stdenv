@@ -245,9 +245,11 @@ freebsd)
     alias ,='ls  -lhFa --time-style=long-iso'
     alias updatedb='/usr/libexec/locate.updatedb'
     ;;
-cygwin*|msys*)
+cygwin*)
     alias pkill='taskkill.exe /f /im $*'
     alias ps='tasklist.exe'
+    ;;
+msys*)
     alias xargs='xargs -r'
     ;;
 *)
