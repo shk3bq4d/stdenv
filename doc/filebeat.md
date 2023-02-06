@@ -277,3 +277,49 @@ https://dissect-tester.jorgelbg.me/
 * https://www.elastic.co/guide/en/beats/filebeat/7.17/exported-fields-beat-common.html # deprecated
 
 timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/15871
+
+processor add_cloud_metadata
+processor add_cloudfoundry_metadata
+processor add_docker_metadata
+processor add_fields
+processor add_host_metadata
+processor add_id
+processor add_kubernetes_metadata
+processor add_labels
+processor add_locale
+processor add_network_direction
+processor add_nomad_metadata
+processor add_observer_metadata
+processor add_process_metadata
+processor add_tags
+processor community_id
+processor convert
+processor copy_fields
+processor decode_base64_field
+processor decode_cef
+processor decode_csv_fields
+processor decode_duration
+processor decode_json_fields
+processor decode_xml
+processor decode_xml_wineventlog
+processor decompress_gzip_field
+processor detect_mime_type
+processor dissect
+processor dns
+processor drop_event
+processor drop_fields
+processor extract_array
+processor fingerprint
+processor include_fields
+processor move_fields
+processor parse_aws_vpc_flow_log
+processor rate_limit
+processor registered_domain
+processor rename
+processor replace
+processor script
+processor syslog
+processor timestamp
+processor translate_sid
+processor truncate_fields
+processor urldecode

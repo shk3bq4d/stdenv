@@ -460,3 +460,8 @@ ps -aef --forest # tree process list
 
 upstart sysv service init init.d update-rc.d # https://askubuntu.com/a/20347
 
+
+# software
+~/bin/mr-shutter.sh # screenshot shutter or flameshot
+shutter   # screenshot
+flameshot # screenshot

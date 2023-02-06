@@ -7,6 +7,7 @@ var bA = document._getElementsByXPath("//input[@type='checkbox']"); for (var k =
 encodeURIComponent
 encodeURI()
 push() // append, extend
+["Banana", "Orange", "Apple", "Mango"].join(",") // merge split
 
 
 "hehe".replace(/h/g, "_");

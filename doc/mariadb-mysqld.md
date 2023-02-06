@@ -132,10 +132,14 @@ rename table foo to foo_old, foo_new to foo; -- swap exchange switch tables
 show variables like 'lock_wait_timeout'; -- see session duration for aquiring table / metadata lock
 set lock_wait_timeout=10;
 
+Select concat('KILL ',id,';') from information_schema.processlist where user='user';
+Select concat('KILL ',id,';') from information_schema.processlist where host like '10.101.6.101:%' and time > 300;
 kill 35; -- kill session 35
 show engine innodb status; -- as root, better for looking at locks
 
 select id, db, command, time, state, info from information_schema.processlist;
+select id, db, command, time, state, info from information_schema.processlist where time > 300;
+select id, db, command, time, state, info from information_schema.processlist where command not in ('Sleep') order by time asc;
 show processlist; -- list sessions connections
 show full processlist; -- see full query
 show privileges; -- dislay list of available privileges
