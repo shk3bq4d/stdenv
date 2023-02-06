@@ -75,3 +75,66 @@ alter table history_uint add primary key (itemid,clock,ns);
 set global event_scheduler = on;
 
 alter database zabbix character set utf8 collate utf8mb3_bin;
+
+
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
+select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 13586 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 13586 v) b;
+delete from trends_uint where itemid = 43245 limit 1;
+-- 1.82
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-22' dt, 19052 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-24' dt, 19076 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-09-27' dt, 19134 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-10-04' dt, 19236 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43245 itemid, '2021-10-12' dt, 19396 v) b;
+
+-- 1.80
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-22' dt, 32639 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-24' dt, 32675 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-09-27' dt, 32738 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-10-04' dt, 32871 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43248 itemid, '2021-10-12' dt, 33121 v) b;
+
+-- 1.81
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-22' dt, 13586 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-24' dt, 13598 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-09-27' dt, 13603 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-10-04' dt, 13635 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43246 itemid, '2021-10-12' dt, 13724 v) b;
+
+-- 2.80
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-22' dt, 12621 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-24' dt, 12678 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-09-27' dt, 12741 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-10-04' dt, 12909 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43254 itemid, '2021-10-12' dt, 13050 v) b;
+
+-- 2.81
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-22' dt, 9022 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-24' dt, 9078 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-09-27' dt, 9110 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-10-04' dt, 9243 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43250 itemid, '2021-10-12' dt, 9354 v) b;
+
+-- 2.82
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-22' dt, 3593 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-24' dt, 3599 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-09-27' dt, 3630 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-10-04' dt, 3666 v) b;
+insert into trends_uint (itemid, clock, num, value_min, value_avg, value_max) select itemid, unix_timestamp(concat(dt,' 12:00:00')), 1, v, v, v from ( select 43251 itemid, '2021-10-12' dt, 3696 v) b;
+
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid in (43245, 43248, 43246, 43254, 43250, 43251);
+
+select * from (select itemid, clock, ns, value from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) b;
+select itemid, clock, ns, value from history_uint where itemid = 30253 order by clock desc, ns desc limit 1;
+with ab as (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) delete from history_uint where (itemid, clock, ns) in ab limit 5;
+with ab as (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) select * from ab;
+with ab as (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) delete from history_uint where (itemid, clock, ns) in ab limit 5;
+delete from history_uint where (itemid, clock, ns) = (select itemid, clock, ns from history_uint where itemid = 30253 order by clock desc, ns desc limit 1) limit 1; -- slow as hell
+delete from history_uint where (itemid, clock, ns) = (select itemid, clock, ns from history_uint where itemid = 43250 order by clock desc, ns desc limit 1) limit 1; -- slow as hell, 19 seconds on ly
+
+-- check backup k8s home
+docker run --rm -e MYSQL_ALLOW_EMPTY_PASSWORD=true --name mysql-zabbix-restore -v /mnt/k8s/local-storage-pv/mariadb/data-mariadb-mysql-backup-apr16:/backup -it mysql
+sudo docker exec -it mysql-zabbix-restore mysql
+sudo docker exec -it mysql-zabbix-restore bash
+zcat zabbix-6020000-6020013-2023.01.05-01.38.01.sql.gz | mysql -f

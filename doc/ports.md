@@ -606,6 +606,7 @@ The TCP port is now used for: IBM WebSphere MQ Workflow	Official
 5025	Yes	Yes	scpi-raw Standard Commands for Programmable Instruments	Official
 5031	Yes	Yes	AVM CAPI-over-TCP (ISDN over Ethernet tunneling)[citation needed]	Unofficial
 5037	Yes		Android ADB server	Unofficial
+5044    filebeats
 5048	Yes		Texai Message Service	Official
 5050	Yes		Yahoo! Messenger	Unofficial
 5051	Yes		ita-agent Symantec Intruder Alert[191]	Official
@@ -708,7 +709,7 @@ Yes		Virtual Network Computing (VNC) Remote Frame Buffer RFB protocol[10][218]	U
 5931	Yes	Yes	AMMYY admin Remote Control	Official
 5938	Yes	Yes	TeamViewer remote desktop protocol[219]	Unofficial
 5984	Yes	Yes	CouchDB database server	Official
-5985	Yes		Windows PowerShell Default psSession Port[220]	Official
+5985	Yes		Windows PowerShell Default psSession Port[220]	Official # windows log forwarding
 5986	Yes		Windows PowerShell Default psSession Port[220]	Official
 5988–5989	Yes		CIM-XML (DMTF Protocol)[221]	Official
 6000-6063	Yes	Yes	X11—used between an X client and server over the network	Official

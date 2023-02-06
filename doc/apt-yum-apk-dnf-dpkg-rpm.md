@@ -75,9 +75,10 @@ yum install yum-plugin-versionlock # pin
 yum versionlock add puppet # pin
 yum versionlock list # pin
 yum versionlock status # find latest available version (that would not be installed)
-yum versionlock delete 0:openldap-2.4.39-8.el6.* # pin
+yum versionlock delete 0:openldap-2.4.39-8.el6.* # unpin
 yum versionlock add # pin ALL PACKAGES
 yum versionlock delete '*' # unpin ALL PACKAGES
+yum versionlock delete 'rsync*'
 yum versionlock clear      # unpin ALL packages
 
 ```

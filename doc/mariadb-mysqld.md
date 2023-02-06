@@ -97,6 +97,7 @@ select UNIX_TIMESTAMP(); -- now
 select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
 SELECT UNIX_TIMESTAMP('2021-11-27 12:35:03.123456') AS Result; -- as a float
 select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https://www.w3schools.com/sql/func_mysql_date_format.asp
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
 
 select now(); -- today date datetime
 
@@ -131,10 +132,14 @@ rename table foo to foo_old, foo_new to foo; -- swap exchange switch tables
 show variables like 'lock_wait_timeout'; -- see session duration for aquiring table / metadata lock
 set lock_wait_timeout=10;
 
+Select concat('KILL ',id,';') from information_schema.processlist where user='user';
+Select concat('KILL ',id,';') from information_schema.processlist where host like '10.101.6.101:%' and time > 300;
 kill 35; -- kill session 35
 show engine innodb status; -- as root, better for looking at locks
 
 select id, db, command, time, state, info from information_schema.processlist;
+select id, db, command, time, state, info from information_schema.processlist where time > 300;
+select id, db, command, time, state, info from information_schema.processlist where command not in ('Sleep') order by time asc;
 show processlist; -- list sessions connections
 show full processlist; -- see full query
 show privileges; -- dislay list of available privileges
@@ -264,3 +269,8 @@ https://hub.docker.com/_/mysql
 ```sh
 
 
+# high-availibility master-slave HA
+```sql
+show slave status\G
+show master status\G
+```

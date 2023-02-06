@@ -21,7 +21,7 @@ To execute a script at shutdown
 sudo apt-get upgrade # system update
 sudo useradd -d /home/testuser -m testuser # user create
 sudo usermod -a -G group username # add existing user to existing group
-sudo gpasswd -d user group # remove existing uer to existing group
+sudo gpasswd -d user group # remove existing user from existing group
 id username # list group of existing user
 cut -d: -f1 /etc/passwd # list all users on system
 cut -d: -f1 /etc/group # list all groups on system
@@ -442,6 +442,7 @@ dolphin # GUI file manager explorer
 thunar # GUI file manager explorer
 double commander # GUI file manager explorer
 nemo # GUI file manager explorer
+duc # recursive directory size calculator
 
 chage -l       myuser # check human status if password expired How to check the account status in Linux https://www.howtouselinux.com/post/how-to-fix-warning-your-password-has-expired-in-linux
 chage -M 99999 myuser # set user password to never expire
@@ -459,3 +460,8 @@ ps -aef --forest # tree process list
 
 upstart sysv service init init.d update-rc.d # https://askubuntu.com/a/20347
 
+
+# software
+~/bin/mr-shutter.sh # screenshot shutter or flameshot
+shutter   # screenshot
+flameshot # screenshot
