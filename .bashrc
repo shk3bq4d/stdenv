@@ -342,14 +342,23 @@ if [[ $UID -ne 0 && $UNAME != cygwin* && $UNAME != msys* ]]; then
     # Source SSH settings, if applicable
 
     if [[ -z ${SSH_CLIENT+1} ]]; then # only start agent if not running inside SSH session
+        #echo a
         start_agent_if_not_started
         mr_ssh_add || true
+    elif [[ -n "${SSH_AUTH_SOCK:-}" ]]; then
+        #echo b
+        true # there's already a socket, that should be kept
+    elif [ -f "${SSH_ENV}" ]; then
+        echo c
+        #env | grep -i ssh
+        #echo "b ${SSH_ENV}"
+        source ${SSH_ENV} > /dev/null
+        # /usr/bin/ssh-add -l &>/dev/null || /usr/bin/ssh-add -t 43200
+        mr_ssh_add || true
     else
-        if [ -f "${SSH_ENV}" ]; then
-             source ${SSH_ENV} > /dev/null
-             # /usr/bin/ssh-add -l &>/dev/null || /usr/bin/ssh-add -t 43200
-             mr_ssh_add || true
-        fi
+        #echo d
+        true
+        #echo c
     fi
 fi
 
