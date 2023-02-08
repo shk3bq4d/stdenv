@@ -195,6 +195,8 @@ def on_window(i3, e):
         if wid in wA:
             wA.remove(wid)
             persist(wA)
+    elif e.change == 'new':
+        logger.info(f'============= new name:{e.container.name} class:{e.container.window_class} title:{e.container.window_title}')
     elif e.change in ['focus', 'move']:
         #e.container.command('[class="[.]*"] border pixel 0')
         e.container.command('border pixel 6')
