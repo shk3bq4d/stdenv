@@ -187,6 +187,20 @@ def set_gaps(i3, workspace):
 
     workspace.command(";".join(commandA))
 
+def send_window_to_citrix_workspace(i3, window):
+    substr = '  citrix   ' 
+    workspace = find_workspace(i3, window.window)
+    if substr in workspace.name:
+        logger.info('noop')
+        return
+
+    for workspace in i3.get_tree().workspaces():
+        if substr in workspace.name:
+            cmd = '[id="{}"] move to workspace "{}"'.format(window.window, workspace.name)
+            logger.warning(cmd)
+            i3.command(cmd)
+            return
+
 def on_window(i3, e):
     logging.info('on_window %s', e.change)
     i3blocklet(i3, e)
@@ -197,6 +211,11 @@ def on_window(i3, e):
             persist(wA)
     elif e.change == 'new':
         logger.info(f'============= new name:{e.container.name} class:{e.container.window_class} title:{e.container.window_title}')
+        if e.container.window_class.lower().startswith('wfica'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
+            send_window_to_citrix_workspace(i3, e.container)
+            cmd = '[id="{}"] full screen disable'
+            logger.warning(cmd)
+            i3.command(cmd)
     elif e.change in ['focus', 'move']:
         #e.container.command('[class="[.]*"] border pixel 0')
         e.container.command('border pixel 6')
