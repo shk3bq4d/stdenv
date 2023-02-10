@@ -255,19 +255,21 @@ fi
 esac
 set +e
 TSSH=""
+CD=""
 if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then
 	TSSH="$(mri3_focused_window_ssh_target.py)"
+	if [[ -z "$TSSH" ]]; then
+		TCD="$(mri3_focused_window_cwd.py)"
+		set -e
+		echo "cd is $TCD"
+		set +x
+		#test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
+		if [[ -d $TCD ]]; then
+			! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
+		fi
+		echo "cd now is $CD"
+	fi
 fi
-TCD="$(mri3_focused_window_cwd.py)"
-CD=""
-set -e
-echo "cd is $TCD"
-set +x
-#test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
-if [[ -d $TCD ]]; then
-    ! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
-fi
-echo "cd now is $CD"
 set -x
 ~/bin/notinpath/mrxmodmap.sh &
 BIN=urxvt
