@@ -187,8 +187,9 @@ def set_gaps(i3, workspace):
 
     workspace.command(";".join(commandA))
 
-def send_window_to_citrix_workspace(i3, window):
-    substr = '  citrix   '
+def send_window_to_workspace(i3, window, substr):
+    logger.info(f"-> substr: {substr}")
+    substr = '  {}   '.format(substr)
     workspace = find_workspace(i3, window.window)
     if substr in workspace.name:
         logger.info('noop')
@@ -213,10 +214,13 @@ def on_window(i3, e):
         logger.info(f'============= new name:{e.container.name} class:{e.container.window_class} title:{e.container.window_title}')
         if e.container.window_class and \
            e.container.window_class.lower().startswith('wfica'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
-            send_window_to_citrix_workspace(i3, e.container)
+            send_window_to_workspace(i3, e.container, 'citrix')
             cmd = '[id="{}"] fullscreen disable'
             logger.warning(cmd)
             i3.command(cmd)
+        elif e.container.window_class and \
+           e.container.window_class.lower().startswith('microsoft teams'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
+            send_window_to_workspace(i3, e.container, 'comm')
     elif e.change in ['focus', 'move']:
         #e.container.command('[class="[.]*"] border pixel 0')
         e.container.command('border pixel 6')
