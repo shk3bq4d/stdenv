@@ -211,9 +211,10 @@ def on_window(i3, e):
             persist(wA)
     elif e.change == 'new':
         logger.info(f'============= new name:{e.container.name} class:{e.container.window_class} title:{e.container.window_title}')
-        if e.container.window_class.lower().startswith('wfica'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
+        if e.container.window_class and \
+           e.container.window_class.lower().startswith('wfica'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
             send_window_to_citrix_workspace(i3, e.container)
-            cmd = '[id="{}"] full screen disable'
+            cmd = '[id="{}"] fullscreen disable'
             logger.warning(cmd)
             i3.command(cmd)
     elif e.change in ['focus', 'move']:
