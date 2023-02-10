@@ -1259,3 +1259,8 @@ print(x.upper())
 def _my_recursive_iterator_function(): # yield from https://stackoverflow.com/questions/38254304/can-generators-be-recursive 
 	yield from _my_recursive_iterator_function # https://stackoverflow.com/questions/38254304/can-generators-be-recursive
 ```
+
+
+cat << 'PYTHONBASHHEREDOC' | python3 - $g
+print('python bash here doc')
+PYTHONBASHHEREDOC
