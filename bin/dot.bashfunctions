@@ -1046,8 +1046,8 @@ ping-up-down() {
     echo ping command stopped
 }
 
-netstat-tlnp() {
-    echo "sudo netstat -tlnp"
+netstat-plutn() {
+    echo "sudo netstat -plutn"
     local SUDO POST
     SUDO="sudo"
     POST="$@"
@@ -1055,7 +1055,7 @@ netstat-tlnp() {
     sudo true || SUDO=""
     export GREP_COLORS="mt=09;31"
 
-    $SUDO netstat -tlnp | GREP_COLORS="mt=34" grep --color=always -P '^|(?<=:)(21|22|25|53|80|8080|8443|443|10050|10051) ' | grep --color=always -E "$POST" -- | mrless
+    $SUDO netstat -plutn | GREP_COLORS="mt=34" grep --color=always -P '^|(?<=:)(21|22|25|53|80|8080|8443|443|10050|10051) ' | grep --color=always -E "$POST" -- | mrless
 }
 alias tr_upper_lower="tr '[:upper:]' '[:lower:]' $*"
 alias tr_lower_upper="tr '[:lower:]' '[:upper:]' $*"

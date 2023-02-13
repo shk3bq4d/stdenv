@@ -28,3 +28,5 @@ curl -D - -s -o /dev/null # only response headers
 curl -s -o /dev/null -w "%{http_code}" # print only http response status code
 
 
+https_proxy == 'socks5h://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved on proxy
+https_proxy ==  'socks5://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved locally

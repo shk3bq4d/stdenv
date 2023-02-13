@@ -11,6 +11,8 @@ tcpdump -i ens160 -nn port 69 # tftp
 tcpdump ip6 # ipv6
 tcpdump -i ens160 arp | grep 10.101.6.85 | ts
 tcpdump -i eth0 -en  | grep 40:a8:f0:75:d3:f7 # track mac address
+tcpdump -i any dst port 443 and dst net 100.64.0.0/16 # CIDR, all interfaces
+tcpdump -e # <-- see ARP destination which helps debug routing information
 wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
