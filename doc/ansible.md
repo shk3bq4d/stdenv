@@ -2148,6 +2148,7 @@ Give me the power of 2! (or 5):
 {{ myvar | root }}
 {{ myvar | root(5) }}
 json_query != jq -> https://jmespath.org/specification.html#and-expressions
+getent_passwd | json_query('*[2]')
 loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}"
 loop: "{{ domain_definition | json_query('domain.server[*].name') }}"
 loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
@@ -2569,7 +2570,7 @@ my_external_internet_ip_address_ipv4: "{{ lookup('dig', 'myip.opendns.com', '@re
 lookup('dict', users) # convert dict to list [item.key, item.value]
 msg: "{{ pvs.stdout | from_json | json_query('report[0].pv[*].pv_name') }}"
 
-/home/rumo/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/plugins/lookup/template.py
+~/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/plugins/lookup/template.py
 lookup('template', "~/git/sf/dcn/iaac-master/ans/group_vars/grafana.yml", template_vars={'sf_scripts_dir':'bip'})
 
 

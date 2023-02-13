@@ -15,6 +15,8 @@ jacobalberty/unifi:v7.0.25
 jacobalberty/unifi:v7.0.26 # does not exist as of 2022.05.01
 jacobalberty/unifi:v7.1.61
 jacobalberty/unifi:v7.1.66
+jacobalberty/unifi:v7.3.76
+jacobalberty/unifi:v7.3.83
 
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
@@ -25,6 +27,7 @@ https://community.ui.com/releases/UniFi-Network-Application-7-2-92/f1903cbc-4daa
 https://community.ui.com/releases/UniFi-Network-Application-7-2-94/2ab774d1-0f24-422e-accc-53b8200c10a7
 https://community.ui.com/releases/UniFi-Network-Application-7-2-95/7adebab5-8c41-4989-835d-ab60dba55255
 https://community.ui.com/releases/UniFi-Network-Application-7-3-76/85c75fc7-3e0f-4e99-aa90-7068af4f1141
+https://community.ui.com/releases/UniFi-Network-Application-7-3-83/88f5ff3f-4c13-45e2-b57e-ad04b4140528
 
 ```sh
 #!/bin/bash

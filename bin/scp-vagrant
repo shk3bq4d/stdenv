@@ -53,6 +53,16 @@ set -euo pipefail
 # echo "p = ${p}"
 # echo "rest = $@"
 
+if ! echo "$@" | grep -q _; then
+    cat << EOF
+FATAL: please use underscore for remote hostname
+scp-vagrant _:/my/remote/dir   /my/local/dir
+scp-vagrant   /my/local/dir  _:/my/remote/dir 
+EOF
+    exit 1
+fi
+
+
 # for i in sed which grep; do ! command -v "$i" &>/dev/null && echo "FATAL: unexisting dependency $i in path: $PATH" && exit 1; done
 
 # DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"

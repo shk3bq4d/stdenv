@@ -106,7 +106,7 @@ def excluded_screen_nov20(workspace):
 
 _gapsH = {}
 def set_gaps(i3, workspace):
-    if _short_hostname not in ['feb22', 'may19', 'nov20']: return
+    if workspace is None or _short_hostname not in ['feb22', 'may19', 'nov20']: return
     o = mri3.get_output_name(workspace)
     if 0:
         all_elems = [x for x in mri3.traverse_all_elem(start_from=workspace, only_visible=True) if mri3.is_window(x)]
@@ -187,6 +187,21 @@ def set_gaps(i3, workspace):
 
     workspace.command(";".join(commandA))
 
+def send_window_to_workspace(i3, window, substr):
+    logger.info(f"-> substr: {substr}")
+    substr = '  {}   '.format(substr)
+    workspace = find_workspace(i3, window.window)
+    if substr in workspace.name:
+        logger.info('noop')
+        return
+
+    for workspace in i3.get_tree().workspaces():
+        if substr in workspace.name:
+            cmd = '[id="{}"] move to workspace "{}"'.format(window.window, workspace.name)
+            logger.warning(cmd)
+            i3.command(cmd)
+            return
+
 def on_window(i3, e):
     logging.info('on_window %s', e.change)
     i3blocklet(i3, e)
@@ -195,6 +210,17 @@ def on_window(i3, e):
         if wid in wA:
             wA.remove(wid)
             persist(wA)
+    elif e.change == 'new':
+        logger.info(f'============= new name:{e.container.name} class:{e.container.window_class} title:{e.container.window_title}')
+        if e.container.window_class and \
+           e.container.window_class.lower().startswith('wfica'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
+            send_window_to_workspace(i3, e.container, 'citrix')
+            cmd = '[id="{}"] fullscreen disable'
+            logger.warning(cmd)
+            i3.command(cmd)
+        elif e.container.window_class and \
+           e.container.window_class.lower().startswith('microsoft teams'): # or e.container.window_class.lower().startswith('urxvt'): # Wfica_ErrorOrInfo
+            send_window_to_workspace(i3, e.container, 'comm')
     elif e.change in ['focus', 'move']:
         #e.container.command('[class="[.]*"] border pixel 0')
         e.container.command('border pixel 6')
@@ -202,7 +228,8 @@ def on_window(i3, e):
         #e.container.command('gaps outer current plus 40')
         wid = e.container.window
         workspace = find_workspace(i3, wid)
-        set_gaps(i3, workspace)
+        if workspace:
+            set_gaps(i3, workspace)
 
         if wid in wA:
             wA.remove(wid)
@@ -239,11 +266,11 @@ def blockpid():
     return _lastpid
 
 _remove_user_at_host = r'(( - )?{}@{}(\.\w+\.(lan|local|net))?$|{}@{}(\.\w+\.(lan|local|net))?:?)'.format(
-            getpass.getuser(),
-            _short_hostname,
-            getpass.getuser(),
-            _short_hostname
-            )
+        getpass.getuser(),
+        _short_hostname,
+        getpass.getuser(),
+        _short_hostname
+        )
 if _short_hostname in ['dec17', 'acer2011', 'feb22']:
     border_width=1 # underline
 else:

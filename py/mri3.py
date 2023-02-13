@@ -583,6 +583,7 @@ def current_output_workspaces():
     return rA
 
 def get_output(o):
+    if o is None: return None
     logger.info(f"get_output type {o.type} {o.name}")
     if o.type == 'output': return o
     if o.type == 'workspace' and o.parent is None:
@@ -603,6 +604,7 @@ def get_output(o):
     return get_output(o.parent)
 
 def get_output_name(o):
+    if o is None: return None
     return get_output(o).name
 
 def workspacereplies():

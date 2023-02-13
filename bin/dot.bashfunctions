@@ -354,7 +354,7 @@ else
             DIR="$(dirname "$1")"
         fi
         NEWEST=$(find $DIR -maxdepth 1 -xdev -ipath "*${@}*" -type f -printf '%T@ %p\0' | \
-            sort -rnz | xargs -0rn1 2>/dev/null | tail -n +$n | head -n1 | cut -d' ' -f2-)
+            sort -rnz | grep -vzE '\.sw[a-p]$|~' | xargs -0rn1 2>/dev/null | tail -n +$n | head -n1 | cut -d' ' -f2-)
         if [[ $DIR == . ]]; then
             mrbasename "$NEWEST"
         else
