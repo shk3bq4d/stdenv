@@ -111,6 +111,8 @@ which is equivalent to
  ! (ip.src == 10.43.54.65 or ip.dst == 10.43.54.65)
 
 
+conntrack -E
+
 #wireshark capture filter
 https://www.wireshark.org/docs/wsug_html_chunked/ChCapCaptureFilterSection.html
 tcp port 23 and host 10.0.0.5
