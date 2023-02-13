@@ -42,8 +42,8 @@ OFF="\033[m"
 
 
 cat "$@" | sed -r \
-	-e "s/(ERROR|Exception|failure|fail\\>|failed|fatal)/$(echo -e ${BGRED}${EMWHITE})\1$(echo -e ${OFF})/ig" \
-	-e "s/(warn(ing)?)/$(echo -e ${MAGENTA})\1$(echo -e ${OFF})/ig" \
+	-e 's/(\<ERR\>|ERROR|Exception|failure|fail\>|failed|fatal)/'"$(echo -e ${BGRED}${EMWHITE})\1$(echo -e ${OFF})/ig" \
+	-e 's/(\<WAR\>|warn(ing)?)/'"$(echo -e ${MAGENTA})\1$(echo -e ${OFF})/ig" \
 	-e "s/(INFO\\>)/$(echo -e ${GREEN})\1$(echo -e ${OFF})/ig" \
 	-e "s/(^20[12][0-9][ -:,0-9]+)/$(echo -e ${BLUE})\1$(echo -e ${OFF})/ig" \
 	-e "/^I[0-9]{4} [0-9]{2}:/s/([^ ]+ [^ ]+)/$(echo -e ${BLUE})\1$(echo -e ${OFF})/" \

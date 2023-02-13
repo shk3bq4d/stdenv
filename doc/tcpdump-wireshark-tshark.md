@@ -50,6 +50,8 @@ sudo tcpdump -i lo -c 100 -s 0 -vv -w - "ip and tcp and host 127.0.12.12"
 https://wiki.wireshark.org/DisplayFilters
 Show only SMTP (port 25) and ICMP traffic:
 
+ip.dst == 10.10.24.0/24 # cidr
+
  tcp.port eq 25 or icmp
 Show only traffic in the LAN (192.168.x.x), between workstations and servers -- no Internet:
 
