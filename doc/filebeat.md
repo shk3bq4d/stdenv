@@ -278,6 +278,14 @@ https://dissect-tester.jorgelbg.me/
 
 timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/15871
 
+- add_fields.fields.step.three: youpi     # short
+- add_fields.fields.step.four.youpi2:     # not very good as youpi2 is key whose value is null
+- drop_fields:                            # short
+    when.equals.nextcloud.userAgent: "--" # short
+    fields:    [nextcloud.userAgent]      # short
+- if.has_fields.nextcloud.time:           # short apparently works
+  if.has_fields.nextcloud:  time          # short apparently works
+
 processor add_cloud_metadata
 processor add_cloudfoundry_metadata
 processor add_docker_metadata

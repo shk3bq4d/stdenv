@@ -1136,3 +1136,8 @@ tail -f /var/log/foo | python -u
 ulimit -f 40 # will limit generate files by current bash session and subshells to 40kb (think files generated with redirections >)
 ulimit -f 1000 # will limit generate files by current bash session and subshells to 1mb (think files generated with redirections >)
 ulimit -f 1000000 # will limit generate files by current bash session and subshells to 1gb (think files generated with redirections >)
+
+cat << 'PYTHONBASHHEREDOC' | python3 - $g
+print('python bash here doc')
+PYTHONBASHHEREDOC
+

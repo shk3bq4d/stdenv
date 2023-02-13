@@ -6,7 +6,8 @@
 ##
 ## Author: Jeff Malone, 02 Dec 2022
 ##
-# 2023.07.19 I am not why I was copying the template to $_tempdir/in, will try to stick to $1 as it breaks template_fullpath
+# 2023.01.19 I am not why I was copying the template to $_tempdir/in, will try to stick to $1 as it breaks template_fullpath
+# 2023.03.10 ok, now I know, it's because of macros.j2, well I guess we can't have both template_fullpath and macros.j2 for the time being
 
 set -euo pipefail
 umask 027
@@ -22,12 +23,30 @@ function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// 
 
 [[ -t 1 ]] && export ANSIBLE_FORCE_COLOR=true
 
-_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
-#cp "$1" "$_tempdir/in"
-f=~/git/sf/dcn/iaac-master/ans/roles/sf-zabbix-template/templates/macros.j2
-test -f "$f" && cp "$f" "$_tempdir"
+fp="$(realpath "$1")"
+if grep -q macros.j2 $fp; then
+    _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+    cp "$fp" "$_tempdir/in"
+    f=~/git/sf/dcn/iaac-master/ans/roles/sf-zabbix-template/templates/macros.j2
+    test -f $f && cp "$f" "$_tempdir"
+    in="$_tempdir/in"
+else
+    in="$fp"
+fi
+
+ev=$_tempdir/extra-vars.yml
+if [[ $fp == *zabbix/templates* ]]; then
+    yq '.[0].vars' "$(basename $fp .j2)" > $ev || echo "" >$ev
+else
+    echo "" >$ev
+fi
+
+
+
 #if ! ansible all -i "localhost," -m template -a "src='$_tempdir/in' dest=$_tempdir/out" --connection=local \
-if ! ansible all -i "localhost," -m template -a "src='$1' dest=$_tempdir/out" --connection=local \
+if ! ansible all -i "localhost," -m template -a "src='$in' dest=$_tempdir/out" --connection=local \
+    -e @$ev \
+    -e @~/git/sf/dcn/iaac-master/ans/group_vars/all.yml \
     -e zabbix_version=6.2.5 \
     -e group_template_uuid=abcd \
     -e _template_uuid=abcd \
