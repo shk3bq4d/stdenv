@@ -252,6 +252,7 @@ export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChec
 
 GIT_SSH_COMMAND # was added in Git version 2.3.0, which was released on February 9th, 2015.
 GIT_SSH # has been present since the early days of Git and was likely included in the initial release of the software.
+26 5-16 * * * { export GIT_SSH=~/.ssh/git_ssh_bip; echo 'ssh -i ~/.ssh/id_rsa_cron_bip $@'>$GIT_SSH;chmod u+x $GIT_SSH; cd mygitrepo; git pull; } >> /tmp/bip-pull 2>&1
 
 @begin=sh@
 #!/usr/bin/env bash
