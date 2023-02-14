@@ -250,6 +250,9 @@ GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 export GIT_TRACE=1 # to work with GIT_SSH and GIT_SSH_COMMAND
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=$HOME/.ssh/id_rsa"
 
+GIT_SSH_COMMAND # was added in Git version 2.3.0, which was released on February 9th, 2015.
+GIT_SSH # has been present since the early days of Git and was likely included in the initial release of the software.
+
 @begin=sh@
 #!/usr/bin/env bash
 

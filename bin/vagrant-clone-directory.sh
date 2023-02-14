@@ -24,7 +24,11 @@ DSTDIR="$2"
 ! test -f "$SRCDIR/Vagrantfile" && echo "FATAL: not a file $SRCDIR/Vagrantfile" && exit 1
 
 mkdir "$DSTDIR"
-rsync -avr --exclude=.vagrant "$SRCDIR"/. "$DSTDIR"/.
+rsync -avr \
+    --exclude=.vagrant \
+    --exclude=roles-external \
+    "$SRCDIR"/. \
+    "$DSTDIR"/.
 
 echo EOF
 exit 0
