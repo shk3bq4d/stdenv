@@ -22,6 +22,10 @@ if [[ -d secrets ]]; then
         tr '\n' ' '
         )"
 fi
+vagrant_args=""
+if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; then
+    vagrant_args='--become --ssh-extra-arg="-o StrictHostKeyChecking=No" -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory'
+fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 for f in \
@@ -32,7 +36,8 @@ for f in \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
-        ansible-playbook $vaults_args "$@"
+        set -x
+        eval ansible-playbook $vagrant_args $vaults_args "$@"
         exit $?
     fi
 done
@@ -42,4 +47,4 @@ if [[ -z "$BIN" ]]; then
     which -a ansible-playbook
     exit 1
 fi
-$BIN $vaults_args "$@"
+$BIN $( echo -n "$vagrant_args") $vaults_args "$@"
