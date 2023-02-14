@@ -196,6 +196,15 @@ alias -g LA='"$(last)"'
 alias -g LAS='"$(last)"'
 alias -g LAST='"$(last)"'
 
+myans() {
+    #ap playbook.yml ANS hos1 hos2 )
+    echo -n " -Dl "
+    for var in $@; do
+        echo -n "$var*:"
+    done
+}
+alias -g ANS='$(myans'
+
 alias -g L='2>&1|less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init'
 alias -g L1='2>/dev/null|L'
 alias -g L2='2>&1 >/dev/null|L'
