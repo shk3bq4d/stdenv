@@ -24,7 +24,7 @@ if [[ -d secrets ]]; then
 fi
 vagrant_args=""
 if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; then
-    vagrant_args='--become --ssh-extra-arg="-o StrictHostKeyChecking=No" -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory'
+    vagrant_args='--ssh-extra-arg="-o StrictHostKeyChecking=No" -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory'
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
