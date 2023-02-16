@@ -140,3 +140,5 @@ vboxmanage guestproperty enumerate VMID
 3840x2160:  64 MB VRAM
 5120x2160:  ?? MB VRAM
 5120x2880: 128 MB VRAM
+
+* https://www.virtualbox.org/manual/ch06.html # network

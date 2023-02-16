@@ -1,4 +1,5 @@
 systemctl enable nginx.service   # Start nginx as system boot
+sudo systemctl restart systemd-resolved # dns
 journalctl --no-tail -f -u nginx.service
 journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
