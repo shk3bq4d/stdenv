@@ -2,6 +2,7 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
+BINNAME="$(basename "$0")"
 if [[ -n "${STDENV_ANSIBLE_PLAYBOOK:-}" ]]; then
     echo "recursion detected, aborting. Which -a ansible-playbook"
     which -a ansible-playbook
@@ -37,14 +38,14 @@ for f in \
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
         set -x
-        eval ansible-playbook $vagrant_args $vaults_args "$@"
+        eval "$BINNAME" $vagrant_args $vaults_args "$@"
         exit $?
     fi
 done
-BIN=$(which -a ansible-playbook | tail -n +2 | head -n 1)
+BIN=$(which -a "$BINNAME" | tail -n +2 | head -n 1)
 if [[ -z "$BIN" ]]; then
-    echo "FATAL: could no find ansible-playbook outside of myself"
-    which -a ansible-playbook
+    echo "FATAL: could no find "$BINNAME" outside of myself"
+    which -a "$BINNAME"
     exit 1
 fi
 $BIN $( echo -n "$vagrant_args") $vaults_args "$@"

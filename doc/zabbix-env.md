@@ -1,4 +1,5 @@
 
+https://github.com/ansible-collections/community.zabbix
 https://www.zabbix.com/documentation/3.2/manual/api/
 https://www.zabbix.com/documentation/2.4/manual/api/reference/maintenance/get
 https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary

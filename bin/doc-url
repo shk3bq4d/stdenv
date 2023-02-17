@@ -20,6 +20,7 @@ go() {
 }
 
 nosuccess() {
+  echo "URL not found ~/bin/doc $@"
   ~/bin/doc "$@"
   echo "FATAL: no http"
   return 1

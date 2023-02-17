@@ -1201,6 +1201,10 @@ sed_ldapsearch() {
     sed ':a;$!{N;ba};s/\n //g'
 }
 
+find-not-current-user() {
+    find "$@" -not -user $(id -un)
+}
+
 
 
 allhash() {
