@@ -1911,6 +1911,7 @@ Variable precedence: Where should I put a variable?
     line: '\1Xms${xms}m\3'
     backrefs: yes
  ```
+https://github.com/ansible-collections/community.zabbix
 # windows
 https://github.com/jonashackt/ansible-windows-docker-springboot
 https://chocolatey.org/packages/zabbix-agent
