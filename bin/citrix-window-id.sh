@@ -4,7 +4,7 @@
 set -euo pipefail
 _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 
-if false; then
+if true; then
     xdotool search --name "ITTS Desktop" > $_tempfile
     xdotool search --class Wfica | grep -f $_tempfile
 else
