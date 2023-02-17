@@ -1220,6 +1220,7 @@ gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, appa
   setup:                                                  # setup gather_subset fact
     gather_subset: setup_gather_subset.ansible_date_time  # setup gather_subset fact
 
+ansible localhost   -m setup            -a 'gather_subset=min' -o        # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=absent" # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=stopped" # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=started restart=yes" # oneliner one-liner adhoc ad-hoc
