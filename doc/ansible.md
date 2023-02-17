@@ -2798,3 +2798,4 @@ query('') -> same as lookup but always return a list (so  same as lookup('', wan
 q('')     -> same as query # lookup
 
 mode: 0o750 # permission octal 0755 0750 777 644 660 664 666
+is_controller: "{{ inventory_hostname == lookup('pipe', 'hostname -f') }}"
