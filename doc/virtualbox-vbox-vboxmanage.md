@@ -4,7 +4,7 @@ vboxmanage closemedium disk df32fae5-4df3-46ab-9d4f-09ab51d50617 --delete
 vboxmanage createhd --filename /lvmr0/vbox/vm/kubuntu1404base/kubuntu1404base.vdi --format VDI --size 204800
 vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 0 --type hdd --medium kubuntu1404base.vdi
 vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 1 --type dvddrive --medium /lvmr0/kubuntu-14.04.1-desktop-amd64.iso
-vboxmanage controlvm kubuntu1404base poweroff # stop 
+vboxmanage controlvm kubuntu1404base poweroff # stop
 vboxmanage modifyvm kubuntu1404base --memory 1024
 vboxmanage guestproperty get xpbase vrdeport
 vboxmanage guestproperty set xptest vrdeport 6040
@@ -92,6 +92,7 @@ with
 # <vssd:VirtualSystemType>vmx-07</vssd:VirtualSystemType>
 - open *mf and suppress the line regarding the checksum of *ovf that was just edited on previous step
 - execute something similar
+```sh
 #!/usr/bin/env bash
 set -e
 DIR=/mnt/local/00-1to/kanban/2016.09.26-zabbix-service-now-snow-servicenow/
@@ -110,9 +111,11 @@ exit 0
 vm="Windows XP"; for i in $(seq 1 4); do VBoxManage controlvm "$vm" setlinkstate$i off ; sleep 1; VBoxManage controlvm "$vm" setlinkstate$i on; done
 
 sudo modprobe vboxdrv # reload kernel module on restart
+```
 
 
 # autostart on boot
+```sh
 vboxmanage showvminfo mitmproxy2 --machinereadable | grep autostart
 vboxmanage modifyvm dnsmasq --autostart-enabled off
 
@@ -122,3 +125,20 @@ vboxmanage clonemedium ~/ITO-BACKUPS-01_Ubuntu16044.vhdx ITO-BACKUPS-01_Ubuntu16
 vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch
 
 vboxmanage guestproperty enumerate VMID
+```
+
+# vram
+640x480:     2 MB VRAM
+800x600:     3 MB VRAM
+1024x768:    4 MB VRAM
+1280x720:    5 MB VRAM
+1280x1024:   8 MB VRAM
+1440x900:    9 MB VRAM
+1600x1200:  12 MB VRAM
+1920x1080:  16 MB VRAM
+2560x1440:  32 MB VRAM
+3840x2160:  64 MB VRAM
+5120x2160:  ?? MB VRAM
+5120x2880: 128 MB VRAM
+
+* https://www.virtualbox.org/manual/ch06.html # network

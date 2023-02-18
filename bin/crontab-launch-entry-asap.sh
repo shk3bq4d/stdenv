@@ -125,7 +125,8 @@ while :; do
 
 
     entry="$(remove_colors $_tempfile | sed -r -n "$_read p")"
-    dateref="$(date +%s -d "-2 minute ago")"
+    #dateref="$(date +%s -d "+2 minute ago")"
+    dateref="$(date +%s -d "$(date +'%Y-%m-%d %H:%M' -d "+2 minute")")"
     backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
     dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     #echo "entry is $entry"
@@ -161,7 +162,7 @@ while :; do
         ;;
     esac
     echo "===="
-    echo "DONE, will execute at $(date -d @$dateref +'%H:%M'). A backup copy was saved in $backupfile"
+    echo "DONE, will execute at $(date -d @$dateref +'%H:%M') in $(( $(date -d @$dateref +%s) - $(date +%s) )) seconds. A backup copy was saved in $backupfile"
 
     break
 done

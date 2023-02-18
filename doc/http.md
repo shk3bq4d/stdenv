@@ -214,3 +214,6 @@ https://http-various-codes.k.abc1.ch/code/465/code/205 # switches between 465 an
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP Content-Security-Policy
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT
+
+https_proxy == 'socks5h://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved on proxy
+https_proxy ==  'socks5://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved locally

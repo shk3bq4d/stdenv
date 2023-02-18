@@ -37,3 +37,13 @@ TZ=Europe/Zurich date # timezone
 date +'%Y-%m-%d %H:%M:%S,%N' | sed -r 's/(,...).*/\1/' # 2022-12-23 10:11:12,023 milliseconds (not nanoseconds)
 date +'%Y-%m-%d %H:%M:%S,%N' # 2022-12-23 10:11:12,02345679 nanoseconds (not milliseconds)
 date +'%Y-%m-%d:%H:%M:%S,%3N' # milliseconds
+
+
+###sleep until, or script duration elapsed
+current_epoch=$(date +%s) # duration elapsed
+target_epoch=$(date -d '01/01/2010 12:00' +%s)
+target_epoch=$(date -d 'tomorrow 12:00' +%s)
+sleep_seconds=$(( $target_epoch - $current_epoch ))
+sleep $sleep_seconds
+duration=$(( $(date +%s) - $current_epoch )) # elapsed
+echo "job took $duration seconds" # elapsed

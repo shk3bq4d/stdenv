@@ -76,3 +76,8 @@ network:
         via: 10.19.29.1
         metric: 100
 ```
+
+
+# LTS kernel GA and HWE
+The first one is the GA (General Availability) kernel, which is the kernel version that is included with the initial release of the LTS. This kernel will receive security updates and critical bug fixes, but will generally not receive any major feature updates.
+The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel version that is introduced during the lifecycle of the LTS release. The HWE kernel is designed to provide updated support for newer hardware and to include additional features that were not available in the GA kernel.

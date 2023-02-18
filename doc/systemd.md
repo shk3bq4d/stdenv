@@ -1,4 +1,5 @@
 systemctl enable nginx.service   # Start nginx as system boot
+sudo systemctl restart systemd-resolved # dns
 journalctl --no-tail -f -u nginx.service
 journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
@@ -1328,3 +1329,6 @@ systemctl list-dependencies --after  shutdown.target
 systemctl list-dependencies --before shutdown.target
 
 Restart= no	always	on-success	on-failure	on-abnormal	on-abort	on-watchdog https://www.freedesktop.org/software/systemd/man/systemd.service.html#
+
+systemd show         -p MainPID filebeat | cut -d = -f 2 # systemd 219
+systemd show --value -p MainPID filebeat                 # systemd 249

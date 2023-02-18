@@ -1220,6 +1220,7 @@ gather_subset options allowed: all, all_ipv4_addresses, all_ipv6_addresses, appa
   setup:                                                  # setup gather_subset fact
     gather_subset: setup_gather_subset.ansible_date_time  # setup gather_subset fact
 
+ansible localhost   -m setup            -a 'gather_subset=min' -o        # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=absent" # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=stopped" # oneliner one-liner adhoc ad-hoc
 ansible confluence -bm docker_container -a "name=jira       state=started restart=yes" # oneliner one-liner adhoc ad-hoc
@@ -1911,6 +1912,7 @@ Variable precedence: Where should I put a variable?
     line: '\1Xms${xms}m\3'
     backrefs: yes
  ```
+https://github.com/ansible-collections/community.zabbix
 # windows
 https://github.com/jonashackt/ansible-windows-docker-springboot
 https://chocolatey.org/packages/zabbix-agent
@@ -2796,3 +2798,4 @@ query('') -> same as lookup but always return a list (so  same as lookup('', wan
 q('')     -> same as query # lookup
 
 mode: 0o750 # permission octal 0755 0750 777 644 660 664 666
+is_controller: "{{ inventory_hostname == lookup('pipe', 'hostname -f') }}"

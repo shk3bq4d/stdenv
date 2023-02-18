@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+go() {
+    local url
+    url="$(
+    ~/bin/doc "$@" |
+        sed -n -r -e '/https?:\/\/[^ ]+/s/.*(https?:\/\/[^ ]+).*/\1/ p' |
+        head -n 1
+    )"
+
+    test -z "$url" && return 1
+    echo "url is $url"
+    chromium-browser --new-window "$url" &>/dev/null
+    return 0
+}
+
+nosuccess() {
+  echo "URL not found ~/bin/doc $@"
+  ~/bin/doc "$@"
+  echo "FATAL: no http"
+  return 1
+}
+
+
+go "$@" || nosuccess "$@"

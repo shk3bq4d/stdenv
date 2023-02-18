@@ -12,3 +12,6 @@ xrandr --addmode HDMI-2 1920x1200_30.00
 xrandr --output DP-2 --auto --primary --output HDMI-2 --mode 1920x1200_30.00 --left-of DP-2
 i3 restart
 feh --bg-scale ~/Pictures/i3lock/boreal3.png
+
+
+xrandr --output Virtual-1 --mode 1920x1200
