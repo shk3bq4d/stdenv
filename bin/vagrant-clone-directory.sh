@@ -27,8 +27,10 @@ mkdir "$DSTDIR"
 rsync -avr \
     --exclude=.vagrant \
     --exclude=roles-external \
+    --max-size=10M \
     "$SRCDIR"/. \
     "$DSTDIR"/.
 
 echo EOF
 exit 0
+    --exclude=*.box \
