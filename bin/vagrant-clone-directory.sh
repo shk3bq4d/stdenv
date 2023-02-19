@@ -25,6 +25,7 @@ DSTDIR="$2"
 
 mkdir "$DSTDIR"
 rsync -avr \
+    --cvs-exclude \
     --exclude=.vagrant \
     --exclude=roles-external \
     --max-size=10M \
