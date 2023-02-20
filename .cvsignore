@@ -1,0 +1,129 @@
+
+# pgp generated files
+dbgmd-0*.creatmdc
+
+mrparcellite
+
+nohup.out
+
+*?.gitignore
+
+.gnome2/
+.shutter/
+.touch/
+.urxvt/
+urxvt.?????
+.xsession-errors
+.xsession-errors.old
+*.old
+*.orig
+.*.orig
+.zgrviewer
+idea
+.words
+.Xdefaults-disabled
+
+mr.rebase/
+
+# zsh
+.zcompdump*
+.z
+.zsh_history
+.zsh-update
+
+.vagrant
+roles-external
+
+# bash
+.bash_history
+
+# vim
+*%*
+*:*
+*~
+*.bak
+**/*.sw[abcdefghijklmnop]
+.viminf*
+
+# images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.svg
+*.ico
+*.psd
+*.PNG
+*.JPG
+*.JPEG
+*.GIF
+*.BMP
+*.SVG
+*.ICO
+*.PSD
+
+# emacs
+*#
+
+# Compiled source #
+###################
+*.com
+target/
+*.class
+*.jar
+*.ear
+*.war
+*.dll
+*.exe
+*.o
+*.so
+
+###### python
+*.pyc
+*.pyo
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.box
+
+# Logs and databases #
+######################
+*.log
+*.log-[0-9]
+*.log-[0-9][0-9]
+*.sql
+*.sqlite
+*.tmp
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+desktop.ini
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+*.mrbkp20*
+*.mrbkp20*/
+
+# git@github.com:shk3bq4d/dmenu-overkill.git output
+dmenu
+dmenu_run
+stest
+
+# ansible
+*.retry
