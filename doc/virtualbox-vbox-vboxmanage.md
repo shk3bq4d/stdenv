@@ -23,6 +23,8 @@ vboxmanage unregistervm vmname # destroy delete unprovision
 
 vboxmanage list vms
 
+~/VirtualBox VM # home dir
+
 # create a VM
 # 1) determine type possible types are listed as
 vboxmanage list ostypes
