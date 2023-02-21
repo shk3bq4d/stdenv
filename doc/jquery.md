@@ -10,7 +10,9 @@ You can also use the slim build, which excludes the ajax and effects modules:
 ```
 
 ```js
+$('#pwd').css('color', 'white'); // style="
 $('#pwd').val('setvalue');
+$('#pwd').length > 0 // test if element worked
 $('#id_password').is(":visible") // sometimes not enough
 $('[name="remember_me"]').prop('checked', true);
 e = $('#id_password'); (e.is(":hidden") || e.css("visibility") == "hidden" || e.css("opacity") == 0) // visible, maybe better, checked in one case and seemd indeed better
