@@ -63,6 +63,7 @@ echo "flagfile is $flagfile"
 
     wait-until.sh "$T"
     ! test -f "$flagfile" && echo "FATAL: flagfile no longer exists" && ls -l "$flagfile" && exit 1
+    ~/bin/ssh-agent-debug.sh || true
     flagfile_lmod_after="$(date -r "$flagfile" "+%s")"
     test "$flagfile_lmod_before" -ne "$flagfile_lmod_after" && echo "FATAL: flagfile last mod time changed $flagfile_lmod_before != $flagfile_lmod_after" && trap '' SIGHUP SIGINT SIGQUIT SIGTERM EXIT && exit 1
     export ANSIBLE_FORCE_COLOR=true
