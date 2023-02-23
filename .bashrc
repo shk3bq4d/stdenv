@@ -352,7 +352,7 @@ if [[ $UID -ne 0 && $UNAME != cygwin* && $UNAME != msys* ]]; then
         #echo b
         true # there's already a socket, that should be kept
     elif [ -f "${SSH_ENV}" ]; then
-        echo c
+        #echo c
         #env | grep -i ssh
         #echo "b ${SSH_ENV}"
         source ${SSH_ENV} > /dev/null
