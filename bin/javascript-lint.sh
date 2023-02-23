@@ -22,11 +22,11 @@ args() {
 docker ps &>/dev/null && SUDO="" || SUDO=sudo
 
 if [[ $# -eq 0 ]]; then
-    $SUDO docker run -it --rm -v $PWD:/code eeacms/jshint
+    $SUDO docker run -i --rm -v $PWD:/code eeacms/jshint
 elif [[ $1 == -* ]]; then
-    $SUDO docker run -it --rm eeacms/jshint /usr/bin/jshint "$@"
+    $SUDO docker run -i --rm eeacms/jshint /usr/bin/jshint "$@"
 else
-    $SUDO docker run -it --rm $(volumes "$@") --entrypoint="" eeacms/jshint jshint --verbose $(args "$@")
+    $SUDO docker run -i --rm $(volumes "$@") --entrypoint="" eeacms/jshint jshint --verbose $(args "$@")
     #$SUDO docker run -it --rm $(volumes "$@") --entrypoint="" eeacms/jshint cat $(args "$@")
 fi
 

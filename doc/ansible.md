@@ -2712,11 +2712,11 @@ vimf6_ansible_args: -e ansible_connection=local
 
   pause: # prompt user
     echo: no # prompt user, use echo: no for password entries
-    prompt: prompt user. What would you like to do next ?
+    prompt: prompt user. pause What would you like to do next ?
 
-  pause: # sleeps waits
-    minutes: 5 # pause sleeps waits
-    seconds: 5 # pause sleeps waits
+  pause: # sleeps waits noprompt
+    minutes: 5 # pause noprompt sleeps waits
+    seconds: 5 # pause noprompt sleeps waits
 
     ansible-playbook --step # prompt after each task debug
 

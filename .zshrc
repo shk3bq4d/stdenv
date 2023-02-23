@@ -194,7 +194,7 @@ alias git='nocorrect git'
 
 alias -g LA='"$(last)"'
 alias -g LAS='"$(last)"'
-alias -g LAST='"$(last)"'
+alias -g LAST='"$(last)"$(>&2 last)'
 
 myans() {
     #ap playbook.yml ANS hos1 hos2 )
