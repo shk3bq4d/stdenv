@@ -69,6 +69,8 @@ http://www.gnu.org/software/sed/manual/html_node/Command-and-Option-Index.html#C
 sed -r -e '0,/OTHRPRTY/{s/OTHRPRTY/youpiiiiiiiiiiiiiiiiiiii/}' $i
 
 sed -n '/USERNAME/,/-----$/ p' #print between two regexp
+sed -n '/^COPY public.oc_activity /,/^\\\\.$/ p'
+sed -zn '/^\\.$/ p' bip.sql.gz
 
 
 sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase

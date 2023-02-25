@@ -166,3 +166,5 @@ http {
 	}
 }
 ```
+
+nginx -t -c /etc/nginx/nginx.conf # test config
