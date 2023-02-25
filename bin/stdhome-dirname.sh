@@ -28,6 +28,6 @@ else
 		echo "$(dirname "$i")/stdhome"
 		exit 0
 	done
-	>&2 echo "stdhome-dirname.sh not found"
+	[[ $EUID -ne 0 ]] && >&2 echo "stdhome-dirname.sh not found"
 	exit 1
 fi

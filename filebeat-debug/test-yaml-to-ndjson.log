@@ -1,0 +1,10 @@
+# /* ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 : */
+root:
+  doc: this is my first document
+---
+otherroot:
+  something_else:
+    - hehe
+    - this is my 2nd document
+---
+third_document: yes
