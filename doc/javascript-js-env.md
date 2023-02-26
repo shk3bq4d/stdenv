@@ -49,3 +49,4 @@ docker run -it --rm -v $PWD:/code eeacms/jshint # lint
 # notifications
 * https://www.bennish.net/web-notifications.html # alert
 
+JSON.stringify()
