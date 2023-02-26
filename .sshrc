@@ -20,6 +20,7 @@ if ! type sudomr &>/dev/null ; then
         local f
         f=$SSHHOME/.sshrc
         echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $f
+		echo "sudomr .sshrc"
         sudo -i bash --rcfile $f "$@"
     }
 fi

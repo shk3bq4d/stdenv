@@ -24,23 +24,27 @@ function sudomr() {
         $hook
     done
 
-    commands="
-export RCD=$NEWRCD
-source $NEWRCD/.bashrc
-export VIMINIT='so $NEWRCD/.vimrc'
-#export VIMF6=$NEWRCD/.vim
-export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
-"
     if [[ -z $SSHHOME ]]; then
-        f=$(mktemp -d)/sudomr.bashrc
-        chmod a+rx $(dirname $f)
+        f="$(mktemp -d)/sudomr.bashrc"
+        chmod a+rx "$(dirname "$f")"
         [[ -f $f ]] && rm -f $f
         touch $f
         chmod a+r $f
     else
         [[ -z $f ]] && f=$SSHHOME/.sshrc
     fi
-    echo "$commands" | sudo tee -a $f >/dev/null
+    cat << EOF | sudo tee -a $f >/dev/null
+export RCD=$NEWRCD
+source $NEWRCD/.bashrc
+export VIMINIT='so $NEWRCD/.vimrc'
+if [ -n "\${SUDO_USER:-}" ]; then
+    HISTFILE="\$HOME/.bash_history.\$SUDO_USER"
+elif [ "${UID:-5}" -eq 0 ]; then
+    HISTFILE="\$HOME/.bash_history.\$(logname)"
+fi
+#export VIMF6=$NEWRCD/.vim
+export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
+EOF
     unalias . 2>/dev/null
     is_zsh \
     && sudo ${=user} bash --rcfile $f \

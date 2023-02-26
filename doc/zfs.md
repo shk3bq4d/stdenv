@@ -1,5 +1,6 @@
 zfs list
 zfs list -t all
+zfs list | sort -k2 --human-numeric-sort
 zfs list mrpool/myfs@month.05
 zfs list -t snapshot -o name,creation
 zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') # snapshot current working directory cwd pwd filesystem fs

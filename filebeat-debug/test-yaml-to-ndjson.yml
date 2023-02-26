@@ -1,0 +1,46 @@
+# ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
+# GREP ME KEYWORD: yaml-to-ndjson
+filebeat.inputs:
+  - type: filestream
+    id: myid
+    paths: /tmp/filebeat-debug/.test-yaml-to-ndjson.json.log
+    parsers:
+      - ndjson:
+
+output:
+  file: # https://www.elastic.co/guide/en/beats/filebeat/current/file-output.html
+    path: /tmp/filebeat-debug
+    filename: filebeat.out
+    permissions: 0644
+    codec:
+     json: # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-output-codec.html
+       pretty: true
+
+processors: # https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html
+
+- drop_fields:
+    fields:
+      - "@metadata"
+      - "@timestamp"
+      - log
+      - ident
+      - ecs
+      - auth
+      - http.request.method
+      - http.response
+      - http.version
+      - input
+      - host
+      - agent
+      - user_agent
+      - source
+
+
+output:
+  file: # https://www.elastic.co/guide/en/beats/filebeat/current/file-output.html
+    path: /tmp/filebeat-debug
+    filename: filebeat.out
+    permissions: 0644
+    codec:
+     json: # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-output-codec.html
+       pretty: true

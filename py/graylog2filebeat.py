@@ -22,6 +22,11 @@ class Graylog2FilebeatTest(unittest.TestCase):
                 [{}, {}],
                 [dict(a="hehe"), dict(a="hehe")],
                 [dict(a_b="hehe"), dict(a=dict(b="hehe"))],
+                [dict(source_b="hehe"), dict(source=dict(b="hehe")), "source_b should be source.b if no 'source' field"],
+                [dict(source="ha", source_b="hehe"), dict(source="ha", source_b="hehe")],
+                [dict(a_0="one", a_1="two"), dict(a=["one", "two"])],
+                [dict(a_2="onlytwo"), dict(a=[None, None, "onlytwo"])],
+                [dict(a_0_hehe="one"), dict(a=[dict(hehe="one")])],
                 ]
 
         for k, test_case in enumerate(cAA):
@@ -37,22 +42,61 @@ class Graylog2FilebeatTest(unittest.TestCase):
 def graylog_to_filebeat(inH):
     returnH = dict()
     def _ensure_key(rH, key, value):
+#       key = re.sub('^source_', 'source#', key)
         key = key.replace('_', '.')
-        keyA = key.split('.')
+#       key = re.sub('^source#', 'source_', key)
+        completed = False
+        logger.debug(f"before key is {key}")
+        # pre-phase where we rebuild key if we detect that we have something like source + source_ip
+        while not completed:
+            replaced = False
+            cH = rH
+            keyA = key.split('.')
+            for k in range(len(keyA)):
+                subkey = keyA[k]
+                if subkey not in cH:
+                    completed = True
+                    break
+                cH = cH[subkey]
+                if type(cH) == str:
+                    key = ".".join(keyA[0:k+1]) + "_" + ".".join(keyA[k+1:])
+                    replaced = True
+                    break
+            if not replaced:
+                break
+        logger.debug(f"after key is {key}")
         for k in range(len(keyA)):
+            if k > 0:
+                prev_key = keyA[k - 1]
+            else:
+                prev_key = keyA[k - 1]
             subkey = keyA[k]
             if k < len(keyA) - 1:
                 next_subkey = keyA[k + 1]
             else:
                 next_subkey = None
             if subkey not in rH:
+                if type(rH) == list:
+                    subkey = int(subkey)
+                    while subkey >= len(rH):
+                        rH.append(None)
                 if next_subkey:
                     if re.match(r'\d+', next_subkey) is not None:
                         rH[subkey] = []
                     else:
                         rH[subkey] = {}
+                elif type(rH) == list:
+                    rH[int(subkey)] = value
                 else:
-                    rH[subkey] = value
+                    try:
+                        rH[subkey] = value
+                    except BaseException as e:
+                        pprint(rH)
+                        print(f"value {value}")
+                        print(f"key {key}")
+                        print(f"prev_key {prev_key}")
+                        print(f"subkey {subkey}")
+                        raise e
             rH = rH[subkey]
 
     for key, value in inH.items():
