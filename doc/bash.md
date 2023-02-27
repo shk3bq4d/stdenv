@@ -1123,6 +1123,7 @@ fi
 
 A=$(</tmp/myfile) # built-in builtin read file into variable
 
+umask 027
 
 # pipebuffer
 tail -f /var/log/foo | stdbuf -o0 cut
