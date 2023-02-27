@@ -19,4 +19,12 @@ echo curl_exec(curl_init("http://localhost"));
 php -a # interactive mode
 php -r 'echo curl_exec(curl_init("http://localhost"));' # execute command from shell
 php -r '$ch = curl_init("http://localhost")); echo curl_exec($ch); echo "error: $curl_error($ch)";' # execute command from shell
+php -l /my/php/file.php # validate syntax
+```
+```php
+function mylog($message, $logFile = "/var/www/html/var/logs/bip.log") {
+  $timestamp = date("Y-m-d H:i:s");
+  $logEntry = "[$timestamp] $message\n";
+  file_put_contents($logFile, $logEntry, FILE_APPEND);
+}
 ```

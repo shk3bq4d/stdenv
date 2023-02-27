@@ -14,3 +14,7 @@ multipart/mixed (only if attachments are included)
 
 http://improvmx.com/success/
 https://forwardmx.io/pricing
+
+
+echo -e "Hello!\nHow are you?\nBob" | mailx -s "test email" -S smtp=webmail.bip.com:587 me@example.com
+echo -e "Hello!\nHow are you?\nBob" | mailx -s "test email" -S smtp=webmail.bip.com:587 me@example.com,me2@example.com

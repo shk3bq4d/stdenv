@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
+import functools
 import os
 import sys
 import re
@@ -22,6 +23,13 @@ class Graylog2FilebeatTest(unittest.TestCase):
                 [{}, {}],
                 [dict(a="hehe"), dict(a="hehe")],
                 [dict(a_b="hehe"), dict(a=dict(b="hehe"))],
+                [dict(source_b="hehe"), dict(source=dict(b="hehe")), "source_b should be source.b if no 'source' field"],
+                [dict(source="ha", source_b="hehe"), dict(source="ha", source_b="hehe")],
+                [dict(a_0="one", a_1="two"), dict(a=["one", "two"])],
+                [dict(a_2="onlytwo"), dict(a=[None, None, "onlytwo"])],
+                [dict(a_0_hehe="one"), dict(a=[dict(hehe="one")])],
+                [dict(dns_resolved_ip="one"), dict(dns=dict(resolved_ip="one")), "hard-coded exception for packetbeat"],
+                [dict(a_0_hehe="one", a_0_haha="ohaha"), dict(a=[dict(hehe="one", haha="ohaha")]), "this testcase doesn't work yet"],
                 ]
 
         for k, test_case in enumerate(cAA):
@@ -34,25 +42,91 @@ class Graylog2FilebeatTest(unittest.TestCase):
             actual = graylog_to_filebeat(_in)
             self.assertEquals(expected, actual, msg)
 
+_exceptions = {
+    # beat
+    'agent.ephemeral.id': 'agent.ephemeral_id',
+    # packetbeat
+    'dns.op.code':                'dns.op_code',
+    'dns.additionals.count':                'dns.additionals_count',
+    'dns.answers.count':                'dns.answers_count',
+    'dns.authorities.count':                'dns.authorities_count',
+    'dns.opt.ext.rcode':                'dns.opt.ext_rcode',
+    'dns.opt.udp.size':                'dns.opt.udp_size',
+    'dns.resolved.ip':                'dns.resolved_ip',
+    'dns.question.top.level.domain':  'dns.question.top_level_domain',
+    'dns.question.registered.domain': 'dns.question.registered_domain',
+    'dns.response.code':              'dns.response_code',
+    'dns.header.flags':               'dns.header_flags',
+    'dns.flags.authentic.data':       'dns.flags.authentic_data',
+    'dns.flags.checking.disabled':       'dns.flags.checking_disabled',
+    'dns.flags.recursion.available':       'dns.flags.recursion_available',
+    'dns.flags.recursion.desired':       'dns.flags.recursion_desired',
+    'dns.flags.truncated.response':       'dns.flags.truncated_response',
+    'network.community.id':           'network.community_id',
+    }
 def graylog_to_filebeat(inH):
     returnH = dict()
     def _ensure_key(rH, key, value):
+#       key = re.sub('^source_', 'source#', key)
         key = key.replace('_', '.')
+#       key = re.sub('^source#', 'source_', key)
+        completed = False
+        logger.debug(f"before key is {key}")
+        # pre-phase where we rebuild key if we detect that we have something like source + source_ip
+        while not completed:
+            replaced = False
+            cH = rH
+            keyA = key.split('.')
+            for k in range(len(keyA)):
+                subkey = keyA[k]
+                if subkey not in cH:
+                    completed = True
+                    break
+                cH = cH[subkey]
+                if type(cH) == str:
+                    key = ".".join(keyA[0:k+1]) + "_" + ".".join(keyA[k+1:])
+                    replaced = True
+                    break
+            if not replaced:
+                break
+        for k, v in _exceptions.items():
+            if key == k:
+                key = v
+                break
         keyA = key.split('.')
+        logger.info(f"after key is {key}")
         for k in range(len(keyA)):
+            if k > 0:
+                prev_key = keyA[k - 1]
+            else:
+                prev_key = keyA[k - 1]
             subkey = keyA[k]
             if k < len(keyA) - 1:
                 next_subkey = keyA[k + 1]
             else:
                 next_subkey = None
             if subkey not in rH:
+                if type(rH) == list:
+                    subkey = int(subkey)
+                    while subkey >= len(rH):
+                        rH.append(None)
                 if next_subkey:
                     if re.match(r'\d+', next_subkey) is not None:
                         rH[subkey] = []
                     else:
                         rH[subkey] = {}
+                elif type(rH) == list:
+                    rH[int(subkey)] = value
                 else:
-                    rH[subkey] = value
+                    try:
+                        rH[subkey] = value
+                    except BaseException as e:
+                        pprint(rH)
+                        print(f"value {value}")
+                        print(f"key {key}")
+                        print(f"prev_key {prev_key}")
+                        print(f"subkey {subkey}")
+                        raise e
             rH = rH[subkey]
 
     for key, value in inH.items():

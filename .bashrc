@@ -289,7 +289,7 @@ if hash ack-grep &>/dev/null; then
 elif hash ack &>/dev/null; then
     alias ackf='ack -f'
 fi
-alias ducks='du -cksh -- * | sort -rh | head -11'
+alias ducks='du -ckshx -- * | sort -rh | head -11'
 alias mdkir=mkdir
 alias finda='find /{bin,etc,home,lib,opt,sbin,tmp,var,usr}'
 alias lynx='lynx -vikeys -cfg=$RCD/lynx.cfg $*'
@@ -352,7 +352,6 @@ if [[ $UID -ne 0 && $UNAME != cygwin* && $UNAME != msys* ]]; then
         #echo b
         true # there's already a socket, that should be kept
     elif [ -f "${SSH_ENV}" ]; then
-        echo c
         #env | grep -i ssh
         #echo "b ${SSH_ENV}"
         source ${SSH_ENV} > /dev/null

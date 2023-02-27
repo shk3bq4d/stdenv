@@ -10,13 +10,15 @@ sudomr_hooks+=('sudomrenv')
 #STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
 if [[ -d ~/git/$USER/stdhome ]]; then
 	STDHOME_DIRNAME="$HOME/git/$USER/stdhome"
-else
+elif [[ -f ~/bin/stdhome-dirname.sh ]]; then
 	STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
 fi
-stdenvdir="$STDHOME_DIRNAME/../stdenv"
-alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
-alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"
-alias cdstdenv="cd $stdenvdir"
+if [[ -d "${STDHOME_DIRNAME:-}" ]]; then
+	stdenvdir="$STDHOME_DIRNAME/../stdenv"
+	alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
+	alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"
+	alias cdstdenv="cd $stdenvdir"
+fi
 alias youtube-dl="youtube-dl --no-playlist --no-call-home --no-mtime"
 bggreen() {
 	printf '\033]11;#00ff77\007'

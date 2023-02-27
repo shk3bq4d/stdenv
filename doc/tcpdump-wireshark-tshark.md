@@ -17,7 +17,7 @@ wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 
 tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
-tcpdump dst port 53 # DNS
+sudo tcpdump -s0 -n port 53 # DNS queries and answer
 ```
 
 # writes and rotates 10 files of max 1Mb

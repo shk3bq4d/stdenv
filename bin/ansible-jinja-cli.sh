@@ -23,9 +23,9 @@ function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// 
 
 [[ -t 1 ]] && export ANSIBLE_FORCE_COLOR=true
 
+_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 fp="$(realpath "$1")"
 if grep -q macros.j2 $fp; then
-    _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
     cp "$fp" "$_tempdir/in"
     f=~/git/sf/dcn/iaac-master/ans/roles/sf-zabbix-template/templates/macros.j2
     test -f $f && cp "$f" "$_tempdir"
@@ -38,9 +38,8 @@ ev=$_tempdir/extra-vars.yml
 if [[ $fp == *zabbix/templates* ]]; then
     yq '.[0].vars' "$(basename $fp .j2)" > $ev || echo "" >$ev
 else
-    echo "" >$ev
+    echo "_nothing:" >$ev
 fi
-
 
 
 #if ! ansible all -i "localhost," -m template -a "src='$_tempdir/in' dest=$_tempdir/out" --connection=local \

@@ -69,6 +69,7 @@ http://www.gnu.org/software/sed/manual/html_node/Command-and-Option-Index.html#C
 sed -r -e '0,/OTHRPRTY/{s/OTHRPRTY/youpiiiiiiiiiiiiiiiiiiii/}' $i
 
 sed -n '/USERNAME/,/-----$/ p' #print between two regexp
+zcat bip.sql.gz | sed -n '/^COPY public.oc_activity /,/^\\.$/ p' # extracts table export from compressed postgresql pgdump
 
 
 sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase
