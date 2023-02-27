@@ -29,6 +29,7 @@ class Graylog2FilebeatTest(unittest.TestCase):
                 [dict(a_2="onlytwo"), dict(a=[None, None, "onlytwo"])],
                 [dict(a_0_hehe="one"), dict(a=[dict(hehe="one")])],
                 [dict(dns_resolved_ip="one"), dict(dns=dict(resolved_ip="one")), "hard-coded exception for packetbeat"],
+                [dict(a_0_hehe="one", a_0_haha="ohaha"), dict(a=[dict(hehe="one", haha="ohaha")]), "this testcase doesn't work yet"],
                 ]
 
         for k, test_case in enumerate(cAA):
