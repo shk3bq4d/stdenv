@@ -1,3 +1,5 @@
+-rw-r----- 1 rumo rumo 10 Feb 26 18:00 /tmp/tmp.AOYDA2BmIf/extra-vars.yml
+_nothing:
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
 # GREP ME KEYWORD: yaml-to-ndjson
 filebeat.inputs:
@@ -17,6 +19,230 @@ output:
        pretty: true
 
 processors: # https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html
+# vid packetbeat.yml.j2 /home/rumo/git/sf/dcn/iaac-master/ans/roles/sf-packetbeat/templates/packetbeat.yml.j2
+  - if.equals.type: flow
+    then:
+
+    - rate_limit:
+        limit: 1/m
+        fields:
+          - source.ip
+          - source.port
+          - destination.ip
+          - destination.port
+
+    - script:
+        id: direction-heuristic
+        lang: javascript
+        when.has_fields:
+          - source.port
+          - source.ip
+          - destination.port
+          - destination.ip
+        source: |
+          var known_ports =
+            [
+              22,
+              25,
+              53,
+              80,
+              119,
+              123,
+              139,
+              443,
+              514,
+              515,
+              587,
+              636,
+              1936,
+              2049,
+              2181,
+              2888,
+              3128,
+              3268,
+              3306,
+              3888,
+              5432,
+              5986,
+              5987,
+              7990,
+              7999,
+              8080,
+              8088,
+              8090,
+              8091,
+              9000,
+              9200,
+              9300,
+              5044,
+              5045,
+              10022,
+              10050,
+              10051,
+              10514,
+              10515,
+              12201,
+              12202,
+              27017,
+              99999
+            ];
+          var reserved_threshold = 1024;
+          var normal    = "->";
+          var reversed  = "<-";
+          var yonose    = "?";
+          var kString = "sf.network.flow";
+          function process(e) {
+            var result = yonose;
+            var decided = false;
+            var source_port = e.Get("source.port") || 0;
+            var destination_port   = e.Get("destination.port") || 0;
+
+            if (source_port <= reserved_threshold)
+            { if (destination_port <= reserved_threshold)
+              { // noop
+              }
+              else
+              { result = reversed;
+                decided = true;
+              }
+            }
+            else
+            { if (destination_port <= reserved_threshold)
+              { result = normal;
+                decided = true;
+              }
+              else
+              { // noop
+              }
+            }
+            if (!decided)
+            {
+              if (known_ports.indexOf(destination_port) >= 0)
+              {
+                if (known_ports.indexOf(source_port) >= 0)
+                { // noop
+                }
+                else
+                { result = normal;
+                  decided = true;
+                }
+              }
+              else
+              {
+                if (known_ports.indexOf(source_port) >= 0)
+                { result = reversed;
+                  decided = true;
+                }
+                else
+                { // noop
+                }
+              }
+            }
+            e.Put(kString, result);
+          }
+
+    - rate_limit:
+        when.equals.sf.network.flow: "->"
+        limit: 1/m
+        fields:
+          - source.ip
+          - destination.ip
+          - destination.port
+
+    - rate_limit:
+        when.equals.sf.network.flow: "<-"
+        limit: 1/m
+        fields:
+          - source.ip
+          - source.port
+          - destination.ip
+
+  - if.equals.type: dns
+    then:
+      - add_fields:
+          target: ""
+            fields:
+            sf.network.flow: "->"
+
+      - rate_limit:
+          limit: 1/m
+          fields:
+            - destination.ip
+            - destination.port
+            - query
+            - dns.response.code
+
+  - rate_limit:
+      limit: 7200/h
+
+  - add_fields:
+      when.not.has_fields: sf.network.flow
+      target: ""
+      fields:
+        sf.network.flow: "?"
+
+  - if.has_fields:
+      - source.ip
+      - source.port
+      - sf.network.flow
+      - destination.ip
+      - destination.port
+    then:
+      - script:
+          id: set-message
+          lang: javascript
+          source: |
+            function process(e) {
+              var sString;
+              var dString;
+              var mString;
+              sString = e.Get("source.ip")      + ":" +      e.Get("source.port").toString();
+              dString = e.Get("destination.ip") + ":" + e.Get("destination.port").toString();
+              switch (e.Get("sf.network.flow"))
+              {
+              case '->': mString = sString + ' -> ' + dString; break;
+              case '<-': mString = dString + ' <- ' + sString; break;
+              default:   mString = sString + ' ?? ' + dString; break;
+              }
+              e.Put("message", mString);
+            }
+    else:
+      - add_fields:
+          target: ""
+          fields:
+            message: insufficients fields to build a flow message
+
+  - replace:
+      fields:
+        # graylog seems to have a problem when filtering on
+        # ok => sf_network_flow:\?
+        # ok => sf_network_flow:\->
+        # KO => sf_network_flow:<\-
+        - field: sf.network.flow
+          pattern: '->'
+          replacement: '->-'
+        - field: sf.network.flow
+          pattern: '<-'
+          replacement: '-<-'
+
+output:
+  logstash:
+    hosts:
+      - "bip:5044"
+    ssl:
+      enabled: true
+
+logging:
+  level: info
+  to_files: true
+  to_syslog: false
+
+  files:
+    path: /var/log/packetbeat
+    name: packetbeat
+    keepfiles: 3
+    permissions: 0640
+
 
 - drop_fields:
     fields:
