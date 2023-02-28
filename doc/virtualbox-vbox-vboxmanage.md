@@ -144,3 +144,5 @@ vboxmanage guestproperty enumerate VMID
 5120x2880: 128 MB VRAM
 
 * https://www.virtualbox.org/manual/ch06.html # network
+
+vboxmanage controlvm $vm keyboardputstring "$(cat ~/.ssh/id_rsa.pub)"$'\n'
