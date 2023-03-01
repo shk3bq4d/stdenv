@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 zfs list
 zfs list -t all
 zfs list | sort -k2 --human-numeric-sort
@@ -71,8 +72,9 @@ zfs set volsize=1t zroot/mrvol/ly80lvmr0
 growfs -N zroot/mrvol/ly80lvmr0
 
 
+zfs list -t snapshot | grep $(df . | tail -1 | awk '{ print $1 }') | sed -n -r -e '1 s/([^ ]+).*/\1/ p' -e '$ s/.*@([^ ]+).*/%\1/ p' | tr -d '\n' | xargs zfs destroy
 zfs destroy data/nested/sv7000v@zfs-auto-snap_daily-2018-04-17-0000,zfs-auto-snap_daily-2018-04-18-0000%zfs-auto-snap_daily-2018-04-19-0000,zfs-auto-snap_daily-2018-04-20-0000%zfs-auto-snap_daily-2018-04-21-0000,zfs-auto-snap_daily-2018-04-22-0000%zfs-auto-snap_daily-2018-04-23-0000 # delete snapshot
-zfs destroy filesystem|volume@snap[%snap[,snap[%snap]]]... # delete snapshot
+zfs destroy filesystem|volume@snap[%snap[,snap[%snap]]]... # delete snapshot ( but due to the boring % , % , syntax, you may stick with @first%last and all intermediates will be gone
 
 zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }')
 zfs list -t snapshot -o name | grep $(df . | tail -1 | awk '{ print $1 }') | xargs -prn1 zfs destroy

@@ -13,6 +13,9 @@ if [[ $# -eq 0 ]]; then
 else
     $SUDO docker run -it --rm \
         $(for i in "$@"; do echo "-v $(readlink -f "$i"):/code/$(basename "$i")"; done) \
-        eeacms/jshint
+        eeacms/jshint \
+        jshint \
+        $(for i in "$@"; do echo " /code/$(basename "$i")"; done)
 fi
+echo EOF
 exit 0
