@@ -109,8 +109,23 @@ ssl_protocols SSLv2 SSLv3 TLSv1.1 TLSv1.2 TLSv1.3;
      proxy_pass_request_headers on;
      proxy_redirect https://oos.collab.local https://oos.io.burp.com;
 
+# location match
+```sh
+(none): If no modifiers are present, the location is interpreted as a prefix match. This means that the location given will be matched against the beginning of the request URI to determine a match.
+=: If an equal sign is used, this block will be considered a match if the request URI exactly matches the location given.
+~: If a tilde modifier is present, this location will be interpreted as a case-sensitive regular expression match.
+~*: If a tilde and asterisk modifier is used, the location block will be interpreted as a case-insensitive regular expression match.
+^~: If a carat and tilde modifier is present, and if this block is selected as the best non-regular expression match, regular expression matching will not take place.
+```
+
 # location priority
 https://stackoverflow.com/questions/5238377/nginx-location-priority
+https://nginx.viraptor.info/
+https://nginx.org/en/docs/http/ngx_http_core_module.html#location
+1. Directives with the "=" prefix that match the query exactly. If found, searching stops.
+2. All remaining directives with conventional strings. If this match used the "^~" prefix, searching stops.
+3. Regular expressions, in the order they are defined in the configuration file.
+4. If #3 yielded a match, that result is used. Otherwise, the match from #2 is used.
 ```sh
 location  = / {
   # matches the query / only.

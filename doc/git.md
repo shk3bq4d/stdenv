@@ -645,3 +645,8 @@ git reflog          # ref tip head history
 git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(reset) %<|(110)%gs %C(green)%s%C(reset) %C(auto)%d%C(reset)'
 
 git blame --ignore-rev XYZ
+
+# 
+~/bin/git/git-rebase-interactive-todo-with-filenames.sh
+git -c rebase.instructionFormat='%Cred%h%Creset -%C(auto)%d%Creset %f %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' rebase -i "$@"
+git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"

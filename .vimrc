@@ -3,6 +3,7 @@ if version >= 500
 let g:pathogen_disabled = []
 let g:ansible_unindent_after_newline = 1
 let g:mapleader=" "
+let g:no_gitrebase_maps=1 " disables remapping in git rebase editor, cf /usr/share/vim/vim82/ftplugin/gitrebase.vim
 let s:sys=system('uname -s | perl -pe "chomp"')
 let hostname = substitute(system('hostname'), '\n', '', '')
 endif
@@ -384,7 +385,7 @@ if s:sys == "Cygwin_NT""
     nmap <C-v> :call setreg("\"",system("xclip -o -selection clipboard"))<CR>P
 else
     nmap <C-b> :%d+<CR>"*p<CR>:diffupdate<CR>
-    nmap <C-x> :%y+<CR>
+    map <C-x> :%y+<CR>
     vmap <C-c> "*yy
     nmap <C-c> "*yy
     "vmap <C-a> :1,$y<CR>:call system("xclip -i -selection clipboard", getreg("\""))<CR>
