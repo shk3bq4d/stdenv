@@ -81,3 +81,41 @@ network:
 # LTS kernel GA and HWE
 The first one is the GA (General Availability) kernel, which is the kernel version that is included with the initial release of the LTS. This kernel will receive security updates and critical bug fixes, but will generally not receive any major feature updates.
 The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel version that is introduced during the lifecycle of the LTS release. The HWE kernel is designed to provide updated support for newer hardware and to include additional features that were not available in the GA kernel.
+
+
+04.04 Warty Warthog
+04.10 Hoary Hedgehog
+05.06 Breezy Badger
+06.04 Dapper Drake
+06.10 Edgy Eft
+07.04 Feisty Fawn
+07.10 Gutsy Gibbon
+08.04 Hardy Heron
+08.10 Intrepid Ibex
+09.04 Jaunty Jackalope
+09.10 Karmic Koala
+10.04 Lucid Lynx
+10.10 Maverick Meerkat
+11.04 Natty Narwhal
+11.10 Oneiric Ocelot
+12.04 Precise Pangolin
+12.10 Quantal Quetzal
+13.04 Raring Ringtail
+13.10 Saucy Salamander
+14.04 Trusty Tahr
+14.10 Utopic Unicorn
+15.04 Vivid Vervet
+15.10 Wily Werewolf
+16.04 Xenial Xerus
+16.10 Yakkety Yak
+17.04 Zesty Zapus
+17.10 Artful Aardvark
+18.04 Bionic Beaver
+18.10 Cosmic Cuttlefish
+19.04 Disco Dingo
+19.10 Eoan Ermine
+20.04 Focal Fossa
+20.10 Groovy Gorilla
+21.04 Hirsute Hippo
+21.10 Impish Indri
+22.04 jammy

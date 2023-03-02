@@ -184,3 +184,6 @@ https://go2docs.graylog.org/4-x/making_sense_of_your_log_data/functions_descript
   gl2_remote_port: long
   gl2_source_input: keyword
   gl2_source_node: keyword
+
+
+ ansible module to be checked and extended: https://github.com/ReconInfoSec/ansible-graylog-modules
