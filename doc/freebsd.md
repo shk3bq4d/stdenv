@@ -90,3 +90,12 @@ mergemaster -UF -D /zfs/jails/jail1 # and continue on for each jail
 *** You installed a new master.passwd file, so make sure that you run
     '/usr/sbin/pwd_mkdb -p /etc/master.passwd'
      to rebuild your password files
+
+# 13.0 to 13.1 upgrade
+freebsd-update fetch
+freebsd-update install
+freebsd-version
+uname -mrs
+reboot
+freebsd-update -r 13.1-RELEASE upgrade
+/usr/sbin/freebsd-update install
