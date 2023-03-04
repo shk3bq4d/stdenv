@@ -443,6 +443,7 @@ Links
 
 There are two ways to create links, inline-style and reference-style.
 
+[](https://link.in.vim.with.com/correct/_/undescore/highlighting)
 [I'm an inline-style link](https://www.google.com)
 
 [I'm a reference-style link][Arbitrary case-insensitive reference text]
