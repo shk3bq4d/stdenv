@@ -135,6 +135,7 @@ git help everyday
 http://stackoverflow.com/questions/6934752/combining-multiple-commits-before-pushing-in-git
 git rebase -i origin/master     # Change all the pick to squash except the first one:
 git rebase -i origin/production # Change all the pick to squash except the first one:
+git rebase -i REF --keep-empty --rebase-merges # keep merges
 git tag $(git_current_branch)-prerebase-$(date-Y.m.d.sh)
 
 git pull
@@ -644,3 +645,8 @@ git reflog          # ref tip head history
 git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(reset) %<|(110)%gs %C(green)%s%C(reset) %C(auto)%d%C(reset)'
 
 git blame --ignore-rev XYZ
+
+# 
+~/bin/git/git-rebase-interactive-todo-with-filenames.sh
+git -c rebase.instructionFormat='%Cred%h%Creset -%C(auto)%d%Creset %f %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' rebase -i "$@"
+git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"

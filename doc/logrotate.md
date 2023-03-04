@@ -33,3 +33,7 @@ Immediately after rotation (before the postrotate script is run) the log file is
 # su
 **su user group**
 Rotate  log  files  set under this user and group instead of using most likely root
+
+# test
+/usr/sbin/logrotate -ds /var/lib/logrotate/logrotate.status /etc/logrotate.conf
+/usr/sbin/logrotate -ds /dev/null /etc/logrotate.d/syslog
