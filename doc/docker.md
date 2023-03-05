@@ -485,3 +485,5 @@ ENV DEBIAN_FRONTEND noninteractive # apt Dockerfile
 
 
 docker-compose up
+
+sudo nerdctl --namespace k8s.io ps -a # kubernetes k8s
