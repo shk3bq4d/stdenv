@@ -20,6 +20,7 @@ To execute a script at shutdown
 ```bash
 sudo apt-get upgrade # system update
 sudo useradd -d /home/testuser -m testuser # user create
+sudo useradd -d /home/myhomedir --createhome --uid 990 --gid 992 testuser # user create
 sudo usermod -a -G group username # add existing user to existing group
 sudo gpasswd -d user group # remove existing user from existing group
 id username # list group of existing user
