@@ -963,3 +963,5 @@ https://dl.k8s.io/v1.20.15/bin/linux/amd64/kubeadm
 ```sh
 for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/linux/amd64/kubeadm || break; done
 ```
+
+sudo nerdctl --namespace k8s.io ps -a # docker ps
