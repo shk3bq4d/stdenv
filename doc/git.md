@@ -650,3 +650,6 @@ git blame --ignore-rev XYZ
 ~/bin/git/git-rebase-interactive-todo-with-filenames.sh
 git -c rebase.instructionFormat='%Cred%h%Creset -%C(auto)%d%Creset %f %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' rebase -i "$@"
 git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"
+
+gca --amend --date "$(date)" # reset commit date
+gca --reedit-message --date "$(date)" # don't forget to use date when re-using messages, as otherwise the previous date gets used
