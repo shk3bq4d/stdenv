@@ -1126,10 +1126,10 @@ A=$(</tmp/myfile) # built-in builtin read file into variable
 umask 027
 
 # pipebuffer
-tail -f /var/log/foo | stdbuf -o0 cut
-tail -f /var/log/foo | grep --line-buffered
-tail -f /var/log/foo | sed -u
-tail -f /var/log/foo | python -u
+tail -f /var/log/foo | stdbuf -o0 cut         # unbuffered pipe
+tail -f /var/log/foo | grep --line-buffered   # unbuffered pipe
+tail -f /var/log/foo | sed -u                 # unbuffered pipe
+tail -f /var/log/foo | python -u              # unbuffered
 
 
 +test -t 0 && TTY_FLAG="-t"
