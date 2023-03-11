@@ -118,4 +118,5 @@ The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel 
 20.10 Groovy Gorilla
 21.04 Hirsute Hippo
 21.10 Impish Indri
-22.04 jammy
+22.04 Jammy Jellyfish
+22.10 Kinetic Kudu
