@@ -55,3 +55,5 @@ yq e '.myarray | map_values("")' # list to dict, https://mikefarah.gitbook.io/yq
 
 
 yq '[.spec.containers[],.spec.initContainers[]]|flatten|.[].image' bip.yaml # concatenate list
+
+yq -o json eval-all '[..|select(has("merged_var_name"))]' $(ack -l merged_var_name:)
