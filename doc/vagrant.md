@@ -80,3 +80,7 @@ Internal      –          –            +          –            –
 Bridged       +          +            +          +            +
 NAT           +     Port forward      –          +       Port forward
 NATservice    +     Port forward      +          +       Port forward
+
+
+jammy.vm.provision "shell", inline: "echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' >> /etc/ssh/sshd_config.d"
+echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' | sudo tee /etc/ssh/sshd_config.d/99-pubkey-ansible-ssh-rsa.conf && sudo systemctl restart sshd
