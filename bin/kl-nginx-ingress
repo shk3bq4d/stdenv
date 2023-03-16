@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+source ~/bin/dot.bashcolors
+
+filtering() {
+    if [[ $# -eq 0  ]]; then
+        sort -k2 # sort by timestamps
+    else
+        stdbuf -o0 cat
+    fi
+
+}
+
+kubectl \
+    logs \
+    --namespace ingress-nginx \
+    --selector app.kubernetes.io/name=ingress-nginx \
+    --max-log-requests=600 \
+    --tail=10000000 \
+    --all-containers \
+    --ignore-errors \
+    --prefix \
+    --timestamps \
+    --pod-running-timeout=49s \
+    "$@" \
+| filtering "$@"
+
+exit 0
