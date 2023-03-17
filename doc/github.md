@@ -17,3 +17,4 @@ Alternatively, you can end the commit message with two empty lines followed by e
 skip-checks:true
 skip-checks: true
 ```
+gh --repo https://github.com/kubernetes/kubernetes release list --limit 50

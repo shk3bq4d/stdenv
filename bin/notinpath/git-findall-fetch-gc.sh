@@ -12,6 +12,21 @@ NORMAL='\e[00m'
 #export GIT_ASKPASS=/bin/false
 export GIT_TERMINAL_PROMPT=0
 
+case $(git --version) in \
+"git version 1."*)
+    actions() {
+        git fetch --all           --tags --no-recurse-submodules
+        git gc
+    }
+    ;;
+*)
+    actions() {
+        git fetch --all --auto-gc --tags --no-recurse-submodules
+    }
+    ;;
+
+esac
+
 function update {
   local d="$1"
   if [ -d "$d" ]; then
@@ -21,7 +36,7 @@ function update {
       cd $d > /dev/null
       if [ -d ".git" ]; then
         echo -e "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-        if git fetch --all --auto-gc --tags --no-recurse-submodules; then
+        if actions; then
             echo "ok"
         else
             echo "ignoring error"
