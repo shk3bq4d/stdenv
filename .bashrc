@@ -341,7 +341,7 @@ PYTHONPATH=$RCD/py
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-if [[ $UID -ne 0 && $UNAME != cygwin* && $UNAME != msys* ]]; then
+if [[ $UID -ne 0 && $UNAME != cygwin* ]]; then #&& $UNAME != msys* ]]; then
     # Source SSH settings, if applicable
 
     if [[ -z ${SSH_CLIENT+1} ]]; then # only start agent if not running inside SSH session

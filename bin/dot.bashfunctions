@@ -744,7 +744,7 @@ function start_agent_if_not_started {
         source ${SSH_ENV} > /dev/null
         #ps ${SSH_AGENT_PID} doesn't work under cywgin
         case $UNAME in \
-        cygwin*)
+        cygwin*|msys*)
             ps -p ${SSH_AGENT_PID} -s       | grep -qx ssh-agent || {
                  start_agent;
             }
