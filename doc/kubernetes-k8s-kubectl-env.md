@@ -775,10 +775,13 @@ kgp -Al app=sfw-web-app         -o name # labels
 kgp -Al app=stp                 -o name # labels
 kgp -Al app=sf-kube-okta-assist -o name # labels
 kgp -Al app=nginx-ingress       -o name # labels
+kgp -n kube-system -l tier=control-plane -l component=etcd # labels
 kubectl get pod -n $ns -l component=client,app=elasticsearch # bales
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
+keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- sh
+ETCDCTL_API=3 keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- etcdctl --key=/etc/kubernetes/pki/etcd/peer.key --cert=/etc/kubernetes/pki/etcd/peer.crt --endpoints=https://127.0.0.1:2379 snapshot save coucou3 # noluck
 ```
 
 # rolloute
@@ -801,6 +804,9 @@ https://microk8s.io/ # minikube replacement native ubuntu (snap) installer
 kubectl get events --sort-by=.metadata.creationTimestamp -A
 kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace -w
 kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
+kgp --field-selector=status.phase==Running
+keti daemonset/kube-proxy sh
+keti -n ingress-nginx deployment/ingress-nginx-controller sh
 
 
 # jsonpath
