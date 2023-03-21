@@ -40,7 +40,9 @@ for f in \
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
         set -x
+        set +u
         "$BINNAME" "${vagrant_args[@]}" $vaults_args "$@"
+        set -u
         exit $?
     fi
 done
@@ -50,4 +52,4 @@ if [[ -z "$BIN" ]]; then
     which -a "$BINNAME"
     exit 1
 fi
-$BIN $( echo -n "$vagrant_args") $vaults_args "$@"
+$BIN $( echo -n "${vagrant_args[@]}") $vaults_args "$@"
