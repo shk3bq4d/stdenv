@@ -769,16 +769,20 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 ```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
-kgp -Al app=sfw-cron            -o name # labels
-kgp -Al app=sfw-server          -o name # labels
-kgp -Al app=sfw-web-app         -o name # labels
-kgp -Al app=stp                 -o name # labels
-kgp -Al app=sf-kube-okta-assist -o name # labels
-kgp -Al app=nginx-ingress       -o name # labels
+kgp -Al app=sfw-cron                  -o name # labels
+kgp -Al app=sfw-server                -o name # labels
+kgp -Al app=sfw-web-app               -o name # labels
+kgp -Al app=stp                       -o name # labels
+kgp -Al app=sf-kube-okta-assist       -o name # labels
+kgp -Al app.kubernetes.io/name=nginx  -o name # labels
+kgp -Al app=nginx-ingress             -o name # labels
+kgp -n kube-system -l tier=control-plane -l component=etcd # labels
 kubectl get pod -n $ns -l component=client,app=elasticsearch # bales
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
+keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- sh
+ETCDCTL_API=3 keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- etcdctl --key=/etc/kubernetes/pki/etcd/peer.key --cert=/etc/kubernetes/pki/etcd/peer.crt --endpoints=https://127.0.0.1:2379 snapshot save coucou3 # noluck
 ```
 
 # rolloute
@@ -801,6 +805,9 @@ https://microk8s.io/ # minikube replacement native ubuntu (snap) installer
 kubectl get events --sort-by=.metadata.creationTimestamp -A
 kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace -w
 kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
+kgp --field-selector=status.phase==Running
+keti daemonset/kube-proxy sh
+keti -n ingress-nginx deployment/ingress-nginx-controller sh
 
 
 # jsonpath
@@ -965,3 +972,5 @@ for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/li
 ```
 
 sudo nerdctl --namespace k8s.io ps -a # docker ps
+
+gh --repo https://github.com/kubernetes/kubernetes release list --limit 50 # list all releases

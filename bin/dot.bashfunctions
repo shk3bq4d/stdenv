@@ -715,7 +715,7 @@ function mr_ssh_add {
         ; do
         test -f $f || continue
         /usr/bin/ssh-add -l | grep -qF "$(ssh-keygen -l -f "$f" | awk '{print $2}')" &>/dev/null && continue
-        t="-t 43200"
+        #t="-t 43200" # removed half a day length on March 10th as it leads to problems for night scripting which I don't yet how to resolve properly
         case $f in \
             *jexternalssh) t="";;
         esac
@@ -744,7 +744,7 @@ function start_agent_if_not_started {
         source ${SSH_ENV} > /dev/null
         #ps ${SSH_AGENT_PID} doesn't work under cywgin
         case $UNAME in \
-        cygwin*)
+        cygwin*|msys*)
             ps -p ${SSH_AGENT_PID} -s       | grep -qx ssh-agent || {
                  start_agent;
             }

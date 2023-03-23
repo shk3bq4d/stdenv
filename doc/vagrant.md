@@ -71,3 +71,18 @@ config.vm.provision "shell", run: "always", inline: <<-SHELL
 SHELL
 
 config.vm.network "public_network", bridge: "Intel(R) 82579LM Gigabit Network Connection" # https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant
+
+## virtual box netwok
+https://www.virtualbox.org/manual/ch06.html
+Mode       VM→Host    VM←Host      VM1↔VM2  VM→Net/LAN   VM←Net/LAN
+Host-only     +          +            +          –            –
+Internal      –          –            +          –            –
+Bridged       +          +            +          +            +
+NAT           +     Port forward      –          +       Port forward
+NATservice    +     Port forward      +          +       Port forward
+
+
+jammy.vm.provision "shell", inline: "echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' >> /etc/ssh/sshd_config.d"
+echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' | sudo tee /etc/ssh/sshd_config.d/99-pubkey-ansible-ssh-rsa.conf && sudo systemctl restart sshd
+vagrant ssh NODENAME -c "echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' | sudo tee /etc/ssh/sshd_config.d/99-pubkey-ansible-ssh-rsa.conf && sudo systemctl restart sshd"
+vagrant ssh          -c "echo 'PubkeyAcceptedKeyTypes=+ssh-rsa' | sudo tee /etc/ssh/sshd_config.d/99-pubkey-ansible-ssh-rsa.conf && sudo systemctl restart sshd"

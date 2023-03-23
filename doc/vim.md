@@ -301,6 +301,8 @@ autocmd CursorHold,CursorHoldI * update
 :!ls -al %:p # current filepath
 :!chmod u+w %:p # current filepath
 :!chmod u+x %:p # current filepath
+<c-r>% # current filepath while in insert mode
+<c-r>=expand("%:p) # current full filepath while in insert mode
 
 :set buftype=nofile # scratchpad no-save read-only-equivalent
 

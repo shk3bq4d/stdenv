@@ -14,6 +14,7 @@ set -euo pipefail
 vagrant_version=1.18.0
 vagrant_version=1.18.1
 vagrant_version=2.2.10
+vagrant_version=2.3.4
 vagrant_version=2.2.19
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 

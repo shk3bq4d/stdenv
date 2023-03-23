@@ -41,7 +41,7 @@ $BIN \
     -o ControlMaster=No \
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=No \
-    -o User=$USER \
+    -o User=${USER:-vagrant} \
     -o Port=$PORT \
     $IP \
     "$@"

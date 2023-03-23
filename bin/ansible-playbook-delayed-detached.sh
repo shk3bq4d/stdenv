@@ -28,7 +28,8 @@ while [[ "$1" == "ap" ]] || [[ "$1" == "ansible-playbook" ]]; do
     shift
 done
 
-! ansible-playbook --syntax-check "$@" &>/dev/null && echo "FATAL: can execute ansible-playbook --syntax-check $@" && exit 1
+! ansible-playbook --syntax-check $@ &>/dev/null && echo "FATAL: can execute ansible-playbook --syntax-check $@" && exit 1
+#! ansible-playbook --syntax-check $@ && echo "FATAL: can execute ansible-playbook --syntax-check $@" && exit 1
 
 ID="$(_script_id "$@")"
 flagfile="$HOME/.tmp/ansible-playbook-delayed-$ID"

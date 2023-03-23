@@ -20,7 +20,7 @@ if ! type sudomr &>/dev/null ; then
         local f
         f=$SSHHOME/.sshrc
         echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $f
-		echo "sudomr .sshrc"
+        echo "sudomr .sshrc"
         sudo -i bash --rcfile $f "$@"
     }
 fi
@@ -159,4 +159,29 @@ is_zsh && unsetopt null_glob
 if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then
     cd /var/log
 fi
-# /* ex: set filetype=sh: */
+_z2() {
+    cat << EOF
+/var/log
+/var/log/sf
+/opt/sf-scripts
+/opt/sf-scripts/zabbix-shared/heartbeat/
+/etc
+$SSHHOME
+
+EOF
+
+}
+_z1() {
+    local c d
+    if [[ "$#" -eq 0 ]]; then
+        echo "$HOME"
+        return 0
+    fi
+    d="$1"
+    _z2 | grep "$d" | while read c; do
+        echo "$c"
+        return 0
+    done
+}
+alias z='_z0() { cd "$(_z1 "$@")"; }; _z0'
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */

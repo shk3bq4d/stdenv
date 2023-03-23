@@ -197,3 +197,5 @@ exclude=kernel* redhat-release* # space separated list excludes in /etc/yum.repo
 ubuntu-security-status --unavailable # unsupported packages
 apt-mark showhold # show held packages
 sudo apt-get purge $(dpkg -l | grep '^rc' | awk '{print $2}') # remove packages with residual config
+
+rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'

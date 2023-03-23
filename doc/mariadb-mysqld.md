@@ -216,6 +216,8 @@ https://mariadb.com/kb/en/json-functions/ -- json-query
 https://stackoverflow.com/questions/303994/log-all-queries-in-mysql
 ## file logging
 ```sql
+set global log_output = 'TABLE';
+
 set global log_output = 'FILE';
 set global general_log_file='/var/log/mysql/query-logging.log';
 set global general_log = 1; -- start logging

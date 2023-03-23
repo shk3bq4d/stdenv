@@ -650,3 +650,10 @@ git blame --ignore-rev XYZ
 ~/bin/git/git-rebase-interactive-todo-with-filenames.sh
 git -c rebase.instructionFormat='%Cred%h%Creset -%C(auto)%d%Creset %f %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' rebase -i "$@"
 git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"
+
+gca --amend --date "$(date)" # reset commit date
+gca --reedit-message --date "$(date)" # don't forget to use date when re-using messages, as otherwise the previous date gets used
+git range-diff $(git_current_branch)...origin/$(git_current_branch) # difference in commits between 
+git range-diff origin/$(git_current_branch)...$(git_current_branch) # difference in commits between 
+
+glola --no-textconv -S "run augenrules" # search in patch, ignoring the git-crypt filter layer

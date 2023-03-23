@@ -183,3 +183,4 @@ http {
 ```
 
 nginx -t -c /etc/nginx/nginx.conf # test config
+chcon -Rv -t httpd_sys_content_t /var/www/ # selinux
