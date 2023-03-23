@@ -208,3 +208,5 @@ cscript.exe volume-mute.vbs
 Test-NetConnection -Computername MYHOSTNETCAT -Port PORT
 tnc                -Computername MYHOSTNETCAT -Port PORT
 ```
+
+ms-settings:windowsupdate # windows update shortcut to be put on desktop, "right click, new, shortcut, ms-settings:windowsupdate, Windows update MYMACHINE NAME"

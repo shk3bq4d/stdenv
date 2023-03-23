@@ -9,7 +9,7 @@ go() {
     local url
     url="$(
     ~/bin/doc "$@" |
-        sed -n -r -e '/https?:\/\/[^ ]+/s/.*(https?:\/\/[^ ]+).*/\1/ p' |
+        sed -n -r -e '/https?:\/\/[^ ]+/s/.*(https?:\/\/[^ ?)]+)(\?[^ ]+)?.*/\1\2/ p' |
         head -n 1
     )"
 

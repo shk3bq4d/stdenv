@@ -769,12 +769,12 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 ```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
-kgp -Al app=sfw-cron            -o name # labels
-kgp -Al app=sfw-server          -o name # labels
-kgp -Al app=sfw-web-app         -o name # labels
-kgp -Al app=stp                 -o name # labels
-kgp -Al app=sf-kube-okta-assist -o name # labels
-kgp -Al app=nginx-ingress       -o name # labels
+kgp -Al app=sfw-cron                  -o name # labels
+kgp -Al app=sfw-server                -o name # labels
+kgp -Al app=sfw-web-app               -o name # labels
+kgp -Al app=stp                       -o name # labels
+kgp -Al app=sf-kube-okta-assist       -o name # labels
+kgp -Al app.kubernetes.io/name=nginx  -o name # labels
 kubectl get pod -n $ns -l component=client,app=elasticsearch # bales
 kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers) # labels
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels

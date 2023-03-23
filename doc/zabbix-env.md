@@ -498,6 +498,7 @@ typeperf -qx   # performance counter perf counter perf_counter windows
 typeperf -qxa  # performance counter perf counter perf_counter windows
 
 https://cdn.zabbix.com/zabbix/binaries/stable/5.4/5.4.10/zabbix_agent2-5.4.10-windows-amd64-openssl.msi
+Invoke-WebRequest -Uri "https://cdn.zabbix.com/zabbix/binaries/stable/6.2/6.2.8/zabbix_agent2-6.2.8-windows-amd64-openssl.msi" -OutFile "C:\Utils\Zabbix\zabbix_agent2-6.2.8-windows-amd64-openssl.msi"
 
 
 tc qdisc add    dev eth0 root netem loss 25% # start simulate ping loss
