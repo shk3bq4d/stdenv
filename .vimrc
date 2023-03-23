@@ -579,6 +579,7 @@ map <C-ScrollWheelRight> <nop>
 map <C-i> <Esc>:bnext<CR>
 
 :nnoremap <Space>   <C-d>
+:inoremap <C-u> <Esc>>>i
 :nnoremap <C-M-Space> <C-u>
 :nnoremap <M-Space> <C-u>
 :nnoremap <C-Space> <C-u>
