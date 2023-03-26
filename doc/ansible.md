@@ -2194,6 +2194,7 @@ To get a sha512 password hash (random salt):
 {{ [0,2] | map('extract', ['x','y','z']) | list }}
 {{ ['x','y'] | map('extract', {'x': 42, 'y': 31}) | list }}
 {{ groups['x'] | map('extract', hostvars, 'ec2_ip_address') | list }}
+   groups['zabbix_proxy'] | map('extract', hostvars, 'ansible_host') | unique | sort | join(comma)
 {{ ['a'] | map('extract', b, ['x','y']) | list }}
 {{ "Plain style (default)" | comment }}
 # Plain style (default)

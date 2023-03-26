@@ -71,3 +71,7 @@ The /mt parameter can't be used with the /ipg and /efsraw parameters.
 /nodcopy	Copies no directory info (the default /dcopy:DA is done).
 /nooffload	Copies files without using the Windows Copy Offload mechanism.
 /compress	Requests network compression during file transfer, if applicable.
+
+
+/XD exclude-folder-possibly-with-wildcard*
+/XF exclude-file-possibly-with-wildcard*

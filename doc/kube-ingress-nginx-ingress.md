@@ -7,9 +7,11 @@ https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
 https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#enable-cors
 
 keti -n ingress-nginx nginx-ingress-controller-7fb5cfd89-hvqkm 
-keti -n $(kgp -Al app=nginx-ingress -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- cat /etc/nginx/nginx.conf | dos2unix | vi -
 keti -n $(kgp -Al app.kubernetes.io/name=ingress-nginx -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- cat /etc/nginx/nginx.conf | dos2unix | vi -
+keti -n $(kgp -Al app.kubernetes.io/name=ingress-nginx -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- cat /etc/nginx/nginx.conf | dos2unix | vi -
+keti -n $(kgp -Al app.kubernetes.io/name=ingress-nginx -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- nginx -v # nginx version
 
+kgp -Al app.kubernetes.io/name=nginx # labels
 kgp -Al k8s-app=fluentd-logging # labels
 kgp -Al app=kured               # labels
 

@@ -1121,6 +1121,8 @@ if [[ $EUID -ne 0 ]]; then
    exit $?
 fi
 
+docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
+
 A=$(</tmp/myfile) # built-in builtin read file into variable
 
 umask 027
