@@ -259,3 +259,5 @@ select pid ,datname ,usename ,application_name ,client_hostname ,client_port ,ba
 
 
 string_agg https://hevodata.com/learn/postgresql-string-agg/ # group by string aggregate
+
+select to_char(now(), 'YYYY-MM-DD HH24:mi:ss') -- date sprintf formating minutes hour year seconds hh12
