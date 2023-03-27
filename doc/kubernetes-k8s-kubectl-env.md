@@ -958,6 +958,10 @@ echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot
     valueFrom:
       fieldRef:
         fieldPath: status.podIP
+  - name: MY_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
 ```
 
 # download kubeadm

@@ -7,6 +7,16 @@ https://www.atlassian.com/trust/security/advisories
 
 https://hub.docker.com/r/atlassian/bitbucket-server
 
+8.9 should be LTS and planned for Q1 2023: https://community.atlassian.com/t5/Data-Center-articles/Announcing-the-next-Bitbucket-Data-Center-Long-Term-Support-LTS/ba-p/2122796
+8.8 (EOL date: 7 Feb 2025)
+8.7 (EOL date: 10 Jan 2025)
+8.6 (EOL date: 15 Nov 2024)
+8.5 (EOL date: 11 Oct 2024)
+8.4 (EOL date: 6 Sep 2024)
+8.3 (EOL date: 2 Aug 2024)
+8.2 (EOL date: 28 Jun 2024)
+8.1 (EOL date: 24 May 2024)
+8.0 (EOL date: 12 May 2024)
 7.21 (EOL date: 2 March 2024) LTS
 7.20 (EOL date: 25 January 2024)
 7.19 (EOL date: 14 December 2023)
