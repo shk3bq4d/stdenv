@@ -8,6 +8,7 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 #_tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 _tempdir=~/tmp
 ORIG_HEAD=$(cat .git/rebase-merge/orig-head)
+HEAD_NAME=$(sed -r -e 's,^refs/heads/,,' .git/rebase-merge/head-name)
 ONTO=$(cat .git/rebase-merge/onto)
 #todo=$_tempdir/git-rebase-todo
 
@@ -20,6 +21,7 @@ touch $f
 #echo '# /* ex: set filetype=gitrebase fenc=utf-8 expandtab ts=4 sw=4 : */' >> $f
 # probably that vimrc deactivates colors because --patch in 
 echo '# to show patches' >> $f
+echo "# glol --patch ${HEAD_NAME}...${ONTO:0:6}" >> $f
 echo "# glol --patch ${ORIG_HEAD:0:6}...${ONTO:0:6}" >> $f
 
 cat $b | while read line; do
