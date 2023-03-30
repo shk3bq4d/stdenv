@@ -6,6 +6,7 @@ set -euo pipefail
 files() {
     cat << EOF
 ~/.bashrc
+~/.bashrc_mrprompt
 ~/.zshrc
 ~/.sshrc
 ~/bin/dot.bashfunctions

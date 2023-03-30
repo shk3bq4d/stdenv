@@ -39,3 +39,8 @@ https://docs.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex
 
 
 Invoke-command -computername mymachine -scriptblock {(get-eventlog -logname System -newest 40 )}
+
+get-vmsnapshot      -vmname mymachine
+remove-vmsnapshot   -vmname mymachine -name "my snap shot"
+restore-vmsnapshot
+export-vmsnapshot
