@@ -44,3 +44,4 @@ get-vmsnapshot      -vmname mymachine
 remove-vmsnapshot   -vmname mymachine -name "my snap shot"
 restore-vmsnapshot
 export-vmsnapshot
+Checkpoint-VM -name mymachine -snapshotname "my snap shot"
