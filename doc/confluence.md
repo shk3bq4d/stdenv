@@ -12,6 +12,7 @@ Support release
 atlassian/confluence-server:7.4.15
 
 docker pull atlassian/confluence-server:7.4.15
+git clone https://bitbucket.org/atlassian-docker/docker-atlassian-confluence-server.git
 
 # EOL
 https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html

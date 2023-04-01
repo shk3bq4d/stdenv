@@ -276,3 +276,13 @@ https://hub.docker.com/_/mysql
 show slave status\G
 show master status\G
 ```
+
+# repair/fix broken replication
+```sql
+stop slave;
+change master to master_log_file = 'mysql-bin.126924', MASTER_LOG_POS = 1;
+start slave;
+stop slave;
+set global sql_slave_skip_counter = 1;
+start slave;
+```
