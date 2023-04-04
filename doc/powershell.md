@@ -45,3 +45,12 @@ remove-vmsnapshot   -vmname mymachine -name "my snap shot"
 restore-vmsnapshot
 export-vmsnapshot
 Checkpoint-VM -name mymachine -snapshotname "my snap shot"
+
+
+# windows service delayed start, dependent dependency
+--Create DelayedAutostart property
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:InstName)" -Name 'DelayedAutostart' -PropertyType DWord -Value 1
+--Set value for DelayedAutostart property
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:InstName)" -Name 'DelayedAutostart' -Value 1
+-- Add dependencies to SQL server service
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:InstName)" -Name 'DependOnService' -Value @("KEYISO", "W32Time")

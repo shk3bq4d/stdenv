@@ -9,6 +9,8 @@ show databases;
 use DATABASENAME;
 show tables;
 show tables like '%event%';
+show full tables where table_type like 'VIEW'; -- show views
+show full tables in database_name where table_type like 'VIEW'; -- show views
 desc mytable; -- show table schema
 create database bip;
 HOW GRANTS for someuser_dbuser@localhost;
