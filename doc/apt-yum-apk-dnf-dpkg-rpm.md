@@ -58,7 +58,7 @@ yum clean all # cache purge
 yum clean all && yum update # upgrade cache purge
 yum history # log
 yum history redo force-reinstall TRANSACTION_ID1 TRANSACTION_ID2
-yum history undo last
+yum history undo last # rollback
 yum reinstall glibc openssl-libs dbus linux-firmware gnutls systemd
 yum-complete-transaction # compares /var/lib/yum-transaction-all-* and /var/lib/yum-transaction-done-* and finishes work
 
