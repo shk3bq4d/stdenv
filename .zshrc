@@ -109,6 +109,7 @@ for c in \
     az \
     castnow \
     command \
+    cssh \
     doc \
     docker \
     fahrplan \
