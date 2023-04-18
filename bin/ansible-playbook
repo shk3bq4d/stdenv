@@ -29,10 +29,9 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
     vagrant_args+=('-i')
     vagrant_args+=('.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory')
 fi
-source ~/bin/dot.bashfunctions
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-pathremove "$DIR"
+source ~/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
     $HOME/.virtualenvs/ansible/bin/activate \
     $HOME/.virtualenvs/ansible-2.10/bin/activate \
@@ -41,6 +40,7 @@ for f in \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
+        export PATH="$PATH:$DIR" # iaac needs to have ~/bin in PATH that was removed with pathremove
         set -x
         set +u
         "$BINNAME" "${vagrant_args[@]}" $vaults_args "$@"
