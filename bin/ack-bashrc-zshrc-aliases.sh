@@ -10,6 +10,7 @@ files() {
 ~/.zshrc
 ~/.sshrc
 ~/bin/dot.bashfunctions
+~/bin/dot.gitfunctions
 ~/.*aliases
 EOF
 

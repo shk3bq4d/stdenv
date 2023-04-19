@@ -120,6 +120,20 @@ function pathappend() {
     export PATH
 }
 
+function pathremove () {
+    # https://stackoverflow.com/a/33853577
+    local IFS=':'
+    local NEWPATH
+    local DIR
+    local PATHVARIABLE=${2:-PATH}
+    for DIR in ${!PATHVARIABLE} ; do
+        if [ "$DIR" != "$1" ] ; then
+            NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+        fi
+    done
+    export $PATHVARIABLE="$NEWPATH"
+}
+
 function mrbasename() {
     local a
     a="$1"

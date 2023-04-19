@@ -8,6 +8,7 @@
 ./*[3]//*[contains(@class, 'odds')]
 ./*[3]//*[contains(@class, 'option-name')]
 .//a[contains(@class,'eventLink')]
+.//a[starts-with(@class,'eventLink')]
 //a[contains(@href, 'en/sports/4/')]/@href
 //a[@href='#upcoming-tab-BASK']
 //a[@href='#upcoming-tab-FOOT']
