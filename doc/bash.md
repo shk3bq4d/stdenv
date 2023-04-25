@@ -767,6 +767,13 @@ ssh user@machine-where-precious-data-is "tar czpf - /some/important/data" | pv |
 xxd # hex dump
 od  # hex dump
 
+% echo -e '\u2620'     # \u takes four hexadecimal digits unicode
+echo $'\u2620' # unicode
+☠
+% echo -e '\U0001f602' # \U takes eight hexadecimal digits
+echo $'\U0001f602' # \U takes eight hexadecimal digits
+😂
+
 
 cut -f2 -d$'\t' infile # inline tab character tabulation raw
 cut -f2 -d$'\n' infile # inline character newline new line raw
