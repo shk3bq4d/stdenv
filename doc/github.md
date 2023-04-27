@@ -17,4 +17,15 @@ Alternatively, you can end the commit message with two empty lines followed by e
 skip-checks:true
 skip-checks: true
 ```
+
+# GH github CLI
+https://cli.github.com/manual/
+```sh
+gh --repo https://github.com/cli/cli release list --limit 50
+gh --repo https://github.com/cli/cli release view v2.28.0
+gh --repo https://github.com/cli/cli release download -p 'gh_*_amd64.tar.gz'
 gh --repo https://github.com/kubernetes/kubernetes release list --limit 50
+gh --repo https://github.com/wso2/product-apim release list | cat # piping allows to have absolute date instead of relative "one month ago"
+gh --repo https://github.com/wso2/product-apim release list | grep -v Pre-release
+gh --repo https://github.com/wso2/product-apim search commits
+```
