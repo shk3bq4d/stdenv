@@ -258,6 +258,11 @@ select * from debug_scheduler order by id desc limit 10;
 drop event debug_scheduler; drop table debug_scheduler;
 ```
 
+# stop server
+```sql
+shutdown -- stops server
+```
+
 ```sh
 mysqldump -h mariad.lan -u root -pblabla --single-transaction                       --databases haha # column-statistics is a mysql 8.0 thing, not compatible with mariadb
 mysqldump -h mariad.lan -u root -pblabla --single-transaction --column-statistics=0 --databases haha # column-statistics is a mysql 8.0 thing, not compatible with mariadb
