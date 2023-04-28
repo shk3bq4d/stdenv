@@ -66,7 +66,7 @@ systemctl reload httpd
 ls -la  /etc/pki/ca-trust/extracted/java/cacerts /etc/pki/java/cacerts
 keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass changeit | grep -i engineer
 
-KEYSTOREPASS=changeme # password java jks cacerts
+KEYSTOREPASS=changeit # password java jks cacerts
 cacert password -> changeit
 keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
 keytool -storepass "123456" -list -v -keystore ~/apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks

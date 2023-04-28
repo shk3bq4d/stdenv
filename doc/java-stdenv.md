@@ -313,5 +313,5 @@ docker run --rm -v $PWD:/myjar -it mausch/docker-groovysh bash bin/groovysh -cp 
 ~/java/stdenv/StdenvSSLSocketConnection.java
 
 # jks
-KEYSTOREPASS=changeme # password java jks cacerts
+KEYSTOREPASS=changeit # password java jks cacerts
 /etc/pki/ca-trust/extracted/java/cacerts # centos7 jks password= changme
