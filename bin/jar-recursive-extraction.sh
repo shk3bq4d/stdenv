@@ -17,7 +17,7 @@ process_single() {
     }
 }
 
-TOPDIR="$PWD"
+TOPDIR="$PWD/" # the / may be important with xdev
 for repetition in $(seq 5); do
 find "$TOPDIR" -xdev -type f -\( -iname '*.jar' -or -iname '*.war' -\) | while read line; do
     process_single "$line"

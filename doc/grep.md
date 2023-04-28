@@ -1,3 +1,4 @@
+```sh
 grep -l # only print matching files
 grep --line-buffered
 
@@ -33,3 +34,6 @@ a special meaning:
 grep -Po 'export\K.*' ~/.bashrc # with both P (perl) and o (only print matching part), \K discards what has been matched so far. Which allow positive look behind of variable size
 
 grep -Poz '<invoice:remark>[^<]*http[^<]*</invoice:remark>' log.txt
+
+grep -R --include='*sql' -i database
+```
