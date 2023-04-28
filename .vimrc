@@ -207,6 +207,7 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 au BufNewFile,BufRead *.yaml   set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml    set expandtab cursorcolumn sts=2 ts=2 sw=2 " noautoindent nocindent nosmartindent
 au BufNewFile,BufRead *.yml.j2 set expandtab cursorcolumn sts=2 ts=2 sw=2 filetype=yaml " noautoindent nocindent nosmartindent
+au BufNewFile,BufRead *.sh.j2  set expandtab cursorcolumn sts=4 ts=4 sw=4 filetype=sh " noautoindent nocindent nosmartindent
 au BufRead,BufNewFile */*aac*/*.yml set filetype=yaml.ansible
 
 " https://stackoverflow.com/questions/26962999/wrong-indentation-when-editing-yaml-in-vim
