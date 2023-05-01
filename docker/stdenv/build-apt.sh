@@ -29,10 +29,11 @@ DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
+docker ps &>/dev/null && SUDO="" || SUDO="sudo";
 for i in apt; do
 	cd $DIR/$i
 	t=shk3bq4d/stdenv:$i
-	docker build -t $t .
+	$SUDO docker build -t $t .
 done
 
 echo EOF
