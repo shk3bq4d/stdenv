@@ -14,6 +14,7 @@ test -d "$V" || mkdir -p "$V"
 $SUDO docker run \
     -v "$V:/stdenv" \
     --rm -it \
+    -e STDENV_DEBUG=1 \
     -e STDENV_USER_SUDOER=1 \
     -e STDENV_USER_UID=$(id -u) \
     -e STDENV_USER_GID=$(id -g) \

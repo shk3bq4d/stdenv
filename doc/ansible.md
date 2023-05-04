@@ -2424,8 +2424,13 @@ Total: {{ items|sum(attribute='price') }}
 title(s)
 tojson(value, indent=None)
 trim(value) # strip
-| trim() # strip
-| trim   # strip
+| trim() # strips
+| trim   # strips
+{%- if ... %} strips/trim before
+{%- if ... -%} strips/trim before and after
+{%+ if ... %} preserves before (strips/trim}
+{%+ if ... -%} preserves before and strips after (strips/trim}
+remember that {% endif %} is treated separately
 truncate(s, length=255, killwords=False, end='...', leeway=None)
 {{ "foo bar baz qux"|truncate(9) }}
 {{ "foo bar baz qux"|truncate(9, True) }}

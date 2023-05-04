@@ -70,9 +70,10 @@ _go
 
 if [[ -n "${STDENV_RUNAS:-}" ]]; then
 	cd "$(eval echo ~$STDENV_RUNAS)"
+	mrecho "$(id $STDENV_RUNAS || true)"
 	if [[ $# -gt 0 ]]; then
 		mrecho "runas exec"
-		sudo -iu $STDENV_RUNAS bash -c "exec $@"
+		sudo -iu $STDENV_RUNAS bash -lc "exec $@"
 	else
 		mrecho "runas zsh"
 		sudo -iu $STDENV_RUNAS zsh
