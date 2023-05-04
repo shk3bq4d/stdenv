@@ -275,7 +275,7 @@ localhost | SUCCESS => {
         "ansible_date_time": {
             "date": "2019-01-19",
             "day": "19",
-            "epoch": "1547896430",
+            "epoch": "1547896430", # unix time unixtime
             "hour": "12",
             "iso8601": "2019-01-19T11:13:50Z",
             "iso8601_basic": "20190119T121350734697",
@@ -2258,9 +2258,9 @@ when: some_string_value | bool
 {{ (("2016-08-14 20:00:12" | to_datetime) - ("2015-12-25" | to_datetime('%Y-%m-%d'))).days  }}
 {{ '%Y-%m-%d' | strftime }}
 {{ '%H:%M:%S' | strftime }}
-{{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }}
+{{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }} unix time unixtime
 {{ '%Y-%m-%d' | strftime(0) }}          # => 1970-01-01
-{{ '%Y-%m-%d' | strftime(1441357287) }} # => 2015-09-04
+{{ '%Y-%m-%d' | strftime(1441357287) }} # => 2015-09-04 unix time unixtime
 - name: give me largest permutations (order matters)
 msg: "{{ [1,2,3,4,5] | permutations | list }}"
 msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
