@@ -9,6 +9,11 @@ strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f negotiate)
 strace -s 99999 -fffttTo /tmp/strace.out -p $(pgrep grafana)
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u grafana   | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -f negotiate | sed -r -e 's/.*/-p \0/')
+strace -tf -p $(pgrep -f /usr/sbin/sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
+strace -tf -p $(systemd show --value -p MainPID sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
+strace -tf -p $(systemd show         -p MainPID sshd | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
+strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
+strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve | grep jks
 
 rm -f /tmp/ssh.out.* 
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
