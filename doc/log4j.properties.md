@@ -170,8 +170,8 @@ Remove the filename attribute. It worked for me. (got the solution from: https:/
 
 # https://logging.apache.org/log4j/2.x/manual/layouts.html
 Conversion Pattern	Description
-c{precision}
-logger{precision}
+%c{precision}
+%logger{precision}
 Outputs the name of the logger that published the logging event. The logger conversion specifier can be optionally followed by precision specifier, which consists of a decimal integer, or a pattern starting with a decimal integer.
 
 When the precision specifier is an integer value, it reduces the size of the logger name. If the number is positive, the layout prints the corresponding number of rightmost logger name components. If negative, the layout removes the corresponding number of leftmost logger name components. If the precision contains periods then the number before the first period identifies the length to be printed from items that precede tokens in the rest of the pattern. If the number after the first period is followed by an asterisk it indicates how many of the rightmost tokens will be printed in full. See the table below for abbreviation examples.
@@ -192,14 +192,14 @@ Conversion Pattern	Logger Name	Result
 %c{1.2.*}	org.apache.commons.test.Foo	o.a.c.test.Foo
 %c{1.3.*}	org.apache.commons.test.Foo	o.a.commons.test.Foo
 %c{1.8.*}	org.apache.commons.test.Foo	org.apache.commons.test.Foo
-C{precision}
-class{precision}
+%C{precision}
+%class{precision}
 Outputs the fully qualified class name of the caller issuing the logging request. This conversion specifier can be optionally followed by precision specifier, that follows the same rules as the logger name converter.
 
 Generating the class name of the caller (location information) is an expensive operation and may impact performance. Use with caution.
 
-d{pattern}
-date{pattern}
+%d{pattern}
+%date{pattern}
 Outputs the date of the logging event. The date conversion specifier may be followed by a set of braces containing a date and time pattern string per SimpleDateFormat .
 
 The predefined named formats are:
@@ -270,7 +270,7 @@ Replaces occurrences of 'test', a string, with its replacement 'substitution' in
 
 The pattern can be arbitrarily complex and in particular can contain multiple conversion keywords.
 
-ex|exception|throwable
+%ex|exception|throwable
 {
   [ "none"
    | "full"
@@ -314,13 +314,13 @@ Use {suffix(pattern)} to add the output of pattern at the end of each stack fram
 
 Use a {separator(...)} as the end-of-line string. For example: separator(|). The default value is the line.separator system property, which is operating system dependent.
 
-F
-file
+%F
+%file
 Outputs the file name where the logging request was issued.
 
 Generating the file information (location information) is an expensive operation and may impact performance. Use with caution.
 
-highlight{pattern}{style}
+%highlight{pattern}{style}
 Adds ANSI colors to the result of the enclosed pattern based on the current event's logging level. (See Jansi configuration.)
 
 The default colors for each level are:
@@ -369,28 +369,28 @@ WARN	Red
 INFO	Blue
 DEBUG	Normal
 TRACE	Normal
-K{key}
-map{key}
-MAP{key}
+%K{key}
+%map{key}
+%MAP{key}
 Outputs the entries in a MapMessage, if one is present in the event. The K conversion character can be followed by the key for the map placed between braces, as in %K{clientNumber} where clientNumber is the key. The value in the Map corresponding to the key will be output. If no additional sub-option is specified, then the entire contents of the Map key value pair set is output using a format {{key1,val1},{key2,val2}}
 
-l
-location
+%l
+%location
 Outputs location information of the caller which generated the logging event.
 
 The location information depends on the JVM implementation but usually consists of the fully qualified name of the calling method followed by the callers source the file name and line number between parentheses.
 
 Generating location information is an expensive operation and may impact performance. Use with caution.
 
-L
-line
+%L
+%line
 Outputs the line number from where the logging request was issued.
 
 Generating line number information (location information) is an expensive operation and may impact performance. Use with caution.
 
-m{ansi}
-msg{ansi}
-message{ansi}
+%m{ansi}
+%msg{ansi}
+%message{ansi}
 Outputs the application supplied message associated with the logging event.
 
 From Log4j 2.16.0, support for lookups in log messages has been removed for security reasons. Both the{lookups} and the {nolookups} options on the %m, %msg and %message pattern are now ignored. If either is specified a message will be logged.
