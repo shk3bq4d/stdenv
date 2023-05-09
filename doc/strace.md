@@ -13,7 +13,9 @@ strace -tf -p $(pgrep -f /usr/sbin/sshd) |& grep -vE 'clock_gettime|rt_sigprocma
 strace -tf -p $(systemd show --value -p MainPID sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemd show         -p MainPID sshd | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
-strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve | grep jks
+strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve | grep -E 'jks|cacert'
+| sed -r 's|overlay2/[^/]{60,}/([^"]+).*|bip\1|'
+
 
 rm -f /tmp/ssh.out.* 
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop

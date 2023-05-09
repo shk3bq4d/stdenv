@@ -301,3 +301,38 @@ sudo update-ca-certificates --fresh
 ```
 
 keytool -list -v -keystore my.jks 2>&1 | grep -E 'Keystore|entry|Alias|chain length|Certificate.[0-9]+.:|Owner:|Issuer:|Valid from' | less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init # keytool list certificate expiration
+
+
+# CSR + CA
+```sh
+# 1.a private key + CSR
+openssl genrsa -out example.com.key 4096
+openssl req -new -sha256 -key example.com.key -out example.com.csr
+# 1.b (one step alternative to 1.a)
+openssl req -new -sha256 -nodes -newkey rsa:4096 -keyout example.com.key -out example.com.csr
+# 2.a (creates a self-signed)
+openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout example.com.key -days 730 -out example.com.pem
+
+# 1.c create a CA
+cat << EOF > x509.ext
+[ ca ]
+# X509 extensions for a ca
+keyUsage                = critical, cRLSign, keyCertSign
+basicConstraints        = CA:TRUE, pathlen:0
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid:always,issuer:always
+
+[ server ]
+# X509 extensions for a server
+keyUsage                = critical,digitalSignature,keyEncipherment
+extendedKeyUsage        = serverAuth,clientAuth
+basicConstraints        = critical,CA:FALSE
+subjectKeyIdentifier    = hash
+authorityKeyIdentifier  = keyid,issuer:always
+EOF
+openssl req -new -sha256 -nodes -newkey rsa:4096 -keyout CA.key -out CA.csr
+openssl x509 -req -sha256 -extfile x509.ext -extensions ca -in CA.csr -signkey CA.key -days 1095 -out CA.pem
+openssl req -new -sha256 -nodes -newkey rsa:4096 -keyout www.example.com.key -out www.example.com.csr
+openssl x509 -req -sha256 -CA CA.pem -CAkey CA.key -days 730 -CAcreateserial -CAserial CA.srl -extfile x509.ext -extensions server -in www.example.com.csr -out www.example.com.pem
+```
+
