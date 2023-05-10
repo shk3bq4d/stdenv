@@ -21,10 +21,11 @@ mongo --host MYHOST --port=27017 --quiet --eval "d=db.isMaster(); print( d['isma
 
 # blue
 ```sh
-mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf)
-mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval "db.cluster_config.find().pretty()"
-mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval "db.cluster_config.find({},{_id:0,last_updated:0,last_updated_by:0}).sort({"last_updated":1}).toArray()" > ~me/azure8
-mongo 127.0.0.1/graylog $(sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval 'db.cluster_config.insert([{"type":"org.graylog2.migrations.V20161122174500_AssignIndexSetsToStreamsMigration.MigrationCompleted","payload":{"index_set_id":"5f8716200e808e404377331a","completed_stream_ids":[],"failed_stream_ids":[]},"last_updated":ISODate("2022-06-03T12:34:56.789Z"),"last_updated_by":"d9ce2ebb-2811-4e13-aa57-508ef7068fd6"}])'
+mongo 127.0.0.1/graylog $(sudo sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf)
+mongo 127.0.0.1/graylog -u admin -p $(sudo sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf)
+mongo 127.0.0.1/graylog $(sudo sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval "db.cluster_config.find().pretty()"
+mongo 127.0.0.1/graylog $(sudo sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval "db.cluster_config.find({},{_id:0,last_updated:0,last_updated_by:0}).sort({"last_updated":1}).toArray()" > ~me/azure8
+mongo 127.0.0.1/graylog $(sudo sed -n -r -e '/^mongodb_uri/s/.*mongodb:\/\/([^:]+):([^:@]+).*/-u \1 -p \2/ p' /etc/graylog/server/server.conf) --quiet --eval 'db.cluster_config.insert([{"type":"org.graylog2.migrations.V20161122174500_AssignIndexSetsToStreamsMigration.MigrationCompleted","payload":{"index_set_id":"5f8716200e808e404377331a","completed_stream_ids":[],"failed_stream_ids":[]},"last_updated":ISODate("2022-06-03T12:34:56.789Z"),"last_updated_by":"d9ce2ebb-2811-4e13-aa57-508ef7068fd6"}])'
 mongo 127.0.0.1/graylog -u 'MYUSER' -p 'MYPASSWORD'
 mongo 172.18.9.77/graylog -u 'MYUSER' -p 'MYPASSWORD'
 mongo 172.18.9.140/graylog -u 'MYUSER' -p 'MYPASSWORD' --quiet --eval  "printjson(db.adminCommand('listDatabases'))"

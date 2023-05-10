@@ -38,6 +38,7 @@ def logging_conf(
     try: logging.getLogger('sh.command').setLevel(logging.WARN)
     except: pass
 
+# smtp_mode: normal (plain-text, plaintext), ssl, tls
 def sendmail(to, subject, body, fr=None, cc=[], bcc=[], attachments=[], html=None, smtp_host=None, smtp_port=587, smtp_password=None, smtp_login=None, smtp_mode='tls'):
 
     if fr is None:
