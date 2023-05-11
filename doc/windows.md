@@ -193,6 +193,8 @@ and follow guidelines to download a file that was named Win10_21H2_English_x64.i
 
 # windows
 certmgr.msc # certificate trust store
+wmic cpu get numberofcores &REM to be multiplied by number of cpu to get total number of cores
+systeminfo | findstr Memory &REM to retrieve amount of free, used, total RAM
 
 
 # volume mute
