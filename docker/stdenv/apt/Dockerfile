@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN \
@@ -29,6 +29,7 @@ RUN \
 		locales-all \
 		locate \
 		moreutils \
+		ncurses-term \
 		nethogs \
 		net-tools \
 		netcat \
@@ -36,7 +37,6 @@ RUN \
 		p7zip-full \
 		p7zip-rar \
 		puppet-lint \
-		pylint3 \
 		python3-pip \
 		rename \
 		rsync \
@@ -53,21 +53,26 @@ RUN \
 		zsh \
 	&& true
 
+COPY stdenv-image-build-time.sh /usr/local/bin
+COPY sudoers /etc/sudoers
+WORKDIR /root
+COPY entrypoint.sh .
+ENTRYPOINT ["/root/entrypoint.sh"]
+
+# U6aMy0wojraho is hash of empty password
 RUN true \
 	&& mkdir -p /stdenv/root /stdenv/user \
 	&& useradd -u 1000 -d /home/user             -m     user -s /usr/bin/zsh \
+	&& echo user:U6aMy0wojraho | sudo chpasswd -e \
 	&& touch /root/.zshrc /home/user/.zshrc \
 	&& mkdir -p /root/.tmp/log /stdenv/user/.tmp/log \
 	&& chown user: /home/user/.zshrc /stdenv/user/ \
 	&& date > /.dockerenv-apt \
+	&& chmod 0755 /usr/local/bin/stdenv-image-build-time.sh \
 	&& true
 
 # && sed -i -r -e "s,^%sudo\\s.*,%sudo ALL=(ALL) NOPASSWD: ALL," /etc/sudoers \
-COPY sudoers /etc/sudoers
 
 ENV DEBIAN_FRONTEND ""
 
-WORKDIR /root
-COPY entrypoint.sh .
-ENTRYPOINT ["/root/entrypoint.sh"]
 #CMD zsh

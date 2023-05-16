@@ -33,16 +33,17 @@ mrecho() {
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
-docker login
+docker ps &>/dev/null && SUDO="" || SUDO="sudo";
+$SUDO docker login
 for i in apt py stdenv; do
 	mrecho compiling $i
 	cd $DIR/$i
 	t=shk3bq4d/stdenv:$i
-	docker build -t $t "$@" .
+	$SUDO docker build -t $t "$@" .
 	mrecho waiting on previous push
 	wait
 	mrecho waited
-	docker push $t &
+	$SUDO docker push $t &
 done
 mrecho final waiting on previous push
 wait

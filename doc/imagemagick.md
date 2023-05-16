@@ -43,6 +43,8 @@ convert yoda-02.png -crop 170x170+50+0 -background transparent -vignette 20x6500
 
 convert -resize 640x480 -depth 8 -colors 14 -background black -extent 640x480 ks3840x2160black.png grub.xpm # enlarge resample canvas
 convert -resize '!640x480' -colors 256 starry-cosmic-background-with-nebula_213524-326.jpg grub.png
+convert -resize '!156x156' in.png moxtra-square-icon.png
+convert -resize '!507x324' in.jpg moxtra-large-icon.jpg
 
 #f00                      #rgb
 #ff0000                   #rrggbb

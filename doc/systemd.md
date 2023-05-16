@@ -1330,7 +1330,7 @@ systemctl list-dependencies --before shutdown.target
 
 Restart= no	always	on-success	on-failure	on-abnormal	on-abort	on-watchdog https://www.freedesktop.org/software/systemd/man/systemd.service.html#
 
-systemd show         -p MainPID filebeat | cut -d = -f 2 # systemd 219
-systemd show --value -p MainPID filebeat                 # systemd 249
+systemctl show         -p MainPID filebeat | cut -d = -f 2 # systemd 219
+systemctl show --value -p MainPID filebeat                 # systemd 249
 
 journalctl -xb # grub Welcome to emergency mode! After logging in, type "journactl -xb" to view system logs, "systemctl reboot" to reboot, "systemctl default" or ^D to try again to boot into default mode. Give root password for maintenance

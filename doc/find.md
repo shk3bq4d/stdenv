@@ -1,4 +1,4 @@
-
+```sh
 
 find . -type f -printf '%T@ %p\n' | sort -k 1nr | sed 's/^[^ ]* //' # https://superuser.com/questions/294161/unix-linux-find-and-sort-by-date-modified
 find /data/backups -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\0' | sort -zk 1nr | sed -z 's/^[^ ]* //'
@@ -21,3 +21,20 @@ find ~/.tmp/vim/output -type f -name '*tmp' \( -mtime +25 -or \( -mtime +10 -and
 
 find . -depth -type d -empty -print # list empty directory
 find . -depth -type d -empty -print -delete # delete empty directory
+
+# printf
+find ~ -mindepth 4 -printf '\nf: %f\nh: %h\np: %p\nP: %P' -quit
+find ~ -mindepth 4 -printf "\\nf: %f\\nh: %h\\nl: %l\\np: %p\\nP: %P\\n" -quit
+\n
+%f basename
+%h dirname
+%l     Object of symbolic link (empty string if file is not a symbolic link).
+%p realpath absolute path
+%P like the default
+
+f: 97bbfb621adfafd6338592fb1eb361ae324782
+h: /home/bip/.cache/mesa_shader_cache/7c
+l:
+p: /home/bip/.cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
+P: .cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
+```

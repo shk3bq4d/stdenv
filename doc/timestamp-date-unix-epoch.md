@@ -12,3 +12,7 @@ Sep 28 2021 01:33:21      sed -r -e "s/^[A-Z][a-z]{2} [ 0-9]?[0-9].{14}/$(date +
 
 Math.round(Date.now() / 1000) # javascript get  timestamp
 new Date(1534191480)          # javascript from timestamp
+
+{{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }} # ansible format unix time
+{{ '%Y-%m-%d' | strftime(0) }}          # ansible => 1970-01-01
+{{ '%Y-%m-%d' | strftime(1441357287) }} # ansible => 2015-09-04

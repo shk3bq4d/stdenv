@@ -44,7 +44,7 @@ else
             -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
             )"
         if [[ "$NAME" = *:* ]]; then
-            PORT="$( echo -n "$PORT" | sed -r \
+            PORT="$( echo -n "$NAME" | sed -r \
                 -e 's/.*://' \
                 )"
             NAME="$( echo -n "$NAME" | sed -r \
@@ -77,7 +77,7 @@ fi
             /usr/bin/openssl s_client -connect $IP:$PORT -servername "$NAME" 2>&1
     fi
 } | tee $_tempfile |
-    sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
+    sed -rne '/-BEGIN (TRUSTED )?CERTIFICATE-/,/-END (TRUSTED )?CERTIFICATE-/p' | \
     openssl x509 -noout -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1| \
     grep -EA1 '^[^ ]|Subject Alternative Name|ublic..ey:' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
     sed -r \
