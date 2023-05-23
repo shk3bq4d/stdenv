@@ -2223,6 +2223,7 @@ To get a sha512 password hash (random salt):
 {{ 'foobar' | regex_replace('^f.*o(.*)$', '\\1') }}
 {{ 'localhost:80' | regex_replace('^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>, \\g<port>') }}
 {{ 'localhost:80' | regex_replace(':80') }}
+{% filter regex_replace('(?m)\s*#.*$', empty) %}{# strip comments per line #}
 {{ hosts | map('regex_replace', '^(.*)$', 'https://\\1') | list }} # format sprintf
 # convert '^f.*o(.*)$' to '\^f\.\*o\(\.\*\)\$'
 {{ '^f.*o(.*)$' | regex_escape() }}
