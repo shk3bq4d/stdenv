@@ -44,7 +44,7 @@ else
             -e 's/^.*(https?:..)([^/ ]+?).*$/\2/'
             )"
         if [[ "$NAME" = *:* ]]; then
-            PORT="$( echo -n "$PORT" | sed -r \
+            PORT="$( echo -n "$NAME" | sed -r \
                 -e 's/.*://' \
                 )"
             NAME="$( echo -n "$NAME" | sed -r \

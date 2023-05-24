@@ -9,4 +9,5 @@ if ! hash vifm &>/dev/null; then
     exit 1
 fi
 
-MYVIFMRC=/dev/null vifm -c only -c ":filetype * bash" -c "set nofollowlinks" .
+#MYVIFMRC=/dev/null vifm -c only -c ":filetype * bash" -c "set nofollowlinks" .
+vifm -c only -c ":filetype * bash" -c "set nofollowlinks" .

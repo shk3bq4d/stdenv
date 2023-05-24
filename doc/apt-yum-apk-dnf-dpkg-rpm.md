@@ -199,3 +199,6 @@ apt-mark showhold # show held packages
 sudo apt-get purge $(dpkg -l | grep '^rc' | awk '{print $2}') # remove packages with residual config
 
 rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'
+
+
+rm -f /var/lib/rpm/__db*; rpm --rebuilddb; yum clean all; # error: rpmdb: BDB0113 Thread/process 15549/140539555264576 failed: BDB1507 Thread died in Berkeley DB library # error: db5 error(-30973) from dbenv->failchk: BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery # error: cannot open Packages index using db5 -  (-30973) # error: cannot open Packages database in /var/lib/rpm # CRITICAL:yum.main:
