@@ -1,3 +1,4 @@
+* http://findproxyforurl.com/pac-functions/
 
 https://superuser.com/questions/952870/how-do-i-force-ie-and-or-microsoft-edge-to-reload-pac-file
 Key: HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings
