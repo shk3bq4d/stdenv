@@ -20,6 +20,7 @@ for format in [
     ('%m', 'Month as a decimal number [01,12].'),
     ('%M', 'Minute as a decimal number [00,59].'),
     ('%p', 'Locale\'s equivalent of either AM or PM.'),
+    ('%s', 'Unix timestamp 1685337841'),
     ('%S', 'Second as a decimal number [00,61].'),
     ('%U', 'Week number of the year (Sunday as the first day of the week)'),
     ('%w', 'Weekday as a decimal number [0(Sunday),6].'),
