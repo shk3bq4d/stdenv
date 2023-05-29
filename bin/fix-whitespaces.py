@@ -33,6 +33,9 @@ class FixWhitespacesTest(unittest.TestCase):
             ("abcd", "abcd"),
             ("abcd ", "abcd"),
             (" abcd", " abcd"),
+            ("\xa0abcd", " abcd"),
+            ("\xa0\xa0abcd", "\tabcd"),
+            ("\xa0\xa0\xa0abcd", "\t abcd"),
             ("  abcd", "\tabcd"),
             ("\tabcd", "\tabcd"),
             ("{\tabcd",    "{\tabcd"),
@@ -62,6 +65,7 @@ class FixWhitespacesTest(unittest.TestCase):
             (" abcd", " abcd"),
             ("  abcd", "  abcd"),
             ("\tabcd", "    abcd"),
+            ("\xa0abcd", " abcd"),
             ("{\tabcd",    "{   abcd"),
             ("{\t\tabcd",  "{       abcd"),
             ("{\t{\tabcd", "{   {   abcd"),
@@ -102,6 +106,7 @@ def rr(i,j=None, k=None):
 
 def process_line(line, conf):
     line = line.rstrip()
+    line = line.replace('\xa0', ' ')
     if conf.tabs:
         line = process_line_space_to_tab(line, conf)
     else:
