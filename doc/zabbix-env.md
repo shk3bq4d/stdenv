@@ -589,3 +589,10 @@ $SSO['SETTINGS']       = (json_decode($sso_settings)) ? json_decode($sso_setting
 
 # functions
 dayofweek # Day of week in range of 1 to 7 (Mon - 1, Sun - 7). dayofweek()<6
+
+operator: EXISTS
+operator: LIKE
+operator: NOT_LIKE
+operator: NOT_MATCHES_REGEX
+operator: NOT_REGEXP
+operator: REGEXP

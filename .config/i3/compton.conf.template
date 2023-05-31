@@ -31,12 +31,12 @@ shadow-ignore-shaped = false;
 
 # Opacity
 #menu-opacity = 1.0
-inactive-opacity =  1.0;
+inactive-opacity =  0.9;
 # active-opacity = 0.8;
 frame-opacity =  1.0;
 inactive-opacity-override = false;
 #alpha-step = 0.06;:# no more in picom
-inactive-dim =  0.09;
+inactive-dim =  0.29;
 # inactive-dim-fixed = true;
 # blur-background = true;
 # blur-background-frame = true;
@@ -63,6 +63,7 @@ opacity-rule = [
     "0:name *= 'mrmagicstring_comptontransparent'"
     , "0:_NET_WM_STATE@[0]:a = '_NET_WM_STATE_HIDDEN'"
     , "92:class_g = 'mrdmenu'"
+    , "98:class_g = 'Dunst'"
 ];
 
 # Fading
@@ -119,7 +120,8 @@ focus-exclude = [
     ,"name ~= '^(https://play.typeracer.com/ )?TypeRacer - .* - Chromium$'"
     ,"name ~= ' - YouTube - Chromium$'"
     ,"name ~= 'Infomaniak Meet - Chromium$'"
-    ,"name ~= '^BlueJeans Network | Video Collaboration in the Cloud'"
+    ,"name ~= 'Meeting.{1,6}Microsoft Teams$'"
+    ,"name ~= '^BlueJeans Network \\\\| Video Collaboration in the Cloud'"
     ,"name ~= 'Netflix - Google Chrome'"
     ,"name ~= '^feh '"
     ,"name ~= 'Running. - Oracle VM VirtualBox$'"
