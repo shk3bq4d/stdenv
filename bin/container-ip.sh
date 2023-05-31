@@ -4,7 +4,7 @@ case $(uname) in \
 CYGWIN*)
 	ipconfig /all 2>&1 | sed -n -r -e '/IPv4 Address/s/.*Address[^0-9]+([0-9.]+).*/\1/ p'
 	;;
-*)	
+*)
 	f=$(echo ~/.tmp/container_ip)
 	ips | \
 		grep -Evw '^(lo|docker[0-9]+|(c|vir)br[0-9]+)' | \

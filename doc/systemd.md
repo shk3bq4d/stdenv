@@ -1322,8 +1322,13 @@ Wants=
 After=
 
 # target
+systemctl isolate graphical.target
+systemctl get-default # target
+systemctl set-default multi-user.target
+systemctl set-default graphical.target
 systemctl list-units --type target --state active # list current targets
 systemctl is-active user-defined.target # check if target is running
+ln -s -f -v /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 
 systemctl list-dependencies --after  shutdown.target
 systemctl list-dependencies --before shutdown.target

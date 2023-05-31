@@ -184,3 +184,18 @@ http {
 
 nginx -t -c /etc/nginx/nginx.conf # test config
 chcon -Rv -t httpd_sys_content_t /var/www/ # selinux
+
+
+
+upstream beats {
+#hash '$remote_addr $remote_port';
+#hash $remote_addr;
+  hash $connection;
+  zone beats 64k;
+#server 10.81.100.193:5045 weight=3 max_conns=4;
+#server 127.0.0.1:5045 weight=5 max_conns=3;
+#server 10.81.100.191:5045 weight=1;
+  server 10.81.100.193:5045;
+  server 127.0.0.1:5045;
+# server 10.201.100.101:5045;
+}

@@ -43,3 +43,5 @@ https://github.com/montag451/pypi-mirror/issues/16 multiple --platform --abi
 
 pip install --target=/tmp --only-binary=:all: cffi cryptography --abi cp38 --abi cp36 --platform manylinux_2_12_x86_64 --platform manylinux_2_24_x86_64 --python-version 38 --implementation cp
 pip install --target=/tmp --only-binary=:all: cffi cryptography --platform manylinux2010_x86_64
+
+error: command 'x86_64-linux-gnu-gcc' failed: No such file or directory # apt install python3-dev build-essential

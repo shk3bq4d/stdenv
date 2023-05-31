@@ -386,6 +386,7 @@ U+27Bx	➰	➱	➲	➳	➴	➵	➶	➷	➸	➹	➺	➻	➼	➽	➾	➿
 
 
 &#160; &nbsp; [3.2]   %A0           Non-breaking space python '\xa0'
+C2A0 UTF-8 nbsp
 
 Usage: ascii [-dxohv] [-t] [char-alias...]
    -t = one-line output  -d = Decimal table  -o = octal table  -x = hex table

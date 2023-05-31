@@ -5,6 +5,7 @@
 import os
 from datetime import datetime as dt
 import sys
+import fileinput # stdin
 import re
 import argparse
 import logging
@@ -32,11 +33,18 @@ def logging_conf(
 def go(args):
     # https://docs.python.org/2/library/argparse.html
     parser = argparse.ArgumentParser(description="Try to human format a date")
-    parser.add_argument("ts", type=str, nargs='*', help="timestampe", default=[dt.utcnow().strftime('%s'), dt.now().strftime('%s')])
-    script_directory, script_name = os.path.split(__file__)
-    script_txt = '{}/{}.txt'.format(script_directory, os.path.splitext(script_name)[0])
+    #parser.add_argument("ts", type=str, nargs='*', help="timestampe", default=[dt.utcnow().strftime('%s'), dt.now().strftime('%s')])
+    parser.add_argument("ts", type=str, nargs='*', help="timestamp", default=[])
     ar = parser.parse_args(args)
-    do(' '.join(ar.ts))
+    if len(ar.ts) == 0:
+        filepath = '-' # or empty, stdin
+        for line in fileinput.input(filepath): # stdin
+            line = line.rstrip() # stdin fileinput
+            if line == '': # stdin fileinput
+                continue # stdin fileinput
+            do(line)
+    else:
+        do(' '.join(ar.ts))
 
 def do(bip):
     if re.match('^u\d+', bip): # $ timestamp.py u'1493354506'

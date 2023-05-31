@@ -322,6 +322,7 @@ docker pull zabbix/zabbix-appliance:ubuntu-4.0.17
 https://hub.docker.com/r/zabbix/zabbix-appliance
 https://hub.docker.com/r/zabbix/zabbix-server-mysql
 https://hub.docker.com/r/zabbix/zabbix-proxy-sqlite3
+https://hub.docker.com/r/zabbix/zabbix-web-nginx-mysql
 
 docker run --name some-zabbix-appliance -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:tag
 docker run --name zabbix -p 80:80 -p 10051:10051 -d zabbix/zabbix-appliance:ubuntu-4.0.17
@@ -588,3 +589,10 @@ $SSO['SETTINGS']       = (json_decode($sso_settings)) ? json_decode($sso_setting
 
 # functions
 dayofweek # Day of week in range of 1 to 7 (Mon - 1, Sun - 7). dayofweek()<6
+
+operator: EXISTS
+operator: LIKE
+operator: NOT_LIKE
+operator: NOT_MATCHES_REGEX
+operator: NOT_REGEXP
+operator: REGEXP
