@@ -34,8 +34,12 @@ docker run \
     --name $CONTAINER_NAME \
     mitmproxy/mitmproxy \
     mitmweb \
+    --mode regular \
+    --verbose \
     -r /home/mitmproxy/.mitmproxy/$(id -un)-flow \
     -w /home/mitmproxy/.mitmproxy/$(id -un)-flow \
+    --showhost \
+    --listen-host 0.0.0.0 \
     --web-host 0.0.0.0 \
 
 )
