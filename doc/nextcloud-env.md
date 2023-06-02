@@ -2265,7 +2265,7 @@ Available commands:
   dav:sync-system-addressbook            Synchronizes users to the system addressbook
  db
   db:add-missing-columns                 Add missing optional columns to the database tables
-  db:add-missing-indices                 Add missing indices to the database tables
+  db:add-missing-indices                 Add missing indices to the database tables # index
   db:add-missing-primary-keys            Add missing primary keys to the database tables
   db:convert-filecache-bigint            Convert the ID columns of the filecache to BigInt
   db:convert-mysql-charset               Convert charset of MySQL/MariaDB to use utf8mb4
