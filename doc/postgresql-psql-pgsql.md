@@ -262,3 +262,6 @@ string_agg https://hevodata.com/learn/postgresql-string-agg/ # group by string a
 string_agg ( expression, separator|delimiter [order_by] )
 
 select to_char(now(), 'YYYY-MM-DD HH24:mi:ss') -- date sprintf formating minutes hour year seconds hh12
+
+select to_timestamp(configvalue::bigint) from oc_preferences where configkey in ('lastLogin'); -- cast string as bigint in nexcloud
+
