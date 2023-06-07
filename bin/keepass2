@@ -3,13 +3,14 @@
 #cd /lvmr0/keepass/
 #/usr/bin/keepass2 mr.kdbx  -preselect:mr.key &>/dev/null </dev/null &
 #DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+set -x
 wids=$(xdotool search --class "keepass")
 ~/bin/sshfs-keepass-apr16.sh || true
 ~/bin/sshfs-keepass-apr16-sf.sh || true
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then
-		i3 "[id=\"$wid\"] move to workspace current, focus" && exit 0
+        i3 "[id=\"$wid\"] move to workspace current, focus" && exit 0
         if xdotool windowactivate $wid; then
             exit 0
         fi
@@ -28,10 +29,10 @@ if hash keepassxc &>/dev/null; then
         if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
             #chmod 0600 ~/.keepass/mr.kdbx
             #ssh $WORK_PC1 chmod 0400 .keepass/mr.kdbx
-			true
+            true
         else
             #chmod 0400 ~/.keepass/mr.kdbx
-			true
+            true
         fi
         ;;
     ${WORK_PC1F})
@@ -39,11 +40,14 @@ if hash keepassxc &>/dev/null; then
         if [[ $HOSTNAMEF == $CORONA_MASTER_PC ]]; then
             #chmod 0600 ~/.keepass/mr.kdbx
             #ssh apr16.ly.lan chmod 0400 .keepass/mr.kdbx &
-			true
+            true
         else
             #chmod 0400 ~/.keepass/mr.kdbx
-			true
+            true
         fi
+        ;;
+    feb*)
+        export QT_SCALE_FACTOR=0.8
         ;;
     *)
         export QT_SCALE_FACTOR=2
@@ -59,11 +63,15 @@ if hash keepassxc &>/dev/null; then
             $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
         fi
     else
-        cd ~/.keepass
-        if [[ -f $PWD/mr.key ]]; then
-            $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+        if [[ -d ~/.keepass ]]; then
+            cd ~/.keepass
+            if [[ -f $PWD/mr.key ]]; then
+                $BIN --keyfile $PWD/mr.key $PWD/mr.kdbx  &>/dev/null </dev/null &
+            else
+                $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+            fi
         else
-            $BIN $PWD/mr.kdbx  &>/dev/null </dev/null &
+            $BIN &>/dev/null </dev/null &
         fi
     fi
 elif [[ -x $DIR/KeePassXC-2.2.0-x86_64.AppImage ]]; then
