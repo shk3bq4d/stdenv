@@ -1,5 +1,6 @@
 
 https://github.com/ansible-collections/community.zabbix
+https://www.zabbix.com/documentation/6.4/en/manual/concepts/server/ha#upgrading-ha-cluster
 https://www.zabbix.com/documentation/3.2/manual/api/
 https://www.zabbix.com/documentation/2.4/manual/api/reference/maintenance/get
 https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary
@@ -416,9 +417,12 @@ last(#3) is the N-2 value
 {$DUMMY_SLOW_TIMEOUT_SECONDS} # macro
 ```
 
+web.page.regexp["https://127.0.0.1:9192/http-status-code",,,"^[^ ]+ (\d+)",,\1]
 
 # preprocessing javascript web.page.get
 ```js
+function(value) {
+// from a web.page.get item, extracts the http body by removing everything before the first \r\n\r\n
 var k;
 var magic = "\r\n\r\n"; //empty line
 var magic2 = "\n\n"; // HTTP says cr lf, but well if anybody messages
@@ -431,6 +435,7 @@ else if ((k = value.indexOf(magic2)) >= 0)
 {    value = value.substring(k + magic2.length);
 }
 return value;
+}
 ```
 
 https://git.zabbix.com/projects/ZBX/repos/zabbix/raw/ChangeLog?at=refs%2Fheads%2Frelease%2F5.0 # changelog

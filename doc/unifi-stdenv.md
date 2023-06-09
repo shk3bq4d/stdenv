@@ -17,6 +17,7 @@ jacobalberty/unifi:v7.1.61
 jacobalberty/unifi:v7.1.66
 jacobalberty/unifi:v7.3.76
 jacobalberty/unifi:v7.3.83
+jacobalberty/unifi:v7.4.156
 
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
@@ -28,6 +29,7 @@ https://community.ui.com/releases/UniFi-Network-Application-7-2-94/2ab774d1-0f24
 https://community.ui.com/releases/UniFi-Network-Application-7-2-95/7adebab5-8c41-4989-835d-ab60dba55255
 https://community.ui.com/releases/UniFi-Network-Application-7-3-76/85c75fc7-3e0f-4e99-aa90-7068af4f1141
 https://community.ui.com/releases/UniFi-Network-Application-7-3-83/88f5ff3f-4c13-45e2-b57e-ad04b4140528
+https://community.ui.com/releases/UniFi-Network-Application-7-4-156/15ac6260-9cd1-4ac3-a91c-4880c1c87882
 
 ```sh
 #!/bin/bash
