@@ -14,6 +14,8 @@ push() // append, extend
 "aaaaa_bbbbbc_ddddddeeeeee=ffffff".replace(/(.)[_=]/g, "__$1__");
 "hehe".replace(/h/g, function(matchstr, pos, fullstr) {return matchstr.toUpperCase();});
 
+toLowerCase
+
 try{
     // Try something wrong here
 }
@@ -50,3 +52,11 @@ docker run -it --rm -v $PWD:/code eeacms/jshint # lint
 * https://www.bennish.net/web-notifications.html # alert
 
 JSON.stringify()
+
+
+# CLI docker node.js
+```sh
+sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine
+.load /js/bip.js
+sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine /js/bip.js # console.log
+```

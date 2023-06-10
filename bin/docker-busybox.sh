@@ -8,5 +8,6 @@ N=${N//-/:}
 H="${N//:/.}-$(head -c2 </dev/urandom|xxd -p)"
 
 #docker run "$@" -it $N /bin/bash
+docker ps &>/dev/null && SUDO="" || SUDO="sudo"
 set -x
-docker run "$@" -h $H --name $H -it $N /bin/sh
+$SUDO docker run "$@" -h $H --name $H -it $N /bin/sh

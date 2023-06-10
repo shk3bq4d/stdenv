@@ -25,7 +25,7 @@ if false; then
 	fi
 	echo $(( $max_port + 1 ))
 fi
-while :; do 
+while :; do
 	P=$RANDOM
 	[[ $P -lt $MIN_AVAILABLE_PORT ]] && continue
 	[[ $P -gt $MAX_AVAILABLE_PORT ]] && continue

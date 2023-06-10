@@ -120,3 +120,6 @@ The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel 
 21.10 Impish Indri
 22.04 Jammy Jellyfish
 22.10 Kinetic Kudu
+
+sudo apt dist-upgrade # minor release upgrades between 22.04.{1,2}
+sudo do-release-upgrade # major dist upgrade
