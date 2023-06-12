@@ -1106,12 +1106,15 @@ else: # prompt
 
 # argparse
 ```python
-# https://docs.python.org/2/library/argparse.html
+# https://docs.python.org/3.8/library/argparse.html
 import argparse
 parser = argparse.ArgumentParser(description="This is the description of what I do") # argparse
 parser.add_argument("FILENAME", type=str, nargs='+', help="file to process") # argparse
 parser.add_argument("-f", "--follow", help="saves output in place", action="store_true") # argparse
 parser.add_argument("-n", "--number", help="number", type # argparse
+parser.add_argument("-t", "--boolean-true", help="yes or no", action='store_true')
+parser.add_argument("-f", "--boolean-false", help="yes or no", action='store_false')
+parser.add_argument("-c", "--constant", help="constant", action='store_const', cons=42)
 ar = parser.parse_args(args) # argparse
 parser.add_argument('integers', metavar='N', type=int, nargs='+', help='an integer for the accumulator') # argparse
 parser.add_argument('--sum', dest='accumulate', action='store_const', const=sum, default=max, help='sum the integers (default: find the max)') # arg_parse
