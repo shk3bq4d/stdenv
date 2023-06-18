@@ -61,6 +61,7 @@ def go(args) -> None:
         doc = csv.reader(fileinput.FileInput([i]))
         timestamp_idx = 0
         message_idx = 1
+        log_original_idx = -1
         dH = OrderedDict()
         for k, row in enumerate(doc):
             if k == 0:
@@ -70,6 +71,9 @@ def go(args) -> None:
                     skip = True
                 if 'message' in row:
                     message_idx = row.index('message')
+                    skip = True
+                if 'log_original' in row:
+                    log_original_idx = row.index('log_original')
                     skip = True
                 if skip:
                     continue
@@ -84,7 +88,10 @@ def go(args) -> None:
                 rA = dH[ts]
             else:
                 dH[ts] = rA = []
-            rA.append(row[message_idx])
+            if log_original_idx >= 0 and len(row[log_original_idx] or '') > 0:
+                rA.append(row[log_original_idx])
+            else:
+                rA.append(row[message_idx])
 
         for ts, rA in dH.items():
             ts = ts.strftime(o)
