@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-~/py/mr_sendkeys.py --id $(citrix-window-id.sh) "$@"
+~/py/mr_sendkeys.py --cr --id $(citrix-window-id.sh) "$@"
 
 exit 0
 

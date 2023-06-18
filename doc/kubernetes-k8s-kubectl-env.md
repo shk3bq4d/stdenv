@@ -977,4 +977,4 @@ for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/li
 
 sudo nerdctl --namespace k8s.io ps -a # docker ps
 
-gh --repo https://github.com/kubernetes/kubernetes release list --limit 50 # list all releases
+gh --repo https://github.com/kubernetes/kubernetes release list --limit 50 # list all releases versions 

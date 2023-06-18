@@ -231,7 +231,7 @@ for i in {1..9}; do
     alias -g T$i="T -n $i"
     alias -g H$i="H -n $i"
     alias -g LAST$i="'$(last $i)'"
-    alias -g P$i="|awk '{ print \$$i }"
+    alias -g P$i="|awk '{ print \$$i }'"
 done
 
 alias -g V='2>&1|sed-remove-ansi-colors.sh|vim -R -'

@@ -5,3 +5,5 @@ https://doodle.com/en/premium 84 CHF / year
 https://crab.fit/r4ptest-917353
 https://support.rallly.co/self-hosting/introduction
 https://github.com/lukevella/rallly-selfhosted
+https://framadate.org/abc/en/
+https://framagit.org/framasoft/framadate

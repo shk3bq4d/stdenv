@@ -1,5 +1,6 @@
 https://www.gva.ch/en/arrivals
 https://www.gva.ch/en/Site/Passagers/Vols/Arrivees?city=Madrid
+https://www.gva.ch/en/Site/Passagers/Vols/Departs/Info-vol-detaillee?id=3187528322.0000
 
 https://www.gva.ch/fr/Site/Passagers/Acces-Transports/Parkings/Calcul-des-tarifs-parkings?from=637932456000000000&to=637932564000000000
 

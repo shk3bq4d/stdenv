@@ -73,11 +73,14 @@ def go(args):
     parser = argparse.ArgumentParser(description="Send keys to a specific window")
     parser.add_argument("ARGS", type=str, nargs='+', help="text to type")
     parser.add_argument("-i", "--id", nargs='?', help="window ID where to send the key event", type=str)
+    parser.add_argument("-r", "--cr", action='store_true', help="sends a carriage return for every linefeed")
     ar = parser.parse_args(args)
     window_id = find_window() if ar.id is None else ar.id
     args = ar.ARGS
     if len(args) > 0:
         args = ' '.join(args)
+        if  ar.cr:
+            args = re.sub(r'(?<!\r)\n', '\r\n', args)
         for i in args:
             bA = 'type --clearmodifiers --window {}'.format(window_id).split()
             bA.append(i)
