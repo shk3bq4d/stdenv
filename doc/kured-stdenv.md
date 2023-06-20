@@ -1,7 +1,8 @@
-https://github.com/kubereboot/kured
-https://github.com/kubereboot/charts
-https://github.com/kubereboot/kured/releases
-https://github.com/weaveworks/kured # legacy repo, currently forwarding to kubereboot
+* https://github.com/kubereboot/kured
+* https://github.com/kubereboot/charts
+* https://github.com/kubereboot/kured/releases
+* https://github.com/weaveworks/kured # legacy repo, currently forwarding to kubereboot
+* https://kured.dev/docs/installation/ # version compatibility
 
 # reboot
 ```sh
