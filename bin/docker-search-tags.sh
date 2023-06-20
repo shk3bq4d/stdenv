@@ -36,12 +36,18 @@ function listAllTags() {
     local base_url="https://registry.hub.docker.com/api/content/v1/repositories/public/library/${repo}/tags"
     local namespace="public"
     local base_url="https://hub.docker.com/v2/namespaces/${namespace}/repositories/${repo}/images-summary"
-    local base_url="https://hub.docker.com/v2/repositories/${repo}/zabbix-proxy-sqlite3/tags/"
+    local base_url="https://hub.docker.com/v2/repositories/${repo}/tags/"
 
     local page=1
     local res=$(mycurl "${base_url}?page_size=${page_size}&page=${page}&name&ordering" 2>/dev/null)
     local tags=$(echo ${res} | jq --raw-output '.results[].name')
     local all_tags="${tags}"
+
+    if true; then
+        echo "${all_tags}" | sort
+        # paginate if you feel like it
+        return
+     fi
 
     local tag_count=$(echo ${res} | jq '.count')
 
