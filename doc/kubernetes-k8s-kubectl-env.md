@@ -939,7 +939,14 @@ kubectl rollout restart deployments/coredns       # restart all
 vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver, controller, scheduler
 ```
 
-/var/lib/kubelet/config.yaml # cgroupDriver
+/var/lib/kubelet/config.yaml # cgroupDriver, kind: KubeletConfiguration, https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/ containerLogMaxSize containerLogMaxFiles
+/etc/kubernetes/kubelet.conf
+/etc/kubernetes/bootstrap-kubelet.conf
+/lib/systemd/system/kubelet.service
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+/etc/default/kubelet
+/var/lib/kubelet/kubeadm-flags.env
+https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/
 
 echo b | keti -n kured kured-6brpw tee /proc/sysrq-trigger # reboot
 

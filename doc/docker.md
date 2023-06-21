@@ -488,3 +488,11 @@ docker-compose up
 
 sudo nerdctl --namespace k8s.io ps -a # kubernetes k8s
 docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
+
+/etc/docker/daemon.json
+/etc/containerd/config.toml
+/lib/systemd/system/containerd.service
+/etc/systemd/system/multi-user.target.wants/containerd.service
+/var/log/containers/
+/var/lib/containerd/io.containerd.grpc.v1.cri/containers/24bc46c268b2b681c9008499334ab2f809c7d01714df426ecd556b0b3e8e270e/status
+/var/lib/containerd/io.containerd.runtime.v2.task/k8s.io/24bc46c268b2b681c9008499334ab2f809c7d01714df426ecd556b0b3e8e270e

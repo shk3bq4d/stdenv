@@ -60,3 +60,12 @@ sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine
 .load /js/bip.js
 sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine /js/bip.js # console.log
 ```
+# node.js reading one file
+```js
+var fs = require('fs');
+var path = require('path');
+function bufferFile(relPath) {
+    return fs.readFileSync(path.join(__dirname, relPath));
+}
+var content = JSON.parse(bufferFile('nextcloud.log').toString());
+```

@@ -2459,3 +2459,5 @@ https://confluence.atlassian.com/doc/confluence-release-notes-327.html
 https://myhost/confluence/fixonly/fixlicense.action?licenseSubmitted=true
 
 #
+sudo docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
+sudo docker run --rm atlassian/confluence-server:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
