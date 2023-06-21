@@ -2411,3 +2411,13 @@ docker exec -itu 33 nextcloud php occ encryption:fix-encrypted-version --path MY
 # What's the difference between NC hubs and NC versions?
 No difference, just a new name and starting from number 1. Internal it's called Nextcloud 25. Frank answered this question at the conference on Saturday.
 https://www.reddit.com/r/NextCloud/comments/xtlqzn/announcing_nextcloud_hub_3_brand_new_design_and/
+
+
+# local client exclude list
+* https://help.nextcloud.com/t/how-can-i-edit-the-default-ignored-files-list/5004/6
+In C:\Users%username%\AppData\Local\Nextcloud adds a file named sync-exclude.lst if you add other extensions that not the default ones.
+In NextCloud client, in the tab “General” you have “Advanced” - Edit Ignored Files, there are the default ones, if you add anything to there, it will create the sync-exclude.lst file.
+```sh
+/PhotoPreviews/   # Documents/ifolor/Photobooks/*/PhotoPreviews/
+/PhotoThumbnails/ # Documents/ifolor/Photobooks/*/PhotoThumbnails
+											   ```
