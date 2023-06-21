@@ -290,7 +290,7 @@ timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/1587
         fields: # regexp
           - field: myfield #regexp
             pattern: ^(.)(.)([^x]+)x(\d+)x(\d+)x(\d+)$ # regexp
-            replacement: \1 \2 # regexp
+            replacement: $1 $2 # regexp ( dollar as group back trace)
 
 processor add_cloud_metadata
 processor add_cloudfoundry_metadata
