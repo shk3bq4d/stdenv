@@ -20,6 +20,12 @@ kubectl apply -f "https://github.com/kubereboot/kured/releases/download/$latest/
 vi "https://github.com/kubereboot/kured/releases/download/$(curl -s https://api.github.com/repos/kubereboot/kured/releases | jq -r '.[0].tag_name')/kured-$(curl -s https://api.github.com/repos/kubereboot/kured/releases | jq -r '.[0].tag_name')-dockerhub.yaml"
 ```
 
+# stdout stderr
+stderr: WARNING: ignoring DaemonSet-managed Pods: filebeat/filebeat-kb9wg, kube-system/azure-ip-masq-agent-jtssr, kube-system/cloud-node-manager-thxxs, kube-system/csi-azuredisk-node-qxd5f, kube-system/csi-azurefile-node-7dt8q, kube-system/kube-proxy-lm5c5, kured/kured-z6v4l, prometheus/prometheus-node-exporter-2pp8t
+stdout: evicting pod prometheus/prometheus-pushgateway-587c8dc779-q9pzn
+stderr: error when evicting pod "metrics-server-db666f966-xm6ns" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+stdout: time="2023-06-20T07:01:07Z" level=info msg="Acquired reboot lock"
+
 # 1.13.1 manifest
 ---
 apiVersion: rbac.authorization.k8s.io/v1
