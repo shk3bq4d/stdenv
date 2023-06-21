@@ -286,6 +286,12 @@ timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/1587
 - if.has_fields.nextcloud.time:           # short apparently works
   if.has_fields.nextcloud:  time          # short apparently works
 
+    - replace: # regexp
+        fields: # regexp
+          - field: myfield #regexp
+            pattern: ^(.)(.)([^x]+)x(\d+)x(\d+)x(\d+)$ # regexp
+            replacement: \1 \2 # regexp
+
 processor add_cloud_metadata
 processor add_cloudfoundry_metadata
 processor add_docker_metadata
