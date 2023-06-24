@@ -536,7 +536,7 @@ BG_White	Set background color to white
 For example:
 
 
-%M method
+%M java method / function
 
 %style{%d{ISO8601}}{black} %style{[%t]}{blue} %style{%-5level:}{yellow} %style{%msg%n%throwable}{green}
 You can also combine styles:
