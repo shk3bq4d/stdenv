@@ -50,7 +50,13 @@ def do(bip):
     if re.match('^u\d+', bip): # $ timestamp.py u'1493354506'
         bip = bip[1:]
     try:
-        print('{} => {}'.format(bip, dt.fromtimestamp(int(bip))))
+        bip_int = int(bip)
+        if  bip_int > 1000000000000 and  \
+            bip_int < 1000000000000000:
+            #         1687343714105
+            bip = '{},{}'.format(bip[:-3], bip[-3:])
+            bip_int = bip_int / 1000
+        print('{} => {}'.format(bip, dt.fromtimestamp(bip_int)))
     except BaseException as e:
         if ' ' in bip:
             for i in bip.split():

@@ -601,3 +601,67 @@ operator: NOT_LIKE
 operator: NOT_MATCHES_REGEX
 operator: NOT_REGEXP
 operator: REGEXP
+
+
+# perf counter system.uptime problem
+## logs
+2023/06/23 16:16:28.259863 failed to execute direct exporter task for key 'system.uptime' error: 'Unable to parse the counter path. Check the format and syntax of the  specified path.  '
+2023/06/23 16:16:28.260412 sending passive check response: ZBX_NOTSUPPORTED: 'Unable to parse the counter path. Check the format and syntax of the  specified path.  ' to '10.102.32.15'
+## symptom
+the following registry key is empty
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib\009
+## solution
+lodctr /r & REM rebuilds performance counter from system backup, if such exists
+sc stop "Zabbix Agent 2" & REM stop and restart zabbix agent
+sc start "Zabbix Agent 2"
+## alternative symptom
+the following registry key is not empty, but incomplete (lacks 2\nSystem\n674\nSystem Up Time)
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Perflib\009
+## solution for alternative symptom
+mkdir c:\temp
+cd c:\temp
+lodctr /s:"c:\temp\000.txt" & REM saves current performance counter to file
+copy c:\temp\000.txt c:\temp\001.txt
+notepad c:\temp\001.txt & REM open notepad and append at the end of the file (or any other value for which you need the counter that you have found on a properly set server)
+2=System
+3=The System performance object consists of counters that apply to more than one instance of a component processors on the computer.
+16=File Read Bytes/sec
+17=File Read Bytes/sec is the overall rate at which bytes are read to satisfy  file system read requests to all devices on the computer, including reads from the file system cache.  It is measured in number of bytes per second.  This counter displays the difference between the values observed in the last two samples, divided by the duration of the sample interval.
+18=File Write Bytes/sec
+19=File Write Bytes/sec is the overall rate at which bytes are written to satisfy file system write requests to all devices on the computer, including writes to the file system cache.  It is measured in number of bytes per second.  This counter displays the difference between the values observed in the last two samples, divided by the duration of the sample interval.
+234=PhysicalDisk
+235=The Physical Disk performance object consists of counters that monitor hard or fixed disk drive on a computer.  Disks are used to store file, program, and paging data and are read to retrieve these items, and written to record changes to them.  The values of physical disk counters are sums of the values of the logical disks (or partitions) into which they are divided.
+250=Threads
+251=Threads is the number of threads in the computer at the time of data collection. This is an instantaneous count, not an average over the time interval.  A thread is the basic executable entity that can execute instructions in a processor.
+674=System Up Time
+675=System Up Time is the elapsed time (in seconds) that the computer has been running since it was last started.  This counter displays the difference between the start time and the current time.
+1402=Avg. Disk Read Queue Length
+1403=Avg. Disk Read Queue Length is the average number of read requests that were queued for the selected disk during the sample interval.
+1404=Avg. Disk Write Queue Length
+1405=Avg. Disk Write Queue Length is the average number of write requests that were queued for the selected disk during the sample interval.
+lodctr /r:"c:\temp\001.txt" & REM  restore performance counter from edited backup
+sc stop "Zabbix Agent 2" & sc start "Zabbix Agent 2"
+shutdown /l
+
+### short version
+mkdir c:\temp & cd c:\temp & lodctr /s:"c:\temp\000.txt" & copy c:\temp\000.txt c:\temp\001.txt & notepad c:\temp\001.txt
+
+2=System
+3=The System performance object consists of counters that apply to more than one instance of a component processors on the computer.
+16=File Read Bytes/sec
+17=File Read Bytes/sec is the overall rate at which bytes are read to satisfy  file system read requests to all devices on the computer, including reads from the file system cache.  It is measured in number of bytes per second.  This counter displays the difference between the values observed in the last two samples, divided by the duration of the sample interval.
+18=File Write Bytes/sec
+19=File Write Bytes/sec is the overall rate at which bytes are written to satisfy file system write requests to all devices on the computer, including writes to the file system cache.  It is measured in number of bytes per second.  This counter displays the difference between the values observed in the last two samples, divided by the duration of the sample interval.
+234=PhysicalDisk
+235=The Physical Disk performance object consists of counters that monitor hard or fixed disk drive on a computer.  Disks are used to store file, program, and paging data and are read to retrieve these items, and written to record changes to them.  The values of physical disk counters are sums of the values of the logical disks (or partitions) into which they are divided.
+250=Threads
+251=Threads is the number of threads in the computer at the time of data collection. This is an instantaneous count, not an average over the time interval.  A thread is the basic executable entity that can execute instructions in a processor.
+674=System Up Time
+675=System Up Time is the elapsed time (in seconds) that the computer has been running since it was last started.  This counter displays the difference between the start time and the current time.
+1402=Avg. Disk Read Queue Length
+1403=Avg. Disk Read Queue Length is the average number of read requests that were queued for the selected disk during the sample interval.
+1404=Avg. Disk Write Queue Length
+1405=Avg. Disk Write Queue Length is the average number of write requests that were queued for the selected disk during the sample interval.
+
+lodctr /r:"c:\temp\001.txt" & sc stop "Zabbix Agent 2" & sc start "Zabbix Agent 2"
+shutdown /l
