@@ -247,6 +247,8 @@ git ls-files --others --exclude-standard
 export GIT_DIR=/home/jly200_user/gitfw/
 export GIT_WORK_TREE=/
 
+GIT_WORK_TREE=/store/other/directory GIT_DIR=$GIT_WORK_TREE/.git git status --porcelain | grep -qE .
+
 GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=tmp/id_rsa"
 export GIT_TRACE=1 # to work with GIT_SSH and GIT_SSH_COMMAND
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=$HOME/.ssh/id_rsa"
@@ -646,7 +648,7 @@ git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(
 
 git blame --ignore-rev XYZ
 
-# 
+#
 ~/bin/git/git-rebase-interactive-todo-with-filenames.sh
 git -c rebase.instructionFormat='%Cred%h%Creset -%C(auto)%d%Creset %f %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' rebase -i "$@"
 git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"
@@ -654,8 +656,8 @@ git -c rebase.instructionFormat='%h %s%n%n%b' rebase -i "$@"
 gca --amend --date "$(date)" # reset commit date
 gca --reedit-message --date "$(date)" # don't forget to use date when re-using messages, as otherwise the previous date gets used
 gca --reedit-message --reset-author" # --reset-author also resets date
-git range-diff $(git_current_branch)...origin/$(git_current_branch) # difference in commits between 
-git range-diff origin/$(git_current_branch)...$(git_current_branch) # difference in commits between 
+git range-diff $(git_current_branch)...origin/$(git_current_branch) # difference in commits between
+git range-diff origin/$(git_current_branch)...$(git_current_branch) # difference in commits between
 
 glola --no-textconv -S "run augenrules" # search in patch, ignoring the git-crypt filter layer
 https://github.com/shk3bq4d/stdenv.git
