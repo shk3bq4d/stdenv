@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
-A=
-B=
-case $# in 
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+A=""
+B=""
+case "$#" in \
 2)
-	A=$1
-	B=$2
+	A="$1"
+	B="$2"
 	;;
 1)
-	A=$1
+	A="$1"
 	B=~/tmp/b
 	;;
 0)
@@ -17,6 +21,7 @@ case $# in
 	;;
 *)
 	vim -d "$@"
+	echo EOF
 	exit $?
 	;;
 esac
@@ -25,6 +30,10 @@ esac
 #export TERM=rxvt-unicode-256color
 #export TERM=xterm-256color
 #export TERM=xterm
+if [[ -d "$B" ]]; then
+	B="$B/$(basename "$A")"
+fi
 vim -d "$A" "$B"
 
-	
+echo EOF
+exit 0
