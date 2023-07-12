@@ -31,14 +31,22 @@ with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_ssh_target.log'), '
             f.write('\n')
         sys.exit(0)
     ssh_children = []
+#   ansible_children = []
     for c in children:
+        f.write("> " + " ".join(c.cmdline()))
         if len(c.cmdline()) == 0: continue
-        if c.cmdline()[0] not in ['ssh']: continue
-        if '-W' in c.cmdline(): continue # Requests that standard input and output on the client be forwarded to host on port over the secure channel.
-        ssh_children.append(c)
+        if c.cmdline()[0] in ['ssh']:
+            if '-W' in c.cmdline(): continue # Requests that standard input and output on the client be forwarded to host on port over the secure channel.
+            if c.cmdline()[1] == '-C': continue # looks like ansible
+            ssh_children.append(c)
+#       elif c.cmdline()[0] in ['ansible', 'ansible-playbook']: 
+#           ansible_children.append(c)
     if len(ssh_children) == 0:
         f.write('--------------------- len ssh_children is 0\n')
         sys.exit(0)
+#   if len(ansible_children) > 0:
+#       f.write('--------------------- len ansible_children is > 0\n')
+#       sys.exit(0)
     #for c in ssh_children: print(c.cmdline())
     child = ssh_children[0]
     cmdA = child.cmdline()

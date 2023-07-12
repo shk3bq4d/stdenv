@@ -134,6 +134,10 @@ alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
 alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook'
 alias cp='nocorrect cp -ip'
+alias ksd0='kubectl scale deployments --replicas 0'
+alias ksd1='kubectl scale deployments --replicas 1'
+alias ksd2='kubectl scale deployments --replicas 2'
+alias ksd3='kubectl scale deployments --replicas 3'
 alias mv='nocorrect mv -i'
 alias ncal='ncal -M'
 alias digs='dig +short'
@@ -151,6 +155,7 @@ complete_function() {
     local f=$1; shift
     compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
   }
+#complete_function ksd0                               kubectl get depl
 complete_function ksns                               kubectl get namespace
 complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
 complete_function kubectl-get-yaml.py                kubectl get

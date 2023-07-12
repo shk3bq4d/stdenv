@@ -4,6 +4,10 @@ git_is_current_repo_clean() {
     ! git status --porcelain | grep -qE .
 }
 
+git_current_branch() {
+    git rev-parse --abbrev-ref HEAD
+}
+
 _git_mrdirname () {
     local a
     a="$1"

@@ -18,7 +18,15 @@ jacobalberty/unifi:v7.1.66
 jacobalberty/unifi:v7.3.76
 jacobalberty/unifi:v7.3.83
 jacobalberty/unifi:v7.4.156
+jacobalberty/unifi:v7.4.162
 
+https://fw-update.ubnt.com/api/firmware
+https://fw-update.ubnt.com/api/firmware-newest
+https://community.ui.com/releases/UniFi-Access-Point-6-5-54/cf7e8c75-1737-4625-88fa-aca2ed0ece39
+https://community.ui.com/releases/UniFi-Access-Point-6-5-54/cf7e8c75-1737-4625-88fa-aca2ed0ece39#comment/5cb0f2de-304a-4515-ac00-aabdd20a7d6d
+
+https://community.ui.com/releases/r/network/7.4.162
+https://community.ui.com/releases/r/network/7.4.156
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
