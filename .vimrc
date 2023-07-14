@@ -153,7 +153,8 @@ set colorcolumn=80
 "match OverLength /\%81v.\+/
 "match ErrorMsg '\%>80v.\+'
 
-:set number
+":set number
+:set number relativenumber
 :set cmdheight=2
 :set laststatus=2
 :set statusline=%F%m%r%h%w\
