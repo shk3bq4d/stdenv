@@ -6,6 +6,7 @@ dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides in installed packages
 dpkg -S $(which tail) # whatprovides core-utils
 dpkg -L python # list files that were installed per package
+apt install ncurses-term # 'rxvt-256color': unknown terminal type.
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip
 apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages

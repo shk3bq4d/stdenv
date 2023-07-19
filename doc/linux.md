@@ -472,3 +472,5 @@ shutter   # screenshot
 flameshot # screenshot
 
 ssh -t myhost sudo date -us @$(date -u +%s) # set remote system time easily
+
+who -b # uptime last boot time
