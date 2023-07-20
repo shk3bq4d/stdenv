@@ -100,7 +100,12 @@ def sendmail(to, subject, body, fr=None, cc=[], bcc=[], attachments=[], html=Non
 
     logger.info('mail_from: %s', mail_from)
     logger.info('smtp_login: %s', smtp_login)
-    logger.info('password: %s', smtp_password)
+    a = 1
+    logger.info('password: %s%s%s',
+        smtp_password[0:a],
+        '*' * (len(smtp_password) - 2 * a),
+        smtp_password[-a:]
+        )
 
 
     ret=pyzmail.send_mail(payload, mail_from, rcpt_to, smtp_host, \
