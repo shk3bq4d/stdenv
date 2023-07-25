@@ -89,6 +89,10 @@ h: Yes we have No bananas  # a string, "Yes" and "No" disambiguated by context.
 myObject:  !myClass { name: Joe, age: 15 }
 ```
 
+set_fact: m_lock_enabled={{ oneliner }}
+yum: name="{{ nginx_pkgs }}" state=present enablerepo="oneliner"
+habon: { he: ho, ha: hi }
+
 ```yaml
 block_mapping:
     name:  foo

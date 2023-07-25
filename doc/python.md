@@ -241,6 +241,7 @@ Expressing a percentage:
 Using type-specific formatting:
 
 '{:%Y-%m-%d %H:%M:%S} printf with strftime formatting'.format(datetime.datetime(2010, 7, 4, 12, 15, 58))
+f'{datetime.now():%Y.%m.%d %H:%M:%S}' printf with strftime formatting
 
 Nesting arguments and more complex examples:
 
