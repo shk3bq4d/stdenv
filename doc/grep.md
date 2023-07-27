@@ -42,5 +42,5 @@ grep -R --include='*sql' -i database
               GNU extension.
 
        -h, --no-filename
-  -L, --files-without-match  print only names of FILEs with no selected lines
-  -l, --files-with-matches  print only names of FILEs with selected lines
+  -L, --files-without-match  print only names of FILEs with no selected lines # filename
+  -l, --files-with-matches  print only names of FILEs with selected lines # filename
