@@ -16,7 +16,8 @@ create database bip;
 HOW GRANTS for someuser_dbuser@localhost;
 select user, host, password from mysql.user order by user, host;
 CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
-CREATE USER 'donald'@'%' IDENTIFIED BY 'duck';
+CREATE USER 'donald'@'%' IDENTIFIED BY 'duck'; -- plain text value
+CREATE USER 'donald'@'%' IDENTIFIED BY passsword '*8656F71D1D5128F9BD83D4A2EB09241B71D2BE3B'; -- hash value
 CREATE USER 'donald' IDENTIFIED BY 'duck';
 drop USER 'donald'@'%';
 SET PASSWORD FOR 'donald'@'%' = PASSWORD('duck');
@@ -25,6 +26,8 @@ GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES; # if modified PRIVILEGES through an insert update or delete statement instead of a grant, revoke, set password or rename user
 
 begin; update low_priority problem set r_eventid=640652792 where  eventid=640652792 limit 5;
+
+select current_user() as authenticated_name, user() as tried_logon_name;  -- whoami
 
 select lower('UPPERCASE');
 select lcase('lowercase UPPERCASE');
@@ -37,6 +40,8 @@ create user root_ansible@127.0.0.1 identified by 'square-root-minus-one';
 grant all privileges on *.* to root_ansible@127.0.0.1 with grant option; flush privileges;
 grant all on zabbix20211230.* to root_ansible@127.0.0.1;
 grant all on zabbix20211230.* to root_ansible@localhost;
+
+create user ansible@127.0.0.1 identified by 'square-root-minus-one';
 
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
 
@@ -74,7 +79,7 @@ concat("first word", "second word")
 INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
 INSERT INTO table_name VALUES (value1, value2, value3, ...);
 
-select Host, User, password from mysql.user \G; -- vertical line alignement (the \G at the end of the query does the trick)
+select * from mysql.user order by user, host \G; -- vertical line alignement (the \G at the end of the query does the trick)
 
 desc c01_templatecachequeries;
 
@@ -145,7 +150,9 @@ select id, db, command, time, state, info from information_schema.processlist wh
 show processlist; -- list sessions connections
 show full processlist; -- see full query
 show privileges; -- dislay list of available privileges
-show grant for user@127.0.0.1;
+show grants for user@127.0.0.1;
+show grants for 'root'@'localhost';
+show grants for 'root'@'127.0.0.1';
 
 alter database craft character set utf8 collate utf8_general_ci;
 
@@ -207,7 +214,54 @@ show variables where variable_name = 'port';
 ```
 
 # replication
+
+## master slave switch
 https://www.abelworld.com/mysql-slave-master-switch/
+* check if replication user for current master exists on current slave
+  select user, host, concat_ws('@', user, host) as userathost password from mysql.user order by user, host;
+* change my.cnf on both hosts, but do not restart services
+-read_only
+-relay-log = relay-bin
+-relay-log-index = relay-bin.index
++log_bin = mysql-bin
++log-bin-index = mysql-bin.index
++expire_logs_days = 5
++max_binlog_size = 100M
++binlog_format = ROW
++binlog_do_db = db1
++binlog_do_db = db2
+
+* optional if you feel like it create a dummy table
+create table if not exists dummy (id int not null auto_increment primary key, ts timestamp default current_timestamp, d varchar(255));
+insert into dummy (d) values ('node1 is master')
+
+
+* make sure no application can write to database
+  either by stopping all write applications
+  or dropping all traffic to 3306 except the slave /master
+  /sbin/iptables -I INPUT 1 -p tcp --destination-port 3306 -j DROP
+  /sbin/iptables -I INPUT 1 -p tcp -s 10.1.1.2 --destination-port 3306 -j ACCEPT
+* on node1 make master read-only  and flush data
+  set global read_only=ON; flush tables; flush logs; show variables like '%read_only%';
+* on node1 check master status
+  show master status\G
+* on node2 stop slave
+  stop slave;
+  reset slave all;
+  reset master;
+* on node2 make slave writable
+  set global read_only=OFF; show variables like '%read_only%';
+  insert into dummy (d) values ('node2 is master')
+  show slave status\G;
+  show master status\G;
+* on node1 make node2 the new master
+  change master to master_host='10.1.1.2', master_user='repl', master_password='123';
+  start slave;
+* check slave status
+  show slave status\G
+  select * from dummy order by id desc limit 10;
+* restart services and check slave status again
+
 
 # json query
 WARNING json_query can't be used to query string or int (scalars)

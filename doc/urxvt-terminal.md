@@ -65,3 +65,6 @@ https://wiki.archlinux.org/index.php/rxvt-unicode#Clickable_URLs
 reset # better than clear
 echo -ne '\033c' # reset clear
 URxvt.keysym.Control-l: command:\033c
+
+
+apt install ncurses-term # 'rxvt-256color': unknown terminal type.

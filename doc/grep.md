@@ -37,3 +37,10 @@ grep -Poz '<invoice:remark>[^<]*http[^<]*</invoice:remark>' log.txt
 
 grep -R --include='*sql' -i database
 ```
+       -H, --with-filename
+              Print  the file name for each match.  This is the default when there is more than one file to search.  This is a
+              GNU extension.
+
+       -h, --no-filename
+  -L, --files-without-match  print only names of FILEs with no selected lines # filename
+  -l, --files-with-matches  print only names of FILEs with selected lines # filename
