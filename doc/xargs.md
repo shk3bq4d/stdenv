@@ -1,3 +1,4 @@
+-0, --null
 -rn 1
 -rtn 1
 -n max-args  --max-args=max-args

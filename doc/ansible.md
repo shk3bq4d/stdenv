@@ -223,6 +223,7 @@ tasks:
       when: url is match("http://example.com/users/.*/resources/.*") # regex
       when: url is search("/users/.*/resources/.*") # regex
       mylist | select('regex', '^mypattern')
+      ansible_facts.services.keys() | select('contains',  service_name):
 
 ```yaml
 - include: ....
@@ -1308,7 +1309,20 @@ with_first_found # doesn't actually loop, but takes first existing file exists
   loop_control:                  # loop_control label index_var loop_var
     loop_var: prerequisites_file # loop_control label index_var loop_var
     index_var: my_idx            # loop_control label index_var loop_var
-    label:     "{{ index.key }}" # loop_control label index_var loop_var
+    label:     "{{ item.key }}"  # loop_control label index_var loop_var
+
+
+when activating loop_control.extended: yes
+ansible_loop.allitems      The list of all items in the loop
+ansible_loop.index         The current iteration of the loop. (1 indexed)
+ansible_loop.index0        The current iteration of the loop. (0 indexed)
+ansible_loop.revindex      The number of iterations from the end of the loop (1 indexed)
+ansible_loop.revindex0     The number of iterations from the end of the loop (0 indexed)
+ansible_loop.first         True if first iteration
+ansible_loop.last          True if last iteration
+ansible_loop.length        The number of items in the loop
+ansible_loop.previtem      The item from the previous iteration of the loop. Undefined during the first iteration.
+ansible_loop.nextitem      The item from the following iteration of the loop. Undefined during the last iteration.
 
 - shell: /usr/bin/foo
   chdir: /tmp
@@ -2410,9 +2424,9 @@ select()
 selectattr()
 {{ users|selectattr("is_active") }}
 {{ users|selectattr("email", "none") }}
-{{ users|selectattr("email", "equalto", "bob@malone.com") }}
+{{ users|selectattr("email", "equalto", "bob@malone.com") }} # list of tests can probably be found in ~/.virtualenvs/ansible/lib/python3.10/site-packages/jinja2/tests.py, "odd", "even", "divisibleby", "defined", "undefined", "filter", "test", "none", "boolean", "false", "true", "integer", "float", "lower", "upper", "string", "mapping", "number", "sequence", "iterable", "callable", "sameas", "escaped", "in", "==", "eq", "equalto", "!=", "ne", ">", "gt", "greaterthan", "ge", ">=", "<", "lt", "lessthan", "<=", "le"
 {{ users|selectattr("email", "defined"))
-{{ users|rejectattr("email", "defined")) | selecattr
+{{ users|rejectattr("email", "defined")) | selectattr
 slice(value, slices, fill_with=None)
 {%- for column in items|slice(3) %}
 sort(value, reverse=False, case_sensitive=False, attribute=None)
@@ -2807,3 +2821,10 @@ q('')     -> same as query # lookup
 
 mode: 0o750 # permission octal 0755 0750 777 644 660 664 666
 is_controller: "{{ inventory_hostname == lookup('pipe', 'hostname -f') }}"
+
+ansible.builtin.service_facts:                # gather services list systemd sysv, probably best with become and no args
+when: ansible_facts.services is not defined   # gather services list systemd sysv, probably best with become and no args
+become: yes                                   # gather services list systemd sysv, probably best with become and no args
+
+systemd:               # systemd daemon-reload daemon_reload
+  daemon_reload: yes   # systemd daemon-reload daemon_reload

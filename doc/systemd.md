@@ -1,3 +1,4 @@
+systemd-analyze verify myunit # <-- debug troubleshooting error
 systemctl enable nginx.service   # Start nginx as system boot
 sudo systemctl restart systemd-resolved # dns
 journalctl --no-tail -f -u nginx.service
@@ -1302,16 +1303,16 @@ systemd(1), systemctl(1), systemd-analyze(1), journalctl(1), systemd-system.conf
            ┌────────────────────────┬─────────────────────────────┐
            │Path                    │ Description                 │
            ├────────────────────────┼─────────────────────────────┤
-           │/etc/systemd/system     │ Local configuration         │
+           │/etc/systemd/system     │ Local configuration         │  # directory directories packages unit location
            ├────────────────────────┼─────────────────────────────┤
            │/run/systemd/system     │ Runtime units               │
            ├────────────────────────┼─────────────────────────────┤
-           │/usr/lib/systemd/system │ Units of installed packages │
+           │/usr/lib/systemd/system │ Units of installed packages │  # directory directories packages unit location
            └────────────────────────┴─────────────────────────────┘
 
 sudo systemctl reboot --firmware-setup # reboot to bios uefi
 systemctl edit tomcat9
-/etc/systemd/system/tomcat9.service.d/override.conf
+/etc/systemd/system/tomcat9.service.d/override.conf                 # directory directories packages unit location
 
 man systemd.unit
 [Unit]
