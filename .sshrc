@@ -161,10 +161,21 @@ if [[ $EUID -eq 0 ]] && [[ "$PWD" == "$( eval echo ~$SUDO_USER)" ]]; then
 fi
 _z2() {
     cat << EOF
+/etc
+/etc/yum.repos.d
+/etc/logrotate.d
+/etc/nginx/sites-enabled
 /var/log
 /var/log/sf
 /opt/sf-scripts
 /opt/sf-scripts/zabbix-shared/heartbeat/
+/opt/sf-scripts/zabbix-shared/heartbeat/weekly
+/opt/sf-scripts/zabbix-shared/heartbeat/monthly
+/opt/sf-scripts/zabbix-shared/heartbeat/minutely
+/opt/sf-scripts/zabbix-shared/heartbeat/yearly
+/opt/sf-scripts/zabbix-shared/heartbeat/daily
+/opt/sf-scripts/zabbix-shared/heartbeat/workday
+/opt/sf-scripts/zabbix-shared/heartbeat/hourly
 /etc
 $SSHHOME
 

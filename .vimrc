@@ -360,10 +360,10 @@ else
     map  <F9>      :GitGutterPreviewHunk<CR>
     imap <F9> <Esc>:GitGutterPreviewHunk<CR>
 endif
-":set number
-:set number relativenumber
-map  <F10>      :set paste! wrap! number! relativenumber!<CR>:GitGutterToggle<CR>:redraw!<CR>
-imap <F10> <Esc>:set paste! wrap! number! relativenumber!<CR>:GitGutterToggle<CR>:redraw!<CR>
+:set number
+":set number relativenumber
+map  <F10>      :set paste! wrap! number!<CR>:GitGutterToggle<CR>:redraw!<CR>
+imap <F10> <Esc>:set paste! wrap! number!<CR>:GitGutterToggle<CR>:redraw!<CR>
 noremap  <F11> <Esc>:syntax sync fromstart<CR>:autocmd BufEnter <buffer> syntax sync fromstart<CR>
 inoremap <F11> <C-o>:syntax sync fromstart<CR>:autocmd BufEnter <buffer> syntax sync fromstart<CR>
 nnoremap <silent> <F12>      :BufExplorer<CR>
