@@ -79,7 +79,7 @@ concat("first word", "second word")
 INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
 INSERT INTO table_name VALUES (value1, value2, value3, ...);
 
-select * from mysql.user order by user, host \G; -- vertical line alignement (the \G at the end of the query does the trick)
+select * from mysql.user order by user, host \G -- vertical line alignement (the \G at the end of the query does the trick)
 
 desc c01_templatecachequeries;
 
@@ -131,6 +131,8 @@ alter table `bip` partition by range (clock) (
 alter table `bip` add partition (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb);
 alter table `bip` add partition (partition future values less than maxvalue engine = innodb);
 alter table `bip` reorganize partition future into (partition p2021_04_15 values less than (unix_timestamp("2021-04-16 00:00:00")) engine = innodb, partition future values less than maxvalue engine = innodb);
+alter table history_str reorganize partition future into ( PARTITION `p2023_07_27` VALUES LESS THAN (1690416000) COMMENT = 'SF created on 2023.07.25 22:28:01' ENGINE = InnoDB, PARTITION `p2023_07_28` VALUES LESS THAN (1690502400) COMMENT = 'SF created on 2023.07.26 22:28:01' ENGINE = InnoDB, PARTITION `p2023_07_29` VALUES LESS THAN (1690588800) COMMENT = 'SF created on 2023.07.27 22:28:02' ENGINE = InnoDB, PARTITION `p2023_07_30` VALUES LESS THAN (1690675200) COMMENT = 'SF created on 2023.07.28 22:28:01' ENGINE = InnoDB, PARTITION `p2023_07_31` VALUES LESS THAN (1690761600) COMMENT = 'SF created on 2023.07.29 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_01` VALUES LESS THAN (1690848000) COMMENT = 'SF created on 2023.07.30 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_02` VALUES LESS THAN (1690934400) COMMENT = 'SF created on 2023.07.31 22:28:02' ENGINE = InnoDB, PARTITION `p2023_08_03` VALUES LESS THAN (1691020800) COMMENT = 'SF created on 2023.08.01 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_04` VALUES LESS THAN (1691107200) COMMENT = 'SF created on 2023.08.02 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_05` VALUES LESS THAN (1691193600) COMMENT = 'SF created on 2023.08.03 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_06` VALUES LESS THAN (1691280000) COMMENT = 'SF created on 2023.08.04 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_07` VALUES LESS THAN (1691366400) COMMENT = 'SF created on 2023.08.05 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_08` VALUES LESS THAN (1691452800) COMMENT = 'SF created on 2023.08.06 22:28:01' ENGINE = InnoDB, PARTITION `p2023_08_09` VALUES LESS THAN (1691539200) COMMENT = 'SF created on 2023.08.07 22:28:01' ENGINE = InnoDB, PARTITION `future` VALUES LESS THAN MAXVALUE ENGINE = InnoDB);
+alter table history_uint drop partition p2023_08_09_13;
 alter table e2 remove partitioning; -- halt stop drop
 select count(1) from trends_uint partition(p2020_05);
 
@@ -233,7 +235,7 @@ https://www.abelworld.com/mysql-slave-master-switch/
 
 * optional if you feel like it create a dummy table
 create table if not exists dummy (id int not null auto_increment primary key, ts timestamp default current_timestamp, d varchar(255));
-insert into dummy (d) values ('node1 is master')
+insert into dummy (d) values ('node1 is master');
 
 
 * make sure no application can write to database
@@ -251,9 +253,9 @@ insert into dummy (d) values ('node1 is master')
   reset master;
 * on node2 make slave writable
   set global read_only=OFF; show variables like '%read_only%';
-  insert into dummy (d) values ('node2 is master')
-  show slave status\G;
-  show master status\G;
+  insert into dummy (d) values ('node2 is master');
+  show slave status\G
+  show master status\G
 * on node1 make node2 the new master
   change master to master_host='10.1.1.2', master_user='repl', master_password='123';
   start slave;
@@ -302,7 +304,7 @@ with a as (select 1 id) update hehe inner join a on hehe.id = a.id set value ='u
 -- activate mysql scheduler for k8s zabbix partitioning
 set global event_scheduler = on;
 show variables like 'event_scheduler';
-show create event e_zbx_part_mgmt\G;
+show create event e_zbx_part_mgmt\G
 create or replace table debug_scheduler (id int not null auto_increment, value varchar(255), clock timestamp default now(), primary key (id));
 delimiter |
 create or replace event debug_scheduler on schedule every 5 second do begin insert into debug_scheduler (value) values (5); end |
