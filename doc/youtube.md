@@ -14,3 +14,7 @@ https://www.youtube.com/playlist?list=PLVMPUbJD7RMGviS5uYlWD-ghEVXX6uirf fifi br
 
 # joakim
 https://www.youtube.com/results?search_query=708cn
+
+
+# ublock origin youtube shorts block
+https://letsblock.it/filters/youtube-shorts

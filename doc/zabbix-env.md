@@ -665,3 +665,6 @@ mkdir c:\temp & cd c:\temp & lodctr /s:"c:\temp\000.txt" & copy c:\temp\000.txt 
 
 lodctr /r:"c:\temp\001.txt" & sc stop "Zabbix Agent 2" & sc start "Zabbix Agent 2"
 shutdown /l
+
+py-zabbix==1.1.7
+zabbix-api==0.5.6 # py pip used to be used by ansible collection community.zabbix < 1.9.0
