@@ -33,6 +33,14 @@ mycurl() {
 # https://forums.docker.com/t/how-can-i-list-tags-for-a-repository/32577/8
 function listAllTags() {
     local repo=${1}
+    case $repo in \
+    _/*) repo="library/${repo:2}";; 
+    *)
+        if [[ $repo != *"/"* ]]; then
+            repo="library/$repo"
+        fi
+        ;;
+    esac
     local page_size=${2:-100}
     [ -z "${repo}" ] && echo "Usage: listTags <repoName> [page_size]" 1>&2 && return 1
     local base_url="https://registry.hub.docker.com/api/content/v1/repositories/public/library/${repo}/tags"
