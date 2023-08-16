@@ -27,6 +27,9 @@ FLUSH PRIVILEGES; # if modified PRIVILEGES through an insert update or delete st
 
 begin; update low_priority problem set r_eventid=640652792 where  eventid=640652792 limit 5;
 
+select sleep(5);
+do sleep(5);
+
 select current_user() as authenticated_name, user() as tried_logon_name;  -- whoami
 
 select lower('UPPERCASE');
@@ -349,6 +352,7 @@ start slave;
 stop slave;
 set global sql_slave_skip_counter = 1;
 start slave;
+stop slave; set global sql_slave_skip_counter = 1; start slave; select sleep(5); show slave status\G
 ```
 
 # release dates
