@@ -19,6 +19,7 @@ wmic process where "caption like 'zabbix%'" get *
 wmic service where "name like 'zabbix%'"
 wmic service where "name like 'zabbix%'" get caption,processid,name,statuswmic service where "name like 'zabbix%'"
 wmic path win32_networkadapter get netenabled,name,macaddress,speed,physicaladapter,adaptertype
+wmic path win32_networkadapterconfiguration where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
 wmic nicconfig where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
 sc query "Zabbix Agent 2"
 sc delete "Zabbix Agent"
