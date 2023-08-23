@@ -5,7 +5,7 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
-GIT_SEQUENCE_EDITOR=~/bin/git-rebase-editor.sh git rebase -i "$@"
+GIT_SEQUENCE_EDITOR=~/bin/git-rebase-editor.sh git rebase --keep-empty --rebase-merges -i "$@"
 
 
 exit 0
