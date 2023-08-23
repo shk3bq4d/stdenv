@@ -444,8 +444,12 @@ https://github.com/zabbix/zabbix
 git remote add github https://github.com/zabbix/zabbix
 
 ```sh
-zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]"
-zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']"
+zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]" # wmic
+zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']" # wmic
+zabbix_get  -s 10.1.1.1 -k "wmi.get[root\\cimv2,select * from Win32_LoggedOnUser]"
+wmic path win32_networkadapter get netenabled,name,macaddress,speed,physicaladapter,adaptertype
+wmic nicconfig where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
+wmic path win32_networkadapterconfiguration where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
 ```
 
 # discovery
