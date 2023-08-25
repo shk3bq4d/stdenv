@@ -74,6 +74,8 @@ Yes	Yes	Official	Microsoft EPMAP (End Point Mapper), also known as DCE/RPC Locat
 138	Assigned	Yes	Official	NetBIOS Datagram Service[10][69][70]
 139	Yes	Assigned	Official	NetBIOS Session Service[69][70]
 143	Yes	Assigned	Official	Internet Message Access Protocol (IMAP),[10] management of electronic mail messages on a server[71]
+143 imap non-encrypted auth
+143 imap StartTLS
 152	Yes	Yes	Official	Background File Transfer Program (BFTP)[72][importance?]
 153	Yes	Yes	Official	Simple Gateway Monitoring Protocol (SGMP), a protocol for remote inspection and alteration of gateway management information[73]
 156	Yes	Yes	Official	Structured Query Language (SQL) Service[jargon]
@@ -126,6 +128,7 @@ No	Yes	Unofficial	Quick UDP Internet Connections (QUIC), a transport protocol ov
 445	Yes	Yes	Official	Microsoft-DS (Directory Services) Active Directory,[85] Windows shares
 Yes	Assigned	Official	Microsoft-DS (Directory Services) SMB[10] file sharing
 464	Yes	Yes	Official	Kerberos Change/Set password
+465 SMTP SSL
 465	Yes	No	Official	URL Rendezvous Directory for SSM (Cisco protocol)[importance?]
 Yes	No	Official	Authenticated SMTP[10] over TLS/SSL (SMTPS)[86]
 475	Yes	Yes	Official	tcpnethaspsrv, Aladdin Knowledge Systems Hasp services
@@ -167,7 +170,7 @@ Yes	Official	Routing Information Protocol (RIP)
 563	Yes	Yes	Official	NNTP over TLS/SSL (NNTPS)
 564	Yes		Unofficial	9P (Plan 9)
 585	Port 993	?	Unofficial	Legacy use of Internet Message Access Protocol over TLS/SSL (IMAPS), now in use at port 993.[88]
-587	Yes	Assigned	Official	email message submission[10][89] (SMTP)
+587	Yes	Assigned	Official	email message submission[10][89] (SMTP) StartTLS
 591	Yes		Official	FileMaker 6.0 (and later) Web Sharing (HTTP Alternate, also see port 80)
 593	Yes	Yes	Official	HTTP RPC Ep Map, Remote procedure call over Hypertext Transfer Protocol, often used by Distributed Component Object Model services and Microsoft Exchange Server
 601	Yes		Official	Reliable Syslog Service — used for system logging
