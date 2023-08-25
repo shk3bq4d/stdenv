@@ -239,7 +239,6 @@ select client_addr, state from pg_stat_replication;
 select pg_is_in_recovery();
 ```
 
-https://hub.docker.com/_/postgres
 # json
 ```sql
 select uid, json_extract_path(mycolumn::json, 'json-root', 'json-key') from oc_accounts limit 10; -- ::json is a cast
@@ -265,3 +264,41 @@ select to_char(now(), 'YYYY-MM-DD HH24:mi:ss') -- date sprintf formating minutes
 
 select to_timestamp(configvalue::bigint) from oc_preferences where configkey in ('lastLogin'); -- cast string as bigint in nexcloud
 
+```markdown
+# major upgrades
+are to be done by making a backup, trashing the data folder, restoring the backu
+
+* [hehe](https://hub.docker.com/_/postgres)
+* https://github.com/docker-library/docs/blob/master/postgres/README.md
+
+
+
+https://www.postgresql.org/support/versioning/
+Releases
+Version	Current minor	Supported	First Release	Final Release
+15	15.4	Yes	October 13, 2022	November 11, 2027
+14	14.9	Yes	September 30, 2021	November 12, 2026
+13	13.12	Yes	September 24, 2020	November 13, 2025
+12	12.16	Yes	October 3, 2019	November 14, 2024
+11	11.21	Yes	October 18, 2018	November 9, 2023
+10	10.23	No	October 5, 2017	November 10, 2022
+9.6	9.6.24	No	September 29, 2016	November 11, 2021
+9.5	9.5.25	No	January 7, 2016	February 11, 2021
+9.4	9.4.26	No	December 18, 2014	February 13, 2020
+9.3	9.3.25	No	September 9, 2013	November 8, 2018
+9.2	9.2.24	No	September 10, 2012	November 9, 2017
+9.1	9.1.24	No	September 12, 2011	October 27, 2016
+9.0	9.0.23	No	September 20, 2010	October 8, 2015
+8.4	8.4.22	No	July 1, 2009	July 24, 2014
+8.3	8.3.23	No	February 4, 2008	February 7, 2013
+8.2	8.2.23	No	December 5, 2006	December 5, 2011
+8.1	8.1.23	No	November 8, 2005	November 8, 2010
+8.0	8.0.26	No	January 19, 2005	October 1, 2010
+7.4	7.4.30	No	November 17, 2003	October 1, 2010
+7.3	7.3.21	No	November 27, 2002	November 27, 2007
+7.2	7.2.8	No	February 4, 2002	February 4, 2007
+7.1	7.1.3	No	April 13, 2001	April 13, 2006
+7.0	7.0.3	No	May 8, 2000	May 8, 2005
+6.5	6.5.3	No	June 9, 1999	June 9, 2004
+6.4	6.4.2	No	October 30, 1998	October 30, 2003
+6.3	6.3.2	No	March 1, 1998	March 1, 2003
