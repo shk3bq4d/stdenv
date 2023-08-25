@@ -444,8 +444,8 @@ https://github.com/zabbix/zabbix
 git remote add github https://github.com/zabbix/zabbix
 
 ```sh
-zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * FROM Win32_RegistryAction]" # wmic
-zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from Win32_DiskDrive where Name like '%PHYSICALDRIVE0%']" # wmic
+zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * from win32_registryaction]" # wmic
+zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from win32_diskdrive where Name like '%PHYSICALDRIVE0%']" # wmic
 zabbix_get  -s 10.1.1.1 -k "wmi.get[root\\cimv2,select * from Win32_LoggedOnUser]"
 wmic path win32_networkadapter get netenabled,name,macaddress,speed,physicaladapter,adaptertype
 wmic nicconfig where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
@@ -672,3 +672,11 @@ shutdown /l
 
 py-zabbix==1.1.7
 zabbix-api==0.5.6 # py pip used to be used by ansible collection community.zabbix < 1.9.0
+
+# CVE
+* https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=zabbix
+* https://support.zabbix.com/browse/ZBX-22588?jql=labels%20%3D%20vulnerability # CVE
+* https://www.cvedetails.com/product/9588/Zabbix-Zabbix.html?vendor_id=5667
+* https://www.cvedetails.com/vulnerability-list/vendor_id-5667/Zabbix.html
+* https://www.opencve.io/cve?vendor=zabbix
+* https://www.zabbix.com/security_advisories
