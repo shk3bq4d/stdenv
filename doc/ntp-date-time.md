@@ -45,3 +45,23 @@ ssh -t myhost sudo date -us @$(date -u +%s) # set remote system time easily
 #NTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
 NTP=6.1.0.50
 FallbackNTP=ntp.ubuntu.com
+
+
+```sh
+chronyc> sources -v
+
+210 Number of sources = 2
+
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current synced, '+' = combined , '-' = not combined,
+| /   '?' = unreachable, 'x' = time may be in error, '~' = time too variable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
+MS Name/IP address         Stratum Poll Reach LastRx Last sample
+===============================================================================
+^? ueaobutnb01.bip.habon.lo>     1   6    77    61   -27.3s[ -27.3s] +/-  10.9s
+^? uaeoutnnb02.bip.habon.lo>     2   6    77    63   -27.3s[ -27.3s] +/-  11.0s
+```
