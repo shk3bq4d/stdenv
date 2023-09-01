@@ -11,4 +11,7 @@ chsh -s $(which bash) $SUDO_USER
 EOF
 }
 
-commands | ssh "$@" sudo bash
+#commands | ssh "$@" sudo bash
+set -x
+ssh -t "$@" bash -c '"sudo chsh -s $(which bash) $(whoami)"'
+ssh -Oexit "$@"
