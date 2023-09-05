@@ -165,7 +165,7 @@ complete_function kubectl-get-events-sort.sh         kubectl get events
 complete_function kubectl-debug-tail-pod.sh          kubectl get pods
 complete_function kubectl-get-confimaps-data.sh       kubectl get configmaps
 complete_function kubectl-get-secrets-data.sh        kubectl get secrets
-complete_function klf kubectl get pods
+complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
 compdef "ssh-no-host-checking"=ssh
 compdef ssh-vagrant=ssh
 compdef zabbix-maintenance=ssh
