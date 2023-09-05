@@ -45,6 +45,7 @@ apt-get install vim
 
 
 docker build -t name .
+docker build --progress=plain . # see stdoud + stderr
 docker build -t $(basename $(realpath .)) .
 
 # test if running inside a container:
