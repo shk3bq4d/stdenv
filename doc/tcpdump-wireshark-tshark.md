@@ -150,3 +150,5 @@ This primitive allows you to filter on either Ethernet or IP broadcasts or multi
 This primitive allows you to create complex filter expressions that select bytes or ranges of bytes in packets. Please see the pcap-filter man page at http://www.tcpdump.org/manpages/pcap-filter.7.html for more details.
 
 
+
+stdbuf -o0 tcpdump # unbuffered IO for piping
