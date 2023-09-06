@@ -589,19 +589,6 @@ function git_reset_dir_work_tree() {
     unset GIT_WORK_TREE
 }
 
-function ps_parent() {
-    local PID
-    [[ $# -eq 0 ]] && PID="$1" || PID="$$"
-    [[ -z "$PID" ]] && PID="$BASHPID"
-    [[ -z "$PID" ]] && PID=$(bash -c 'cut -d " " -f 4 /proc/$PPID/stat')
-    [[ -z "$PID" ]] && echo "Fatal couldnt get PID" && return 1
-    while [[ $PID -ne 0 ]]; do
-        printf "%-7s" "$PID"
-        cat /proc/$PID/cmdline | xargs -0 echo
-        PID=$(cut -d ' ' -f 4 /proc/$PID/stat)
-    done
-}
-
 function ks_k8s() {
     case $HOSTNAMEF in \
     *-k8s-master*) true ;;
@@ -664,7 +651,7 @@ function ks_k8s() {
     alias kgsw='kgs --watch'
     alias kgswide='kgs -o wide'
     alias kl='kubectl logs'
-    alias klf='kubectl logs -f'
+#   alias klf='kubectl logs -f'
     alias kp='kubectl --context=prod.clusters.greypay.net'
     alias kpf='kubectl port-forward'
     alias krh='kubectl rollout history'
@@ -1298,13 +1285,40 @@ grep_systemd_unit() {
 
 }
 
+function ps_group() {
+    ps --forest -o pid,tty,stat,time,cmd -g $(ps -o sid= -p "$1")
+}
+
+function ps_docker() {
+    systemd-cgls --no-pager --full | less -p "$1"" "
+}
+
+function ps_group2() {
+    ps --forest $(ps -e --no-header -o pid,ppid|awk -vp="$1" 'function r(s){print s;s=a[s];while(s){sub(",","",s);t=s;sub(",.*","",t);sub("[0-9]+","",s);r(t)}}{a[$2]=a[$2]","$1}END{r(p)}')
+}
+
+function ps_parent() {
+    local PID
+    [[ $# -eq 0 ]] && PID="$1" || PID="$$"
+    [[ -z "$PID" ]] && PID="$BASHPID"
+    [[ -z "$PID" ]] && PID=$(bash -c 'cut -d " " -f 4 /proc/$PPID/stat')
+    [[ -z "$PID" ]] && echo "Fatal couldnt get PID" && return 1
+    while [[ $PID -ne 0 ]]; do
+        printf "%-7s" "$PID"
+        cat /proc/$PID/cmdline | xargs -0 echo
+        PID=$(cut -d ' ' -f 4 /proc/$PID/stat)
+    done
+}
+
 alias klf &>/dev/null && unalias klf &>/dev/null
 klf() {
     local s
     s=$(kubectl get pod "$@" -o jsonpath='{.status.phase}')
     echo "current pod phase is $s"
     case "$s" in \
-    uoathuoau) kubectl wait --for=condition=Ready --timeout=5m pod "$@" || return 1;;
+    Pending|ContainerCreating)
+        kubectl wait --for=condition=Ready --timeout=5m pod "$@" || return 1
+        ;;
     esac
     kubectl logs -f "$@"
 }

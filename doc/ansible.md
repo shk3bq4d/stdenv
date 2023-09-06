@@ -178,6 +178,7 @@ condition | ternary('if_cond_true', 'if_cond_false', 'if_cond_null')
 "{{ 'ternary operator jinja' if expose_service == 'true' else 'ClusterIP' }}"
 
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html
+{{ [false, booleanvar, varexpression] is any}}
 "{{ ('~' + ansible_env.SUDO_USER) | expanduser }}"
 To add quotes for shell usage: ```yaml - shell: echo {{ string_value | quote }}```
 To use one value on true and another on false (new in version 1.9): ```yaml {{ (name == "John") | ternary('Mr','Ms') }}```

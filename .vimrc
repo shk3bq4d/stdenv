@@ -29,44 +29,44 @@ if hostname == "jly200" || hostname == "bipbip"
 endif
 if &diff
     " https://vi.stackexchange.com/questions/2705/create-mappings-that-only-apply-to-diff-mode
-	" https://github.com/vim-syntastic/syntastic/issues/822
+    " https://github.com/vim-syntastic/syntastic/issues/822
     " Your setting you want to set when using diff mode.
     "
-	if v:false
-		set ttyfast
-		au FileWritePost * :redraw!
-		au TermResponse * :redraw!
-		au TextChanged * :redraw!
-		au QuickFixCmdPre * :redraw!
-		au QuickFixCmdPost * :redraw!
-	endif
+    if v:false
+        set ttyfast
+        au FileWritePost * :redraw!
+        au TermResponse * :redraw!
+        au TextChanged * :redraw!
+        au QuickFixCmdPre * :redraw!
+        au QuickFixCmdPost * :redraw!
+    endif
     "autocmd VimEnter * nnoremap <silent> <c-w>l <c-w>l<cr>:redraw!<cr>
     "autocmd VimEnter * nnoremap <silent> <c-w>h <c-w>h<cr>:redraw!<cr>
-	if v:false
-		let g:loaded_youcompleteme = 1
-		let g:syntastic_check_on_open = 0
-		let g:mrdiffmode = "yes you are in mrdiffmode" " :echo g:mrdiffmode
-		call add(g:pathogen_disabled, 'vim-gitgutter')
-		call add(g:pathogen_disabled, 'syntastic')
-		call add(g:pathogen_disabled, 'SyntaxRange')
-		call add(g:pathogen_disabled, 'tabular')
-		call add(g:pathogen_disabled, 'Align')
-		call add(g:pathogen_disabled, 'AnsiEsc')
-		call add(g:pathogen_disabled, 'bufexplorer')
-		call add(g:pathogen_disabled, 'colorschemes')
-		call add(g:pathogen_disabled, 'dockerfile')
-		call add(g:pathogen_disabled, 'ingo-library')
-		call add(g:pathogen_disabled, 'syntastic')
-		call add(g:pathogen_disabled, 'SyntaxRange')
-		call add(g:pathogen_disabled, 'tabular')
-		call add(g:pathogen_disabled, 'vim-airline')
-		call add(g:pathogen_disabled, 'vim-airline-themes')
-		call add(g:pathogen_disabled, 'vim-fugitive')
-		call add(g:pathogen_disabled, 'vim-gitgutter')
-		call add(g:pathogen_disabled, 'vim-indentwise')
-		call add(g:pathogen_disabled, 'vim-puppet')
-		call add(g:pathogen_disabled, 'youcompleteme')
-	endif
+    if v:false
+        let g:loaded_youcompleteme = 1
+        let g:syntastic_check_on_open = 0
+        let g:mrdiffmode = "yes you are in mrdiffmode" " :echo g:mrdiffmode
+        call add(g:pathogen_disabled, 'vim-gitgutter')
+        call add(g:pathogen_disabled, 'syntastic')
+        call add(g:pathogen_disabled, 'SyntaxRange')
+        call add(g:pathogen_disabled, 'tabular')
+        call add(g:pathogen_disabled, 'Align')
+        call add(g:pathogen_disabled, 'AnsiEsc')
+        call add(g:pathogen_disabled, 'bufexplorer')
+        call add(g:pathogen_disabled, 'colorschemes')
+        call add(g:pathogen_disabled, 'dockerfile')
+        call add(g:pathogen_disabled, 'ingo-library')
+        call add(g:pathogen_disabled, 'syntastic')
+        call add(g:pathogen_disabled, 'SyntaxRange')
+        call add(g:pathogen_disabled, 'tabular')
+        call add(g:pathogen_disabled, 'vim-airline')
+        call add(g:pathogen_disabled, 'vim-airline-themes')
+        call add(g:pathogen_disabled, 'vim-fugitive')
+        call add(g:pathogen_disabled, 'vim-gitgutter')
+        call add(g:pathogen_disabled, 'vim-indentwise')
+        call add(g:pathogen_disabled, 'vim-puppet')
+        call add(g:pathogen_disabled, 'youcompleteme')
+    endif
 endif
 if hostname == "bipbip" || hostname == "bipbip"
     call add(g:pathogen_disabled, 'vim-gitgutter')
@@ -252,7 +252,8 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 endif
 set guifont=Consolas:h10
-:set sidescroll=1 listchars=extends:>,precedes:< sidescrolloff=6
+:set sidescroll=1 sidescrolloff=6
+:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 :nmap <silent> <C-k> :wincmd k<CR>
 :nmap <silent> <C-j> :wincmd j<CR>
 :nmap <silent> <C-h> :wincmd h<CR>
@@ -396,7 +397,6 @@ else
     map <C-s> O<Esc>"*P
 endif
 imap <C-v> <Esc><C-v>a
-:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 inoremap <ScrollWheelUp> <Nop>
 inoremap <ScrollWheelDown> <Nop>
@@ -723,6 +723,6 @@ if version >= 500
     endfunc
 endif
 if &diff
-	set t_Co=8
+    set t_Co=8
 endif
 "set viminfo+=n$RCD/.tmp/vim/viminfo

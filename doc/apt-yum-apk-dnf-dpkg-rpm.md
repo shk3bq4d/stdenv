@@ -130,7 +130,7 @@ dnf install -y  findutils
 
 yum downgrade rsyslog-8.29.0-2.el7.x86_64
 
-rpm -qlp *rpm # list file in .rpm
+rpm -qlp *rpm # list file in .rpm ls extract filelist
 dpkg -c ovpc_1.06.94-3_i386.deb # list file in .deb
 
 npm install graylog-cli-dashboard@0.13

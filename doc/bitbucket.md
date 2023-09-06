@@ -3,6 +3,7 @@
 * https://www.atlassian.com/software/bitbucket/download-archives # upgrade version latest update
 
 https://confluence.atlassian.com/bitbucketserver/bitbucket-server-security-advisory-2020-01-15-985498238.html
+https://confluence.atlassian.com/bitbucketserver/supported-platforms-776640981.html # postgresql database versions
 https://www.atlassian.com/trust/security/advisories
 
 https://hub.docker.com/r/atlassian/bitbucket-server

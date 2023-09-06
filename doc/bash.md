@@ -1139,6 +1139,7 @@ tail -f /var/log/foo | stdbuf -o0 cut         # unbuffered pipe
 tail -f /var/log/foo | grep --line-buffered   # unbuffered pipe
 tail -f /var/log/foo | sed -u                 # unbuffered pipe
 tail -f /var/log/foo | python -u              # unbuffered
+stdbuf -o0 tcpdump
 
 
 +test -t 0 && TTY_FLAG="-t"

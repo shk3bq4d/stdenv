@@ -33,6 +33,7 @@ mrecho() {
 
 # test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 #
+stdhome-pull.sh || true
 docker ps &>/dev/null && SUDO="" || SUDO="sudo";
 $SUDO docker login
 for i in apt py stdenv; do

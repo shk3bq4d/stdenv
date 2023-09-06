@@ -12,7 +12,7 @@ Support release
 atlassian/confluence-server:7.4.15
 
 docker pull atlassian/confluence-server:7.4.15
-git clone https://bitbucket.org/atlassian-docker/docker-atlassian-confluence-server.git
+* git clone https://bitbucket.org/atlassian-docker/docker-atlassian-confluence-server.git # github
 
 # EOL
 https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
@@ -2443,7 +2443,7 @@ update cwd_user set lower_email_address = lower(email_address) where user_name l
 
 -- top 30 spaces by attachment size
 select * from (select s.spacekey, round(sum(longval) / 1024 / 1024) as attachments_size from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' group by s.spacekey order by 2 desc) b limit 30;
-select sum(attachments_size) from (select s.spacekey, round(sum(longval) / 1024 / 1024) as attachments_size from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' group by s.spacekey order by 2 desc) b limit 30;
+select attachments_size as size_mb, spacekey from (select s.spacekey, round(sum(longval) / 1024 / 1024) as attachments_size from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' group by s.spacekey order by 2 desc) b limit 12;
 select s.spacekey, round(longval / 1024 / 1024) as attachments_size, c.title from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' order by longval desc limit 30;
 select s.spacekey, round(longval / 1024 / 1024) as attachments_size, c.title from contentproperties cp join content c on cp.contentid = c.contentid join spaces s on s.spaceid = c.spaceid where c.contenttype = 'ATTACHMENT' and cp.propertyname = 'FILESIZE' and s.spacekey = 'MYKEY' order by longval desc limit 600;
 ```

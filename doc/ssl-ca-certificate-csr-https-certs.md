@@ -336,3 +336,6 @@ openssl req -new -sha256 -nodes -newkey rsa:4096 -keyout www.example.com.key -ou
 openssl x509 -req -sha256 -CA CA.pem -CAkey CA.key -days 730 -CAcreateserial -CAserial CA.srl -extfile x509.ext -extensions server -in www.example.com.csr -out www.example.com.pem
 ```
 
+
+echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha256 # thumbprints
+echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha1   # thumbprints
