@@ -1323,4 +1323,22 @@ klf() {
     kubectl logs -f "$@"
 }
 
+cds() {
+    local d i c
+    d=$PWD
+    for i in "$@"; do
+        if [[ -d "$d/$i" ]]; then
+            d="$d/$i"
+            continue
+        fi
+        c="$(cd "$d" && ls -1d */ | grep -- "$i" | wc -l)"
+        case $c in \
+        1) d=$d/$(cd "$d" && ls -1d */ | grep -- "$i");;
+        0) echo "FATAL: can't find ${ERED:-}$i${ENONE:-} in $d"; return 1;;
+        *) echo "FATAL: multiple ${ERED:-}$i${ENONE:-} in $d"; echo $(cd "$d" && ls -1d */ | grep -- "$i"); return 1;;
+        esac
+    done
+    cd $d
+}
+
 true # last statement must return true
