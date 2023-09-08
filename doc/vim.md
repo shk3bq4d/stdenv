@@ -1,5 +1,8 @@
 # /* ex: set filetype=markdown: */
 
+"ey$ # copy from current character to end of line into buffer e clipboard
+"ep  # paste buffer e clipboard
+
 ```sh
 
 :echo g:pathogen_disabled
