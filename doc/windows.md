@@ -23,6 +23,7 @@ wmic path win32_networkadapterconfiguration where ipenabled=true get defaultipga
 wmic nicconfig where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
 sc query "Zabbix Agent 2"
 sc delete "Zabbix Agent"
+sc delete "Zabbix Agent 2"
 sc stop "Zabbix Agent 2"
 sc start "Zabbix Agent 2"
 Get-Content "C:\Program Files\Zabbix Agent 2\zabbix_agent2.log.old" -Tail 30
