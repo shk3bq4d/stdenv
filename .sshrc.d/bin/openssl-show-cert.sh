@@ -1,0 +1,1 @@
+../../bin/openssl-show-cert.sh

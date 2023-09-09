@@ -136,6 +136,14 @@ export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/source/anchors/myca.crt
 GIT_SSL_NO_VERIFY=true
 
 LDAPTLS_REQCERT=never ldapwhoami -v -x -H ldaps://10.0.1.15 -D myuser@domain # ldaps no verify ldapsearch
+wget --no-check-certificate
+wget --certificate=FILEPATH
+wget --ca-certificate=FILEPATH
+curl --insecure # -k
+curl --cert FILEPATH
+SSL_CERT_DIR=DIRPATH lynx
+SSL_CERT_FILE=FILEPATH lynx
+
 
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
 ```
