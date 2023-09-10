@@ -8,6 +8,11 @@
 *    https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
+* https://docs.ansible.com/ansible/latest/collections/community/general/merge_variables_lookup.html # mv: community.general.merge_variables 
+* initial_value= # mv: community.general.merge_variables 
+* override=error(default), warn, ignore # mv: community.general.merge_variables 
+* pattern_type, prefix, suffige, regex # mv: community.general.merge_variables 
+
 ```yaml
 - name: mongo_dev_fs_id
   set_fact: fs_id='fs-d3ad0faa'
