@@ -1,5 +1,6 @@
-* Gerald decom
-* script gc-host-delete
+* zabbix ldaps.group.local
+* okta docusign follow up
+* change wifi controller
 * beats command not found
 * shane max upload size
 * shane max time execution
@@ -10,3 +11,4 @@
 * patch tuesday windows OOS
 * yum sync
 * mdatp update
+* firewall ticket dremio zurich denies
