@@ -1,5 +1,4 @@
-* zabbix ldaps.group.local
-* okta docusign follow up
+* yum sync
 * change wifi controller
 * beats command not found
 * shane max upload size
@@ -9,6 +8,5 @@
 * Interview Questions Ansible RH
 * deskpro jeaddom
 * patch tuesday windows OOS
-* yum sync
 * mdatp update
 * firewall ticket dremio zurich denies
