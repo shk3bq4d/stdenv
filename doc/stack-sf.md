@@ -1,8 +1,6 @@
-* yum sync
-* change wifi controller
-* beats command not found
 * shane max upload size
 * shane max time execution
+* beats command not found
 * srl py branch may19
 * Okta Nicky
 * Interview Questions Ansible RH
