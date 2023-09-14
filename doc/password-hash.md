@@ -11,3 +11,6 @@ $2b$  bcrypt - latest revision of the official BCrypt algorithm, current default
 
 cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 24
 openssl rand -base64 30
+
+openssl rand -base64 30 | openssl passwd -6 -stdin
+openssl rand -base64 30 | openssl passwd -6 -stdin | xargs -nI@ usermod -p @ zabbix
