@@ -14,6 +14,8 @@ strace -tf -p $(systemd show --value -p MainPID sshd) |& grep -vE 'clock_gettime
 strace -tf -p $(systemd show         -p MainPID sshd | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemd show         -p MainPID docker | cut -d = -f 2) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve | grep -E 'jks|cacert'
+{ strace -s 99999 -fffttT $(pgrep -u zabbix_server | sed -r -e 's/.*/-p \0/') |& tee -a /tmp/strace.out; } &>/dev/null </dev/null  &
+
 | sed -r 's|overlay2/[^/]{60,}/([^"]+).*|bip\1|'
 
 
