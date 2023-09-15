@@ -12,6 +12,7 @@ $mysqli->close();
 
 
 ```php
+sleep(3600);
 echo curl_exec(curl_init("http://localhost"));
 ```
 

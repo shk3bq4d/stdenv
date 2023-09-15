@@ -347,3 +347,6 @@ openssl x509 -req -sha256 -CA CA.pem -CAkey CA.key -days 730 -CAcreateserial -CA
 
 echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha256 # thumbprints
 echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha1   # thumbprints
+t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm shk3bq4d/openssl:alpine  /usr/bin/openssl s_client -tls1_2 -connect $t:$p -servername $t -showcerts </dev/null && echo yes || echo no; } | grep --color=always -Ei '^|\w*renegoti\w*' # renegotiation status
+
+

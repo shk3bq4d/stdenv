@@ -1,14 +1,10 @@
-* zabbix ldaps.group.local
-* okta docusign follow up
-* change wifi controller
-* beats command not found
 * shane max upload size
 * shane max time execution
+* beats command not found
 * srl py branch may19
 * Okta Nicky
 * Interview Questions Ansible RH
 * deskpro jeaddom
 * patch tuesday windows OOS
-* yum sync
 * mdatp update
 * firewall ticket dremio zurich denies
