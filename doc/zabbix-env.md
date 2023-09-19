@@ -12,6 +12,10 @@ https://github.com/ansible/ansible-modules-extras/blob/482b1a640e95274b1a6f41ec2
 https://github.com/zabbix/zabbix-docker/
 https://github.com/zabbix/zabbix-docker/tree/6.2/Dockerfiles/proxy-sqlite3/alpine
 
+system.hostname
+system.hostname[fqdn] 7.0.0 https://support.zabbix.com/browse/ZBXNEXT-7132
+system.uname
+agent.hostname
 
 Appendix 1. Reference commentary
 

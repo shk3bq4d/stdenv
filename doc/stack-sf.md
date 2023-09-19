@@ -1,5 +1,3 @@
-* shane max upload size
-* shane max time execution
 * beats command not found
 * srl py branch may19
 * Okta Nicky
