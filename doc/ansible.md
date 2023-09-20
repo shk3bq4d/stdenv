@@ -1236,6 +1236,7 @@ ansible linux  -m shell -a "needs-restarting -r" -v                      # oneli
 ansible linux -bm shell -a "needs-restarting -r" -s                      # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
+ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
