@@ -2433,6 +2433,7 @@ selectattr()
 {{ users|selectattr("email", "none") }}
 {{ users|selectattr("email", "equalto", "bob@malone.com") }} # list of tests can probably be found in ~/.virtualenvs/ansible/lib/python3.10/site-packages/jinja2/tests.py, "odd", "even", "divisibleby", "defined", "undefined", "filter", "test", "none", "boolean", "false", "true", "integer", "float", "lower", "upper", "string", "mapping", "number", "sequence", "iterable", "callable", "sameas", "escaped", "in", "==", "eq", "equalto", "!=", "ne", ">", "gt", "greaterthan", "ge", ">=", "<", "lt", "lessthan", "<=", "le"
 {{ users|selectattr("email", "defined"))
+{{ ansible_facts | dict2items | selectattr('key', 'match', '.*docker.*') }} # regex rx regular expression
 {{ users|rejectattr("email", "defined")) | selectattr
 slice(value, slices, fill_with=None)
 {%- for column in items|slice(3) %}

@@ -29,4 +29,8 @@ function mylog($message, $logFile = "/var/www/html/var/logs/bip.log") {
   $logEntry = "[$timestamp] $message\n";
   file_put_contents($logFile, $logEntry, FILE_APPEND);
 }
+
+in_array($valueToCheck, $array, $same_type_boolnean);
+explode(":", "a:b:c");       # split
+implode(":", ["a","b","c"]); # join
 ```
