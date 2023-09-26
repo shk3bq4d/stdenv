@@ -5,7 +5,6 @@
 * Interview Questions Ansible RH
 * deskpro jeaddom
 * patch tuesday windows OOS
-* mdatp update
 * firewall ticket dremio zurich denies
 * firewall OUTPUT rules
 * zabbix SSL alert refactor
