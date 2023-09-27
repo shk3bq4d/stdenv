@@ -8,10 +8,10 @@
 *    https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
-* https://docs.ansible.com/ansible/latest/collections/community/general/merge_variables_lookup.html # mv: community.general.merge_variables 
-* initial_value= # mv: community.general.merge_variables 
-* override=error(default), warn, ignore # mv: community.general.merge_variables 
-* pattern_type, prefix, suffige, regex # mv: community.general.merge_variables 
+* https://docs.ansible.com/ansible/latest/collections/community/general/merge_variables_lookup.html # mv: community.general.merge_variables
+* initial_value= # mv: community.general.merge_variables
+* override=error(default), warn, ignore # mv: community.general.merge_variables
+* pattern_type, prefix, suffige, regex # mv: community.general.merge_variables
 
 ```yaml
 - name: mongo_dev_fs_id
@@ -1234,6 +1234,7 @@ ansible confluence -bm docker_container -a "name=jira       state=started restar
 ansible confluence -bm docker_container -a "name=confluence state=started restart=yes" # oneliner one-liner adhoc ad-hoc
 ansible linux  -m shell -a "needs-restarting -r" -v                      # oneliner one-liner adhoc ad-hoc
 ansible linux -bm shell -a "needs-restarting -r" -s                      # oneliner one-liner adhoc ad-hoc
+ansible linux -bm package -a "name=zabbix-agent2 state=latest"           # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
@@ -2812,7 +2813,7 @@ flatten | select | unique | sort | join(',')
 - setup:
   gather_subset: min
 - copy:
-    dest: /tmp/bip.{{ ansible_date_time.iso8601_basic_short }} # path setup: gather_subset=min 
+    dest: /tmp/bip.{{ ansible_date_time.iso8601_basic_short }} # path setup: gather_subset=min
 
 # first timetouch heartbeat file creation
 file:                         # first timetouch heartbeat file creation
