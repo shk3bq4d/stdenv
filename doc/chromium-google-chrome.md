@@ -1700,3 +1700,13 @@ curl -s http://omahaproxy.appspot.com/all.json | jq -r '.[] | select(.os=="win")
 # passwords no longer saving
 https://superuser.com/questions/573602/chrome-not-saving-passwords-and-not-auto-filling-existing-login-passwords
 rm -f ~/.config/chromium/*/Login\ Data{,-journal}
+
+
+# printscreen
+* https://swimburger.net/blog/web/hidden-gem-take-screenshots-using-built-in-commands-in-chrome-edge#capture-full-size-screenshot
+steps:
+*  F12, go to developer tools, console
+* control-shift-P (bring up Chrome DevTools Command Menu)
+* type "Full" to search for "Capture full size screenshot"
+* press Enter, a png image file whose name matches most of the URL, has been saved to ~/Downloads
+

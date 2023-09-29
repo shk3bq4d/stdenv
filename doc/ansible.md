@@ -2247,6 +2247,7 @@ To get a sha512 password hash (random salt):
 {{ 'localhost:80' | regex_replace(':80') }}
 {% filter regex_replace('(?m)\s*#.*$', empty) %}{# strip comments per line #}
 {{ hosts | map('regex_replace', '^(.*)$', 'https://\\1') | list }} # format sprintf
+{{ '%04d' | format(6) }} # format sprintf
 # convert '^f.*o(.*)$' to '\^f\.\*o\(\.\*\)\$'
 {{ '^f.*o(.*)$' | regex_escape() }}
 # convert '^f.*o(.*)$' to '\^f\.\*o(\.\*)\$'

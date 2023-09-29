@@ -2461,3 +2461,44 @@ https://myhost/confluence/fixonly/fixlicense.action?licenseSubmitted=true
 #
 sudo docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
 sudo docker run --rm atlassian/confluence-server:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
+
+
+# confluence markup
+<p class="auto-cursor-target">
+  <br/>
+</p>
+<table class="wrapped">
+  <colgroup> <col/> <col/> <col/> </colgroup>
+  <tbody>
+    <tr>
+      <th scope="col">youpi</th>
+      <th scope="col">col2</th>
+      <th scope="col">col3</th>
+    </tr>
+    <tr>
+      <td>
+        <br/>
+      </td>
+      <td>
+        <br/>
+      </td>
+      <td>hehe</td>
+    </tr>
+    <tr>
+      <td>
+        <br/>
+      </td>
+      <td>
+        <br/>
+      </td>
+      <td>
+        <br/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="auto-cursor-target">
+  <br/>
+</p>
+
+

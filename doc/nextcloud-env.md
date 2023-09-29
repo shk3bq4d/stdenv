@@ -2421,3 +2421,8 @@ In NextCloud client, in the tab “General” you have “Advanced” - Edit Ign
 /PhotoPreviews/   # Documents/ifolor/Photobooks/*/PhotoPreviews/
 /PhotoThumbnails/ # Documents/ifolor/Photobooks/*/PhotoThumbnails
 											   ```
+
+
+# chat webrtc
+https://apps.nextcloud.com/apps/spreed
+https://github.com/nextcloud/spreed

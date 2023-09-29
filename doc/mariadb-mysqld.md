@@ -110,6 +110,7 @@ select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https
 select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
 
 select now(); -- today date datetime
+select curdate(); -- today date datetime
 
 
 Alter table Empolyee disable constraint pk_EmpNumer;
