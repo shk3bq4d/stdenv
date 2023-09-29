@@ -8,6 +8,11 @@
 *    https://docs.ansible.com/ansible/2.6/modules/user_module.html
 * https://stackoverflow.com/questions/35654286/how-check-a-file-exists-in-ansible
 
+* https://docs.ansible.com/ansible/latest/collections/community/general/merge_variables_lookup.html # mv: community.general.merge_variables
+* initial_value= # mv: community.general.merge_variables
+* override=error(default), warn, ignore # mv: community.general.merge_variables
+* pattern_type, prefix, suffige, regex # mv: community.general.merge_variables
+
 ```yaml
 - name: mongo_dev_fs_id
   set_fact: fs_id='fs-d3ad0faa'
@@ -1229,8 +1234,10 @@ ansible confluence -bm docker_container -a "name=jira       state=started restar
 ansible confluence -bm docker_container -a "name=confluence state=started restart=yes" # oneliner one-liner adhoc ad-hoc
 ansible linux  -m shell -a "needs-restarting -r" -v                      # oneliner one-liner adhoc ad-hoc
 ansible linux -bm shell -a "needs-restarting -r" -s                      # oneliner one-liner adhoc ad-hoc
+ansible linux -bm package -a "name=zabbix-agent2 state=latest"           # oneliner one-liner adhoc ad-hoc
 ansible all -bm yum -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
+ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
@@ -2427,6 +2434,7 @@ selectattr()
 {{ users|selectattr("email", "none") }}
 {{ users|selectattr("email", "equalto", "bob@malone.com") }} # list of tests can probably be found in ~/.virtualenvs/ansible/lib/python3.10/site-packages/jinja2/tests.py, "odd", "even", "divisibleby", "defined", "undefined", "filter", "test", "none", "boolean", "false", "true", "integer", "float", "lower", "upper", "string", "mapping", "number", "sequence", "iterable", "callable", "sameas", "escaped", "in", "==", "eq", "equalto", "!=", "ne", ">", "gt", "greaterthan", "ge", ">=", "<", "lt", "lessthan", "<=", "le"
 {{ users|selectattr("email", "defined"))
+{{ ansible_facts | dict2items | selectattr('key', 'match', '.*docker.*') }} # regex rx regular expression
 {{ users|rejectattr("email", "defined")) | selectattr
 slice(value, slices, fill_with=None)
 {%- for column in items|slice(3) %}
@@ -2805,7 +2813,7 @@ flatten | select | unique | sort | join(',')
 - setup:
   gather_subset: min
 - copy:
-    dest: /tmp/bip.{{ ansible_date_time.iso8601_basic_short }} # path setup: gather_subset=min 
+    dest: /tmp/bip.{{ ansible_date_time.iso8601_basic_short }} # path setup: gather_subset=min
 
 # first timetouch heartbeat file creation
 file:                         # first timetouch heartbeat file creation

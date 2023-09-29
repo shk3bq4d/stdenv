@@ -1,6 +1,6 @@
 # ubuntu
 save rootCA.pem in /usr/local/share/ca-certificates/ with a .crt extension
-sudo update-ca-certificates
+sudo update-ca-certificates # probably updating /etc/ssl/certs/ca-certificates.crt
 systemctl restart docker.service # optional for artifactory
 ## cert will probably show up in /etc/ssl/certs/* as well as /etc/ssl/certs/ca-certificates.crt
 
@@ -136,6 +136,14 @@ export NODE_EXTRA_CA_CERTS=/etc/pki/ca-trust/source/anchors/myca.crt
 GIT_SSL_NO_VERIFY=true
 
 LDAPTLS_REQCERT=never ldapwhoami -v -x -H ldaps://10.0.1.15 -D myuser@domain # ldaps no verify ldapsearch
+wget --no-check-certificate
+wget --certificate=FILEPATH
+wget --ca-certificate=FILEPATH
+curl --insecure # -k
+curl --cert FILEPATH
+SSL_CERT_DIR=DIRPATH lynx
+SSL_CERT_FILE=FILEPATH lynx
+
 
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
 ```
@@ -339,3 +347,6 @@ openssl x509 -req -sha256 -CA CA.pem -CAkey CA.key -days 730 -CAcreateserial -CA
 
 echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha256 # thumbprints
 echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -showcerts | openssl x509 -noout -fingerprint -sha1   # thumbprints
+t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm shk3bq4d/openssl:alpine  /usr/bin/openssl s_client -tls1_2 -connect $t:$p -servername $t -showcerts </dev/null && echo yes || echo no; } | grep --color=always -Ei '^|\w*renegoti\w*' # renegotiation status
+
+

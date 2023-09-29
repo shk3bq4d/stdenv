@@ -217,3 +217,10 @@ Network #	IP Range	Broadcast
 .240	.241-.246	.247
 .248	.249-.254	.255
  Valid XHTML 1.1!
+
+
+ 169.254.169.254 Of particular note, 169.254.169.254 is used in AWS, Azure and other cloud computing platforms to host instance metadata service.
+ 169.254.0.0/16  dynamically configured link-local addresses https://www.rfc-editor.org/rfc/rfc3927
+ AWS curl -s http://169.254.169.254/user-data/
+ azure curl -s http://169.254.169.254/user-data/
+ azure curl -s -H Metadata:true 'http://169.254.169.254/metadata/instance?api-version=2021-02-01' | python3 -m json.tool

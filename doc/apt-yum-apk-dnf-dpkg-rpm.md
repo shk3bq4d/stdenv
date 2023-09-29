@@ -10,6 +10,8 @@ apt install ncurses-term # 'rxvt-256color': unknown terminal type.
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip
 apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
+apt-file search apt-file # apt-file: whatprovides in all packages
+apt-file search if-config | grep -E '/sbin/ifconfig' # net-tools
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
 iproute2: /sbin/ip
 apt list --upgradable
