@@ -15,13 +15,13 @@ export GIT_TERMINAL_PROMPT=0
 case $(git --version) in \
 "git version 1."*)
     actions() {
-        git fetch --all           --tags --no-recurse-submodules
+        timeout 2m git fetch --all           --tags --no-recurse-submodules
         git gc
     }
     ;;
 *)
     actions() {
-        git fetch --all --auto-gc --tags --no-recurse-submodules
+        timeout 2m git fetch --all --auto-gc --tags --no-recurse-submodules
     }
     ;;
 
@@ -60,4 +60,8 @@ function scan {
 
 if [ $# -ne 0 ]; then cd "$1" > /dev/null; fi
 #echo -e "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
+if ! can-ping-gateway.sh; then
+    echo "ABORT as probably no network avaible"
+    exit 0
+fi
 scan ~/git
