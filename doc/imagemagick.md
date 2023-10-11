@@ -95,3 +95,5 @@ convert -append img1.png img2.png img3.png out.png # vertical concatenation
 
 https://github.com/Matthias-Wandel/jhead
 jhead -ft * # set file system last modification time to value set in exif data
+
+convert -size 420x120 xc:transparent -fill "#006237" -gravity center -pointsize 64 -annotate 0 "Quick Okta\nIcon" output.png; feh output.png

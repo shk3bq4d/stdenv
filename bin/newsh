@@ -87,6 +87,8 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 # for i in sed which grep; do ! command -v \"\$i\" &>/dev/null && echo \"FATAL: unexisting dependency \$i in path: \$PATH\" && exit 1; done
 
 # DIR=\"\$( cd -P \"\$( dirname \"\$(readlink -f \"\${BASH_SOURCE[0]}\")\" )\" && pwd )\"
+#_tempdir=\$(mktemp -d); function cleanup() { [[ -n "\${_tempdir:-}" ]]  && [[ -d "\$_tempdir" ]]  && rm -rf "\$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+# _tempfile=\$(mktemp);   function cleanup() { [[ -n "\${_tempfile:-}" ]] && [[ -f "\$_tempfile" ]] && rm  -f "\$_tempfile" || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 
 #[[ -n "\${VIMF6:-}" ]] && echo "running from vim-f6"
 
