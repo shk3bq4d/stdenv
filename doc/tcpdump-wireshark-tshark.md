@@ -153,3 +153,6 @@ This primitive allows you to create complex filter expressions that select bytes
 
 
 stdbuf -o0 tcpdump # unbuffered IO for piping
+
+
+pcapfix -d openwrt-1696493214-2.cap # repair broken corrupted
