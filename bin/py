@@ -115,6 +115,7 @@ def go(args) -> None:
     # print(script_txt)
     ar = parser.parse_args(args)
     # pprint(ar)
+    return 0
 
 if __name__ == '__main__':
     logging_conf()
@@ -122,10 +123,11 @@ if __name__ == '__main__':
         unittest.main()
     else:
         try:
-            go(sys.argv[1:])
+            r = go(sys.argv[1:])
         except BaseException as e:
             logger.exception('oups for %s', sys.argv)
             sys.exit(1)
+        sys.exit(r)
 
 """.replace('___', '"""').replace('__NAME__', toCamelCase(name + ' test')).encode())
     os.chmod(fp, 0o0750)

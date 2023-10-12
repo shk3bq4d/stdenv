@@ -15,6 +15,7 @@ tcpdump -i any dst port 443 and dst net 100.64.0.0/16 # CIDR, all interfaces
 tcpdump -e # <-- see ARP destination which helps debug routing information
 wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
+a=5; for i in $(seq 90000); do ssh myrouter tcpdump -i eth1 -nn -w - 'ip and not net 10.1.1.0/24 and not net 10.1.2.0/24' >wrt-$a-$i.cap; done
 
 tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
 sudo tcpdump -s0 -n port 53 # DNS queries and answer
@@ -35,7 +36,7 @@ tcpdump -i eth0 -X port 514
 
 #imap JP
 /usr/sbin/tcpdump -i vtnet0 -c 100 -s 0 -vv -w jpimap "ip and tcp and ( host 10.19.29.231 and port 143 )"
-file jpimap 
+file jpimap
 jpimap: tcpdump capture file (little-endian) - version 2.4 (Ethernet, capture length 65535)
 sudo apt install tcpick
 tcpick -C -yP -r jpimap
@@ -152,3 +153,6 @@ This primitive allows you to create complex filter expressions that select bytes
 
 
 stdbuf -o0 tcpdump # unbuffered IO for piping
+
+
+pcapfix -d openwrt-1696493214-2.cap # repair broken corrupted

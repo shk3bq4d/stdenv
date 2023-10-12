@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 pkill compton &&O gpick -p
 pkill compton && gcolor2
 
@@ -22,7 +23,7 @@ mogrify -resize 1100 *jpg
 identify.exe *jpg
 Schema_mydb.jpg JPEG 1100x819 1100x819+0+0 8-bit DirectClass 109KB 0.015u 0:00.003
 
-
+set -x; x=187; y=50; i=b.png o=$(nocorrect basename $i .png).out.png; w=$(identify $i | cut -d ' ' -f3 | cut -d x -f 1); h=$(identify $i | cut -d ' ' -f3 | cut -d x -f 2); convert -verbose $i -crop $((w - x ))x$((h - y))+0+$y $o; feh $o; set +x
 
 pngcheck
 
@@ -94,3 +95,5 @@ convert -append img1.png img2.png img3.png out.png # vertical concatenation
 
 https://github.com/Matthias-Wandel/jhead
 jhead -ft * # set file system last modification time to value set in exif data
+
+convert -size 420x120 xc:transparent -fill "#006237" -gravity center -pointsize 64 -annotate 0 "Quick Okta\nIcon" output.png; feh output.png
