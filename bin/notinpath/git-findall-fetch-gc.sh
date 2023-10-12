@@ -64,4 +64,15 @@ if ! can-ping-gateway.sh; then
     echo "ABORT as probably no network avaible"
     exit 0
 fi
+if hash wifi-current-ssid-$(id -un).sh &>/dev/null;
+    ssid="$(wifi-current-ssid-$(id -un).sh || true)"
+else
+    ssid="$(wifi-current-ssid.sh || true)"
+fi
+case "$ssid" in \
+jul20)
+    echo "ABORT, not doing this on wifi $wifi"
+    exit 0
+*)
+esac
 scan ~/git
