@@ -412,8 +412,11 @@ Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex
  14 0E SO   30 1E RS   46 2E .  62 3E >  78 4E N  94 5E ^  110 6E n  126 7E ~
  15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL
 
-carriage returns \x0A 10 CR
-line feed        \x0D 13 LF
+end of line endofline CRLF windows \r\n  0a0d
+end of line endofline LFCR macold  \n\r  0d0a
+end of line endofline LF unix    \n      0d
+carriage returns \x0A 10 CR \r end of line endofline
+line feed        \x0D 13 LF \n linefeed end of line endofline
 
 ♂ | male sign (U+2642)
 ♀ Female Sign
