@@ -20,6 +20,7 @@ jacobalberty/unifi:v7.3.83
 jacobalberty/unifi:v7.4.156
 jacobalberty/unifi:v7.4.162
 jacobalberty/unifi:v7.5.176
+jacobalberty/unifi:v7.5.187
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest
@@ -29,6 +30,7 @@ https://community.ui.com/releases/UniFi-Access-Point-6-5-54/cf7e8c75-1737-4625-8
 https://community.ui.com/releases/r/network/7.4.162
 https://community.ui.com/releases/r/network/7.4.156
 https://community.ui.com/releases/r/network/7.5.174
+https://community.ui.com/releases/r/network/7.5.187
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
@@ -40,6 +42,20 @@ https://community.ui.com/releases/UniFi-Network-Application-7-2-95/7adebab5-8c41
 https://community.ui.com/releases/UniFi-Network-Application-7-3-76/85c75fc7-3e0f-4e99-aa90-7068af4f1141
 https://community.ui.com/releases/UniFi-Network-Application-7-3-83/88f5ff3f-4c13-45e2-b57e-ad04b4140528
 https://community.ui.com/releases/UniFi-Network-Application-7-4-156/15ac6260-9cd1-4ac3-a91c-4880c1c87882
+
+# CVE
+## CVE-2023-41721
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41721
+* https://community.ui.com/releases/Security-Advisory-Bulletin-036-036/81367bc9-2a64-4435-95dc-bbe482457615
+* https://github.com/jacobalberty/unifi-docker/issues/696
+* https://github.com/jacobalberty/unifi-docker/pull/694
+
+
+# docker alternative
+## linuxserver
+* https://github.com/linuxserver/docker-unifi-network-application
+* https://hub.docker.com/r/linuxserver/unifi-network-application
+* lscr.io/linuxserver/unifi-controller:latest
 
 ```sh
 #!/bin/bash
