@@ -11,6 +11,9 @@ https://github.com/jacobalberty/unifi-docker/issues/472 # snmp
 
 unifi@netwc400p90:/usr/lib/unifi/dl/firmware/bundles.json
 
+```sh
+docker-search-tags.sh jacobalberty/unifi | grep -E '^v' | sort -nr | head -n 10
+```
 jacobalberty/unifi:v7.0.25
 jacobalberty/unifi:v7.0.26 # does not exist as of 2022.05.01
 jacobalberty/unifi:v7.1.61
