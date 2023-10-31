@@ -343,6 +343,8 @@ if __name__ == '__main__':
 
 
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s') # oneliner
+
 import logging
 import logging.config
 logger = logging.getLogger(__name__)

@@ -10,3 +10,6 @@ The LDAP RFC specifies that LDAP messages are ASN1 encoded. This means the messa
 (&(objectClass=group)(|(ou:dn:=Chicago)(ou:dn:=Miami))) # (possibly jira specific) will find groups with an OU component of their DN which is either 'Chicago' or 'Miami'.
 
 sed ':a;$!{N;ba};s/\n //g' # ldapsearch
+
+ldapwhoami -W # prompt for password on stdin
+ldapwhoami -w "thisismypassword"
