@@ -81,6 +81,7 @@ To set a different trace mask, send a request containing the stmk four-letter wo
 $ perl -e "print 'stmk', pack('q>', 0b0011111010)" | nc localhost 2181
 250
 
+ZOO_LOG4J_PROP=WARN,CONSOLE ./bin/zkCli.sh ls / # this env variable worked in zookeeper 3.7 but not anymore in >= 3.8 as they switched to logback
 /usr/jails/jzookeeper/usr/local/bin/zkCli.sh
 /usr/local/bin/zkCli.sh
 ssh_jail.sh jzookeeper /usr/local/bin/zkCli.sh
