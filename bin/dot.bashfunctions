@@ -1323,6 +1323,17 @@ klf() {
     kubectl logs -f "$@"
 }
 
+ansible-playbook-delayed-history.sh() {
+  # can't be a shell script as history must be called for the currently running shell, not the shebang
+  if [[ $# -eq 0 ]]; then
+      history | grep --color=always ansible-playbook-delayed-detached.sh
+  else
+      arg="$1"
+      shift
+      "$0" "$@" | grep -i --color=always "$arg"
+  fi
+}
+
 cds() {
     local d i c
     d=$PWD

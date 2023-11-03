@@ -7,8 +7,8 @@ now = datetime.datetime.now()
 
 
 for format in [ 
-    ('%a', 'Locale\'s abbreviated weekday name.'),
-    ('%A', 'Locale\'s full weekday name.'),
+    ('%a', 'Locale\'s abbreviated weekday name. dow'),
+    ('%A', 'Locale\'s full weekday name. dow'),
     ('%b', 'Locale\'s abbreviated month name.'),
     ('%B', 'Locale\'s full month name.'),
     ('%c', 'Locale\'s appropriate date and time representation.'),
@@ -23,7 +23,7 @@ for format in [
     ('%s', 'Unix timestamp 1685337841'),
     ('%S', 'Second as a decimal number [00,61].'),
     ('%U', 'Week number of the year (Sunday as the first day of the week)'),
-    ('%w', 'Weekday as a decimal number [0(Sunday),6].'),
+    ('%w', 'Weekday as a decimal number [0(Sunday),6]. dow'),
     ('%W', 'Week number of the year (Monday as the first day of the week)'),
     ('%x', 'Locale\'s appropriate date representation.'),
     ('%X', 'Locale\'s appropriate time representation.'),
