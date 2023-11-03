@@ -13,3 +13,6 @@ CVE-2023-44487 HTTP/2 Rapid Reset Attack
 
 2023.10.31 CVE-2023-22518 Confluence
 * https://www.helpnetsecurity.com/2023/10/31/cve-2023-22518/
+
+2023.11.03 CVE-2023-46724 squid ssl_bump
+* https://access.redhat.com/security/cve/cve-2023-46724
