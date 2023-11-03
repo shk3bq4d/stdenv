@@ -30,7 +30,7 @@ list_files() {
 go() {
     local nb_files
     cd ~/.tmp/log
-    nb_files="$(files | wc -l)" 
+    nb_files="$(files | wc -l)"
     if [[ "$nb_files" -eq 0 ]]; then
         echo -e "No files within $(mtime) days, try:\nNBDAYS=365 $0 $@"
         exit 1

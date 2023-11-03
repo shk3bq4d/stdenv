@@ -5,6 +5,7 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
+source ~/bin/dot.bashcolors
 # https://stackoverflow.com/questions/30758424/starting-a-new-process-group-from-bash-script
 # difference between a session and a group
 ongoing_pgids() {
@@ -24,19 +25,29 @@ print_pgid() {
     flag_file=$(ps --no-headers -o ppid,cmd $mpgid | grep ansible-playbook-delayed-color- | awk-print-last.sh | sed -r -e 's/-color//' -e 's/\.log$//' -e 's,log/(ansible-playbook-),\1,')
 
     echo -n -e "\n========= PGID $pgid -- "
-    if [[ ! -f $flag_file ]]; then
-        echo ""
-        echo "skipping as missing flag_file $flag_file"
-        continue
-    fi
 
     ps --no-headers -o ppid,cmd $mpgid | grep -E "^ *1 " | awk-print-shift.sh 3
+    if [[ ! -f $flag_file ]]; then
+        echo -n "${ERED}"
+        echo "skipping as missing flag_file $flag_file. You can show which processes exist by executing"
+        echo "ps $mpgid"
+        echo "and kill those by issuing"
+        echo "kill -9 -- $mpgid"
+        echo -n "${EOFF}"
+        return
+    fi
     echo "Since:   $(date +'%a %b %d %H:%M' -d @$sleep_lmod_epoch)"
     echo "Exec:    $(date +'%a %b %d %H:%M' -d @$(( sleep_lmod_epoch + sleep)) ) (sleeping $sleep seconds)"
     echo "To Kill:"
     echo "kill -9 -- $mpgid; command rm -f $flag_file"
 }
 
+#ongoing_pgids | tr -d '\n' | wc -c | grep -x 0
+#ongoing_pgids | tr -d '\n' | wc -c | grep -E . && echo "retcode is $?" ||  echo "retcode is $?"
+if ! ongoing_pgids >/dev/null; then
+    echo "No ongoing ansible-playbook-delayed processes"
+    exit 0
+fi
 
 for pgid in $(ongoing_pgids); do
     print_pgid "$pgid"
