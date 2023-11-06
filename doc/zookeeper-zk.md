@@ -148,6 +148,7 @@ $ strace -s 99999 -ffttTo /tmp/strace.out service zookeeper-server init
 
 
 # upgrade cluster procedure
+https://zookeeper.apache.org/doc/r3.8.3/releasenotes.html
 https://zookeeper.apache.org/doc/r3.7.1/releasenotes.html
 https://zookeeper.apache.org/releases.html#releasenotes
 https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.2.9/bk_rolling-upgrade/content/upgrade_zookeeper.html

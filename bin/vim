@@ -6,6 +6,17 @@ set -euo pipefail
 test -z "${UNAME:-}" && UNAME="$(uname)"
 test -d ~/.tmp/log && echo "$0 $@" > ~/.tmp/log/vim.exec
 test -d ~/.tmp/vim || mkdir -p ~/.tmp/vim
+args=""
+if [[ $# -eq 1 ]] && [[ ! -f "$1" ]]; then
+    source ~/bin/dot.gitfunctions
+    if git_root_dir &>/dev/null; then
+        f="$(git_root_dir)/$1"
+        if [[ -f "$f" ]]; then
+            args="$f"
+            shift
+        fi
+    fi
+fi
 
 OLDPATH="$PATH"
 export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
@@ -14,7 +25,7 @@ EXPECTED_COMMAND="$(basename "$0")"
 BIN="$(which "$EXPECTED_COMMAND")"
 if [[ -n "$BIN" ]]; then
     export PATH="$OLDPATH"
-    "$BIN" "$@"
+    "$BIN" $args "$@"
 else
-    $0 "$@"
+    $0 $args "$@"
 fi

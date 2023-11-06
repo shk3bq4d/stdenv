@@ -63,7 +63,7 @@ cat $b | while read line; do
     fi
     echo ""
     echo -n "$instruction $c "
-    git log -1 --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat --reverse $ref |
+    git log -1 --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat=10000 --reverse $ref |
         sed -r -e '
         # delete stats summary
         /^ [0-9]+ file/ d
