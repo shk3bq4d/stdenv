@@ -3,6 +3,7 @@ touch -d "2 days ago"
 touch -d "+17hour"
 date -d "2 days ago"
 date -d "+17hour"
+date +'%w' # dow day of week weekday
 date -d "+1min"
 date -d "1min"
 date -d "+1sec"
