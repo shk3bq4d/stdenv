@@ -32,7 +32,9 @@ dmesg -T
 myvalue=600711.395348; date -u -d"1970-01-01 + $(date -u +%s) sec - $(cut -d' ' -f1 </proc/uptime) sec + $myvalue sec" +"%F %T.%N %Z" # dmesg
 
 
-last sunday of october dernier dimanche octobre DST heure hiver été suisse switzerland
+last sunday of october dernier dimanche octobre DST heure hiver été suisse switzerland, CEST, CET Central European Standard Time, Central European Summer Time
+CEST CET Daylight Saving Time begins in Switzerland at 2am on the last Sunday in March, and is when people have to move their clocks forward an hour. This is also when Central European Summer Time begins.
+Daylight Saving Time ends in Switzerland at 3am on the last Sunday in October, when the clocks move backwards an hour and the alpine nation resumes running on Central European Time.
 
 TZ=Europe/Zurich date # timezone
 
