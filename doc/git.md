@@ -243,8 +243,11 @@ git config status.showuntrackedfiles no
 # list untracked files
 git ls-files --others --exclude-standard
 
+GIT_DIR=~/git/bip/blabla/.git glol
+GIT_DIR=~/git/bip/blabla/.git git log
+
 # store in another directory
-export GIT_DIR=/home/jly200_user/gitfw/
+export GIT_DIR=/home/jly200_user/gitfw/.git
 export GIT_WORK_TREE=/
 
 GIT_WORK_TREE=/store/other/directory GIT_DIR=$GIT_WORK_TREE/.git git status --porcelain | grep -qE .
