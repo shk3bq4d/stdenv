@@ -28,4 +28,18 @@ gh --repo https://github.com/kubernetes/kubernetes release list --limit 50
 gh --repo https://github.com/wso2/product-apim release list | cat # piping allows to have absolute date instead of relative "one month ago"
 gh --repo https://github.com/wso2/product-apim release list | grep -v Pre-release
 gh --repo https://github.com/wso2/product-apim search commits
+gh --repo https://github.com/ansible/ansible release list --limit 40
+gh --repo https://github.com/ansible/ansible release list --limit 40 | grep v2.13
+gh --repo https://github.com/ansible-collections/ansible.posix.git        release list --limit 10
+gh --repo https://github.com/ansible-collections/ansible.netcommon.git    release list --limit 10
+gh --repo https://github.com/ansible-collections/community.mysql.git      release list --limit 10
+gh --repo https://github.com/ansible-collections/ansible.windows.git      release list --limit 10
+gh --repo https://github.com/ansible-collections/kubernetes.core.git      release list --limit 10
+gh --repo https://github.com/ansible-collections/azure.git                release list --limit 10
+gh --repo https://github.com/ansible-collections/community.postgresql.git release list --limit 10
+gh --repo https://github.com/ansible-collections/community.zabbix.git     release list --limit 10
+gh --repo https://github.com/ansible-collections/community.general.git    release list --limit 10
+gh --repo https://github.com/ansible-collections/community.docker.git     release list --limit 10
+gh --repo https://github.com/ansible-collections/community.crypto.git     release list --limit 10
+gh --repo https://github.com/netbox-community/ansible-modules             release list --limit 10
 ```

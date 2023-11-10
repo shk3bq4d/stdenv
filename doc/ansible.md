@@ -1,4 +1,19 @@
 # /* ex: set filetype=md fenc=utf-8 expandtab ts=2 sw=2 : */
+
+ansible-project ansible-core            ansible-core main changes
+                2.17                    https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_17.html Drop Python 2.7 and 3.6 for module execution
+                2.16                    https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_16.html Drop Python 3.9 support for controller, Drop Python 3.5 support for module execution
+8.0             2.15                    https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_15.html
+7.0             2.14                    https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_15.html Drop Python 3.8 support for controller
+6.0             2.13 https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_13.html
+5.0             2.12
+4.0             2.11
+3.0
+2.10            2.10 (ansible-base) https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_10.html
+https://docs.ansible.com/ansible/latest/roadmap/old_roadmap_index.html
+
+
+
 * https://github.com/ansible/ansible/blob/stable-2.12/changelogs/CHANGELOG-v2.12.rst#release-summary
 * https://docs.ansible.com/ansible/latest/modules/template_module.html
 * https://docs.ansible.com/ansible/latest/modules/include_vars_module.html

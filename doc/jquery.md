@@ -36,3 +36,5 @@ $('p:contains("mytext")').click() # p element that contains my text
 $(document).ready(function() { });
   $( "tr" ).odd().addClass("odd");
   $( "tr" ).even().addClass("even");
+$('a.logo-wrapper').append($('<span>').text(okta_env.toUpperCase()));
+$('a.logo-wrapper').parent().append($('<span>').text(" " + okta_env.toUpperCase()));
