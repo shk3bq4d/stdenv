@@ -1,3 +1,5 @@
+* end-of-life lifecycle versions https://www.php.net/supported-versions.php
+
 # debug craft mysql connection
 ```php <?php
 $mysqli = mysqli_init();
