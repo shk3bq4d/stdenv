@@ -1,7 +1,14 @@
 * https://www.php.net/ChangeLog-8.php#8.1.25 release changelog version
-* end-of-life lifecycle versions https://www.php.net/supported-versions.php
 * https://www.php.net/downloads.php
 * Unsupported Historical Releases https://www.php.net/releases/index.php
+
+# EOL
+* end-of-life lifecycle versions https://www.php.net/supported-versions.php
+
+Branch  Initial Release  Active Support Until    Security Support Until
+8.0     26 Nov 2020      26 Nov 2022             26 Nov 2023
+8.1     25 Nov 2021      25 Nov 2023             25 Nov 2024
+8.2      8 Dec 2022       8 Dec 2024              8 Dec 2025
 
 # debug craft mysql connection
 ```php <?php

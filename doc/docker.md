@@ -497,3 +497,15 @@ docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
 /var/log/containers/
 /var/lib/containerd/io.containerd.grpc.v1.cri/containers/24bc46c268b2b681c9008499334ab2f809c7d01714df426ecd556b0b3e8e270e/status
 /var/lib/containerd/io.containerd.runtime.v2.task/k8s.io/24bc46c268b2b681c9008499334ab2f809c7d01714df426ecd556b0b3e8e270e
+
+# prune
+* https://docs.docker.com/config/pruning/
+docker volume prune    # This will remove anonymous local volumes not used by at least one container.
+docker volume prune -a # This will remove all       local volumes not used by at least one container.
+docker image prune -f
+docker image prune -f -a --filter "until=336h"
+docker network prune
+docker network prune --filter "until=24h"
+docker system prune
+docker system prune --volumes
+docker system prune --filter "until=24h"
