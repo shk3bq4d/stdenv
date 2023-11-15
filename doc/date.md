@@ -1,4 +1,4 @@
-
+* date -d https://www.gnu.org/software/coreutils/manual/html_node/Date-input-formats.html
 touch -d "2 days ago"
 touch -d "+17hour"
 date -d "2 days ago"
@@ -14,6 +14,12 @@ date -d "june 18 16" # june 18 of current year at 16
 date -d "aug 27" # august 27 of this year
 date -d "sat 5" # next saturday at 5 o'clock
 date -d "next saturday 8:00"
+date -d "tue"   # today (if today is tue) or next tue
+date -d "1 tue" # next tue (even if today is tue)
+date -d "fortnight" # two weeks from now, same time
+date -d "fortnight tue" # two weeks from now, tue, but at midnight
+date -d "2 week" # two weeks from now
+date -d "saturday 8:00 + 7 day"
 date -d "2004-02-29 16:21:42"
 touch -d "1970-01-01 00:00:00"
 touch -d "2038-01-10 00:00:00"
