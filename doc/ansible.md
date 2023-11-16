@@ -2808,18 +2808,20 @@ wait-until.sh "tomorrow 05:55"; ANSIBLE_FORCE_COLOR=true ansible-playbook myplay
 https://github.com/mitogen-hq/mitogen # ansible speed
 
 
-- with_dict: "{{ mydict }}"                                                                      # iterate over with_dict's result with single/individual input/item and output/result
-  shell:                                                                                         # iterate over with_dict's result with single/individual input/item and output/result
-    cmd: echo "{{ item.value }}"                                                                 # iterate over with_dict's result with single/individual input/item and output/result
-  register: dict_result                                                                          # iterate over with_dict's result with single/individual input/item and output/result
-- vars:                                                                                          # iterate over with_dict's result with single/individual input/item and output/result
-    individual_result: "{{ dict_result.results | selectattr('item', 'equalto', item) | first }}" # iterate over with_dict's result with single/individual input/item and output/result
-  debug:                                                                                         # iterate over with_dict's result with single/individual input/item and output/result
-    msg: |-                                                                                      # iterate over with_dict's result with single/individual input/item and output/result
-      input:  {{ item }}                                                                         # iterate over with_dict's result with single/individual input/item and output/result
-      output: {{ individual_result }}                                                            # iterate over with_dict's result with single/individual input/item and output/result
-  when: individual_result.changed                                                 # for example  # iterate over with_dict's result with single/individual input/item and output/result
-  with_dict: "{{ mydict }}"                                                                      # iterate over with_dict's result with single/individual input/item and output/result
+- with_dict: "{{ mydict }}"                                                                      # iterate twice over with_dict's result with single/individual input/item and output/result
+  shell:                                                                                         # iterate twice over with_dict's result with single/individual input/item and output/result
+    cmd: echo "{{ item.value }}"                                                                 # iterate twice over with_dict's result with single/individual input/item and output/result
+  register: dict_result                                                                          # iterate twice over with_dict's result with single/individual input/item and output/result
+- vars:                                                                                          # iterate twice over with_dict's result with single/individual input/item and output/result
+    individual_result: "{{ dict_result.results | selectattr('item', 'equalto', item) | first }}" # iterate twice over with_dict's result with single/individual input/item and output/result
+  debug:                                                                                         # iterate twice over with_dict's result with single/individual input/item and output/result
+    msg: |-                                                                                      # iterate twice over with_dict's result with single/individual input/item and output/result
+      input:  {{ item }}                                                                         # iterate twice over with_dict's result with single/individual input/item and output/result
+      output: {{ individual_result }}                                                            # iterate twice over with_dict's result with single/individual input/item and output/result
+  when: individual_result.changed                                                 # for example  # iterate twice over with_dict's result with single/individual input/item and output/result
+  with_dict: "{{ mydict }}"                                                                      # iterate twice over with_dict's result with single/individual input/item and output/result
+
+    individual_result: "{{ dict_result.results | selectattr('item.key', 'equalto', 'mydictkeyofinterest') | first }}" # retrieve with_dict's result with dict key value
 
 
 play keyword order https://docs.ansible.com/ansible/latest/user_guide/playbooks_strategies.html#ordering-execution-based-on-inventory

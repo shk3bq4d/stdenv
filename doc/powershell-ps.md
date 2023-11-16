@@ -54,3 +54,42 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:InstName)" -Name 'DelayedAutostart' -Value 1
 -- Add dependencies to SQL server service
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:InstName)" -Name 'DependOnService' -Value @("KEYISO", "W32Time")
+
+Test-NetConnection -Computername MYHOSTNETCAT -Port PORT # nc
+tnc                -Computername MYHOSTNETCAT -Port PORT
+
+
+$Username = "MyUserName";
+$Password = "MyPassword";
+$path = "C:\attachment.txt";
+
+function Send-ToEmail([string]$email, [string]$attachmentpath){
+
+    $message = new-object Net.Mail.MailMessage;
+    $message.From = "YourName@gmail.com";
+    $message.To.Add($email);
+    $message.Subject = "subject text here...";
+    $message.Body = "body text here...";
+    $attachment = New-Object Net.Mail.Attachment($attachmentpath);
+    $message.Attachments.Add($attachment);
+
+    $smtp = new-object Net.Mail.SmtpClient("smtp.gmail.com", "587");
+    $smtp.EnableSSL = $true;
+    $smtp.Credentials = New-Object System.Net.NetworkCredential($Username, $Password);
+    $smtp.send($message);
+    write-host "Mail Sent" ;
+    $attachment.Dispose();
+ }
+Send-ToEmail  -email "reciever@gmail.com" -attachmentpath $path;
+
+# function to get stack trace
+function Resolve-Error ($ErrorRecord=$Error[0])
+{
+   $ErrorRecord | Format-List * -Force
+   $ErrorRecord.InvocationInfo |Format-List *
+   $Exception = $ErrorRecord.Exception
+   for ($i = 0; $Exception; $i++, ($Exception = $Exception.InnerException))
+   {   "$i" * 80
+       $Exception |Format-List * -Force
+   }
+}
