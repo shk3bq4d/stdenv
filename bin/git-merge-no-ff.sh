@@ -39,7 +39,7 @@ cur_head=$(   git_branch_ref $cur_branch)
 master_head=$(git_branch_ref $master_branch)
 
 if [[ "$cur_head" == "$master_head" ]]; then
-    fatal "current branch $cur_branch's head is $cur_branch, identical to target branch $master_branch's head $master_head"
+    fatal "current branch $cur_branch's head is $cur_head, identical to target branch $master_branch's head $master_head"
 fi
 
 if git branch --merged $master_branch | grep -E "^[\\* ]*$cur_branch\$"; then

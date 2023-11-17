@@ -28,9 +28,9 @@ git_branch_ref() {
         h=heads
     fi
     d="$(git_root_dir)"
-    f="$d/refs/$h/$branch_name"
+    f="$d/.git/refs/$h/$branch_name"
     if [[ -f "$f" ]]; then
-        < "$f"
+        cat "$f"
     else
         grep -E " refs/$h/$branch_name\$" "$d/.git/packed-refs" |
             awk '{ print $1 }'

@@ -211,7 +211,7 @@ cscript.exe volume-mute.vbs
 
 # telnet netcat
 ```sh
-Test-NetConnection -Computername MYHOSTNETCAT -Port PORT
+Test-NetConnection -Computername MYHOSTNETCAT -Port PORT # nc
 tnc                -Computername MYHOSTNETCAT -Port PORT
 ```
 
