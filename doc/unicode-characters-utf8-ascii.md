@@ -131,9 +131,10 @@ U+00F1 U+00D1
 U+00F5 U+00D5
 &tilde; &sim;  
 
-&atilde; &Atilde;
-&ntilde; &Ntilde;
-&otilde; &Otilde;
+&atilde; &Atilde; Ã ã
+&ntilde; &Ntilde; Ñ ñ
+&otilde; &Otilde; Õ õ Ö ö
+Acute Accent: á, é, í, ó, ú, Á, É, Í, Ó, Ú
 ¸ (Cedilla)
 [façade]
 ç Ç
