@@ -22,7 +22,8 @@ print_pgid() {
     sleep_pid=$(ps --no-headers -o pid,cmd $mpgid | grep -E "sleep [0-9]+$" | awk-print1.sh)
     sleep_lmod_epoch=$(stat -c %Y /proc/$sleep_pid/stat)
     #echo "sleep is $sleep, sleep_pid is $sleep_pid"
-    flag_file=$(ps --no-headers -o ppid,cmd $mpgid | grep ansible-playbook-delayed-color- | awk-print-last.sh | sed -r -e 's/-color//' -e 's/\.log$//' -e 's,log/(ansible-playbook-),\1,')
+    log_file=$(ps --no-headers -o ppid,cmd $mpgid  | grep ansible-playbook-delayed-color- | awk-print-last.sh)
+    flag_file=$(echo "$log_file" | sed -r -e 's/-color//' -e 's/\.log$//' -e 's,log/(ansible-playbook-),\1,')
 
     echo -n -e "\n========= PGID $pgid -- "
 
@@ -38,6 +39,8 @@ print_pgid() {
     fi
     echo "Since:   $(date +'%a %b %d %H:%M' -d @$sleep_lmod_epoch)"
     echo "Exec:    $(date +'%a %b %d %H:%M' -d @$(( sleep_lmod_epoch + sleep)) ) (sleeping $sleep seconds)"
+    echo "To follow:"
+    echo "tail -f $log_file"
     echo "To Kill:"
     echo "kill -9 -- $mpgid; command rm -f $flag_file"
 }
