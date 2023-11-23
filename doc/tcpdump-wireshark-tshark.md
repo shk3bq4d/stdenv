@@ -31,6 +31,19 @@ wireshark ~/tmp/arp.cap &
 # rsyslog
 tcpdump -i eth0 -X port 514
 
+# TCP reset
+## understanding expression
+tcp[13] & 4 != 0
+* tcp[13]: Refers to the 14th byte of the TCP header. In TCP headers, the 13th byte is the flags field, and each bit in this byte represents a different flag (e.g., SYN, ACK, RST).
+* & 4: Performs a bitwise AND operation with 4. In TCP, the RST (Reset) flag is represented by the 4th bit in the flags field. This part of the filter checks if the RST bit is set.
+* != 0': Checks if the result of the previous operation is not equal to 0. This ensures that the RST bit is set, indicating a TCP reset.
+
+## actual commands
+```sh
+tcpdump -n 'tcp[13] & 4 != 0' # tracks TCP reset
+tcpdump -n '(host 172.31.20.100) and (port 443) and (tcp[13] & 4 != 0)' # tracks TCP reset
+```
+
 
 
 

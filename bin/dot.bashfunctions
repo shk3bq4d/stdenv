@@ -1352,4 +1352,8 @@ cds() {
     cd $d
 }
 
+cd_realpath() {
+    cd -P "$(readlink -f "$PWD")"
+}
+
 true # last statement must return true
