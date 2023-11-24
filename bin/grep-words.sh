@@ -13,15 +13,23 @@ esac
 test -t 1 && color=always || color=no
 
 go() {
+  local arg args
   if [[ $# -eq 0 ]]; then
       cat -
-  else
+      return
+  fi
+  args=""
+  while :; do
       arg="$1"
       shift
-      export GREP_COLORS='ms=01;32'
-      #"$0" "$@" | grep --line-buffered --color=$color -aE $case_sensitive "$arg" --
-      "$0" "$@" | ack --color $case_sensitive "$arg" --
-  fi
+      case "$arg" in \
+      -*) args="$args $arg";;
+      *) break;;
+      esac
+  done
+  export GREP_COLORS='ms=01;32'
+  #"$0" "$@" | grep --line-buffered --color=$color -aE $case_sensitive "$arg" --
+  "$0" "$@" | ack --color $case_sensitive $args "$arg" --
 
 }
 
