@@ -16,3 +16,6 @@ CVE-2023-44487 HTTP/2 Rapid Reset Attack
 
 2023.11.03 CVE-2023-46724 squid ssl_bump
 * https://access.redhat.com/security/cve/cve-2023-46724
+
+2023.11.20 CVE-2023-6175 wireshark netscreen
+* https://access.redhat.com/security/cve/cve-2023-6175

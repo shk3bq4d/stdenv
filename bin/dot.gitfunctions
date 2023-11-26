@@ -1,5 +1,16 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
+
+unalias git  &>/dev/null || true # allow proper sourcing in shell
+unalias glol &>/dev/null || true # allow proper sourcing in shell
+glol() {
+    git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' "$@"
+}
+
+git_log_commit_message() {
+    git log --pretty='%s' "$@"
+}
+
 git_is_current_repo_clean() {
     ! git status --porcelain | grep -qE .
 }
@@ -8,8 +19,42 @@ git_has_anything_been_staged() {
     ! git diff --cached --quiet
 }
 
-git_current_branch() {
+git_branch_ref() {
+    local f branch_name d h
+    branch_name="$1"
+    if [[ $branch_name == */* ]]; then
+        h=remotes
+    else
+        h=heads
+    fi
+    d="$(git_root_dir)"
+    f="$d/.git/refs/$h/$branch_name"
+    if [[ -f "$f" ]]; then
+        cat "$f"
+    else
+        grep -E " refs/$h/$branch_name\$" "$d/.git/packed-refs" |
+            awk '{ print $1 }'
+    fi
+}
+
+git_current_branch_old() {
     git rev-parse --abbrev-ref HEAD
+}
+
+git_current_branch () {
+    local ref
+    ref=$(__git_prompt_git symbolic-ref --quiet HEAD 2> /dev/null)
+    local ret=$?
+    if [[ $ret != 0 ]]
+    then
+        [[ $ret == 128 ]] && return
+        ref=$(__git_prompt_git rev-parse --short HEAD 2> /dev/null)  || return
+    fi
+    echo ${ref#refs/heads/}
+}
+
+__git_prompt_git () {
+    GIT_OPTIONAL_LOCKS=0 command git "$@"
 }
 
 _git_mrdirname () {

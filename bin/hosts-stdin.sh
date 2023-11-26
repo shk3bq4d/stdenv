@@ -8,6 +8,6 @@ export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:~/bin
 cat - |
     sed -r -e 's/[ :,\t/]/\n/g' |
     tr '[[:upper:]]' '[[:lower:]]' |
-    grep -E '^([a-z][a-z0-9-]{1,40}\.){2,5}(lan|co|io|com|ch|mgnt|local)(\.|\.yml)?$' |
+    grep -E '^([a-z][a-z0-9-]{1,40}\.){2,5}(lan|co|io|com|ch|mgnt|local|il)(\.|\.yml)?$' |
     sed -r -e 's/(\.|\.yml)$//' |
     sort -u

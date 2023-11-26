@@ -199,3 +199,7 @@ upstream beats {
   server 127.0.0.1:5045;
 # server 10.201.100.101:5045;
 }
+
+# tweaking
+* https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx
+* https://www.getpagespeed.com/?s=nginx

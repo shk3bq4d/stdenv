@@ -227,8 +227,9 @@ alias -g C='2>&1|cat'
 alias -g C1='2>/dev/null|C'
 alias -g C2='2>&1 >/dev/null|C'
 
-alias -g G='2>&1|grep --line-buffered --color=auto -aE'
-alias -g GI='2>&1|grep --line-buffered --color=auto -iaE'
+#alias -g G='2>&1|grep --line-buffered --color=auto -aE'
+alias -g G='2>&1|grep-words.sh'
+alias -g GI='2>&1|grep-words-i.sh'
 
 for i in {1..9}; do
     alias -g G$i="G -C$i"

@@ -2892,3 +2892,6 @@ steps:
 * type "Full" to search for "Capture full size screenshot"
 * press Enter, a png image file whose name matches most of the URL, has been saved to ~/Downloads
 
+
+# control-f find hijacking search
+workaround: select location bar, then do you control-f

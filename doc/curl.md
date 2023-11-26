@@ -9,10 +9,12 @@ curl -X PATCH
 curl -L # follow
 curl -k # insecure https certificate validation
 curl -H "Content-Type: application/json"
+curl --data "name=curl" --data "tool=cmdline" https://example.com # POST is implicit, content-type: application/x-www-form-urlencoded is implicit
+curl  -d    "name=curl"  -d    "tool=cmdline" https://example.com # POST is implicit, content-type: application/x-www-form-urlencoded is implicit
 curl -H "Content-Type: application/json"     --data-raw '{"key1":"value"}' # raw json
 curl -H "Content-Type: application/json"     --data-binary '{"key1":"value"}' # raw json --data-raw not in centos. Beware that data-binary has special handling of @
 curl -H "Content-Type: application/json"     --data-binary @filename.json
-curl -H "Content-Type: multipart/form-data;" -F "key1=val1"        # raw form
+curl -H "Content-Type: multipart/form-data;" --form "key1=val1"        # raw form
 curl -T filename.txt # PUT --upload-file
 curl --upload-file filename.txt # PUT --upload-file
 curl -v # debug verbose see certificate, request headers, response headers

@@ -13,3 +13,9 @@ Check for updates
 
 # match include
 https://stackoverflow.com/questions/71882835/convert-deprecated-include-with-regular-expression-to-match-in-userscript
+
+extensions
+tampermonkey
+dashboard
++
+(Delete all content)
