@@ -172,30 +172,31 @@ compdef zabbix-maintenance=ssh
 compdef zabbix-maintenance-off=ssh
 #complete_function ssh-no-host-checking ssh
 
+alias -g NC='|sed-remove-ansi-colors.sh' # no colors
 case "$UNAME" in \
 freebsd)
     alias grep='nocorrect grep --line-buffered -a --color=auto'
-    alias -g X="|tr '\n' '\0' | xargs -0 -o"
-    alias -g XX='|xargs -o'
-    alias -g 'X@'='|xargs -o -I@'
-    alias -g X1='|xargs -o -n 1'
-    alias -g 'X@1'='|xargs -n 1 |xargs -o -I@'
-    alias -g 'X1@'='|xargs -n 1 |xargs -o -I@'
+    alias -g X="NC|tr '\n' '\0' | xargs -0 -o"
+    alias -g XX='NC|xargs -o'
+    alias -g 'X@'='NC|xargs -o -I@'
+    alias -g X1='NC|xargs -o -n 1'
+    alias -g 'X@1'='NC|xargs -n 1 |xargs -o -I@'
+    alias -g 'X1@'='NC|xargs -n 1 |xargs -o -I@'
     ;;
 *)
     alias grep='nocorrect grep --line-buffered -a --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
-    alias -g X="| xargs                --open-tty --verbose --no-run-if-empty -d '\n'"
-    alias -g XX='|xargs                --open-tty --verbose --no-run-if-empty'
-    alias -g 'X@'='|xargs              --open-tty --verbose --no-run-if-empty -I@'
-    alias -g X1='|xargs                --open-tty --verbose --no-run-if-empty -n 1'
-    alias -g 'X@1'='|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
-    alias -g 'X1@'='|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
+    alias -g X="NC| xargs                --open-tty --verbose --no-run-if-empty -d '\n'"
+    alias -g XX='NC|xargs                --open-tty --verbose --no-run-if-empty'
+    alias -g 'X@'='NC|xargs              --open-tty --verbose --no-run-if-empty -I@'
+    alias -g X1='NC|xargs                --open-tty --verbose --no-run-if-empty -n 1'
+    alias -g 'X@1'='NC|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
+    alias -g 'X1@'='NC|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
     ;;
 esac
 alias -g HF="$(hostname -f)"
-alias -g XV="|sed-remove-ansi-colors.sh| xargs bash -c '</dev/tty vim \$@' ignoreme"
+alias -g XV="NC |xargs bash -c '</dev/tty vim \$@' ignoreme"
 alias -g LXV="-l XV" # like in ack PATTERN -l XV"
-alias -g XC="|sed-remove-ansi-colors.sh|xclip-tee.sh"
+alias -g XC="NC|xclip-tee.sh"
 alias git='nocorrect git'
 
 alias -g LA='"$(last)"'
@@ -240,7 +241,7 @@ for i in {1..9}; do
     alias -g P$i="|awk '{ print \$$i }'"
 done
 
-alias -g V='2>&1|sed-remove-ansi-colors.sh|vim -R -'
+alias -g V='2>&1 NC |vim -R -'
 alias -g V1='2>/dev/null|V'
 alias -g V2='2>&1 >/dev/null|V'
 
@@ -258,14 +259,14 @@ alias -g P23='|awk "{ print \$2 \" \" \$3 }"'
 alias -g P21='|awk "{ print \$2 \" \" \$1 }"'
 alias -g P31='|awk "{ print \$3 \" \" \$1 }"'
 alias -g P32='|awk "{ print \$3 \" \" \$2 }"'
-alias -g Wa='| while read a; do '
-alias -g Wab='| while read a b; do '
-alias -g Wabc='| while read a b c; do '
-alias -g Wabcd='| while read a b c d; do '
-alias -g Wabcde='| while read a b c d; do '
-alias -g Wabcdef='| while read a b c d; do '
+alias -g Wa='NC| while read a; do '
+alias -g Wab='NC| while read a b; do '
+alias -g Wabc='NC| while read a b c; do '
+alias -g Wabcd='NC| while read a b c d; do '
+alias -g Wabcde='NC| while read a b c d; do '
+alias -g Wabcdef='NC| while read a b c d; do '
 
-alias -g Y='|json-to-yaml.sh'
+alias -g Y='NC|json-to-yaml.sh'
 alias -g S='|sed -r -e'
 
 alias findf='find . -type d -name .git -prune -o -type f -print'

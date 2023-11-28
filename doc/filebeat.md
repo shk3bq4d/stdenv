@@ -70,6 +70,8 @@ equals
         contains:
           source: "test"
 
+if.equals.log.file.path:
+if.regexp.log.file.path:
 
 processors:
   - rename:
@@ -196,14 +198,14 @@ processors:
       ignore_failure: true
       overwrite_keys: true
       target_prefix: ""
-  - drop_fields:
-      fields:
-        - ecs
-        - input
-        - host
-        - log
-        - agent
-        - _
+  - drop_fields:     # delete remove rm
+      fields:        # delete remove rm
+      - ecs          # delete remove rm
+      - input        # delete remove rm
+      - host         # delete remove rm
+      - log          # delete remove rm
+      - agent        # delete remove rm
+      - _            # delete remove rm
 ```
 
 
@@ -213,13 +215,16 @@ https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.15.2-window
 
 
 - timestamp:
-   field: ansible.time
-   test:
-     - Dec 31 1999 23:59:59.999
-     - Jul 15 2021 13:08:56.040
-     - 1663443523.289
-   layouts:
+   field: ansible.time # timestamp
+   target_field: @timestamp # @timestamp is default, and a such this is optional
+   test: # timestamp
+     - Dec 31 1999 23:59:59.999 # timestamp
+     - Jul 15 2021 13:08:56.040 # timestamp
+     - 1663443523.289 # timestamp
+   layouts: # timestamp
      - Jan  2 2006 15:04:05.999        # timestamp layout
+      # Fri, 24 Nov 2023 07:29:19 +0000
+     - Mon, 2 Jan 2006 15:04:05.999 -0700 # timestamp layout
      - Mon Jan  2 2006 15:04:05.999    # timestamp layout
      - Mon Jan 2 2006 15:04:05.999     # timestamp layout
      - '2006-01-02T15:04:05Z'          # timestamp layout
@@ -269,7 +274,7 @@ filebeat.inputs:
 
 date -d "2006-01-02 15:04:05" +"%A" # filebeat timestamp reference day of week is Monday
 
-https://dissect-tester.jorgelbg.me/ 
+https://dissect-tester.jorgelbg.me/
 
 # missing source field
 * https://github.com/Graylog2/graylog2-server/issues/13254
@@ -291,6 +296,11 @@ timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/1587
           - field: myfield #regexp
             pattern: ^(.)(.)([^x]+)x(\d+)x(\d+)x(\d+)$ # regexp
             replacement: $1 $2 # regexp ( dollar as group back trace)
+
+copy_fields:
+  fields: # copy
+  - from: copy.from
+    to:   copy.to
 
 processor add_cloud_metadata
 processor add_cloudfoundry_metadata
