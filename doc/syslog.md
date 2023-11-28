@@ -68,3 +68,10 @@ Ski Haus Delta reports temperature 60
 
 # Paloalto to graylog
 log format IETF
+
+```sh
+tcpdump -nn -i eth1   'host 172.31.180.72 and port 514' -X > mycapture
+d() { date +'%Y-%m-%dT%H:%M:%S+01:00' -d "+1 hour"; }
+cat mycapture | grep -E '^[^0-9]' | cut -d' ' -f 3-10 | xxd -p -r | ser -r
+cat mycapture | grep -E '^[^0-9]' | sed -r -e 's/^ *[0-9:x]+ *//' -e 's/  .*//' | xxd -p -r | nc -u 172.31.11.105 514
+```

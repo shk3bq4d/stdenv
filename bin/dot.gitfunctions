@@ -78,13 +78,28 @@ _git_mrdirname () {
     fi
 }
 
+unset_git_env() {
+    unset GIT_WORK_TREE
+    unset GIT_DIR
+}
+
+git_env() {
+    unset_git_env
+    export GIT_WORK_TREE="$(git_root_dir "$@")"
+    export GIT_DIR="$GIT_WORK_TREE/.git"
+}
+
 git_root_dir () {
     local a
     if [[ -n ${GIT_DIR:+1} ]]
     then
         [[ -f ${GIT_DIR}/index ]] && echo "${GIT_DIR}" && return 0
     fi
-    a="$PWD"
+    if [[ $# -eq 0 ]]; then
+        a="$PWD"
+    else
+        a="$(_git_mrdirname "$1")"
+    fi
     while [[ "$a" != "/" ]] && [[ "$a" != "." ]]
     do
         [[ -d "$a/.git" ]] && echo "$a" && return 0
