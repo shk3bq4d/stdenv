@@ -40,8 +40,13 @@ tcp[13] & 4 != 0
 
 ## actual commands
 ```sh
-tcpdump -n 'tcp[13] & 4 != 0' # tracks TCP reset
-tcpdump -n '(host 172.31.20.100) and (port 443) and (tcp[13] & 4 != 0)' # tracks TCP reset
+tcpdump -nn 'tcp[13] & 4 != 0' # tracks TCP reset
+tcpdump -nn '(host 172.31.20.100) and (port 443) and (tcp[13] & 4 != 0)' # tracks TCP reset
+
+tcpdump -nn 'not ip6'  # exclude ipv6
+tcpdump -nn 'not arp'  # exclude arp
+tcpdump -nn 'not icmp' # exclude ping
+tcpdump -nn 'not igmp' # exclude igmp
 ```
 
 
