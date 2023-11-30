@@ -77,6 +77,7 @@ Version     Code name     Release date                                     Suppo
 dmesg
 
 ifconfig eth0 10.19.29.54 netmask 255.255.255.0 # ifconfig route gateway
+ip route add 192.168.1.2 via 192.168.0.1
 route add default gw 10.19.29.1 #                 ifconfig route gateway
 route del -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103
 route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103
