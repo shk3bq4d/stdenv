@@ -33,7 +33,7 @@ print_pgid() {
         echo "skipping as missing flag_file $flag_file. You can show which processes exist by executing"
         echo "ps $mpgid"
         echo "and kill those by issuing"
-        echo "kill -9 -- $mpgid"
+        echo "kill -- $mpgid"
         echo -n "${EOFF}"
         return
     fi
@@ -42,7 +42,7 @@ print_pgid() {
     echo "To follow:"
     echo "tail -f $log_file"
     echo "To Kill:"
-    echo "kill -9 -- $mpgid; command rm -f $flag_file"
+    echo "kill -- $mpgid; command rm -f $flag_file"
 }
 
 #ongoing_pgids | tr -d '\n' | wc -c | grep -x 0
