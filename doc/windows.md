@@ -71,8 +71,8 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
 rundll32.exe shell32.dll,Control_RunDLL ncpa.cpl
 
 
-cd "$APPDATA/Microsoft/Windows/Start Menu/Programs/Startup"
-cd %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup
+cd /d "$APPDATA/Microsoft/Windows/Start Menu/Programs/Startup"
+cd /d %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup & explorer
 cd "/cygdrive/c/Users/$(whoami)/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
 ~/stdhome/bin/cron-from-win32.bat # dont forget to go to stdhome dir as windows wont interpret symlink
 
