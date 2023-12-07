@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
-##
-##Usage:  __SCRIPT__ "date -d expression" playbook arguments
-##executes a delayed ansible run
-##
-## Author: Jeff Malone, 10 Mar 2022
-##
 
 set -euo pipefail
 umask 027
@@ -33,7 +27,7 @@ done
 
 ID="$(_script_id "$@")"
 flagfile="$HOME/.tmp/ansible-playbook-delayed-$ID"
-logfile1="$HOME/.tmp/log/ansible-playbook-delayed-black-${ID}.log"
+#logfile1="$HOME/.tmp/log/ansible-playbook-delayed-black-${ID}.log"
 logfile2="$HOME/.tmp/log/ansible-playbook-delayed-color-${ID}.log"
 
 test -f $flagfile && echo "FATAL: flagfile already exists" && ls -l "$flagfile" && exit 1
@@ -47,7 +41,7 @@ echo "flagfile is $flagfile"
 
 {
     set -euo pipefail;
-    exec > >(stdbuf -o0 ts | tee $logfile2 | sed-remove-ansi-colors.sh | tee $logfile1)
+    exec > >(stdbuf -o0 ts | tee $logfile2 | sed-remove-ansi-colors.sh ) #| tee $logfile1)
     exec 2>&1
     trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 
@@ -56,8 +50,8 @@ echo "flagfile is $flagfile"
     echo "T is $T"
     echo "to follow (with colors) execute"
     echo "tail -f $logfile2"
-    echo "to follow (no colors) execute"
-    echo "tail -f $logfile1"
+#   echo "to follow (no colors) execute"
+#   echo "tail -f $logfile1"
     echo "to cancel, execute"
     echo "rm -f $flagfile"
     echo "args are $@"
@@ -68,6 +62,7 @@ echo "flagfile is $flagfile"
     flagfile_lmod_after="$(date -r "$flagfile" "+%s")"
     test "$flagfile_lmod_before" -ne "$flagfile_lmod_after" && echo "FATAL: flagfile last mod time changed $flagfile_lmod_before != $flagfile_lmod_after" && trap '' SIGHUP SIGINT SIGQUIT SIGTERM EXIT && exit 1
     export ANSIBLE_FORCE_COLOR=true
+    export ANSIBLE_TIMEOUT=120
     set +e
     echo "pwd is $PWD"
     echo ansible-playbook "$@"
@@ -82,6 +77,6 @@ echo "flagfile is $flagfile"
 disown
 
 sleep 3
-cat $logfile1
+cat $logfile2
 
 exit 0
