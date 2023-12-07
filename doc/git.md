@@ -12,6 +12,8 @@ git log
 git help -a
 git help -g
 
+git checkout --orphan new_branch # create a new commit with zero parents
+
 # This will destroy any local modifications.
 # Don't do it if you have uncommitted work you want to keep.
 git reset --hard 0d1d7fc32
