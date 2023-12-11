@@ -107,7 +107,7 @@ fi
 # append to the history file, don't overwrite it
 HISTSIZE=200000
 HISTFILESIZE=400000
-HISTCONTROL=ignorespace
+HISTCONTROL=ignorespace:erasedups # https://askubuntu.com/questions/15926/how-to-avoid-duplicate-entries-in-bash-history
 HISTTIMEFORMAT="%Y.%m.%d %H:%M:%S "
 if [[ -z "$HISTFILE" ]]; then
     HISTFILE=$HOME/.bash_history
@@ -187,9 +187,6 @@ alias rsync='rsync -vh --progress'
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-HISTFILESIZE=1000000000
-HISTSIZE=1000000
-HISTCONTROL=ignorespace
 set -o vi
 set -o noclobber
 if which vim  &>/dev/null; then # zsh hash does not work, I'm not sure why
