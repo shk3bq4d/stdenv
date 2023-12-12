@@ -18,6 +18,8 @@ hostname | select-string -pattern '[abcx]' # grep
 select-String '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.conf' -Pattern ^Server # grep
 get-content '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.log' -Tail 100 # tail
 get-content 'C:\Program Files\Zabbix Agent 2\zabbix_agent2.log' -Tail 100 # tail
+get-content 'C:\Program Files\Zabbix Agent 2\zabbix_agent2.log' -wait # tail -f follow
+powershell.exe get-content 'C:\Program Files\Zabbix Agent 2\zabbix_agent2.log' -wait # tail -f follow
 
 Get-Help Search-ADAccount -ShowWindow
 

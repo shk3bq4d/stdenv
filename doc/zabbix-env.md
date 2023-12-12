@@ -250,7 +250,12 @@ import urllib; urllib.quote('myp/\ssword', safe='') # escape uricomponent encode
 {_csrf_token}=regex:name="_csrf_token" value="([^"]*){43}"
 
 vi /etc/zabbix/zabbix_server.conf
-DebugLevel=4
+DebugLevel=4 # 0 - basic information about starting and stopping of Zabbix processes
+DebugLevel=1 - critical information;
+DebugLevel=2 - error information;
+DebugLevel=3 - warnings;
+DebugLevel=4 - for debugging (produces lots of information);
+DebugLevel=5 - extended debugging (produces even more information).
 service zabbix-server restart
 tail -f /var/log/zabbix/zabbix_server.log | grep -C0 -E 'process_httptest|web scenario'
 ```
