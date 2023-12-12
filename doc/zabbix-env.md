@@ -703,3 +703,8 @@ zabbix-api==0.5.6 # py pip used to be used by ansible collection community.zabbi
 * https://www.cvedetails.com/vulnerability-list/vendor_id-5667/Zabbix.html
 * https://www.opencve.io/cve?vendor=zabbix
 * https://www.zabbix.com/security_advisories
+
+
+
+# other
+* zabbix agent2 windows syslog logtype=system https://git.zabbix.com/projects/ZBX/repos/zabbix/commits/0d03c8f6e95db370d0d64565d95ba9776ada9b96#src/go/conf/zabbix_agent2.win.conf
