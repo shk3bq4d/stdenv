@@ -457,6 +457,10 @@ zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select * from win32_registr
 zabbix_get  -s 10.201.16.112 -k "wmi.get[root\\cimv2,select status from win32_diskdrive where Name like '%PHYSICALDRIVE0%']" # wmic
 zabbix_get  -s 10.1.1.1 -k "wmi.get[root\\cimv2,select * from Win32_LoggedOnUser]"
 zabbix_get  -s 10.1.1.1 -k "wmi.getall[root\cimv2,select * from win32_networkadapterconfiguration]"
+zabbix_get  -s 10.1.1.1 -k 'wmi.getall[root\cimv2,select * from win32_networkadapterconfiguration where ipenabled=true]'
+zabbix-get-proxy.sh BIPBIP 'wmi.getall[root\cimv2,select * from win32_networkadapterconfiguration where ipenabled=true]' | jq '.[].IPAddress'
+zabbix-get-proxy.sh BIPBIP 'wmi.getall[root\cimv2,select * from win32_networkadapterconfiguration where ipenabled=true]' | jq '.[].DNSServerSearchOrder'
+zabbix-get-proxy.sh BIPBIP 'wmi.getall[root\cimv2,select * from win32_networkadapterconfiguration where ipenabled=true]' | jq '.[].MACAddress'
 wmic path win32_networkadapter get netenabled,name,macaddress,speed,physicaladapter,adaptertype
 wmic nicconfig where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
 wmic path win32_networkadapterconfiguration where ipenabled=true get defaultipgateway,description,dhcpleaseobtained,dhcpserver,dnsdomainsuffixsearchorder,dnshostname,dnsserversearchorder,ipaddress,ipenabled,ipsubnet,macaddress
