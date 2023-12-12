@@ -110,7 +110,7 @@ Options:
                         set additional variables as key=value or YAML/JSON
   --flush-cache         clear the fact cache
   --force-handlers      run handlers even if a task fails
-  -f FORKS, --forks=FORKS
+  -f FORKS, --forks=FORKS # throttle serial
                         specify number of parallel processes to use
                         (default=5)
   -h, --help            show this help message and exit

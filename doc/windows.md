@@ -179,6 +179,7 @@ echo bip &REM this is a comment as ampersand add a new command and REM at the be
 taskkill /f /im lsass.exe &:: reboot using a sneaky way
 shutdown /r &:: reboot
 shutdown /l &:: log off
+logoff.exe &:: log off
 shutdown /l /f /t 0 &:: force log off
 shutdown /r /t 18000 &:: restart machine in 5 hours
 mstsc /v server:port &:: rdp remote desktop protocol
