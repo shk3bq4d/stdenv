@@ -2895,3 +2895,7 @@ steps:
 
 # control-f find hijacking search
 workaround: select location bar, then do you control-f
+
+
+https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Linux&num=1&offset=0
+https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Windows&num=1&offset=0

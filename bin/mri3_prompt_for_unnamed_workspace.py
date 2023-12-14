@@ -106,7 +106,7 @@ def go2(args=[], only_for_unnamed=True):
     logger.info('ws_number is {}'.format(ws_number))
 
     proposalsH = {
-        'comm':None,
+        'comm': '~/bin/notinpath/workspace-comm.sh',
         'whatsapp':None,
         'doc':None,
         'vpn':None, #'~/bin/vpn-start.sh',
