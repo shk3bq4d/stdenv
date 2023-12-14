@@ -1,4 +1,5 @@
 * https://nextcloud.com/changelog/ # release
+* https://github.com/nextcloud/server/milestones # release
 * [hub.docker.com](https://hub.docker.com/_/nextcloud)
 
 https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
