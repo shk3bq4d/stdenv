@@ -78,3 +78,12 @@ less /run/user/3000/i3/errorlog.4108
 cd /run/user/$(id -u)/i3/
 
 mod+q # sticky floating window, persistent accross all workspaces
+
+# layout
+* https://i3wm.org/docs/layout-saving.html
+```sh
+i3-save-tree --workspace '1   comm   ' > ~/.config/i3/i3-save-tree-workspace-comm.json
+i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
+i3-msg "append_layout ~/.config/i3/i3-save-tree-workspace-comm.json"
+echo "'$(mri3_current_workspace.py)'" XC
+```
