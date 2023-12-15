@@ -174,3 +174,7 @@ stdbuf -o0 tcpdump # unbuffered IO for piping
 
 
 pcapfix -d openwrt-1696493214-2.cap # repair broken corrupted
+
+# tshark
+tshark -Y http.request.uri -r FILENAME
+tshark -qz conv,tcp -r FILENAME
