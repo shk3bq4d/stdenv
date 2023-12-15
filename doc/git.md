@@ -437,6 +437,7 @@ git --git-dir=~/git/ly.abc1.ch/stdenv/.git submodule deinit ~
     path = .vim/bundle/vim-gitgutter
     url = https://github.com/airblade/vim-gitgutter.git
 
+git gc # garbage collect on slow zsh prompt
 
 # interactive
 git add --interactive # stages
@@ -634,8 +635,8 @@ git config --global core.excludesfile ~/.gitignore_global
 
 git push origin --delete refs/heads/branchname # delete branch with collision with tag name
 
-GIT_WORK_TREE=~/git/blabla       # environment variable directory
-GIT_WORK_DIR=$GIT_WORK_TREE}.git # environment variable directory
+GIT_WORK_TREE=~/git/blabla    # environment variable directory
+GIT_DIR=${GIT_WORK_TREE}/.git # environment variable directory
 
 
 git rebase; git merge --no-ff # "semi-linear merge" is the way we work
