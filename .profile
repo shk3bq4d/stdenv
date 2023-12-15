@@ -20,7 +20,7 @@ do
 done < <(grep -hE "^export (WORK)" ~/.std*)
 
 export TERMINAL=mrurxvt
-export WFICA_OPTS="-nosound -errno"
+#export WFICA_OPTS="-nosound -errno"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
