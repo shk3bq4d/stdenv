@@ -1,0 +1,258 @@
+<!-- ex: set filetype=html fenc=utf-8 expandtab ts=4 sw=4 : -->
+<html><head>
+<link rel="icon" type="image/png" href="favicon-48x48.ico" sizes="48x48">
+<base target="_blank">
+        <style type="text/css">
+
+body, #right {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#left {
+    /* width: 20%; */
+}
+
+#right {
+    left: 20%;
+    border: 1px;
+}
+
+td {
+    padding: 3px 20px;
+    margin: 0;
+}
+
+.treven  { background-color: #eef; }
+
+/*.hover { background-color: #aaf; }*/
+
+table a, #right_div a             {text-decoration: none;}
+
+a.tdeven, a.tdeven:visited {color: #00f;}
+
+a.tdodd,   a.tdodd:visited {color: #bb3278;}
+
+a:hover      {color: #f00;}
+
+table a:hover, #right_div a:hover {text-decoration: underline;}
+
+.none { display: none; }
+
+iframe {
+    display: block;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    bottom: 0;
+    border: 0;
+    left: 30%;
+    width: 70%;
+    height: 100%;
+    background-color:  #ccf;
+}
+
+#right_div {
+    display: block;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    bottom: 0;
+    border: 0;
+    right: 0;
+    /* width: 500px; */
+    /* float: right; */
+    height: 100%;
+    /* background-color:  #fcc; */
+    overflow: scroll;
+}
+
+#leftdiv {
+    display: block;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    bottom: 0;
+    border: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color:  #fcc; */
+    overflow: scroll;
+}
+
+#hosts   .treven  { background-color: #eef; }
+
+/*#hosts   .hover { background-color: #aaf; } */
+
+#classes .treven  { background-color: #fee; }
+
+/*#classes .hover { background-color: #faa; } */
+
+#refresh {
+    position: absolute;
+    display: block;
+    right: 30px;
+}
+
+input {
+    width: 400px;
+}
+
+.oktaenv {
+    width: 120px;
+}
+
+.oktaline a, .oktaline span {
+    display: inline-table;
+}
+
+</style>
+
+</style></head><body>
+<a id="refresh" href="#" onclick="javascript:location.reload(true); return false;">refresh page</a>
+<input id="input_filter" type="text" />
+<table id="left"></table>
+<script type="text/javascript" src="../stdsf/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="../stdsf/index.js"></script>
+<script type="text/javascript">
+
+    const spec = `
+OKTA TF RESSOURCE                          OKTA TF DATA                     OKTA GUI                                               OKTA URL                              OKTA API                               DCA
+   https://www.jumbo.ch/fr/gros-outillage-atelier/atelier-cave/etageres/etageres-a-vin/c/04030104
+`;
+
+
+a = 0;
+b = spec.trim().indexOf("OKTA TF DATA");
+c = spec.trim().indexOf("OKTA GUI");
+d = spec.trim().indexOf("OKTA URL");
+e = spec.trim().indexOf("OKTA API");
+f = spec.trim().indexOf("DCA");
+
+okta_env = [
+    ["", "A DEV", "dev"],
+    ["", "B UAT", "uat"],
+    ["", "EU PROD", "us"],
+    ["", "US PROD", "prod"],
+    ["", "PREVIEW", "preview"],
+    ];
+
+table = document.getElementById('left');
+
+spec.split("\n")
+    .filter(x => x)
+    .filter(x => x.indexOf('TF MODULE') < 0)
+    .map(line =>
+{
+    okta_r   = line.substring(a, b).trim();
+    okta_d   = line.substring(b, c).trim();
+    okta_gui = line.substring(c, d).trim();
+    okta_url = line.substring(d, e).trim();
+    api_url  = line.substring(e, f).trim();
+    dca_url  = line.substring(f).trim();
+    okta_r   = okta_r == '|' ? '' : okta_r;
+    okta_d   = okta_d == '|' ? '' : okta_d;
+    okta_gui = okta_gui == '|' ? '' : okta_gui;
+    okta_url = okta_url == '|' ? '' : okta_url;
+    api_url  = api_url == '|' ? '' : api_url;
+    dca_url  = dca_url == '|' ? '' : dca_url;
+    if (okta_url == 'OKTA URL')
+    {   okta_url = '';
+    }
+    okta_d_text = okta_d;
+
+    tr = $('<tr>');
+    $('#left').append(tr);
+
+    if (okta_r)
+    {
+        if (okta_d == '*')
+        {   okta_d = okta_r;
+            okta_d_text = 'data';
+        }
+        t_template_data = {
+            t_top_url: 'https://registry.terraform.io/providers/okta/okta/latest/docs/resources/',
+            okta_r: okta_r,
+            okta_r_short: okta_r.replace(/^okta_/, ''),
+            };
+        t_template = '<td><a href="{t_top_url}{okta_r_short}">{okta_r}</a></td>';
+        tr.append(
+            $(t_template.replace(/{(\w+)}/g, function(match, key) { return t_template_data[key] || match; })),
+           );
+    }
+    else
+    {   tr.append('<td>');
+    }
+
+    if (okta_d)
+    {
+        d_template_data = {
+            d_top_url: 'https://registry.terraform.io/providers/okta/okta/latest/docs/data-sources/',
+            okta_d: okta_d,
+            okta_d_text: okta_d_text,
+            okta_d_short: okta_d.replace(/^okta_/, ''),
+            };
+        d_template = '<td><a href="{d_top_url}{okta_d_short}">{okta_d_text}</a></td>';
+
+        tr.append(
+            $(d_template.replace(/{(\w+)}/g, function(match, key) { return d_template_data[key] || match; })),
+           );
+    }
+    else
+    {   tr.append('<td>');
+    }
+
+    tr.append('<td>' + okta_gui + '</td>');
+
+    if (api_url)
+    {   tr.append('<td><a href="https://developer.okta.com/docs/reference/api/' + api_url + '">API ' + api_url + '</a></td>');
+    }
+    else
+    {   tr.append('<td>');
+    }
+
+    okta_gui_template = '<td><a href="https://{env_url}/admin/{okta_url}">{env_name}</a></td>';
+    okta_env.map(x =>
+    {
+        env_url  = x[0];
+        env_name = x[1];
+        okta_gui_template_data = {
+                env_url: env_url,
+                okta_url: okta_url,
+                env_name, env_name,
+                }
+        tr.append(
+                okta_url ? $(okta_gui_template.replace(/{(\w+)}/g, function(match, key) { return okta_gui_template_data[key] || match; })) : '<td>',
+           );
+    })
+
+    if (dca_url)
+    {
+        bitbucket_template = '<td><a href="">dca-{env_bb}</a></td>';
+        tr.append('<td>' + dca_url + '</td>');
+        okta_env.map(x =>
+        {
+            env_url  = x[0];
+            env_bb = x[2];
+
+            bitbucket_template_data = {
+                    dca_url: dca_url,
+                    env_bb, env_bb,
+                    }
+            tr.append(
+                    $(bitbucket_template.replace(/{(\w+)}/g, function(match, key) { return bitbucket_template_data[key] || match; }))
+               );
+        })
+    }
+    else
+    {   tr.append('<td><td><td><td><td><td>');
+    }
+});
+</script>
+</body></html>

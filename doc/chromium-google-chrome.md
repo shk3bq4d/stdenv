@@ -22,6 +22,7 @@ Shift + Delete # https://superuser.com/questions/382437/how-can-i-remove-a-sugge
 * git@github.com:shk3bq4d/X-Agent.git # mr user-agent useragent
   * ~/git/shk3bq4d/X-Agent
 * https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm ublock origin
+  http://127.0.0.1:57155/www/stdenv/adblock-ublock-origin.list
 * https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg cookies.txt cookie exporter
 
 https://chrome.google.com/extensions

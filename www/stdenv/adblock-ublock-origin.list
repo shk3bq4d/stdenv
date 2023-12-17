@@ -1,0 +1,24 @@
+! http://127.0.0.1:57155/adblock.list
+
+! 2023-12-15 https://www.hornbach.ch
+www.hornbach.ch###usercentrics-root
+
+! 2023-12-15 https://en.wikipedia.org
+en.wikipedia.org##.vector-sitenotice-container
+
+! 2023-12-17 https://en.wikipedia.org
+en.wikipedia.org##.frb-country-CH.frb-rml-disabled.frb
+en.wikipedia.org##.frb-nag-link
+
+! jumbobot always on right
+www.jumbo.ch###frontnow-advisor-launcher
+
+! self-ad on bottom
+www.jumbo.ch##.newsletterTeaser
+
+www.jumbo.ch##.supercard-teaser__head
+www.jumbo.ch##.supercard-teaser__body
+
+www.jumbo.ch##.header__trust-elements-container
+
+www.jumbo.ch##.swc-cookie-banner
