@@ -1,4 +1,4 @@
-! http://127.0.0.1:57155/adblock.list
+! http://127.0.0.1:57155/www/stdenv/adblock.list
 
 ! 2023-12-15 https://www.hornbach.ch
 www.hornbach.ch###usercentrics-root
@@ -22,3 +22,7 @@ www.jumbo.ch##.supercard-teaser__body
 www.jumbo.ch##.header__trust-elements-container
 
 www.jumbo.ch##.swc-cookie-banner
+
+www.teletext.ch##.ot-sdk-container > .ot-sdk-row
+www.teletext.ch##.ot-fade-in.onetrust-pc-dark-filter
+www.teletext.ch###onetrust-consent-sdk
