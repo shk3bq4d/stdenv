@@ -34,6 +34,7 @@ kgcm -A -o json | jq -r '.items[] | select(.metadata.name=="server-mysql-passwor
 
 cat uat.json| jq '[.resources[]| select(.type == "random_id") ] | length' # count
 terraform state pull | jq '.resources[]| select(.type == "azurerm_virtual_machine") | .instances[].attributes.name'
+terraform state pull | jq '.resources[]| select(.type == "okta_user" and .name == "auth_profile").instances[].index_key'
 
 ```
 ```sh
