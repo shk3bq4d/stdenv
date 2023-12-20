@@ -2,6 +2,7 @@
 
 ```markdown
 * https://jquery.com/download/
+* https://api.jquery.com/category/selectors/
 * https://code.jquery.com/jquery-3.6.0.js
 * https://code.jquery.com/jquery-3.6.0.min.js
 You can also use the slim build, which excludes the ajax and effects modules:
@@ -14,8 +15,10 @@ $('#pwd').css('color', 'white'); // style="
 $('#pwd').val('setvalue');
 $('#pwd').length > 0 // test if element worked
 $('#id_password').is(":visible") // sometimes not enough
+$('[title="Ticket ID"]:visible').length
 $('[name="remember_me"]').prop('checked', true);
 e = $('#id_password'); (e.is(":hidden") || e.css("visibility") == "hidden" || e.css("opacity") == 0) // visible, maybe better, checked in one case and seemd indeed better
+$('.id-number:visible > [title="Ticket ID"]').length
 
 $(this).attr('title') // attribute value
 $(this).text(); // read text
