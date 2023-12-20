@@ -857,6 +857,7 @@ easy_install pip
 
 
 # find in iterable
+app_name = next(iter([x[label] for x in apps if x[_id] == rH[defaultApp][appInstanceId]])) # iter seems to be important
 next(x for x in lst if ...)
 which will return the first match or raise a StopIteration if none is found. Alternatively, you can use
 next((x for x in lst if ...), [default value])

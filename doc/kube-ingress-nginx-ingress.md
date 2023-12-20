@@ -3,6 +3,7 @@ curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/charts
 helm search repo -l nginx-ingress
 
 * https://github.com/kubernetes/ingress-nginx
+* https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
 * https://github.com/kubernetes/ingress-nginx/tree/master/charts/ingress-nginx
 * https://github.com/kubernetes/ingress-nginx/releases
 * https://github.com/kubernetes/ingress-nginx/tree/main/changelog
