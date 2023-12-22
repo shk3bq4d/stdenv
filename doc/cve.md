@@ -1,3 +1,10 @@
+CVE-2023-48795 OpenSSH Terrapin 
+* https://github.com/RUB-NDS/Terrapin-Scanner/releases/tag/v1.1.0
+* https://forum.proxmox.com/threads/cve-2023-48795-proxmox-is-vulnerable-to-terrapin-as-of-right-now.138488/#post-618071
+* https://seclists.org/oss-sec/2023/q4/292
+* https://access.redhat.com/security/cve/cve-2023-48795
+* https://forums.centos.org/viewtopic.php?f=51&t=80511
+
 CVE-2023-44487 HTTP/2 Rapid Reset Attack
 * https://github.com/kubernetes/ingress-nginx/issues/10493
 * https://nvd.nist.gov/vuln/detail/CVE-2023-44487
