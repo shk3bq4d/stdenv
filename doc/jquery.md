@@ -20,6 +20,9 @@ $('[name="remember_me"]').prop('checked', true);
 e = $('#id_password'); (e.is(":hidden") || e.css("visibility") == "hidden" || e.css("opacity") == 0) // visible, maybe better, checked in one case and seemd indeed better
 $('.id-number:visible > [title="Ticket ID"]').length
 
+remove() - Removes the selected element (and its child elements)
+empty() - Removes the child elements from the selected element.
+
 $(this).attr('title') // attribute value
 $(this).text(); // read text
 $(this).text('write text');
@@ -41,3 +44,8 @@ $(document).ready(function() { });
   $( "tr" ).even().addClass("even");
 $('a.logo-wrapper').append($('<span>').text(okta_env.toUpperCase()));
 $('a.logo-wrapper').parent().append($('<span>').text(" " + okta_env.toUpperCase()));
+
+
+# selectors
+> # direct child, the any descendant selector is simply the space
+
