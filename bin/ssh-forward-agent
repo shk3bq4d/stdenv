@@ -5,6 +5,16 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 
+helper() {
+    cat << EOF
+ssh-add -L
+sudo sed -r -i -e 's/^(AllowAgentForwarding).*/\1 yes/' && sudo systemctl restart sshd
+
+EOF
+
+}
+
+helper
 ssh \
     -o ForwardAgent=yes \
     "$@"

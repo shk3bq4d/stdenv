@@ -1,5 +1,6 @@
 CVE-2023-48795 OpenSSH Terrapin 
 * https://github.com/RUB-NDS/Terrapin-Scanner/releases/tag/v1.1.0
+* https://github.com/RUB-NDS/Terrapin-Scanner/releases/download/v1.1.0/Terrapin_Scanner_Linux_amd64
 * https://forum.proxmox.com/threads/cve-2023-48795-proxmox-is-vulnerable-to-terrapin-as-of-right-now.138488/#post-618071
 * https://seclists.org/oss-sec/2023/q4/292
 * https://access.redhat.com/security/cve/cve-2023-48795

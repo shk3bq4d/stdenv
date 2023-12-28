@@ -158,3 +158,9 @@ TABLES
                   filter table, allowing any Discretionary Access Control (DAC) rules in the filter table to take effect before MAC rules.  This ta‐
                   ble provides the following built-in chains: INPUT (for packets coming into the box itself), OUTPUT (for altering locally-generated
                   packets before routing), and FORWARD (for altering packets being routed through the box).
+
+
+# firewalld
+sudo firewall-cmd --zone=public --add-port=5556/tcp
+sudo firewall-cmd --get-default-zone
+sudo firewall-cmd --get-active-zones
