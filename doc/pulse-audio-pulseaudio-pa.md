@@ -8,4 +8,8 @@ amixer -q -D pulse sset Master on      # un-mute
 pacmd list-sinks | awk '/muted/ { print $2 }' # returns no if mute or yes
 pacmd list-sinks | grep -Eo 'bluez_card[^>]*'
 pacmd ls # list-sinks
+
+ps -f --pid=$(pgrep pulseaudio ) # check if running as user or system wide
+journalctl --user -fu pulseaudio
+sudo journalctl -fu pulseaudio
 ```
