@@ -102,7 +102,12 @@ alias   ssh-me-proxy="ssh -F $RCD/ssh_config-proxy"
 alias scp="scp -F $RCD/ssh_config"
 export RSYNC_RSH="ssh -F $RCD/ssh_config"
 export GIT_SSH_COMMAND="ssh -F $RCD/ssh_config"
-export GIT_SSH=$RCD/git_ssh
+if mount | grep "on $(df -P /tmp | tail -n 1 | awk '{ print $6 }') " | grep -q noexec; then
+    command cp -f $RCD/git_ssh ~/git_ssh &>/dev/null || true
+    export GIT_SSH=~/git_ssh
+else
+    export GIT_SSH=$RCD/git_ssh
+fi
 [[ -d $RCD/completion ]] && for i in $RCD/completion/*; do source $i; done
 
 #[[ -n $SSH_TTY ]] && command last | head
