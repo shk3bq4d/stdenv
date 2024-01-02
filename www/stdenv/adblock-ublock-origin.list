@@ -7,6 +7,10 @@
 ! License:  https://github.com/shk3bq4d/stdenv/blob/master/LICENSE.md
 ! Url: http://127.0.0.1:57155/www/stdenv/adblock.list
 
+! 2024-01-02 https://www.sbb.ch
+www.sbb.ch##.ot-fade-in.onetrust-pc-dark-filter
+www.sbb.ch##.ot-sdk-container
+
 ! 2023-12-15 https://www.hornbach.ch
 www.hornbach.ch###usercentrics-root
 
