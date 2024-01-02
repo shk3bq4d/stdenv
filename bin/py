@@ -102,7 +102,7 @@ def logging_conf(
     try: logging.getLogger('sh.command').setLevel(logging.WARN)
     except: pass
 
-def go(args) -> int:
+def go(args: List[str]) -> int:
     # https://docs.python.org/2/library/argparse.html
     # logger.info(__file__)
     # logger.debug(__file__)

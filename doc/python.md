@@ -35,6 +35,8 @@ hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
 
 functools.partial # bind freeze some portion of a fuctions arguments or keywords. 
 
+from bs4 import BeautifulSoup as bs # type: ignore
+
 # UTF-8 IO
 @begin=python@
 #this is bad:
@@ -1271,3 +1273,6 @@ def _my_recursive_iterator_function(): # yield from https://stackoverflow.com/qu
 cat << 'PYTHONBASHHEREDOC' | python3 - $g
 print('python bash here doc')
 PYTHONBASHHEREDOC
+
+    script_directory, script_name = os.path.split(__file__)
+	filepath = os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))
