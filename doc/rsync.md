@@ -1,3 +1,4 @@
+```sh
 --modify-window=2
 rsync -vnra --progress --stats --human-readable --modify-window=2 
 --bwlimit=KBPS
@@ -13,3 +14,4 @@ rsync -avrnR --prune-empty-dirs --exclude=".*" --include="*/" --include="*.sh" -
 
 
 -a = --recursive --links --perms --times --group --owner --devices --specials # archive
+```

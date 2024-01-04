@@ -5,9 +5,16 @@ dir /w /s recursively_find_me
 dir /w /s | findstr /i recursively_find_me
 
 tasklist | findstr /i Zabbix
+tasklist /svc & rem Displays services hosted in each process.
+tasklist /v & rem verbose
+tasklist /m & rem list dll
 taskkill /f /t /im zabbix_agentd.exe
+wmic path win32_process get processid,caption,ExecutablePath,commandline                  & rem tasklist with cli command line
 wmic path win32_process get caption,processid,commandline                  & rem tasklist with cli command line
 wmic path win32_process get caption,processid,commandline | findstr /i pac & tasklist with cli command line
+wmic process get /format:list
+
+where outlook.exe & rem which
 
 
 WMIC PROCESS get Caption,Commandline,Processid 2>&1 | vi -
