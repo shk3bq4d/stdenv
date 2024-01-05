@@ -1356,6 +1356,10 @@ sed_remove_utf8_bom() {
     sed '1s/^\xEF\xBB\xBF//' "$@"
 }
 
+ls_l_recursive() {
+    find "$@" -print0 | xargs -r0 ls -ltrdh --color=auto --time-style=long-iso --time-style +"%Y.%m.%d %H:%M:%S"
+}
+
 cp_backup_with_timestamp() {
     local arg ts
     for arg in "$@"; do
