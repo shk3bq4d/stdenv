@@ -1,29 +1,51 @@
 <html><head><style type="text/css">
 textarea {
-	width: 70%;
-	height: 40%;
+    width: 70%;
+    height: 20%;
 }
 </style></head>
 <body>
-<input type="button" onclick="go()" value="go" />
-<input type="button" onclick="go_blocking()" value="go_blocking" />
+<input type="button" onclick="mycopy()" value="copy" />
+<input type="button" onclick="paste_non_blocking()" value="paste_non_blocking" />
+<input type="button" onclick="paste_blocking()" value="past_blocking" />
 <a href="#" onclick="location.reload(true); return false;">refresh</a>
 <br />
-<textarea id="textarea"></textarea>
+<textarea id="textarea1">
+</textarea>
+<br />
+<textarea id="textarea2">
+</textarea>
 </body>
 <script type="text/javascript">
 
-function go() {
-	console.log('go');
-	navigator.clipboard.readText().then(function(text) {console.log('inner'); document.getElementById('textarea').value = text; console.log('/inner');});
-	console.log('/go');
+async function setClipboardText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Text successfully copied to clipboard');
+  } catch (err) {
+    console.error('Unable to copy text to clipboard', err);
+  }
+}
+
+function mycopy() {
+    setClipboardText(document.getElementById('textarea1').value);
 };
 
-async function go_blocking() {
-	console.log('go_blocking');
-	var text = await navigator.clipboard.readText();
-	document.getElementById('textarea').value = text;
-	console.log('/go_blocking');
+function paste_non_blocking() {
+    console.log('paste_non_blocking');
+    navigator.clipboard.readText().then(function(text) {console.log('inner'); document.getElementById('textarea2').value = text; console.log('/inner');});
+    console.log('/paste_non_blocking');
+};
+
+async function paste_blocking() {
+    console.log('paste_blocking');
+    var text = await navigator.clipboard.readText();
+    document.getElementById('textarea2').value = text;
+    console.log('/paste_blocking');
+};
+
+window.onload = function() {
+    document.getElementById('textarea1').value = 'Hello\nToday is ' + new Date().toString();
 };
 
 </script>

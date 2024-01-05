@@ -27,16 +27,24 @@ remove_non_unique_files() {
     set -u
 }
 
-reconstruct_csr() {
+reconstruct_cert() {
     echo "$a"
     cat $f | sed -r -e 's/^ +//'
     echo "$b"
 }
-a="-----BEGIN CERTIFICATE REQUEST-----"
-b="-----END CERTIFICATE REQUEST-----"
+a="-----BEGIN CERTIFICATE-----"
+b="-----END CERTIFICATE-----"
+
+cat_all() {
+    for arg in "$@"; do
+        test -d "$arg" && continue
+        cat -- "$arg"
+    done
+    return 0
+}
 
 go() {
-    cat -- "$@" |
+    cat_all "$@" |
         sed_remove_colors.sh |
         awk "/$a/{f=1;s=\"$tempdir/FILE\"++i;next}/$b/{f=0;close(s)}f{print > s}"
 #       awk "/$a/,/$b/"'{print > "output_file"++c; next} {print > "output_file"c}'
@@ -45,19 +53,19 @@ go() {
     remove_non_unique_files $tempdir/*
 #   fdupes -N .
     for f in $tempdir/*; do
-        reconstruct_csr $f |
-          openssl-output-csr.sh |
-          grep -EA 1 'Subject:|X509v3 Subject Alternative Name:' |
-          grep -E 'Subject:|DNS:|IP:' |
+        reconstruct_cert $f |
+          openssl-cert-info.sh 2>/dev/null |
+          grep -EA 1 'subject=|X509v3 Subject Alternative Name:' |
+          grep -E 'subject=|DNS:|IP:' |
           while read line; do
               case $line in \
-              Subject:*) echo -n "$line";;
-              *) echo -n ", SAN: $line";;
+              subject=*) echo "$line";;
+              DNS:*) echo "SAN: $line";;
+              IP:*) echo "SAN: $line";;
               esac
           done
 
-      echo ""
-      reconstruct_csr $f
+      reconstruct_cert $f
       echo ""
 
     done
@@ -65,7 +73,7 @@ go() {
 }
 
 if [[ -n ${VIMF6:-} ]]; then
-    cat ~/tmp/csr.log | go
+    cat ~/tmp/cert.log | go
 
 else
     go "$@"

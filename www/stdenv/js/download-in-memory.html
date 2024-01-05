@@ -1,0 +1,53 @@
+<html><head><style type="text/css">
+textarea {
+    width: 70%;
+    height: 20%;
+}
+</style></head>
+<body>
+<input type="button" onclick="go_async()" value="go_async" />
+<input type="button" onclick="go_ud_bookmarklet()" value="go_ud_bookmarklet" />
+<a href="#" onclick="location.reload(true); return false;">refresh</a>
+<br />
+<textarea id="textarea1">
+</textarea>
+</body>
+<script type="text/javascript">
+
+var go_async = function() {
+    fetch(location.href).then(
+        function(r)
+        {   r.text().then(
+                function (s)
+                {   s = "SUCCESS go_async\n" + s;
+                    document.getElementById('textarea1').value = s;
+                    console.log(s);
+                });
+        });
+};
+var go_ud_bookmarklet_success = function(s)
+{
+    s = "SUCCESS go_ud_bookmarklet\n" + s;
+    document.getElementById('textarea1').value = s;
+    console.log(s);
+};
+
+var go_ud_bookmarklet = function() {
+    function_download_in_memory(location.href, go_ud_bookmarklet_success);
+
+};
+
+var function_download_in_memory, function_download_in_memory2;
+
+function_download_in_memory = function(url, callback_function) {
+    console.log("function_download_in_memory", arguments);
+    fetch(url).then(function_download_in_memory2.bind(null, callback_function));
+};
+
+function_download_in_memory2 = function(callback_function, response) {
+    console.log("function_download_in_memory2", arguments);
+    response.text().then(callback_function);
+}
+
+</script>
+</html>
