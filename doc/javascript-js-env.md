@@ -1,5 +1,11 @@
 ```js
 setTimeout(function() {alert(1);}, 10)
+location.reload(true) // refresh
+
+async function go_blocking() { // await
+    var text = await navigator.clipboard.readText(); // async
+    document.getElementById('textarea').value = text;
+};
 
 slice // does substring while allowing negative values
 
