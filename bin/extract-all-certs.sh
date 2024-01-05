@@ -36,10 +36,14 @@ a="-----BEGIN CERTIFICATE-----"
 b="-----END CERTIFICATE-----"
 
 cat_all() {
-    for arg in "$@"; do
-        test -d "$arg" && continue
-        cat -- "$arg"
-    done
+    if [[ $# -eq 0 ]]; then
+        cat -- -
+    else
+        for arg in "$@"; do
+            test -d "$arg" && continue
+            cat -- "$arg"
+        done
+    fi
     return 0
 }
 
