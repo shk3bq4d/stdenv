@@ -1352,6 +1352,10 @@ cds() {
     cd $d
 }
 
+sed_remove_utf8_bom() {
+    sed '1s/^\xEF\xBB\xBF//' "$@"
+}
+
 cp_backup_with_timestamp() {
     local arg ts
     for arg in "$@"; do
