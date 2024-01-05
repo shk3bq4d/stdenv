@@ -18,3 +18,11 @@ https://www.youtube.com/results?search_query=708cn
 
 # ublock origin youtube shorts block
 https://letsblock.it/filters/youtube-shorts
+
+
+
+Start playback at time position 1:20 (1 minute and 20 seconds into the video): http://www.youtube.com/watch?v=69hADT4pWWc#t=1m20s
+
+Add #t=1m20s after the video’s URL
+FORMAT: t=XhYmZs –> X hours, Y minutes, Z seconds
+NOTE: If there’s already a “#” or “hash” or “pound sign” in the URL, you’ll need to change from #t=1m20s to &t=1m20s

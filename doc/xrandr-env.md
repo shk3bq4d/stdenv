@@ -15,3 +15,6 @@ feh --bg-scale ~/Pictures/i3lock/boreal3.png
 
 
 xrandr --output Virtual-1 --mode 1920x1200
+xrandr --output HDMI-1 --same-as eDP-1
+xrandr --output eDP-1 --auto --output HDMI-1 --same-as eDP-1
+xrandr --output eDP-1 --auto --output HDMI-1 --auto
