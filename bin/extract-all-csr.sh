@@ -35,8 +35,20 @@ reconstruct_csr() {
 a="-----BEGIN CERTIFICATE REQUEST-----"
 b="-----END CERTIFICATE REQUEST-----"
 
+cat_all() {
+    if [[ $# -eq 0 ]]; then
+        cat -- -
+    else
+        for arg in "$@"; do
+            test -d "$arg" && continue
+            cat -- "$arg"
+        done
+    fi
+    return 0
+}
+
 go() {
-    cat -- "$@" |
+    cat_all "$@" |
         sed_remove_colors.sh |
         awk "/$a/{f=1;s=\"$tempdir/FILE\"++i;next}/$b/{f=0;close(s)}f{print > s}"
 #       awk "/$a/,/$b/"'{print > "output_file"++c; next} {print > "output_file"c}'
