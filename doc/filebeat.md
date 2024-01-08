@@ -267,6 +267,9 @@ filebeat.inputs:
         } # javascript
         // ```
 
+if.equals.bip.leftover: ''
+if.and:
+  - equals.bip.leftover: 'if.and'
 
  - include_fields: # keep fields exclude only subset
       when:
