@@ -314,7 +314,7 @@ $HOME/.Xdefaults)
         echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/$(id -un)/docker-latex/ && \\"
         echo "    cd ~/git/$(id -un)/docker-latex/ && ./build.sh"
         exit 1
-    elif $SUDO docker run -i mrlatex < $SCRIPT > $out 2>/dev/null; then
+    elif $SUDO docker run -v $PWD:/tmp -i mrlatex < $SCRIPT > $out 2>/dev/null; then
         echo $out
         nohup evince $out &>/dev/null </dev/null &
         exit 0
