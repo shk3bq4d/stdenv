@@ -1,5 +1,13 @@
 ```js
+
+
 setTimeout(function() {alert(1);}, 10)
+location.reload(true) // refresh
+
+async function go_blocking() { // await
+    var text = await navigator.clipboard.readText(); // async
+    document.getElementById('textarea').value = text;
+};
 
 slice // does substring while allowing negative values
 
@@ -37,6 +45,10 @@ catch(e){
 docker run -it --rm -v $PWD:/code eeacms/jshint # lint
 ~/bin/javascript-lint.sh
 ```
+
+# minify
+## yui-compressor
+* https://github.com/yui/yuicompressor/
 
 # https://stackoverflow.com/questions/12977661/is-there-a-way-to-suppress-jshint-warning-for-one-given-line
 ```js

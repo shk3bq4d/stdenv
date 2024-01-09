@@ -1,0 +1,30 @@
+<html><head><style type="text/css">
+textarea {
+	width: 70%;
+	height: 40%;
+}
+</style></head>
+<body>
+<input type="button" onclick="go()" value="go" />
+<input type="button" onclick="go_blocking()" value="go_blocking" />
+<a href="#" onclick="location.reload(true); return false;">refresh</a>
+<br />
+<textarea id="textarea"></textarea>
+</body>
+<script type="text/javascript">
+
+function go() {
+	console.log('go');
+	navigator.clipboard.readText().then(function(text) {console.log('inner'); document.getElementById('textarea').value = text; console.log('/inner');});
+	console.log('/go');
+};
+
+async function go_blocking() {
+	console.log('go_blocking');
+	var text = await navigator.clipboard.readText();
+	document.getElementById('textarea').value = text;
+	console.log('/go_blocking');
+};
+
+</script>
+</html>

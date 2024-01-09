@@ -1,0 +1,46 @@
+<html><head><style type="text/css">
+textarea {
+    width: 70%;
+    height: 20%;
+}
+</style></head>
+<body>
+<input type="button" onclick="go()" value="go" />
+<a href="#" onclick="location.reload(true); return false;">refresh</a>
+<br />
+<textarea id="textarea1">
+</textarea>
+</body>
+<script type="text/javascript">
+
+function tostring(s) {
+    if (s === null) { return "null"; }
+    if (s === undefined) { return "undefined"; }
+    return s.toString();
+};
+
+function log() {
+    var bAString = [];
+    var k, s, nl;
+    for (k = 0, s = arguments.length; k < s; ++k)
+    {   bAString.push(tostring(arguments[k]));
+    }
+
+    nl = "";
+    if (document.getElementById('textarea1').value.length > 0) nl = "\n";
+    document.getElementById('textarea1').value =
+        document.getElementById('textarea1').value + nl + bAString.join(' ');
+    document.getElementById('textarea1').scrollTo(0, 100000000);
+
+};
+
+
+function go() {
+    log.bind(null, 'one arg')();
+    log.bind(null, 'coucou 2', 'coucou 3')();
+    log.bind(null, 'coucou 4', 'coucou 6')();
+    log.bind(null)();
+};
+
+</script>
+</html>
