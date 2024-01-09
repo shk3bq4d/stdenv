@@ -979,6 +979,7 @@ import yaml; yaml.dump({}, fd) # dump into file descriptor fd
 import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.safe_load(f)
 import yaml; with open('/tmp/bip.yml', 'rb') as f: yaml.load(f, Loader=yaml.FullLoader)
 import yaml; yaml.safe_dump({}, default_flow_style=False)
+def print_yaml(i): import yaml; print(yaml.dump(i))
 from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python2
 from io       import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python3
     """)))
