@@ -164,7 +164,7 @@ The easiest way to output a literal variable delimiter ({{) is by using a variab
 {{ '{{' }}
 For bigger sections, it makes sense to mark a block raw. For example, to include example Jinja syntax in a template, you can use this snippet:
 
-{% raw %}
+{% raw %} # filter
     <ul>
     {% for item in seq %}
         <li>{{ item }}</li>
@@ -1511,3 +1511,4 @@ Quick search
 
 
 ALL: {% for iprange in rhel7cis_host_allow -%}{{ iprange }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% filter trim %} strips/trim

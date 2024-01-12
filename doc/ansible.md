@@ -2466,6 +2466,7 @@ tojson(value, indent=None)
 trim(value) # strip
 | trim() # strips
 | trim   # strips
+{% filter trim %} strips/trim
 {%- if ... %} strips/trim before
 {%- if ... -%} strips/trim before and after
 {%+ if ... %} preserves before (strips/trim}
@@ -2855,3 +2856,6 @@ become: yes                                   # gather services list systemd sys
 
 systemd:               # systemd daemon-reload daemon_reload
   daemon_reload: yes   # systemd daemon-reload daemon_reload
+
+
+# "recursive loop detected in template string" # infinite recursion loop
