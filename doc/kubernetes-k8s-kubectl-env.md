@@ -769,11 +769,7 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 ```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
-kgp -Al app=sfw-cron                  -o name # labels
-kgp -Al app=sfw-server                -o name # labels
-kgp -Al app=sfw-web-app               -o name # labels
 kgp -Al app=stp                       -o name # labels
-kgp -Al app=sf-kube-okta-assist       -o name # labels
 kgp -Al app.kubernetes.io/name=nginx  -o name # labels
 kgp -Al app=nginx-ingress             -o name # labels
 kgp -n kube-system -l tier=control-plane -l component=etcd # labels
@@ -985,4 +981,4 @@ for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/li
 
 sudo nerdctl --namespace k8s.io ps -a # docker ps
 
-gh --repo https://github.com/kubernetes/kubernetes release list --limit 50 # list all releases versions 
+gh --repo https://github.com/kubernetes/kubernetes release list --limit 50 # list all releases versions
