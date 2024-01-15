@@ -352,3 +352,5 @@ processor timestamp
 processor translate_sid
 processor truncate_fields
 processor urldecode
+
+kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
