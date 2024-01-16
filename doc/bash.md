@@ -767,8 +767,16 @@ ssh user@machine-where-precious-data-is "tar czpf - /some/important/data" | pv |
 xxd # hex dump
 od  # hex dump
 
+% echo -e '\x61'       # \x takes two hexadecimal digits unicode
+a
+echo     $'\x61'       # \x takes two hexadecimal digits unicode
+a
+% echo -e '\u0061'     # \u takes two hexadecimal digits unicode
+a
+echo     $'\u0061'     # \u takes two hexadecimal digits unicode
+a
 % echo -e '\u2620'     # \u takes four hexadecimal digits unicode
-echo $'\u2620' # unicode
+echo     $'\u2620' # unicode
 ☠
 % echo -e '\U0001f602' # \U takes eight hexadecimal digits
 echo $'\U0001f602' # \U takes eight hexadecimal digits
