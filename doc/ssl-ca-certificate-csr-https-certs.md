@@ -350,3 +350,5 @@ echo | /usr/bin/openssl s_client -connect hostname:port -servername hostname -sh
 t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm shk3bq4d/openssl:alpine  /usr/bin/openssl s_client -tls1_2 -connect $t:$p -servername $t -showcerts </dev/null && echo yes || echo no; } | grep --color=always -Ei '^|\w*renegoti\w*' # renegotiation status
 
 
+
+* https://www.ssllabs.com/ssltest/ # ssl check qualys
