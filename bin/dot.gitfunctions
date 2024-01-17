@@ -19,6 +19,10 @@ git_has_anything_been_staged() {
     ! git diff --cached --quiet
 }
 
+git_is_master_an_ancestor_of_currench_branch() {
+    git merge-base --is-ancestor master $(git_current_branch)
+}
+
 git_branch_ref() {
     local f branch_name d h
     branch_name="$1"
