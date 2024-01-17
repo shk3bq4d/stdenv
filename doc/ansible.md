@@ -2189,6 +2189,7 @@ Give me the power of 2! (or 5):
 json_query != jq -> https://jmespath.org/specification.html#and-expressions
 getent_passwd | json_query('*[2]')              # all uids
 getent_passwd.values()|map(attribute=2)|list    # all uids
+images.values() | map(attribute='push') | map('default', yes)
 loop: "{{ domain_definition | json_query('domain.cluster[*].name') }}"
 loop: "{{ domain_definition | json_query('domain.server[*].name') }}"
 loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
