@@ -2,10 +2,13 @@
 psql -U postgres
 sudo -u postgres psql
 
+port TCP/5432
+
 ```sql
 \list or \l: list all databases
 \dt: list all tables in the current database
 \du list roles
+\dn list schemas
 \d table -- describe table
 \d+ table -- describe table + storage + stats + description
 pg_dump -st tablename dbname -- show create table (ie: there is no such thing according to https://serverfault.com/questions/231952/is-there-an-equivalent-of-mysqls-show-create-table-in-postgres)
@@ -21,6 +24,7 @@ select c.relname from pg_class c where c.relkind = 'S'; # list sequences
 -v ON_ERROR_STOP=1
 
 ```sql
+create schema coucou;
 select datname from pg_database where datistemplate = false; -- list databases
 select table_schema,table_name from information_schema.tables order by table_schema,table_name; -- list tables in current database
 create user tom with password 'myPassword';
@@ -212,6 +216,9 @@ update bandana set bandanavalue = regexp_replace(bandanavalue, '(<hostname>)[^<]
 concat('bip', 'bop')
 ```
 
+https://hub.docker.com/_/postgres
+https://github.com/docker-library/docs/tree/master/postgres/README.md
+
 ```markdown
 # replication
 * https://github.com/lesovsky/ansible-postgresql-sr-on-el6
@@ -302,3 +309,17 @@ Version	Current minor	Supported	First Release	Final Release
 6.5	6.5.3	No	June 9, 1999	June 9, 2004
 6.4	6.4.2	No	October 30, 1998	October 30, 2003
 6.3	6.3.2	No	March 1, 1998	March 1, 2003
+
+
+# copy
+```bash
+echo "Name,Age,Location" > data.csv
+echo "John,25,New York" >> data.csv
+echo "Alice,30,San Francisco" >> data.csv
+echo "Bob,22,Los Angeles" >> data.csv
+```
+```sql
+create table your_table ( name varchar(50), age integer, location varchar(50));
+\copy your_table from '/var/lib/postgresql/data/pgdata/data.csv' with csv header;
+select * from your_table;
+```
