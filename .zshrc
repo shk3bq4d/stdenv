@@ -105,6 +105,7 @@ unsetopt null_glob
 source ~/.bashrc
 for c in \
     aliashelp \
+    ansible-doc-snippet \
     ant \
     az \
     castnow \
@@ -133,6 +134,11 @@ done
 alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
 alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook'
+alias ads='ansible-doc-snippet'
+alias add='ansible-playbook-delayed-detached.sh'
+alias adh='ansible-playbook-delayed-history.sh'
+alias adl='ansible-playbook-delayed-less.sh'
+alias ado='ansible-playbook-delayed-ongoing.sh'
 alias cp='nocorrect cp -ip'
 alias ksd0='kubectl scale deployments --replicas 0'
 alias ksd1='kubectl scale deployments --replicas 1'

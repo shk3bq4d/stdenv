@@ -397,11 +397,18 @@ function cdl_old () {
 
 function viw () {
     local f
-    f=$(command which $1)
-    if [[ -f $f ]]; then
-        $EDITOR $(command which $1)
+    f="$(command which $1)"
+    if [[ -f "$f" ]]; then
+        $EDITOR "$f"
     else
-        echo "FATAL: not a file: $1"
+        if command which ack-bashrc-zshrc-aliases.sh &>/dev/null; then
+            ack-bashrc-zshrc-aliases.sh --color "$1" | cat
+        fi
+        echo ""
+        which -a "$1"
+        echo ""
+        test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
+        echo -e "${RED:-}FATAL: not a file: $1${OFF}\n"
         return 1
     fi
 }
@@ -1326,7 +1333,7 @@ klf() {
 ansible-playbook-delayed-history.sh() {
   # can't be a shell script as history must be called for the currently running shell, not the shebang
   if [[ $# -eq 0 ]]; then
-      history | grep --color=always ansible-playbook-delayed-detached.sh
+      history | grep --color=always -E '\badd\b|ansible-playbook-delayed-detached.sh'
   else
       arg="$1"
       shift

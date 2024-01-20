@@ -16,6 +16,14 @@ www.hornbach.ch###usercentrics-root
 
 www.nba.com##.ot-sdk-row
 
+! cookie acceptance using a widely deployed framework across multiple sites
+##onetrust-consent-sdk
+
+stackoverflow.com##div:has(div:has-text(Join Stack Overflow to find))
+stackoverflow.com##.s-sidebarwidget:has-text(people chatting)
+stackoverflow.com##.s-sidebarwidget:has-text(The Overflow Blog)
+stackoverflow.com##.s-sidebarwidget:has-text(Featured on Meta)
+
 login.swisspass.ch###onetrust-consent-sdk
 
 ! 2023-12-15 https://en.wikipedia.org
