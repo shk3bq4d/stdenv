@@ -658,9 +658,9 @@ let g:tagbar_type_yaml = {
     \ }
 
 if has ('autocmd') " Remain compatible with earlier versions
- augroup vimrc     " Source vim configuration upon save
-    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
-    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup vimrc     " Source vim configuration upon save
+  autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+  autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif " has autocmd
 endif
@@ -725,4 +725,37 @@ endif
 if &diff
     set t_Co=8
 endif
+function! MrLog(b)
+    call writefile([a:b],  '/home/rumo/.tmp/log/vim-mrdebug.log', 'a')
+endfunc
+
+function! GoToNextIndent(inc)
+    " Get the cursor current position
+    let currentPos = getpos('.')
+    let currentLine = currentPos[1]
+    let currentCol = currentPos[2] - 1
+    "call MrLog("current Line:" . currentLine . ", Col:"  . currentCol . ", indent:" . indent('.'))
+    let matchIndent = 0
+
+    " Look for a line with the same indent level whithout going out of the buffer
+    while !matchIndent && currentLine != line('$') + 1 && currentLine != -1
+        let currentLine += a:inc
+        "let matchIndent = indent(currentLine) == indent('.')
+        "call MrLog("iterating over line:" . currentLine . " which has indent:" .  indent(currentLine))
+        if empty(substitute(getline(currentLine), '\s', '', 'g')) == 0
+            let matchIndent = indent(currentLine) == currentCol
+        endif
+    endwhile
+
+    " If a line is found go to this line
+    if (matchIndent)
+        "call MrLog("Youpppi!")
+        let currentPos[1] = currentLine
+        call setpos('.', currentPos)
+    else
+        echo "couldn't find such a line"
+    endif
+endfunction
+nnoremap <F3> :call GoToNextIndent(-1)<CR>
+nnoremap <F4> :call GoToNextIndent(1)<CR>
 "set viminfo+=n$RCD/.tmp/vim/viminfo

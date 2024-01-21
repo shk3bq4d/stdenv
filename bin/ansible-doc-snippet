@@ -98,4 +98,6 @@ if ! get_module_unique "$arg" >/dev/null; then
 fi
 
 #echo module is $(get_module_unique "$arg")
-ansible-doc -s $(get_module_unique "$arg")
+ansible-doc -s $(get_module_unique "$arg") -j |
+    ~/py/ansible-doc-formatter.py |
+    command less --ignore-case --no-init --chop-long-lines

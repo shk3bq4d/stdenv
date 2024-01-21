@@ -1333,7 +1333,7 @@ klf() {
 ansible-playbook-delayed-history.sh() {
   # can't be a shell script as history must be called for the currently running shell, not the shebang
   if [[ $# -eq 0 ]]; then
-      history | grep --color=always -E '\badd\b|ansible-playbook-delayed-detached.sh'
+      history | grep --color=always -P '(?<=[0-9.: ]{10})(add |ansible-playbook-delayed-detached.sh)'
   else
       arg="$1"
       shift
