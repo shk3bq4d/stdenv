@@ -187,6 +187,9 @@ select if(5 is null, "was null", "wasnt null");
 -- a priori no standard character classes in mysql regexp, use standard custem [a-zA-Z0-9_.-]
 regexp_replace(original_value, pattern, replacement[, pos[, occurrence[, match_type]]])
 select regexp_substr(headers, '(?<=Date: ).*') as c from email_sources; -- extract date from email header, https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr
+regexp_like appear to not exist in mariadb
+where regexp_replace('str', 't', 'SUCCESS') like '%SUCCESS%';
+where regexp_replace(name, 'core\.(app|deskpro|install)', 'SUCCESS') like '%SUCCESS%';
 ```
 
 # safe mode
@@ -355,6 +358,8 @@ set global sql_slave_skip_counter = 1;
 start slave;
 stop slave; set global sql_slave_skip_counter = 1; start slave; select sleep(5); show slave status\G
 ```
+
+substring('str', 1, 10) WARNING, index is 1-based and returns empty on mariadb if 0 is used
 
 # release dates
 ```sh
