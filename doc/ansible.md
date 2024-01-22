@@ -2769,6 +2769,8 @@ vimf6_ansible_args: -e ansible_connection=local
 
     ansible-playbook --step # prompt after each task debug
 
+vars:
+  ansible_connection: "{{ 'local' if inventory_hostname == 'localhost' else 'ssh' }}"
 
 linux:!corp
 linux:&corp

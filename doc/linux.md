@@ -476,3 +476,5 @@ flameshot # screenshot
 ssh -t myhost sudo date -us @$(date -u +%s) # set remote system time easily
 
 who -b # uptime last boot time
+
+sudo groupadd user1user2; sudo usermod -a -G user1user2 user1; sudo usermod -a -G user1user2 user2; sudo chgrp user1user2 myfile; sudo chmod g+x myfile
