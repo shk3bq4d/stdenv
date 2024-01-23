@@ -181,6 +181,7 @@ _z2() {
 /opt/sf-scripts/zabbix-shared/heartbeat/daily
 /opt/sf-scripts/zabbix-shared/heartbeat/workday
 /opt/sf-scripts/zabbix-shared/heartbeat/hourly
+/etc/ssh/authorized_keys/
 /etc
 $SSHHOME
 
