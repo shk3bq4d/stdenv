@@ -84,6 +84,7 @@ sed -e '/search/i insert this text before the line matching my /search/ pattern'
 ```sh
 sed '1d; $d'
 
+journalctl --user -feu intune-agent.service | grep Reporting | sed -r -e 's/[{}]/\n/g' | sed -r -e "s/(NonCompliant)/"$'\033[1;31m''\1'$'\033[m''/'
 
 sed -r \
     -e '/^    bgcolor/ d' \

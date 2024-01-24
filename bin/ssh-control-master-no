@@ -3,4 +3,4 @@
 
 set -euo pipefail
 
-ssh -oControlMaster=no -oControlPath=none -oControlPersist=no "$@"
+command ssh -oControlMaster=no -oControlPath=none -oControlPersist=no "$@"

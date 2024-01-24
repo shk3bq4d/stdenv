@@ -9,9 +9,10 @@ port TCP/5432
 \dt: list all tables in the current database
 \du list roles
 \dn list schemas
-\d table -- describe table
+\d table -- describe table , create table alternative
 \d+ table -- describe table + storage + stats + description
 pg_dump -st tablename dbname -- show create table (ie: there is no such thing according to https://serverfault.com/questions/231952/is-there-an-equivalent-of-mysqls-show-create-table-in-postgres)
+sudo docker exec -u 999 -it postgres pg_dump -st repository -U bitbucket bitbucketdb -- show create table repository
 \c       database_name -- use
 \connect database_name -- use
 \x # toggles expanded display (vertical alignment)
