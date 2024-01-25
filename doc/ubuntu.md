@@ -1,12 +1,12 @@
 Set DNS servers
 cat /etc/network/interfaces
 # It should look something like this:
-# The loopback network interface  
-auto lo  
-iface lo inet loopback  
-# The primary network interface  
-auto eth0 
-iface eth0 inet static  
+# The loopback network interface
+auto lo
+iface lo inet loopback
+# The primary network interface
+auto eth0
+iface eth0 inet static
 address 192.168.X.X
 netmask 255.255.255.0
 gateway 192.168.X.X
@@ -29,7 +29,7 @@ echo "Acquire::http::Proxy \"http://6.1.0.159:3142\";" | sudo tee -a /etc/apt/ap
 
 
 # desktop notification receiving
-dbus-monitor "interface='org.freedesktop.Notifications'"    
+dbus-monitor "interface='org.freedesktop.Notifications'"
 dbus-monitor "interface='org.freedesktop.Notifications'"    | grep --line-buffered  "member=Notify\|string"
 # desktop notification send
 notify-send message
@@ -123,3 +123,9 @@ The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel 
 
 sudo apt dist-upgrade # minor release upgrades between 22.04.{1,2}
 sudo do-release-upgrade # major dist upgrade
+
+# unattended-upgrade
+/var/log/unattended-upgrades/unattended-upgrades.log
+systemctl status apt-daily-upgrade.timer
+journalctl -eu apt-daily-upgrade.timer
+/etc/apt/apt.conf.d/50unattended-upgrades
