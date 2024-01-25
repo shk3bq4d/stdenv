@@ -327,6 +327,7 @@ echo "Bob,22,Los Angeles" >> data.csv
 ```
 ```sql
 create table your_table ( name varchar(50), age integer, location varchar(50));
-\copy your_table from '/var/lib/postgresql/data/pgdata/data.csv' with csv header;
+\copy your_table from '/var/lib/postgresql/data/pgdata/data.csv' with csv header; -- sql load
+\copy your_table from 'data.csv' with csv header; -- sql load
 select * from your_table;
 ```

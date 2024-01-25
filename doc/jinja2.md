@@ -1,3 +1,11 @@
+# reserved vames
+Jan 25 14:50:38 +ansible_managed: Ansible managed
+Jan 25 14:50:38 +template_host:   mypy.lan
+Jan 25 14:50:38 +template_uid:   myuser
+Jan 25 14:50:38 +template_path:   tpl.tpl
+Jan 25 14:50:38 +template_fullpath:   /home/myuser/.tmpp/20240125/tpl.tpl
+Jan 25 14:50:38 +template_destpath:
+Jan 25 14:50:38 +template_run_date:   2024-01-25 14:50:37.193923
 # debug
 ```sh
 vi ~.virtualenvs/ansible/lib/python3.10/site-packages/ansible/template/__init__.py +1199
