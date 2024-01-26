@@ -203,3 +203,6 @@ upstream beats {
 # tweaking
 * https://www.getpagespeed.com/server-setup/nginx/tuning-proxy_buffer_size-in-nginx
 * https://www.getpagespeed.com/?s=nginx
+
+
+* "an upstream response is buffered to a temporary file" https://serverfault.com/questions/587386/an-upstream-response-is-buffered-to-a-temporary-file

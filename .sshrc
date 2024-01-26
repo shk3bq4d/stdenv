@@ -168,8 +168,8 @@ _z2() {
     cat << EOF
 /etc
 /etc/yum.repos.d
-/etc/logrotate.d
 /etc/nginx/sites-enabled
+/home
 /var/log
 /var/log/sf
 /opt/sf-scripts
@@ -181,6 +181,8 @@ _z2() {
 /opt/sf-scripts/zabbix-shared/heartbeat/daily
 /opt/sf-scripts/zabbix-shared/heartbeat/workday
 /opt/sf-scripts/zabbix-shared/heartbeat/hourly
+/etc/logrotate.d
+/var/log/apt
 /etc/ssh/authorized_keys/
 /etc
 $SSHHOME
