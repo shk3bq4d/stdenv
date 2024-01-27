@@ -98,6 +98,7 @@ if ! get_module_unique "$arg" >/dev/null; then
 fi
 
 #echo module is $(get_module_unique "$arg")
+echo "ansible-doc -s $(get_module_unique "$arg") -j | json-to-yaml.sh --colors | less"
 ansible-doc -s $(get_module_unique "$arg") -j |
     ~/py/ansible-doc-formatter.py |
     command less --ignore-case --no-init --chop-long-lines
