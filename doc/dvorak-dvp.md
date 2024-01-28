@@ -199,3 +199,6 @@ http://www.kaufmann.no/downloads/winnt/kbddvp-1_2_7-i386.exe
 
 loadkeys -d # restore keyboard to default
 loadkeys us-dvp
+loadkeys ch
+loadkeys us
+setxkbmap

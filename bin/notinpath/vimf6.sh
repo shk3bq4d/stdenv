@@ -306,22 +306,9 @@ $HOME/.Xdefaults)
     ;;
 *tex)
     out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-${SCRIPT_NAME}.pdf
-    #docker run -i narf/latex < $SCRIPT > $out
-    image=mrlatex
-    docker ps &>/dev/null && SUDO= || SUDO=sudo
-    if ! $SUDO docker images $image | grep -wqE "^${image}"; then
-        echo "Image not found $image, execute the following:"
-        echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/$(id -un)/docker-latex/ && \\"
-        echo "    cd ~/git/$(id -un)/docker-latex/ && ./build.sh"
-        exit 1
-    elif $SUDO docker run -v $PWD:/tmp -i mrlatex < $SCRIPT > $out 2>/dev/null; then
-        echo $out
-        nohup evince $out &>/dev/null </dev/null &
-        exit 0
-    else
-        echo "exit code is $?"
-        cat $out
-        exit 1
+    ~/bin/docker-mrlatex.sh "$SCRIPT_NAME" "$out"
+    if is_pdf "$out"; then
+        evince "$out"
     fi
     ;;
 *.plantuml)
