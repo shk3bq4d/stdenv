@@ -6,7 +6,7 @@
 import subprocess
 
 s = subprocess.Popen('sudo netstat -tlnpe'.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-out = '\n'.join(map(str.strip, s.communicate()))
+out = '\n'.join(map(str.strip, map(str, s.communicate())))
 #out = str(s.stdout)
 print(out)
 
