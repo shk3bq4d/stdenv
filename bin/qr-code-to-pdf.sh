@@ -1,9 +1,24 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+##
+##Usage:  __SCRIPT__ DATA LABEL
+## writes DATA in letters and as a QR code as well
+## as LABEL in a temporary PDF file that is not kept on
+## the filesystem. Ideal for offline secrets to be printed.
+##
+## Author: Jeff Malone, 29 Jan 2024
+##
+
 
 set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
+
+[[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
+
+[[ $# -lt 2 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
 
 tex() {
     local value comment

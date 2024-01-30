@@ -26,6 +26,7 @@ select c.relname from pg_class c where c.relkind = 'S'; # list sequences
 ```
 
 -v ON_ERROR_STOP=1
+\set ON_ERROR_STOP on
 
 ```sql
 create schema coucou;
@@ -251,6 +252,7 @@ https://github.com/docker-library/postgres
 ```sql
 select client_addr, state from pg_stat_replication;
 select pg_is_in_recovery();
+select pg_read_file('/etc/hostname') as hostname, setting as port from pg_settings where name='port';
 ```
 
 # json
@@ -317,6 +319,7 @@ Version	Current minor	Supported	First Release	Final Release
 6.4	6.4.2	No	October 30, 1998	October 30, 2003
 6.3	6.3.2	No	March 1, 1998	March 1, 2003
 
+Select current_setting('server_version');
 
 # copy
 ```bash
@@ -326,7 +329,7 @@ echo "Alice,30,San Francisco" >> data.csv
 echo "Bob,22,Los Angeles" >> data.csv
 ```
 ```sql
-create table your_table ( name varchar(50), age integer, location varchar(50));
+create table if not exists your_table ( name varchar(50), age integer, location varchar(50));
 \copy your_table from '/var/lib/postgresql/data/pgdata/data.csv' with csv header; -- sql load
 \copy your_table from 'data.csv' with csv header; -- sql load
 select * from your_table;
