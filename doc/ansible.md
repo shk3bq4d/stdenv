@@ -2862,3 +2862,10 @@ systemd:               # systemd daemon-reload daemon_reload
 
 
 # "recursive loop detected in template string" # infinite recursion loop
+
+template_host:   myhostname.bip.com
+template_uid:   myuserid
+template_path:   tpl.tpl
+template_fullpath:   /home/me/.tmpp/20240125/tpl.tpl
+template_destpath:
+:template_run_date:   2024-01-25 14:50:37.193923
