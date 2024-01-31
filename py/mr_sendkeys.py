@@ -73,6 +73,7 @@ def go(args):
     parser = argparse.ArgumentParser(description="Send keys to a specific window")
     parser.add_argument("ARGS", type=str, nargs='+', help="text to type")
     parser.add_argument("-i", "--id", nargs='?', help="window ID where to send the key event", type=str)
+    parser.add_argument("-f", "--focus", action='store_true', help="if set, window is first focused")
     parser.add_argument("-r", "--cr", action='store_true', help="sends a carriage return for every linefeed")
     ar = parser.parse_args(args)
     window_id = find_window() if ar.id is None else ar.id
@@ -81,6 +82,8 @@ def go(args):
         args = ' '.join(args)
         if  ar.cr:
             args = re.sub(r'(?<!\r)\n', '\r\n', args)
+        if ar.focus:
+            xdotool('windowfocus', '--sync', window_id)
         for i in args:
             bA = 'type --clearmodifiers --window {}'.format(window_id).split()
             bA.append(i)
