@@ -71,3 +71,4 @@ update-initramfs -u -k all
 #update-initramfs -u
 ```
 
+
