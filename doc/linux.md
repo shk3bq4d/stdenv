@@ -30,6 +30,7 @@ cut -d: -f1 /etc/group # list all groups on system
 dhclient -r; sleep 10; dhclient # renew dhcp
 ln -is TARGET LINKNAME
 sudo strace -ff -o /tmp/mreclipse -p3266 #trace file access of process and child processes 3266
+grep ^processor /proc/cpuinfo | wc -l # CPU count
 ```
 
 
