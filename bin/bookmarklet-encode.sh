@@ -25,8 +25,9 @@ EOF
 
 
 {
-    echo -n "javascript:"
-    content "$@" | yui-compressor $(munge "$0") --type js | sed -r -e 's/;$//' | url_encode_bookmarklet.py
+    # 2024.01.30 removing the j in javascript as there seem te be something like windows defender snooping on my data and crashing
+    echo -n "avascript:"
+    content "$@" | yui-compressor $(munge "$0") --type js | sed -r -e 's/;$//' -e "s/__BOOKMARKLET_DATE__/$(date +'%Y.%m.%d %H:%M:%S')/" | url_encode_bookmarklet.py
 } > $_tempfile
 cat $_tempfile | xclip-tee.sh
 
