@@ -23,7 +23,7 @@ apt list --installed | grep PACKAGE # current version info
 echo 'Acquire::http:Proxy "http://172.17.0.1:3142"' > /etc/apt/apt.conf.d/93-mr-httproxy
 
 netstat : apt install net-tools
-apt update && apt install -y netcat curl wget net-tools; curl http://localhost; nc -v localhost 80
+apt update && apt install -y netcat-traditional curl wget net-tools; curl http://localhost; nc -v localhost 80 # netcat
 dpkg -S $(which dig) # dnsutils: /usr/bin/dig
 
 aptitude why PACKAGE # describe why package was installed

@@ -266,8 +266,8 @@ function ssh() {
             TERM=xterm
             ;;
     esac
-    case TERM in
-        rxvt-unicode-256color)
+    case $TERM in
+        rxvt-unicode-256color|rxvt-256color)
             TERM=xterm-256color
             ;;
         *)
@@ -1032,28 +1032,63 @@ rawurldecode() {
   echo "${REPLY}"  #+or echo the result (EASIER)... or both... :p
 }
 
+ping_up_down_format_time() {
+    local seconds=$1
+    local hours=$((seconds / 3600))
+    local minutes=$(( (seconds % 3600) / 60 ))
+    local seconds=$((seconds % 60))
+    if [ $hours -gt 0 ]; then
+        hours=$(printf "%2s:" $hours)
+        minutes=$(printf "%02d:" $minutes)
+    else
+        hours="   "
+        if [ $minutes -gt 0 ]; then
+            minutes=$(printf "%2s:" $minutes)
+            seconds=$(printf "%02d" $seconds)
+        else
+            minutes="   "
+            seconds=$(printf "%2s" $seconds)
+        fi
+    fi
+
+
+    echo "$hours$minutes$seconds"
+}
+
 ping-up-down() {
-    local up nextup down nonetwork timeout args
-    state="unknown"
+    local up nextup down nonetwork timeout args ts nextts diff ip
+    state="startup"
+    ts="$(date +%s)"
+    nextts="$ts"
     nextstate="$state"
+    args="$@"
     test -z "${ERED:-}${ENONE:-}${EBGMAGENTA:-}" && source $RCD/bin/dot.bashcolors
-    up="${EGREEN:-}host is up${ENONE:-}"
+    up="${EGREEN:-}host is up  ${ENONE:-}"
     down="${ERED:-}host is down${ENONE:-}"
     nonetwork="${ERED:-}network is down${ENONE:-}"
     timeout=10
-    args="$@"
     case "$args" in \
     *aria.ly.lan) timeout=30;;
     esac
     while read line;
     do
-        [[ "$line" == PING* && $state == "unknown" ]] && echo "$line"
+        if [[ "$line" == PING* && $state == "startup" ]]; then
+            echo "$line"
+            ip="$(echo "$line" | sed -r -e 's/^[^(]+\(([0-9.]*)\).*/\1/')"
+        fi
         [[ "$line" == *"1 packets received"* ]] && nextstate="$up" # busybox ping
         [[ "$line" == *" 0% packet loss"* ]]    && nextstate="$up" # ubuntu 20.04 ping
         [[ "$line" == *"100% packet loss"* ]]   && nextstate="$down"
         [[ "$line" == *"0 packets received"* ]] && nextstate="$down"
         [[ "$line" == *"Network is unreachable"* ]] && nextstate="$nonetwork"
-        [[ "$state" != "$nextstate" ]] && echo "$(date) $nextstate"
+        if [[ "$state" != "$nextstate" ]]; then
+            nextts="$(date +%s)"
+            if [[ "$state" != "startup" ]]; then
+                echo "$(ping_up_down_format_time  $(( nextts - ts )) )"
+            fi
+            echo -n "$(date +'%Y.%m.%d %H:%M:%S')  $ip $nextstate"
+        fi
+        ts="$nextts"
         state="$nextstate"
     done < <( while :; do ping -W $timeout -c1 "$args" 2>&1; sleep 1 || break; done )
     echo ping command stopped
