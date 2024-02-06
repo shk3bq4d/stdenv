@@ -7,3 +7,6 @@ https://pve.proxmox.com/wiki/Secure_Boot_Setup for backend
 * Attempt Secure Boot 
 * [ ]
 * Reset
+
+
+* New VM
