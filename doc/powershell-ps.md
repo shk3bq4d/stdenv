@@ -4,9 +4,9 @@ Start-Service -Name "MpsSvc" # start firewall service
 Start-Process -FilePath sc.exe -ArgumentList 'start winlogbeat'
 Start-Process -FilePath sc.exe -ArgumentList 'status winlogbeat'
 get-aduser -Filter 'Name -like "*oper"'
-get-service "wuauserv"       -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize # windows update
+get-service "wuauserv"       -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename -autosize # windows update
 get-service "Zabbix Agent 2"
-get-service "Zabbix Agent 2" -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename –autosize
+get-service "Zabbix Agent 2" -ComputerName remotePC1,remotePC2, remotePC3| format-table Name,Status,Machinename -autosize
 get-content '\\remotemachine\C$\Program Files\Zabbix Agent 2\zabbix_agent2.conf' # cat
 hostname | select-string -pattern '[abcx]' # grep
 
@@ -94,4 +94,13 @@ function Resolve-Error ($ErrorRecord=$Error[0])
    {   "$i" * 80
        $Exception |Format-List * -Force
    }
+}
+
+function log() {
+  $timestamp = Get-Date -Format "yyyy.MM.dd HH:mm:ss.fff" # %y.%M.%d %H:%m:%s,fff";
+  $message = $args -join ' ';  # Concatenate all input arguments into a single string
+  $message = "$timestamp $message";
+  Write-Host("$message");
+  #$LogFile = "c:\Users\myself\Documents\mrclip.log";
+  #Add-Content -Path $LogFile -Value $message -Encoding UTF8;
 }

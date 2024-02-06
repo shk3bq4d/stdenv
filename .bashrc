@@ -551,6 +551,7 @@ if [[ -f ~/.tmp/touch/stdhome-pull && ! -f ~/.tmp/touch/stdhome-pull-automation-
     fi
 fi
 test -f $HOME/.config/bcrc && export BC_ENV_ARGS=$HOME/.config/bcrc # test for file presence because of sshrc
+alias deti='docker exec -it'
 alias ........='cd ../../../../../../../..'
 alias .......='cd ../../../../../../..'
 alias ......='cd ../../../../../..'
