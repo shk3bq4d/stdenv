@@ -32,7 +32,7 @@ go() {
     cd ~/.tmp/log
     nb_files="$(files | wc -l)"
     if [[ "$nb_files" -eq 0 ]]; then
-        echo -e "No files within $(mtime) days, try:\nNBDAYS=365 $0 $@"
+        echo -e "No files within $(mtime) days, try:\nNB_DAYS=365 $0 $@"
         exit 1
     fi
     if [[ $# -eq 0 ]]; then

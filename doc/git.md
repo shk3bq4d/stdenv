@@ -665,5 +665,6 @@ gca --reedit-message --reset-author" # --reset-author also resets date
 git range-diff $(git_current_branch)...origin/$(git_current_branch) # difference in commits between
 git range-diff origin/$(git_current_branch)...$(git_current_branch) # difference in commits between
 
+git log --grep="git-crypt"
 glola --no-textconv -S "run augenrules" # search in patch, ignoring the git-crypt filter layer
 https://github.com/shk3bq4d/stdenv.git

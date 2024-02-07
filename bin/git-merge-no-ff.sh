@@ -3,11 +3,12 @@
 set -euo pipefail
 umask 027
 
-source ~/bin/dot.gitfunctions
+DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+source $DIR/dot.gitfunctions
 
 
 fatal() {
-    source ~/bin/dot.bashcolors
+    source $DIR/dot.bashcolors
     echo -e "${ERED}FATAL: $@${ENONE}"
     echo "temptag is ${temptag:-unset}, branch to merge is ${cur_branch:-unset}"
     exit 1

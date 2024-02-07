@@ -116,6 +116,49 @@ detach the tty without exiting the shell, use the escape sequence Ctrl+p + Ctrl+
 # nice but old version
 http://crosbymichael.com/advanced-docker-volumes.html
 
+docker inspect zabbix-web --format '{{ .Id }}'
+docker inspect zabbix-web --format '{{ .Name }}'
+docker inspect zabbix-web --format '{{ .Created }}'
+docker inspect zabbix-web --format '{{ .Args }}'
+docker inspect zabbix-web --format '{{ .Image }}'
+docker inspect zabbix-web --format '{{ .LogPath }}'
+docker inspect zabbix-web --format '{{ .RestartCount }}'
+docker inspect zabbix-web --format '{{ .HostConfig.Binds }}' # Mounts
+docker inspect zabbix-web    | jq '.[0].HostConfig.Binds'    # Mounts
+docker inspect zabbix-web --format '{{ .Mounts }}'           # Mounts
+docker inspect zabbix-web    | jq '.[0].Mounts'              # Mounts
+docker inspect zabbix-web --format '{{ .HostConfig.NetworkMode }}'
+docker inspect zabbix-web --format '{{ .HostConfig.RestartPolicy }}'
+docker inspect zabbix-web --format '{{ .HostConfig.AutoRemove }}'
+docker inspect zabbix-web --format '{{ .State.Status }}'
+docker inspect zabbix-web --format '{{ .State.Running }}'
+docker inspect zabbix-web --format '{{ .State.Paused }}'
+docker inspect zabbix-web --format '{{ .State.Restarting }}'
+docker inspect zabbix-web --format '{{ .State.OOMKilled }}'
+docker inspect zabbix-web --format '{{ .State.Dead }}'
+docker inspect zabbix-web --format '{{ .State.Pid }}'
+docker inspect zabbix-web --format '{{ .State.ExitCode }}'
+docker inspect zabbix-web --format '{{ .State.Error }}'
+docker inspect zabbix-web --format '{{ .State.StartedAt }}'
+docker inspect zabbix-web --format '{{ .State.FinishedAt }}'
+docker inspect zabbix-web    | jq '.[0].Config'
+docker inspect zabbix-web    | jq '.[0].Config.Hostname'
+docker inspect zabbix-web    | jq '.[0].Config.User'
+docker inspect zabbix-web    | jq '.[0].Config.ExposedPorts'
+docker inspect zabbix-web    | jq '.[0].Config.Env' # environment variables
+docker inspect zabbix-web    | jq '.[0].Config.Cmd'
+docker inspect zabbix-web    | jq '.[0].Config.Healthcheck'
+docker inspect zabbix-web    | jq '.[0].Config.Healthcheck.Test'
+docker inspect zabbix-web    | jq '.[0].Config.Healthcheck.Test[3]' -r # CMD bash -c
+docker inspect zabbix-web    | jq '.[0].Config.Image'
+docker inspect zabbix-web    | jq '.[0].Config.WorkingDir'
+docker inspect zabbix-web    | jq '.[0].Config.Entrypoint'
+docker inspect zabbix-web    | jq '.[0].Config.Entrypoint[2]' -r # bash -c
+docker inspect zabbix-web    | jq '.[0].Config.Labels'
+
+docker inspect zabbix-web --format '{{ .State.Health.Status }}'
+
+
 # copy files using system cp (rsync, ...)
 1) docker ps
 2) docker inspect -f   '{{.Id}}'  SHORT_CONTAINER_ID-or-CONTAINER_NAME
