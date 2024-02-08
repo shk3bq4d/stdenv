@@ -2827,6 +2827,28 @@ https://github.com/mitogen-hq/mitogen # ansible speed
 
     individual_result: "{{ dict_result.results | selectattr('item.key', 'equalto', 'mydictkeyofinterest') | first }}" # retrieve with_dict's result with dict key value
 
+- with_items: &with_items                                                                        # iterate twice over with_items's result with single/individual input/item and output/result
+    - name: zero                                                                                 # iterate twice over with_items's result with single/individual input/item and output/result
+      changed: no                                                                                # iterate twice over with_items's result with single/individual input/item and output/result
+    - name: one                                                                                  # iterate twice over with_items's result with single/individual input/item and output/result
+      changed: yes                                                                               # iterate twice over with_items's result with single/individual input/item and output/result
+    - name: two                                                                                  # iterate twice over with_items's result with single/individual input/item and output/result
+      changed: no                                                                                # iterate twice over with_items's result with single/individual input/item and output/result
+    - name: three                                                                                # iterate twice over with_items's result with single/individual input/item and output/result
+      changed: yes                                                                               # iterate twice over with_items's result with single/individual input/item and output/result
+  changed_when: item.changed                                                                     # iterate twice over with_items's result with single/individual input/item and output/result
+  register: this                                                                                 # iterate twice over with_items's result with single/individual input/item and output/result
+  loop_control:                                                                                  # iterate twice over with_items's result with single/individual input/item and output/result
+    label: "{{ item.name }}"                                                                     # iterate twice over with_items's result with single/individual input/item and output/result
+  file:                                                                                          # iterate twice over with_items's result with single/individual input/item and output/result
+    path: /tmp/a                                                                                 # iterate twice over with_items's result with single/individual input/item and output/result
+    state: touch                                                                                 # iterate twice over with_items's result with single/individual input/item and output/result
+- with_items: *with_items                                                                        # iterate twice over with_items's result with single/individual input/item and output/result
+  loop_control:                                                                                  # iterate twice over with_items's result with single/individual input/item and output/result
+    label: "{{ item.name }}"                                                                     # iterate twice over with_items's result with single/individual input/item and output/result
+    index_var: kk                                                                                # iterate twice over with_items's result with single/individual input/item and output/result
+  debug:                                                                                         # iterate twice over with_items's result with single/individual input/item and output/result
+    msg: element {{ item.name }} has {{ this.results[kk].changed | ternary('', 'not ') }}changed # iterate twice over with_items's result with single/individual input/item and output/result
 
 play keyword order https://docs.ansible.com/ansible/latest/user_guide/playbooks_strategies.html#ordering-execution-based-on-inventory
 
