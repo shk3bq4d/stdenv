@@ -39,6 +39,8 @@ https://community.ui.com/releases/r/network/7.4.156
 https://community.ui.com/releases/r/network/7.5.174
 https://community.ui.com/releases/r/network/7.5.187
 https://community.ui.com/releases/r/network/8.0.24
+https://community.ui.com/releases/r/network/8.0.26
+https://community.ui.com/releases/r/network/8.0.28
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
