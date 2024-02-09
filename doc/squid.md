@@ -32,3 +32,6 @@ systemctl edit squid
 LimitNOFILE=65536
 ```
 
+
+
+squid -k parse # validate test config
