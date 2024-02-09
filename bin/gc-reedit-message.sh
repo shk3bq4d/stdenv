@@ -5,6 +5,13 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
-test $# -eq 0 && args=HEAD || args="$@"
+if [[ $# -eq 0 ]]; then
+    ref=HEAD
+elif [[ "$1" == "-"* ]]; then
+    ref=HEAD
+else
+    ref="$1"
+    shift
+fi
 
-git commit --reset-author --reedit-message=$args
+git commit --reset-author --reedit-message=$ref "$@"
