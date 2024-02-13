@@ -697,12 +697,12 @@ py-zabbix==1.1.7
 zabbix-api==0.5.6 # py pip used to be used by ansible collection community.zabbix < 1.9.0
 
 # CVE
+* https://www.zabbix.com/security_advisories # cve
 * https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=zabbix
 * https://support.zabbix.com/browse/ZBX-22588?jql=labels%20%3D%20vulnerability # CVE
 * https://www.cvedetails.com/product/9588/Zabbix-Zabbix.html?vendor_id=5667
 * https://www.cvedetails.com/vulnerability-list/vendor_id-5667/Zabbix.html
 * https://www.opencve.io/cve?vendor=zabbix
-* https://www.zabbix.com/security_advisories
 
 
 
