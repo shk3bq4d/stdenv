@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+    echo "You are calling ~/bin/import, it's probably an error with a python script being called and missing a shebang"
+>&2 echo "You are calling ~/bin/import, it's probably an error with a python script being called and missing a shebang"
+exit 1
+
+# this probably shadows
+import-im6.q16(1)           General Commands Manual           import-im6.q16(1)
+
+NAME
+       import  -  saves  any visible window on an X server and outputs it as an
+       image file. You can capture a single window, the entire screen,  or  any
+       rectangular portion of the screen.
+
+SYNOPSIS
+       import-im6.q16 [options] output-file
+
+OVERVIEW
+       The  import-im6.q16  program  is a member of the ImageMagick-ims6.q16(1)
+       suite of tools.  Use it to capture some or all of an X server screen and
+       save the image to a file.
+# function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
+
+# [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
+
+# [[ $# -lt 1 || $# -gt 2 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
+
+# if [[ $EUID -ne 0 ]]; then
+#     echo "This script requires elevated privileges to run, switching to sudo"
+#     sudo $0 $@
+#     exit $?
+# fi
+
+#   h - check for option -h without parameters; gives error on unsupported options;
+#   h: - check for option -h with parameter; gives errors on unsupported options;
+#   abc - check for options -a, -b, -c; gives errors on unsupported options;
+#   :abc - check for options -a, -b, -c; silences errors on unsupported options;
+#      Notes: In other words, colon in front of options allows you handle the errors in your code. Variable will contain ? in the case of unsupported option, : in the case of missing value.
+# OPTARG - is set to current argument value,
+# OPTERR - indicates if Bash should display error messages.
+# usage() { echo "Usage: $0 [-s <45|90>] [-p <string>]" 1>&2; }
+# while getopts ":s:p:h" o; do
+#     case "${o}" in
+#         s)
+#             s=${OPTARG}
+#             ! ((s == 45 || s == 90)) && usage && exit 1
+#             ;;
+#         p)
+#             p=${OPTARG}
+#             ;;
+#         h)
+#             usage
+#             exit 0
+#             ;;
+#         *)
+#             usage
+#             exit 1
+#             ;;
+#     esac
+# done
+# shift $((OPTIND-1)) || true
+# if [ -z "${s:-}" ] || [ -z "${p:-}" ]; then
+#     usage
+#     exit 1
+# fi
+# echo "s = ${s}"
+# echo "p = ${p}"
+# echo "rest = $@"
+
+# for i in sed which grep; do ! command -v "$i" &>/dev/null && echo "FATAL: unexisting dependency $i in path: $PATH" && exit 1; done
+
+# DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+#_tempdir=$(mktemp -d); function cleanup() { [[ -n ${_tempdir:-} ]]  && [[ -d $_tempdir ]]  && rm -rf $_tempdir  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+# _tempfile=$(mktemp);   function cleanup() { [[ -n ${_tempfile:-} ]] && [[ -f $_tempfile ]] && rm  -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+
+#[[ -n ${VIMF6:-} ]] && echo running from vim-f6
+
+# exec > >(tee -a ~/.tmp/log/$(basename $0 .sh).log)
+# exec > >(tee >(logger --id=$$ -t "$(basename $0)" -p user.info ))
+# exec 2>&1
+
+# docker ps &>/dev/null && SUDO= || SUDO=sudo
+# $SUDO docker ps
+
+# test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
+
+#echo -n "Are you sure you want to proceed (yN): "
+#read _read
+#echo
+#case "${_read,,}" in #y|yes) true ;;
+#*)   false;;
+#esac
+
+echo EOF
+exit 0
+
