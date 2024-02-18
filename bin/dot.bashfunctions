@@ -1281,6 +1281,11 @@ password_af09()   { local l; [[ "$#" -eq 1 ]] && l="$1" || l=32; tr -dc a-f0-9  
 password__()      { local l; [[ "$#" -eq 1 ]] && l="$1" || l=24; tr -dc 'A-Za-z0-9_%$~&[{}(=*)+]!#-'    < /dev/urandom | head -c"${1:-${l}}"; test -t 2 && echo; }
 nc_v_127_0_0_1() { set -x; nc -v 127.0.0.1 "$@"; set +x; }
 
+deti() {
+    local SUDO
+    docker ps &>/dev/null && SUDO= || SUDO=sudo
+    $SUDO docker exec -it "$@"
+}
 db_docker_vim_mode() {
     local list
     list="$(sudo docker ps --format '{{ .Names }}')"
