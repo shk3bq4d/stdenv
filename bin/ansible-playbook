@@ -31,7 +31,7 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-source ~/bin/dot.bashfunctions; pathremove "$DIR"
+source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
     $HOME/.virtualenvs/ansible/bin/activate \
     $HOME/.virtualenvs/ansible-2.10/bin/activate \
