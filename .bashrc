@@ -256,7 +256,7 @@ msys*)
     function ll() {
         if [[ $# -ge 2 ]]; then
             ls -lhFa --group-directories-first "$@"
-        elif [[ $# -eq 1 ]]; then
+        elif [[ $# -eq 0 ]]; then
             ls -lhFa --group-directories-first
         else
             ls -lhFa --group-directories-first | grep -i $*
