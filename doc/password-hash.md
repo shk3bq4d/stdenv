@@ -14,3 +14,4 @@ openssl rand -base64 30
 
 openssl rand -base64 30 | openssl passwd -6 -stdin
 openssl rand -base64 30 | openssl passwd -6 -stdin | xargs -nI@ usermod -p @ zabbix
+openssl rand -base64 30 | ./encrypt-string.sh
