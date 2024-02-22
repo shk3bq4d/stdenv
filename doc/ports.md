@@ -1211,3 +1211,4 @@ Yes	Yes	Steam (downloads)[309]	Unofficial
 47001	Yes		Windows Remote Management Service (WinRM)[328]	Official
 47808	Yes	Yes	BACnet Building Automation and Control Networks (4780810 = BAC016)	Official
 49151	Reserved	Reserved	Reserved[1]	Official
+51820 Udp wireguard

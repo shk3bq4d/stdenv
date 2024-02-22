@@ -52,3 +52,5 @@ xmlstarlet sel -t -v "//element/@attribute" file.xml
 xpath -q -e '//element/@attribute' file.xml
 xidel -se '//element/@attribute' file.xml
 saxon-lint --xpath '//element/@attribute' file.xml
+
+xmlstarlet sel -t -m "//Variable" -v "concat(Name, '=', Value)" -n file.xml | while IFS='=' read -r name value; do export "$name"="$value"; done
