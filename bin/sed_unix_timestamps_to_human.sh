@@ -13,7 +13,7 @@ delimiter=","
 delimiter=$'\1'
 
 #bip |
-	sed -r -e 's/(.*)(\<1[0-9]{9}\>)(.*)/\1'"$delimiter"'\2'"$delimiter"'\3/' \
+	sed -u -r -e 's/(.*)(\<1[0-9]{9}\>)(.*)/\1'"$delimiter"'\2'"$delimiter"'\3/' \
 	"$@" |
 	while IFS="$delimiter" read a b c; do
 		if [[ -n "$b" ]]; then

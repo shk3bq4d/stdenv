@@ -77,6 +77,7 @@ fi
 
 check_wip_or_fixup
 
+git push --force
 git checkout $master_branch
 git merge --no-ff $cur_branch --no-edit
 

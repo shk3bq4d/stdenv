@@ -254,7 +254,9 @@ msys*)
     alias xargs='xargs -r'
     alias chmod='chmod --preserve-root'
     function ll() {
-        if [[ -z "$1" ]]; then
+        if [[ $# -ge 2 ]]; then
+            ls -lhFa --group-directories-first "$@"
+        elif [[ $# -eq 0 ]]; then
             ls -lhFa --group-directories-first
         else
             ls -lhFa --group-directories-first | grep -i $*

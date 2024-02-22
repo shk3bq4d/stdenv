@@ -47,6 +47,7 @@ tcpdump -nn 'not ip6'  # exclude ipv6
 tcpdump -nn 'not arp'  # exclude arp
 tcpdump -nn 'not icmp' # exclude ping
 tcpdump -nn 'not igmp' # exclude igmp
+tcpdump -i any -nn ifname eth0 # need packet filter, doesn't work on centos7
 ```
 
 

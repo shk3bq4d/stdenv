@@ -3,6 +3,7 @@
 
 set -euo pipefail
 BINNAME="$(basename "$0")"
+SCRIPT_FILEPATH="$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )"
 if [[ -n "${STDENV_ANSIBLE_PLAYBOOK:-}" ]]; then
     echo "recursion detected, aborting. Which -a ansible-playbook"
     which -a ansible-playbook
@@ -10,7 +11,11 @@ if [[ -n "${STDENV_ANSIBLE_PLAYBOOK:-}" ]]; then
 fi
 export STDENV_ANSIBLE_PLAYBOOK=1
 if [[ -n "${SUDO_USER:-}" ]]; then
+    # session accessed via sudo
     USER="${SUDO_USER}"
+elif [[ ${EUID:-5} -eq 0 ]]; then
+    # session access via crontab
+    USER="$(stat -c "%U" $SCRIPT_FILEPATH)"
 else
     USER=$(id -un)
 fi
@@ -31,7 +36,7 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
 fi
 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-source ~/bin/dot.bashfunctions; pathremove "$DIR"
+source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
     $HOME/.virtualenvs/ansible/bin/activate \
     $HOME/.virtualenvs/ansible-2.10/bin/activate \
