@@ -6,6 +6,7 @@ exec 2>&1
 # ubuntu graylog script
 exec  > >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-empty --id=$$ -p user.info  --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null ))
 exec 2> >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-empty --id=$$ -p user.error --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null ))
+echo hahabip | sed -e "s/^/$(hostname -f) testsyslog /" | logger --skip-empty --id=$$ -p user.error --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null
 
 echo bip > /dev/tcp/graylog-internal.greypay.net/1514
 
