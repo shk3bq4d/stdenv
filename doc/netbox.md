@@ -11,6 +11,7 @@ https://demo.netbox.dev/static/docs/configuration/optional-settings/
 https://demo.netbox.dev/static/docs/configuration/required-settings/
 
 ~/git/github/netbox-community/netbox-docker/docker/docker-entrypoint.sh
+https://github.com/netbox-community/netbox-docker/commits/release/docker/docker-entrypoint.sh
 
 
 
@@ -80,3 +81,11 @@ SHORT_DATETIME_FORMAT
 SHORT_TIME_FORMAT
 TIME_FORMAT
 TIME_ZONE
+
+
+# upgrade script
+```sql
+select id from dcim_device where lower(name) in (select lower(name) from dcim_device group by lower(name) having count(1) > 1);
+create table mrfix_dcim_device_name as select id from dcim_device where lower(name) in (select lower(name) from dcim_device group by lower(name) having count(1) > 1);
+select name || ' - #' || id || ' DBfix 2024.02.22' from dcim_device where id in (select id from mrfix_dcim_device_name);
+update dcim_device set name = name || ' - #' || id || ' DBfix 2024.02.22' where id in (select id from mrfix_dcim_device_name);
