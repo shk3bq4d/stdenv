@@ -169,6 +169,7 @@ _z2() {
 /etc
 /etc/yum.repos.d
 /etc/nginx/sites-enabled
+/etc/wireguard
 /home
 /var/log
 /var/log/sf
