@@ -16,6 +16,7 @@ fi
 
 nohup \
 	"$BIN" \
+    --draw-filename \
 	-p --auto-zoom -. -B black \
 	"$@" \
 	</dev/null &>/dev/null &
