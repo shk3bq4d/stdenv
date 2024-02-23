@@ -58,6 +58,9 @@ do
 done
 
 
+iptables -I INPUT 1 -p tcp -m tcp --dport 5201 -j ACCEPT # iperf3
+iptables -I INPUT 1 -p udp        --dport 5201 -j ACCEPT # iperf3
+
 iptables -A INPUT -p tcp -m tcp --dport 10050 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 10514 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 12201 -j ACCEPT
