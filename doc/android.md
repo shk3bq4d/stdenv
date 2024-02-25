@@ -33,6 +33,7 @@ am start -a android.intent.action.SENDTO -d sms:+41774552829 --es sms_body "xxx 
 install sshdroid
 
 #crontab android
+```sh
 
 # >= 3.0
 mount -o remount,rw -t rootfs / /
@@ -84,6 +85,7 @@ echo 100 >  /sys/devices/virtual/timed_output/vibrator/enable
 mount -o remount,rw -t ext4 /system
 vi /system/build.prop
 # edit ro.sf.lcd_density=180 between 180 and 320, 180 increases the number of objects drawn on screen (thus objects are smaller)
+```
 
 
 # enable developer mode (likely cyanogenmod only)
@@ -109,6 +111,9 @@ FCM: fMMpukO7WmA:APA91bGhod_3f4h4mRj7ueRgDD6i-S701FCkcQ5Wk_RrU55fTcQTQxNAQqM91AD
 https://console.firebase.google.com/project/mrr0-30688/settings/general/
 
 galaxy a3 2016
+SM-A310F
+https://wiki.lineageos.org/devices/a3xelte/#supported-models
+https://wiki.lineageos.org/devices/a3xelte/install/
 
 
 tablette samsung rose: ssh galaxytab port 22 /mnt/sdcard/extStorages/SdCard/movies
