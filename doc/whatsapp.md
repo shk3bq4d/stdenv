@@ -1,6 +1,11 @@
 ~strikethrough~
 *bold*
 _italic_
+- bulleted list unordered ul
+1. orderered numbered  list
+> block quote
+`inline code`
+```monospace```
 
 
 ```
