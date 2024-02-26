@@ -334,4 +334,5 @@ create table if not exists your_table ( name varchar(50), age integer, location 
 \copy your_table from 'data.csv' with csv header; -- sql load
 -- Do not confuse COPY with the psql instruction \copy. \copy invokes COPY FROM STDIN or COPY TO STDOUT, and then fetches/stores the data in a file accessible to the psql client. Thus, file accessibility and access rights depend on the client rather than the server when \copy is used.
 select * from your_table;
+insert into your_table (name) values (current_timestamp);
 ```
