@@ -336,3 +336,10 @@ create table if not exists your_table ( name varchar(50), age integer, location 
 select * from your_table;
 insert into your_table (name) values (current_timestamp);
 ```
+
+https://www.postgresql.org/docs/14/ssl-tcp.html
+ssl
+ssl_key_file
+ssl_cert_file
+ssl_ca_file
+ssl_min_protocol_version
