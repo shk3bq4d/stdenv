@@ -77,7 +77,9 @@ fi
 
 check_wip_or_fixup
 
-git push --force
+if ! git_current_checked_out_upstream_branch | grep -qx $master_branch; then
+    git push --force
+fi
 git checkout $master_branch
 git merge --no-ff $cur_branch --no-edit
 
