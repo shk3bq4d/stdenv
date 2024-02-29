@@ -276,6 +276,9 @@ insert into dummy (d) values ('node1 is master');
 WARNING json_query can't be used to query string or int (scalars)
 use json_value instead
 https://mariadb.com/kb/en/json-functions/ -- json-query
+select json_quote(mymultilinecol) from mytable; -- serialization
+select json_unquote('"myjsonencodedvalue"') from mytable; -- deserialization, notice the double layer of quotes
+replace into settings (name, value) values ('core.license', json_unquote('"hehe"'));
 
 # query logging
 https://stackoverflow.com/questions/303994/log-all-queries-in-mysql
