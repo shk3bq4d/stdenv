@@ -222,6 +222,17 @@ case $SCRIPT in \
     nohup firefox $SCRIPT &>/dev/null &
     exit 0
     ;;
+*.json)
+    case "$SCRIPT_NAME" in \
+    i3-save-tree*)
+        i3-msg "append_layout $SCRIPT"
+        exit $?
+        ;;
+    esac
+    echo '# e''x: set filetype=yaml'
+    json-to-yaml.sh "$SCRIPT"
+    exit 0
+    ;;
 *.yml|*.yaml)
     # trying for ansible
     if grep -qE "^[- ] hosts:" $SCRIPT && [[ "$SCRIPT" != */inventory.yml ]]; then
