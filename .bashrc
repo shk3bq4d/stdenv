@@ -20,8 +20,14 @@ if [[ -n "${SSH_CLIENT}" && -z "$TMUX" ]] && hash tmux &>/dev/null; then
             exit 0
         fi
     else
-        if tmux; then
-            exit 0
+        if [[ -f $RCD/tmux.conf ]]; then
+            if tmux -l -f $RCD/tmux.conf; then
+                exit 0
+            fi
+        else
+            if tmux -l; then
+                exit 0
+            fi
         fi
     fi
 fi
