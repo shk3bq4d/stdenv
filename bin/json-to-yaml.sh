@@ -4,8 +4,9 @@
 set -euo pipefail
 
 if [[ $# -eq 0 ]]; then
-    yq e -P -
+    yq e --output-format=yaml -P -
+
 else
-    yq e -P "$@"
+    yq e --output-format=yaml -P "$@"
 fi
 #| yq-kislyuk -y --indentless-lists
