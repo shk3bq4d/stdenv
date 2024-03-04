@@ -8,6 +8,11 @@ tmux kill-session -t myname # kill session:
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill # Kill all the tmux sessions:
 In tmux, hit the prefix ctrl+b (my modified prefix is ctrl+a) and then:
 
+<C-b> Page Up   scroll up
+<C-b> Page Down scroll down
+
+set -g mouse on Scoll sync
+
 Sessions
 
 :new<CR>  new session

@@ -120,6 +120,7 @@ git remote set-url origin git://new.url.here
 git remote set-url origin ssh://git@gitlab.ksnet.nagra.com/CFC/managed-devices-tools.git
 git remote add origin git0@ly.abc1.ch:docker && git branch --set-upstream-to=origin/master master
 git remote add origin git0@jexternalssh.ly.lan:docker && git branch --set-upstream-to=origin/master master
+git remote add myotherpc myotherpc:$PWD/.git && git branch --set-upstream-to=myotherpc/master master
 
 git clone ssh://git0@ly.abc1.ch:443/home/git0/stdhome
 
