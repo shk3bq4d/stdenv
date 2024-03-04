@@ -9,8 +9,8 @@ rm -f $tmpbg
 
 set -x
 if true; then
-	i3lock -c 000000 -n &
-	FOO_PID=$!
+    i3lock -c 000000 -n &
+    FOO_PID=$!
 fi
 
 i=$RANDOM
@@ -28,11 +28,19 @@ q=$(( $i % 37 ))
 scrot --quality $q "$tmpbg"
 ls -l "$tmpbg"
 if [[ "$tmpbg" != *".png" ]]; then
-	newbg="${tmpbg}.png"
-	#convert "$tmpbg" "$newbg"
-	convert "$tmpbg" -scale ${a}% -scale ${b}% "$newbg"
-	#convert "$tmpbg" "$newbg"
-	tmpbg="$newbg"
+    newbg="${tmpbg}.png"
+    #convert "$tmpbg" "$newbg"
+    convert \
+        "$tmpbg" \
+        -scale ${a}% \
+        -scale ${b}% \
+        -annotate +100+100 "SALUUUUUTT $(hostname -f)" \
+        "$newbg"
+#   mogrify \
+#       -annotate +100+100 "SALUUUUUTT $(hostname -f)" \
+#       "$newbg"
+    #convert "$tmpbg" "$newbg"
+    tmpbg="$newbg"
 fi
 
 #convert "$tmpbg" -scale 2% -scale 5000% "$tmpbg"
