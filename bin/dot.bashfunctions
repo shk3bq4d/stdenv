@@ -58,6 +58,12 @@ EOF
     fi
 }
 
+term_xterm()    { export TERM=xterm; }
+term_xterm256() { export TERM=xterm-256color; }
+term_rxvt256()  { export TERM=rxvt-256color; }
+term_screen()   { export TERM=screen; }
+term_tmux()     { export TERM=tmux; }
+
 function abspath() {
     cd "$(mrdirname "$1")"
     echo -n "$PWD/$(mrbasename "$1")"
