@@ -1,3 +1,4 @@
+echo .sshrc
 if [[ -f ~/.stdenv_aliases ]]; then
     if [[ -f ~/.zshrc ]] && hash zsh &>/dev/null; then
         exec zsh
@@ -5,8 +6,10 @@ if [[ -f ~/.stdenv_aliases ]]; then
         # retrieves and executes user shell
         exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
     fi
+    echo .sshrc return
     return
 fi
+echo .sshrc2
 if [[ -z $SSHHOME ]]; then
     export SSHHOME=$( dirname "${BASH_SOURCE[0]}" )
 fi

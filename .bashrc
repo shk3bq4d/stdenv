@@ -20,13 +20,31 @@ if [[ -n "${SSH_CLIENT}" && -z "$TMUX" ]] && hash tmux &>/dev/null; then
             exit 0
         fi
     else
-        if [[ -f $RCD/tmux.conf ]]; then
-            if tmux -l -f $RCD/tmux.conf; then
-                exit 0
+        f="$RCD/../bashsshrc"
+        #export SHELL="$RCD/../bashsshrc"
+        if tmux -V | grep -F 1.8; then ## centos7
+            echo tmux1.8
+            if [[ -f $RCD/tmux1.8.conf ]]; then
+                echo tmux1.8.conf
+                if tmux -l -f $RCD/tmux1.8.conf -c $f; then
+                    exit 0
+                fi
+            else
+                if tmux -l -c $f; then
+                    exit 0
+                fi
             fi
         else
-            if tmux -l; then
-                exit 0
+            echo tmuxrecent
+            export SHELL=$f
+            if [[ -f $RCD/tmux.conf ]]; then
+                if tmux -l -f $RCD/tmux.conf; then
+                    exit 0
+                fi
+            else
+                if tmux -l; then
+                    exit 0
+                fi
             fi
         fi
     fi
