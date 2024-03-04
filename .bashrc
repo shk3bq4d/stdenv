@@ -13,6 +13,42 @@ umask 027
 #            of full screen lines that need to be written
 #[[ -z $SSH_CLIENT && -f ~/.config/i3/config ]] && echo 'welcome?' && tail -n 85 ~/.config/urxvt-resize-bug && echo ✇
 [[ -z $SSH_CLIENT && $TERM == rxvt* && -f ~/.config/i3/config && -f ~/.config/urxvt-resize-bug ]] && echo -n "$(<~/.config/urxvt-resize-bug)"
+if [[ -n "${SSH_CLIENT}" && -z "$TMUX" ]] && hash tmux &>/dev/null; then
+    _unattached_tmux="$(tmux ls 2>/dev/null | grep -v attached | head -n 1 | cut -d: -f 1)"
+    if [[ -n "$_unattached_tmux" ]]; then
+        if tmux attach -t $_unattached_tmux; then
+            exit 0
+        fi
+    else
+        f="$RCD/../bashsshrc"
+        #export SHELL="$RCD/../bashsshrc"
+        if tmux -V | grep -F 1.8; then ## centos7
+            echo tmux1.8
+            if [[ -f $RCD/tmux1.8.conf ]]; then
+                echo tmux1.8.conf
+                if tmux -l -f $RCD/tmux1.8.conf -c $f; then
+                    exit 0
+                fi
+            else
+                if tmux -l -c $f; then
+                    exit 0
+                fi
+            fi
+        else
+            echo tmuxrecent
+            export SHELL=$f
+            if [[ -f $RCD/tmux.conf ]]; then
+                if tmux -l -f $RCD/tmux.conf; then
+                    exit 0
+                fi
+            else
+                if tmux -l; then
+                    exit 0
+                fi
+            fi
+        fi
+    fi
+fi
 is_zsh() { # redundant with ~/bin/dot.bashfunctions, but also needed here
     test -n "${ZSH_VERSION:-}"
 }
