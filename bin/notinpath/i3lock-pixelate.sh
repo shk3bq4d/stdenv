@@ -34,7 +34,7 @@ if [[ "$tmpbg" != *".png" ]]; then
         "$tmpbg" \
         -scale ${a}% \
         -scale ${b}% \
-        -annotate +100+100 "SALUUUUUTT $(hostname -f)" \
+        -annotate +100+100 "$(hostname -s)" \
         "$newbg"
 #   mogrify \
 #       -annotate +100+100 "SALUUUUUTT $(hostname -f)" \
