@@ -1417,6 +1417,23 @@ ls_l_recursive() {
     find "$@" -print0 | xargs -r0 ls -ltrdh --color=auto --time-style=long-iso --time-style +"%Y.%m.%d %H:%M:%S"
 }
 
+mv_backup_with_timestamp() {
+    local arg ts
+    for arg in "$@"; do
+        ! test -f "${arg%/}" && ! test -d "${arg%/}" && echo "FATAL: not a file neither a dir ${arg%/}" && return 1
+    done
+    ts="$(date +"%Y.%m.%d-%H.%M.%S")"
+    for arg in "$@"; do
+        test -f "${arg%/}.$ts" && echo "FATAL: file ${arg%/}.$ts already exists" && return 1
+    done
+    for arg in "$@"; do
+        echo mv ${arg%/} ${arg%/}.$ts
+             mv ${arg%/} ${arg%/}.$ts 2>/dev/null ||
+        sudo mv ${arg%/} ${arg%/}.$ts
+    done
+    return 0
+}
+
 cp_backup_with_timestamp() {
     local arg ts
     for arg in "$@"; do
