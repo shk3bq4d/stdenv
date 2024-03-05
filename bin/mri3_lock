@@ -24,17 +24,17 @@ may19*)
 	;;
 esac
 case "$(hostname -f)" in \
-may19*)
+may19*|shaz*)
 	~/bin/notinpath/i3lock-pixelate.sh
 	;;
-dec17*|may19*)
+dec17*|may19*|nov20*|shaz*)
 	case "$(hostname -f)" in \
 		may19*) f="$HOME/images/sf.png";;
 		*)      f="$HOME/Pictures/i3lock/boreal3-$(current-resolution.sh).png";;
 	esac
 	if [[ ! -f "$f" ]]; then
 		convert -resize $(current-resolution.sh) \
-			~/Pictures/i3lock/boreal3.png \
+			-annotate 0 "$(hostname -f)" \
 			"$f"
 	fi
 	i3lock --debug -enf -i "$f" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
