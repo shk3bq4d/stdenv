@@ -340,6 +340,8 @@ let g:html_use_css=0
 let g:html_no_pre=1
 :command! Gstagehunk :GitGutterStageHunk
 :command! Gundohunk :GitGutterUndoHunk
+:command! GitBlame :!git blame %:p
+:command! GitLol :!git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" %p
 endif
 
 " http://vim.wikia.com/wiki/Fix_syntax_highlighting

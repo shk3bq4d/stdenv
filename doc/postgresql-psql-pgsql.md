@@ -237,7 +237,7 @@ https://github.com/docker-library/postgres
 * https://hub.docker.com/r/severalnines/clustercontrol
 * https://www.enterprisedb.com/postgres-tutorials/postgresql-replication-and-automatic-failover-tutorial#log-shipping
 * https://pgdash.io/blog/postgres-physical-replication.html#:~:text=Physical%20replication%20methods%20are%20used,)%2C%20typically%20on%20another%20machine.
-* https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling
+* [https://wiki.postgresql.org/wiki/Replication,\_Clustering,\_and_Connection_Pooling](https://wiki.postgresql.org/wiki/Replication,_Clustering,_and_Connection_Pooling)
 * https://www.postgresql.org/docs/current/different-replication-solutions.html
 * https://momjian.us/main/writings/pgsql/replication.pdf
 * https://postgres-r.org/documentation/terms
@@ -250,7 +250,7 @@ https://github.com/docker-library/postgres
 
 ```
 ```sql
-select client_addr, state from pg_stat_replication;
+ect client_addr, state from pg_stat_replication;
 select pg_is_in_recovery();
 select pg_read_file('/etc/hostname') as hostname, setting as port from pg_settings where name='port';
 ```
