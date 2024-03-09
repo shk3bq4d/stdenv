@@ -12,8 +12,16 @@ www.sbb.ch##.ot-fade-in.onetrust-pc-dark-filter
 www.sbb.ch##.ot-sdk-container
 
 ! 2023-12-15 https://www.hornbach.ch
-# 2024.03.09 deactivating as can't scroll
-#www.hornbach.ch###usercentrics-root
+www.hornbach.ch###usercentrics-root
+www.hornbach.ch###uc-cross-domain-bridge
+www.hornbach.ch###uc-overflow-style
+www.hornbach.ch###uc-overflow-style
+# restore scroll
+# https://stackoverflow.com/questions/67850933/remove-class-from-body-dynamically-using-ublock-origin
+www.hornbach.ch##body:remove-class(overflowHidden)
+www.hornbach.ch##body:watch-attr(class):remove-class(overflowHidden)
+# block iframe from user centric
+||app.usercentrics.eu^$subdocument,domain=www.hornbach.ch
 
 www.nba.com##.ot-sdk-row
 
