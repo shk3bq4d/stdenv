@@ -12,7 +12,8 @@ www.sbb.ch##.ot-fade-in.onetrust-pc-dark-filter
 www.sbb.ch##.ot-sdk-container
 
 ! 2023-12-15 https://www.hornbach.ch
-www.hornbach.ch###usercentrics-root
+# 2024.03.09 deactivating as can't scroll
+#www.hornbach.ch###usercentrics-root
 
 www.nba.com##.ot-sdk-row
 

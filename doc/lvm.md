@@ -82,6 +82,12 @@ systemctl stop mdatp
 systemctl stop audit2why
 systemctl stop postfix
 systemctl stop nginx
+systemctl stop squid
+systemctl stop pcsd
+systemctl stop gssproxy
+systemctl stop rpcbind.service
+systemctl stop rpcbind.socket
+systemctl stop corosync
 systemctl stop rsyslog
 systemctl stop atop
 systemctl stop chronyd
@@ -92,7 +98,14 @@ systemctl stop mde_netfilter.socket
 systemctl stop systemd-journald.service
 systemctl stop systemd-journald.socket
 umount /var/lib/docker # and all mount points that are below /var
+umount sunrpc # /var/lib/nfs/rpc_pipefs
 lvresize --size 14G --resizefs /dev/mapper/VG_root-LV_var
+
+# remove PV from VG
+vgreduce VG_root /dev/sda3
+pvremove /dev/sda3
+fdisk /dev/sda # delete partition
+partprobe
 
 
 lvremove /dev/mapper/VG_data-LV_opt
