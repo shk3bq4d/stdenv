@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-docker run "$@" -it alpine /bin/sh
+docker ps &>/dev/null && SUDO="" || SUDO="sudo"
+$SUDO docker run "$@" -it alpine /bin/sh
