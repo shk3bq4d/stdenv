@@ -361,6 +361,7 @@ systemctl status systemd-shutdownd.service
 
 # udev
 sudo udevadm monitor --environment --udev # follow udev events
+sudo udevadm control --reload-rules
 kazam # screen capture video -- record
 
 https://www.osetc.com/en/centos-7-rhel-7-how-to-change-the-system-keyboard-layout.html
