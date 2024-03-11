@@ -9,6 +9,8 @@ port TCP/5432
 \dt: list all tables in the current database
 \du list roles
 \dn list schemas
+\dp list privileges for current user on current database
+\dp TABLENAME list privileges for current user on TABLENAME database
 \d table -- describe table , create table alternative
 \d+ table -- describe table + storage + stats + description
 \! pwd -- execute shell command
@@ -18,8 +20,20 @@ pg_dump -st tablename dbname -- show create table (ie: there is no such thing ac
 sudo docker exec -u 999 -it postgres pg_dump -st repository -U bitbucket bitbucketdb -- show create table repository
 \c       database_name -- use
 \connect database_name -- use
+\conninfo -- whoami
+set role to username; -- to change the current user without relogin
 \x # toggles expanded display (vertical alignment)
 show config_file; -- display filepath of main config file
+
+select schema_name from information_schema.schemata;
+select * from information_schema.table_privileges;
+select * from information_schema.tables;
+select table_catalog, table_schema, table_name, table_type from information_schema.tables;
+select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_name like '%priv%';
+select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_schema not in ('pg_catalog', 'information_schema');
+
+show search_path;
+set search_path to myotherschema, public;
 
 coalesce -- nvl
 select c.relname from pg_class c where c.relkind = 'S'; # list sequences
