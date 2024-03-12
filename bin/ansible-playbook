@@ -20,7 +20,7 @@ else
     USER=$(id -un)
 fi
 HOME=$( eval echo ~$USER)
-echo HOME is $HOME, user is $USER
+>&2 echo HOME is $HOME, user is $USER
 vaults_args=""
 if [[ -d secrets ]]; then
     vaults_args="$(find secrets -maxdepth 1 -type f -name 'ansible-vault-*' |
@@ -34,7 +34,7 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
     vagrant_args+=('-i')
     vagrant_args+=('.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory')
 fi
-echo "vaults_args are $vaults_args"
+>&2 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
