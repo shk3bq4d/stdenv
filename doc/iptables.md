@@ -9,6 +9,8 @@ sudo iptables -I INPUT 1 -p tcp --src 91.216.32.0/24 -j DROP
 sudo iptables -I INPUT 1 -p tcp --src 172.31.11.0/24 -j ACCEPT
 sudo iptables -I OUTPUT 1 --dst 10.101.6.18/32 -j DROP
 
+
+
 # openwrt cut outgoing access
 iptables -A forwarding_lan_rule -p tcp --src 10.19.29.69/32 -j DROP
 iptables -A forwarding_lan_rule -p udp --src 10.19.29.69/32 -j DROP
@@ -60,6 +62,7 @@ done
 
 iptables -I INPUT 1 -p tcp -m tcp --dport 5201 -j ACCEPT # iperf3
 iptables -I INPUT 1 -p udp        --dport 5201 -j ACCEPT # iperf3
+iptables -I INPUT 1 -p udp --src 192.168.5.4 --dport 123 -j ACCEPT # ntp
 
 iptables -A INPUT -p tcp -m tcp --dport 10050 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 10514 -j ACCEPT
