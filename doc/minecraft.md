@@ -3,6 +3,9 @@ https://www.digminecraft.com/getting_started/how_to_open_crafting_table.php
 https://fr.wikihow.com/apprivoiser-un-ocelot-dans-Minecraft # chat transformer osselot
 * https://minecraft.fandom.com/fr/wiki/Contr%C3%B4les # contrôles controles francais
 
+
+respaw
+
 Left click    Attack/Destroy
 Middle click    Pick Block
 Right click    Use Item/Place Block
@@ -20,6 +23,11 @@ W    Walk Forward
 Z    Mob Effects
 T, RETURN    Open/Close Chat
 /    Open Command
+
+Z Open Command nov20
+- Open Command nov22 (dec17)
+/kill # respawn (but we lost the world 2024.03.17)
+https://futurekids.io/activities/stages-vacances
 
 
 F1 - Remove your Heads-Up Display
