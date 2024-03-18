@@ -9,10 +9,10 @@ Support release
 * 21  April 2020 Confluence 7.4  https://confluence.atlassian.com/doc/confluence-7-4-release-notes-994312218.html
 * 17 August 2021 Confluence 7.13 https://confluence.atlassian.com/doc/confluence-7-13-release-notes-1044114085.html
 * 28 July   2022 Confluence 7.19 https://confluence.atlassian.com/doc/confluence-7-19-release-notes-1141976784.html
-atlassian/confluence-server:7.4.15
+atlassian/confluence:7.4.15
 
-docker pull atlassian/confluence-server:7.4.15
-* git clone https://bitbucket.org/atlassian-docker/docker-atlassian-confluence-server.git # github
+docker pull atlassian/confluence:7.4.15
+* git clone https://bitbucket.org/atlassian-docker/docker-atlassian-confluence.git # github
 
 # EOL
 https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
@@ -2451,7 +2451,7 @@ select s.spacekey, round(longval / 1024 / 1024) as attachments_size, c.title fro
 
 
 https://www.atlassian.com/trust/security/advisories
-https://hub.docker.com/r/atlassian/confluence-server
+https://hub.docker.com/r/atlassian/confluence
 https://confluence.atlassian.com/doc/confluence-release-notes-327.html
 7.4 is LTS (EOL Date: Apr 21, 2022)
 * end of life policy: https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
@@ -2460,7 +2460,7 @@ https://myhost/confluence/fixonly/fixlicense.action?licenseSubmitted=true
 
 #
 sudo docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
-sudo docker run --rm atlassian/confluence-server:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
+sudo docker run --rm atlassian/confluence:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
 
 
 # confluence markup
