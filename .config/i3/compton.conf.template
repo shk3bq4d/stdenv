@@ -124,6 +124,7 @@ focus-exclude = [
     ,"class_g = 'mrmagicstring_comptonopaque'"
     ,"name ~= '^(https://play.typeracer.com/ )?TypeRacer - .* - Chromium$'"
     ,"name ~= ' - YouTube - Chromium$'"
+    ,"name ~= '^Minecraft .*'"
     ,"name ~= '^RTS . - Direct - TV - Play RTS - Chromium$'"
     ,"name ~= 'Infomaniak Meet - Chromium$'"
     ,"name ~= 'Meeting.{1,6}Microsoft Teams$'"

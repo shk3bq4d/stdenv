@@ -73,3 +73,10 @@ chcon -t zabbix_agent_exec_t     $(which zabbix_agent2) # couldn't listen to 100
 #chcon -t unconfined_exec_t $(which zabbix_agent2) # does not work for restoring
 restorecon $(which zabbix_agent2 ) # cancel changes
 ps -eZ | grep unconfined_service_t
+
+
+
+system_u: User identity, indicating the SELinux user associated with the process or file. In this case, it's a system user.
+object_r: Role identity, indicating the SELinux role associated with the process or file. This specifies the role within the system that the user is assigned when accessing the resource.
+ssh_home_t: Type identity, indicating the SELinux type context. It defines the type of object the process or file is. In this case, it might refer to a file or directory related to SSH home directories.
+s0: Sensitivity level, indicating the SELinux sensitivity label. In SELinux, sensitivity labels define the level of sensitivity or confidentiality associated with the resource. s0 typically represents the default sensitivity level.
