@@ -15,6 +15,7 @@ https://go2docs.graylog.org/4-x/what_is_graylog/what_is_graylog_operations.html
 https://go2docs.graylog.org/4-x/changelogs/changelog.html
 https://go2docs.graylog.org/4-x/changelogs/operations_changelog.html
 
+https://YOUR_INSTANCE/api/api-browser/global/index.html
 
 # extractors
 are configured per inputs
