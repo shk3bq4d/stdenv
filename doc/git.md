@@ -669,3 +669,4 @@ git range-diff origin/$(git_current_branch)...$(git_current_branch) # difference
 git log --grep="git-crypt"
 glola --no-textconv -S "run augenrules" # search in patch, ignoring the git-crypt filter layer
 https://github.com/shk3bq4d/stdenv.git
+git@github.com:shk3bq4d/stdenv.git
