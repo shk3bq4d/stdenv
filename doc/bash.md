@@ -1100,13 +1100,20 @@ done < <(find . -type f -name "*.bin" -maxdepth 1)
 [[ $ZSH_EVAL_CONTEXT =~ :file$ ]] && sourced=1 || sourced=0 # must be called outside a function https://stackoverflow.com/a/28776166
 
 
-echo -n "Are you sure you want to proceed (yN): " # read
-read _read
-echo # read
+echo -n "Are you sure you want to proceed (yN): " # read prompt
+read _read # prompt
+echo # read prompt
 case "${_read,,}" in \
-y|yes) true ;; # read
-*)   echo "ABORTING"; exit 1;; # read
-esac # read
+y|yes) true ;; # read prompt
+*)   echo "ABORTING"; exit 1;; # read prompt
+esac # read prompt
+
+# read prompt while loop https://stackoverflow.com/a/46936399
+while read line <&3; do # read prompt while loop
+	read _read # prompt while loop
+done 3< <(cat myfile) # prompt while loop
+
+
 
 echo -e "\e[1mbold\e[0m" # ansi escape color
 echo -e "\e[3mitalic\e[0m" # ansi escape color
