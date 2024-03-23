@@ -1499,4 +1499,30 @@ cd_realpath() {
     cd -P "$(readlink -f "$PWD")"
 }
 
+docker_rm_images_interactive() {
+    local f SUDO _read
+    docker ps &>/dev/null && SUDO="" || SUDO="sudo";
+    f=/tmp/docker-rm-interactive-$(date +%s)
+    $SUDO docker images | command grep -vE 'IMAGE ID' | cat -n >$f
+    cat $f
+    echo "========"
+    while read linenum image tag id leftover <&3; do
+        command grep -E "^\\s*$linenum\\s" $f
+        echo -n "delete (yN) ? "
+        read _read </dev/stdin
+        case "${_read}" in  \
+        y|yes|Y|YES)
+            if [[ "$tag" == "<none>" ]]; then
+                echo  docker rmi $image
+                $SUDO docker rmi "$image"
+            else
+                echo  docker rmi $image:$tag
+                $SUDO docker rmi "$image:$tag"
+            fi
+            ;;
+        esac
+    done 3< <(cat $f)
+    command rm -f $f
+}
+
 true # last statement must return true
