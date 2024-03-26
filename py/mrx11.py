@@ -46,10 +46,28 @@ def go(args: List[str]) -> int:
 
 def list_modes():
     d = display.Display()
+    if 0:
+        pprint(d.xrandr_list_output_properties(65))
+        # <ListOutputProperties serial = 16, data = {'sequence_number': 16, 'atoms': [69, 90, 89, 86, 81, 77, 74, 73, 72, 71]}, error = None>
+        return
+    if 1:
+        help(d.screen().root.xrandr_get_screen_resources())
+        vars(d.screen().root.xrandr_get_screen_resources())
+        pprint(d.screen().root.xrandr_get_screen_resources())
+        return
+    help(d)
+    pprint(vars(d))
     screen = d.screen()
+    help(screen)
+    pprint(vars(screen))
     root = screen.root
+    help(root)
+    pprint(vars(root))
 
     res = root.xrandr_get_screen_resources()
+    help(res)
+    pprint(vars(res))
+
     for mode in res.modes:
         print(f"Mode ID: {mode.id}, Width: {mode.width}, Height: {mode.height}")
 

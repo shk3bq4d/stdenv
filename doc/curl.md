@@ -44,4 +44,8 @@ sed -imybackup -r -e '/^\[system_default_sect\]/a Options = UnsafeLegacyRenegoti
 curl -k                # SSL certificates validation
 curl --insecure # -k     SSL certificates validation
 curl --cert FILEPATH   # SSL certificates validation
+
+curl --output FILEPATH url # save document filename filepath
+curl -O FILEPATH  url      # save document filename filepath
 ```
+
