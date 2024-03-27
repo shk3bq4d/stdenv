@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -eu
+if [[ -n "${SUDO_USER:-}" ]]; then
+    user="$SUDO_USER"
+else
+    user=$(whoami)
+fi
+echo "user is $user"
+export XAUTHORITY=/run/user/$(id -u $user)/gdm/Xauthority
+if [[ -z "${DISPLAY:-}" ]]; then
+    correct_pidns="$(ps --no-headers -o pidns $$)"
+    ps --no-headers -o pidns,pid,cmd -u $user | while read pidns pid cmd; do
+        [[ "$pidns" != "$correct_pidns" ]] && continue
+        f="/proc/$pid/environ"
+        if grep -qzE "^DISPLAY=" $f; then
+            # leading caret doesn't work, probably because of -z
+            export DISPLAY="$(grep -zPo '(?<=DISPLAY=).*' $f)"
+            echo "DISPLAY is $DISPLAY from pid $pid, pidns $pidns and fp $f and cmdline $cmd"
+            break
+        fi
+    done
+    if [[ -z "${DISPLAY:-}" ]]; then
+        export DISPLAY=:0
+        echo "DISPLAY is $DISPLAY from default"
+    fi
+else
+    echo "DISPLAY was already set to $DISPLAY before dot.x11"
+fi
+set +eu
