@@ -57,7 +57,7 @@ User                           hehe                                     # /home/
 Port                           23417                                    # /home/hehe/.ssh/config:161
 ControlMaster                  auto                                     # /home/hehe/.ssh/config:486
 ControlPersist                 12h                                      # /home/hehe/.ssh/config:486
-ControlPath                    ~/.ssh/c/%h_%p_%r                        # /home/hehe/.ssh/config:492
+ControlPath                    ~/.ssh/c/%h_%r_%p                        # /home/hehe/.ssh/config:492
 ServerAliveInterval            30                                       # /home/hehe/.ssh/config:494
 ServerAliveCountMax            5                                        # /home/hehe/.ssh/config:496
 SendEnv                        LANG LC_*                                # /home/hehe/.ssh/config:543
