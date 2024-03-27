@@ -53,11 +53,13 @@ SELINUX=permissive
 SELINUXTYPE=targeted
 
 
+```sh
 restorecon -FRvv ~/.ssh
 chcon -Rv -t ssh_home_t ~/.ssh
 chcon -Rv -t httpd_sys_content_t /var/www/
 chcon -Rv -t httpd_sys_content_t /data/www/html/manual_uploads
 chcon     -t httpd_tmp_t /mnt/resource/nginx
+chcon     -t net_conf_t /etc/sysconfig/network-scripts/ifcfg-*
 
 chcon -Rv -t ssh_home_t /var/www/.ssh
 chcon  -v -t user_home_dir_t /var/www # system_u:object_r:unlabeled_t:s0 beforehande
@@ -73,6 +75,7 @@ chcon -t zabbix_agent_exec_t     $(which zabbix_agent2) # couldn't listen to 100
 #chcon -t unconfined_exec_t $(which zabbix_agent2) # does not work for restoring
 restorecon $(which zabbix_agent2 ) # cancel changes
 ps -eZ | grep unconfined_service_t
+```
 
 
 
