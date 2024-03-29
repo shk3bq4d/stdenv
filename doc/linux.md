@@ -115,6 +115,7 @@ date -s "2 OCT 2006 18:00:00"
 date --set="2 OCT 2006 18:00:00"
 date +%Y%m%d -s "20081128"
 date +%T -s "10:13:13"
+sudo date +%s --set $(date -d "-6min" +%s) # set system date 6 min earlier
 
 
 #########
