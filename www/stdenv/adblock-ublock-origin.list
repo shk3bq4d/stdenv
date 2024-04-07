@@ -84,7 +84,7 @@ www.teletext.ch##.ot-fade-in.onetrust-pc-dark-filter
 www.teletext.ch###onetrust-consent-sdk
 
 
-www.youtube.com##tp-yt-paper-dialog.ytd-popup-container.style-scope
+!www.youtube.com##tp-yt-paper-dialog.ytd-popup-container.style-scope
 www.youtube.com##tp-yt-iron-overlay-backdrop
 
 ! >>>>>> https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
