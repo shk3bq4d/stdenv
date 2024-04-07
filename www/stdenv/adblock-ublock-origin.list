@@ -11,10 +11,18 @@
 www.sbb.ch##.ot-fade-in.onetrust-pc-dark-filter
 www.sbb.ch##.ot-sdk-container
 
+! 2024-04-07 https://www.rts.ch
+www.rts.ch###usercentrics-root
+www.rts.ch##body:remove-class(overflowHidden)
+www.rts.ch##body:watch-attr(class):remove-class(overflowHidden)
+www.rts.ch###uc-cross-domain-bridge
+www.rts.ch###uc-overflow-style
+# block iframe from user centric
+||app.usercentrics.eu^$subdocument,domain=www.rts.ch
+
 ! 2023-12-15 https://www.hornbach.ch
 www.hornbach.ch###usercentrics-root
 www.hornbach.ch###uc-cross-domain-bridge
-www.hornbach.ch###uc-overflow-style
 www.hornbach.ch###uc-overflow-style
 # restore scroll
 # https://stackoverflow.com/questions/67850933/remove-class-from-body-dynamically-using-ublock-origin
