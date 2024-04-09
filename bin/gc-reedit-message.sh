@@ -9,9 +9,11 @@ if [[ $# -eq 0 ]]; then
     ref=HEAD
 elif [[ "$1" == "-"* ]]; then
     ref=HEAD
-else
+elif git check-ref-format "$1" &>/dev/null; then
     ref="$1"
     shift
+else
+    ref="$(git log -1 --pretty='%H' "$@")"
 fi
 
 git commit --reset-author --reedit-message=$ref "$@"

@@ -16,6 +16,14 @@ docker pull atlassian/confluence:7.4.15
 
 # EOL
 https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
+8.9 (EOL date: 2 Apr 2026)
+8.8 (EOL date: 8 Feb 2026)
+8.7 (EOL date: 6 Dec 2025)
+8.6 (EOL date: 5 Oct 2025)
+8.5 (EOL date: 22 Aug 2025) LONG TERM SUPPORT
+8.4 (EOL date: 6 July 2025)
+8.3 (EOL date: 23 May 2025)
+8.2 (EOL date: 29 Mar 2025)
 8.1 (EOL date: 14 Feb 2025)
 8.0 (EOL date: 29 Nov 2024)
 7.20 (EOL date: 4 Oct 2024)
@@ -2460,7 +2468,7 @@ https://myhost/confluence/fixonly/fixlicense.action?licenseSubmitted=true
 
 #
 sudo docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
-sudo docker run --rm atlassian/confluence:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
+sudo docker run --rm atlassian/confluencer:7.19.10 cat docker exec confluence cat /opt/atlassian/confluence/confluence/WEB-INF/classes/log4j.properties
 
 
 # confluence markup

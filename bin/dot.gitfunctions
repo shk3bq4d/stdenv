@@ -15,6 +15,10 @@ git_log_commit_message() {
     git log --pretty='%s' "$@"
 }
 
+git_is_ref() {
+    git check-ref-format "$@" &>/dev/null
+}
+
 git_is_current_repo_clean() {
     ! git status --porcelain | grep -qE .
 }
