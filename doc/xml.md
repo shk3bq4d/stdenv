@@ -28,6 +28,8 @@
 
 
 # XML duration examples
+P stands for period
+T for time ( to separate date and time
 P1D
 PT10H5S
 PT6000M
