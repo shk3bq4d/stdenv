@@ -2,6 +2,8 @@
 strace $(pgrep zabbix_server | sed -e 's/^/ -p /' | tr -d '\n') 2>&1
 
 
+strace-log-merge /tmp/strace.out | vi -
+
 strace -s 99999 -ffttTo /tmp/strace.out CMD
 strace -s 99999 -ffttTo /tmp/strace.out puppet apply                                   --modulepath=/puppet-envs/modules --config /workdir/shared/puppet.conf -e ""
 strace -s 99999 -e execve -fto /tmp/strace.out -p $(pgrep -f network-config-tui.sh)
