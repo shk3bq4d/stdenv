@@ -12,14 +12,15 @@
 set -euo pipefail
 
 if [[ $EUID -ne 0 ]]; then
-    sudo $0 "$@"
-    exit $?
+    SUDO=sudo
+else
+    SUDO=""
 fi
 
 set -x
-apt update
-apt upgrade -y
-apt autoremove -y
+$SUDO apt update
+$SUDO apt upgrade -y
+$SUDO apt autoremove -y
 set +x
 echo ""
 
