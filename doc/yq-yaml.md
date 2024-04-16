@@ -57,3 +57,17 @@ yq e '.myarray | map_values("")' # list to dict, https://mikefarah.gitbook.io/yq
 yq '[.spec.containers[],.spec.initContainers[]]|flatten|.[].image' bip.yaml # concatenate list
 
 yq -o json eval-all '[..|select(has("merged_var_name"))]' $(ack -l merged_var_name:)
+
+| explode(.) # resolves anchors, https://mikefarah.gitbook.io/yq/operators/anchor-and-alias-operators
+
+    _yq -r '
+        (
+        []
+        + ([.[].roles[] | select(has("role") | not)] // [])
+        + ([.[].roles[] | select(has("role")).role] // [])
+        + ([.. | select(has("include_role"))."include_role".name] // [])
+        + ([.. | select(has("ansible.builtin.include_role"))."ansible.builtin.include_role".name] // [])
+        + ([.. | select(has("import_role"))."import_role".name] // [])
+        + ([.. | select(has("ansible.builtin.import_role"))."ansible.builtin.import_role".name] // [])
+        ) | explode(.) | unique | sort | join(" ")
+        ' "$1" | tr ' ' $'\n'
