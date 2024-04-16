@@ -2896,3 +2896,15 @@ no_log: '{{ ansible_verbosity < 3 }}'
 
 "biphehe"  | quote =>  "biphehe"
 "bip hehe" | quote => "'bip hehe'"
+
+
+assert:
+  that:
+    # Note that a string is classed as also being "iterable" and "sequence", but not "mapping"
+    a_string is string and a_string is iterable and a_string is sequence and a_string is not mapping
+
+    # Note that a dictionary is classed as not being a "string", but is "iterable", "sequence" and "mapping"
+    - a_dictionary is not string and a_dictionary is iterable and a_dictionary is mapping
+
+    # Note that a list is classed as not being a "string" or "mapping" but is "iterable" and "sequence"
+    - a_list is not string and a_list is not mapping and a_list is iterable

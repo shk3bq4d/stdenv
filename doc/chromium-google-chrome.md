@@ -183,6 +183,15 @@ https://developers.whatismybrowser.com/useragents/explore/software_name/chrome/
 User-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36
 User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36
 
+# Okta 3rd party cookies 
+https://support.okta.com/help/s/article/deprecation-of-3rd-party-cookies-in-google-chrome?language=en_US
+## to try early
+chrome://flags#third-party-cookie-deprecation-trial -> enabled
+chrome://flags/#tracking-protection-3pcd -> enabled
+chrome://flags/#tpcd-metadata-grants -> disabled
+
+* https://chromium.googlesource.com/chromium/chromium/+/trunk/chrome/common/chrome_switches.cc # command line switches
+* https://chromium.googlesource.com/chromium/chromium/+/trunk/base/base_switches.cc
 
 # undocumented command line switches
 taken from https://peter.sh/experiments/chromium-command-line-switches/
@@ -2900,3 +2909,9 @@ workaround: select location bar, then do you control-f
 
 https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Linux&num=1&offset=0
 https://chromiumdash.appspot.com/fetch_releases?channel=Stable&platform=Windows&num=1&offset=0
+
+# certificates custom root / intermediate
+  # https://superuser.com/questions/1717914/make-chrome-trust-the-linux-system-certificate-store-or-select-certificates-via
+  # 1) is import with certutil to each applications  cert8.db or cert9.db
+  # 2) is to do some clever with the libraries like 
+  sudo ln -s -f /usr/lib/x86_64-linux-gnu/pkcs11/p11-kit-trust.so /usr/lib/x86_64-linux-gnu/nss/libnssckbi.so
