@@ -34,7 +34,11 @@ freebsd)
 esac
 
 filelist() {
-	find -L $DOCDIR -maxdepth 2 -\( -name "*$1*.md" -or -name "*$1*.yml" -or -name "*$1*.yaml" -\) -print0 | sort -z
+    if [[ "$(find -L $DOCDIR -maxdepth 2 -\( -name "$1.md" -or -name "$1.yml" -or -name "$1.yaml" -\) | wc -l)" -eq 1 ]]; then
+      find -L $DOCDIR -maxdepth 2 -\( -name "$1.md" -or -name "$1.yml" -or -name "$1.yaml" -\) -print0
+      return
+    fi
+    find -L $DOCDIR -maxdepth 2 -\( -name "*$1*.md" -or -name "*$1*.yml" -or -name "*$1*.yaml" -\) -print0 | sort -z
     [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/*README*.md" -print0 | sort -z
 }
 filelistcount() {

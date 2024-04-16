@@ -2908,3 +2908,7 @@ assert:
 
     # Note that a list is classed as not being a "string" or "mapping" but is "iterable" and "sequence"
     - a_list is not string and a_list is not mapping and a_list is iterable
+
+ansible.utils.validate # asserts validation
+* [asserts validate validation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation)
+* [asserts validate validation](https://www.youtube.com/watch?v=MGYSluLyPj8)

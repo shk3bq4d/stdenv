@@ -1,4 +1,31 @@
 /* ex: set filetype=markdown: */
+# class version
+Exception in thread "main" java.lang.UnsupportedClassVersionError: com/dremio/dac/cmd/AdminCommandRunner has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+22	66
+21	65
+20	64
+19	63
+18	62
+17	61
+16	60
+15	59
+14	58
+13	57
+12	56
+11	55
+10	54
+9	53
+8	52
+7	51
+6	50
+5	49
+1.4	48
+1.3	47
+1.2	46
+1.1	45
+1.0.2	45
+
+
 # string format date
 ```java
 	System.out.println(String.format("mrstub %tY.%<tm.%<td %<tH.%<tM.%<tS-%<tL", new Date()));
