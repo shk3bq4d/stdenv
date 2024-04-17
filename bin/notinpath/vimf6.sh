@@ -295,7 +295,27 @@ case $SCRIPT in \
         echo '# /* e''x: set filetype=python */'
         python3 -c "
 import yaml
+import os
 import pprint
+class VaultTag(yaml.YAMLObject):
+    yaml_tag = u'!vault'
+    def __init__(self, data):
+        self.data = data
+
+    def __repr__(self):
+        return 'VaultTag({})'.format(self.data)
+
+    @classmethod
+    def from_yaml(cls, loader, node):
+        return VaultTag(node.value)
+
+    @classmethod
+    def to_yaml(cls, dumper, data):
+        return dumper.represent_scalar(cls.yaml_tag, data.env_var)
+# Required for safe_load
+yaml.SafeLoader.add_constructor('!vault', VaultTag.from_yaml)
+# Required for safe_dump
+yaml.SafeDumper.add_multi_representer(VaultTag, VaultTag.to_yaml)
 with open('$SCRIPT', 'rb') as f:
     pprint.pprint(yaml.safe_load(f))
             "
