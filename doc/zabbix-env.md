@@ -708,3 +708,21 @@ zabbix-api==0.5.6 # py pip used to be used by ansible collection community.zabbi
 
 # other
 * zabbix agent2 windows syslog logtype=system https://git.zabbix.com/projects/ZBX/repos/zabbix/commits/0d03c8f6e95db370d0d64565d95ba9776ada9b96#src/go/conf/zabbix_agent2.win.conf
+
+
+# hard-coded value discovery
+Create a discovery of type "Script"
+```js
+var nl = "\n";
+var headers = "{#DEST},{#PORT},{#EXPECTED},{#ITEMDELAY},{#TRIGGERMINARG},{#ITEMTEXT},{#TRIGGERTEXT}";
+var value1 = "nmprx101p06.mfogroup.co,3128,1,30m,#3,squid_cluster,squid_cluster should be accessible";
+var value2 = "graylog.group.local,5044,1,30m,#3,filebeat,filebeat should be accessible";
+return headers + nl + value1 + nl + value2;
+
+return "{#KEY}\nVirtualMachineId\nPhysicalHostNameFullyQualified\nVirtualMachineName";
+vfs.file.regexp[/opt/sf-scripts/zabbix-shared/hyperv-kvp,^{#KEY}: (.*),,,,<output>]
+```
+add preprocessing steps: CSV to JSON with default ' and " parameters and "with headers row checked"
+
+
+
