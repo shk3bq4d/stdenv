@@ -71,3 +71,6 @@ yq -o json eval-all '[..|select(has("merged_var_name"))]' $(ack -l merged_var_na
         + ([.. | select(has("ansible.builtin.import_role"))."ansible.builtin.import_role".name] // [])
         ) | explode(.) | unique | sort | join(" ")
         ' "$1" | tr ' ' $'\n'
+
+yq '(... | select(type == "!!seq")) |= sort' # sort list / array recursively, useful for ansible groups comparison
+ansible -m debug -a var=groups MYHOST 2>/dev/null | sed -n -e '/groups:/,/PLAY RECAP/ p' | head -n -1 | yq '(... | select(type == "!!seq")) |= sort'
