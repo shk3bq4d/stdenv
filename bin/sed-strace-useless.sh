@@ -15,6 +15,10 @@ _sed() {
 / poll\(\[/ d
 / futex\(/ d
 / mmap\(/ d
+/ munmap\(/ d
+/ munmap\(/ d
+/ mprotect\(/ d
+/ close\(/ d
 / timerfd_settime\(/ d
 
 / (read|write|writev|recvmsg)\(.*"[^"]?(\\([a-z]|[0-9]{,4})[^"]{,2})+"/ d
