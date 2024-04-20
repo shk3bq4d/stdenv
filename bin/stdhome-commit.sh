@@ -2,8 +2,16 @@
 
 set -e
 if [[ $# -gt 0 ]]; then
-	echo sleep "$@"
-	sleep "$@"
+    case "$1" in \
+    feb22*|may19*|shaz*|apr16*|charlotte)
+		# not readay yet as I need to load the ssh-agent
+        ssh "$1" bin/stdhome-commit.sh
+        ;;
+    *)
+        echo sleep "$@"
+        sleep "$@"
+        ;;
+    esac
 fi
 unset GIT_DIR
 unset GIT_WORK_TREE
