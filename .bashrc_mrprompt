@@ -1,6 +1,6 @@
 function mr_prompt() {
-	history -a
     local EXITSTATUS="$?"
+	history -a
     local NONE="\[\033[0m\]"    # unsets color to term's fg color
     local BOLD="\[\033[1m\]"
 
