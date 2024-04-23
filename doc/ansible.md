@@ -2900,6 +2900,7 @@ no_log: '{{ ansible_verbosity < 3 }}'
 "biphehe"  | quote =>  "biphehe"
 "bip hehe" | quote => "'bip hehe'"
 
+* [apt_repository better alternative](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/deb822_repository_module.html#ansible-collections-ansible-builtin-deb822-repository-module )
 
 assert:
   that:
