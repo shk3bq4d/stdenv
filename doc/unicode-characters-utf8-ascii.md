@@ -2,6 +2,7 @@
 è &egrave; e aigu
 = &#61; equal
 à
+UTF-8 BOM is a sequence of bytes at the start of a text stream (0xEF, 0xBB, 0xBF)
 
 ¦	- 0166	U+00A6	&brvbar;
 § (Section)	- 0167	U+00A7	&sect;
