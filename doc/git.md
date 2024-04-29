@@ -642,6 +642,7 @@ GIT_DIR=${GIT_WORK_TREE}/.git # environment variable directory
 
 git rebase; git merge --no-ff # "semi-linear merge" is the way we work
 git log --pretty=fuller # AuthorDate: Sun Aug 29 21:24:24 2021 +0200        CommitDate: Fri Sep 3 08:25:34 2021 +0200
+git log --date=format:'%Y.%m.%d %H:%M:%S'
 
 # rewrite history
 * https://stackoverflow.com/questions/59850631/how-to-remove-sensitive-data-from-a-file-in-github-history
@@ -670,3 +671,5 @@ git log --grep="git-crypt"
 glola --no-textconv -S "run augenrules" # search in patch, ignoring the git-crypt filter layer
 https://github.com/shk3bq4d/stdenv.git
 git@github.com:shk3bq4d/stdenv.git
+
+~/.oh-my-zsh/plugins/git/README.md # aliases functions list
