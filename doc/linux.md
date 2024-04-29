@@ -243,6 +243,8 @@ xset dpms force on # forces turn off screen
 
 sysctl -w net.ipv4.ip_nonlocal_bind = 1 # bind on unassigned ip, useful in case of failover vip
 
+fuser -mv /dev/mapper/vgroot-lvdocker
+lsof | grep docker
 
 # netstat replacement
 nmap -sT -O localhost
