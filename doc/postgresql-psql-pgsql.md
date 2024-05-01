@@ -12,7 +12,7 @@ port TCP/5432
 \dp list privileges for current user on current database
 \dp TABLENAME list privileges for current user on TABLENAME database
 \d table -- describe table , create table alternative
-\d+ table -- describe table + storage + stats + description
+\d+ table -- describe table + storage + stats + description, show create table, show create view
 \! pwd -- execute shell command
 \! for i in $(seq 5); do echo $i; done
 \! echo $0 # sh
