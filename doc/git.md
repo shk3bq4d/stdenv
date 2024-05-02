@@ -53,6 +53,7 @@ git config core.whitespace -blank-at-eol
 git add README.md
 git commit -m "add README"
 git push -u origin master
+git push --force origin HEAD:$(id -un) # push current branch onto remote unique reference corresponding to my username
 
 git difftool --tool=vimdiff --no-prompt
 
