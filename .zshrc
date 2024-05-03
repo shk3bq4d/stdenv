@@ -114,6 +114,7 @@ for c in \
     doc \
     docker \
     fahrplan \
+    git \
     helm \
     kubectl \
     locate \
@@ -124,6 +125,7 @@ for c in \
     ssh \
     sshfs \
     sshpass \
+    terraform \
     vagrant \
     viw \
     watch \

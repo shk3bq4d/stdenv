@@ -79,7 +79,7 @@ rundll32.exe shell32.dll,Control_RunDLL ncpa.cpl
 
 
 cd /d "$APPDATA/Microsoft/Windows/Start Menu/Programs/Startup"
-cd /d %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup & explorer
+cd /d %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup & explorer .
 start ms-settings:regionlanguage & REM keyboard layout, then click on language, then options
 cd "/cygdrive/c/Users/$(whoami)/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
 ~/stdhome/bin/cron-from-win32.bat # dont forget to go to stdhome dir as windows wont interpret symlink
