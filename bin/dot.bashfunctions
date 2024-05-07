@@ -892,12 +892,25 @@ function bc() {
         command bc -ql
     else
         # bc 5+5
-        command bc -ql <<< "$@" | sed -r -e '/\./s/0+$//'
+        echo "$@" | command bc -ql | sed -r -e '/\./s/0+$//'
     fi
 }
 
 lowercase(){
     echo "$1" | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/"
+}
+
+machine_sizing() {
+    local t
+    echo "RAM: $(free -h | egrep ^Mem: | awk '{ print $2 }')"
+    echo "CPU: $(nproc)"
+    echo ""
+    echo "disks:"
+    lsblk | awk '{ if (/disk/) { print $1 " " $4  }}'
+    echo ""
+    t=3
+    echo "partitions above ${t}G"
+    df -h | awk '{ if ($2 ~ /G$/ && $2 > 3) { print $2 " " $5 " " $6 }}' | while read a b c; do printf "%7.1fG %4s %s\n" ${a//G/} $b $c ; done; echo
 }
 
 os_detection() {
