@@ -6,9 +6,10 @@ iptables -D INPUT   -p ICMP --icmp-type 8 -j DROP # restore stopped incoming pin
 # stop output
 sudo iptables -I INPUT 1 -p tcp --src 91.216.32.0/24 -j DROP
 sudo iptables -I INPUT 1 -p tcp --src 91.216.32.0/24 -j DROP
-sudo iptables -I INPUT 1 -p tcp --src 172.31.11.0/24 -j ACCEPT
+sudo iptables -I INPUT 1 -p tcp --dport 443 --src 172.31.11.0/24 -j ACCEPT
 sudo iptables -I OUTPUT 1 --dst 10.101.6.18/32 -j DROP
 
+sudo iptables -I INPUT 1 -p tcp --dport 3306 --src 10.101.6.192/29 -j ACCEPT
 
 
 # openwrt cut outgoing access
