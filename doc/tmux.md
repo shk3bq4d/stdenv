@@ -1,8 +1,8 @@
 tmux shortcuts & cheatsheet
 tmux # start new:
 tmux new -s myname # start new with session name:
-tmux a  #   (or at, or attach) #attach:
-tmux a -t myname # attach to named:
+tmux a  #   (or at, or attach) #reattach:
+tmux a -t myname # attach to named: #reattach
 tmux ls # list sessions:
 tmux kill-session -t myname # kill session:
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill # Kill all the tmux sessions:
