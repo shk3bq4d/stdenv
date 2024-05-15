@@ -2,6 +2,11 @@
 
 #source ~/.std*aliases
 #set -x
+# https://bugzilla.redhat.com/show_bug.cgi?id=1927185
+# https://lwn.net/Articles/570485/
+export GOOGLE_API_KEY="no"
+export GOOGLE_DEFAULT_CLIENT_ID="no"
+export GOOGLE_DEFAULT_CLIENT_SECRET="no"
 ARGS="--allow-legacy-extension-manifests --debug-print"
 SCALE="1.4"
 case $(timeout 2 hostname -f) in \
