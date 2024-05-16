@@ -80,3 +80,13 @@ new Date(1534191480)                    # javascript from timestamp
 2900000000 => 2061-11-23 20:33:20
 2950000000 => 2063-06-25 14:26:40
 3000000000 => 2065-01-24 06:20:00
+
+
+
+```sql
+select unix_timestamp(); -- mariadb mysql
+select unix_timestamp("2021-04-15 00:00:00"); -- 1618444800 mariadb mysql
+select unix_timestamp('2021-11-27 12:35:03.123456') as result; -- as a float mariadb mysql
+select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- mariadb mysql timestamp https://www.w3schools.com/sql/func_mysql_date_format.asp
+select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020; -- mariadb mysql
+```

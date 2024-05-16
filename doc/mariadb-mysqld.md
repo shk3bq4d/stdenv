@@ -64,6 +64,23 @@ ALTER USER 'fw'@'10.1.1.120' IDENTIFIED WITH mysql_native_password BY 'fwpass';
 
 mysql -U -h 127.0.0.1 -u root --password=mypasswordislongerasyours repository_sd2 <<<"select * from (select count(1) as co, formatbasic FROM SUBFIELD where \`release\` = '20171222' and formatbasic regexp '.*[0-9]{2,}.*' group by formatbasic) mralias where co > 35 order by formatbasic;"
 
+# two step procedure to get all tables counts
+```
+SELECT CONCAT(
+    'SELECT "',
+    table_name,
+    '" AS table_name, COUNT(*) AS exact_row_count FROM `',
+    table_schema,
+    '`.`',
+    table_name,
+    '` UNION '
+)
+FROM INFORMATION_SCHEMA.TABLES
+WHERE table_schema = database();
+```
+
+select database(); -- current schema
+
 ```sql
 
 -- disk usage by table
@@ -103,10 +120,10 @@ pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-colum
 pager less --raw-control-chars --quit-if-one-screen --ignore-case --status-column --no-init --chop-long-lines; -- truncate lines instead of wrapping
 pager more
 
-select UNIX_TIMESTAMP(); -- now
-select UNIX_TIMESTAMP("2021-04-15 00:00:00"); -- 1618444800
-SELECT UNIX_TIMESTAMP('2021-11-27 12:35:03.123456') AS Result; -- as a float
-select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- https://www.w3schools.com/sql/func_mysql_date_format.asp
+select unix_timestamp(); -- now
+select unix_timestamp("2021-04-15 00:00:00"); -- 1618444800
+select unix_timestamp('2021-11-27 12:35:03.123456') as result; -- as a float
+select date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s") from bip; -- timestamp https://www.w3schools.com/sql/func_mysql_date_format.asp
 select itemid, date_format(from_unixtime(clock), "%Y.%m.%d %H:%i:%s"), num, value_min, value_avg, value_max from trends_uint where itemid = 29020;
 
 select now(); -- today date datetime

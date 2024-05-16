@@ -206,11 +206,12 @@ case $SCRIPT in \
     jpg=${SCRIPT_DIR}/${SCRIPT_NAME}.jpg
     txt=${SCRIPT_DIR}/${SCRIPT_NAME}.txt
     wrl=${SCRIPT_DIR}/${SCRIPT_NAME}.wrl
-    #$engine -Tsvg -o$svg -v $SCRIPT
-    #nohup firefox $svg &>/dev/null &
+    $engine -Tsvg -o$svg -v $SCRIPT
+    nohup firefox $svg &>/dev/null &
+    exit 0
     set -x
     #nohup $engine -Tx11  -v $SCRIPT #&>/dev/null &
-    nohup neato -Tvrml -o$wrl -v $SCRIPT -Gdimen=3 -Gdim=3#&>/dev/null &
+#   nohup neato -Tvrml -o$wrl -v $SCRIPT -Gdimen=3 -Gdim=3#&>/dev/null &
     #nohup $engine -Tplain-ext  -o$txt -v $SCRIPT #&>/dev/null &
     exit 0
     nohup $engine -Tpng  -o$png -v $SCRIPT &>/dev/null &
