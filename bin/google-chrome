@@ -8,6 +8,7 @@ export GOOGLE_API_KEY="no"
 export GOOGLE_DEFAULT_CLIENT_ID="no"
 export GOOGLE_DEFAULT_CLIENT_SECRET="no"
 ARGS="--allow-legacy-extension-manifests --debug-print"
+ARGS="$ARGS --disable-restore-last-session" # 2024.05.15, trying my luck
 SCALE="1.4"
 case $(timeout 2 hostname -f) in \
 may19*)
