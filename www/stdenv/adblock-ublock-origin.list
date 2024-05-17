@@ -147,4 +147,5 @@ m.youtube.com##ytm-reel-shelf-renderer.item:has(.reel-shelf-title-wrapper:has-te
 m.youtube.com##.single-column-browse-results-tabs>a:has-text(Shorts)
 ! <<<<<< https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
 
-www.google.com##[aria-label="Before you continue to Google Search"]
+!2024-05-17 commenting out the next thing
+!www.google.com##[aria-label="Before you continue to Google Search"]
