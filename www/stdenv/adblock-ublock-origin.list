@@ -148,4 +148,5 @@ m.youtube.com##.single-column-browse-results-tabs>a:has-text(Shorts)
 ! <<<<<< https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt
 
 !2024-05-17 commenting out the next thing
-!www.google.com##[aria-label="Before you continue to Google Search"]
+www.google.com##[aria-label="Before you continue to Google Search"]
+www.google.com##body:style(overflow: auto !important)
