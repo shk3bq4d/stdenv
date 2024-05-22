@@ -3,7 +3,7 @@
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
 
-# https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format 
+# https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format
 ```sh
 docopt == 0.6.1             # requirements Version Matching. Must be version 0.6.1
 keyring >= 4.1.1            # requirements Minimum version 4.1.1
@@ -33,7 +33,7 @@ hashlib.md5("Nobody inspects the spammish repetition".encode()).hexdigest()
 hashlib.sha1("Nobody inspects the spammish repetition".encode()).hexdigest()
 hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
 
-functools.partial # bind freeze some portion of a fuctions arguments or keywords. 
+functools.partial # bind freeze some portion of a fuctions arguments or keywords.
 
 from bs4 import BeautifulSoup as bs # type: ignore
 
@@ -133,9 +133,9 @@ x: and re.X (verbose),
 for the entire regular expression. (The flags are described in Module Contents.) This is useful if you wish to include the flags as part of the regular expression, instead of passing a flag argument to the re.compile() function.
 
 pattern = r"""                                               # verbose multi line comments regexp, re.X re.VERBOSE
-	[a-z]    # letter                                        # verbose multi line comments regexp, re.X re.VERBOSE
-	[0-9]+   # digits                                        # verbose multi line comments regexp, re.X re.VERBOSE
-	"""                                                      # verbose multi line comments regexp, re.X re.VERBOSE
+    [a-z]    # letter                                        # verbose multi line comments regexp, re.X re.VERBOSE
+    [0-9]+   # digits                                        # verbose multi line comments regexp, re.X re.VERBOSE
+    """                                                      # verbose multi line comments regexp, re.X re.VERBOSE
 pprint(re.search(pattern, '___a035535__-ueau', flags=re.X))  # verbose multi line comments regexp, re.X re.VERBOSE
 
 
@@ -1182,7 +1182,7 @@ for previous, item, nxt in previous_and_next(mylist):
 ```
 
 os.mkdir()     # mkdir makedir
-os.makedirs()  # mkdir -p 
+os.makedirs()  # mkdir -p
 
 ln -s foo-bar.py foo_bar.py # https://stackoverflow.com/questions/8350853/how-to-import-module-when-module-name-has-a-dash-or-hyphen-in-it
 
@@ -1218,7 +1218,7 @@ def foo() -> None: # typing void
 @typing.no_type_check
 def do_not_check_me_bro():
 
-	a = 7 # type: ignore         <-- ignore single line
+    a = 7 # type: ignore         <-- ignore single line
 
 # https://stackoverflow.com/questions/43957034/specifying-a-type-to-be-a-list-of-numbers-ints-and-or-floats typing
 from typing import Union, Sequence # typing list
@@ -1266,14 +1266,23 @@ print(x.upper())
 ```
 
 ```python
-def _my_recursive_iterator_function(): # yield from https://stackoverflow.com/questions/38254304/can-generators-be-recursive 
-	yield from _my_recursive_iterator_function # https://stackoverflow.com/questions/38254304/can-generators-be-recursive
+def _my_recursive_iterator_function(): # yield from https://stackoverflow.com/questions/38254304/can-generators-be-recursive
+    yield from _my_recursive_iterator_function # https://stackoverflow.com/questions/38254304/can-generators-be-recursive
 ```
 
 
+```sh
 cat << 'PYTHONBASHHEREDOC' | python3 - $g
 print('python bash here doc')
 PYTHONBASHHEREDOC
+```
 
+```python
     script_directory, script_name = os.path.split(__file__)
-	filepath = os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))
+    filepath = os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))
+    ```
+
+
+```sh
+python3 -m venv /tmp/myvenv
+```
