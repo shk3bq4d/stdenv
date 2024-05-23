@@ -137,9 +137,11 @@ a) find out PID of your process of interes
 b) Control-Z it or kill -STOP PID
 c) start your tmux session
 d) try of of either
-   reptyr PID
-   reptyr -T PID
-   sudo reptyr -T PID
+```sh
+   reptyr PID         # doesn't work for processes that have subprocesses
+   reptyr      -T PID # has some subprocesses facilities (sshd is a known case where it still fails
+   sudo reptyr -T PID # did my trick with ansible on 2024.05.23
+ ```
 e) fg
    or
    kill -CONT PID
