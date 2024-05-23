@@ -131,3 +131,16 @@ set -g status-justify centre
 unbind Up bind Up new-window -d -n tmp \; swap-pane -s tmp.1 \; select-window -t tmp
 unbind Down
 bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
+
+# reptyr
+a) find out PID of your process of interes
+b) Control-Z it or kill -STOP PID
+c) start your tmux session
+d) try of of either
+   reptyr PID
+   reptyr -T PID
+   sudo reptyr -T PID
+e) fg
+   or
+   kill -CONT PID
+
