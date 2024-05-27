@@ -34,6 +34,9 @@ www.hornbach.ch##body:watch-attr(class):remove-class(overflowHidden)
 www.nba.com##.ot-sdk-row
 
 www.bluewin.ch###wisepops-root
+www.bluewin.ch##video
+www.bluewin.ch##.m-teaser__details
+www.bluewin.ch##.m-mediaimage
 
 ! cookie acceptance using a widely deployed framework across multiple sites
 ###onetrust-consent-sdk
