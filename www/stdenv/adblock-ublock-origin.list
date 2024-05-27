@@ -37,6 +37,8 @@ www.bluewin.ch###wisepops-root
 www.bluewin.ch##video
 www.bluewin.ch##.m-teaser__details
 www.bluewin.ch##.m-mediaimage
+www.bluewin.ch##.free-html-embed
+www.bluewin.ch##.c-brightcove-teaser-v2
 
 ! cookie acceptance using a widely deployed framework across multiple sites
 ###onetrust-consent-sdk
