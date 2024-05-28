@@ -17,6 +17,20 @@ if [[ $# -eq 1 ]] && [[ ! -f "$1" ]]; then
         fi
     fi
 fi
+has_any_dir_args() {
+    for arg in "$@"; do
+        test -d "$arg" && return 0
+    done
+    return 1
+}
+if [[ $# -gt 1 ]] && has_any_dir_args "$@"; then
+    for arg in "$@"; do
+        if ! test -d "$arg"; then
+            args="$args $arg"
+        fi
+        shift
+    done
+fi
 
 OLDPATH="$PATH"
 export PATH=/bin:/sbin:/usr/bin/:/usr/sbin:/usr/local/bin:/usr/local/sbin
