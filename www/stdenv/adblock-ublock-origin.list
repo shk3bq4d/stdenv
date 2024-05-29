@@ -155,3 +155,6 @@ m.youtube.com##.single-column-browse-results-tabs>a:has-text(Shorts)
 !2024-05-17 commenting out the next thing
 www.google.com##[aria-label="Before you continue to Google Search"]
 www.google.com##body:style(overflow: auto !important)
+
+! May 28, 2024 https://www.npr.org
+www.npr.org##.tp-modal

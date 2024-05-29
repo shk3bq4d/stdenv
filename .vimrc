@@ -24,6 +24,12 @@ if hostname == $WORK_PC1 || hostname == "bipbip"
     "set completeopt=menu,preview
 else
 endif
+
+" https://vi.stackexchange.com/questions/14622/how-can-i-close-the-netrw-buffer
+" https://github.com/tpope/vim-vinegar/issues/13
+"autocmd FileType netrw setl bufhidden=wipe " <-- still leaves one buffer open. I found this solution, which closes it after opening the file:
+let g:netrw_fastbrowse = 0
+
 if hostname == "jly200" || hostname == "bipbip"
     let g:airline#extensions#whitespace#mixed_indent_algo = 2
 endif
