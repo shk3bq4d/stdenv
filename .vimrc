@@ -536,6 +536,7 @@ func! MrSyntaxRange()
     endtry
     try
         call SyntaxRange#Include('```nosyntax'         ,'```'       ,'syntaxrangenosyntax'       ,'NonText')
+        call SyntaxRange#Include('#```nosyntax'         ,'#```'       ,'syntaxrangenosyntax'       ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it
     catch /^Vim\%((\a\+)\)\=:E484/
@@ -728,7 +729,7 @@ if &diff
     set t_Co=8
 endif
 function! MrLog(b)
-    call writefile([a:b],  '/home/rumo/.tmp/log/vim-mrdebug.log', 'a')
+    call writefile([a:b],  '~/.tmp/log/vim-mrdebug.log', 'a')
 endfunc
 
 function! GoToNextIndent(inc)
