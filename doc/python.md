@@ -132,11 +132,11 @@ u: re.U (Unicode dependent),
 x: and re.X (verbose),
 for the entire regular expression. (The flags are described in Module Contents.) This is useful if you wish to include the flags as part of the regular expression, instead of passing a flag argument to the re.compile() function.
 
-pattern = r"""                                               # verbose multi line comments regexp, re.X re.VERBOSE
-    [a-z]    # letter                                        # verbose multi line comments regexp, re.X re.VERBOSE
-    [0-9]+   # digits                                        # verbose multi line comments regexp, re.X re.VERBOSE
-    """                                                      # verbose multi line comments regexp, re.X re.VERBOSE
-pprint(re.search(pattern, '___a035535__-ueau', flags=re.X))  # verbose multi line comments regexp, re.X re.VERBOSE
+pattern = r"""                                               # verbose multi line comments regexp, re.X re.VERBOSE multiline debug
+    [a-z]    # letter                                        # verbose multi line comments regexp, re.X re.VERBOSE multiline debug
+    [0-9]+   # digits                                        # verbose multi line comments regexp, re.X re.VERBOSE multiline debug
+    """                                                      # verbose multi line comments regexp, re.X re.VERBOSE multiline debug
+pprint(re.search(pattern, '___a035535__-ueau', flags=re.X))  # verbose multi line comments regexp, re.X re.VERBOSE multiline debug
 
 
 
