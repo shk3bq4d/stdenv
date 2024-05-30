@@ -43,7 +43,7 @@ import re
 import unittest
 import argparse
 import logging
-from typing import Sequence, Union, Iterator, List, Tuple, no_type_check, Any, Optional
+from typing import Sequence, Union, Iterator, List, Dict, Tuple, no_type_check, Any, Optional
 
 from pprint import pprint, pformat
 
