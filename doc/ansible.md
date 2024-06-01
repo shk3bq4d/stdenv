@@ -2467,7 +2467,6 @@ sum(iterable, attribute=None, start=0)
 Total: {{ items|sum(attribute='price') }}
 title(s)
 tojson(value, indent=None)
-trim(value) # strip
 | trim() # strips
 | trim   # strips
 {% filter trim %} strips/trim
