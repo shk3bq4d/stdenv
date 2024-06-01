@@ -338,10 +338,12 @@ $HOME/.Xdefaults)
     ;;
 *tex)
     out=/tmp/$(date +'%Y.%m.%d_%H.%M.%S')-${SCRIPT_NAME}.pdf
-    ~/bin/docker-mrlatex.sh "$SCRIPT_NAME" "$out"
+    set -x
+    bash -x ~/bin/docker-mrlatex.sh "$SCRIPT_NAME" "$out"
     if is_pdf "$out"; then
         evince "$out"
     fi
+    exit 0
     ;;
 *.plantuml)
     f=~/tmp/bip.svg

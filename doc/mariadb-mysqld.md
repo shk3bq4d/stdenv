@@ -353,14 +353,18 @@ mysqldump --no-data
 ```
 
 # docker
-```sh
-https://github.com/docker-library/docs/tree/master/mariadb
-https://github.com/mariadb/mariadb-docker
-https://github.com/mariadb/server
-https://hub.docker.com/_/mariadb
-https://hub.docker.com/_/mysql
-```sh
+* https://github.com/docker-library/docs/tree/master/mariadb
+* https://github.com/mariadb/mariadb-docker
+* https://github.com/mariadb/server
+* [a](https://hub.docker.com/_/mariadb)
+* [a](https://hub.docker.com/_/mysql)
 
+```sh
+sudo docker run --rm -it --name mariadb -e MARIADB_ROOT_PASSWORD=example mariadb
+sudo docker exec -it mariadb mariadb -uroot -p$(sudo docker exec -it mariadb sh -c 'echo -n $MARIADB_ROOT_PASSWORD')
+```
+
+```sh
 
 # high-availibility master-slave HA
 ```sql
