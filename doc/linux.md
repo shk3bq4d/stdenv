@@ -238,8 +238,9 @@ et dans le fichier il suffit de mettre par example:
 10.36.211.0/24 via 192.168.168.1 dev eth0
 
 
-xset -dpms; xset s off; # removes energy saving
-xset dpms force on # forces turn off screen
+xset -dpms; xset s off; # removes energy saving screensaver power
+xset dpms force on # forces turn off screen screensaver power saving
+xset q # query current status screensaver dpms power saving energy
 
 sysctl -w net.ipv4.ip_nonlocal_bind = 1 # bind on unassigned ip, useful in case of failover vip
 
