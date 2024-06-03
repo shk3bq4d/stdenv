@@ -10,5 +10,6 @@ www.example.com##body:watch-attr(class):remove-class(xyz)
 
 
 ! http://127.0.0.1:57155/www/stdenv/adblock-ublock-origin.list
+vi http://127.0.0.1:57155/www/stdenv/adblock-ublock-origin.list.py
 
 
