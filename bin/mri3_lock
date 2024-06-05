@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
 
 
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 LOGDIR=~/.tmp/i3lock
+
 test -d $LOGDIR/debug || mkdir -p $LOGDIR/debug
+
+# https://github.com/dunst-project/dunst/issues/697
+restore_dunst() {
+	pkill -u "$USER" -USR2 dunst
+}
+
+pause_dunst() {
+	pkill -u "$USER" -USR1 dunst || true;
+	trap restore_dunst SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+	sleep 0.1
+}
+
 
 function msg() {
 	echo "$(date +'%Y.%m.%d %H:%M:%S') $@" | tee -a $LOGDIR/events
 }
 msg lock
+pause_dunst
 #i3lock --debug -enf -i $(find ~/Pictures/i3lock/ -type f | shuf -n 1) >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 if false; then
 	i3lock --debug -enf -c 0000ff  $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
