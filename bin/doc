@@ -38,9 +38,14 @@ filelist() {
       find -L $DOCDIR -maxdepth 2 -\( -name "$1.md" -or -name "$1.yml" -or -name "$1.yaml" -\) -print0
       return
     fi
+    filelist2
+}
+
+filelist2() {
     find -L $DOCDIR -maxdepth 2 -\( -name "*$1*.md" -or -name "*$1*.yml" -or -name "*$1*.yaml" -\) -print0 | sort -z
     [[ -e $KANBANDIR ]] && find -L $KANBANDIR -maxdepth 2 -path "/*$1*/*README*.md" -print0 | sort -z
 }
+
 filelistcount() {
     filelist "$@" | tr -cd '\0' | wc -c
 }
@@ -66,7 +71,7 @@ if [[ -z "$(filelist "$ARG1")" ]] 2>/dev/null; then
 elif [[ ! -z "$ARG2" ]]
 then
         #grep -i $ARG2 $3 $4 $5 $6 $7 $8 $9 $DOCDIR/*"$ARG1"*
-    filelist "$ARG1" | $XARGS -0 $ACK \
+    filelist2 "$ARG1" | $XARGS -0 $ACK \
         --with-filename \
         --ignore-case \
         "$ARG2" # $3 $4 $5 $6 $7 $8 $9"
