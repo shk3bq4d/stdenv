@@ -38,7 +38,7 @@ filelist() {
       find -L $DOCDIR -maxdepth 2 -\( -name "$1.md" -or -name "$1.yml" -or -name "$1.yaml" -\) -print0
       return
     fi
-    filelist2
+    filelist2 "$@"
 }
 
 filelist2() {
