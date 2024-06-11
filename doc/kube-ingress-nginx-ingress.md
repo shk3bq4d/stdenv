@@ -13,10 +13,7 @@ keti -n ingress-nginx nginx-ingress-controller-7fb5cfd89-hvqkm
 keti -n $(kgp -Al app.kubernetes.io/name=ingress-nginx -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- cat /etc/nginx/nginx.conf | dos2unix | sed -r -e 's/\t/    /g' -e 's/ +$//' | vi -
 keti -n $(kgp -Al app.kubernetes.io/name=ingress-nginx -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers | head -n 1) -- nginx -v # nginx version
 
-kgp -Al app.kubernetes.io/name=nginx # labels
-kgp -Al k8s-app=fluentd-logging # labels
-kgp -Al app=kured               # labels
-
+kgp -Al app.kubernetes.io/name=ingress-nginx # labels
 
 # tcp service
 https://medium.com/@ahmedwaleedmalik/exposing-tcp-and-udp-services-in-kubernetes-using-nginx-ingress-9b8fd639c576

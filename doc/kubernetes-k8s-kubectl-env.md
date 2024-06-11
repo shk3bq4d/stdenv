@@ -1,5 +1,8 @@
 /* ex: set expandtab ts=2 sw=2 : */
 
+https://github.com/kubernetes/kubectl
+https://github.com/kubernetes/kubectl/tags # versions
+
 # acronyms
 CNCF Cloud Native Computing Foundation
 CRI  container runtime interface # spec'ed by CNCF
