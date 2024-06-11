@@ -7,6 +7,12 @@ kubectl cert-manager renew letsencrypt-prod.blabla.bip.bop.com # certificate.cer
 kubectl cert-manager renew -n prometheus           --all
 kubectl cert-manager renew -n prometheus           --all --all-namespaces
 
+kgp -Al app.kubernetes.io/instance=cert-manager
+kgp -Al app.kubernetes.io/name=cert-manager
+kgp -Al app.kubernetes.io/name=cainjector
+kgp -Al app.kubernetes.io/name=webhook,app.kubernetes.io/instance=cert-manager
+kgp -Al app=cert-manager
+
 # cmctl
 https://cert-manager.io/docs/reference/cmctl/
 https://github.com/cert-manager/cmctl
