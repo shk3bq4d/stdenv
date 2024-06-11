@@ -772,6 +772,8 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 ```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
+kgp -Al app=a -l app=b                -o name # labels app=a OR  app=B
+kgp -Al app=a,app=b                   -o name # labels app=a AND app=B
 kgp -Al app=stp                       -o name # labels
 kgp -Al app.kubernetes.io/name=nginx  -o name # labels
 kgp -Al app=nginx-ingress             -o name # labels
