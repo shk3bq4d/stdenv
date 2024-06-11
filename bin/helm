@@ -18,6 +18,7 @@ helm_version=3.7.2
 helm_version=3.8.0
 helm_version=3.9.0
 helm_version=3.13.2
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/helm-$helm_version"
 

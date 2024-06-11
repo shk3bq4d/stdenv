@@ -7,6 +7,7 @@
 # sudo mv kubectl-cert_manager /usr/local/bin
 
 set -euo pipefail
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 version=1.7.1
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt

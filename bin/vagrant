@@ -10,6 +10,7 @@
 ##
 
 set -euo pipefail
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 vagrant_version=1.18.0
 vagrant_version=1.18.1

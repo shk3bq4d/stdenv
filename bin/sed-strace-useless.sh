@@ -5,7 +5,6 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 _sed() {
-# stdrumo
     cat << 'EOF'
 # 214480 12:56:48.152486 recvmsg(9, {msg_namelen=0}, 0) = -1 EAGAIN (Resource temporarily unavailable) <0.000007>
 /(read|recvmsg).{,40}EAGAIN .Resource temporarily unavailable. <[0-9.]+>$/ d
