@@ -6,6 +6,7 @@ set -euo pipefail
 # https://github.com/mattolenik/hclq
 # https://github.com/mattolenik/hclq/issues/11 no support for terraform 12
 
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 hclq_version=0.5.3
 
 BIN="$HOME/bin/hclq-$hclq_version"

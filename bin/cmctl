@@ -3,9 +3,14 @@
 
 set -euo pipefail
 
+<<<<<<< HEAD
 cmctl_version=2.0.0
 
-BIN="/home/rumo/bin/cmctl-$cmctl_version"
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
+cmctl_version=2.0.0
+
+BIN="$HOME/bin/cmctl-$cmctl_version"
+
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 # curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 if [[ ! -f "$BIN" ]]; then

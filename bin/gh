@@ -3,6 +3,7 @@
 # https://github.com/cli/cli/releases/
 
 set -euo pipefail
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 gh_version=2.47.0
 
 

@@ -10,6 +10,7 @@
 ##
 
 set -euo pipefail
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 # function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'   $0 ; }
 

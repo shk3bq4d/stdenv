@@ -240,7 +240,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: fabdeployer
-  namespace: rumotest
+  namespace: burptest
 spec:
   containers:
   - name: mrname
@@ -320,7 +320,7 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pv-claim
-" | kubectl create -n rumotest -f -
+" | kubectl create -n burptest -f -
 ```
 
 # julien debug my minikube ~JUL18
