@@ -50,7 +50,7 @@ dec17.ly.lan|nov20.ly.lan)
 	wait_git
 	if [[ -z "$SSH_CLIENT" ]]; then
 		pkill -9 sshuttle
-		docker stop forticlientvpn
+		#docker stop forticlientvpn
 		#pkill -9 forticlientsslvpn_cli
 	fi
 	sudo umount -t fuse.sshfs -a
