@@ -181,3 +181,5 @@ pcapfix -d openwrt-1696493214-2.cap # repair broken corrupted
 # tshark
 tshark -Y http.request.uri -r FILENAME
 tshark -qz conv,tcp -r FILENAME
+
+opkg update && opkg install tcpdump # openwrt
