@@ -111,6 +111,7 @@ def go2(args=[], only_for_unnamed=True):
         'doc':None,
         'vpn':None, #'~/bin/vpn-start.sh',
         'bg':None, #'~/bin/bg-start.sh',
+        'downdogapp': '~/bin/notinpath/downdogapp.sh',
         'netflix': '~/bin/notinpath/netflix-nf.sh',
         'citrix': '~/bin/notinpath/workspace-citrix.sh',
         'zscaler': '~/bin/notinpath/workspace-zscaler.sh',
