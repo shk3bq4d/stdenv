@@ -31,6 +31,7 @@ select * from information_schema.tables;
 select table_catalog, table_schema, table_name, table_type from information_schema.tables;
 select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_name like '%priv%';
 select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_schema not in ('pg_catalog', 'information_schema');
+substring(column, start_pos, length)
 
 show search_path;
 set search_path to myotherschema, public;
@@ -291,6 +292,8 @@ string_agg https://hevodata.com/learn/postgresql-string-agg/ # group by string a
 string_agg ( expression, separator|delimiter [order_by] )
 
 select to_char(now(), 'YYYY-MM-DD HH24:mi:ss') -- date sprintf formating minutes hour year seconds hh12
+select extract(epoch from now()); -- unix timestamp
+select to_timestamp(mycolumn::bigint);    -- postgresq psql from unixtime
 
 select to_timestamp(configvalue::bigint) from oc_preferences where configkey in ('lastLogin'); -- cast string as bigint in nexcloud
 
