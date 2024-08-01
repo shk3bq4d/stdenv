@@ -4,6 +4,9 @@ date +%s -d "2004-02-29 16:21:42" # to unix epoch timestamp => 1078068102
 python3 -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch timestamp
 python3 -c "import datetime; print(datetime.datetime.now().strftime('%s'))" # unix epoch timestamp
 
+select extract(epoch from now()); -- postgresql psql  to unixtime
+select to_timestamp(mycolumn::bigint);    -- postgresq psql from unixtime
+
 RFC3339: 2014-03-10T05:40:00+00:00
 
 Sep 28 2021 01:33:21      date +'%b %d %Y %H:%M:%S'
