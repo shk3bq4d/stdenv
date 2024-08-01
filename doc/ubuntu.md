@@ -129,3 +129,16 @@ sudo do-release-upgrade # major dist upgrade
 systemctl status apt-daily-upgrade.timer
 journalctl -eu apt-daily-upgrade.timer
 /etc/apt/apt.conf.d/50unattended-upgrades
+
+# apt repository
+## 22.04 jammy
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy main restricted
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy universe
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates universe
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy multiverse
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted
+deb http://security.ubuntu.com/ubuntu jammy-security universe
+deb http://security.ubuntu.com/ubuntu jammy-security multiverse
