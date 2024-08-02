@@ -1,5 +1,8 @@
 /* ex: set expandtab ts=2 sw=2 : */
 
+https://github.com/kubernetes/kubectl
+https://github.com/kubernetes/kubectl/tags # versions
+
 # acronyms
 CNCF Cloud Native Computing Foundation
 CRI  container runtime interface # spec'ed by CNCF
@@ -237,7 +240,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: fabdeployer
-  namespace: rumotest
+  namespace: burptest
 spec:
   containers:
   - name: mrname
@@ -317,7 +320,7 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pv-claim
-" | kubectl create -n rumotest -f -
+" | kubectl create -n burptest -f -
 ```
 
 # julien debug my minikube ~JUL18
@@ -769,6 +772,8 @@ docker run --rm -it babar cat /hehe/hihi;
 # labels
 ```sh
 kubectl get pod -n kube-system --selector k8s-app=fluentd-logging # labels
+kgp -Al app=a -l app=b                -o name # labels app=a OR  app=B
+kgp -Al app=a,app=b                   -o name # labels app=a AND app=B
 kgp -Al app=stp                       -o name # labels
 kgp -Al app.kubernetes.io/name=nginx  -o name # labels
 kgp -Al app=nginx-ingress             -o name # labels

@@ -352,3 +352,8 @@ t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm s
 
 
 * https://www.ssllabs.com/ssltest/ # ssl check qualys
+
+
+
+-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----

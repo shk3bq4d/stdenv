@@ -102,8 +102,12 @@ process_file() {
         if [[ -f "$outfile" ]]; then
             echo "skipping already existing $format file $outfile"
         else
-            ssh-keygen -e -m "$format" -f "$reffile" > "$outfile"
-            echo "Successfully wrote $outfile"
+            if ssh-keygen -e -m "$format" -f "$reffile" > "$outfile" 2>/dev/null; then
+                echo "Successfully wrote $outfile"
+            else
+                rm "$outfile" || true
+                ssh-keygen -e -m "$format" -f "$reffile" &> "$outfile".error || true
+            fi
         fi
     done
     rm -f "$reffile"

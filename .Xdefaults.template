@@ -49,7 +49,7 @@ URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
 URxvt.iso14755: false
 URxvt.iso14755_52: false
-!URxvt*termName: rxvt-unicode-256color  
+!URxvt*termName: rxvt-unicode-256color
 !  I am enabling urxvt*termName: rxvt-256color on 2022.04.10 following this piece of advice https://unix.stackexchange.com/questions/21707/clear1-after-detach-in-gnu-screen , which actually worked
 urxvt*termName: rxvt-256color
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
@@ -205,7 +205,7 @@ URxvt.print-pipe: ~/bin/mrurxvt-printpipe.sh
 *color14: #93a1a1
 *color15: #fdf6e3
 
-! appears to fix Home and End in VI (but not ZSH) on rumopc
+! appears to fix Home and End in VI (but not ZSH) on burppc
 ! https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working#Readline
 !URxvt.keysym.Home: \033[1~
 !URxvt.keysym.End: \033[4~
