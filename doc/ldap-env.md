@@ -13,3 +13,14 @@ sed ':a;$!{N;ba};s/\n //g' # ldapsearch
 
 ldapwhoami -W # prompt for password on stdin
 ldapwhoami -w "thisismypassword"
+
+
+# escapes
+( becomes \28
+) becomes \29
+* becomes \2a
+\ becomes \5c
+NUL (null character) becomes \00
+## escape example
+                   group name:   BBQ   (Oper)   youpi
+(&(objectClass=user)(memberOf=CN=BBQ \28Oper\29 youpi,OU=blaba,DC=hehe))
