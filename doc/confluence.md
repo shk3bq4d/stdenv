@@ -9,6 +9,7 @@ Support release
 * 21  April 2020 Confluence 7.4  https://confluence.atlassian.com/doc/confluence-7-4-release-notes-994312218.html
 * 17 August 2021 Confluence 7.13 https://confluence.atlassian.com/doc/confluence-7-13-release-notes-1044114085.html
 * 28 July   2022 Confluence 7.19 https://confluence.atlassian.com/doc/confluence-7-19-release-notes-1141976784.html
+* 22 August 2023 Confluence 8.5  https://confluence.atlassian.com/doc/confluence-8-5-release-notes-1252010185.html
 atlassian/confluence:7.4.15
 
 docker pull atlassian/confluence:7.4.15
