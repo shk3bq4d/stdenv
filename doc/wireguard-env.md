@@ -2,19 +2,23 @@
 * https://forums.centos.org/viewtopic.php?t=75586 # centos7
 * https://github.com/githubixx/ansible-role-wireguard
 
+```sh
 man wg
 man wg-quick
 
+
 wg genkey | wg pubkey # create a dummy public key 9yRg/5yupXqZ9OtriRiCc5hBloH22N8AmtuRhBPNcm0=
 
-grep -n -R ^PrivateKey /etc/wireguard/  | while read fileandline equal key leftover; do echo "$fileandline -> Public: $(echo $key | wg pubkey)"; done
+grep -n -R ^PrivateKey /etc/wireguard/*.conf  | while read fileandline equal key leftover; do echo "$fileandline -> Public: $(echo $key | wg pubkey)"; done
 
 
 systemctl stop wg-quick@wg0
 
-```sh
+wg show
+wg showconf wg0
+
 # share config, hiding private keys and comment
-for i in /etc/wireguard/*conf; do echo "# ====== $i ======"; sed-remove-comment.sh $i | sed -r -e 's/(privatekey[^a-z]+)([a-z0-9=/]{30,60})/\1__________________________________________/gi' -e 's/^\[/\n\[/'; echo; done
+for i in /etc/wireguard/*conf; do echo "# ====== $i ======"; sed-remove-comment.sh $i | sed -r -e 's/(privatekey[^a-z]+)([a-z0-9=/+]{30,60})/\1__________________________________________/gi' -e 's/^\[/\n\[/'; echo; done
 
 # activate IP forwarding
 echo 1 | tee /proc/sys/net/ipv4/ip_forward

@@ -7,6 +7,7 @@ vgdisplay # display attributes of volume groups
 pvcreate # initialize a disk or partition for use by LVM
 pvdisplay # display attributes of a physical volume
 
+pvscan
 pvs
 lvs
 vgs
