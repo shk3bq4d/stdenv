@@ -63,8 +63,12 @@ yum clean all && yum update # upgrade cache purge
 yum history # log
 yum history redo force-reinstall TRANSACTION_ID1 TRANSACTION_ID2
 yum history undo last # rollback
+yum history info last
+yum history info 331
 yum reinstall glibc openssl-libs dbus linux-firmware gnutls systemd
 yum-complete-transaction # compares /var/lib/yum-transaction-all-* and /var/lib/yum-transaction-done-* and finishes work
+
+yum list updates -q | awk 'NR>1 {print $1}' | xargs -rtn 1 yum -y update # install updates one by one
 
 yum-config-manager --disable base,extras,updates
 

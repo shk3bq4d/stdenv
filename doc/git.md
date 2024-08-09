@@ -674,3 +674,12 @@ https://github.com/shk3bq4d/stdenv.git
 git@github.com:shk3bq4d/stdenv.git
 
 ~/.oh-my-zsh/plugins/git/README.md # aliases functions list
+
+
+# How to merge commit
+label a
+pick ABC
+pick XYZ
+label b
+reset a
+merge b # Merge branch 'mybranchname'
