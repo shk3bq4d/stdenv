@@ -1892,7 +1892,7 @@ Variable precedence: Where should I put a variable?
 * set_facts / registered vars               # precedence variables priority
 * role (and include_role) params            # precedence variables priority
 * include params                            # precedence variables priority
-* extra vars (always win precedence)        # precedence variables priority
+* cli extra vars (always win precedence)    # precedence variables priority
 
 ```yaml
 - stat:
