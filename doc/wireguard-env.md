@@ -18,7 +18,7 @@ wg show
 wg showconf wg0
 
 # share config, hiding private keys and comment
-for i in /etc/wireguard/*conf; do echo "# ====== $i ======"; sed-remove-comment.sh $i | sed -r -e 's/(privatekey[^a-z]+)([a-z0-9=/+]{30,60})/\1__________________________________________/gi' -e 's/^\[/\n\[/'; echo; done
+for i in /etc/wireguard/*conf; do echo "# ====== $i ======"; sed-remove-comment.sh $i | sed -r -e 's/(PrivateKey[^a-z]+)([a-zA-Z0-9=/+]{30,60})/\1__________________________________________/gi' -e 's/^\[/\n\[/'; echo; done
 
 # activate IP forwarding
 echo 1 | tee /proc/sys/net/ipv4/ip_forward

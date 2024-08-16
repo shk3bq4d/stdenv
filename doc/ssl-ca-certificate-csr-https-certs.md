@@ -68,7 +68,9 @@ keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass c
 
 KEYSTOREPASS=changeit # password java jks cacerts
 cacert password -> changeit
-keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
+keytool -list -v -storepass "" -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
+keytool -list -v -storepass "" -keystore /etc/ssl/certs/java/cacerts | grep -i mysearchstring #jks
+keytool -storepass "changeit" -list -v -cacerts | grep Owner: | grep -i mysearchstring #jks
 keytool -storepass "123456" -list -v -keystore ~/apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks
 keytool -storepass "123456"  -exportcert -alias webserver -v -keystore apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks -rfc > /tmp/out3
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
@@ -357,3 +359,8 @@ t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm s
 
 -----BEGIN CERTIFICATE-----
 -----END CERTIFICATE-----
+
+# python
+```py
+import certifi; print(certifi.where()) # print certifi cert location /usr/local/lib/python3.10/site-packages/certifi/cacert.pem
+```
