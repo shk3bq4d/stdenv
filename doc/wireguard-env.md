@@ -30,10 +30,11 @@ cat /proc/sys/net/ipv4/ip_forward
 modprobe wireguard && echo "module wireguard +p"  |tee  /sys/kernel/debug/dynamic_debug/control
 
 # add kernel debugging + follow logs one liner
-modprobe wireguard && echo "module wireguard +p"  |tee  /sys/kernel/debug/dynamic_debug/control; dmesg -wL always | grep wireguard
+modprobe wireguard && echo "module wireguard +p"  |tee  /sys/kernel/debug/dynamic_debug/control; dmesg -wL=always | grep wireguard
 
 # follow logs one liner
-dmesg -wL always | grep wireguard
+dmesg -wL always | grep wireguard # centos
+dmesg -wL=always | grep wireguard # debian
 
 tcpdump -i wg0 -nn
 tcpdump -i wg0 -nn host MYHOST
