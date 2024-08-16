@@ -39,7 +39,7 @@ dmesg -wL=always | grep wireguard # debian
 tcpdump -i wg0 -nn
 tcpdump -i wg0 -nn host MYHOST
 
-
+```
 
 
 Yeah, basically, the .conf files contain two kinds of parameters:
@@ -47,3 +47,29 @@ Yeah, basically, the .conf files contain two kinds of parameters:
 "Native" Wireguard parameters
 
 Additional parameters that only wg-quick interprets and understands.
+
+# private key to public key (GPT)
+```python
+from cryptography.hazmat.primitives.asymmetric import x25519
+from base64 import b64decode, b64encode
+
+# Replace this with your base64-encoded private key
+private_key_b64 = "your_base64_encoded_private_key"
+
+# Decode the private key from base64
+private_key_bytes = b64decode(private_key_b64)
+
+# Generate the private key object
+private_key = x25519.X25519PrivateKey.from_private_bytes(private_key_bytes)
+
+# Derive the public key
+public_key = private_key.public_key()
+
+# Get the public key in raw bytes
+public_key_bytes = public_key.public_bytes()
+
+# Encode the public key to base64
+public_key_b64 = b64encode(public_key_bytes).decode()
+
+print("Public Key:", public_key_b64)
+```
