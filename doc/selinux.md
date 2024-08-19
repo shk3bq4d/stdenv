@@ -90,3 +90,19 @@ semodule --build  --disable_dontaudit # show hidden denies
 # temporary disable
 setenforce 0 # disable
 setenforce 1 # reenable
+
+## loadable policy
+```sh
+echo 'avc:  denied  { name_bind } for  pid=736591 comm="nginx" src=514 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=udp_socket permissive=0' | audit2allow  -r -m coucou
+
+module coucou 1.0;
+
+require {
+	type http_port_t;
+	type httpd_t;
+	class udp_socket name_bind;
+}
+
+#============= httpd_t ==============
+allow httpd_t http_port_t:udp_socket name_bind;
+```
