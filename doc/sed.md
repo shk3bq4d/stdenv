@@ -161,3 +161,5 @@ sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.con
         s/c/xxxx/
         '
 ```
+
+tail -f /var/log/squid/access.log | perl -p -e 's/^([0-9]*)/"[".localtime($1)."]"/e' # datetime

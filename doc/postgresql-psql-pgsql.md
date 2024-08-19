@@ -284,7 +284,9 @@ psql -At # batch mode --tuples-only --no-align skip headers column namse
 
 # sessions
 ```
+select * from pg_stat_activity where state in ('idle', 'active');
 select pid ,datname ,usename ,application_name ,client_hostname ,client_port ,backend_start ,query_start ,query ,state from pg_stat_activity where state in ('idle', 'active');
+select pid, usename as user_name, datname as database_name, client_addr as client_address, client_port, backend_start, state, query from pg_stat_activity; -- show connections lists sessions
 ```
 
 
@@ -360,3 +362,4 @@ ssl_key_file
 ssl_cert_file
 ssl_ca_file
 ssl_min_protocol_version
+

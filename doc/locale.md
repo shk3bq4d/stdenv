@@ -8,3 +8,7 @@ LC_NUMERIC=fr_CH.UTF-8
 LC_PAPER=fr_CH.UTF-8
 LC_TELEPHONE=fr_CH.UTF-8
 LC_TIME=en_DK.UTF-8
+
+```sh
+locale -a # lists available locale
+```
