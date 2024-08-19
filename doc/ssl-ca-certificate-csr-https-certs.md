@@ -4,6 +4,9 @@ sudo update-ca-certificates # probably updating /etc/ssl/certs/ca-certificates.c
 systemctl restart docker.service # optional for artifactory
 ## cert will probably show up in /etc/ssl/certs/* as well as /etc/ssl/certs/ca-certificates.crt
 
+/etc/ssl/certs/ca-certificates.crt # debian bundle
+/etc/ssl/certs/java/cacerts # debian bundle when openjdk is installed on host
+
 #centos6 and 7
 yum install ca-certificates                  # Install the ca-certificates package:
 update-ca-trust force-enable                 # Enable the dynamic CA configuration feature:
@@ -124,6 +127,7 @@ echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_3
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp -showcerts # -starttls for upgraded connection
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME}       -starttls postgres -showcerts # -starttls for upgraded connection
 printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -crlf -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 ```
