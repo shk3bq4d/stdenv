@@ -1,5 +1,7 @@
 deduplication
 
+BEWARE OF FILE OWNERSHIPS
+
 rdfind is compatible with link-dest
 ts="$(date +'%Y.%m.%d-%H.%M.%S')"; rdfind -outputname result.$ts.txt -makehardlinks true -dryrun true $PWD |& tee rdfind.$ts.txt
 ts="$(date +'%Y.%m.%d-%H.%M.%S')"; rdfind -outputname result.$ts.txt -makehardlinks true              $PWD |& tee rdfind.$ts.txt
