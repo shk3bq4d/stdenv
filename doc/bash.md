@@ -1170,3 +1170,6 @@ cat << 'PYTHONBASHHEREDOC' | python3 - $g
 print('python bash here doc')
 PYTHONBASHHEREDOC
 
+
+[ -z "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is empty"
+[ -n "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is not empty"
