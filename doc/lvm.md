@@ -47,6 +47,7 @@ lvresize --size +512M --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root-LV_backup
 lvresize --size +5G   --resizefs /dev/mapper/VG_root-opt
 lvresize --size +9G   --resizefs /dev/mapper/VG_root_home
+lvresize --size +10G   --resizefs /dev/mapper/vgroot-lvhome
 #lvresize --size 1200M   --resizefs /dev/mapper/VG_root-LV_home --yes <-- schedules via crontab
 lvresize --size +3G   --resizefs /dev/mapper/rootvg-optlv
 lvresize --size +1G   --resizefs /dev/mapper/rootvg-data
@@ -101,6 +102,9 @@ systemctl stop systemd-journald.socket
 umount /var/lib/docker # and all mount points that are below /var
 umount sunrpc # /var/lib/nfs/rpc_pipefs
 lvresize --size 14G --resizefs /dev/mapper/VG_root-LV_var
+
+sudo resize2fs  /dev/mapper/vgname-lvname # ext3, ext4 when forgotten to have lvresize with --resizefs (growpart growfs)
+sudo xfs_growfs /mount/point              # xfs       when forgotten to have lvresize with --resizefs (growpart growfs)
 
 # remove PV from VG
 vgreduce VG_root /dev/sda3
