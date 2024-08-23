@@ -135,7 +135,9 @@ for c in \
 done
 alias todo='nocorrect todo'
 alias ah='nocorrect aliashelp'
-alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook'
+alias ap='ANSIBLE_FORCE_COLOR=true ansible-playbook -D'
+alias aplo='ap -l localhost'
+alias apfqdn='ap -l $(hostname -f)'
 alias ads='ansible-doc-snippet'
 alias add='ansible-playbook-delayed-detached.sh'
 alias adh='ansible-playbook-delayed-history.sh'
