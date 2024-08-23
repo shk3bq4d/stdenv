@@ -2,5 +2,7 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
+set +u
 source ~/.virtualenvs/ansible/bin/activate
+set -u
 ~/.virtualenvs/ansible/bin/yamllint "$@"
