@@ -467,7 +467,7 @@ wmic path win32_networkadapterconfiguration where ipenabled=true get defaultipga
 ```
 
 # discovery
-uc ls --database /var/cache/duc/data /data -b --full-path -R -l 1  | grep -vE 'rumo_wrong|occ-fix' | awk 'BEGIN { print "{#SIZE},{#PATH}"}{ print $1 "," $2 }' |tee  /opt/sf-scripts/zabbix-shared/duc | head
+uc ls --database /var/cache/duc/data /data -b --full-path -R -l 1  | grep -vE 'burp_wrong|occ-fix' | awk 'BEGIN { print "{#SIZE},{#PATH}"}{ print $1 "," $2 }' |tee  /opt/sf-scripts/zabbix-shared/duc | head
 
 # actions
 ```bash

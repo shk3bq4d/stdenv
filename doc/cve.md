@@ -1,4 +1,4 @@
-# CVE-2023-48795 OpenSSH Terrapin 
+# CVE-2023-48795 OpenSSH Terrapin
 * https://github.com/RUB-NDS/Terrapin-Scanner/releases/tag/v1.1.0
 * https://github.com/RUB-NDS/Terrapin-Scanner/releases/download/v1.1.0/Terrapin_Scanner_Linux_amd64
 * https://forum.proxmox.com/threads/cve-2023-48795-proxmox-is-vulnerable-to-terrapin-as-of-right-now.138488/#post-618071
@@ -41,3 +41,36 @@ sudo docker run --rm -it atlassian/jira-software:9.12.5 sh -c "ls -l /opt/atlass
 
 # 2024.05.24 CVE-2024-22257 jira spring-security-core
 https://jira.atlassian.com/browse/JSWSERVER-25905
+
+
+
+# 2024.07.01 CVE-2024-6387 OpenSSH RegreSSHion
+https://www.qualys.com/regresshion-cve-2024-6387/
+timeout 1 nc localhost 22
+
+## debian
+https://security-tracker.debian.org/tracker/CVE-2024-6387
+bookworm	1:9.2p1-2+deb12u2	vulnerable
+bookworm (security)	1:9.2p1-2+deb12u3	fixed
+bullseye (proxmox) 1:8.4p1-5+deb11u3 fixed
+
+## ubuntu
+https://ubuntu.com/security/CVE-2024-6387
+jammy	Released (1:8.9p1-3ubuntu0.10)
+
+## affected version checker
+but does not passes for fixed debian
+https://github.com/xaitax/CVE-2024-6387_Check/blob/main/CVE-2024-6387_Check.py
+        'SSH-2.0-OpenSSH_8.5p1',
+        'SSH-2.0-OpenSSH_8.6p1',
+        'SSH-2.0-OpenSSH_8.7p1',
+        'SSH-2.0-OpenSSH_8.8p1',
+        'SSH-2.0-OpenSSH_8.9p1',
+        'SSH-2.0-OpenSSH_9.0p1',
+        'SSH-2.0-OpenSSH_9.1p1',
+        'SSH-2.0-OpenSSH_9.2p1',
+        'SSH-2.0-OpenSSH_9.3p1',
+        'SSH-2.0-OpenSSH_9.4p1',
+        'SSH-2.0-OpenSSH_9.5p1',
+        'SSH-2.0-OpenSSH_9.6p1',
+        'SSH-2.0-OpenSSH_9.7p1'

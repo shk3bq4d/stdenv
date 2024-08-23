@@ -63,8 +63,12 @@ yum clean all && yum update # upgrade cache purge
 yum history # log
 yum history redo force-reinstall TRANSACTION_ID1 TRANSACTION_ID2
 yum history undo last # rollback
+yum history info last
+yum history info 331
 yum reinstall glibc openssl-libs dbus linux-firmware gnutls systemd
 yum-complete-transaction # compares /var/lib/yum-transaction-all-* and /var/lib/yum-transaction-done-* and finishes work
+
+yum list updates -q | awk 'NR>1 {print $1}' | xargs -rtn 1 yum -y update # install updates one by one
 
 yum-config-manager --disable base,extras,updates
 
@@ -208,3 +212,16 @@ rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'
 rm -f /var/lib/rpm/__db*; rpm --rebuilddb; yum clean all; # error: rpmdb: BDB0113 Thread/process 15549/140539555264576 failed: BDB1507 Thread died in Berkeley DB library # error: db5 error(-30973) from dbenv->failchk: BDB0087 DB_RUNRECOVERY: Fatal error, run database recovery # error: cannot open Packages index using db5 -  (-30973) # error: cannot open Packages database in /var/lib/rpm # CRITICAL:yum.main:
 
 sudo apt -oDebug::pkgAcquire::Worker=1 update # verbose loglevel debug
+
+
+# ubuntu sources list
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy main restricted
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy universe
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates universe
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy multiverse
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+deb http://ch.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted
+deb http://security.ubuntu.com/ubuntu jammy-security universe
+deb http://security.ubuntu.com/ubuntu jammy-security multiverse

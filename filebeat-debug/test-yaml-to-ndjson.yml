@@ -1,4 +1,4 @@
--rw-r----- 1 rumo rumo 10 Feb 26 18:00 /tmp/tmp.AOYDA2BmIf/extra-vars.yml
+-rw-r----- 1 burp burp 10 Feb 26 18:00 /tmp/tmp.AOYDA2BmIf/extra-vars.yml
 _nothing:
 # ex: set filetype=yaml fenc=utf-8 expandtab ts=2 sw=2 :
 # GREP ME KEYWORD: yaml-to-ndjson
@@ -19,7 +19,7 @@ output:
        pretty: true
 
 processors: # https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html
-# vid packetbeat.yml.j2 /home/rumo/git/sf/dcn/iaac-master/ans/roles/sf-packetbeat/templates/packetbeat.yml.j2
+# vid packetbeat.yml.j2 /home/burp/git/sf/dcn/iaac-master/ans/roles/sf-packetbeat/templates/packetbeat.yml.j2
   - if.equals.type: flow
     then:
 

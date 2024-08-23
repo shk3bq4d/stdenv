@@ -83,3 +83,26 @@ system_u: User identity, indicating the SELinux user associated with the process
 object_r: Role identity, indicating the SELinux role associated with the process or file. This specifies the role within the system that the user is assigned when accessing the resource.
 ssh_home_t: Type identity, indicating the SELinux type context. It defines the type of object the process or file is. In this case, it might refer to a file or directory related to SSH home directories.
 s0: Sensitivity level, indicating the SELinux sensitivity label. In SELinux, sensitivity labels define the level of sensitivity or confidentiality associated with the resource. s0 typically represents the default sensitivity level.
+
+
+semodule --build  --disable_dontaudit # show hidden denies
+
+# temporary disable
+setenforce 0 # disable
+setenforce 1 # reenable
+
+## loadable policy
+```sh
+echo 'avc:  denied  { name_bind } for  pid=736591 comm="nginx" src=514 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:http_port_t:s0 tclass=udp_socket permissive=0' | audit2allow  -r -m coucou
+
+module coucou 1.0;
+
+require {
+	type http_port_t;
+	type httpd_t;
+	class udp_socket name_bind;
+}
+
+#============= httpd_t ==============
+allow httpd_t http_port_t:udp_socket name_bind;
+```

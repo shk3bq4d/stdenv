@@ -39,3 +39,5 @@ l:
 p: /home/bip/.cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
 P: .cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
 ```
+
+find $PWD -printf '%5n %p\n'  | tee filelist.txt # hardlinks count

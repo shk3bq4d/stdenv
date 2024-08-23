@@ -325,7 +325,7 @@ msys*)
                 export LC_CTYPE="en_US.UTF-8"
             fi
         fi
-        export LC_TIME="en_DK.UTF-8"
+        [[ -f /etc/locale.gen ]] && grep -qx "en_DK.UTF-8"  /etc/locale.gen && export LC_TIME="en_DK.UTF-8" && echo hihi
     fi
     ;;
 esac

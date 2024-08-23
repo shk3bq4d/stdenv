@@ -2,7 +2,8 @@
 mysql  -u root --password=root # long  password with equal
 mysql  -u root -proot          # short password no equal
 mysql --version
-show variables like 'version';
+show variables like 'version'; # see effective variables
+show variables like 'tmpdir'; # see effective variables
 ```
 ```sql
 show databases;

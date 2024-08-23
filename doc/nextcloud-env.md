@@ -2431,3 +2431,8 @@ In NextCloud client, in the tab “General” you have “Advanced” - Edit Ign
 # chat webrtc
 https://apps.nextcloud.com/apps/spreed
 https://github.com/nextcloud/spreed
+
+
+# push mobile
+This is the unsupported community build of Nextcloud. Given the size of this instance, performance, reliability and scalability cannot be guaranteed. Push notifications are limited to avoid overloading our free service.
+* GDPR data processor third party https://help.nextcloud.com/t/this-is-the-unsupported-community-build-of-nextcloud-with-push-for-500-users/154477/10

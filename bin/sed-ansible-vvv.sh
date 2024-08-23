@@ -5,7 +5,6 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 _sed() {
-# stdrumo
     cat << 'EOF'
 # removing
 # Skipping empty key (hosts) in group (bip)

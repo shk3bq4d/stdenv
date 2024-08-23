@@ -97,3 +97,7 @@ https://github.com/Matthias-Wandel/jhead
 jhead -ft * # set file system last modification time to value set in exif data
 
 convert -size 420x120 xc:transparent -fill "#006237" -gravity center -pointsize 64 -annotate 0 "Quick Okta\nIcon" output.png; feh output.png
+
+# automatic crop
+convert image.svg           -trim +repage image.png
+convert image.svg -fuzz 10% -trim +repage image.png

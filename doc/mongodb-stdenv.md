@@ -141,3 +141,11 @@ upgrade all the secondary nodes, one by one, ensure service was restarted
 rs.stepDown(600); on the master, to relinquish its master status
 upgrade the last node
 db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } ); # to the new, upgrade version
+
+
+# memory limit RAM
+from https://github.com/jacobalberty/unifi-docker/compare/master...deviantintegral:unifi-docker:patch-1
+ # Uncomment and modify the following to limit how much memory Mongo will use.
+    # If the cache is too small, this may lead to higher CPU use.
+    # https://www.mongodb.com/docs/manual/faq/storage/#to-what-size-should-i-set-the-wiredtiger-internal-cache-
+    # command: --wiredTigerCacheSizeGB 0.25

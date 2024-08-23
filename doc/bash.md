@@ -1110,7 +1110,7 @@ esac # read prompt
 
 # read prompt while loop https://stackoverflow.com/a/46936399
 while read line <&3; do # read prompt while loop
-	read _read # prompt while loop
+    read _read # prompt while loop
 done 3< <(cat myfile) # prompt while loop
 
 
@@ -1143,6 +1143,9 @@ if [[ $EUID -ne 0 ]]; then
    exit $?
 fi
 
+sudo -n /bin/true 2>/dev/null # test if no password is needed
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
+
 docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
 
 A=$(</tmp/myfile) # built-in builtin read file into variable
@@ -1167,3 +1170,6 @@ cat << 'PYTHONBASHHEREDOC' | python3 - $g
 print('python bash here doc')
 PYTHONBASHHEREDOC
 
+
+[ -z "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is empty"
+[ -n "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is not empty"

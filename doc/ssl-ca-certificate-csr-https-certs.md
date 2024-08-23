@@ -4,6 +4,9 @@ sudo update-ca-certificates # probably updating /etc/ssl/certs/ca-certificates.c
 systemctl restart docker.service # optional for artifactory
 ## cert will probably show up in /etc/ssl/certs/* as well as /etc/ssl/certs/ca-certificates.crt
 
+/etc/ssl/certs/ca-certificates.crt # debian bundle
+/etc/ssl/certs/java/cacerts # debian bundle when openjdk is installed on host
+
 #centos6 and 7
 yum install ca-certificates                  # Install the ca-certificates package:
 update-ca-trust force-enable                 # Enable the dynamic CA configuration feature:
@@ -68,7 +71,9 @@ keytool -list -v -keystore /etc/pki/ca-trust/extracted/java/cacerts -storepass c
 
 KEYSTOREPASS=changeit # password java jks cacerts
 cacert password -> changeit
-keytool -list -v -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
+keytool -list -v -storepass "" -keystore /etc/pki/java/cacerts | grep -i mysearchstring #jks
+keytool -list -v -storepass "" -keystore /etc/ssl/certs/java/cacerts | grep -i mysearchstring #jks
+keytool -storepass "changeit" -list -v -cacerts | grep Owner: | grep -i mysearchstring #jks
 keytool -storepass "123456" -list -v -keystore ~/apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks
 keytool -storepass "123456"  -exportcert -alias webserver -v -keystore apache-tomcat/webapps/ROOT/WEB-INF/certs/WebServer.jks -rfc > /tmp/out3
 keytool -import -trustcacerts -alias root -file /tmp/myca.crt -keystore cacerts
@@ -122,6 +127,7 @@ echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_3
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp -showcerts # -starttls for upgraded connection
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME}       -starttls postgres -showcerts # -starttls for upgraded connection
 printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -crlf -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 ```
@@ -352,3 +358,13 @@ t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm s
 
 
 * https://www.ssllabs.com/ssltest/ # ssl check qualys
+
+
+
+-----BEGIN CERTIFICATE-----
+-----END CERTIFICATE-----
+
+# python
+```py
+import certifi; print(certifi.where()) # print certifi cert location /usr/local/lib/python3.10/site-packages/certifi/cacert.pem
+```

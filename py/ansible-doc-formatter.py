@@ -73,7 +73,7 @@ git_doc =  \
             "description": [
                 "Manage I(git) checkouts of repositories to deploy files or software."
             ],
-            "filename": "/home/rumo/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/modules/git.py",
+            "filename": "/home/burp/.virtualenvs/ansible/lib/python3.10/site-packages/ansible/modules/git.py",
             "has_action": false,
             "module": "git",
             "notes": [

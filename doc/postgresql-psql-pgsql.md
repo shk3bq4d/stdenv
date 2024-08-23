@@ -31,6 +31,7 @@ select * from information_schema.tables;
 select table_catalog, table_schema, table_name, table_type from information_schema.tables;
 select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_name like '%priv%';
 select table_catalog, table_schema, table_name, table_type from information_schema.tables where table_schema not in ('pg_catalog', 'information_schema');
+substring(column, start_pos, length)
 
 show search_path;
 set search_path to myotherschema, public;
@@ -283,7 +284,9 @@ psql -At # batch mode --tuples-only --no-align skip headers column namse
 
 # sessions
 ```
+select * from pg_stat_activity where state in ('idle', 'active');
 select pid ,datname ,usename ,application_name ,client_hostname ,client_port ,backend_start ,query_start ,query ,state from pg_stat_activity where state in ('idle', 'active');
+select pid, usename as user_name, datname as database_name, client_addr as client_address, client_port, backend_start, state, query from pg_stat_activity; -- show connections lists sessions
 ```
 
 
@@ -291,6 +294,8 @@ string_agg https://hevodata.com/learn/postgresql-string-agg/ # group by string a
 string_agg ( expression, separator|delimiter [order_by] )
 
 select to_char(now(), 'YYYY-MM-DD HH24:mi:ss') -- date sprintf formating minutes hour year seconds hh12
+select extract(epoch from now()); -- unix timestamp
+select to_timestamp(mycolumn::bigint);    -- postgresq psql from unixtime
 
 select to_timestamp(configvalue::bigint) from oc_preferences where configkey in ('lastLogin'); -- cast string as bigint in nexcloud
 
@@ -357,3 +362,4 @@ ssl_key_file
 ssl_cert_file
 ssl_ca_file
 ssl_min_protocol_version
+
