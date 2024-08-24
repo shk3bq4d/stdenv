@@ -24,7 +24,7 @@ $WORK_PC1F)
         --shadow-offset-x=-18
         --shadow-offset-y=-18
         "
-	;;
+    ;;
 *)
     extra="
         --shadow-exclude-reg x39+0+0
@@ -34,7 +34,8 @@ $WORK_PC1F)
         "
     ;;
 esac
-compton --dbus --config $f
+compton --dbus --config $f &
+sleep 2
 #compton -b --dbus $extra --experimental-backends --config $f
 echo true > ~/.tmp/compton-enabled
 xwininfo -root -tree \
