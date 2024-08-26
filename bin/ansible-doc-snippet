@@ -5,6 +5,8 @@ set -euo pipefail
 umask 027
 
 cd # executing from ~/tmp caused be some trouble
+test -d ~/git/sf/dcn/iaac-master/ans && cd ~/git/sf/dcn/iaac-master/ans
+test -d ~/git/sf/dcn/iaac/ans        && cd ~/git/sf/dcn/iaac/ans
 
 # activate venv if existing
 set +u
@@ -86,6 +88,7 @@ fi
 arg="$( echo "$1" | sed -r -e 's/[:]+//g')"
 
 
+pwd
 if ! module_list | igrep -q "$arg" &&
    ! igrep -q "$arg" < $f; then
     echo "No match for $arg"
