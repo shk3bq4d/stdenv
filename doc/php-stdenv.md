@@ -7,8 +7,9 @@
 
 Branch  Initial Release  Active Support Until    Security Support Until
 8.0     26 Nov 2020      26 Nov 2022             26 Nov 2023
-8.1     25 Nov 2021      25 Nov 2023             25 Nov 2024
-8.2      8 Dec 2022       8 Dec 2024              8 Dec 2025
+8.1     25 Nov 2021      25 Nov 2023             31 Dec 2025
+8.2      8 Dec 2022      31 Dec 2024             31 Dec 2026
+8.3	    23 Nov 2023	     31 Dec 2025	         31 Dec 2027
 
 # debug craft mysql connection
 ```php <?php
@@ -34,6 +35,8 @@ php -r 'echo curl_exec(curl_init("http://localhost"));' # execute command from s
 php -r '$ch = curl_init("http://localhost")); echo curl_exec($ch); echo "error: $curl_error($ch)";' # execute command from shell
 php -l /my/php/file.php # validate syntax --syntax-check
 php --syntax-check /my/php/file.php # validate syntax --syntax-check
+php -v # version
+php --version
 ```
 ```php
 function mylog($message, $logFile = "/var/www/html/var/logs/bip.log") {
@@ -46,3 +49,8 @@ in_array($valueToCheck, $array, $same_type_boolnean);
 explode(":", "a:b:c");       # split
 implode(":", ["a","b","c"]); # join
 ```
+
+
+echo '<?php phpinfo();' > phpinfo.php
+curl -s http://127.0.0.1/phpinfo.php | grep -E 'post_max_size|upload_max_filesize'
+curl -s https://$(hostname -f)/phpinfo.php | grep -E 'post_max_size|upload_max_filesize'

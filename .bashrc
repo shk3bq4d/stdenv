@@ -237,6 +237,10 @@ alias ssh-no-host-checking='ssh -o ControlMaster=No -o UserKnownHostsFile=/dev/n
 alias ssh-password-auth='ssh -o ControlMaster=No -o NumberOfPasswordPrompts=1000 -o PubkeyAuthentication=no -o HostbasedAuthentication=no -o KbdInteractiveAuthentication=no -o RhostsRSAAuthentication=no -o RSAAuthentication=no -o ChallengeResponseAuthentication=no $@'
 alias scp='scp -p'
 alias rsync='rsync -vh --progress'
+alias curllo='curl -s http://127.0.0.1'
+alias curllos='curl -s https://127.0.0.1'
+alias curlfqdn='curl -s http://$(hostname -f)'
+alias curlfqdns='curl -s https://$(hostname -f)'
 #alias githome='git --git-dir=$STDHOME_DIRNAME/.git'
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
