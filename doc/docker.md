@@ -61,7 +61,7 @@ docker run -dt mr/testimage:version2
 docker run --name squid -d --restart=always --publish 127.0.0.1:3128:3128 --volume /srv/docker/squid/cache:/var/spool/squid3 sameersbn/squid:3.3.8-19
 
 # run new container in interactive
-docker run -it --rm mr/testimage:version2
+docker run -it --rm --entrypoint="" mr/testimage:version2
 
 # add new shell to existing
 docker exec -it 824d2ac1981e2c17c6e4b3595286d41d929ccba0f91c14127c335a891d1ec60b /bin/bash
