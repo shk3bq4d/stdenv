@@ -1,3 +1,4 @@
+python3 -m venv ~/.virtualenvs/VENVNAME
 echo $VIRTUAL_ENV
 
 This cheat sheet describes my usage/implementation of virtualenv with virtualenv wrapper and the bash foo that I added with the help of many blogs to make it all tick together in fun land.

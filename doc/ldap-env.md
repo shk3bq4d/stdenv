@@ -1,5 +1,10 @@
 yum install openldap-clients
-apt install ldap-utils
+apt install ldap-utils # debian ubuntu
+ldapwhoami -d 1 -x -H ldaps://myadserver.mydomain:3269/ -D toby.app@mydomain -W # debug -d 1
+ldapwhoami -d 3 -x -H ldaps://myadserver.mydomain:3269/ -D toby.app@mydomain -W # debug -d 1
+LDAPTLS_REQCERT=never ldapwhoami -d 1 -x -H ldaps://myadserver.mydomain:3269/ -D toby.app@mydomain -W # debug -d 1
+LDAPTLS_REQCERT=never ldapwhoami -d 1 -x -H ldaps://myadserver.mydomain:3269/ -D toby.app@mydomain -W # debug -d 1
+LDAPTLS_CACERT=/etc/ssl/certs/ca-certificates.crt ldapwhoami -d 1 -x -H ldaps://myadserver.mydomain:3269/ -D toby.app@mydomain -W # debug -d 1
 
 The LDAP RFC specifies that LDAP messages are ASN1 encoded. This means the messages are binary data in a special format, instead of text, following a special format. This makes it very hard to write ladap-queries by hand with telnet. # https://stackoverflow.com/questions/11549731/is-it-possible-to-send-ldap-requests-via-telnet
 
