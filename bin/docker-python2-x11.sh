@@ -9,11 +9,10 @@ args() {
     if [[ $# -eq 0 ]]; then
         return
     fi
-    if [[ $# -eq 1 ]]; then
-        case "$1" in \
-        bash) echo bash; return;;
-        esac
-    fi
+    case "$1" in \
+        *.py) echo "python $@"; return;;
+        *) echo "$@"; return;;
+    esac
     echo "$@"
 }
 
@@ -25,6 +24,8 @@ XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
 xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 chmod 0755 $XAUTH
+
+args "$@"
 
 $SUDO docker run \
     --rm  \
