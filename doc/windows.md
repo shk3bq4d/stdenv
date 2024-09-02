@@ -40,7 +40,7 @@ Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
 powershell.exe Get-content -Wait -Tail 20 C:\zabbix_agentd.log & REM tail -f
 powershell.exe Set-WinUserLanguageList -LanguageList en-US -Force & REM keyboard layout
 
-disable windows key
+# disable windows key
 google Microsoft Fix it 50465
 HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout
 REG_BINARY "Scancode Map" 00000000 00000000 03000000 00005BE0 00005CE0 00000000
@@ -59,7 +59,7 @@ Value	Interpretation
 0xE01D0000	Remove the right CTRL key (0xE01D --> 0x00).
 0xE038E020	Right ALT key --> Mute key (0xE038 --> 0xE020).
 
-@begin=sh@
+```sh
 # escape to caps lock http://vim.wikia.com/wiki/Map_caps_lock_to_escape_in_Windows
 cat >/tmp/capslock2escape.reg <<EOF
 REGEDIT4
@@ -68,7 +68,7 @@ REGEDIT4
 "Scancode Map"=hex:00,00,00,00,00,00,00,00,03,00,00,00,3a,00,46,00,01,00,3a,00,00,00,00,00
 EOF
 cygstart /tmp/capslock2escape.reg
-@end=sh@
+```
 
 
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
@@ -109,7 +109,7 @@ How to remove 'Administrator:' from the command prompt title
 Locate and then click the following key in the registry:
 HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\BootExecute
 On the Edit menu, click Modify.
-Type autocheck autochk *, and then press ENTER.
+Type autocheck autochk `*`, and then press ENTER.
 
 # change user disconnect utility
 C:\Windows\System32\tsdiscon.exe
@@ -160,12 +160,14 @@ https://www.fosshub.com/ConEmu.html/ConEmuPack.161206.7z
 4b)  mintty steps # https://github.com/mintty/mintty/wiki/Tips#using-mintty-for-bash-on-ubuntu-on-windows-uow--windows-subsystem-for-linux-wsl
 https://github.com/rprichard/wslbridge/releases
 download
+```
 tar xzf *cygwin64.tar.gz
 cdl
 mv wslbridge* /bin
 mintty.exe /bin/wslbridge.exe -t /bin/bash -l
 
 http://babun.github.io/
+```
 
 # curl
 bitsadmin /addfile thisissomejobname http://kakao.ro/Pictures.iso C:\john_pictures.iso
@@ -229,3 +231,9 @@ tnc                -Computername MYHOSTNETCAT -Port PORT
 ```
 
 ms-settings:windowsupdate # windows update shortcut to be put on desktop, "right click, new, shortcut, ms-settings:windowsupdate, Windows update MYMACHINE NAME"
+
+# windows border
+HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
+Look for a value named BorderWidth. If it doesn’t exist, you can create it by right-clicking on the right pane, selecting New > String Value, and naming it BorderWidth.
+Double-click BorderWidth and set its value. The value is in pixels, and you can enter a negative number to increase the width (e.g., -15 for 15 pixels wide).
+Close the Registry Editor and restart your computer for the changes to take effect.
