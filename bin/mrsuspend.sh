@@ -57,6 +57,7 @@ dec17.ly.lan|nov20.ly.lan)
 	mute.sh
 	sudo umount -t fuse.sshfs -a
 	sudo systemctl suspend
+	citrix-stop-kill-all.sh
 	exit 0
 	;;
 esac
