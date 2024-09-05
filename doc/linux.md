@@ -483,3 +483,11 @@ who -b # uptime last boot time
 sudo groupadd user1user2; sudo usermod -a -G user1user2 user1; sudo usermod -a -G user1user2 user2; sudo chgrp user1user2 myfile; sudo chmod g+x myfile
 
 /proc/acpi/button/lid/LID/state # laptop lid state
+
+# gnome keyring
+sudo apt install libsecret-tools # secret-tool CLI
+sudo apt install seahorse        # GUI tool
+secret-tool search --all xdg:schema org.freedesktop.Secret.Generic
+~/.local/share/keyrings/user.keystore
+~/.local/share/keyrings/login.keyring
+pgrep gnome-keyring-daemon

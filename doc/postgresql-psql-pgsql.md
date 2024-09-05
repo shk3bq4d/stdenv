@@ -20,7 +20,7 @@ pg_dump -st tablename dbname -- show create table (ie: there is no such thing ac
 sudo docker exec -u 999 -it postgres pg_dump -st repository -U bitbucket bitbucketdb -- show create table repository
 \c       database_name -- use
 \connect database_name -- use
-\conninfo -- whoami
+\conninfo -- whoami, hostname
 set role to username; -- to change the current user without relogin
 \x # toggles expanded display (vertical alignment)
 show config_file; -- display filepath of main config file
@@ -265,9 +265,11 @@ https://github.com/docker-library/postgres
 
 ```
 ```sql
-ect client_addr, state from pg_stat_replication;
+select client_addr, state from pg_stat_replication;
 select pg_is_in_recovery();
 select pg_read_file('/etc/hostname') as hostname, setting as port from pg_settings where name='port';
+\conninfo -- You are connected to database "blabla" as user "myuser" on host "myhost" (address "192.168.33.33") at port "5432".
+select inet_server_addr() as server_ip;
 ```
 
 # json
@@ -349,8 +351,12 @@ echo "Bob,22,Los Angeles" >> data.csv
 ```
 ```sql
 create table if not exists your_table ( name varchar(50), age integer, location varchar(50));
+create table if not exists your_table ( id serial primary key, created_at timestamp default current_timestamp, name varchar(50), age integer, location varchar(50));
 \copy your_table from '/var/lib/postgresql/data/pgdata/data.csv' with csv header; -- sql load
 \copy your_table from 'data.csv' with csv header; -- sql load
+COPY your_table from '/var/lib/postgresql/data/pgload/data.csv';
+COPY your_table from '/var/lib/postgresql/data/pgload/data.csv' delimiter ',' csv;
+COPY(name,age,location) your_table from '/var/lib/postgresql/data/pgload/data.csv' delimiter ',' csv;
 -- Do not confuse COPY with the psql instruction \copy. \copy invokes COPY FROM STDIN or COPY TO STDOUT, and then fetches/stores the data in a file accessible to the psql client. Thus, file accessibility and access rights depend on the client rather than the server when \copy is used.
 select * from your_table;
 insert into your_table (name) values (current_timestamp);

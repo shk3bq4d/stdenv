@@ -68,6 +68,7 @@ vgextend - Add physical volumes to a volume group
 lvrename VG_root LV_data LV_backup # move rename mv
 
 # var downsizing
+lsof +D /var
 zabbix-maintenance-on.sh
 docker stop mariadb
 systemctl stop vmtoolsd
