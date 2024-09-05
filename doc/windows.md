@@ -233,7 +233,9 @@ tnc                -Computername MYHOSTNETCAT -Port PORT
 ms-settings:windowsupdate # windows update shortcut to be put on desktop, "right click, new, shortcut, ms-settings:windowsupdate, Windows update MYMACHINE NAME"
 
 # windows border
+https://www.tenforums.com/customization/85513-how-adjust-window-border-thickness.html
 HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
 Look for a value named BorderWidth. If it doesn’t exist, you can create it by right-clicking on the right pane, selecting New > String Value, and naming it BorderWidth.
 Double-click BorderWidth and set its value. The value is in pixels, and you can enter a negative number to increase the width (e.g., -15 for 15 pixels wide).
+PaddedBorderWidth
 Close the Registry Editor and restart your computer for the changes to take effect.
