@@ -2895,7 +2895,7 @@ template_fullpath:   /home/me/.tmpp/20240125/tpl.tpl
 template_destpath:
 :template_run_date:   2024-01-25 14:50:37.193923
 
-no_log: '{{ ansible_verbosity < 3 }}'
+no_log: "{{ ansible_verbosity < 3 }}"
 
 "biphehe"  | quote =>  "biphehe"
 "bip hehe" | quote => "'bip hehe'"
