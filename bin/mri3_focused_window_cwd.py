@@ -29,7 +29,11 @@ with open(os.path.expanduser('~/.tmp/log/mri3_focused_window_cwd.log'), 'w') as 
         if name not in ['bash', 'zsh', 'vim', 'urxvt']:
             f.write('continue not in\n')
             continue
-        cwd = child.cwd()
+        try:
+            cwd = child.cwd()
+        except psutil.AccessDenied as e:
+            f.write("AccessDenied")
+            continue
         if cwd.startswith('/proc/'):
             f.write('continue /proc/\n')
             continue # chromium continue
