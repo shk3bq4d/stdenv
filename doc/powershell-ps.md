@@ -104,3 +104,6 @@ function log() {
   #$LogFile = "c:\Users\myself\Documents\mrclip.log";
   #Add-Content -Path $LogFile -Value $message -Encoding UTF8;
 }
+
+`" escape a double quote with a backtick (or use single quotes strings)
+`$ escape a dollar sign  with a backtick
