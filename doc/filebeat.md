@@ -214,7 +214,7 @@ https://www.elastic.co/downloads/beats/winlogbeat # version
 https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-7.15.2-windows-x86_64.zip
 
 
-ilebeat test config -c /etc/filebeat/filebeat.yml --strict.perms # doesn't seem to verify my module config
+filebeat test config -c /etc/filebeat/filebeat.yml --strict.perms # doesn't seem to verify my module config
 
 - timestamp:
    field: ansible.time # timestamp

@@ -7,6 +7,7 @@ Jan 25 14:50:38 +template_fullpath:   /home/myuser/.tmpp/20240125/tpl.tpl
 Jan 25 14:50:38 +template_destpath:
 Jan 25 14:50:38 +template_run_date:   2024-01-25 14:50:37.193923
 template_path|basename # -> simulate template_name
+template_path|basename|splitext|first # -> simulate template_name
 # debug
 ```sh
 vi ~.virtualenvs/ansible/lib/python3.10/site-packages/ansible/template/__init__.py +1199
