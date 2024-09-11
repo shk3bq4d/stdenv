@@ -13,6 +13,7 @@ apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search apt-file # apt-file: whatprovides in all packages
 apt-file search if-config | grep -E '/sbin/ifconfig' # net-tools
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
+apt purge postfix\* # erase
 iproute2: /sbin/ip
 apt list --upgradable
 apt list --installed
