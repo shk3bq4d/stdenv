@@ -13,6 +13,7 @@ apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search apt-file # apt-file: whatprovides in all packages
 apt-file search if-config | grep -E '/sbin/ifconfig' # net-tools
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
+apt purge postfix\* # erase
 iproute2: /sbin/ip
 apt list --upgradable
 apt list --installed
@@ -150,6 +151,8 @@ sudo yum reinstall --downloadonly --downloaddir=/home/adminmru zabbix-agent
 yum reinstall kernel-3.10.0-1160.11.1.el7
 
 ENV DEBIAN_FRONTEND noninteractive # DockerFile build
+DEBIAN_FRONTEND=noninteractive apt install -y postfix
+DEBIAN_FRONTEND=noninteractive dpkg --configure postfix
 
 ```
 
