@@ -30,6 +30,7 @@ jacobalberty/unifi:v7.5.187 # never released due to maintainer being away
 jacobalberty/unifi:v8.0.24
 jacobalberty/unifi:v8.2.93
 jacobalberty/unifi:v8.3.32
+jacobalberty/unifi:v8.4.59
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest
@@ -45,6 +46,7 @@ https://community.ui.com/releases/r/network/8.0.26
 https://community.ui.com/releases/r/network/8.0.28
 https://community.ui.com/releases/r/network/8.2.93
 https://community.ui.com/releases/r/network/8.3.32
+https://community.ui.com/releases/r/network/8.4.59
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7

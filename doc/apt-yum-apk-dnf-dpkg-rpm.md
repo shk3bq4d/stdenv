@@ -151,6 +151,8 @@ sudo yum reinstall --downloadonly --downloaddir=/home/adminmru zabbix-agent
 yum reinstall kernel-3.10.0-1160.11.1.el7
 
 ENV DEBIAN_FRONTEND noninteractive # DockerFile build
+DEBIAN_FRONTEND=noninteractive apt install -y postfix
+DEBIAN_FRONTEND=noninteractive dpkg --configure postfix
 
 ```
 
