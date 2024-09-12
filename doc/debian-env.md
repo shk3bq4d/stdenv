@@ -32,6 +32,11 @@ unstable AKA sid The unstable distribution is where active development of Debian
 * https://www.debian.org/releases/stable/i386/apbs02.en.html#preseed-auto
 * https://blog.entek.org.uk/notes/2023/08/22/automated-debian-install.html
 
+## disk selection
+* https://askubuntu.com/questions/707327/use-preseed-to-chose-install-disks-based-on-size-or-type
+* https://serverfault.com/questions/1050396/debian-preseed-select-smallest-drive-for-os
+* https://www.debian.org/releases/bookworm/amd64/apbs05.en.html
+
 
 ## dnsmasq
 ### preseed URL straight from dnsmasq
