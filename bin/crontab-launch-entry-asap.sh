@@ -55,7 +55,7 @@ newentry() {
     #echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') $dow"
     echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') *" # don't use dow => https://stackoverflow.com/questions/34357126/why-crontab-uses-or-when-both-day-of-month-and-day-of-week-specified
     echo -n " $(crontab_line_user "$@" <<< "$entry")"
-    echo -n " test \`date +\\%Y\` == $(date +%Y) || exit; "
+    echo -n " test \`date +\\%Y\` = $(date +%Y) || exit; "
     cleanup_crontab_line "$@" <<< "$entry" | sed -r -e "s/$/ # crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
 }
 
@@ -130,8 +130,9 @@ while :; do
     backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
     dow=$(date +%a | tr '[:upper:]' '[:lower:]')
     #echo "entry is $entry"
-    #echo "user is $(crontab_line_user "$@" <<< "$entry")"
-    #exit 0
+    #echo "crontab_line_user is $(crontab_line_user "$@" <<< "$entry")"
+    #echo "_user is $_user"
+    #echo "source_type is $(source_type "$_user")"
     case "$(source_type "$_user")" in \
     currentuser)
         {   crontab -l | tee $backupfile
@@ -141,10 +142,20 @@ while :; do
         ;;
     user)
         if crontab -l -u "$_user" &>/dev/null; then
+            echo HERE
             {   crontab -l -u "$_user" | tee $backupfile
                 newentry "$entry" "$_user"
             } > $_tempfile
-            crontab -u "$_user" - < $_tempfile
+            #echo === tempfile is
+            #cat $_tempfile
+            #echo === before -l is
+            #crontab -l -u "$_user"
+            #crontab -u "$_user" - < $_tempfile <-- 2024.09.05 that construction was selinux denied
+            cat $_tempfile | crontab -u "$_user" -
+            #echo '<<<'
+            #echo === after -l is
+            #crontab -l -u "$_user"
+            #echo '<<<'
         else
             {   sudo crontab -l -u "$_user" | tee $backupfile
                 newentry "$entry" "$_user"

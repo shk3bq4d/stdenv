@@ -239,3 +239,6 @@ Look for a value named BorderWidth. If it doesn’t exist, you can create it by 
 Double-click BorderWidth and set its value. The value is in pixels, and you can enter a negative number to increase the width (e.g., -15 for 15 pixels wide).
 PaddedBorderWidth
 Close the Registry Editor and restart your computer for the changes to take effect.
+
+cmd /c mklink "%USERPROFILE%\Desktop\logoff.exe" "C:\Windows\System32\logoff.exe"
+$b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\logoff.lnk"); $b.TargetPath = "C:\Windows\System32\logoff.exe"; $b.Save()

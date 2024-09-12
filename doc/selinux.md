@@ -85,7 +85,7 @@ ssh_home_t: Type identity, indicating the SELinux type context. It defines the t
 s0: Sensitivity level, indicating the SELinux sensitivity label. In SELinux, sensitivity labels define the level of sensitivity or confidentiality associated with the resource. s0 typically represents the default sensitivity level.
 
 
-semodule --build  --disable_dontaudit # show hidden denies
+semodule --build  --disable_dontaudit # show hidden denies nolog no log
 
 # temporary disable
 setenforce 0 # disable

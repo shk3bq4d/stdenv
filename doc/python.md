@@ -1205,7 +1205,7 @@ https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
 https://docs.python.org/3.6/library/typing.html
 ```sh
 pip install mypy
-mypy mycode.py
+mypy mycode.py # check typing
 ```
 ```python
 

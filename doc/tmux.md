@@ -132,7 +132,7 @@ unbind Up bind Up new-window -d -n tmp \; swap-pane -s tmp.1 \; select-window -t
 unbind Down
 bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
 
-# reptyr
+# reptyr to put an existing process not running in tmux in a tmux session
 a) find out PID of your process of interes
 b) Control-Z it or kill -STOP PID
 c) start your tmux session
@@ -146,3 +146,8 @@ e) fg
    or
    kill -CONT PID
 
+
+# save buffer to file
+   https://unix.stackexchange.com/questions/26548/write-all-tmux-scrollback-to-a-file
+1) Use prefix + :, then type in capture-pane -S -3000 + Return. (Replace -3000 with however many lines you'd like to save, or with - for all lines.) This copies those lines into a buffer.
+0) Then, to save the buffer to a file, just use prefix + : again, and type in save-buffer filename.txt + return. (by default it'll save the file in ~/)
