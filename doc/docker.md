@@ -545,6 +545,7 @@ docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
 
 # prune
 * https://docs.docker.com/config/pruning/
+docker volume list
 docker volume prune    # This will remove anonymous local volumes not used by at least one container.
 docker volume prune -a # This will remove all       local volumes not used by at least one container.
 docker image prune -f
