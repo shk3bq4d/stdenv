@@ -492,6 +492,35 @@ secret-tool search --all xdg:schema org.freedesktop.Secret.Generic
 ~/.local/share/keyrings/login.keyring
 pgrep gnome-keyring-daemon
 
-kill -TSTP PID # kill politely
-kill -STOP PID # hard stop
-kill -CONT PID # resume process
+kill -TSTP PID # ask to pause politely
+kill -STOP PID # hard pause stop
+kill -CONT PID # unpause, resume process
+
+SIGHUP (1): Hang up detected on controlling terminal or death of controlling process.
+SIGINT (2): Interrupt from keyboard (Ctrl+C).
+SIGQUIT (3): Quit from keyboard (produces core dump).
+SIGILL (4): Illegal Instruction (usually indicates a corrupted executable or bad hardware).
+SIGABRT (6): Abort signal from abort(3) (indicates an abort or crash of a program).
+SIGFPE (8): Floating-point exception (e.g., division by zero).
+SIGKILL (9): Kill signal that immediately terminates the process. Cannot be caught or ignored.
+SIGSEGV (11): Segmentation fault (invalid memory reference).
+SIGPIPE (13): Broken pipe (writing to a pipe with no readers).
+SIGALRM (14): Timer signal from alarm(2) (used for timing).
+SIGTERM (15): Termination signal, requesting graceful shutdown. This is the default signal for kill.
+SIGUSR1 (10): User-defined signal 1 (used by applications for custom handling).
+SIGUSR2 (12): User-defined signal 2 (another custom user-defined signal).
+SIGCHLD (17): Child stopped or terminated (sent to a parent process when a child terminates or stops).
+SIGCONT (18): Continue if stopped (resumes a paused process, like with SIGSTOP).
+SIGSTOP (19): Stop process (cannot be caught or ignored).
+SIGTSTP (20): Stop typed at terminal (Ctrl+Z), similar to SIGSTOP but can be caught or ignored.
+SIGTTIN (21): Background process attempting read from TTY (sent when a background process tries to read input).
+SIGTTOU (22): Background process attempting write to TTY (sent when a background process tries to write output).
+SIGBUS (7): Bus error (generally, misaligned memory access).
+SIGPOLL (29): Pollable event (Sys V). Synonym for SIGIO on most platforms.
+SIGPROF (27): Profiling timer expired.
+SIGSYS (31): Bad argument to routine (invalid system call argument).
+SIGTRAP (5): Trace/breakpoint trap (used for debugging).
+SIGURG (23): Urgent condition on socket (used for out-of-band data on sockets).
+SIGVTALRM (26): Virtual alarm clock (for processes' virtual time).
+SIGXCPU (24): CPU time limit exceeded.
+SIGXFSZ (25): File size limit exceeded.

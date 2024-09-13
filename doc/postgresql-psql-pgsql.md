@@ -60,6 +60,7 @@ grant execute on all functions in schema public to user;
 ```
 
 select "user" from oc_activity; -- escape column name table protected values keyword
+select ''''; -- escape single quote by doubling it
 
 psql confdb myuser -c "select count(1) from cwd_user;"
 
