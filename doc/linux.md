@@ -491,3 +491,7 @@ secret-tool search --all xdg:schema org.freedesktop.Secret.Generic
 ~/.local/share/keyrings/user.keystore
 ~/.local/share/keyrings/login.keyring
 pgrep gnome-keyring-daemon
+
+kill -TSTP PID # kill politely
+kill -STOP PID # hard stop
+kill -CONT PID # resume process

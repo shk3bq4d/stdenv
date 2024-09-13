@@ -25,6 +25,7 @@ set role to username; -- to change the current user without relogin
 \x # toggles expanded display (vertical alignment)
 show config_file; -- display filepath of main config file
 
+SELECT round( float8 '3.1415927', 2 );
 select schema_name from information_schema.schemata;
 select * from information_schema.table_privileges;
 select * from information_schema.tables;
