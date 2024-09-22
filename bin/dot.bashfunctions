@@ -1457,9 +1457,9 @@ cp_backup_with_timestamp() {
         test -f "${arg%/}.$ts" && echo "FATAL: file ${arg%/}.$ts already exists" && return 1
     done
     for arg in "$@"; do
-        echo cp -Rp ${arg%/} ${arg%/}.$ts
-             cp -Rp ${arg%/} ${arg%/}.$ts 2>/dev/null ||
-        sudo cp -Rp ${arg%/} ${arg%/}.$ts
+        echo cp -Ra ${arg%/} ${arg%/}.$ts
+             cp -Ra ${arg%/} ${arg%/}.$ts 2>/dev/null ||
+        sudo cp -Ra ${arg%/} ${arg%/}.$ts
     done
     return 0
 }
