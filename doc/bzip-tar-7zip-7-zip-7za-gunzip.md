@@ -19,8 +19,8 @@ zip file.zip filetocompress.txt
 
 docker cp $(which zip) my_container:/bin/
 docker cp $(which unzip) my_container:/bin/
-zip -vT myzip.jar # kind list files ls (instead it test integrity in verbose mode)
 unzip -l myzip.jar #     list files ls
+zip -vT myzip.jar # kind list files ls (instead it test integrity in verbose mode)
 rpm2cpio moxapi-7.10.5-1.x86_64.rpm|cpio -idmv
 
 
