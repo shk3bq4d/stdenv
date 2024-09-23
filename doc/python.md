@@ -3,6 +3,9 @@
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
 
+os.unlink(single_file)
+shutil.rmtree(recursive_delete_directory)
+
 # https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format
 ```sh
 docopt == 0.6.1             # requirements Version Matching. Must be version 0.6.1
