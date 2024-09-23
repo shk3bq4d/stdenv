@@ -315,6 +315,7 @@ are to be done by making a backup, trashing the data folder, restoring the backu
 https://www.postgresql.org/support/versioning/
 Releases
 Version	Current minor	Supported	First Release	Final Release
+16	16.4	Yes	September 14, 2023	November 9, 2028
 15	15.4	Yes	October 13, 2022	November 11, 2027
 14	14.9	Yes	September 30, 2021	November 12, 2026
 13	13.12	Yes	September 24, 2020	November 13, 2025
