@@ -32,6 +32,7 @@ jacobalberty/unifi:v8.0.24
 jacobalberty/unifi:v8.2.93
 jacobalberty/unifi:v8.3.32
 jacobalberty/unifi:v8.4.59
+jacobalberty/unifi:v8.4.62
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest

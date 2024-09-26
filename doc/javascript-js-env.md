@@ -88,3 +88,6 @@ function bufferFile(relPath) {
 }
 var content = JSON.parse(bufferFile('nextcloud.log').toString());
 ```
+
+```js
+Array.isArray(myvar); // test is instance instanceof type
