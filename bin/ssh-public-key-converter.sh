@@ -15,6 +15,21 @@ set -euo pipefail
 
 [[ $# -lt 1 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
 
+_ssh_keygen() {
+    if false; then
+        # this works, but I did not have better success converting ED25519 to PEM or PKCS8,
+        # as such I am removing it as it needs sudo
+        docker ps &>/dev/null && SUDO="" || SUDO="sudo"
+        $SUDO docker run -it --rm --name ssh-keygen \
+            -v "$PWD:$PWD" \
+            -v "/tmp:/tmp" \
+            -w "$PWD" \
+            shk3bq4d/openssh-keygen:alpine3.20 "$@"
+    else
+        ssh-keygen "$@"
+    fi
+}
+
 #   h - check for option -h without parameters; gives error on unsupported options;
 #   h: - check for option -h with parameter; gives errors on unsupported options;
 #   abc - check for options -a, -b, -c; gives errors on unsupported options;
@@ -74,12 +89,12 @@ process_file() {
 
     FORMATS="PKCS8 PEM RFC4716"
     for format in $FORMATS; do
-        ssh-keygen -i -m $format -f "$f" > "$tmpfile" 2>/dev/null && reffile="$tmpfile" && break
+        _ssh_keygen -i -m $format -f "$f" > "$tmpfile" 2>/dev/null && reffile="$tmpfile" && break
     done
     if [[ -z "$reffile" ]]; then
         tmpfile2=$(mktemp)
-        if ssh-keygen -e -f "$f" > "$tmpfile2"; then
-            ssh-keygen -i -f "$tmpfile2" > "$tmpfile"
+        if _ssh_keygen -e -f "$f" > "$tmpfile2"; then
+            _ssh_keygen -i -f "$tmpfile2" > "$tmpfile"
             rm -f "$tmpfile2"
             reffile="$tmpfile"
         else
@@ -102,11 +117,11 @@ process_file() {
         if [[ -f "$outfile" ]]; then
             echo "skipping already existing $format file $outfile"
         else
-            if ssh-keygen -e -m "$format" -f "$reffile" > "$outfile" 2>/dev/null; then
+            if _ssh_keygen -e -m "$format" -f "$reffile" > "$outfile" 2>/dev/null; then
                 echo "Successfully wrote $outfile"
             else
                 rm "$outfile" || true
-                ssh-keygen -e -m "$format" -f "$reffile" &> "$outfile".error || true
+                _ssh_keygen -e -m "$format" -f "$reffile" &> "$outfile".error || true
             fi
         fi
     done
@@ -114,7 +129,7 @@ process_file() {
 }
 
 
-for i in ssh-keygen; do ! command -v "$i" &>/dev/null && echo "FATAL: unexisting dependency $i in path: $PATH" && exit 1; done
+for i in _ssh_keygen; do ! command -v "$i" &>/dev/null && echo "FATAL: unexisting dependency $i in path: $PATH" && exit 1; done
 
 is_private_key() {
     local f

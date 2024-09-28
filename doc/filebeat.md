@@ -232,6 +232,7 @@ filebeat test config -c /etc/filebeat/filebeat.yml --strict.perms # doesn't seem
      - '2006-01-02T15:04:05Z'          # timestamp layout
      - '2006-01-02T15:04:05.999Z'      # timestamp layout
      - '2006-01-02T15:04:05.999-07:00' # timestamp layout
+     - "2006-01-02 15:04:05,999"       # timestamp layout
      - UNIX                            # timestamp layout 1663443523.289
      - UNIX_MS                         # timestamp layout 1663443523289 unix with milliseconds
 
