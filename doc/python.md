@@ -1289,3 +1289,5 @@ PYTHONBASHHEREDOC
 ```sh
 python3 -m venv /tmp/myvenv
 ```
+
+with open(os.path.expanduser(fp), 'r', encoding='utf-8-sig') as f: # windows BOM UTF-8 reader
