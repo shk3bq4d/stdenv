@@ -293,7 +293,7 @@ if isinstance(b, str) or isinstance(b, unicode): # types ~instanceof~
 for k, v in dict_.iteritems():
 for k, v in sorted(rH.iteritems(), key=lambda x: x[0]):
 
-for i, v in enumerate(['tic', 'tac', 'toe']):
+for i, v in enumerate(['tic', 'tac', 'toe']): # indexed idx
     print i, v
           0  tic
           1  tac
@@ -843,7 +843,7 @@ mylist = [20, 30, 25, 20]
 # find doublon as well as indices
 from collections import defaultdict
 D = defaultdict(list)
-for i,item in enumerate(mylist):
+for i,item in enumerate(mylist): # indexed idx
     D[item].append(i)
 D = {k:v for k,v in D.items() if len(v)>1}
 
