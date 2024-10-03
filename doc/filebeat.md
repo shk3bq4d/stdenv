@@ -302,6 +302,7 @@ timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/1587
     fields:    [nextcloud.userAgent]      # short
 - if.has_fields.nextcloud.time:           # short apparently works
   if.has_fields.nextcloud:  time          # short apparently works
+    when.has_fields: sf.tmp.leftover
 
     - replace: # regexp
         fields: # regexp
