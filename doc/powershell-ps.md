@@ -59,6 +59,7 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\MSSQL`$$($Using:
 
 Test-NetConnection -Computername MYHOSTNETCAT -Port PORT # nc
 tnc                -Computername MYHOSTNETCAT -Port PORT
+tnc                              MYHOSTNETCAT -Port PORT
 
 
 $Username = "MyUserName";

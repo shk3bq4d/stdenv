@@ -2,10 +2,13 @@
 * https://nextcloud.com/changelog/#latest27
 * https://github.com/nextcloud/server/milestones # release
 * [hub.docker.com](https://hub.docker.com/_/nextcloud)
+* https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html # database support
 
 https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
 
 Version code  Version name  Release date  End of life  Current version       Next version
+30            Hub 9         2024-04-24    2025-04
+29            Hub 8         2024-04-24    2025-04
 28            Hub 7         2023-12-12    2024-12
 27.1          Hub 6         2023-06-13    2024-06
 27.0          Hub 5         2023-06-13    2024-06
@@ -105,10 +108,10 @@ $CONFIG = [
 'updater.release.channel' => 'stable',
 'has_internet_connection' => true,
 'connectivity_check_domains' => [
-	'www.nextcloud.com',
-	'www.startpage.com',
-	'www.eff.org',
-	'www.edri.org'
+    'www.nextcloud.com',
+    'www.startpage.com',
+    'www.eff.org',
+    'www.edri.org'
 ],
 'check_for_working_wellknown_setup' => true,
 'check_for_working_htaccess' => true,
@@ -120,30 +123,30 @@ $CONFIG = [
 'loglevel' => 2,
 'syslog_tag' => 'Nextcloud',
 'log.condition' => [
-	'shared_secret' => '57b58edb6637fe3059b3595cf9c41b9',
-	'users' => ['sample-user'],
-	'apps' => ['files'],
+    'shared_secret' => '57b58edb6637fe3059b3595cf9c41b9',
+    'users' => ['sample-user'],
+    'apps' => ['files'],
 ],
 'logdateformat' => 'F d, Y H:i:s',
 'logtimezone' => 'Europe/Berlin',
 'log_query' => false,
 'log_rotate_size' => 100 * 1024 * 1024,
 'customclient_desktop' =>
-	'https://nextcloud.com/install/#install-clients',
+    'https://nextcloud.com/install/#install-clients',
 'customclient_android' =>
-	'https://play.google.com/store/apps/details?id=com.nextcloud.client',
+    'https://play.google.com/store/apps/details?id=com.nextcloud.client',
 'customclient_ios' =>
-	'https://itunes.apple.com/us/app/nextcloud/id1125420102?mt=8',
+    'https://itunes.apple.com/us/app/nextcloud/id1125420102?mt=8',
 'customclient_ios_appid' =>
-		'1125420102',
+        '1125420102',
 'appstoreenabled' => true,
 'appstoreurl' => 'https://apps.nextcloud.com/api/v1',
 'apps_paths' => [
-	[
-		'path'=> '/var/www/nextcloud/apps',
-		'url' => '/apps',
-		'writable' => true,
-	],
+    [
+        'path'=> '/var/www/nextcloud/apps',
+        'url' => '/apps',
+        'writable' => true,
+    ],
 ],
 'enable_previews' => true,
 'preview_max_x' => 4096,
@@ -151,19 +154,19 @@ $CONFIG = [
 'preview_max_filesize_image' => 50,
 'preview_libreoffice_path' => '/usr/bin/libreoffice',
 'preview_office_cl_parameters' =>
-	' --headless --nologo --nofirststartwizard --invisible --norestore '.
-	'--convert-to png --outdir ',
+    ' --headless --nologo --nofirststartwizard --invisible --norestore '.
+    '--convert-to png --outdir ',
 'enabledPreviewProviders' => [
-	'OC\Preview\PNG',
-	'OC\Preview\JPEG',
-	'OC\Preview\GIF',
-	'OC\Preview\BMP',
-	'OC\Preview\XBitmap',
-	'OC\Preview\MP3',
-	'OC\Preview\TXT',
-	'OC\Preview\MarkDown',
-	'OC\Preview\OpenDocument',
-	'OC\Preview\Krita',
+    'OC\Preview\PNG',
+    'OC\Preview\JPEG',
+    'OC\Preview\GIF',
+    'OC\Preview\BMP',
+    'OC\Preview\XBitmap',
+    'OC\Preview\MP3',
+    'OC\Preview\TXT',
+    'OC\Preview\MarkDown',
+    'OC\Preview\OpenDocument',
+    'OC\Preview\Krita',
 ],
 'ldapUserCleanupInterval' => 51,
 'sort_groups_by_name' => false,
@@ -171,108 +174,108 @@ $CONFIG = [
 'systemtags.managerFactory' => '\OC\SystemTag\ManagerFactory',
 'maintenance' => false,
 'openssl' => [
-	'config' => '/absolute/location/of/openssl.cnf',
+    'config' => '/absolute/location/of/openssl.cnf',
 ],
 'memcache.local' => '\OC\Memcache\APCu',
 'memcache.distributed' => '\OC\Memcache\Memcached',
 'redis' => [
-	'host' => 'localhost', // can also be a unix domain socket: '/tmp/redis.sock'
-	'port' => 6379,
-	'timeout' => 0.0,
-	'password' => '', // Optional, if not defined no password will be used.
-	'dbindex' => 0, // Optional, if undefined SELECT will not run and will use Redis Server's default DB Index.
+    'host' => 'localhost', // can also be a unix domain socket: '/tmp/redis.sock'
+    'port' => 6379,
+    'timeout' => 0.0,
+    'password' => '', // Optional, if not defined no password will be used.
+    'dbindex' => 0, // Optional, if undefined SELECT will not run and will use Redis Server's default DB Index.
 ],
 'redis.cluster' => [
-	'seeds' => [ // provide some/all of the cluster servers to bootstrap discovery, port required
-		'localhost:7000',
-		'localhost:7001',
-	],
-	'timeout' => 0.0,
-	'read_timeout' => 0.0,
-	'failover_mode' => \RedisCluster::FAILOVER_ERROR,
-	'password' => '', // Optional, if not defined no password will be used.
+    'seeds' => [ // provide some/all of the cluster servers to bootstrap discovery, port required
+        'localhost:7000',
+        'localhost:7001',
+    ],
+    'timeout' => 0.0,
+    'read_timeout' => 0.0,
+    'failover_mode' => \RedisCluster::FAILOVER_ERROR,
+    'password' => '', // Optional, if not defined no password will be used.
 ],
 'memcached_servers' => [
-	// hostname, port and optional weight. Also see:
-	// http://www.php.net/manual/en/memcached.addservers.php
-	// http://www.php.net/manual/en/memcached.addserver.php
-	['localhost', 11211],
-	//array('other.host.local', 11211),
+    // hostname, port and optional weight. Also see:
+    // http://www.php.net/manual/en/memcached.addservers.php
+    // http://www.php.net/manual/en/memcached.addserver.php
+    ['localhost', 11211],
+    //array('other.host.local', 11211),
 ],
 'memcached_options' => [
-	// Set timeouts to 50ms
-	\Memcached::OPT_CONNECT_TIMEOUT => 50,
-	\Memcached::OPT_RETRY_TIMEOUT =>   50,
-	\Memcached::OPT_SEND_TIMEOUT =>    50,
-	\Memcached::OPT_RECV_TIMEOUT =>    50,
-	\Memcached::OPT_POLL_TIMEOUT =>    50,
+    // Set timeouts to 50ms
+    \Memcached::OPT_CONNECT_TIMEOUT => 50,
+    \Memcached::OPT_RETRY_TIMEOUT =>   50,
+    \Memcached::OPT_SEND_TIMEOUT =>    50,
+    \Memcached::OPT_RECV_TIMEOUT =>    50,
+    \Memcached::OPT_POLL_TIMEOUT =>    50,
 
-	// Enable compression
-	\Memcached::OPT_COMPRESSION =>          true,
+    // Enable compression
+    \Memcached::OPT_COMPRESSION =>          true,
 
-	// Turn on consistent hashing
-	\Memcached::OPT_LIBKETAMA_COMPATIBLE => true,
+    // Turn on consistent hashing
+    \Memcached::OPT_LIBKETAMA_COMPATIBLE => true,
 
-	// Enable Binary Protocol
-	\Memcached::OPT_BINARY_PROTOCOL =>      true,
+    // Enable Binary Protocol
+    \Memcached::OPT_BINARY_PROTOCOL =>      true,
 
-	// Binary serializer vill be enabled if the igbinary PECL module is available
-	//\Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_IGBINARY,
+    // Binary serializer vill be enabled if the igbinary PECL module is available
+    //\Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_IGBINARY,
 ],
 'cache_path' => '',
 'cache_chunk_gc_ttl' => 60*60*24,
 'objectstore' => [
-	'class' => 'OC\\Files\\ObjectStore\\Swift',
-	'arguments' => [
-		// trystack will use your facebook id as the user name
-		'username' => 'facebook100000123456789',
-		// in the trystack dashboard go to user -> settings -> API Password to
-		// generate a password
-		'password' => 'Secr3tPaSSWoRdt7',
-		// must already exist in the objectstore, name can be different
-		'container' => 'nextcloud',
-		// prefix to prepend to the fileid, default is 'oid:urn:'
-		'objectPrefix' => 'oid:urn:',
-		// create the container if it does not exist. default is false
-		'autocreate' => true,
-		// required, dev-/trystack defaults to 'RegionOne'
-		'region' => 'RegionOne',
-		// The Identity / Keystone endpoint
-		'url' => 'http://8.21.28.222:5000/v2.0',
-		// required on dev-/trystack
-		'tenantName' => 'facebook100000123456789',
-		// dev-/trystack uses swift by default, the lib defaults to 'cloudFiles'
-		// if omitted
-		'serviceName' => 'swift',
-		// The Interface / url Type, optional
-		'urlType' => 'internal'
-	],
+    'class' => 'OC\\Files\\ObjectStore\\Swift',
+    'arguments' => [
+        // trystack will use your facebook id as the user name
+        'username' => 'facebook100000123456789',
+        // in the trystack dashboard go to user -> settings -> API Password to
+        // generate a password
+        'password' => 'Secr3tPaSSWoRdt7',
+        // must already exist in the objectstore, name can be different
+        'container' => 'nextcloud',
+        // prefix to prepend to the fileid, default is 'oid:urn:'
+        'objectPrefix' => 'oid:urn:',
+        // create the container if it does not exist. default is false
+        'autocreate' => true,
+        // required, dev-/trystack defaults to 'RegionOne'
+        'region' => 'RegionOne',
+        // The Identity / Keystone endpoint
+        'url' => 'http://8.21.28.222:5000/v2.0',
+        // required on dev-/trystack
+        'tenantName' => 'facebook100000123456789',
+        // dev-/trystack uses swift by default, the lib defaults to 'cloudFiles'
+        // if omitted
+        'serviceName' => 'swift',
+        // The Interface / url Type, optional
+        'urlType' => 'internal'
+    ],
 ],
 'objectstore' => [
-	'class' => 'OC\\Files\\ObjectStore\\Swift',
-	'arguments' => [
-		'autocreate' => true,
-		'user' => [
-			'name' => 'swift',
-			'password' => 'swift',
-			'domain' => [
-				'name' => 'default',
-			],
-		],
-		'scope' => [
-			'project' => [
-				'name' => 'service',
-				'domain' => [
-					'name' => 'default',
-				],
-			],
-		],
-		'tenantName' => 'service',
-		'serviceName' => 'swift',
-		'region' => 'regionOne',
-		'url' => 'http://yourswifthost:5000/v3',
-		'bucket' => 'nextcloud',
-	],
+    'class' => 'OC\\Files\\ObjectStore\\Swift',
+    'arguments' => [
+        'autocreate' => true,
+        'user' => [
+            'name' => 'swift',
+            'password' => 'swift',
+            'domain' => [
+                'name' => 'default',
+            ],
+        ],
+        'scope' => [
+            'project' => [
+                'name' => 'service',
+                'domain' => [
+                    'name' => 'default',
+                ],
+            ],
+        ],
+        'tenantName' => 'service',
+        'serviceName' => 'swift',
+        'region' => 'regionOne',
+        'url' => 'http://yourswifthost:5000/v3',
+        'bucket' => 'nextcloud',
+    ],
 ],
 'objectstore.multibucket.preview-distribution' => false,
 'sharing.managerFactory' => '\OC\Share20\ProviderFactory',
@@ -282,16 +285,16 @@ $CONFIG = [
 'sharing.force_share_accept' => false,
 'sharing.enable_share_mail' => true,
 'dbdriveroptions' => [
-	PDO::MYSQL_ATTR_SSL_CA => '/file/path/to/ca_cert.pem',
-	PDO::MYSQL_ATTR_INIT_COMMAND => 'SET wait_timeout = 28800'
+    PDO::MYSQL_ATTR_SSL_CA => '/file/path/to/ca_cert.pem',
+    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET wait_timeout = 28800'
 ],
 'sqlite.journal_mode' => 'DELETE',
 'mysql.utf8mb4' => false,
 'supportedDatabases' => [
-	'sqlite',
-	'mysql',
-	'pgsql',
-	'oci',
+    'sqlite',
+    'mysql',
+    'pgsql',
+    'oci',
 ],
 'tempdirectory' => '/tmp/nextcloudtemp',
 'hashing_default_password' => false,
@@ -326,8 +329,8 @@ $CONFIG = [
 'gs.enabled' => false,
 'gs.federation' => 'internal',
 'csrf.optout' => [
-	'/^WebDAVFS/', // OS X Finder
-	'/^Microsoft-WebDAV-MiniRedir/', // Windows webdav drive
+    '/^WebDAVFS/', // OS X Finder
+    '/^Microsoft-WebDAV-MiniRedir/', // Windows webdav drive
 ],
 'simpleSignUpLink.shown' => true,
 'login_form_autocomplete' => true,
@@ -433,9 +436,9 @@ $CONFIG = [
  * ``supportedDatabases``
  *
  * Available:
- * 	- sqlite3 (SQLite3)
- * 	- mysql (MySQL/MariaDB)
- * 	- pgsql (PostgreSQL)
+ *  - sqlite3 (SQLite3)
+ *  - mysql (MySQL/MariaDB)
+ *  - pgsql (PostgreSQL)
  *
  * Defaults to ``sqlite3``
  */
@@ -1067,10 +1070,10 @@ $CONFIG = [
  *  - www.edri.org
  */
 'connectivity_check_domains' => [
-	'www.nextcloud.com',
-	'www.startpage.com',
-	'www.eff.org',
-	'www.edri.org'
+    'www.nextcloud.com',
+    'www.startpage.com',
+    'www.eff.org',
+    'www.edri.org'
 ],
 
 /**
@@ -1186,9 +1189,9 @@ $CONFIG = [
  * Defaults to an empty array.
  */
 'log.condition' => [
-	'shared_secret' => '57b58edb6637fe3059b3595cf9c41b9',
-	'users' => ['sample-user'],
-	'apps' => ['files'],
+    'shared_secret' => '57b58edb6637fe3059b3595cf9c41b9',
+    'users' => ['sample-user'],
+    'apps' => ['files'],
 ],
 
 /**
@@ -1242,13 +1245,13 @@ $CONFIG = [
  *  - iOS client app id: ``1125420102``
  */
 'customclient_desktop' =>
-	'https://nextcloud.com/install/#install-clients',
+    'https://nextcloud.com/install/#install-clients',
 'customclient_android' =>
-	'https://play.google.com/store/apps/details?id=com.nextcloud.client',
+    'https://play.google.com/store/apps/details?id=com.nextcloud.client',
 'customclient_ios' =>
-	'https://itunes.apple.com/us/app/nextcloud/id1125420102?mt=8',
+    'https://itunes.apple.com/us/app/nextcloud/id1125420102?mt=8',
 'customclient_ios_appid' =>
-		'1125420102',
+        '1125420102',
 /**
  * Apps
  *
@@ -1279,11 +1282,11 @@ $CONFIG = [
  * indicates if a Web server can write files to that folder.
  */
 'apps_paths' => [
-	[
-		'path'=> '/var/www/nextcloud/apps',
-		'url' => '/apps',
-		'writable' => true,
-	],
+    [
+        'path'=> '/var/www/nextcloud/apps',
+        'url' => '/apps',
+        'writable' => true,
+    ],
 ],
 
 /**
@@ -1348,8 +1351,8 @@ $CONFIG = [
  * Defaults to ``''`` (empty string)
  */
 'preview_office_cl_parameters' =>
-	' --headless --nologo --nofirststartwizard --invisible --norestore '.
-	'--convert-to png --outdir ',
+    ' --headless --nologo --nofirststartwizard --invisible --norestore '.
+    '--convert-to png --outdir ',
 
 /**
  * Only register providers that have been explicitly enabled
@@ -1386,16 +1389,16 @@ $CONFIG = [
  *  - OC\Preview\Krita
  */
 'enabledPreviewProviders' => [
-	'OC\Preview\PNG',
-	'OC\Preview\JPEG',
-	'OC\Preview\GIF',
-	'OC\Preview\BMP',
-	'OC\Preview\XBitmap',
-	'OC\Preview\MP3',
-	'OC\Preview\TXT',
-	'OC\Preview\MarkDown',
-	'OC\Preview\OpenDocument',
-	'OC\Preview\Krita',
+    'OC\Preview\PNG',
+    'OC\Preview\JPEG',
+    'OC\Preview\GIF',
+    'OC\Preview\BMP',
+    'OC\Preview\XBitmap',
+    'OC\Preview\MP3',
+    'OC\Preview\TXT',
+    'OC\Preview\MarkDown',
+    'OC\Preview\OpenDocument',
+    'OC\Preview\Krita',
 ],
 
 /**
@@ -1475,7 +1478,7 @@ $CONFIG = [
  * Defaults to an empty array.
  */
 'openssl' => [
-	'config' => '/absolute/location/of/openssl.cnf',
+    'config' => '/absolute/location/of/openssl.cnf',
 ],
 
 /**
@@ -1523,11 +1526,11 @@ $CONFIG = [
  * for more information.
  */
 'redis' => [
-	'host' => 'localhost', // can also be a unix domain socket: '/tmp/redis.sock'
-	'port' => 6379,
-	'timeout' => 0.0,
-	'password' => '', // Optional, if not defined no password will be used.
-	'dbindex' => 0, // Optional, if undefined SELECT will not run and will use Redis Server's default DB Index.
+    'host' => 'localhost', // can also be a unix domain socket: '/tmp/redis.sock'
+    'port' => 6379,
+    'timeout' => 0.0,
+    'password' => '', // Optional, if not defined no password will be used.
+    'dbindex' => 0, // Optional, if undefined SELECT will not run and will use Redis Server's default DB Index.
 ],
 
 /**
@@ -1556,14 +1559,14 @@ $CONFIG = [
  * https://github.com/phpredis/phpredis/commit/c5994f2a42b8a348af92d3acb4edff1328ad8ce1
  */
 'redis.cluster' => [
-	'seeds' => [ // provide some/all of the cluster servers to bootstrap discovery, port required
-		'localhost:7000',
-		'localhost:7001',
-	],
-	'timeout' => 0.0,
-	'read_timeout' => 0.0,
-	'failover_mode' => \RedisCluster::FAILOVER_ERROR,
-	'password' => '', // Optional, if not defined no password will be used.
+    'seeds' => [ // provide some/all of the cluster servers to bootstrap discovery, port required
+        'localhost:7000',
+        'localhost:7001',
+    ],
+    'timeout' => 0.0,
+    'read_timeout' => 0.0,
+    'failover_mode' => \RedisCluster::FAILOVER_ERROR,
+    'password' => '', // Optional, if not defined no password will be used.
 ],
 
 
@@ -1571,35 +1574,35 @@ $CONFIG = [
  * Server details for one or more memcached servers to use for memory caching.
  */
 'memcached_servers' => [
-	// hostname, port and optional weight. Also see:
-	// http://www.php.net/manual/en/memcached.addservers.php
-	// http://www.php.net/manual/en/memcached.addserver.php
-	['localhost', 11211],
-	//array('other.host.local', 11211),
+    // hostname, port and optional weight. Also see:
+    // http://www.php.net/manual/en/memcached.addservers.php
+    // http://www.php.net/manual/en/memcached.addserver.php
+    ['localhost', 11211],
+    //array('other.host.local', 11211),
 ],
 
 /**
  * Connection options for memcached
  */
 'memcached_options' => [
-	// Set timeouts to 50ms
-	\Memcached::OPT_CONNECT_TIMEOUT => 50,
-	\Memcached::OPT_RETRY_TIMEOUT =>   50,
-	\Memcached::OPT_SEND_TIMEOUT =>    50,
-	\Memcached::OPT_RECV_TIMEOUT =>    50,
-	\Memcached::OPT_POLL_TIMEOUT =>    50,
+    // Set timeouts to 50ms
+    \Memcached::OPT_CONNECT_TIMEOUT => 50,
+    \Memcached::OPT_RETRY_TIMEOUT =>   50,
+    \Memcached::OPT_SEND_TIMEOUT =>    50,
+    \Memcached::OPT_RECV_TIMEOUT =>    50,
+    \Memcached::OPT_POLL_TIMEOUT =>    50,
 
-	// Enable compression
-	\Memcached::OPT_COMPRESSION =>          true,
+    // Enable compression
+    \Memcached::OPT_COMPRESSION =>          true,
 
-	// Turn on consistent hashing
-	\Memcached::OPT_LIBKETAMA_COMPATIBLE => true,
+    // Turn on consistent hashing
+    \Memcached::OPT_LIBKETAMA_COMPATIBLE => true,
 
-	// Enable Binary Protocol
-	\Memcached::OPT_BINARY_PROTOCOL =>      true,
+    // Enable Binary Protocol
+    \Memcached::OPT_BINARY_PROTOCOL =>      true,
 
-	// Binary serializer vill be enabled if the igbinary PECL module is available
-	//\Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_IGBINARY,
+    // Binary serializer vill be enabled if the igbinary PECL module is available
+    //\Memcached::OPT_SERIALIZER => \Memcached::SERIALIZER_IGBINARY,
 ],
 
 
@@ -1645,61 +1648,61 @@ $CONFIG = [
  * One way to test is applying for a trystack account at http://trystack.org/
  */
 'objectstore' => [
-	'class' => 'OC\\Files\\ObjectStore\\Swift',
-	'arguments' => [
-		// trystack will use your facebook id as the user name
-		'username' => 'facebook100000123456789',
-		// in the trystack dashboard go to user -> settings -> API Password to
-		// generate a password
-		'password' => 'Secr3tPaSSWoRdt7',
-		// must already exist in the objectstore, name can be different
-		'container' => 'nextcloud',
-		// prefix to prepend to the fileid, default is 'oid:urn:'
-		'objectPrefix' => 'oid:urn:',
-		// create the container if it does not exist. default is false
-		'autocreate' => true,
-		// required, dev-/trystack defaults to 'RegionOne'
-		'region' => 'RegionOne',
-		// The Identity / Keystone endpoint
-		'url' => 'http://8.21.28.222:5000/v2.0',
-		// required on dev-/trystack
-		'tenantName' => 'facebook100000123456789',
-		// dev-/trystack uses swift by default, the lib defaults to 'cloudFiles'
-		// if omitted
-		'serviceName' => 'swift',
-		// The Interface / url Type, optional
-		'urlType' => 'internal'
-	],
+    'class' => 'OC\\Files\\ObjectStore\\Swift',
+    'arguments' => [
+        // trystack will use your facebook id as the user name
+        'username' => 'facebook100000123456789',
+        // in the trystack dashboard go to user -> settings -> API Password to
+        // generate a password
+        'password' => 'Secr3tPaSSWoRdt7',
+        // must already exist in the objectstore, name can be different
+        'container' => 'nextcloud',
+        // prefix to prepend to the fileid, default is 'oid:urn:'
+        'objectPrefix' => 'oid:urn:',
+        // create the container if it does not exist. default is false
+        'autocreate' => true,
+        // required, dev-/trystack defaults to 'RegionOne'
+        'region' => 'RegionOne',
+        // The Identity / Keystone endpoint
+        'url' => 'http://8.21.28.222:5000/v2.0',
+        // required on dev-/trystack
+        'tenantName' => 'facebook100000123456789',
+        // dev-/trystack uses swift by default, the lib defaults to 'cloudFiles'
+        // if omitted
+        'serviceName' => 'swift',
+        // The Interface / url Type, optional
+        'urlType' => 'internal'
+    ],
 ],
 
 /**
  * To use swift V3
  */
 'objectstore' => [
-	'class' => 'OC\\Files\\ObjectStore\\Swift',
-	'arguments' => [
-		'autocreate' => true,
-		'user' => [
-			'name' => 'swift',
-			'password' => 'swift',
-			'domain' => [
-				'name' => 'default',
-			],
-		],
-		'scope' => [
-			'project' => [
-				'name' => 'service',
-				'domain' => [
-					'name' => 'default',
-				],
-			],
-		],
-		'tenantName' => 'service',
-		'serviceName' => 'swift',
-		'region' => 'regionOne',
-		'url' => 'http://yourswifthost:5000/v3',
-		'bucket' => 'nextcloud',
-	],
+    'class' => 'OC\\Files\\ObjectStore\\Swift',
+    'arguments' => [
+        'autocreate' => true,
+        'user' => [
+            'name' => 'swift',
+            'password' => 'swift',
+            'domain' => [
+                'name' => 'default',
+            ],
+        ],
+        'scope' => [
+            'project' => [
+                'name' => 'service',
+                'domain' => [
+                    'name' => 'default',
+                ],
+            ],
+        ],
+        'tenantName' => 'service',
+        'serviceName' => 'swift',
+        'region' => 'regionOne',
+        'url' => 'http://yourswifthost:5000/v3',
+        'bucket' => 'nextcloud',
+    ],
 ],
 
 /**
@@ -1773,8 +1776,8 @@ $CONFIG = [
  * encryption in MySQL or specify a custom wait timeout on a cheap hoster.
  */
 'dbdriveroptions' => [
-	PDO::MYSQL_ATTR_SSL_CA => '/file/path/to/ca_cert.pem',
-	PDO::MYSQL_ATTR_INIT_COMMAND => 'SET wait_timeout = 28800'
+    PDO::MYSQL_ATTR_SSL_CA => '/file/path/to/ca_cert.pem',
+    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET wait_timeout = 28800'
 ],
 
 /**
@@ -1820,10 +1823,10 @@ $CONFIG = [
  * Database types that are supported for installation.
  *
  * Available:
- * 	- sqlite (SQLite3)
- * 	- mysql (MySQL)
- * 	- pgsql (PostgreSQL)
- * 	- oci (Oracle)
+ *  - sqlite (SQLite3)
+ *  - mysql (MySQL)
+ *  - pgsql (PostgreSQL)
+ *  - oci (Oracle)
  *
  * Defaults to the following databases:
  *  - sqlite (SQLite3)
@@ -1831,10 +1834,10 @@ $CONFIG = [
  *  - pgsql (PostgreSQL)
  */
 'supportedDatabases' => [
-	'sqlite',
-	'mysql',
-	'pgsql',
-	'oci',
+    'sqlite',
+    'mysql',
+    'pgsql',
+    'oci',
 ],
 
 /**
@@ -2166,8 +2169,8 @@ $CONFIG = [
  * WARNING: only use this if you know what you are doing
  */
 'csrf.optout' => [
-	'/^WebDAVFS/', // OS X Finder
-	'/^Microsoft-WebDAV-MiniRedir/', // Windows webdav drive
+    '/^WebDAVFS/', // OS X Finder
+    '/^Microsoft-WebDAV-MiniRedir/', // Windows webdav drive
 ],
 
 /**
@@ -2425,7 +2428,7 @@ In NextCloud client, in the tab “General” you have “Advanced” - Edit Ign
 ```sh
 /PhotoPreviews/   # Documents/ifolor/Photobooks/*/PhotoPreviews/
 /PhotoThumbnails/ # Documents/ifolor/Photobooks/*/PhotoThumbnails
-											   ```
+                                               ```
 
 
 # chat webrtc

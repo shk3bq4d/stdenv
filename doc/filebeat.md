@@ -73,6 +73,9 @@ equals
 if.equals.log.file.path:
 if.regexp.log.file.path:
 
+* [if doc](https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html)
+* [no else if elif](https://discuss.elastic.co/t/beats-processors-else-if/197608)
+
 processors:
   - rename:
       fields:
@@ -232,6 +235,8 @@ filebeat test config -c /etc/filebeat/filebeat.yml --strict.perms # doesn't seem
      - '2006-01-02T15:04:05Z'          # timestamp layout
      - '2006-01-02T15:04:05.999Z'      # timestamp layout
      - '2006-01-02T15:04:05.999-07:00' # timestamp layout
+     - "2006-01-02 15:04:05,999"       # timestamp layout, if you have nanoseconds, use truncate field
+     - "2006-01-02T15:04:05.999"       # timestamp layout, if you have nanoseconds, use truncate field
      - UNIX                            # timestamp layout 1663443523.289
      - UNIX_MS                         # timestamp layout 1663443523289 unix with milliseconds
 
@@ -289,12 +294,15 @@ https://dissect-tester.jorgelbg.me/
 timestamps milliseconds nanoseconds https://github.com/elastic/beats/issues/15871
 
 - add_fields.fields.step.three: youpi     # short
+- add_fields.fields.line.line49: 1        # short
+- add_fields.fields.line.line50: 1        # short
 - add_fields.fields.step.four.youpi2:     # not very good as youpi2 is key whose value is null
 - drop_fields:                            # short
     when.equals.nextcloud.userAgent: "--" # short
     fields:    [nextcloud.userAgent]      # short
 - if.has_fields.nextcloud.time:           # short apparently works
   if.has_fields.nextcloud:  time          # short apparently works
+    when.has_fields: sf.tmp.leftover
 
     - replace: # regexp
         fields: # regexp

@@ -309,6 +309,7 @@ msys*)
     ;;
 *)
     #mrbg() { nohup "$@" &>/dev/null &; disown; }
+    export LC_ALL="${LC_ALL:-en_US.UTF-8}"
     alias xargs='xargs -r'
     alias chmod='chmod --preserve-root'
     function ll() {

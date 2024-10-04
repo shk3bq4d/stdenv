@@ -3,6 +3,9 @@
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
 
+os.unlink(single_file)
+shutil.rmtree(recursive_delete_directory)
+
 # https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format
 ```sh
 docopt == 0.6.1             # requirements Version Matching. Must be version 0.6.1
@@ -290,7 +293,7 @@ if isinstance(b, str) or isinstance(b, unicode): # types ~instanceof~
 for k, v in dict_.iteritems():
 for k, v in sorted(rH.iteritems(), key=lambda x: x[0]):
 
-for i, v in enumerate(['tic', 'tac', 'toe']):
+for i, v in enumerate(['tic', 'tac', 'toe']): # indexed idx
     print i, v
           0  tic
           1  tac
@@ -840,7 +843,7 @@ mylist = [20, 30, 25, 20]
 # find doublon as well as indices
 from collections import defaultdict
 D = defaultdict(list)
-for i,item in enumerate(mylist):
+for i,item in enumerate(mylist): # indexed idx
     D[item].append(i)
 D = {k:v for k,v in D.items() if len(v)>1}
 
@@ -1286,3 +1289,5 @@ PYTHONBASHHEREDOC
 ```sh
 python3 -m venv /tmp/myvenv
 ```
+
+with open(os.path.expanduser(fp), 'r', encoding='utf-8-sig') as f: # windows BOM UTF-8 reader

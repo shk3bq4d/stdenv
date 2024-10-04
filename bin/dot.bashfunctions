@@ -260,7 +260,7 @@ function ssh() {
                 echo "~/bin/dot.bashfunctions install sshpass"
             fi
             ;;
-        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.2[4-5][1-9]|10.19.29.60|piproj|ap-*)
+        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.1|10.19.29.2[4-5][1-9]|10.19.29.60|piproj|ap-*)
             ;;
         *)
             hash sshrc 2>/dev/null && BIN=sshrc
@@ -1510,6 +1510,18 @@ grep_strace_files() {
 
 cd_realpath() {
     cd -P "$(readlink -f "$PWD")"
+}
+
+cd_minus_one() {
+    # cd to ~/.tmpp/(previous day)
+    local c p
+    c="$(readlink -f "$PWD")"
+    p="$(dirname "$c")"
+    cd -P \
+        $p/"$(ls -1 "$p" |
+            sort -V |
+            grep -xB1 "$(basename "$c")" |
+            head -n 1)"
 }
 
 docker_rm_images_interactive() {

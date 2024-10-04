@@ -524,3 +524,5 @@ SIGURG (23): Urgent condition on socket (used for out-of-band data on sockets).
 SIGVTALRM (26): Virtual alarm clock (for processes' virtual time).
 SIGXCPU (24): CPU time limit exceeded.
 SIGXFSZ (25): File size limit exceeded.
+
+			  /var/run/reboot-required # debian ubuntu
