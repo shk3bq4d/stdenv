@@ -11,6 +11,10 @@ git_current_checked_out_upstream_branch() {
     git rev-parse --abbrev-ref @{upstream}
 }
 
+git_current_commit() {
+    git rev-parse HEAD
+}
+
 git_log_commit_message() {
     git log --pretty='%s' "$@"
 }
