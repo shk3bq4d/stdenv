@@ -29,9 +29,11 @@ mplayer -delay
 mpv # delay
 
 # subvideo cut extract https://askubuntu.com/questions/56022/what-to-use-to-quickly-cut-audio-video
-ffmpeg -ss 00:00:00 -t 00:30:00 -i input.avi -vcodec copy -acodec copy output1.avi
+ffmpeg -ss 00:00:00 -t 00:30:00 -i input.avi -vcodec copy -acodec copy output1.avi # may vertically reverse video when replayed with mpv
 
 ffmpeg -ss 0 -t 100 -i source.m4v -vcodec copy -acodec copy part1.m4v
+
+ffmpeg -ss 00:01:09 -t 00:01:05 -i IMG_4119.MP4 -vcodec copy -acodec copy output1.m4v # worked perfectly with whatsapp web
 
 avconv -i input.avi -vcodec copy -acodec copy -ss 00:00:00 -t 00:30:00 output1.avi
 
@@ -39,3 +41,6 @@ avconv -ss 0 -i source.m4v -t 100 -vcodec copy -acodec copy part1.m4v
 
 
 mplayer  -loop 0 -rootwin -ao null -vo x11 -noconsolecontrols ~/videos/myvideo.mp4 # background video
+
+# frame extract
+ffmpeg -i input_video.mp4 -ss 00:00:05.000 -vframes 1 output_image.png
