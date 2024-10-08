@@ -59,4 +59,6 @@ if [[ -z "$BIN" ]]; then
     which -a "$BINNAME"
     exit 1
 fi
+
+renice +1 $$
 $BIN $( echo -n "${vagrant_args[@]}") $vaults_args "$@"
