@@ -85,6 +85,7 @@ route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.56.103 dev enp8s0 o
 ip route add 192.168.1.2 via 192.168.0.1
 ip route add 100.64.0.0/16 via 10.0.0.103
 ip route del 100.64.0.0/16 via 10.0.0.103 dev eth1
+sudo ip route flush default # removes default gw
 
 # capture short lived process excluding existing the pid that matches the same grep
 while :; do ps -eo pid,command | grep java | egrep -vw '542|562|651|21437|grep' >>mrlog; done
