@@ -106,3 +106,6 @@ require {
 #============= httpd_t ==============
 allow httpd_t http_port_t:udp_socket name_bind;
 ```
+
+
+semanage fcontext -l | grep -i postgres # list all types
