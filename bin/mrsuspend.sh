@@ -13,15 +13,20 @@ set -o pipefail
 #exec > >(tee /tmp/logfile.txt)
 #exec 2>&1
 
+_pgrep() {
+	pgrep -f "git (fetch|pull|push)"
+
+}
+
 wait_git() {
 	while :; do
-		pgrep git && sleep 1 && continue
+		_pgrep && sleep 1 && continue
 		sleep 0.1
-		pgrep git && sleep 1 && continue
+		_pgrep && sleep 1 && continue
 		sleep 0.1
-		pgrep git && sleep 1 && continue
+		_pgrep && sleep 1 && continue
 		sleep 0.1
-		pgrep git || break
+		_pgrep || break
 	done
 }
 source ~/bin/dot.hostname
