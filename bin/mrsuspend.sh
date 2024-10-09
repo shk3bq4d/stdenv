@@ -59,6 +59,7 @@ dec17.ly.lan|nov20.ly.lan)
 		#pkill -9 forticlientsslvpn_cli
 	fi
 	~/bin/bt-airpod-marc-off.sh
+	autorandr --load default
 	mute.sh
 	sudo umount -t fuse.sshfs -a
 	sudo systemctl suspend
