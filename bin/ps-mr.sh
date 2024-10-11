@@ -95,7 +95,7 @@ fi
 export COLUMNS=2000
 function red() { echo -ne "$RED"; }
 function off() { echo -ne "$OFF"; }
-ps wwxao mntns,user,pid,ppid,start,args k mntns,ppid,pid --cols=$COLUMNS </dev/null | \
+ps wwxao mntns,user,pid,ppid,start,args k mntns,pgid,ppid,pid --cols=$COLUMNS </dev/null | \
 	grep -vF "sshrc requires openssl to be installed on the server" | \
 	sed -r \
 		-e "/^(\\w+\\s+){1,2}($$\\s+)/ d" \
