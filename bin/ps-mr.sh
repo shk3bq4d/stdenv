@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 export COLUMNS=9000
+unset MR_COLUMNS
 PIPE="cat -"
 PIPE3="cat -"
 pipe2() {
@@ -103,6 +104,6 @@ ps wwxao mntns,user,pid,ppid,start,args k mntns,ppid,pid --cols=$COLUMNS </dev/n
 	$PIPE | \
 	pipe2 | \
 	$PIPE3
-	
+
 cleanup
 exit 0
