@@ -207,3 +207,51 @@ upstream beats {
 
 
 * "an upstream response is buffered to a temporary file" https://serverfault.com/questions/587386/an-upstream-response-is-buffered-to-a-temporary-file
+
+
+# debian vs external repository
+## user
+debian creates no user, uses built-in www-data
+external repo creates nginx user
+## logrotate
+apt-file search /etc/logrotate.d/httpd-prerotate
+package awstats creates awstats: /etc/logrotate.d/httpd-prerotate/awstats
+### debian
+```sh
+/var/log/nginx/*.log {
+    daily
+    missingok
+    rotate 14
+    compress
+    delaycompress
+    notifempty
+    create 0640 www-data adm
+    sharedscripts
+    prerotate
+        if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+            run-parts /etc/logrotate.d/httpd-prerotate; \
+        fi \
+    endscript
+    postrotate
+        invoke-rc.d nginx rotate >/dev/null 2>&1
+    endscript
+}
+```
+### external repo
+```sh
+/var/log/nginx/*.log {
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 640 nginx adm
+        sharedscripts
+        postrotate
+                if [ -f /var/run/nginx.pid ]; then
+                        kill -USR1 `cat /var/run/nginx.pid`
+                fi
+        endscript
+}
+```
