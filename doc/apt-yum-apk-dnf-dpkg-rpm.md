@@ -6,6 +6,7 @@ dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides in installed packages
 dpkg -S $(which tail) # whatprovides core-utils
 dpkg -L python # list files that were installed per package
+dpkg -L nginx | grep logrotate
 apt install ncurses-term # 'rxvt-256color': unknown terminal type.
 apt-file search date # apt-get install apt-file && apt-file update
 apt-file search /sbin/ip | grep -Ew ip
@@ -13,6 +14,8 @@ apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search apt-file # apt-file: whatprovides in all packages
 apt-file search if-config | grep -E '/sbin/ifconfig' # net-tools
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
+apt update && apt install -y apt-file && apt-file update && apt-file search mysqldump
+sudo docker run --rm -it  debian:bookworm sh -c "apt update && apt install -y apt-file && apt-file update && apt-file search mysqldump"
 apt purge postfix\* # erase
 iproute2: /sbin/ip
 apt list --upgradable
