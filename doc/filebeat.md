@@ -362,3 +362,8 @@ processor truncate_fields
 processor urldecode
 
 kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
+
+
+# log_file_inode
+ls -ila grep MYINODE
+find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|run|mnt|proc|sys)') -inum 9387 -o -path /var/lib/docker -prune
