@@ -14,6 +14,7 @@ Sep 28 2021 01:33:21      sed -r -e "s/^[A-Z][a-z]{2} [ 0-9]?[0-9].{14}/$(date +
 
 %m/%b/%y %I:%M %p    09/Sep/21 09:33 AM
 
+new Date("2024-10-14T13:59:39.000Z")    # javascript
 Math.round(new Date().getTime() / 1000) # javascript get  timestamp
 Math.round(Date.now() / 1000)           # javascript get  timestamp
 new Date(1534191480)                    # javascript from timestamp
@@ -156,3 +157,46 @@ duration=$(( $(date +%s) - $current_epoch )) # elapsed
 echo "job took $duration seconds" # elapsed
 
 tail -f /var/log/squid/access.log | perl -p -e 's/^([0-9]*)/"[".localtime($1)."]"/e'
+
+# filebeat javascript timestamp
+e.Get("@timestamp").Add()
+e.Get("@timestamp").AddDate()
+e.Get("@timestamp").After()
+e.Get("@timestamp").AppendFormat()
+e.Get("@timestamp").Before()
+e.Get("@timestamp").Clock()
+e.Get("@timestamp").Compare()
+e.Get("@timestamp").Date()
+e.Get("@timestamp").Day()
+e.Get("@timestamp").Equal()
+e.Get("@timestamp").Format()
+e.Get("@timestamp").GoString()
+e.Get("@timestamp").GobEncode()
+e.Get("@timestamp").Hour()
+e.Get("@timestamp").ISOWeek()
+e.Get("@timestamp").In()
+e.Get("@timestamp").IsDST()
+e.Get("@timestamp").IsZero()
+e.Get("@timestamp").Local()
+e.Get("@timestamp").Location()
+e.Get("@timestamp").MarshalBinary()
+e.Get("@timestamp").MarshalJSON()
+e.Get("@timestamp").MarshalText()
+e.Get("@timestamp").Minute()
+e.Get("@timestamp").Month()
+e.Get("@timestamp").Nanosecond()
+e.Get("@timestamp").Round()
+e.Get("@timestamp").Second()
+e.Get("@timestamp").String()
+e.Get("@timestamp").Sub()
+e.Get("@timestamp").Truncate()
+e.Get("@timestamp").UTC()
+e.Get("@timestamp").Unix()
+e.Get("@timestamp").UnixMicro()
+e.Get("@timestamp").UnixMilli()
+e.Get("@timestamp").UnixNano()
+e.Get("@timestamp").Weekday()
+e.Get("@timestamp").Year()
+e.Get("@timestamp").YearDay()
+e.Get("@timestamp").Zone()
+e.Get("@timestamp").ZoneBounds()
