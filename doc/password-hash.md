@@ -1,4 +1,5 @@
 
+$apr1$: Apache MD5-based   $apr1$xJZ8QPTb$O93/pwUz9b.YQ5raH88mZ
 $1$: MD5-based crypt ('md5crypt')
 $2$: Blowfish-based crypt ('bcrypt')
 $sha1$: SHA-1-based crypt ('sha1crypt')
