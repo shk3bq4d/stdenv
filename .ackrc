@@ -29,6 +29,7 @@
 --ignore-directory=is:.mypy_cache
 --ignore-file=is:terraform.tfstate
 --ignore-file=is:terraform.tfstate.backup
+--ignore-file=is:.terraform.lock.hcl
 
 # Codeville
 # http://freecode.com/projects/codeville

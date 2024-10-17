@@ -103,11 +103,9 @@ else
     source $RCD/.bashrc_mrprompt
 fi
 
-if ! hash python3 &>/dev/null && hash python &>/dev/python; then
+if ! hash python3 &>/dev/null && hash python &>/dev/null; then
     alias sed_unix_timestamps.py='python $RCD/bin/sed_unix_timestamps.py $*'
 fi
-    
-
 
 for i in $RCD ~$SUDO_USER; do
     i=$(eval echo $i)

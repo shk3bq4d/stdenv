@@ -8,7 +8,7 @@ import re
 import fileinput # stdin
 import datetime
 
-if sys.stdout.isatty() or True:
+if sys.stdout.isatty():
     none="\033[0m"    # unsets color to term's fg color
     bold="\033[1m"
     off="\033[m"
@@ -79,8 +79,8 @@ def parse_and_write_timestamp(s):
 
 
 # 1671700267
-pattern = re.compile(r'1[0-9]{9}')
-pattern = re.compile(r'1[0-9]{9}(\.[0-9]{9}|\.[0-9]{6}|\.[0-9]{3})?')
+#pattern = re.compile(r'1[0-9]{9}')
+pattern = re.compile(r'1[0-9]{9}(\.[0-9]{9}|\.[0-9]{6}|\.[0-9]{3})?(?![0-9])')
 def process_line(line):
     #before = 0
     matcher = None
@@ -98,10 +98,10 @@ def process_line(line):
 
 def go(args):
     filepath = '-' if len(args) == 0 else args[0]
-    print("filepath is {}".format(filepath))
+    #print("filepath is {}".format(filepath))
     for line in fileinput.input(filepath):
         line = line.rstrip()
-        print("line is {}".format(line))
+        #print("line is {}".format(line))
         process_line(line)
         if line == '':
             continue

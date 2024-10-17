@@ -1,5 +1,5 @@
 import sys
-if sys.stdout.isatty() or True:
+if sys.stdout.isatty():
 	none="\033[0m"    # unsets color to term's fg color
 	bold="\033[1m"
 	off="\033[m"
