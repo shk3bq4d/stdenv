@@ -242,6 +242,7 @@ https://hub.docker.com/_/postgres
 https://github.com/docker-library/docs/tree/master/postgres/README.md
 https://github.com/docker-library/postgres/blob/master/14/bookworm/Dockerfile
 https://github.com/docker-library/postgres/blob/master/14/bookworm/docker-entrypoint.sh
+https://raw.githubusercontent.com/docker-library/postgres/refs/heads/master/14/bookworm/docker-entrypoint.sh
 https://github.com/docker-library/postgres
 
 ```markdown

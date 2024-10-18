@@ -555,3 +555,6 @@ docker network prune --filter "until=24h"
 docker system prune
 docker system prune --volumes
 docker system prune --filter "until=24h"
+
+# user uid gid remapping
+* [user uid gid remapping](https://www.jujens.eu/posts/en/2017/Jul/02/docker-userns-remap/)
