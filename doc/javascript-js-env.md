@@ -91,3 +91,51 @@ var content = JSON.parse(bufferFile('nextcloud.log').toString());
 
 ```js
 Array.isArray(myvar); // test is instance instanceof type
+
+new Date("2024-10-14T13:59:39.000Z")    // timestamp
+Math.round(new Date().getTime() / 1000) // get  timestamp
+Math.round(Date.now() / 1000)           // get  timestamp
+new Date(1534191480)                    // from timestamp
+
+# filebeat javascript timestamp
+e.Get("@timestamp").Add()
+e.Get("@timestamp").AddDate()
+e.Get("@timestamp").After()
+e.Get("@timestamp").AppendFormat()
+e.Get("@timestamp").Before()
+e.Get("@timestamp").Clock()
+e.Get("@timestamp").Compare()
+e.Get("@timestamp").Date()
+e.Get("@timestamp").Day()
+e.Get("@timestamp").Equal()
+e.Get("@timestamp").Format()
+e.Get("@timestamp").GoString()
+e.Get("@timestamp").GobEncode()
+e.Get("@timestamp").Hour()
+e.Get("@timestamp").ISOWeek()
+e.Get("@timestamp").In()
+e.Get("@timestamp").IsDST()
+e.Get("@timestamp").IsZero()
+e.Get("@timestamp").Local()
+e.Get("@timestamp").Location()
+e.Get("@timestamp").MarshalBinary()
+e.Get("@timestamp").MarshalJSON()
+e.Get("@timestamp").MarshalText()
+e.Get("@timestamp").Minute()
+e.Get("@timestamp").Month()
+e.Get("@timestamp").Nanosecond()
+e.Get("@timestamp").Round()
+e.Get("@timestamp").Second()
+e.Get("@timestamp").String()
+e.Get("@timestamp").Sub()
+e.Get("@timestamp").Truncate()
+e.Get("@timestamp").UTC()
+e.Get("@timestamp").Unix()
+e.Get("@timestamp").UnixMicro()
+e.Get("@timestamp").UnixMilli()
+e.Get("@timestamp").UnixNano()
+e.Get("@timestamp").Weekday()
+e.Get("@timestamp").Year()
+e.Get("@timestamp").YearDay()
+e.Get("@timestamp").Zone()
+e.Get("@timestamp").ZoneBounds()

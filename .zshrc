@@ -201,6 +201,7 @@ freebsd)
     alias -g X="NC| xargs                --open-tty --verbose --no-run-if-empty -d '\n'"
     alias -g XX='NC|xargs                --open-tty --verbose --no-run-if-empty'
     alias -g 'X@'='NC|xargs              --open-tty --verbose --no-run-if-empty -I@'
+    alias -g X0='NC|xargs                --open-tty --verbose --no-run-if-empty --null'
     alias -g X1='NC|xargs                --open-tty --verbose --no-run-if-empty -n 1'
     alias -g 'X@1'='NC|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'
     alias -g 'X1@'='NC|xargs -n 1 |xargs --open-tty --verbose --no-run-if-empty -I@'

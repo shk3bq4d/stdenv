@@ -362,3 +362,54 @@ processor truncate_fields
 processor urldecode
 
 kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
+
+
+# log_file_inode
+ls -ila grep MYINODE
+find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|run|mnt|proc|sys)') -inum 9387 -o -path /var/lib/docker -prune
+/var/lib/filebeat/registry/filebeat/log.json # internal tracking
+
+# filebeat javascript timestamp
+e.Get("@timestamp").Add()
+e.Get("@timestamp").AddDate()
+e.Get("@timestamp").After()
+e.Get("@timestamp").AppendFormat()
+e.Get("@timestamp").Before()
+e.Get("@timestamp").Clock()
+e.Get("@timestamp").Compare()
+e.Get("@timestamp").Date()
+e.Get("@timestamp").Day()
+e.Get("@timestamp").Equal()
+e.Get("@timestamp").Format()
+e.Get("@timestamp").GoString()
+e.Get("@timestamp").GobEncode()
+e.Get("@timestamp").Hour()
+e.Get("@timestamp").ISOWeek()
+e.Get("@timestamp").In()
+e.Get("@timestamp").IsDST()
+e.Get("@timestamp").IsZero()
+e.Get("@timestamp").Local()
+e.Get("@timestamp").Location()
+e.Get("@timestamp").MarshalBinary()
+e.Get("@timestamp").MarshalJSON()
+e.Get("@timestamp").MarshalText()
+e.Get("@timestamp").Minute()
+e.Get("@timestamp").Month()
+e.Get("@timestamp").Nanosecond()
+e.Get("@timestamp").Round()
+e.Get("@timestamp").Second()
+e.Get("@timestamp").String()
+e.Get("@timestamp").Sub()
+e.Get("@timestamp").Truncate()
+e.Get("@timestamp").UTC()
+e.Get("@timestamp").Unix()
+e.Get("@timestamp").UnixMicro()
+e.Get("@timestamp").UnixMilli()
+e.Get("@timestamp").UnixNano()
+e.Get("@timestamp").Weekday()
+e.Get("@timestamp").Year()
+e.Get("@timestamp").YearDay()
+e.Get("@timestamp").Zone()
+e.Get("@timestamp").ZoneBounds()
+
+

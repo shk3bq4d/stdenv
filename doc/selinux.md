@@ -108,4 +108,11 @@ allow httpd_t http_port_t:udp_socket name_bind;
 ```
 
 
+```sh
 semanage fcontext -l | grep -i postgres # list all types
+
+echo "" | audit2allow -rm bip
+
+
+perl -p -e 's/^([^()]+.)([0-9.]+)(.*)/localtime($2)." -- $1$2$3"/e' /var/log/audit/audit.log
+```

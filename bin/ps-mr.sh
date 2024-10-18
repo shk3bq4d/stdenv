@@ -1,7 +1,23 @@
 #!/usr/bin/env bash
 export COLUMNS=9000
+unset MR_COLUMNS
 PIPE="cat -"
-PIPE2="cat -"
+PIPE3="cat -"
+pipe2() {
+	local c defaultns
+	c=""
+	defaultns="$(readlink /proc/1/ns/mnt | tr -d -c [:digit:])"
+	while read a b; do
+		if [[ -n "$c" ]] && [[ "$c" != "$a" ]]; then
+			echo "----------------"
+		fi
+		c="$a"
+		if [[ "$a" = "$defaultns" ]]; then
+			a="           "
+		fi
+		echo "$a $b"
+	done
+}
 _tempfile=
 function cleanup() { [[ -f "$_tempfile" ]] && rm -f $_tempfile; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 ONLYPID=0
@@ -20,10 +36,10 @@ if [[ -n "${MR_COLUMNS+1}" ]] && command -v fmt >/dev/null; then
 	#echo "MR_COLUMNS is $MR_COLUMNS"
 	case "$(uname)" in  \
 	FreeBSD)
-		PIPE2="fmt -w ${MR_COLUMNS-3}"
+		PIPE3="fmt -w ${MR_COLUMNS-3}"
 		;;
 	*)
-		PIPE2="fmt -t -w ${MR_COLUMNS-3}"
+		PIPE3="fmt -t -w ${MR_COLUMNS-3}"
 		;;
 	esac
 	if false && command -v tput >/dev/null; then
@@ -31,12 +47,12 @@ if [[ -n "${MR_COLUMNS+1}" ]] && command -v fmt >/dev/null; then
 		tput init
 		tput cols
 		echo $COLUMNS
-		#PIPE2="$PIPE2 -w $(tput cols)"
+		#PIPE3="$PIPE3 -w $(tput cols)"
 		true
 	fi
 fi
 if [[ "$ONLYPID" -eq 1 ]]; then
-	PIPE2="sed -r -e s/^(\\w+\\s+)(\\w+)\\s.*/\2/"
+	PIPE3="sed -r -e s/^(\\w+\\s+)(\\w+)\\s.*/\2/"
 fi
 #echo "onlypid is $ONLYPID"
 
@@ -75,16 +91,19 @@ else
 fi
 #echo "MR_COLUMNS is $MR_COLUMNS"
 #echo "PIPE is $PIPE"
-#echo "PIPE2 is $PIPE2"
+#echo "PIPE3 is $PIPE3"
+export COLUMNS=2000
 function red() { echo -ne "$RED"; }
 function off() { echo -ne "$OFF"; }
-ps xao user,pid,ppid,start,args  | \
+ps wwxao mntns,user,pid,ppid,start,args k mntns,pgid,ppid,pid --cols=$COLUMNS </dev/null | \
 	grep -vF "sshrc requires openssl to be installed on the server" | \
 	sed -r \
 		-e "/^(\\w+\\s+){1,2}($$\\s+)/ d" \
-		-e "s/^(\\w+\\s+)(\\w+\\s+)(\\w+\\s+)(.*)/$(echo -ne "$RED")\\1$(echo -ne "$BLUE")\\2$(echo -ne "$GREEN")\\3$(echo -ne "$OFF")\\4/" \
+		-e "s/^(\\w+\\s+)(\\w+\\s+)(\\w+\\s+)(\\w+\\s+)(.*)/\\1$(echo -ne "$RED")\\2$(echo -ne "$BLUE")\\3$(echo -ne "$GREEN")\\4$(echo -ne "$OFF")\\5/" \
 		| \
 	$PIPE | \
-	$PIPE2
+	pipe2 | \
+	$PIPE3
+
 cleanup
 exit 0
