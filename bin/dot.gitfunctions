@@ -3,8 +3,13 @@
 
 unalias git  &>/dev/null || true # allow proper sourcing in shell
 unalias glol &>/dev/null || true # allow proper sourcing in shell
+unalias glod &>/dev/null || true # allow proper sourcing in shell
 glol() {
     git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' "$@"
+}
+
+glod() {
+    git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"' "$@"
 }
 
 git_current_checked_out_upstream_branch() {

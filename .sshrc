@@ -29,6 +29,7 @@ if ! type sudomr &>/dev/null ; then
 fi
 
 source $RCD/.rcproxy
+hash git &>/dev/null && source "$RCD/bin/dot.gitfunctions"
 scptome() {
 #scp -i $SSHHOME/.sshrc.d/scp  -P 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no "$@" scp@127.0.0.1:chroot/data/
     scp -P 60123 -o UserKnownHostsFile=/dev/null -o CheckHostIP=no -o StrictHostKeyChecking=no "$@" scp@127.0.0.1:chroot/data/

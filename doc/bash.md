@@ -1087,7 +1087,7 @@ echo abc        | # Normal comment OK here
 #  while subshell avoidance by using process substitution https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
 ```sh
 var=0
-while read i;
+while read -r i;
 do
   # perform computations on $i
   ((var++))
@@ -1109,7 +1109,7 @@ y|yes) true ;; # read prompt
 esac # read prompt
 
 # read prompt while loop https://stackoverflow.com/a/46936399
-while read line <&3; do # read prompt while loop
+while read -r line <&3; do # read prompt while loop
     read _read # prompt while loop
 done 3< <(cat myfile) # prompt while loop
 
