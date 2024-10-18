@@ -138,7 +138,18 @@ while :; do
         {   crontab -l | tee $backupfile
             newentry "$entry" "$_user"
         } > $_tempfile
+        echo A
+        if [[ $(stat -c %s $_tempfile) -lt 5 ]]; then
+            echo "FATAL: something went off A 1"
+            exit 1
+        fi
+        set -x
         crontab - < $_tempfile
+        set +x
+        if [[ $(crontab -l | wc -c) -lt 5 ]]; then
+            echo "FATAL: something went off A 2"
+            exit 1
+        fi
         ;;
     user)
         if crontab -l -u "$_user" &>/dev/null; then
@@ -151,16 +162,37 @@ while :; do
             #echo === before -l is
             #crontab -l -u "$_user"
             #crontab -u "$_user" - < $_tempfile <-- 2024.09.05 that construction was selinux denied
+            echo B
+            if [[ $(stat -c %s $_tempfile) -lt 5 ]]; then
+                echo "FATAL: something went off B 1"
+                exit 1
+            fi
+            set -x
             cat $_tempfile | crontab -u "$_user" -
+            set +x
+            if [[ $(crontab -l -u "$_user" | wc -c) -lt 5 ]]; then
+                echo "FATAL: something went off B 2"
+                exit 1
+            fi
             #echo '<<<'
             #echo === after -l is
             #crontab -l -u "$_user"
             #echo '<<<'
         else
+            echo C
+            set -x
             {   sudo crontab -l -u "$_user" | tee $backupfile
                 newentry "$entry" "$_user"
             } > $_tempfile
+            if [[ $(stat -c %s $_tempfile) -lt 5 ]]; then
+                echo "FATAL: something went off C 1"
+                exit 1
+            fi
             sudo crontab -u "$_user" - < $_tempfile
+            if [[ $(sudo crontab -l -u "$_user" | wc -c) -lt 5 ]]; then
+                echo "FATAL: something went off C 2"
+                exit 1
+            fi
         fi
         ;;
     *)
