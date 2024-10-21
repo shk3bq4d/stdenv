@@ -209,7 +209,7 @@ iface eth1 inet static
 
 ```sh
 route add -net 10.0.0.0 netmask 255.0.0.0 gw 172.172.29.4.1 dev eth1
-NEWHOSTNAME=sonarqube3 && sudo hostnamectl set-hostname $NEWHOSTNAME && sudo sed -i -r -e '/^127.0.1.1 / d' /etc/hosts && echo "127.0.1.1 ${NEWHOSTNAME}.pamo.local ${NEWHOSTNAME}" | sed -r -e 's/\.pa(mo\.)/.ru\1/' | sudo tee -a /etc/hosts;
+NEWHOSTNAME=sonarqube3 && sudo hostnamectl hostname $NEWHOSTNAME && sudo sed -i -r -e '/^127.0.1.1 / d' /etc/hosts && echo "127.0.1.1 ${NEWHOSTNAME}.pamo.local ${NEWHOSTNAME}" | sed -r -e 's/\.pa(mo\.)/.ru\1/' | sudo tee -a /etc/hosts;
 
 yum whatprovides '*bin/dig'
 ```

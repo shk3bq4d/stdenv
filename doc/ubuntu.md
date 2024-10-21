@@ -16,7 +16,7 @@ sudo ifdown eth0 && sudo ifup eth0
 
 # change hostname
 OLD: edit /etc/hostname and /etc/hosts then execute service hostname restart
-NEW: sudo hostnamectl MYHOSTNAME
+NEW: sudo hostnamectl hostname MYHOSTNAME
 
 # add new root certificate, (cert file MUST end with .crt)
 sudo cp foo.crt /usr/local/share/ca-certificates/foo.crt

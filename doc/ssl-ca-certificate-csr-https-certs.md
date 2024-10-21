@@ -186,7 +186,7 @@ jdk6/bin/keytool -importkeystore -deststorepass "Abcd1234" -destkeypass "Abcd123
 
 # on apache
 insures that hostname is FQDN and hostname -f returns correct value
-hostnamectl set-hostname mymachine-001.mydomain.local
+hostnamectl hostname mymachine-001.mydomain.local
 
 
 # standards

@@ -74,7 +74,7 @@ ping 10.0.2.2
 
 VM=sonarqube5; SNAPUUID=9bc610ea-1306-43b1-a0c1-19dc282ebd63; vboxmanage controlvm $VM poweroff && vboxmanage snapshot $VM restore $SNAPUUID && vboxmanage startvm $VM --type headless;
 
-NEWHOSTNAME=sonarqube3 && DOMAIN=me.local && sudo hostnamectl set-hostname $NEWHOSTNAME && sudo sed -i -r -e '/^127.0.1.1 / d' /etc/hosts && echo "127.0.1.1 ${NEWHOSTNAME}.${DOMAIN} ${NEWHOSTNAME}" | sudo tee -a /etc/hosts;
+NEWHOSTNAME=sonarqube3 && DOMAIN=me.local && sudo hostnamectl hostname $NEWHOSTNAME && sudo sed -i -r -e '/^127.0.1.1 / d' /etc/hosts && echo "127.0.1.1 ${NEWHOSTNAME}.${DOMAIN} ${NEWHOSTNAME}" | sudo tee -a /etc/hosts;
 i=/etc/sysctl.d/disable_ipv6.conf; echo -e "net.ipv6.conf.all.disable_ipv6 = 1\nnet.ipv6.conf.default.disable_ipv6 = 1\nnet.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a $i && sudo sysctl -p $i;
 sudo yum install -y rsync vim mlocate && sudo updatedb;
 curl http://beyondgrep.com/ack-2.14-single-file | sudo tee /bin/ack && sudo chmod 0755 /bin/ack
