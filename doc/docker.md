@@ -79,6 +79,7 @@ docker rm $(docker ps -q -f status=exited)
 
 export http_proxy=http://6.1.0.159:3142 && apt-get -y install python
 docker ps -a | while read a b; do docker stop $a; docker rm -v $a; done
+docker ps -a --no-trunc # width
 
 
 DID=da82cbc63a14;tar cPhzpf - --transform "s,^$HOME,sshrc," ~/.sshrc ~/.sshrc.d/ | docker cp - $DID:/tmp; docker exec -it $DID /bin/bash --rcfile /tmp/sshrc/.sshrc
