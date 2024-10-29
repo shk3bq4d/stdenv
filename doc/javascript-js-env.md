@@ -139,3 +139,15 @@ e.Get("@timestamp").Year()
 e.Get("@timestamp").YearDay()
 e.Get("@timestamp").Zone()
 e.Get("@timestamp").ZoneBounds()
+
+# http redirect
+<head>
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            var newHost = "https://www.example.com";
+            var currentPath = window.location.pathname + window.location.search + window.location.hash;
+            window.location.href = newHost + currentPath;
+        };
+    </script>
+</head>
