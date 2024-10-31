@@ -1,3 +1,8 @@
+# CVE-2024-45802 CVE-2024-37894 squid esi
+https://security-tracker.debian.org/tracker/CVE-2024-45802
+https://security-tracker.debian.org/tracker/CVE-2024-37894
+https://tracker.debian.org/pkg/squid
+
 # CVE-2023-48795 OpenSSH Terrapin
 * https://github.com/RUB-NDS/Terrapin-Scanner/releases/tag/v1.1.0
 * https://github.com/RUB-NDS/Terrapin-Scanner/releases/download/v1.1.0/Terrapin_Scanner_Linux_amd64
