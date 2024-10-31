@@ -631,5 +631,5 @@ alias bc='bc -l'
 alias dc=cd
 alias vgr=vim-git-rev.sh
 alias vgns=vim-git-not-staged.sh
-alias vhr=vim-hostvar.sh
+alias vhv=vim-hostvar.sh
 true # so prompt is green

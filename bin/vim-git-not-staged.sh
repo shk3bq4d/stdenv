@@ -47,19 +47,20 @@ list() {
             -e 's/^...//' \
             -e 's/.* -> (.*)/\1/' | while read line; do
         if [[ -d "$line" ]]; then
-            find "$line" -type f;
+            find "$grd/$line" -not type d;
         else
-            echo "$line"
+            echo "$grd/$line"
         fi
-    done
+    done # | xargs -n 1 readlink -f
 }
 
 ! git_root_dir &>/dev/null && echo "FATAL: not a git repository" && exit 1
 
-if [[ -z "$(list)" ]]; then
+grd="$(git_root_dir)"
+
+if [[ -z "$(list "$grd")" ]]; then
     echo "no unstaged files"
     exit 1
 fi
-cd $(git_root_dir)
-list
-vim $(list)
+list "$grd"
+vim $(list "$grd")
