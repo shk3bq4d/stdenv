@@ -242,3 +242,11 @@ Close the Registry Editor and restart your computer for the changes to take effe
 
 cmd /c mklink "%USERPROFILE%\Desktop\logoff.exe" "C:\Windows\System32\logoff.exe"
 $b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\logoff.lnk"); $b.TargetPath = "C:\Windows\System32\logoff.exe"; $b.Save()
+$b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\cmd.exe-admin.lnk"); $b.TargetPath = "C:\Windows\System32\cmd.exe"; $b.Save()
+
+-- HKLM Set-ItemProperty -Path "HKLM:\Software\Microsoft\ServerManager" -Name "DoNotOpenServerManagerAtLogon" -Value 1
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\ServerManager" -Name "DoNotOpenServerManagerAtLogon" -Value 1
+
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticecaption /t REG_SZ /d "WARNING" /f
+REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticetext /t REG_SZ /d "This computer is property of <company name> and is for authorized use only. Activities may be monitored and unauthorized access may result in criminal or civil prosecution. By signing into this device, you attest that you are an authorized user." /f
