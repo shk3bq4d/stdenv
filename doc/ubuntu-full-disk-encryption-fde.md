@@ -72,3 +72,6 @@ update-initramfs -u -k all
 ```
 
 
+
+# ansible
+https://docs.ansible.com/ansible/latest/collections/community/crypto/luks_device_module.html
