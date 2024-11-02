@@ -242,7 +242,7 @@ Close the Registry Editor and restart your computer for the changes to take effe
 
 cmd /c mklink "%USERPROFILE%\Desktop\logoff.exe" "C:\Windows\System32\logoff.exe"
 $b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\logoff.lnk"); $b.TargetPath = "C:\Windows\System32\logoff.exe"; $b.Save()
-$b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\cmd.exe-admin.lnk"); $b.TargetPath = "C:\Windows\System32\cmd.exe"; $b.Save()
+$b = (New-Object -ComObject WScript.Shell).CreateShortcut("$env:USERPROFILE\Desktop\cmd.exe-admin.lnk"); $b.TargetPath = "C:\Windows\System32\runas.exe"; $b.Arguments = "/user:Administrator cmd.exe"; $b.Save()
 
 -- HKLM Set-ItemProperty -Path "HKLM:\Software\Microsoft\ServerManager" -Name "DoNotOpenServerManagerAtLogon" -Value 1
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\ServerManager" -Name "DoNotOpenServerManagerAtLogon" -Value 1

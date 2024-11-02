@@ -36,6 +36,8 @@ Rotate  log  files  set under this user and group instead of using most likely r
 
 # test
 ```sh
+/usr/sbin/logrotate -f /etc/logrotate.conf # force rotation
+/usr/sbin/logrotate -df /etc/logrotate.conf # list rotation (but not permission change)
 /usr/sbin/logrotate -ds /var/lib/logrotate/status /etc/logrotate.conf
 /usr/sbin/logrotate -ds /dev/null /etc/logrotate.d/syslog
 echo '*  *    * * * root /etc/cron.daily/logrotate' >> /etc/crontab
