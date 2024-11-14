@@ -299,6 +299,7 @@ https://mariadb.com/kb/en/json-functions/ -- json-query
 select json_quote(mymultilinecol) from mytable; -- serialization
 select json_unquote('"myjsonencodedvalue"') from mytable; -- deserialization, notice the double layer of quotes
 replace into settings (name, value) values ('core.license', json_unquote('"hehe"'));
+select json_set(priv, '$.locked', 'true') from mysql.global_priv
 
 # query logging
 https://stackoverflow.com/questions/303994/log-all-queries-in-mysql

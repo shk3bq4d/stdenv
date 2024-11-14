@@ -2206,6 +2206,12 @@ loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
 (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('host/prefix')    # 10.1.5.6/8
 (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('network/prefix') # 10.0.0.0/8
 
+community.general.keep_keys - Keep specific keys from dictionaries in a list. filter
+community.general.remove_keys - Remove specific keys from dictionaries in a list. filter
+community.general.replace_keys - Replace specific keys in a list of dictionaries. filter
+community.general.reveal_ansible_type - Return input type. filter
+community.general.ansible_type - Validate input type. test
+
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
 - "^(?P<name>Ethernet\\d\\/\\d*)"

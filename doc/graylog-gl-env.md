@@ -122,7 +122,42 @@ ls -l /usr/share/graylog-server/plugin/ /opt/graylog/plugins/
 # terraform
 * https://github.com/suzuki-shunsuke/docker-image-terraform-graylog
 * https://hub.docker.com/r/suzukishunsuke/terraform-graylog
+* https://github.com/zahiar/terraform-provider-graylog
+* https://registry.terraform.io/providers/zahiar/graylog/1.3.0
 * https://registry.terraform.io/providers/terraform-provider-graylog/graylog/latest/docs
+
+## ressources
+graylog_alarm_callback
+graylog_alert_condition
+graylog_dashboard
+graylog_dashboard_widget
+graylog_dashboard_widget_positions
+graylog_event_definition
+graylog_event_notification
+graylog_extractor
+graylog_grok_pattern
+graylog_index_set
+graylog_input
+graylog_input_static_fields
+graylog_ldap_setting
+graylog_output
+graylog_pipeline
+graylog_pipeline_connection
+graylog_pipeline_rule
+graylog_role
+graylog_sidecar_collector
+graylog_sidecar_configuration
+graylog_sidecars
+graylog_stream
+graylog_stream_output
+graylog_stream_rule
+graylog_user
+
+## Data Sources
+graylog_dashboard
+graylog_index_set
+graylog_sidecar
+graylog_stream
 
 signup
 
@@ -188,3 +223,6 @@ https://go2docs.graylog.org/4-x/making_sense_of_your_log_data/functions_descript
 
 
  ansible module to be checked and extended: https://github.com/ReconInfoSec/ansible-graylog-modules
+
+# docker
+https://go2docs.graylog.org/current/downloading_and_installing_graylog/docker_installation.htm
