@@ -374,3 +374,10 @@ ssl_cert_file
 ssl_ca_file
 ssl_min_protocol_version
 
+
+# mysql lifecycle support
+* https://www.mysql.com/support/eol-notice.html
+* https://www.mysql.com/support/supportedplatforms/database.html
+* https://dev.mysql.com/blog-archive/introducing-mysql-innovation-and-long-term-support-lts-versions/
+* https://www.oracle.com/support/lifetime-support/resources.html 
+* https://en.wikipedia.org/wiki/MySQL#Release_history
