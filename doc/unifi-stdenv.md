@@ -34,6 +34,7 @@ jacobalberty/unifi:v8.3.32
 jacobalberty/unifi:v8.4.59
 jacobalberty/unifi:v8.4.62
 jacobalberty/unifi:v8.5.6
+jacobalberty/unifi:v8.6.9
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest
@@ -52,6 +53,7 @@ https://community.ui.com/releases/r/network/8.3.32
 https://community.ui.com/releases/r/network/8.4.59
 https://community.ui.com/releases/r/network/8.4.62
 https://community.ui.com/releases/r/network/8.5.6
+https://community.ui.com/releases/r/network/8.6.9
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
@@ -64,6 +66,7 @@ https://community.ui.com/releases/UniFi-Network-Application-7-3-76/85c75fc7-3e0f
 https://community.ui.com/releases/UniFi-Network-Application-7-3-83/88f5ff3f-4c13-45e2-b57e-ad04b4140528
 https://community.ui.com/releases/UniFi-Network-Application-7-4-156/15ac6260-9cd1-4ac3-a91c-4880c1c87882
 * https://community.ui.com/releases/UniFi-Network-Application-8-0-24/43b24781-aea8-48dc-85b2-3fca42f758c9
+* https://community.ui.com/releases/UniFi-Network-Application-8-6-9/e4bd3f71-a2c4-4c98-b12a-a8b0b1c2178e
 
 # CVE
 ## CVE-2023-41721
