@@ -117,6 +117,10 @@ detach the tty without exiting the shell, use the escape sequence Ctrl+p + Ctrl+
 
 # nice but old version
 http://crosbymichael.com/advanced-docker-volumes.html
+docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
+sudo docker image list --format "{{.Repository}}"
+sudo docker ps --format "{{.Names}}"
+sudo docker ps --format "{{.Image}}"
 
 docker inspect zabbix-web --format '{{ .Id }}'
 docker inspect zabbix-web --format '{{ .Name }}'
