@@ -109,6 +109,10 @@ ssl_protocols SSLv2 SSLv3 TLSv1.1 TLSv1.2 TLSv1.3;
      proxy_pass_request_headers on;
      proxy_redirect https://oos.collab.local https://oos.io.burp.com;
 
+proxy_hide_header Content-Type;                  # replace header coming from proxy
+add_header        Content-Type application/json; # replace header coming from proxy
+default_type                   application/json; # set header for return 200 '{"json":"static"}';
+
 # location match
 ```sh
 (none): If no modifiers are present, the location is interpreted as a prefix match. This means that the location given will be matched against the beginning of the request URI to determine a match.
