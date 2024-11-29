@@ -49,3 +49,7 @@ curl --output FILEPATH url # save document filename filepath
 curl -O FILEPATH  url      # save document filename filepath
 ```
 
+--fail-with-body: Exits with a non-zero code for non-2xx responses.
+Unlike --fail, it will also print the response body in case of failure.
+--upload-file -T
+--silent --dump-header - # print header to stdline

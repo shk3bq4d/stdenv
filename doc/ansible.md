@@ -2153,7 +2153,7 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ [3, [4, 2] ] | flatten }}
 {{ [3, [4, [2]] ] | flatten(levels=1) }}
 {{ list1 | unique }}
-{{ list1 | union(list2) }}
+{{ list1 | union(list2) }} # concat, plus add
 {{ list1 | intersect(list2) }}
 {{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2), minus, list
 {{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
