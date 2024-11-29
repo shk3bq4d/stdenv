@@ -44,7 +44,9 @@ list() {
     if [[ $# -eq 0 ]]; then
         git diff-tree --no-commit-id --name-only -r HEAD
     else
-        git diff-tree --no-commit-id --name-only -r "$@"
+        for rev in "$@"; do
+            git diff-tree --no-commit-id --name-only -r "$rev"
+        done | sort -u
     fi
 }
 

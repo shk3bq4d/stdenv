@@ -82,6 +82,8 @@ venv.init -p $(which python3) ENVNAME
 venv.init -p $(which python3.5) fpedialog
 ```
 
+test -n "${VIRTUAL_ENV:-}" && source ~/bin/dot.venvfuctions && deactivate # deactivate within script
+
 ```sh
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
