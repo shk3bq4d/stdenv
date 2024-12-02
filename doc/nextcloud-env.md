@@ -2441,3 +2441,7 @@ https://github.com/nextcloud/spreed
 # push mobile
 This is the unsupported community build of Nextcloud. Given the size of this instance, performance, reliability and scalability cannot be guaranteed. Push notifications are limited to avoid overloading our free service.
 * GDPR data processor third party https://help.nextcloud.com/t/this-is-the-unsupported-community-build-of-nextcloud-with-push-for-500-users/154477/10
+
+# antivirus
+* https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/antivirus_configuration.html
+* https://github.com/nextcloud/files_antivirus
