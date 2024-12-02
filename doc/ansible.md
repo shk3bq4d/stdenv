@@ -2922,3 +2922,5 @@ assert:
 ansible.utils.validate # asserts validation
 * [asserts validate validation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation)
 * [asserts validate validation](https://www.youtube.com/watch?v=MGYSluLyPj8)
+
+- import_playbook: another_playbook.yml # include_playbook doesn't exist

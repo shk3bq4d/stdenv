@@ -92,3 +92,6 @@ select id from dcim_device where lower(name) in (select lower(name) from dcim_de
 create table mrfix_dcim_device_name as select id from dcim_device where lower(name) in (select lower(name) from dcim_device group by lower(name) having count(1) > 1);
 select name || ' - #' || id || ' DBfix 2024.02.22' from dcim_device where id in (select id from mrfix_dcim_device_name);
 update dcim_device set name = name || ' - #' || id || ' DBfix 2024.02.22' where id in (select id from mrfix_dcim_device_name);
+
+# core.models.contenttypes.ObjectType.DoesNotExist
+https://github.com/netbox-community/netbox/issues/17356
