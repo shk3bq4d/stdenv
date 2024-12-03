@@ -104,6 +104,8 @@ kubectl get namespace
 kubectl get service
 kubectl get deployment
 kubectl get secret -o jsonpath='{.data.admin-password}' -n monitoring grafana  | base64 -d | xclip
+kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}"
+kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}" | base64 -d | openssl-cert-info.sh
 kubectl options
 kubectl exec zookeeper-d8f95899d-z5b5c -it /bin/sh
 kubectl exec -n monitoring kube-prometheus-exporter-node-wchkz -i -t -- /bin/sh
