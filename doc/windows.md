@@ -178,6 +178,7 @@ Invoke-WebRequest -Uri "https://blabla.com/pictures.iso" -OutFile "c:\lol.iso"
 # uptime
 systeminfo | find "System Boot Time:"
 systeminfo | find "System Boot Time:" &:: uptime
+Get-WmiObject -Class Win32_OperatingSystem                                | Select-Object LastBootUpTime
 Get-WmiObject -Class Win32_OperatingSystem -ComputerName "mycomputername" | Select-Object LastBootUpTime
 Restart-Computer -ComputerName "RemoteHostName" -Force
 Enter-PSSession -ComputerName myremotecomputername & REM remote interactive session

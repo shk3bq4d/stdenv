@@ -1,4 +1,7 @@
 #  ex: set cursorcolumn fenc=utf-8 expandtab ts=2 sw=2 :
+```sh
+filebeat version # filebeat version 8.16.1 (amd64), libbeat 8.16.1 [f17e0828f1de9f1a256d3f520324fa6da53daee5 built 2024-11-14 14:56:43 +0000 UTC]
+```
 ```yaml
 output.file:
   path: "/tmp/filebeat"
