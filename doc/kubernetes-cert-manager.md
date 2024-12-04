@@ -47,3 +47,9 @@ kubectl get certificate
 cmctl check api
 eval $(cmctl completion zsh)
 eval $(cmctl completion bash)
+
+kubectl get orders.acme.cert-manager.io -A
+kubectl get certificates.cert-manager.io -A
+kubectl get certificaterequests.cert-manager.io -A
+kubectl get certificatesigningrequests.certificates.k8s.io -A
+kubectl cert-manager status certificate -n namespace certificates.cert-manager.io
