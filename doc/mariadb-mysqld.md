@@ -247,7 +247,7 @@ show variables where variable_name = 'port';
 ## master slave switch
 https://www.abelworld.com/mysql-slave-master-switch/
 * check if replication user for current master exists on current slave
-  select user, host, concat_ws('@', user, host) as userathost password from mysql.user order by user, host;
+  select user, host, concat_ws('@', user, host) as userathost, password from mysql.user order by user, host;
 * change my.cnf on both hosts, but do not restart services
 -read_only
 -relay-log = relay-bin
@@ -323,6 +323,8 @@ echo 'set editing-mode vi' | tee -a /etc/inputrc
 
 ## gzip'ed column
 db.sh --binary-as-hex --skip-column-names -B <<< "select data from blobs_storage where blob_id = '774'" | xxd -r -p | gunzip # gzip hex binary
+
+--skip-column-names # no-headers
 
 ## with update
 ```sql
