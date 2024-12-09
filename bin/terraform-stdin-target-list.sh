@@ -9,7 +9,7 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 cat "$@" |
 sed -r -n -e '
 
-s/  # (.*) will be .*/-target ,\1,/p
+s/  # (.*) (must|will) be .*/-target ,\1,/p
 
 
 ' | tr , "'"
