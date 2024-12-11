@@ -16,6 +16,7 @@ pkg3>=1.0,<=2.0             # requirements
 ProjectB<1.3                # requirements
 oracledb==1.3.1; python_version < '3.12'
 oracledb==2.4.1; python_version >= '3.12'
+pip list --format=freeze
 ```
 
 # http://sametmax.com/sept-petites-libs-qui-changent-la-vie-dun-dev-python/
@@ -1294,4 +1295,3 @@ python3 -m venv /tmp/myvenv
 
 with open(os.path.expanduser(fp), 'r', encoding='utf-8-sig') as f: # windows BOM UTF-8 reader
 
-pip list --format=freeze

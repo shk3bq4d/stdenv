@@ -1,3 +1,4 @@
 export STDHOME_FONT='Urxvt*font: xft:DejaVuSansMono:size=20:antialias=true,xft:Inconsolata\ for\ Powerline:size=20'
 export STDHOME_FONT='*font: xft:DejaVuSansMono:size=20:antialias=true,xft:Inconsolata\ for\ Powerline:size=20'
+export STDHOME_TERM='rxvt-256color'
 
