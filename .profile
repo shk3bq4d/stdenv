@@ -14,10 +14,10 @@ date >> $LOG
 echo "Caller: $0" >>$LOG
 echo "DESKTOP_SESSION: $DESKTOP_SESSION" >>$LOG
 echo "GDMSESSION: $GDMSESSION" >>$LOG
-while read line; # subshell avoidance
-do
-    eval $line
-done < <(grep -hE "^export (WORK)" ~/.std*)
+#while read line; # subshell avoidance
+#do
+#    eval $line
+#done < <(grep -hE "^export (WORK)" ~/.std*)
 
 export TERMINAL=mrurxvt
 #export WFICA_OPTS="-nosound -errno"

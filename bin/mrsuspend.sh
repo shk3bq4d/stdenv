@@ -48,7 +48,7 @@ apr16.ly.lan)
 		echo "you came remotely and have 5 seconds to close your SSH session"
 	fi
 	;;
-dec17.ly.lan|nov20.ly.lan)
+dec17.ly.lan|nov20.ly.lan|shaz0140504)
 	if at-work.sh; then
 		mri3lock &
 	fi
