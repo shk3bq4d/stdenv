@@ -275,9 +275,7 @@ insert into dummy (d) values ('node1 is master');
 * on node1 check master status
   show master status\G
 * on node2 stop slave
-  stop slave;
-  reset slave all;
-  reset master;
+  stop slave; reset slave all; reset master;
 * on node2 make slave writable
   set global read_only=OFF; show variables like '%read_only%';
   insert into dummy (d) values ('node2 is master');
