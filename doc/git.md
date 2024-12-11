@@ -683,3 +683,5 @@ pick XYZ
 label b
 reset a
 merge b # Merge branch 'mybranchname'
+
+source <(curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/refs/heads/master/plugins/git/git.plugin.zsh) # glola glod

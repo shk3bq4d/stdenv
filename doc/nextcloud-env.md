@@ -2445,3 +2445,11 @@ This is the unsupported community build of Nextcloud. Given the size of this ins
 # antivirus
 * https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/antivirus_configuration.html
 * https://github.com/nextcloud/files_antivirus
+```sh
+php occ config:list files_antivirus
+php occ files_antivirus:background-scan
+php occ files_antivirus:mark
+php occ files_antivirus:scan
+php occ files_antivirus:status
+php occ files_antivirus:test
+```
