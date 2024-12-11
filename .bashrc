@@ -51,7 +51,7 @@ if [[ -n "${SSH_CLIENT}" && -z "$TMUX" ]] && hash tmux &>/dev/null; then
 #               fi
 #           fi
         else
-            echo tmuxrecent not ready
+#           echo tmuxrecent not ready
             if false; then
             export SHELL=$f
             if [[ -f $RCD/tmux.conf ]]; then

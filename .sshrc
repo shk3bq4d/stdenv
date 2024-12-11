@@ -1,4 +1,4 @@
-echo .sshrc
+#echo .sshrc
 if [[ -f ~/.stdenv_aliases ]]; then
     if [[ -f ~/.zshrc ]] && hash zsh &>/dev/null; then
         exec zsh
@@ -9,7 +9,7 @@ if [[ -f ~/.stdenv_aliases ]]; then
     echo .sshrc return
     return
 fi
-echo .sshrc2
+#echo .sshrc2
 if [[ -z $SSHHOME ]]; then
     export SSHHOME=$( dirname "${BASH_SOURCE[0]}" )
 fi
