@@ -7,6 +7,13 @@ cd fonts
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 https://github.com/robbyrussell/oh-my-zsh
 https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono/Regular/complete # font windows
+~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+~/.oh-my-zsh/custom/plugins/vi-mode-mr
+
+
+# zsh-autosuggestions
+wrong color => check your TERM variable, for me rxvt-256color works well
 
 unset HISTFILE
 
@@ -15,6 +22,7 @@ unset HISTFILE
 
 setopt null_glob # solves zsh: no matches found:
 
+```sh
 list_of_files=(*(N)) # solves zsh: no matches found: # Turn on the null_glob option for your pattern with the N glob qualifier.
 
 dolphin &!  # The &! (or equivalently, &|) is a zsh-specific shortcut to both background and disown the process, such that exiting the shell will leave it running.
@@ -66,3 +74,4 @@ git config oh-my-zsh.hide-status 1
 
 ${myvar:l} # l lowercase lower-case
 ${myvar:u} # u uppercase upper-case
+```

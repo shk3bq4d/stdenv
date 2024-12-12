@@ -19,3 +19,11 @@ tampermonkey
 dashboard
 +
 (Delete all content)
+paste from
+curl -s http://localhost:57155/tampermonkey/mr.py XC
+
+~/git/$USER/websupport/tampermonkey
+
+# installation
+enable developer mode on chrome extension global dashboard # troubleshooting errors not working
+http://localhost:57155/tampermonkey/mr.py
