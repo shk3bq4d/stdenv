@@ -1,3 +1,4 @@
+/usr/bin/google-chrome --version
 https://github.com/MicrosoftDocs/Edge-Enterprise/blob/public/edgeenterprise/microsoft-edge-policies.md#passwordmanagerenabled
 
 
@@ -6,3 +7,6 @@ deb [arch=amd64 signed-by=/etc/apt/keyrings/70-iaac-microsoft.gpg] https://packa
 deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main
 
 /usr/bin/microsoft-edge
+
+
+"C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors

@@ -151,3 +151,5 @@ e) fg
    https://unix.stackexchange.com/questions/26548/write-all-tmux-scrollback-to-a-file
 1) Use prefix + :, then type in capture-pane -S -3000 + Return. (Replace -3000 with however many lines you'd like to save, or with - for all lines.) This copies those lines into a buffer.
 0) Then, to save the buffer to a file, just use prefix + : again, and type in save-buffer filename.txt + return. (by default it'll save the file in ~/)
+
+<C-b> , rename current window

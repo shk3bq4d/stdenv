@@ -385,3 +385,8 @@ Unattended-Upgrade::DevRelease "auto";
 // uninstallable packages at the expense of rarely keeping back packages which
 // could be upgraded or installed.
 // Unattended-Upgrade::Allow-APT-Mark-Fallback "true";
+
+
+# apt pin
+/etc/apt/preferences.d/90-blacklist-packages-microsoft-com
+apt-cache policy
