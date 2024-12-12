@@ -2317,6 +2317,10 @@ msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
 msg: "{{ [1,2,3,4,5] | combinations(2) | list }}"
 msg: "{{ ['foo', 'bar'] | product(['com']) | map('join', '.') | join(',') }}" # cross-product multiply zip
 {{ myvar | type_debug }}
+{{ "heh" | type_debug == "str" }} # string
+{{ myvar | type_debug == "AnsibleUnicode" }} # string
+{{ myvar | string | type_debug == "NativeJinjaText" }} # string
+{{ myvar | type_debug == "dict" }} # string, alternative is to use "is mapping"
 - '"1.00 Bytes" == 1|human_readable'
 - '"1.00 bits" == 1|human_readable(isbits=True)'
 - '"10.00 KB" == 10240|human_readable'
