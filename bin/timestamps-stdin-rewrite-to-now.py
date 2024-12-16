@@ -24,7 +24,7 @@ def get_line():
 
 def get_date_format(s):
     all_formats = {
-        r'^20\d{2}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{3}\b': ['%Y.%m.%d %H:%H:%S.%f', 23],
+        r'^20\d{2}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{3}\b': ['%Y.%m.%d %H:%M:%S.%f', 23],
         }
     for pattern, python_format in all_formats.items():
         if re.search(pattern, s):
