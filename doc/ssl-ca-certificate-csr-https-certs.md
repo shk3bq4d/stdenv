@@ -368,3 +368,5 @@ t=my.host.example.com; p=443;  { sudo docker run -u 99 -i --entrypoint "" --rm s
 ```py
 import certifi; print(certifi.where()) # print certifi cert location /usr/local/lib/python3.10/site-packages/certifi/cacert.pem
 ```
+
+"C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors && REM chromium edge
