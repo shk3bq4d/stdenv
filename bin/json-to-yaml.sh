@@ -4,7 +4,11 @@
 set -euo pipefail
 
 if [[ $# -eq 0 ]]; then
-    yq e --output-format=yaml -P -
+    # I have no idea why I am piping this in prettify-json first as it should not be needed, nonetheless
+    # I keep getting
+    # Error: bad file '-': yaml: found unknown escape character
+    # otherwise
+    prettify-json | yq e -P --output-format=yaml
 
 else
     yq e --output-format=yaml -P "$@"

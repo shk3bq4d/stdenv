@@ -176,3 +176,7 @@ re.search(r'\bmyword\b', mH['name']): # python word boundary
 re.match(r'^debug1: (?P<mygroup1>.+) line ([0-9]+): Applying options for (.*)', s).groupdict() # python named group
 
 ^(?i)this regex will be case insensitive
+
+
+# dates
+'^20\d{2}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}\.\d{3}\b'

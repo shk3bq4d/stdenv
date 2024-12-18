@@ -219,10 +219,10 @@ order by total_bytes desc;
 # regexp regular expression
 https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
 ```sql
-~ (Matches regular expression, case sensitive)
-~* (Matches regular expression, case insensitive)
-!~ (Does not match regular expression, case sensitive)
-!~* (Does not match regular expression, case insensitive)
+~ (Matches regular expression regexp, case sensitive)
+~* (Matches regular expression regexp, case insensitive)
+!~ (Does not match regular expression regexp, case sensitive)
+!~* (Does not match regular expression regexp, case insensitive)
 replace(string text, from text, to text)
 regexp_replace # https://www.postgresql.org/docs/8.2/functions-matching.html
 regexp_replace('foobarbaz', 'b..', 'X', 'g') --> fooXX
@@ -383,5 +383,5 @@ ssl_min_protocol_version
 * https://www.mysql.com/support/eol-notice.html
 * https://www.mysql.com/support/supportedplatforms/database.html
 * https://dev.mysql.com/blog-archive/introducing-mysql-innovation-and-long-term-support-lts-versions/
-* https://www.oracle.com/support/lifetime-support/resources.html 
+* https://www.oracle.com/support/lifetime-support/resources.html
 * https://en.wikipedia.org/wiki/MySQL#Release_history

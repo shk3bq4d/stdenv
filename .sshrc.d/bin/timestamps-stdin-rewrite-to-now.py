@@ -1,0 +1,1 @@
+../../bin/timestamps-stdin-rewrite-to-now.py
