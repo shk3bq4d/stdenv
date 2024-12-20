@@ -38,7 +38,16 @@ h: /home/bip/.cache/mesa_shader_cache/7c
 l:
 p: /home/bip/.cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
 P: .cache/mesa_shader_cache/7c/97bbfb621adfafd6338592fb1eb361ae324782
-```
 
 find $PWD -printf '%5n %p\n'  | tee filelist.txt # hardlinks count
 find $PWD -printf '%5n %p\n'  | sort -V  | tee filelist.txt # hardlinks count
+
+
+find /opt/splunk/* -not -user splunk -ls
+find /opt/splunk/* -not -group splunk -ls
+find /opt/splunk/*  -perm /007 -type f,d -ls
+find /opt/splunk/*  -perm /0007 -type f,d -ls
+find /opt/splunk/*  -perm /0007 -type f,d -print -exec chmod o-rwx '{}' + -quit
+find ~/tmp/  -perm /0007 -type f,d -print -exec chmod o-rwx '{}' + -quit
+find /opt/splunk -\( -type f -and 
+```
