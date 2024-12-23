@@ -314,13 +314,13 @@ are to be done by making a backup, trashing the data folder, restoring the backu
 
 
 
-https://www.postgresql.org/support/versioning/
+* https://www.postgresql.org/support/versioning/ # end of life
 https://www.postgresql.org/developer/roadmap/
-https://www.postgresql.org/support/versioning/
 https://www.postgresql.org/about/news/postgresql-172-166-1510-1415-1318-and-1222-released-2965/
 https://www.postgresql.org/about/news/out-of-cycle-release-scheduled-for-november-21-2024-2958/
 Releases
 Version	Current minor	Supported	First Release	Final Release
+17	17.2	Yes	September 26, 2024	November 8, 2029
 16	16.4	Yes	September 14, 2023	November 9, 2028
 15	15.4	Yes	October 13, 2022	November 11, 2027
 14	14.9	Yes	September 30, 2021	November 12, 2026
