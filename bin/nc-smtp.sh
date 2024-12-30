@@ -43,7 +43,7 @@ _connect() {
     case "${starttls}" in \
     y*|Y*)
         set -x
-        sed -r -e '/^(EHLO|HELO)/d' | openssl s_client -connect $h:$p -crlf -starttls smtp
+        sed -u -r -e '/^(EHLO|HELO)/d' | openssl s_client -connect $h:$p -crlf -starttls smtp
         set +x
         ;;
     *)
