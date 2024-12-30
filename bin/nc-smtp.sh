@@ -26,7 +26,7 @@ p() {
 [[ $# -eq 0 ]] && PORT="$(p "25" "what destination TCP port to use")" || { PORT="$1"; shift; }
 [[ $# -eq 0 ]] && STARTTLS="$(p "no" "would you like to starttls ?")" || { STARTTLS="$1"; shift; }
 
-[[ $# -eq 0 ]] && FROM_DOMAIN="$(p "$(hostname -f)" "what HELO value to use")" || { FROM_DOMAIN="$1"; shift; }
+[[ $# -eq 0 ]] && FROM_DOMAIN="$(p "$(hostname -f)" "what EHLO value to use")" || { FROM_DOMAIN="$1"; shift; }
 [[ $# -eq 0 ]] && FROM_MAIL="$(p "$(id -un)@$(hostname -f)" "What from value to use")" || { FROM_MAIL="$1"; shift; }
 #TO="test4324@mailinator.com"
 #TO="$(id -un)@$(hostname -f)"
@@ -57,7 +57,7 @@ _connect() {
 
 _tempfile=$(mktemp); function cleanup() { [[ -f "$_tempfile" ]] && rm -f $_tempfile; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 echo \
-"HELO $FROM_DOMAIN
+"EHLO $FROM_DOMAIN
 MAIL FROM: $FROM_MAIL
 RCPT TO: $TO
 DATA
