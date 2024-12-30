@@ -12,6 +12,7 @@ ansible-project ansible-core            ansible-core main changes
 2.10            2.10 (ansible-base) https://docs.ansible.com/ansible-core/devel/roadmap/ROADMAP_2_10.html
 https://docs.ansible.com/ansible/latest/roadmap/old_roadmap_index.html
 
+* https://docs.debops.org/en/latest/meta/philosophy.html # debian
 
 
 * https://github.com/ansible/ansible/blob/stable-2.12/changelogs/CHANGELOG-v2.12.rst#release-summary
