@@ -3,6 +3,8 @@
 * https://www.debian.org/releases/testing/
 * https://www.debian.org/releases/sid/
 
+* https://docs.debops.org/en/latest/meta/philosophy.html # ansible
+
 The current stable distribution of Debian is version 12, codenamed bookworm. It was released on June 10th, 2023.
 testing AKA trixie The testing distribution contains packages that haven't been accepted into a stable release yet, but they are in the queue for that. The main advantage of using this distribution is that it has more recent versions of software.
 unstable AKA sid The unstable distribution is where active development of Debian occurs. Generally, this distribution is run by developers and those who like to live on the edge. It is recommended that users running unstable should subscribe to the debian-devel-announce mailing list to receive notifications of major changes, for example upgrades that may break.
