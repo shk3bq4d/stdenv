@@ -28,8 +28,9 @@ p() {
 
 [[ $# -eq 0 ]] && FROM_DOMAIN="$(p "$(hostname -f)" "what HELO value to use")" || { FROM_DOMAIN="$1"; shift; }
 [[ $# -eq 0 ]] && FROM_MAIL="$(p "$(id -un)@$(hostname -f)" "What from value to use")" || { FROM_MAIL="$1"; shift; }
-TO="test4324@mailinator.com"
-TO="$(id -un)@$(hostname -f)"
+#TO="test4324@mailinator.com"
+#TO="$(id -un)@$(hostname -f)"
+TO="$FROM_MAIL"
 [[ $# -eq 0 ]] && TO="$(p "${GIT_AUTHOR_EMAIL:-$TO}" "Who to send to")" || { TO="$1"; shift; }
 SUBJECT="Test #${SESS} sent from $(hostname -f) on $(date +'%Y.%m.%d %H:%M:%S')"
 
@@ -60,6 +61,8 @@ echo \
 MAIL FROM: $FROM_MAIL
 RCPT TO: $TO
 DATA
+From: $FROM_MAIL
+To: $TO
 Subject: $SUBJECT
 Body start
 hehe
