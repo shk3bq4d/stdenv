@@ -7,6 +7,7 @@ https://www.zabbix.com/documentation/2.4/manual/api/reference_commentary
 https://www.zabbix.com/documentation/2.4/manual/appliance
 https://www.zabbix.com/documentation/3.0/manual/appliance
 https://www.zabbix.com/release_notes # changelog rn
+https://www.zabbix.com/life_cycle_and_release_policy
 
 https://github.com/ansible/ansible-modules-extras/blob/482b1a640e95274b1a6f41ec21efc333ac4076b5/monitoring/zabbix_maintenance.py
 https://github.com/zabbix/zabbix-docker/
