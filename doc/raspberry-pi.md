@@ -26,6 +26,7 @@ https://www.raspberrypi.org/forums/viewtopic.php?f=37&t=66946 # 433mhz
 http://www.yoctopuce.com/EN/article/turn-your-raspberry-pi-into-a-network-multimeter
 http://davidhoulding.blogspot.ch/2014/02/high-sensitivity-vibration-sensor-using.html
 http://dietpi.com/
+http://rptl.io/configtxt
 
 # http://www.ebay.com/itm/262636901441
 # http://www.waveshare.com/wiki/4inch_HDMI_LCD

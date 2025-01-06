@@ -22,7 +22,7 @@ p() {
     esac
 }
 
-[[ $# -eq 0 ]] && SERVER="$(p "mail.mydomain.local" "what SMTP to connect to")" || { SERVER="$1"; shift; }
+[[ $# -eq 0 ]] && SERVER="$(p "localhost" "what SMTP to connect to")" || { SERVER="$1"; shift; }
 [[ $# -eq 0 ]] && PORT="$(p "25" "what destination TCP port to use")" || { PORT="$1"; shift; }
 [[ $# -eq 0 ]] && STARTTLS="$(p "no" "would you like to starttls ?")" || { STARTTLS="$1"; shift; }
 

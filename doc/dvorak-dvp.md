@@ -1,6 +1,8 @@
 $mod+Control+Return exec mrurxvt-dvorak.sh
 setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch # dvorak programmer
 setxkbmap -layout ch -variant fr
+dpkg-reconfigure keyboard-configuration
+dpkg-reconfigure console-setup
 
 vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch
 
