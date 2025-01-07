@@ -164,6 +164,7 @@ DEBIAN_FRONTEND=noninteractive dpkg --configure postfix
 pkg info -D zoneminder
 
 apt install --reinstall docker-ce
+KERNEL_VERSION='6.8.0-50'; apt list --installed | cut -d / -f 1 | grep linux | grep -F -- "-$KERNEL_VERSION" | xargs sudo apt install --reinstall
 apt-cache madison docker-ce # list available version
 
 needs-restarting -r # yum reboot check if necessary
