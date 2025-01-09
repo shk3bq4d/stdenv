@@ -584,7 +584,7 @@ docker exec -it zabbix-proxy zabbix_proxy -R log_level_increase
 
 
 ```sql
-set global log_bin_trust_function_creators=1; -- "You do not have the SUPER privilege and binary logging is enabled", zabbix 5.4 -> 6.0 upgrade (or 6.0 to 6.2 I don't recall)
+set global log_bin_trust_function_creators=1; -- "You do not have the SUPER privilege and binary logging is enabled", zabbix 5.4 -> 6.0 upgrade (or 6.0 to 6.2 I don't recall), as well as 6.4 -> 7.0
 ```
 
 # high availibility cluster HA master slave repliac
