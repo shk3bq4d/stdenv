@@ -53,3 +53,5 @@ curl -O FILEPATH  url      # save document filename filepath
 Unlike --fail, it will also print the response body in case of failure.
 --upload-file -T
 --silent --dump-header - # print header to stdline
+
+--connect-timeout <fractional seconds>

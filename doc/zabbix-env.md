@@ -13,6 +13,11 @@ https://github.com/ansible/ansible-modules-extras/blob/482b1a640e95274b1a6f41ec2
 https://github.com/zabbix/zabbix-docker/
 https://github.com/zabbix/zabbix-docker/tree/6.2/Dockerfiles/proxy-sqlite3/alpine
 
+# zabbix-web
+https://github.com/zabbix/zabbix-docker/tree/7.0/Dockerfiles/web-nginx-mysql/ubuntu
+https://raw.githubusercontent.com/zabbix/zabbix-docker/refs/heads/7.0/Dockerfiles/web-nginx-mysql/ubuntu/Dockerfile
+https://raw.githubusercontent.com/zabbix/zabbix-docker/refs/heads/7.0/Dockerfiles/web-nginx-mysql/ubuntu/docker-entrypoint.sh
+
 system.hostname
 system.hostname[fqdn] 7.0.0 https://support.zabbix.com/browse/ZBXNEXT-7132
 system.uname
