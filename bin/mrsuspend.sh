@@ -62,8 +62,8 @@ dec17.ly.lan|nov20.ly.lan|shaz0140504)
 	autorandr --load default
 	mute.sh
 	sudo umount -t fuse.sshfs -a
-	sudo systemctl suspend
 	citrix-stop-kill-all.sh
+	sudo systemctl suspend
 	exit 0
 	;;
 esac
