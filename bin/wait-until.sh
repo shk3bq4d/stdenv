@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
 ##
-##Usage:  __SCRIPT__ DATESPEC [COMMAND]
+##Usage:  __SCRIPT__ DATESPEC [COMMAND [ARGS..]]
 ##sleeps until the specified time
 ##    DATESPEC: date  that has to be understood by date -d "STRING" command
 ##    COMMAND: optional command to execute when time is reached
@@ -15,7 +15,7 @@ function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'
 
 [[ $# -eq 1 && ( $1 == -h || $1 == --help ) ]] && usage && exit 0
 
-[[ $# -lt 1 || $# -gt 2 ]] && echo FATAL: incorrect number of args && usage && exit 1
+[[ $# -lt 1 ]] && echo FATAL: incorrect number of args && usage && exit 1
 
 for i in date sleep; do ! command -v touch &>/dev/null && echo FATAL: unexisting dependency touch && exit 1; done
 
@@ -31,8 +31,10 @@ if [[ $sleep_seconds -lt 0 ]] && [[ $sleep_seconds -ge -86400 ]]; then
 else
 	echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$1")"
 fi
+shift
 
+set -x
 sleep $sleep_seconds
-[[ $# -eq 2 ]] && sh -c "$2"
+bash -c "$(echo "$@")"
 exit 0
 
