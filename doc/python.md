@@ -102,6 +102,7 @@ from pprint import pprint; pprint(vars(obj))
 # regexp regular expression
 import re
 str2 = re.sub(r'fsdf', '', str1)
+print(re.sub(r"\$(\d+)", lambda x: f"${int(x.group(1)) * 1.1:.2f}",  "The price of item1 is $10 and item2 is $20.")) # Use re.sub with a lambda to increase prices by 10%
 pattern = re.compile(pattern, flags=0)
 str_ = re.escape(pattern)
 pprint(matcher.group())
