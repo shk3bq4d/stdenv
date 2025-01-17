@@ -259,3 +259,6 @@ package awstats creates awstats: /etc/logrotate.d/httpd-prerotate/awstats
         endscript
 }
 ```
+allow 192.168.1.1;    # IP whitelisting
+allow 203.0.113.0/24; # IP whitelisting
+deny all;             # IP whitelisting

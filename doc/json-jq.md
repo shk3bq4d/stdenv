@@ -38,6 +38,9 @@ terraform state pull | jq '.resources[]| select(.type == "okta_user" and .name =
 
 ```
 ```sh
+echo "$response" | jq -r '.[] | (.id|tostring) + " " + .uid + " " + .title' | while read id uid title; do
+```
+```sh
 az acr list -o json |
   jq -r '.[] | .loginServer + " " + .name + " " + .resourceGroup + " " + .id' |
   while read server name rg id; do
