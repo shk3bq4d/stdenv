@@ -20,9 +20,11 @@ if [[ $nb_args -eq 0 ]]; then
 elif [[ "$@" = *"-h"* ]]; then
     /usr/bin/clusterssh "$@"
 else
-    sleep=$(max 5  $(( $nb_args / 2 )))
-    echo "sleep is $sleep"
-    { sleep $sleep; mri3_grid_layout.py; } &
+	if false; then
+		sleep=$(max 5  $(( $nb_args / 2 )))
+		echo "sleep is $sleep"
+		{ sleep $sleep; mri3_grid_layout.py; } &
+	fi
 	_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" ]] && [[ -f "$_tempfile" ]] && rm -f $_tempfile || true; }; #trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 	cat ~/.clusterssh/cluster-* > $_tempfile
 #cat $_tempfile
