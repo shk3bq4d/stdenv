@@ -1,5 +1,6 @@
 https://jmespath.org/
 https://jmespath.org/tutorial.html#functions
+https://docs.ansible.com/ansible/latest/collections/community/general/json_query_filter.html
 # https://jmespath.org/specification.html#builtin-functions
 ## Built-in Functions
 * abs
