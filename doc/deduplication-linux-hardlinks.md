@@ -10,6 +10,7 @@ rdfind -makehardlinks true /backup/bipbip/data/hardlinks/ /backup/sync-from-othe
 -n, -dryrun true|false
 
 
-find $PWD -printf '%5n %p\n'  | tee filelist.txt
+find $PWD -type f -printf "%5n %p\\n"
+find $PWD -type f -printf '%5n %p\\n'  | tee filelist.txt
 
 https://rmlint.readthedocs.io/en/latest/cautions.html
