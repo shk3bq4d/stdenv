@@ -2187,7 +2187,7 @@ Give me the power of 2! (or 5):
 {{ myvar | pow(5) }}
 {{ myvar | root }}
 {{ myvar | root(5) }}
-json_query != jq -> https://jmespath.org/specification.html#and-expressions
+json_query != jq -> https://jmespath.org/specification.html#and-expressions, https://docs.ansible.com/ansible/latest/collections/community/general/json_query_filter.html
 getent_passwd | json_query('*[2]')              # all uids
 getent_passwd.values()|map(attribute=2)|list    # all uids
 images.values() | map(attribute='push') | map('default', yes)
