@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
+# 2024.01.23 mark $cur_branch as fully merged
 
 set -euo pipefail
 umask 027
@@ -82,6 +84,16 @@ if ! git_current_checked_out_upstream_branch | grep -qx $master_branch; then
 fi
 git checkout $master_branch
 git merge --no-ff $cur_branch --no-edit
+
+if true; then
+    if ! git_current_checked_out_upstream_branch | grep -qx $master_branch; then
+        # 2024.01.23 mark $cur_branch as fully merged
+        git checkout $cur_branch
+        git reset $master_branch
+        git push
+        git checkout $master_branch
+    fi
+fi
 
 glol ${master_branch}...$master_head^ --color=always | cat
 
