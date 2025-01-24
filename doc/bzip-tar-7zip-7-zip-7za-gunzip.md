@@ -21,6 +21,7 @@ docker cp $(which zip) my_container:/bin/
 docker cp $(which unzip) my_container:/bin/
 unzip -l myzip.jar #     list files ls
 zip -vT myzip.jar # kind list files ls (instead it test integrity in verbose mode)
+zip --encrypt my.zip my.log # ask password on stdin
 rpm2cpio moxapi-7.10.5-1.x86_64.rpm|cpio -idmv
 
 
