@@ -70,6 +70,7 @@ if [[ "$(git_branch_ref "$master_branch")" != "$(git_branch_ref "origin/$master_
     fatal "FATAL: likely $master_branch is ahead or origin/$master_branch\nPlease deal with the situation yourself"
 fi
 
+set -x
 
 git checkout $cur_branch
 if ! git rebase $master_branch; then
@@ -90,7 +91,9 @@ if true; then
         # 2024.01.23 mark $cur_branch as fully merged
         git checkout $cur_branch
         git reset $master_branch
-        git push
+        if git_current_branch_s_remote | grep -q /; then
+            git push --force
+        fi
         git checkout $master_branch
     fi
 fi
