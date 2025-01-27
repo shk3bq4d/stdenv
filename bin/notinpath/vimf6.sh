@@ -353,7 +353,7 @@ $HOME/.Xdefaults)
     cat $SCRIPT | $SUDO docker run --rm -i think/plantuml -txt
     if true; then
         cat $SCRIPT | $SUDO docker run --rm -i think/plantuml > $f
-        chromium-browser --incognito --new-window --app=file://$f
+        default-browser --incognito --new-window --app=file://$f
     fi
     date
     exit 0

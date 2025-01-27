@@ -19,4 +19,5 @@ CLIP="$(xclip -o -selection primary 2>/dev/null | ~/bin/sed_remove_colors.sh | t
 	)"
 URL="$CLIP"
 set -x
-$HOME/bin/chromium-browser --new-window "$URL"
+#$HOME/bin/chromium-browser --new-window "$URL"
+$HOME/bin/default-browser --new-window "$URL"
