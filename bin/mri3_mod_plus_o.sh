@@ -9,7 +9,7 @@ case $HOSTNAME in \
 		URL=http://jlighttpd.ly.lan
 		;;
 	*)
-		URL=http://localhost
+		URL=http://127.0.0.1:57155
 		;;
 esac
 CLIP="$(xclip -o -selection primary 2>/dev/null | ~/bin/sed_remove_colors.sh | tr -d '\n'| sed -r \

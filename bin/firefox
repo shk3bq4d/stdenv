@@ -1,1 +1,8 @@
-chromium-browser
+#!/usr/bin/env bash
+
+#source ~/.std*aliases
+set -x
+BIN=/usr/bin/firefox
+$BIN \
+	"$@" \
+	</dev/null &>/dev/null &
