@@ -41,4 +41,5 @@ if [[ "$CLIP" != "$PREVCLIP" ]]; then # only open an URL once to avoid constant 
 	esac
 fi
 set -x
-$HOME/bin/chromium-browser --new-window "$URL"
+#$HOME/bin/chromium-browser --new-window "$URL"
+$HOME/bin/default-browser --new-window "$URL"

@@ -10,7 +10,7 @@ EOF
 }
 for i in $(sites); do
     [[ -z "$i" ]] && continue
-    nohup $HOME/bin/chromium-browser --new-window https://$i </dev/null &>/dev/null &
+    nohup $HOME/bin/default-browser --new-window https://$i </dev/null &>/dev/null &
 done
 for i in $(seq 1); do
     /usr/bin/mplayer ~/Music/bip-stereo.mp3

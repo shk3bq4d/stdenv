@@ -40,6 +40,11 @@ git_is_master_an_ancestor_of_currench_branch() {
     git merge-base --is-ancestor master $(git_current_branch)
 }
 
+git_current_branch_s_remote() {
+    # git current branch's remote
+    git rev-parse --abbrev-ref --symbolic-full-name @{u}
+}
+
 git_branch_ref() {
     local f branch_name d h
     branch_name="$1"
