@@ -2206,7 +2206,7 @@ loop: "{{ domain_definition | json_query(server_name_cluster1_query) }}"
 (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('prefix') -> 8 like in /8 of the subnet
 (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('host/prefix')    # 10.1.5.6/8
 (ansible_default_ipv4.address + '/' + ansible_default_ipv4.netmask) | ipaddr('network/prefix') # 10.0.0.0/8
-
+ansible_search_path
 community.general.keep_keys - Keep specific keys from dictionaries in a list. filter
 community.general.remove_keys - Remove specific keys from dictionaries in a list. filter
 community.general.replace_keys - Replace specific keys in a list of dictionaries. filter
