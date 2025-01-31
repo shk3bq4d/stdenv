@@ -21,6 +21,43 @@ os.umask (0o27)
 logger = logging.getLogger(__name__)
 
 class AnsibleStdinSortResultByAlphaTest(unittest.TestCase):
+    def test_a(self) -> None:
+        i = textwrap.dedent("""
+            ansible -m debug -a var=_20_nginx_ssl_cert_check__to_merge nginx
+            HOME is /home/hehe, user is hehe
+            vaults_args are --vault-id bob@secrets/ansible-vault-bob
+            + set +u
+            Friday 31 January 2025  20:45:17 +0100 (0:00:00.080)       0:00:00.080 ********
+            zzz | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: zzz
+                    port: 443
+            yyy | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: yyy
+                    port: 443
+            xxx | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: xxx
+                    port: 443
+              """)
+        o = textwrap.dedent("""
+            ====
+            xxx:
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: xxx
+                    port: 443
+            yyy:
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: yyy
+                    port: 443
+            zzz:
+                _20_nginx_ssl_cert_check__to_merge:
+                -   hostname: zzz
+                    port: 443
+              """).strip()
+        self.assertEqual(process(i), o)
+
     def test_me(self) -> None:
         i = textwrap.dedent("""
             PLAY [Ansible Ad-Hoc] **********************************************************
@@ -133,6 +170,8 @@ class State(Enum):
     TASK = auto()
     HOST_RESULT = auto()
     PLAY_RECAP = auto()
+    ADHOC_TASK = auto()
+    ADHOC_HOST_RESULT = auto()
 
 def process(ii: Union[str, Callable]) -> None:
     if type(ii) == str:
@@ -152,6 +191,12 @@ def process(ii: Union[str, Callable]) -> None:
         logger.info(f"{current_state} {line}")
         if re.match(r'^TASK \[', line) is not None:
             next_state = State.TASK
+            current_host = None
+            current_taskH = {}
+            taskAH.append(current_taskH)
+        elif re.match(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) \d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December) 20\d{2} .* \*\*\*\*\*\*\*\*$', line) is not None:
+            # Friday 31 January 2025  20:45:17 +0100 (0:00:00.080)       0:00:00.080 ********
+            next_state = State.ADHOC_TASK
             current_host = None
             current_taskH = {}
             taskAH.append(current_taskH)
@@ -180,6 +225,21 @@ def process(ii: Union[str, Callable]) -> None:
                             current_taskH[current_host] = current_taskH[current_host] + '\n' + line.lstrip()
                         else:
                             current_taskH[current_host] = line.lstrip()
+            if current_state in [State.ADHOC_TASK, State.ADHOC_HOST_RESULT]:
+                matcher = re.match(r'^(\S+) \| (SUCCESS) =>$', line)
+                if matcher:
+                    next_state = State.ADHOC_HOST_RESULT
+                    current_host = matcher.group(1)
+                    current_taskH[current_host] = ''
+                else:
+                    if not current_host:
+                        if False:
+                            raise BaseException("No current host while consuming ADHOC_HOST_RESULT")
+                    if current_host:
+                        if current_taskH[current_host]:
+                            current_taskH[current_host] = current_taskH[current_host] + '\n' + line[2:]
+                        else:
+                            current_taskH[current_host] = line[2:]
 
 
         if current_state == State.PLAY_RECAP:
