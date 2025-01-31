@@ -251,7 +251,6 @@ for i in {1..9}; do
     alias -g GI$i="GI -C$i"
     alias -g T$i="T -n $i"
     alias -g H$i="H -n $i"
-    alias -g LAST$i="'$(last $i)'"
     alias -g P$i="|awk '{ print \$$i }'"
 done
 
