@@ -61,3 +61,4 @@ cat ~/tmp/bip.json | jq -r '([ .resources[]| select(.type == "azuread_service_pr
 
 jq -R -s '.' < FILE # escape FILE as json string
 ```
+curl -s https://config.zscaler.com/api/zscaler.net/cenr/json | jq -r '[.[]|flatten(5)|reduce .[] as $item ({}; . * $item) | with_entries(select(.key | test("^city : (Zurich|Saint-Barthelemy).*"))) | flatten | .[].range]|map(select(test("^([0-9]{1,3}\\.){3}[0-9]{1,3}")))'
