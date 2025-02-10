@@ -1101,6 +1101,7 @@ done < <(find . -type f -name "*.bin" -maxdepth 1)
 
 
 echo -n "Are you sure you want to proceed (yN): " # read prompt
+read _read </dev/tty # prompt for reading in loop
 read _read # prompt
 echo # read prompt
 case "${_read,,}" in \
