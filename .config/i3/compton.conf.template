@@ -65,6 +65,7 @@ opacity-rule = [
     , "0:_NET_WM_STATE@[0]:a = '_NET_WM_STATE_HIDDEN'"
     , "92:class_g = 'mrdmenu'"
     , "98:class_g = 'Dunst'"
+    , "80:class_g ~= '^firefox-esr.*' && !focused"
 ];
 
 # Fading
