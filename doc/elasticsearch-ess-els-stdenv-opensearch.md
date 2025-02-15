@@ -180,7 +180,7 @@ having rotation based on size gives us peace of mind as per cluster's health liv
 4. Reboot one node and wait for it to come and have its service up again
 5. Reactivate allocation
 ```bash
-   b=all; curl -XPUT -d "{\"transient\":{\"cluster.routing.allocation.enable\":\"$b\"}}" 'http://localhost:9200/_cluster/settings'
+   b=all; curl -XPUT -H 'content-type: application/json' -d "{\"transient\":{\"cluster.routing.allocation.enable\":\"$b\"}}" 'http://localhost:9200/_cluster/settings'
 ```
 6. Verify cluster's health
 7. When green, deactivate shard allocation

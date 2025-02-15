@@ -251,3 +251,5 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\ServerManager" -Name "DoNotOpen
 reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System
 REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticecaption /t REG_SZ /d "WARNING" /f
 REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticetext /t REG_SZ /d "This computer is property of <company name> and is for authorized use only. Activities may be monitored and unauthorized access may result in criminal or civil prosecution. By signing into this device, you attest that you are an authorized user." /f
+
+ssh client through powershell seems to be happier with private key in %USERPROFILE%/.ssh/id_xxx instead of other place

@@ -5,13 +5,13 @@ _italic_
 1. orderered numbered  list
 > block quote
 `inline code`
-```monospace```
+```monospace single line```
 
 
 ```
-monospaced multiline text
-hihi
+monospaced multiline
 ```
+
 
 yowsup-cli
 yowsup-cli-mr registration --env android --requestcode sms --phone 41794276772 --cc 41 --mcc 228 --mnc 02 --debug
