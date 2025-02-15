@@ -14,6 +14,6 @@ for i in $(sites); do
     nohup $HOME/bin/chromium-browser --new-window https://$i </dev/null &>/dev/null &
 done
 for i in $(seq 1); do
-    /usr/bin/mplayer ~/Music/bip-stereo.mp3
+    #/usr/bin/mplayer ~/Music/bip-stereo.mp3
     sleep 1
 done
