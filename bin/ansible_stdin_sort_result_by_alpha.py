@@ -290,7 +290,7 @@ def go(args: List[str]) -> int:
     print(process(read_stdin))
 
 if __name__ == '__main__':
-    logging_conf()
+    logging_conf(level='INFO' if 'VIMF6' in os.environ else 'ERROR')
     if 'VIMF6' in os.environ:
         unittest.main()
     else:
