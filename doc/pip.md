@@ -1,4 +1,5 @@
 pip show requests # display version
+pip config debug
 
 pip install virtualenv virtualenvwrapper
 
