@@ -44,3 +44,8 @@ Option 66—TFTP server name option. It specifies a TFTP server to be assigned t
 Option 67—Boot file name option. It specifies the boot file name to be assigned to the client.
 Option 121—Classless route option. It specifies a list of classless static routes (the destination network addresses in these static routes are classless) that the requesting client should add to its routing table. If both Option 33 and Option 121 exist, Option 33 is ignored.
 Option 150—TFTP server IP address option. It specifies the TFTP server IP address to be assigned to the client.
+
+filter-A # disable all ipv4
+filter-A=example.com # disable ipv4 record for example.com
+filter-AAAA # disable ipv6 records
+disable-ipv6 # disable all ipv6 functionality

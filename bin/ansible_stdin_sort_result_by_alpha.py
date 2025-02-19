@@ -58,6 +58,31 @@ class AnsibleStdinSortResultByAlphaTest(unittest.TestCase):
               """).strip()
         self.assertEqual(process(i), o)
 
+    def test_b(self) -> None:
+        i = textwrap.dedent("""
+            ansible -m debug -a var=_20_nginx_ssl_cert_check__to_merge nginx
+            HOME is /home/hehe, user is hehe
+            vaults_args are --vault-id bob@secrets/ansible-vault-bob
+            + set +u
+            Friday 31 January 2025  20:45:17 +0100 (0:00:00.080)       0:00:00.080 ********
+            zzz | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge: false
+            yyy | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge: false
+            xxx | SUCCESS =>
+                _20_nginx_ssl_cert_check__to_merge: true
+              """)
+        o = textwrap.dedent("""
+            ====
+            xxx:
+                _20_nginx_ssl_cert_check__to_merge: true
+            yyy:
+                _20_nginx_ssl_cert_check__to_merge: false
+            zzz:
+                _20_nginx_ssl_cert_check__to_merge: false
+              """).strip()
+        self.assertEqual(process(i), o)
+
     def test_me(self) -> None:
         i = textwrap.dedent("""
             PLAY [Ansible Ad-Hoc] **********************************************************
@@ -194,7 +219,8 @@ def process(ii: Union[str, Callable]) -> None:
             current_host = None
             current_taskH = {}
             taskAH.append(current_taskH)
-        elif re.match(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) \d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December) 20\d{2} .* \*\*\*\*\*\*\*\*$', line) is not None:
+#       elif re.match(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) \d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December) 20\d{2} .* \*\*\*\*\*\*\*\*$', line) is not None:
+        elif re.match(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) \d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December) 20\d{2} .* \*{2,}$', line) is not None:
             # Friday 31 January 2025  20:45:17 +0100 (0:00:00.080)       0:00:00.080 ********
             next_state = State.ADHOC_TASK
             current_host = None
@@ -226,10 +252,11 @@ def process(ii: Union[str, Callable]) -> None:
                         else:
                             current_taskH[current_host] = line.lstrip()
             if current_state in [State.ADHOC_TASK, State.ADHOC_HOST_RESULT]:
-                matcher = re.match(r'^(\S+) \| (SUCCESS) =>$', line)
-                if matcher:
+                matcher1 = re.match(r'^(\S+) \| (SUCCESS) =>$', line)
+                matcher2 = re.match(r'^(ok|changed|failed): \[([^\]]+)\].*', line)
+                if matcher1 or matcher2:
                     next_state = State.ADHOC_HOST_RESULT
-                    current_host = matcher.group(1)
+                    current_host = matcher1.group(1) if matcher1 is not None else matcher2.group(2)
                     current_taskH[current_host] = ''
                 else:
                     if not current_host:
@@ -250,6 +277,7 @@ def process(ii: Union[str, Callable]) -> None:
 
     rA = []
     for tH in taskAH:
+        if len(tH) == 0: continue
         rA.append("====")
         for host in sorted(tH.keys()):
             rA.append(f"{host}:")
@@ -262,7 +290,7 @@ def go(args: List[str]) -> int:
     print(process(read_stdin))
 
 if __name__ == '__main__':
-    logging_conf()
+    logging_conf(level='INFO' if 'VIMF6' in os.environ else 'ERROR')
     if 'VIMF6' in os.environ:
         unittest.main()
     else:
