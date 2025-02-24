@@ -1296,3 +1296,22 @@ python3 -m venv /tmp/myvenv
 
 with open(os.path.expanduser(fp), 'r', encoding='utf-8-sig') as f: # windows BOM UTF-8 reader
 
+```sh
+ for tag in 7.2.0 latest; do for rpaversion in "" "==28.6.3"; do echo -n "tag:$tag rpaversion:$rpaversion, result is "; sudo docker run --rm -itu 0 ppodgorsek/robot-framework:$tag pip install rpaframework$rpaversion &>/dev/null && echo success || echo FAILURE; done; done
+for image in python:3.10 python:3.11 python:3.12 ppodgorsek/robot-framework:latest ppodgorsek/robot-framework:7.2.0 ; do for rpaversion in "==30.0.0" "==29.0.0" "==28.6.3"; do echo -n "image:$image rpaversion:$rpaversion, result is "; sudo docker run --rm -itu 0 $image pip install rpaframework$rpaversion &>/dev/null && echo success || echo FAILURE; done; done
+image:python:3.10 rpaversion:==30.0.0, result is success
+image:python:3.10 rpaversion:==29.0.0, result is success
+image:python:3.10 rpaversion:==28.6.3, result is success
+image:python:3.11 rpaversion:==30.0.0, result is success
+image:python:3.11 rpaversion:==29.0.0, result is success
+image:python:3.11 rpaversion:==28.6.3, result is success
+image:python:3.12 rpaversion:==30.0.0, result is success
+image:python:3.12 rpaversion:==29.0.0, result is success
+image:python:3.12 rpaversion:==28.6.3, result is FAILURE
+image:ppodgorsek/robot-framework:latest rpaversion:==30.0.0, result is success
+image:ppodgorsek/robot-framework:latest rpaversion:==29.0.0, result is success
+image:ppodgorsek/robot-framework:latest rpaversion:==28.6.3, result is FAILURE
+image:ppodgorsek/robot-framework:7.2.0 rpaversion:==30.0.0, result is success
+image:ppodgorsek/robot-framework:7.2.0 rpaversion:==29.0.0, result is success
+image:ppodgorsek/robot-framework:7.2.0 rpaversion:==28.6.3, result is FAILURE
+```
