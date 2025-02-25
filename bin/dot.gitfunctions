@@ -116,6 +116,7 @@ git_env() {
 }
 
 git_root_dir () {
+    # equivalent of "git rev-parse --absolute-git-dir" without git binary
     local a
     if [[ -n ${GIT_DIR:+1} ]]
     then

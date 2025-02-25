@@ -280,6 +280,28 @@ elif which vi  &>/dev/null; then # zsh hash does not work, I'm not sure why
 else
     echo "bashrc no vi(m)"
 fi
+if [[ $EUID -eq 0 ]]; then # vim readonly for root
+    function _rootgit() {
+        local git_root_dir git_owner
+        git_root_dir="$(command git rev-parse --absolute-git-dir 2>/dev/null || true)"
+        if [[ "$git_root_dir" == "--absolute-git-dir" ]]; then
+            # old git version
+            git_root_dir="$(command git rev-parse --git-dir 2>/dev/null | xargs -0r realpath || true)"
+        fi
+        if [[ -z "$git_root_dir" ]] || [[ ! -d "$git_root_dir" ]]; then
+            command git "$@"
+            return $?
+        fi
+        git_owner="$(stat -c "%u" "$git_root_dir")"
+        if [[ $git_owner -eq 0 ]]; then
+            command git "$@"
+        else
+            >&2 echo "bashrc git as root is function'ed, executing sudo -u \\#$git_owner git $@"
+            sudo -u \#$git_owner git "$@"
+        fi
+    }
+    alias git=_rootgit
+fi
 
 #export PATH=~/bin:$PATH
 export VAGRANT_SERVER_URL=https://app.vagrantup.com
