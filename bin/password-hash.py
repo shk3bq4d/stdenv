@@ -73,7 +73,8 @@ _ = {
             [passlib.hash.bcrypt, 'BCrypt', dict(ident='2b')],
             [passlib.hash.bcrypt, 'BCrypt', dict(ident='2y')],
             [passlib.hash.sha256_crypt, 'SHA-256 Crypt'],
-            [passlib.hash.sha512_crypt, 'SHA-512 Crypt'],
+            [passlib.hash.sha512_crypt, 'SHA-512 Crypt with rounds='],
+            [passlib.hash.sha512_crypt, 'SHA-512 Crypt with no rounds as using defaults', dict(rounds=5000)],
 
             [passlib.hash.unix_disabled, 'Unix Disabled Account Helper Special'], #note should be made of the following fallback helper, which is not an actual hash scheme, but implements the “disabled account marker” found in many Linux & BSD password files:'],
         ],

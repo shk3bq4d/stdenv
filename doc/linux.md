@@ -529,3 +529,6 @@ SIGXFSZ (25): File size limit exceeded.
 			  /var/run/reboot-required # debian ubuntu
 
 vm.swapiness: 0 (starts to use swap when free RAM is 0% (instead of 30 or 60 as it is default on some distribution))
+
+
+ddrescue # dd /dev/sdb alternative

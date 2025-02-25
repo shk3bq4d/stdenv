@@ -118,4 +118,5 @@ lvremove /dev/mapper/VG_data-LV_opt
 lvremove /dev/mapper/VG_data-LV_var
 lvremove /dev/mapper/VG_data-LV_data
 lvcreate --size 80G  -n LV_data VG_root
+lvcreate --size 512M -n lvswap vgroot && mkswap /dev/mapper/vgroot-lvswap && swapon /dev/mapper/vgroot-lvswap
 mkfs.ext4 /dev/mapper/VG_root-LV_data

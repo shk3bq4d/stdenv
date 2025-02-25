@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh expandtab :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 13 Jan 2020
-##
 
 set -euo pipefail
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
@@ -17,6 +9,7 @@ vagrant_version=1.18.1
 vagrant_version=2.2.10
 vagrant_version=2.3.4
 vagrant_version=2.2.19
+vagrant_version=2.4.3
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 BIN="$HOME/bin/vagrant-$vagrant_version"
