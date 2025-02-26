@@ -10,9 +10,9 @@ untrap() { trap - SIGHUP SIGINT SIGQUIT SIGTERM EXIT; }
 
 cleanup_crontab_line() {
     if [[ "$(source_type "$@")" == *user ]]; then
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})//"
+        sed -u -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})//"
     else
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S\s+(\S+\s+){4})\S+\s+//"
+        sed -u -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})\S+\s+//"
     fi
 }
 
@@ -20,7 +20,7 @@ crontab_line_user() {
     if [[ "$(source_type "$@")" == *user ]]; then
         return 0
     else
-        sed -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})(\S+)\s+.*/\3/"
+        sed -u -r -e "s/^\s*(@\w+\s+|[*0-9]\S*\s+(\S+\s+){4})(\S+)\s+.*/\3/"
     fi
 }
 
@@ -28,14 +28,14 @@ filter() {
     if [[ $# -eq 0 ]]; then
         cat
     else
-        grep -E --color=always "$@"
+        grep --line-buffered -E --color=always "$@"
     fi
 }
 
 cleanup_crontab_file_stdin() {
-    grep -E "^\s*[@*0-9]" |
-        grep -vF '# crontab-launch-entry-asap.sh' |
-        grep -vF 'RUNONCEID=' |
+    grep --line-buffered -E "^\s*[@*0-9]" |
+        grep --line-buffered -vF '# crontab-launch-entry-asap.sh' |
+        grep --line-buffered -vF 'RUNONCEID=' |
         filter "$@"
 }
 
@@ -57,7 +57,7 @@ newentry() {
     echo -n "$(date -d "@$dateref" +'%_M    %_H  %_d  %_m') *" # don't use dow => https://stackoverflow.com/questions/34357126/why-crontab-uses-or-when-both-day-of-month-and-day-of-week-specified
     echo -n " $(crontab_line_user "$@" <<< "$entry")"
     echo -n " test \`date +\\%Y\` = $(date +%Y) || exit; "
-    cleanup_crontab_line "$@" <<< "$entry" | sed -r -e "s/$/ # crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
+    cleanup_crontab_line "$@" <<< "$entry" | sed -u -r -e "s/$/ # crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
 }
 
 consume_crontab() {
@@ -80,8 +80,14 @@ consume_crontab() {
         if [[ -f "$f" ]]; then
             cat $f
         else
-            >&2 echo "FATAL: not a file nor a user $@"
-            exit 1
+            if [[ "$EUID" -ne 0 ]]; then
+                >&2 echo "WARN: not a file nor a user $@, trying as sudo"
+                sudo bash "$(realpath "$0")" "$@" >&2
+                exit $?
+            else
+                >&2 echo "FATAL: not a file nor a user $@"
+                return 1
+            fi
         fi
     fi
     return 0
@@ -101,10 +107,10 @@ while :; do
     [[ $_user == "" ]] && _user=$(id -un)
     consume_crontab "$_user" | cleanup_crontab_file_stdin "$_grep" > $_tempfile
     nb_lines="$(wc -l < $_tempfile)"
-    cat -n $_tempfile  | sed -r -e "s/^([ 0-9]+)/$ECYAN\1$EOFF/"
+    cat -n $_tempfile  | sed -u -r -e "s/^([ 0-9]+)/$ECYAN\1$EOFF/"
     echo -n "Which entry would you like to execute ? "
 
-    read _read
+    read _read </dev/tty
     if [[ -z "$_read" ]]; then
         echo "EMPTY, aborting"
         exit 1
@@ -125,7 +131,7 @@ while :; do
     fi
 
 
-    entry="$(remove_colors $_tempfile | sed -r -n "$_read p")"
+    entry="$(remove_colors $_tempfile | sed -u -r -n "$_read p")"
     #dateref="$(date +%s -d "+2 minute ago")"
     dateref="$(date +%s -d "$(date +'%Y-%m-%d %H:%M' -d "+2 minute")")"
     backupfile=/tmp/crontab-launch-entry-asap.$(date +'%Y.%m.%d_%H.%M.%S')
