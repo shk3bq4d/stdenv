@@ -46,3 +46,6 @@ pip install --target=/tmp --only-binary=:all: cffi cryptography --abi cp38 --abi
 pip install --target=/tmp --only-binary=:all: cffi cryptography --platform manylinux2010_x86_64
 
 error: command 'x86_64-linux-gnu-gcc' failed: No such file or directory # apt install python3-dev build-essential
+
+
+pip install --user --break-system-packages requests # debian
