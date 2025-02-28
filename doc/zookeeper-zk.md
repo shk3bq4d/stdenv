@@ -164,3 +164,18 @@ echo stat | nc localhost 2181 | grep Mode
    zkCli.sh delete /my-upgrade-test-node
  * abort in case of any error
 
+
+https://hub.docker.com/_/zookeeper
+https://github.com/31z4/zookeeper-docker/issues?q
+# get peers
+zkCli.sh get /zookeeper/config
+docker exec -it zookeeper zkCli.sh get /zookeeper/config
+docker exec -it zookeeper zkCli.sh get /zookeeper/config
+docker exec -it zookeeper zkCli.sh create /my-upgrade-test-node from-node-$(hostname -f)
+
+4lw.commands.whitelist=stat, srvr, mntr, ruok
+echo stat | nc localhost 2181
+echo srvr | nc localhost 2181
+echo mntr | nc localhost 2181 # metrics
+echo ruok | nc localhost 2181
+
