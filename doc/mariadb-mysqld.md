@@ -210,6 +210,8 @@ where regexp_replace('str', 't', 'SUCCESS') like '%SUCCESS%';
 where regexp_replace(name, 'core\.(app|deskpro|install)', 'SUCCESS') like '%SUCCESS%';
 regexp_replace(message, '\n *\n', '') -- remove empty line, sort of
 regexp_replace(message, 'Confidentiality Notice:(.*\n)+.*$', '') -- get rid of multiple lines after pattern
+select regexp_replace(bandanavalue, '(<property name="mail.smtp.host" value="|<hostname>)(?!disabled)([^"<]*)', '\1disabled_\2', 'g') from bandana where bandanakey = 'atlassian.confluence.smtp.mail.accounts' and regexp_instr(bandanavalue, '(<property name="mail.smtp.host" value="|<hostname>)(?!disabled)') > 0; -- global match
+update bandana set bandanavalue = regexp_replace(bandanavalue, '(<property name="mail.smtp.host" value="|<hostname>)(?!disabled_)([^"<]*)', '\1disabled_\2', 'g') where bandanakey = 'atlassian.confluence.smtp.mail.accounts'  and regexp_instr(bandanavalue, '(<property name="mail.smtp.host" value="|<hostname>)(?!disabled)') > 0; -- global match
 ```
 
 # safe mode

@@ -39,3 +39,7 @@ xzcat is equivalent to xz --decompress --stdout.
 lzma is equivalent to xz --format=lzma.
 unlzma is equivalent to xz --format=lzma --decompress.
 lzcat is equivalent to xz --format=lzma --decompress --stdout.
+
+
+gzip --keep myfile.gz # don't delete file
+gunzip --keep myfile.gz # don't delete file
