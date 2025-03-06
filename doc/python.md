@@ -1137,8 +1137,8 @@ print args.accumulate(args.integers) # arg_parse
 ```
 
 ```sh
-python -m SimpleHTTPServer 8000
-python3 -m http.server 8000 # SimpleHTTPServer
+python -m SimpleHTTPServer 8000 # SimpleHTTPServer httpd webserver
+python3 -m http.server 8000 # SimpleHTTPServer httpd webserver
 ```
 
 pydoc mypackage
