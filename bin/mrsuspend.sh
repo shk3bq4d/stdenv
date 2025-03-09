@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 22 Sep 2018
-##
 
 set -o pipefail
 #exec > >(tee /tmp/logfile.txt)
@@ -63,6 +55,26 @@ dec17.ly.lan|nov20.ly.lan|shaz0140504)
 	mute.sh
 	sudo umount -t fuse.sshfs -a
 	citrix-stop-kill-all.sh
+	# before suspend launch a background process that, contrary to an unique sleep
+	# command, will sleep for at least $delay actual seconds and not
+	# for real (wall-clock) time
+	# The idea is to restore the keepass fs early
+	delay=90
+	before=$(date +%s)
+	after=$(( before + delay ))
+	{
+		while :; do
+			now=$(date +%s)
+			if [[ $now -gt $after ]]; then
+				echo completed
+				break
+			fi
+			sleep 1
+		done
+		~/bin/sshfs-keepass-apr16.sh || true
+		~/bin/sshfs-keepass-apr16-sf.sh || true
+		date >> ~/.tmp/log/mrsuspend.sh.log
+	} &
 	sudo systemctl suspend
 	exit 0
 	;;
