@@ -3,6 +3,9 @@ https://searchfox.org/mozilla-release/source/modules/libpref/init/StaticPrefList
 https://mozilla.github.io/policy-templates/
 https://support.mozilla.org/en-US/kb/customizing-firefox-using-policiesjson
 
+# keyboard shorcuts
+<F6> shift between text entry
+
 # ublock-origin
 uBlock0@raymondhill.net:
 https://addons.mozilla.org/en-US/firefox/addon/ublock-origin
