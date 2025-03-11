@@ -10,3 +10,6 @@ deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main
 
 
 "C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors
+
+
+chattr +i /etc/apt/sources.list.d/microsoft-edge.list # lock file to prevent modification
