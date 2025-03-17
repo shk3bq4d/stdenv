@@ -7,6 +7,9 @@ iperf3 -c -R # --reverse
 iperf3 -c -u # --udp
 iperf3 -V # --verbose
 iperf3 -v # --version
+iperf3 -p 4 # --parrallel 4 , multiple parrallel streams
+
+LACP: link aggregation: leads to no gain on two servers, you need multiple host to saturate a server link that has LACP activated
 
 apt install iperf3
 iptables -I INPUT 1 -p tcp -m tcp --dport 51820 -j ACCEPT # wireguard
@@ -15,10 +18,13 @@ iptables -I INPUT 1 -p udp        --dport 51820 -j ACCEPT # wireguard
 iptables -I INPUT 1 -p tcp -m tcp --dport 5201 -j ACCEPT
 iptables -I INPUT 1 -p udp        --dport 5201 -j ACCEPT
 
+iptables -I INPUT 1 -p tcp -m tcp --dport 5202 -j ACCEPT
+iptables -I INPUT 1 -p udp        --dport 5202 -j ACCEPT
+
 iptables -D INPUT   -p tcp -m tcp --dport 5201 -j ACCEPT
 iptables -D INPUT   -p udp        --dport 5201 -j ACCEPT
 
-$ iperf3 -c myhest --time 10
+$ iperf3 --time 10 -c myhest 
 Connecting to host myhest port 5201
 [  5] local 10.12.9.1 port 34012 connected to 10.12.9.4 port 5201
 [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
