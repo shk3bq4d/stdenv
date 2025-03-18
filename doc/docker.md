@@ -156,6 +156,7 @@ docker inspect zabbix-web    | jq '.[0].Config.Cmd'
 docker inspect zabbix-web    | jq '.[0].Config.Healthcheck'
 docker inspect zabbix-web    | jq '.[0].Config.Healthcheck.Test'
 docker inspect zabbix-web    | jq '.[0].Config.Healthcheck.Test[3]' -r # CMD bash -c
+docker inspect zabbix-web --format '{{ .Config.Image }}'
 docker inspect zabbix-web    | jq '.[0].Config.Image'
 docker inspect zabbix-web    | jq '.[0].Config.WorkingDir'
 docker inspect zabbix-web    | jq '.[0].Config.Entrypoint'

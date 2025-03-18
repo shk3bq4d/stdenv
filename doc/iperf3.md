@@ -7,15 +7,37 @@ iperf3 -c -R # --reverse
 iperf3 -c -u # --udp
 iperf3 -V # --verbose
 iperf3 -v # --version
+iperf3 -p 4 # --parrallel 4 , multiple parrallel streams
+
+LACP: link aggregation: leads to no gain on two servers, you need multiple host to saturate a server link that has LACP activated
 
 apt install iperf3
 iptables -I INPUT 1 -p tcp -m tcp --dport 51820 -j ACCEPT # wireguard
 iptables -I INPUT 1 -p udp        --dport 51820 -j ACCEPT # wireguard
+
 iptables -I INPUT 1 -p tcp -m tcp --dport 5201 -j ACCEPT
 iptables -I INPUT 1 -p udp        --dport 5201 -j ACCEPT
+
+iptables -I INPUT 1 -p tcp -m tcp --dport 5202 -j ACCEPT
+iptables -I INPUT 1 -p udp        --dport 5202 -j ACCEPT
+
 iptables -D INPUT   -p tcp -m tcp --dport 5201 -j ACCEPT
 iptables -D INPUT   -p udp        --dport 5201 -j ACCEPT
 
+$ iperf3 --time 10 -c myhest 
+Connecting to host myhest port 5201
+[  5] local 10.12.9.1 port 34012 connected to 10.12.9.4 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec  1.08 GBytes  9.24 Gbits/sec  3676    694 KBytes
+[  5]   1.00-2.00   sec  1.09 GBytes  9.37 Gbits/sec  1969   1.23 MBytes
+[  5]   2.00-3.00   sec  1.09 GBytes  9.34 Gbits/sec  2918    691 KBytes
+
+ID:     Stream Id
+Retr (Retransmissions): The number of TCP retransmissions during that interval.  A high number of retransmissions (e.g., 3676 in the first second) suggests packet loss or congestion.
+Cwnd (Congestion Window Size)
+    The TCP congestion window size in bytes.
+    It adjusts dynamically to network conditions.
+    A decrease in Cwnd (e.g., from 1.23 MBytes to 691 KBytes) suggests the TCP congestion control algorithm is responding to network conditions (possibly high retransmissions or congestion).
 
 
 IPERF3(1)                                                     User Manuals                                                     IPERF3(1)

@@ -8,6 +8,7 @@
 -I@ -i@ --replace=@ : xargs -I@ cp security-groups.tf @.tf
 -o, --open-tty
 
+xargs -d '\n'             # keeps double quotes in input which is convenient for terraform state list | xargs -d '\n' when terraform addresses are like 'module.vsphere_vm["HEHE.pa.bo"].data.vsphere_virtual_machine.template[0]'
 xargs -d '\n'             ## GNU line separator while read line
 | tr '\n' '\0' | xargs -0 ##     line separator while read line
 

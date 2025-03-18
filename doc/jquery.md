@@ -23,7 +23,7 @@ $('.id-number:visible > [title="Ticket ID"]').length
 remove() - Removes the selected element (and its child elements)
 empty() - Removes the child elements from the selected element.
 
-$(this).attr('title') // attribute value
+$(this).attr('title') // attribute value clear
 $(this).text(); // read text
 $(this).text('write text');
 $(this).html();
