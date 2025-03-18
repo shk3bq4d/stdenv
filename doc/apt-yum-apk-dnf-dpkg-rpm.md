@@ -14,6 +14,7 @@ apt-file search ts | grep -E '/ts$' # moreutils: whatprovides in all packages
 apt-file search apt-file # apt-file: whatprovides in all packages
 apt-file search if-config | grep -E '/sbin/ifconfig' # net-tools
 apt-file search ldapwhoami| grep -E '/ldapwhoami$' # ldap-utils
+apt install procps # ps
 apt update && apt install -y apt-file && apt-file update && apt-file search mysqldump
 sudo docker run --rm -it  debian:bookworm sh -c "apt update && apt install -y apt-file && apt-file update && apt-file search mysqldump"
 apt purge postfix\* # erase
