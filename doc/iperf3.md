@@ -10,6 +10,7 @@ iperf3 -v # --version
 iperf3 -p 4 # --parrallel 4 , multiple parrallel streams
 
 LACP: link aggregation: leads to no gain on two servers, you need multiple host to saturate a server link that has LACP activated
+ping -M do -s 8972 MYHOST # test jumbo frames with do not fragment icmp flag
 
 apt install iperf3
 iptables -I INPUT 1 -p tcp -m tcp --dport 51820 -j ACCEPT # wireguard
