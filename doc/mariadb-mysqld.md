@@ -291,6 +291,9 @@ insert into dummy (d) values ('node1 is master');
   select * from dummy order by id desc limit 10;
 * restart services and check slave status again
 
+```sh
+while :; do if [[ $(echo 'show slave status\G' | db.sh | grep -Po '(?<=Last_Errno: ).*') -ne 0 ]]; then echo 'stop slave; set global sql_slave_skip_counter = 1; start slave;' | db.sh; fi; sleep 1; done
+```
 
 # json query
 WARNING json_query can't be used to query string or int (scalars)

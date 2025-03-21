@@ -23,6 +23,10 @@ git/$(whoami)/haac
 EOF
 }
 
+excludes() {
+    grep -vE '\.orig$'
+}
+
 found_git_dir() {
     local d g
 
@@ -40,20 +44,20 @@ found_git_dir() {
 
 d="$(found_git_dir)/ans/host_vars"
 
-case "$(ls -1d $d/* | grep -c "$@")" in \
+case "$(ls -1d $d/* | excludes | grep -c "$@")" in \
 0)
     >&2 echo "FATAL: found zero hosts matching $@"
     exit 1
     ;;
 1) true;;
 *)
-    ls -1d $d/* | grep "$@" | tail -n 10
+    ls -1d $d/* | excludes | grep "$@" | tail -n 10
     >&2 echo "FATAL: found $(ls -1d $d/* | grep -c "$@") hosts matching $@"
     exit 1
     ;;
 esac
 
-h="$(ls -1d $d/* | grep -- "$@")"
+h="$(ls -1d $d/* | excludes | grep -- "$@")"
 #ls -1d $d/*
 #echo "arg is $@"
 #echo d is $d
@@ -62,11 +66,11 @@ if [[ -d "$h" ]]; then
     if [[ -f "$h/main.yml" ]]; then
         echo "$h/main.yml"
     else
-        if [[ 0 -eq $(ls -1d $h/* | wc -l) ]]; then
+        if [[ 0 -eq $(ls -1d $h/* | excludes | wc -l) ]]; then
             >&2 echo "FATAL not hosts found in dir $h"
             exit 1
         fi
-        ls -1d $h/* | head -n 1
+        ls -1d $h/* | excludes | head -n 1
     fi
 else
     echo "$h"

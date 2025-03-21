@@ -38,6 +38,7 @@ aptitude why PACKAGE # describe why package was installed
 ## APT security updates
 ```sh
 apt-get upgrade -s | grep -i security # list security updates
+apt-get upgrade -s | grep -i security | awk '{print $2}' | xargs -o apt install
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
 ```

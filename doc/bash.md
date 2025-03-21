@@ -1180,3 +1180,4 @@ sudo nice -n -18 openssl dhparam -out /tmp/high-priority-requires-sudo-with-nice
 renice +2 $(pgrep blobfuse) # lower priority of process
 renice +2 $$                # lower priority of current process
 renice -2 $(pgrep blobfuse) # higher priority of process
+watch bash -c \""echo 'show slave status\G' | db.sh"\"
