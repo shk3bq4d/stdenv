@@ -18,3 +18,5 @@ xrandr --output Virtual-1 --mode 1920x1200
 xrandr --output HDMI-1 --same-as eDP-1
 xrandr --output eDP-1 --auto --output HDMI-1 --same-as eDP-1
 xrandr --output eDP-1 --auto --output HDMI-1 --auto
+
+xrandr --output eDP --mode 2880x1800 --pos 0x0
