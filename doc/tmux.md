@@ -7,6 +7,7 @@ tmux ls # list sessions:
 tmux kill-session -t myname # kill session:
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill # Kill all the tmux sessions:
 In tmux, hit the prefix ctrl+b (my modified prefix is ctrl+a) and then:
+tmux new -s sessionname ';' send-keys $'echo coucou\n'
 
 <C-b> Page Up   scroll up
 <C-b> Page Down scroll down
@@ -45,11 +46,11 @@ Sync Panes
 You can do this by switching to the appropriate window, typing your Tmux prefix (commonly Ctrl-B or Ctrl-A) and then a colon to bring up a Tmux command line, and typing:
 
 :setw synchronize-panes
-You can optionally add on or off to specify which state you want; otherwise the option is simply toggled. This option is specific to one window, so it wont change the way your other sessions or windows operate. When youre done, toggle it off again by repeating the command. tip source
+You can optionally add on or off to specify which state you want; otherwise the option is simply toggled. This option is specific to one window, so it won't change the way your other sessions or windows operate. When you're done, toggle it off again by repeating the command. tip source
 
 Resizing Panes
 
-You can also resize panes if you dont like the layout defaults. I personally rarely need to do this, though its handy to know how. Here is the basic syntax to resize panes:
+You can also resize panes if you don't like the layout defaults. I personally rarely need to do this, though it's handy to know how. Here is the basic syntax to resize panes:
 
 PREFIX : resize-pane (By default it resizes the current pane down)
 PREFIX : resize-pane -U (Resizes the current pane upward)
@@ -68,7 +69,7 @@ Pressing PREFIX [ places us in Copy mode. We can then use our movement keys to m
 setw -g mode-keys vi
 With this option set, we can use h, j, k, and l to move around our buffer.
 
-To get out of Copy mode, we just press the ENTER key. Moving around one character at a time isnt very efficient. Since we enabled vi mode, we can also use some other visible shortcuts to move around the buffer.
+To get out of Copy mode, we just press the ENTER key. Moving around one character at a time isn't very efficient. Since we enabled vi mode, we can also use some other visible shortcuts to move around the buffer.
 
 For example, we can use "w" to jump to the next word and "b" to jump back one word. And we can use "f", followed by any character, to jump to that character on the same line, and "F" to jump backwards on the line.
 
