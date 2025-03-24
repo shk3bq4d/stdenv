@@ -182,3 +182,5 @@ echo mntr | nc localhost 2181 # metrics
 echo ruok | nc localhost 2181
 
 ```
+
+cat /etc/hosts | grep -v 127.0.0.1 | grep -v $(hostname -s) | docker exec -i zookeeper tee -a /etc/hosts
