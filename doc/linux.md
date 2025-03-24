@@ -532,3 +532,8 @@ vm.swapiness: 0 (starts to use swap when free RAM is 0% (instead of 30 or 60 as 
 
 
 ddrescue # dd /dev/sdb alternative
+
+
+sudo dmesg -n 1 # console logging disabling,
+sudo dmesg -D   # console logging disabling,
+sudo dmesg -E   # reactivate console logging
