@@ -76,4 +76,5 @@ update-initramfs -u -k all
 # ansible
 https://docs.ansible.com/ansible/latest/collections/community/crypto/luks_device_module.html
 
-cryptsetup luksDump /dev/sda3
+cryptsetup luksDump /dev/sda3 # list keys slot
+cryptsetup luksKillSlot /dev/sda3 NUMBER # list keys slot
