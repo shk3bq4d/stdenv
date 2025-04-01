@@ -3,7 +3,6 @@
 
 set -euo pipefail
 
-<<<<<<< HEAD
 cmctl_version=2.0.0
 
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries

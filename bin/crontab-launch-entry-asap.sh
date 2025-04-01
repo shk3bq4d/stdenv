@@ -60,6 +60,16 @@ newentry() {
     cleanup_crontab_line "$@" <<< "$entry" | sed -u -r -e "s/$/ # crontab-launch-entry-asap.sh $(date -d "@$dateref" +'%Y.%m.%d %H:%M:%S')/"
 }
 
+file_from_arg() {
+    local f
+    case "$@" in \
+    s) f=/etc/cron.d/sf-role;;
+    crontab) f=/etc/crontab ;;
+    *) f="$@" ;;
+    esac
+    echo -n "$f"
+}
+
 consume_crontab() {
     local f user
     if [[ $# -eq 0 ]] || [[ -z "$1" ]]; then
@@ -69,14 +79,7 @@ consume_crontab() {
         #crontab -l -u "$user"
         ! crontab -l -u "$user" 2>/dev/null && echo "enter your sudo password" && sudo crontab -l -u "$user"
     else
-        case "$@" in \
-        crontab)
-            f=/etc/crontab
-            ;;
-        *)
-            f="$@"
-            ;;
-        esac
+        f="$(file_from_arg "$@")"
         if [[ -f "$f" ]]; then
             cat $f
         else
@@ -209,11 +212,12 @@ while :; do
         fi
         ;;
     *)
-        cp "$_user" $backupfile
-        if [[ -w "$@" ]]; then
-            newentry "$entry" "$_user" >> "$_user"
+        f="$(file_from_arg "$_user")"
+        cp "$f" $backupfile
+        if [[ -w "$f" ]]; then
+            newentry "$entry" "$f" >> "$f"
         else
-            newentry "$entry" "$_user" | sudo tee -a "$_user" >/dev/null
+            newentry "$entry" "$f" | sudo tee -a "$f" >/dev/null
         fi
         ;;
     esac

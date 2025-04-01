@@ -393,3 +393,6 @@ Unattended-Upgrade::DevRelease "auto";
 # apt pin
 /etc/apt/preferences.d/90-blacklist-packages-microsoft-com
 apt-cache policy
+
+# opkg
+opkg install bind-dig

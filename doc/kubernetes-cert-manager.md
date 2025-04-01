@@ -2,7 +2,10 @@
 * https://cert-manager.io/docs/release-notes/
 * https://github.com/cert-manager/cert-manager
 * https://github.com/cert-manager/cert-manager/releases
+* https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/values.yaml
+* https://raw.githubusercontent.com/cert-manager/cert-manager/refs/heads/master/deploy/charts/cert-manager/values.yaml
 
+cmctl renew -n graylog gl.e.boop.com
 kubectl cert-manager renew letsencrypt-prod.blabla.bip.bop.com # certificate.cert-manager.io/
 kubectl cert-manager renew -n prometheus           --all
 kubectl cert-manager renew -n prometheus           --all --all-namespaces
