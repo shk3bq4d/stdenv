@@ -55,6 +55,9 @@ SELINUXTYPE=targeted
 
 ```sh
 restorecon -FRvv ~/.ssh
+i=/tmp/myreference; j=myfile; chcon --reference=$i $j && chmod --reference=$i $j && chown --reference=$i $j && echo yes || echo no
+i=/var/lib/grafana/grafana.db;  j=/var/lib/grafana/s3-warp/*; chcon --reference=$i $j && chmod --reference=$i $j && chown --reference=$i $j && echo yes || echo no
+chcon --reference=/my/referencefile myfiles
 chcon -Rv -t ssh_home_t ~/.ssh
 chcon -Rv -t httpd_sys_content_t /var/www/
 chcon -Rv -t httpd_sys_content_t /data/www/html/manual_uploads

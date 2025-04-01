@@ -643,6 +643,7 @@ set -e # stop after first errors
 set -x # print command (useful in debugging scripts)
 set -u # crash if unbound variables => use [[ -n ${VAR+1} ]] to check for existence
 set -o pipefail # crash if programs in between pipes fail
+set -f # disable path expansion globbing *
 
 set -o noclobber
 
