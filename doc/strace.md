@@ -12,6 +12,7 @@ strace -s 99999 -fffttTo /tmp/strace.out -p $(pgrep grafana)
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u grafana   | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -f negotiate | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u docker999 | sed -r -e 's/.*/-p \0/')
+strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u zabbix | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $( ps --no-headers -o pid -$(pgrep -f "run_app.sh mage start" | head -n 1) | sed -r -e 's/.*/-p \0/')
 strace -tf -p $(pgrep -f /usr/sbin/sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemctl show --value -p MainPID sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
