@@ -991,6 +991,13 @@ from StringIO import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(te
 from io       import StringIO; import yaml, textwrap; mH = yaml.load(StringIO(textwrap.dedent("""python3
     """)))
 
+def ignore_unknown_tags(loader, tag_suffix, node):                   # ansible vault yaml ignore unknown tag
+    return None                                                      # ansible vault yaml ignore unknown tag
+    return loader.construct_object(node)                             # ansible vault yaml ignore unknown tag
+yaml.SafeLoader.add_multi_constructor('!vault', ignore_unknown_tags) # ansible vault yaml ignore unknown tag
+with open(fp, 'rb') as f:                                            # ansible vault yaml ignore unknown tag
+yH = yaml.load(f, Loader=yaml.SafeLoader)                            # ansible vault yaml ignore unknown tag
+
 # https://stackoverflow.com/questions/6432605/any-yaml-libraries-in-python-that-support-dumping-of-long-strings-as-block-liter
 @begin=python@
     import yaml
