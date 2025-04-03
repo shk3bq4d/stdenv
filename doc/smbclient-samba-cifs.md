@@ -1,3 +1,4 @@
+apt install smbclient
 smbclient -L r001itmgt0011 -A ~/.smbclientenv1
 smbclient \\\\r001itmgt0011\\C$ -A ~/.words/.smbclientenv1
 smbclient '\\p-jnfra-jtm-001.kboum.net\C$' -A ~/.words/.smbclientenv2
