@@ -13,6 +13,7 @@ strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u grafana   | sed -r -e 's/.*/
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -f negotiate | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u docker999 | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $(pgrep -u zabbix | sed -r -e 's/.*/-p \0/')
+session_id_process_regex='linux_devops$'; strace -s 99999 -fffttTo /tmp/strace.out $(pgrep --session "$(ps --no-headers -o sid -f -p "$(pgrep -f "$session_id_process_regex" | tr '\n' , | sed -r -e 's/,$//')" | sort -u | tr '\n' , | sed -r 's/,$//' )" | sed -r -e 's/.*/-p \0/')
 strace -s 99999 -fffttTo /tmp/strace.out $( ps --no-headers -o pid -$(pgrep -f "run_app.sh mage start" | head -n 1) | sed -r -e 's/.*/-p \0/')
 strace -tf -p $(pgrep -f /usr/sbin/sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
 strace -tf -p $(systemctl show --value -p MainPID sshd) |& grep -vE 'clock_gettime|rt_sigprocmask' | grep -F / | grep -E open\|execve
