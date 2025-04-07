@@ -10,7 +10,7 @@ case $0 in \
 *)    case_sensitive="";;
 esac
 
-test -t 1 && color=always || color=no
+test -t 1 && color=--color || color=--nocolor
 
 go() {
   local arg args
@@ -29,7 +29,7 @@ go() {
   done
   export GREP_COLORS='ms=01;32'
   #"$0" "$@" | grep --line-buffered --color=$color -aE $case_sensitive "$arg" --
-  "$0" "$@" | ack --color $case_sensitive $args "$arg" --
+  "$0" "$@" | ack $color $case_sensitive $args "$arg" --
 
 }
 
