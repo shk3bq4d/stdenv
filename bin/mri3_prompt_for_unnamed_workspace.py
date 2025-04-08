@@ -115,6 +115,7 @@ def go2(args=[], only_for_unnamed=True):
         'netflix': '~/bin/notinpath/netflix-nf.sh',
         'citrix': '~/bin/notinpath/workspace-citrix.sh',
         'zscaler': '~/bin/notinpath/workspace-zscaler.sh',
+        'zsf': '~/bin/notinpath/workspace-zsf.sh',
         }
     # i3 isn't yet provided with those .bashrc env var
     if True or \
