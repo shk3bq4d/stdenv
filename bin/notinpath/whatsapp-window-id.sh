@@ -6,7 +6,8 @@ _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfi
 
 if true; then
     xdotool search --name "WhatsApp" > $_tempfile
-    xdotool search --class Chromium | grep -f $_tempfile | head -n 1
+    #xdotool search --class Chromium | grep -f $_tempfile | head -n 1
+    xdotool search --class Firefox | grep -f $_tempfile | head -n 1
 else
     xdotool search --name "zscaler-ubuntu20-citrix-gnome_shaz0140003" > $_tempfile
     xdotool search --class "VirtualBox Machine" | grep -f $_tempfile
