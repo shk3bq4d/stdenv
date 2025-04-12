@@ -7,6 +7,7 @@
 https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
 
 Version code  Version name  Release date  End of life  Current version       Next version
+31            Hub 10        2025-02-25    2026-02-25
 30            Hub 9         2024-04-24    2025-09
 29            Hub 8         2024-04-24    2025-04
 28            Hub 7         2023-12-12    2024-12

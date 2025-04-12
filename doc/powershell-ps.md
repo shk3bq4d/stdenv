@@ -108,3 +108,18 @@ function log() {
 
 `" escape a double quote with a backtick (or use single quotes strings)
 `$ escape a dollar sign  with a backtick
+
+
+# Get IP and Mac address
+Get-NetIPAddress -AddressFamily IPv4 | Where-Object {
+    $_.IPAddress -notlike "169.*" -and $_.IPAddress -notlike "127.*"
+} | ForEach-Object {
+    $adapter = Get-NetAdapter | Where-Object { $_.InterfaceIndex -eq $_.InterfaceIndex }
+    [PSCustomObject]@{
+        ComputerName   = $adapter.SystemName
+        InterfaceAlias = $_.InterfaceAlias
+        IPAddress      = $_.IPAddress
+        MACAddress     = $adapter.MacAddress
+    }
+}
+
