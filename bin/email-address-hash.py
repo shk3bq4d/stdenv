@@ -43,7 +43,9 @@ def go(args):
     i = ar.identifier
     i = re.sub(r'^h?t?t?p?s?:?/?/', '', i) # strip leading https://
     i = re.sub(r'/.*$', '', i) # strip tailing /path
-    h = hashlib.sha512(ar.identifier.encode()).hexdigest()
+    if '/' in i:
+        raise BaseException("/ in i: " + i)
+    h = hashlib.sha512(i.encode()).hexdigest()
     print("""123r4p+{}{}@gmail.com
 {}-{}@abc1.ch
 password:
