@@ -36,7 +36,8 @@ function sudomr() {
     cat << EOF | sudo tee -a $f >/dev/null
 export RCD=$NEWRCD
 source $NEWRCD/.bashrc
-export VIMINIT="set number cursorline nocursorcolumn ignorecase smartcase showcmd hlsearch incsearch syntax=on t_Co=256 nocompatible encoding=utf-8|hi CursorLine   cterm=None ctermbg=yellow ctermfg=white guibg=yellow guifg=black|colorscheme solarized|let g:airline_powerline_fonts=1|let g:airline_theme='papercolor'|let g:airline#extensions#tabline#enabled=1"
+# color scheme currently not working
+export VIMINIT="filetype plugin indent on|syntax on|set number cursorline nocursorcolumn ignorecase smartcase showcmd hlsearch incsearch t_Co=256 nocompatible encoding=utf-8|hi CursorLine   cterm=None ctermbg=yellow ctermfg=white guibg=yellow guifg=black|autocmd VimEnter,WinEnter,BufEnter * colorscheme solarized|let g:airline_powerline_fonts=1|let g:airline_theme='papercolor'|let g:airline#extensions#tabline#enabled=1"
 # export VIMINIT='so $NEWRCD/.vimrc' <- not readable in sudo
 if [ -n "\${SUDO_USER:-}" ]; then
     HISTFILE="\$HOME/.bash_history.\$SUDO_USER"
