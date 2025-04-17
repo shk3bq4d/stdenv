@@ -14,6 +14,10 @@
 
 ```
 
+<C-r>%                  -- insert current filename
+<C-r>=expand('%:p')<CR> -- insert current filepath
+<C-r>=fnamemodify(expand('%'), ':t')<CR>
+
 :set foldmethod=indent YAML block zA za zc
 
 # the following three modelines are for examples. modeline word is only here for grep purpose and not a valid vim config key

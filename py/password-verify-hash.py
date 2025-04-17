@@ -68,16 +68,16 @@ if 1:
     guess_password = 'incorrect password'
     guess_password = 'my password is rich'
     known_hash_str = '$2y$10$ODbODzErpQ1Hzn/GsxkAdO/EJ3lAOKl2HLHBZGnKDYL0.JvS4ic5m'
-if 1:
+if 0:
     guess_password = 'hehe'
     known_hash_str = '$6$Y5K.kBDDDDDDDDmb$jKktR.YiXLIp5CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCzS4skjJu9/'
-if 1:
+if 0:
     guess_password = 'aaaa'
     known_hash_str = '$6$rounds=656000$592Ov58gEtGvQmVc$aobAlPHeIFdUUsUlopN917FFsoXVkOqmz/2x2IgMw/TJaOoFTZS3FW5.ATNrwbMb9Ct7t7fS.aUddl/NV1uJB/'
-if 1:
+if 0:
     guess_password = 'aaaa'
     known_hash_str = '$6$a00/u7AEplyC9T0h$SSiHFBurLgcAL1lPIJMjkLV2FRct8j8IX369zVq9g45haVvYqMyNdmHa5ClbaT7Hrw7tbKM4.1FssgKPAyozG/'
-if 1:
+if 0:
     guess_password = ' '
     known_hash_str = '$6$nAUbRd4mgzKFQJ6.$Q9KD.oRjn0wjvCLFAvb6nKL7As0A3PvJuaMZclikh.1y.Z5gzqX3JcJLDyM80stKUwo71A8eaJ.2xJVjKUr8n/'
 
