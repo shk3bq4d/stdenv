@@ -17,4 +17,4 @@ else:
     winobject = mri3.focused()
     window_id = winobject.window
 
-print("{width}x{height}".format(**vars(mri3.get_output(winobject).rect)))
+print("{width}x{height}x{x}x{y}".format(**vars(mri3.get_output(winobject).rect)))

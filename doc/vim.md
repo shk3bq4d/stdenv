@@ -1,5 +1,7 @@
 # /* ex: set filetype=markdown: */
 
+vim -u myvimrc
+
 "ey$ # copy from current character to end of line into buffer e clipboard
 "ep  # paste buffer e clipboard
 
