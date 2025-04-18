@@ -25,6 +25,8 @@ i3 '[class="VirtualBox Machine"] floating disable'
 i3 '[class="VirtualBox Machine"] fullscreen'
 ~/bin/mri3_get_window_criteria.sh
 
+i3-msg -t get_workspaces | jq -r '.[].name' # workspaces list
+i3-msg -t get_workspaces | jq -r '.[].name' | sed -r -e 's/^[0-9]+ +| +$//g' # workspaces list, trimmed, without numbers
 
 # i3 blocks install
 #git clone git://github.com/vivien/i3blocks

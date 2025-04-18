@@ -8,20 +8,35 @@ files() {
 ~/.bashrc
 ~/.bashrc_mrprompt
 ~/.zshrc
+~/.zlogin
+~/.zlogout
+~/.zprofile
+~/.zshenv
 ~/.sshrc
+~/.profile
 ~/bin/dot.bashfunctions
 ~/bin/dot.gitfunctions
 ~/.*aliases
+/etc/profile
+/etc/profile.d/*sh
+/etc/bash.bashrc
+/etc/bashrc
+/etc/inputrc
+/etc/screenrc
 EOF
 
 }
 
+filter_existing() {
+    cat | while read line; do
+        test -e "$line" && echo "$line"
+    done
+}
+
 files_unique_sorted() {
-    files | sed -r -e "s,^~/,$HOME/," | xargs -n 1 realpath | sort -u
+    files | sed -r -e "s,^~/,$HOME/," | filter_existing | xargs -n 1 realpath | sort -u
 
 }
 
 ack "$@" -- $(files_unique_sorted)
 exit 0
-ack "$@" ~/.bashrc ~/.zshrc ~/.sshrc ~/bin/dot.bashfunctions ~/.*aliases
-

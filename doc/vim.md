@@ -1,5 +1,7 @@
 # /* ex: set filetype=markdown: */
 
+vim -u myvimrc
+
 "ey$ # copy from current character to end of line into buffer e clipboard
 "ep  # paste buffer e clipboard
 
@@ -13,6 +15,10 @@
 :helptags ~/.vim/doc " rebuild doc tags for specified folder
 
 ```
+
+<C-r>%                  -- insert current filename
+<C-r>=expand('%:p')<CR> -- insert current filepath
+<C-r>=fnamemodify(expand('%'), ':t')<CR>
 
 :set foldmethod=indent YAML block zA za zc
 

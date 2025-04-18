@@ -119,3 +119,9 @@ echo "" | audit2allow -rm bip
 
 perl -p -e 's/^([^()]+.)([0-9.]+)(.*)/localtime($2)." -- $1$2$3"/e' /var/log/audit/audit.log
 ```
+sudo auditctl -r 0                    # Increase the rate limit (events per second, 0 = unlimited)
+sudo auditctl -b 655360               # Increase the backlog limit
+setenforce 0                          # deactivate selinux enforcement
+semodule --build  --disable_dontaudit # include logging of noaudit rules
+
+auditctl -s # list limits

@@ -204,7 +204,6 @@ au BufReadPost * if getfsize(bufname("%")) > 90*1024 |
 :noremap _ ?
 :noremap - /
 :set nowrap
-:set scrolloff=5 " keep 10 lines (top/bottom) for scope
 ":auto BufEnter * let &titlestring = "vi" . strpart(v:servername, 3, 1) . " %t     " . expand("%:p:h:h:t") . "\\" . expand("%:p:h:t") . " %=%l/%L-%P "
 :set title
 
@@ -258,7 +257,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 endif
 set guifont=Consolas:h10
-:set sidescroll=1 sidescrolloff=6
+:set sidescroll=1 sidescrolloff=6 scrolloff=5 " keep 10 lines (top/bottom) for scope
 :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 :nmap <silent> <C-k> :wincmd k<CR>
 :nmap <silent> <C-j> :wincmd j<CR>

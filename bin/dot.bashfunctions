@@ -36,7 +36,9 @@ function sudomr() {
     cat << EOF | sudo tee -a $f >/dev/null
 export RCD=$NEWRCD
 source $NEWRCD/.bashrc
-export VIMINIT='so $NEWRCD/.vimrc'
+# color scheme currently not working
+export VIMINIT="filetype plugin indent on|syntax on|set number cursorline nocursorcolumn ignorecase smartcase showcmd hlsearch incsearch t_Co=256 nocompatible encoding=utf-8|hi CursorLine   cterm=None ctermbg=yellow ctermfg=white guibg=yellow guifg=black|autocmd VimEnter,WinEnter,BufEnter * colorscheme solarized|let g:airline_powerline_fonts=1|let g:airline_theme='papercolor'|let g:airline#extensions#tabline#enabled=1"
+# export VIMINIT='so $NEWRCD/.vimrc' <- not readable in sudo
 if [ -n "\${SUDO_USER:-}" ]; then
     HISTFILE="\$HOME/.bash_history.\$SUDO_USER"
 elif [ "${UID:-5}" -eq 0 ]; then
@@ -260,7 +262,7 @@ function ssh() {
                 echo "~/bin/dot.bashfunctions install sshpass"
             fi
             ;;
-        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.1|10.19.29.2[4-5][1-9]|10.19.29.60|piproj|ap-*)
+        minikube|charlotte|$WORK_PC1|dec20|pfsense|apr16|acer2011|thinkpad|fw11*|motog*|ly1*|10.19.29.1|10.19.29.2[4-5][1-9]|10.19.29.60|piproj|ap-*|s3cr*|s3zu*)
             ;;
         *)
             hash sshrc 2>/dev/null && BIN=sshrc

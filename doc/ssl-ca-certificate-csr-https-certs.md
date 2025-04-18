@@ -152,6 +152,8 @@ SSL_CERT_FILE=FILEPATH lynx
 
 
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
+check_ssl_certificate = False # s3cmd
+check_ssl_hostname = False # s3cmd
 ```
 
 # verify validation (full chain must be in onefile)

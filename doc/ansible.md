@@ -2313,6 +2313,10 @@ when: some_string_value | bool
 {{ '%Y-%m-%d %H:%M:%S' | strftime(ansible_date_time.epoch) }} unix time unixtime
 {{ '%Y-%m-%d' | strftime(0) }}          # => 1970-01-01
 {{ '%Y-%m-%d' | strftime(1441357287) }} # => 2015-09-04 unix time unixtime
+  - debug: # strftime
+      var: f | strftime((ansible_date_time.date|string|to_datetime(f)).timestamp())
+    vars: # strftime
+      f: '%Y-%m-%d' # strftime
 - name: give me largest permutations (order matters)
 msg: "{{ [1,2,3,4,5] | permutations | list }}"
 msg: "{{ [1,2,3,4,5] | permutations(3) | list }}"
@@ -2913,6 +2917,8 @@ no_log: "{{ ansible_verbosity < 3 }}"
 "bip hehe" | quote => "'bip hehe'"
 
 * [apt_repository better alternative](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/deb822_repository_module.html#ansible-collections-ansible-builtin-deb822-repository-module )
+
+item.name | default(item.key) is search(sf_rx)
 
 assert:
   that:

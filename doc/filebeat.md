@@ -370,7 +370,7 @@ kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat
 # log_file_inode
 ls -ila grep MYINODE
 find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|run|mnt|proc|sys)') -inum 9387 -o -path /var/lib/docker -prune
-/var/lib/filebeat/registry/filebeat/log.json # internal tracking
+/var/lib/filebeat/registry/filebeat/log.json # internal tracking state
 
 # filebeat javascript timestamp
 e.Get("@timestamp").Add()
