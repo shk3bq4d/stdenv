@@ -11,6 +11,9 @@ case ${HOSTNAMEF:-hostnamef-unset} in \
 ${WORK_PC1F:-workpc1f-unset})
 	exit 0
 	;;
+shaz0140504)
+	ip a show wlp2s0 | grep -qE "inet (10\.14\.52\.)" && exit 0
+	;;
 nov20.ly.lan)
 	#ips --no-internet | grep -q 'wlp58s0.*172.28'
 	ifconfig wlp0s20f3 | grep -qE "inet (10\.14\.2\.|192\.168\.168\.)" && exit 0
