@@ -2,6 +2,7 @@
 
 pkill compton || true
 pkill picom || true
+BIN="$(which picom &>/dev/null && echo picom || echo compton)"
 f=~/.config/i3/compton.conf
 if [[ ! -f $f ]]; then
     cd $(stdhome-dirname.sh)
@@ -37,7 +38,7 @@ $WORK_PC1F)
 esac
 logfile=$HOME/.tmp/log/compton.log
 #{ while :; do echo "$(date) rumo startup" >> $logfile; compton --dbus --config $f </dev/null >> $logfile 2>&1 || echo "$(date) exited with error $?"; sleep 5; done  } &
-{ while :; do echo "$(date) rumo startup" >> $logfile; picom --dbus --config $f </dev/null >> $logfile 2>&1 || echo "$(date) exited with error $?"; sleep 5; done  } &
+{ while :; do echo "$(date) rumo startup" >> $logfile; $BIN --dbus --config $f </dev/null >> $logfile 2>&1 || echo "$(date) exited with error $?"; sleep 5; done  } &
 sleep 2
 #compton -b --dbus $extra --experimental-backends --config $f
 echo true > ~/.tmp/compton-enabled
