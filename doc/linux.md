@@ -537,3 +537,10 @@ ddrescue # dd /dev/sdb alternative
 sudo dmesg -n 1 # console logging disabling,
 sudo dmesg -D   # console logging disabling,
 sudo dmesg -E   # reactivate console logging
+
+Kernel versions that have a dash in them are packaged by distributions and are often extensively modified. Please contact the relevant distribution to obtain the exact kernel source. # https://www.kernel.org/category/faq.html
+
+* https://kernel.org/
+* https://www.kernel.org/category/releases.html
+* https://cdn.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.1.135 # CVE 
+* https://security-tracker.debian.org/tracker/source-package/linux # kernel cve
