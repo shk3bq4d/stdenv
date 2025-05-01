@@ -28,6 +28,24 @@ if [[ -d secrets ]]; then
         tr '\n' ' '
         )"
 fi
+all_dirs() {
+    cat << 'EOF'
+ans
+..
+../ans
+../..
+../../ans
+../../..
+../../../ans
+../../../..
+../../../../ans
+../../../../..
+../../../../../ans
+../../../../../..
+../../../../../../ans
+EOF
+}
+
 vagrant_args=()
 if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; then
     vagrant_args+=('--ssh-extra-arg="-o StrictHostKeyChecking=No"')
@@ -36,6 +54,16 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
 fi
 >&2 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
+if [[ ! -f ./inventory.yml ]] &&  [[ ! -f ./inventory.ini ]]; then
+    for d in $(all_dirs); do
+        if [[ -f $d/inventory.yml ]]; then
+            >&2 echo "cd $d"
+            cd $d
+            break
+        fi
+    done
+fi
+renice +1 $$
 source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
     $HOME/.virtualenvs/ansible/bin/activate \
@@ -60,5 +88,4 @@ if [[ -z "$BIN" ]]; then
     exit 1
 fi
 
-renice +1 $$
 $BIN $( echo -n "${vagrant_args[@]}") $vaults_args "$@"
