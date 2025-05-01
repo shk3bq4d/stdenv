@@ -25,7 +25,7 @@ strace -tf -p $(systemctl show         -p MainPID docker | cut -d = -f 2) |& gre
 | sed -r 's|overlay2/[^/]{60,}/([^"]+).*|bip\1|'
 
 
-rm -f /tmp/ssh.out.* 
+rm -f /tmp/ssh.out.*
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
 grep -E execve.*usr.bin.ssh /tmp/ssh.out.*
 
