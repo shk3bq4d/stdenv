@@ -544,3 +544,5 @@ Kernel versions that have a dash in them are packaged by distributions and are o
 * https://www.kernel.org/category/releases.html
 * https://cdn.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.1.135 # CVE
 * https://security-tracker.debian.org/tracker/source-package/linux # kernel cve
+
+du -ckshx --inodes * | sort -rh | head -11 # count files 
