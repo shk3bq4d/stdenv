@@ -1552,4 +1552,14 @@ docker_rm_images_interactive() {
     command rm -f $f
 }
 
+a2a() {
+    local a
+    if [[ $# -eq 0 ]]; then
+        a=/var/log/audit/audit.log
+    else
+        a="$@"
+    fi
+    sudo cat "$a" | audit2allow -m bip
+}
+
 true # last statement must return true

@@ -526,7 +526,7 @@ SIGVTALRM (26): Virtual alarm clock (for processes' virtual time).
 SIGXCPU (24): CPU time limit exceeded.
 SIGXFSZ (25): File size limit exceeded.
 
-			  /var/run/reboot-required # debian ubuntu
+              /var/run/reboot-required # debian ubuntu
 
 vm.swapiness: 0 (starts to use swap when free RAM is 0% (instead of 30 or 60 as it is default on some distribution))
 
@@ -537,3 +537,12 @@ ddrescue # dd /dev/sdb alternative
 sudo dmesg -n 1 # console logging disabling,
 sudo dmesg -D   # console logging disabling,
 sudo dmesg -E   # reactivate console logging
+
+Kernel versions that have a dash in them are packaged by distributions and are often extensively modified. Please contact the relevant distribution to obtain the exact kernel source. # https://www.kernel.org/category/faq.html
+
+* https://kernel.org/
+* https://www.kernel.org/category/releases.html
+* https://cdn.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.1.135 # CVE
+* https://security-tracker.debian.org/tracker/source-package/linux # kernel cve
+
+du -ckshx --inodes * | sort -rh | head -11 # count files 

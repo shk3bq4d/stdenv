@@ -24,6 +24,7 @@ shadow-exclude = [
     , "class_g = 'i3lock'"
     , "class_g = 'keepassxc'"
     , "class_g = 'spotify'"
+    ,"class_g = 'Wfica'"
 ];
 # shadow-exclude = "n:e:Notification";
 shadow-ignore-shaped = false;

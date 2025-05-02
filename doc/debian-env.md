@@ -2,6 +2,9 @@
 * https://www.debian.org/releases/stable/
 * https://www.debian.org/releases/testing/
 * https://www.debian.org/releases/sid/
+* https://www.debian.org/security/
+* https://security-tracker.debian.org/tracker/source-package/linux # kernel cve
+* https://lists.debian.org/debian-security-announce/2025/msg00069.html
 
 * https://docs.debops.org/en/latest/meta/philosophy.html # ansible
 

@@ -4,10 +4,12 @@
 * https://github.com/crocandr/docker-unimus
 * https://hub.docker.com/r/croc/unimus/tags
 * https://forum.unimus.net/viewforum.php?f=3&sid=899d1cb9892d801fdf2f0767ba26e717 # release changelog
+* https://blog.unimus.net/unimus-backup-exporter/
+* https://github.com/netcore-jsa/unimus-backup-exporter/
 
 # postgresql
 * https://wiki.unimus.net/display/UNPUB/Database+requirements
-* https://forum.unimus.net/viewtopic.php?f=9&t=1097&p=4364&hilit=postgresql#p4364 
+* https://forum.unimus.net/viewtopic.php?f=9&t=1097&p=4364&hilit=postgresql#p4364
   says support for PostgreSQL 12 is not ready, probably not before 2.6.0 in July 2024
 * https://wiki.unimus.net/display/UNPUB/Roadmap mentions for Q3 2024
   Support for PostgreSQL 12+

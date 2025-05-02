@@ -1,5 +1,5 @@
 sudo -n true # do not ask for password
-sudo -k # force expiration of current user cached password (will reask nexttime)
+sudo -k # force expiration of current user cached password (will reask nexttime) ticket relinquish
 
 sudo -u mongod whomai
 sudo -u mongod bash
