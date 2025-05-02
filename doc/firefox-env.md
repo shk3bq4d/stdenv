@@ -28,3 +28,7 @@ ADMX file.
 https://mozilla.github.io/policy-templates/#3rdparty
 https://extensionworkshop.com/documentation/enterprise/enterprise-development/#how-to-add-policy
 https://mozilla.github.io/policy-templates/#3rdparty
+
+# force restart
+either go to about:restartrequired
+or go to about:profiles
