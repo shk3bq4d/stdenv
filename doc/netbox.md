@@ -1,15 +1,19 @@
+* https://docs.netbox.dev/en/stable/release-notes/version-4.3/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.2/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.1/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.0/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-3.7/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes # changelog
 * https://docs.netbox.dev/en/stable/installation/upgrading/
+* https://netboxlabs.com/docs/netbox/en/stable/administration/authentication/microsoft-azure-ad/ # azuread sso
+* https://python-social-auth.readthedocs.io/en/latest/configuration/settings.html#processing-redirects-and-urlopen # azuread azure-ad sso
 * https://github.com/netbox-community/netbox/releases
 * https://github.com/netbox-community/migration-scripts
 * https://docs.netbox.dev/en/stable/customization/custom-scripts/
 * [docker builder](https://github.com/netbox-community/netbox-docker)
 * https://hub.docker.com/r/netboxcommunity/netbox/tags
 
+* https://github.com/netbox-community/netbox/issues/18627 # http proxy
 
 https://demo.netbox.dev/static/docs/configuration/optional-settings/
 https://demo.netbox.dev/static/docs/configuration/required-settings/
@@ -96,3 +100,10 @@ update dcim_device set name = name || ' - #' || id || ' DBfix 2024.02.22' where 
 
 # core.models.contenttypes.ObjectType.DoesNotExist
 https://github.com/netbox-community/netbox/issues/17356
+
+
+# users
+```sql
+select * from users_user where email like '%rumo%';
+update users_user set is_superuser = 't', is_staff='t', is_active='t' where email like 'marc.rumo%';
+```
