@@ -1183,3 +1183,18 @@ renice +2 $(pgrep blobfuse) # lower priority of process
 renice +2 $$                # lower priority of current process
 renice -2 $(pgrep blobfuse) # higher priority of process
 watch bash -c \""echo 'show slave status\G' | db.sh"\"
+
+
+declare -A mydict
+mydict[key1]="value1"
+mydict[key2]="value2"
+mydict[key3]="value3"
+
+#To iterate over the keys and values:
+for key in "${!mydict[@]}"; do
+  echo "$key: ${mydict[$key]}"
+done
+
+echo "${mydict[key1]}" # To access a value:
+echo "${!mydict[@]}" # To list all keys:
+echo "${mydict[@]}" # To list all values:
