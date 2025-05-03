@@ -124,6 +124,7 @@ ls -l /usr/share/graylog-server/plugin/ /opt/graylog/plugins/
 * https://hub.docker.com/r/suzukishunsuke/terraform-graylog
 * https://github.com/zahiar/terraform-provider-graylog
 * https://registry.terraform.io/providers/zahiar/graylog/1.3.0
+* https://github.com/one-2-one/terraform-provider-graylog
 * https://registry.terraform.io/providers/terraform-provider-graylog/graylog/latest/docs
 
 ## ressources
