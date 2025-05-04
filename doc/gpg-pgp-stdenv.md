@@ -11,3 +11,11 @@ gpg --edit-key <your-key-ID>
 key <number>
 expire
 ```
+
+# be prompted for private key
+```sh
+gpg --list-secret-keys
+gpg --edit-key SECRETKEY
+passwd
+[save]
+```
