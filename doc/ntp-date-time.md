@@ -65,3 +65,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^? ueaobutnb01.bip.habon.lo>     1   6    77    61   -27.3s[ -27.3s] +/-  10.9s
 ^? uaeoutnnb02.bip.habon.lo>     2   6    77    63   -27.3s[ -27.3s] +/-  11.0s
 ```
+
+
+
+~/bin/ansible-hosts-list.sh habon:\&debian | while read i; do ssh automation@$i true </dev/null; ssh automation@$i sudo date -us @$(date -u +%s) </dev/null; done

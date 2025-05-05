@@ -40,6 +40,17 @@ mongoimport --db graylog --username=admin --password=MYPASSWORD --authentication
 ```sh
 sudo docker exec -it mongo mongo 127.0.0.1/unifi
 ```
+
+# graylog
+sudo docker exec -itu mongodb mongodb mongosh
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates 
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates -u admin -p "$(sudo docker exec -tu mongodb mongodb sh -c 'echo -n $MONGO_INITDB_ROOT_PASSWORD')"
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"
+use graylog
+db.nodes.find().pretty()
+db.datanodes.find().pretty()
+mongo.sh "show collections" | while read c; do printf "%-40s %d\n" "$c" "$(mongo.sh "db.$c.countDocuments()")"; done
+
 ```js
 db.site.findOne()
 db.site.find().forEach(function(i) { print(i.desc); })

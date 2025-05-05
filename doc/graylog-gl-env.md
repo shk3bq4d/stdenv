@@ -227,3 +227,80 @@ https://go2docs.graylog.org/4-x/making_sense_of_your_log_data/functions_descript
 
 # docker
 https://go2docs.graylog.org/current/downloading_and_installing_graylog/docker_installation.htm
+
+# mongodb
+```sh
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates -u admin -p "$(sudo docker exec -t mongodb sh -c 'echo -n $MONGO_INITDB_ROOT_PASSWORD')"
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"
+echo "show dbs" | sudo docker exec -iu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"
+echo "show collections" | sudo docker exec -iu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"
+echo "show collections" | xargs -I_ sudo docker exec -iu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates --norc --quiet "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"  --eval "_"
+echo "db.datanodes.find().pretty()" | xargs -I_ sudo docker exec -iu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates --norc --quiet "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"  --eval "_"
+echo "db.datanodes.countDocuments()" | xargs -I_ sudo docker exec -iu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates --norc --quiet "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"  --eval "_"
+mongo.sh "db.datanodes.countDocuments()"
+mongo.sh "db.access_tokens.countDocuments()"
+mongo.sh "show collections" | while read c; do printf "%-40s %d\n" "$c" "$(mongo.sh "db.$c.countDocuments()")"; done
+mongo.sh "db.cluster_config.find().pretty()"
+mongo.sh "db.nodes.find().pretty()"
+mongo.sh "db.datanodes.find().pretty()"
+```
+## collections
+```sh
+access_tokens
+certificate_exchange
+cluster_config
+cluster_events
+cluster_locks
+content_packs
+content_packs_installations
+dashboards                            [view]
+datanodes
+entity_list_preferences
+event_definitions
+event_notifications
+event_processor_state
+favorites
+grants
+grok_patterns
+index_failures
+index_field_type_profiles
+index_field_types
+index_ranges
+index_set_templates
+index_sets
+inputs
+last_opened
+lut_caches
+lut_data_adapters
+lut_tables
+nodes
+notifications
+pipeline_processor_pipelines
+pipeline_processor_pipelines_streams
+pipeline_processor_rules
+preflight
+processing_status
+query_strings
+recent_activity
+roles
+rule_fragments
+scheduler_job_definitions
+scheduler_triggers
+search_job_states
+searches
+sessions
+sidecar_collectors
+sidecar_configuration_variables
+sidecar_configurations
+sidecars
+stream_destination_filters
+streamrules
+streams
+system_messages
+telemetry_cluster_infos
+telemetry_user_settings
+traffic
+users
+views
+system.views
+```

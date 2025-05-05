@@ -149,6 +149,7 @@ curl --insecure # -k
 curl --cert FILEPATH
 SSL_CERT_DIR=DIRPATH lynx
 SSL_CERT_FILE=FILEPATH lynx
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates
 
 
 AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
