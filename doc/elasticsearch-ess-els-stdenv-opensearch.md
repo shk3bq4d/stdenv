@@ -241,3 +241,12 @@ https://www.elastic.co/guide/en/elasticsearch/reference/7.17/put-shutdown.html
 mynode="graylog-elasticsearch-data-1"; curl -XPUT http://localhost:9200/graylog_371/_settings -d '{ "index.mapping.total_fields.limit": 2000 }' -H 'content-type: application/json'
 graylog-elasticsearch-data-1
 ```
+# graylog datanode opensearch topology
+https://go2docs.graylog.org/current/setting_up_graylog/data_node_configuration_overrides.htm?tocpath=Set%20Up%20Graylog%7CConfiguration%20Settings%7CData%20Node%20Configuration%7C_____1
+https://docs.opensearch.org/docs/2.17/tuning-your-cluster/#shard-allocation-awareness
+PUT /_cluster/settings
+{
+  "persistent": {
+    "cluster.routing.allocation.awareness.attributes": "hypervisor_id"
+  }
+}

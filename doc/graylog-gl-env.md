@@ -304,3 +304,8 @@ users
 views
 system.views
 ```
+
+
+# graylog datanode opensearch
+https://go2docs.graylog.org/current/setting_up_graylog/data_node_configuration_overrides.htm?tocpath=Set%20Up%20Graylog%7CConfiguration%20Settings%7CData%20Node%20Configuration%7C_____1
+https://docs.opensearch.org/docs/2.17/tuning-your-cluster/#shard-allocation-awareness
