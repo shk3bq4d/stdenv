@@ -417,6 +417,8 @@ upower -i /org/freedesktop/UPower/devices/battery_BAT0
 # method 4)
 upower -i `upower -e | grep 'BAT'`
 # further methods -> https://ostechnix.com/how-to-check-laptop-battery-status-in-terminal-in-linux/
+echo 80 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
+echo 20 | sudo tee /sys/class/power_supply/BAT0/charge_start_threshold
 ```
 
 vi /var/mail/$(whoami) # read cron outputs or other local mails
