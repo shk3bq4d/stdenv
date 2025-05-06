@@ -309,3 +309,19 @@ system.views
 # graylog datanode opensearch
 https://go2docs.graylog.org/current/setting_up_graylog/data_node_configuration_overrides.htm?tocpath=Set%20Up%20Graylog%7CConfiguration%20Settings%7CData%20Node%20Configuration%7C_____1
 https://docs.opensearch.org/docs/2.17/tuning-your-cluster/#shard-allocation-awareness
+
+Hi,
+You have two options. Either you can use the built-in proxy in the graylog server to forward authenticated requests directly to the underlying opensearch. This will add the needed JWT auth header for you. The URL format is /api/datanodes/{hostname}/opensearch/{path: .*}
+
+for example http://graylog-server-host:port/api/datanodes/any/opensearch/_cat/indices?h=index,status
+
+The {hostname} part can be used to target a specific datanode/opensearch instance. The any keyword will forward your request to a random connected opensearch.
+
+By default the proxy is limited to a few read-only opensearch endpoints. You’ll need to disable the allowlist if you want to delete indices. The graylog-server setting is called datanode_proxy_api_allowlist. Set it to false if you want to disable it.
+
+You’ll also need your graylog auth credentials provided as basic auth header in the request.
+
+The other option is to generate client certificates which you can use to communicate directly. They can be configured and downloaded in the System->Datanodes->Configuration menu.
+
+Best regards,
+Tomas
