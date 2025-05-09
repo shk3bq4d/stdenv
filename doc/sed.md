@@ -9,6 +9,7 @@ pattern   normal -r
 [0-9]     works  works
 +         NOK    works
 
+sed -r -e '\, /basic_status , d' # use backslash for using a different separatorl
 
 sed --unbuffered
 sed -u # unbuffered
@@ -154,7 +155,7 @@ sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.con
 ## comments
 ```sh
     sed -r -e '
-        # is this is a comment for first sed
+        # is this is a comment for first sed multiline debug
         s/a/_/g # this apparently works as well
         # ok
         s/r/*/g
@@ -169,4 +170,22 @@ tail -f /var/log/squid/access.log | perl -p -e 's/^([0-9]*)/"[".localtime($1)."]
 perl -p -e 's/^([^()]+.)([0-9.]+)(.*)/localtime($2)." -- $1$2$3"/e' /var/log/audit/audit.log 
 
 sed -r -e 's/\r//g' # dos2unix
+```
+
+```sh
+_convert_rx() { sed -r -e 's/ +(#.*)?$//' <<<"$@" | tr -d '\n' } # sed emulate a sort of debug mode that allow to express a regular expression on multiple line and with comments
+# then you can do something like
+      sed -u -r -e "
+s/$(_convert_rx '
+([^"]+"[^"]+")    # group1: not-quotes, quotes, not-quotes, quotes => 195.184.66.249 - - [09/May/2025:09:22:36 +0000] "GET /zabbix/dc-squid-cluster HTTP/2.0"
+ (                # single space + group2: parent http response code group start
+([12][0-9][0-9])  # group3: http 1xx + http2xx response code
+|
+([3][0-9][0-9])   # group4: http 3xx
+|
+([4-9][0-9][0-9]) # group5: http 4xx -> 9xx
+)                 # group 2 end
+ ([^ ].*)         # space + group6: leftover, 313 "-" "JIRA-9.12.3 (9120003)" 252 0.009 [atlassian] [atlassian/bitbucket] 10.201.101.104:7990 301 0.009 200 64678b72fbfc5068d33e8223488e98c6
+ ')/\\1 ${ESF_INFO_COLOR}\\3${ESF_WARNING_COLOR}\\4${ESF_ERROR_COLOR}\\5${EOFF} \\6/
+"
 ```

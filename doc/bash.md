@@ -810,14 +810,14 @@ fi
 # colors
 @begin=sh@
 if [[ -t 1 ]]; then
-    local BLACK="\033[0;30m"    # black
-    local RED="\033[0;31m"    # red
-    local GREEN="\033[0;32m"    # green
-    local YELLOW="\033[0;33m"    # yellow
-    local BLUE="\033[0;34m"    # blue
-    local MAGENTA="\033[0;35m"    # magenta
-    local CYAN="\033[0;36m"    # cyan
-    local WHITE="\033[0;37m"    # white
+    local BLACK="\033[0;30m"    # black color
+    local RED="\033[0;31m"    # red color
+    local GREEN="\033[0;32m"    # green color
+    local YELLOW="\033[0;33m"    # yellow color
+    local BLUE="\033[0;34m"    # blue color
+    local MAGENTA="\033[0;35m"    # magenta color
+    local CYAN="\033[0;36m"    # cyan color
+    local WHITE="\033[0;37m"    # white color
 else
     local BLACK=""    # black
     local RED=""    # red

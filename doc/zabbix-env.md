@@ -159,7 +159,9 @@ Item values:
 3. {ITEM.NAME3} ({HOST.NAME3}:{ITEM.KEY3}): {ITEM.VALUE3}
 Zabbix event ID: {EVENT.ID}
 Zabbix web UI: https://zabbix.domain.com/zabbix
-For a full list of trigger macros see https://www.zabbix.com/documentation/2.4/manual/appendix/macros/supported_by_location
+For a full list of trigger macros see
+https://www.zabbix.com/documentation/7.2/en/manual/appendix/macros/supported_by_location?hl=macros
+https://www.zabbix.com/documentation/7.2/en/manual/appendix/macros/supported_by_location_user?hl=macros
 At the Conditions tab, to only forward PROBLEM events:
 (A) Maintenance status not in "maintenance"
 (B) Trigger value = "PROBLEM"
