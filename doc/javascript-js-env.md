@@ -3,6 +3,8 @@ var copy_html_to_clipboard = async function() { try {console.log('trying to copy
 
 "  a strip ".trim()
 
+delete foH.mykey
+delete foH["mykey"]
 
 setTimeout(function() {alert(1);}, 10)
 location.reload(true) // refresh
