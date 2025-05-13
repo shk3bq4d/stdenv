@@ -34,8 +34,13 @@ curl -s http://localhost:9200/_cluster/state?pretty=true | grep -C4 read_only
 curl -s http://localhost:9200/_cat/shards | sort
 curl -s http://localhost:9200/_cat/shards | grep -vE 'STARTED' | sort
 curl -s http://localhost:9200/_cat/shards | sort | tail -n 24
-curl -s http://localhost:9200/graylog_43 | python -m json.tool
-curl -XDELETE http://localhost:9200/graylog_43
+curl -s http://localhost:9200/graylog_43 | python -m json.tool # index
+curl -s http://localhost:9200/graylog_43/_settings # index
+curl -s http://localhost:9200/graylog_43/_mappings # index
+curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties' # index
+curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties|keys' # index
+curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties|length' # index
+curl -XDELETE http://localhost:9200/graylog_43 # index
 
 
 curl -sXPOST http://localhost:9200/_cluster/reroute?retry_failed=true

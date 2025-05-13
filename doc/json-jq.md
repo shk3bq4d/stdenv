@@ -60,5 +60,9 @@ cat ~/tmp/bip.json | jq -r  '[ .resources[]| select(.type == "azuread_service_pr
 cat ~/tmp/bip.json | jq -r '([ .resources[]| select(.type == "azuread_service_principal") | .instances[] | .attributes.display_name == "my_name" ] | index(true)) as $myindex | .resources[]| select(.type == "azuread_service_principal") | .instances[$myindex].attributes.application_id'  retrieves the (first) index of elements that match a condition within a list, https://coderedirect.com/questions/337575/getting-the-object-array-index-in-jq, intermediary variables
 
 jq -R -s '.' < FILE # escape FILE as json string
-```
+
 curl -s https://config.zscaler.com/api/zscaler.net/cenr/json | jq -r '[.[]|flatten(5)|reduce .[] as $item ({}; . * $item) | with_entries(select(.key | test("^city : (Zurich|Saint-Barthelemy).*"))) | flatten | .[].range]|map(select(test("^([0-9]{1,3}\\.){3}[0-9]{1,3}")))'
+
+curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties|keys'
+
+```
