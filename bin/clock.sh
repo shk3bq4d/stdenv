@@ -7,11 +7,15 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 tput civis
 trap "tput cnorm; echo; exit" INT
+host="$(hostname -f)"
+if [[ $# -gt 0 ]]; then
+    host="${host} $@"
+fi
 
 prev_len=0
 
 while true; do
-    time_str=$(date +"%H:%M:%S")
+    time_str="${host} $(date +"%Y.%m.%d %H:%M:%S")"
     len=${#time_str}
 
     # Erase previous characters if the new string is shorter
