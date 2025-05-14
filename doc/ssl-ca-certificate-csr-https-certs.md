@@ -253,6 +253,11 @@ openssl pkcs12 -in client_ssl.pfx -out client_ssl.pem -clcerts # extract CL cert
 openssl pkcs12 -in client_ssl.pfx -out root.pem -cacerts       # extract CA certs (but not CL certs) from pfx
 openssl pkcs12 -export -out domain.name.pfx -inkey domain.name.key -in domain.name.crt -in intermediate.crt -in rootca.crt # to pfx
 openssl pkcs12 -export -out out.pfx -inkey key.pem -in root.crt -in intermediate.crt -in mycert.pem
+openssl pkcs12 -export -out /etc/ssl/private/my.pfx -inkey /etc/ssl/private/my.key -in /etc/ssl/certs/my-chain.crt
+openssl pkcs12 -in ~/tmp/my.pfx -info -noout
+openssl pkcs12 -in ~/tmp/my.pfx -nocerts -nodes -out key.pem
+openssl pkcs12 -in ~/tmp/my.pfx -clcerts -nokeys -chain -out cert.pem
+openssl pkcs12 -in ~/tmp/my.pfx -cacerts -nokeys -chain -out chain.pem
 openssl pkcs7 -print_certs  -in p2f.LweE3.p7b # microsoft CA
 ```
 
