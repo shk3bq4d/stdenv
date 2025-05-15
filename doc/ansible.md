@@ -2232,6 +2232,8 @@ Other hashes (platform dependent):
 {{ 'test2' | hash('blowfish') }}
 To get a sha512 password hash (random salt):
 {{ 'passwordsaresecret' | string | password_hash('sha512') }}
+{{ 'secretpassword' | string |          hash('sha256') }}  # unsalted no round hash
+{{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt') }}
 {{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt') }}
 {{ 'secretpassword' | string | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
 {{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt', rounds=10000) }}

@@ -6,6 +6,7 @@ import os
 import sys
 import re
 import crypt
+import hashlib
 import unittest
 import argparse
 import logging
@@ -51,6 +52,11 @@ def detect_and_hash(password, hash_str):
             salt_str = f"$6$rounds={rounds}${salt}$"
         hashed_password = crypt.crypt(password, salt_str)
         return hashed_password
+    elif len(hash_str) == 64:
+        print('no hash identified, but trying sha256 based on length')
+        data = password.encode()  # Convert string to bytes
+        hashed_password = hashlib.sha256(data).hexdigest()
+        return hashed_password
     else:
         raise ValueError("Unsupported or unrecognized hash format.")
 
@@ -80,6 +86,9 @@ if 0:
 if 0:
     guess_password = ' '
     known_hash_str = '$6$nAUbRd4mgzKFQJ6.$Q9KD.oRjn0wjvCLFAvb6nKL7As0A3PvJuaMZclikh.1y.Z5gzqX3JcJLDyM80stKUwo71A8eaJ.2xJVjKUr8n/'
+if 1:
+    guess_password = 'l!2*Nxjv&^uV!BKM!heqWc!iO@rYnXdy'
+    known_hash_str = '47013acd882a696ce5b7b478e828dede1a7b47c9edb727ba22578a4e52aee682'
 
 start_guess_password = star_password(guess_password)
 hashed_guess_password = detect_and_hash(guess_password, known_hash_str)
