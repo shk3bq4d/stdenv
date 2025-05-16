@@ -1172,7 +1172,7 @@ cat << 'PYTHONBASHHEREDOC' | python3 - $g
 print('python bash here doc')
 PYTHONBASHHEREDOC
 
-[ -z "${myvar+x}" ] && echo "myvar is unset" || echo "myvar exist and may be empty or not empty"
+[ -z "${myvar+x}" ] && echo "myvar is unset" || echo "myvar exists, is defined and may be empty or not empty"
 
 [ -z "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is empty"
 [ -n "$(find /path/to/directory -mindepth 1 -maxdepth 1 -print -quit)" ] && echo "directory is not empty"
