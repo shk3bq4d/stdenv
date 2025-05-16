@@ -11,9 +11,9 @@ https://www.tonyballantyne.com/graphs.html
 
 ```ini
 digraph graphname {
-	rankdir=LR;
-	 a -> b -> c;
-	 b -> d;
+    rankdir=LR;
+     a -> b -> c;
+     b -> d;
      a [label="Foo"];
      // Here, the node shape is changed.
      b [shape=box];
@@ -24,22 +24,22 @@ digraph graphname {
    }
 }
 digraph graphname {
-	rankdir=LR;
-	compound=true; // needed to link to make think we're linking to cluster subgraph
-	subgraph cluster1 { # must start with "cluster" prefix to be visible
-		nginx1;
-		gl1;
-	}
-	subgraph cluster2 {
-		nginx2;
-		gl2;
-	}
-	subgraph cluster3 {
-		nginx3;
-		gl3;
-	}
-	LB -> nginx1 [label="Keepalive active link",lhead=cluster1] # lhead to a subgraph cluster make think we're linking to it instead of the edge
-	LB -> nginx2 [style=dotted, lhead=cluster2];
-	LB -> nginx3 [style=dotted, lhead=cluster3];
+    rankdir=LR;
+    compound=true; // needed to link to make think we're linking to cluster subgraph
+    subgraph cluster1 { # must start with "cluster" prefix to be visible
+        nginx1;
+        gl1;
+    }
+    subgraph cluster2 {
+        nginx2;
+        gl2;
+    }
+    subgraph cluster3 {
+        nginx3;
+        gl3;
+    }
+    LB -> nginx1 [label="Keepalive active link",lhead=cluster1] # lhead to a subgraph cluster make think we're linking to it instead of the edge
+    LB -> nginx2 [style=dotted, lhead=cluster2];
+    LB -> nginx3 [style=dotted, lhead=cluster3];
 }
 ```
