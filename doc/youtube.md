@@ -23,6 +23,7 @@ https://www.youtube.com/results?search_query=708cn
 https://letsblock.it/filters/youtube-shorts
 
 
+[Et toi Pascal! Tu parles toujours pour rien?](https://www.youtube.com/watch?v=OQXbcf9dflw#t=2m02s)
 
 Start playback at time position 1:20 (1 minute and 20 seconds into the video): http://www.youtube.com/watch?v=69hADT4pWWc#t=1m20s
 

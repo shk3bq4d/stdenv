@@ -43,7 +43,7 @@ sudo docker exec -it mongo mongo 127.0.0.1/unifi
 
 # graylog
 sudo docker exec -itu mongodb mongodb mongosh
-sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates 
+sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates
 sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates -u admin -p "$(sudo docker exec -tu mongodb mongodb sh -c 'echo -n $MONGO_INITDB_ROOT_PASSWORD')"
 sudo docker exec -itu mongodb mongodb mongosh --tls --tlsAllowInvalidCertificates "$(sudo docker exec -t graylog sh -c 'echo -n $GRAYLOG_MONGODB_URI')"
 use graylog
