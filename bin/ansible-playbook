@@ -28,23 +28,6 @@ if [[ -d secrets ]]; then
         tr '\n' ' '
         )"
 fi
-all_dirs() {
-    cat << 'EOF'
-ans
-..
-../ans
-../..
-../../ans
-../../..
-../../../ans
-../../../..
-../../../../ans
-../../../../..
-../../../../../ans
-../../../../../..
-../../../../../../ans
-EOF
-}
 
 vagrant_args=()
 if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; then
@@ -54,14 +37,8 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
 fi
 >&2 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-if [[ ! -f ./inventory.yml ]] &&  [[ ! -f ./inventory.ini ]]; then
-    for d in $(all_dirs); do
-        if [[ -f $d/inventory.yml ]]; then
-            >&2 echo "cd $d"
-            cd $d
-            break
-        fi
-    done
+if ansdir &>/dev/null; then
+    cd $(ansdir)
 fi
 renice +1 $$ &>/dev/null
 source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
