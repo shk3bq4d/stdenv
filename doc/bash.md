@@ -551,16 +551,16 @@ date >>/dev/fd/4 # append to FD4
 
 
 # hash key value hashtable hashmap
-declare -A array
-array[foo]=bar
-array[bar]=foo
-for i in "${!array[@]}" # iterate over an array
-do
+declare -A my_array
+my_array[foo]=bar
+my_array[bar]=foo
+for i in "${!my_array[@]}"; do # iterate over an array
     echo "key  : $i"
-    echo "value: ${array[$i]}"
+    echo "value: ${my_array[$i]}"
 done
-${#array[@]} # array  length
-${#var}      # string length
+${#my_array[@]} # array  length
+${#var}         # string length
+declare -p my_array # prints/debug content of array
 
 #iterage over args arguments parameters
 for var in "$@" # iterate
