@@ -215,12 +215,15 @@ https://go2docs.graylog.org/4-x/making_sense_of_your_log_data/functions_descript
 # hidden fields
   gl2_accounted_message_size: long
   gl2_message_id: keyword
+  gl2_original_timestamp: date
   gl2_processing_timestamp: date
   gl2_receive_timestamp: date
   gl2_remote_ip: keyword
   gl2_remote_port: long
   gl2_source_input: keyword
   gl2_source_node: keyword
+  gl2_processing_duration_ms
+  gl2_second_sort_field
 
 
  ansible module to be checked and extended: https://github.com/ReconInfoSec/ansible-graylog-modules
