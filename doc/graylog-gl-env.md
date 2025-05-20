@@ -1,5 +1,8 @@
 # https://facinating.tech/2020/03/08/in-depth-guide-to-running-graylog-in-production/
 
+https://hub.docker.com/r/graylog/graylog
+https://hub.docker.com/r/graylog/graylog-datanode
+
 # cluster discovery
 /etc/graylog/server/server.conf mongodb_uri mongodb://admin:password@172.48.9.11:27017,172.48.8.107:27017,172.48.10.233:27017/graylog?replicaSet=rs01
 /etc/graylog/server/server.conf elasticsearch_hosts http://172.48.9.200:9200,http://172.48.8.207:9200,http://172.48.10.7:9200
@@ -215,12 +218,15 @@ https://go2docs.graylog.org/4-x/making_sense_of_your_log_data/functions_descript
 # hidden fields
   gl2_accounted_message_size: long
   gl2_message_id: keyword
+  gl2_original_timestamp: date
   gl2_processing_timestamp: date
   gl2_receive_timestamp: date
   gl2_remote_ip: keyword
   gl2_remote_port: long
   gl2_source_input: keyword
   gl2_source_node: keyword
+  gl2_processing_duration_ms
+  gl2_second_sort_field
 
 
  ansible module to be checked and extended: https://github.com/ReconInfoSec/ansible-graylog-modules
@@ -311,9 +317,9 @@ https://go2docs.graylog.org/current/setting_up_graylog/data_node_configuration_o
 https://docs.opensearch.org/docs/2.17/tuning-your-cluster/#shard-allocation-awareness
 
 Hi,
-You have two options. Either you can use the built-in proxy in the graylog server to forward authenticated requests directly to the underlying opensearch. This will add the needed JWT auth header for you. The URL format is /api/datanodes/{hostname}/opensearch/{path: .*}
+You have two options. Either you can use the built-in proxy in the graylog server to forward authenticated requests directly to the underlying opensearch. This will add the needed JWT auth header for you. The URL format is `/api/datanodes/{hostname}/opensearch/{path: .*}`
 
-for example http://graylog-server-host:port/api/datanodes/any/opensearch/_cat/indices?h=index,status
+[for example](http://graylog-server-host:port/api/datanodes/any/opensearch/_cat/indices?h=index,status)
 
 The {hostname} part can be used to target a specific datanode/opensearch instance. The any keyword will forward your request to a random connected opensearch.
 
@@ -325,3 +331,88 @@ The other option is to generate client certificates which you can use to communi
 
 Best regards,
 Tomas
+
+
+```sh
+$ curl-opensearch.sh _cat/shards\?help
+index                                     | i,idx                                       | index name
+shard                                     | s,sh                                        | shard name
+prirep                                    | p,pr,primaryOrReplica                       | primary or replica
+state                                     | st                                          | shard state
+docs                                      | d,dc                                        | number of docs in shard
+store                                     | sto                                         | store size of shard (how much disk it uses)
+ip                                        |                                             | ip of node where it lives
+id                                        |                                             | unique id of node where it lives
+node                                      | n                                           | name of node where it lives
+sync_id                                   | sync_id                                     | sync id
+unassigned.reason                         | ur                                          | reason shard is unassigned
+unassigned.at                             | ua                                          | time shard became unassigned (UTC)
+unassigned.for                            | uf                                          | time has been unassigned
+unassigned.details                        | ud                                          | additional details as to why the shard became unassigned
+recoverysource.type                       | rs                                          | recovery source type
+completion.size                           | cs,completionSize                           | size of completion
+fielddata.memory_size                     | fm,fielddataMemory                          | used fielddata cache
+fielddata.evictions                       | fe,fielddataEvictions                       | fielddata evictions
+query_cache.memory_size                   | qcm,queryCacheMemory                        | used query cache
+query_cache.evictions                     | qce,queryCacheEvictions                     | query cache evictions
+flush.total                               | ft,flushTotal                               | number of flushes
+flush.total_time                          | ftt,flushTotalTime                          | time spent in flush
+get.current                               | gc,getCurrent                               | number of current get ops
+get.time                                  | gti,getTime                                 | time spent in get
+get.total                                 | gto,getTotal                                | number of get ops
+get.exists_time                           | geti,getExistsTime                          | time spent in successful gets
+get.exists_total                          | geto,getExistsTotal                         | number of successful gets
+get.missing_time                          | gmti,getMissingTime                         | time spent in failed gets
+get.missing_total                         | gmto,getMissingTotal                        | number of failed gets
+indexing.delete_current                   | idc,indexingDeleteCurrent                   | number of current deletions
+indexing.delete_time                      | idti,indexingDeleteTime                     | time spent in deletions
+indexing.delete_total                     | idto,indexingDeleteTotal                    | number of delete ops
+indexing.index_current                    | iic,indexingIndexCurrent                    | number of current indexing ops
+indexing.index_time                       | iiti,indexingIndexTime                      | time spent in indexing
+indexing.index_total                      | iito,indexingIndexTotal                     | number of indexing ops
+indexing.index_failed                     | iif,indexingIndexFailed                     | number of failed indexing ops
+merges.current                            | mc,mergesCurrent                            | number of current merges
+merges.current_docs                       | mcd,mergesCurrentDocs                       | number of current merging docs
+merges.current_size                       | mcs,mergesCurrentSize                       | size of current merges
+merges.total                              | mt,mergesTotal                              | number of completed merge ops
+merges.total_docs                         | mtd,mergesTotalDocs                         | docs merged
+merges.total_size                         | mts,mergesTotalSize                         | size merged
+merges.total_time                         | mtt,mergesTotalTime                         | time spent in merges
+refresh.total                             | rto,refreshTotal                            | total refreshes
+refresh.time                              | rti,refreshTime                             | time spent in refreshes
+refresh.external_total                    | rto,refreshTotal                            | total external refreshes
+refresh.external_time                     | rti,refreshTime                             | time spent in external refreshes
+refresh.listeners                         | rli,refreshListeners                        | number of pending refresh listeners
+search.fetch_current                      | sfc,searchFetchCurrent                      | current fetch phase ops
+search.fetch_time                         | sfti,searchFetchTime                        | time spent in fetch phase
+search.fetch_total                        | sfto,searchFetchTotal                       | total fetch ops
+search.open_contexts                      | so,searchOpenContexts                       | open search contexts
+search.query_current                      | sqc,searchQueryCurrent                      | current query phase ops
+search.query_time                         | sqti,searchQueryTime                        | time spent in query phase
+search.query_total                        | sqto,searchQueryTotal                       | total query phase ops
+search.concurrent_query_current           | scqc,searchConcurrentQueryCurrent           | current concurrent query phase ops
+search.concurrent_query_time              | scqti,searchConcurrentQueryTime             | time spent in concurrent query phase
+search.concurrent_query_total             | scqto,searchConcurrentQueryTotal            | total concurrent query phase ops
+search.concurrent_avg_slice_count         | casc,searchConcurrentAvgSliceCount          | average query concurrency
+search.scroll_current                     | scc,searchScrollCurrent                     | open scroll contexts
+search.scroll_time                        | scti,searchScrollTime                       | time scroll contexts held open
+search.scroll_total                       | scto,searchScrollTotal                      | completed scroll contexts
+search.point_in_time_current              | spc,searchPointInTimeCurrent                | open point in time contexts
+search.point_in_time_time                 | spti,searchPointInTimeTime                  | time point in time contexts held open
+search.point_in_time_total                | spto,searchPointInTimeTotal                 | completed point in time contexts
+search.search_idle_reactivate_count_total | ssirct,searchSearchIdleReactivateCountTotal | number of times a shard reactivated
+segments.count                            | sc,segmentsCount                            | number of segments
+segments.memory                           | sm,segmentsMemory                           | memory used by segments
+segments.index_writer_memory              | siwm,segmentsIndexWriterMemory              | memory used by index writer
+segments.version_map_memory               | svmm,segmentsVersionMapMemory               | memory used by version map
+segments.fixed_bitset_memory              | sfbm,fixedBitsetMemory                      | memory used by fixed bit sets for nested object field types and type filters for types referred in _parent fields
+seq_no.max                                | sqm,maxSeqNo                                | max sequence number
+seq_no.local_checkpoint                   | sql,localCheckpoint                         | local checkpoint
+seq_no.global_checkpoint                  | sqg,globalCheckpoint                        | global checkpoint
+warmer.current                            | wc,warmerCurrent                            | current warmer ops
+warmer.total                              | wto,warmerTotal                             | total warmer ops
+warmer.total_time                         | wtt,warmerTotalTime                         | time spent in warmers
+path.data                                 | pd,dataPath                                 | shard data path
+path.state                                | ps,statsPath                                | shard state path
+docs.deleted                              | dd,docsDeleted                              | number of deleted docs in shard
+```

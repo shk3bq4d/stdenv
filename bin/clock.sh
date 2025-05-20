@@ -5,8 +5,9 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
-tput civis
-trap "tput cnorm; echo; exit" INT
+if tput civis &>/dev/null; then # ignores TERM and lack of stdin problems
+    trap "tput cnorm; echo; exit" INT
+fi
 host="$(hostname -f)"
 if [[ $# -gt 0 ]]; then
     host="${host} $@"
