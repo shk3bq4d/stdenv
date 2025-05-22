@@ -742,3 +742,50 @@ add preprocessing steps: CSV to JSON with default ' and " parameters and "with h
 
 
 yellow trigger depends on red
+
+
+# SQL item or trigger by function
+```sql
+
+select
+    f.name as functionname,
+    f.functionid,
+    f.parameter,
+    ih.name as itemhost,
+    i.name as itemame,
+    i.key_ as itemkey,
+    it.name as triggerhost,
+    t.description as triggerdescription,
+    t.expression as triggerexpression,
+	concat('https://zabbix.group.local/zabbix.php?action=item.list&context=host&filter_name=&filter_type=-1&filter_value_type=-1&filter_history=&filter_trends=&filter_delay=&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_state=-1&filter_status=-1&filter_with_triggers=-1&filter_inherited=-1&filter_discovered=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_key=',
+		replace(replace(replace(replace(replace(replace(replace(i.key_, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
+		) as itemurl,
+	concat('https://zabbix.group.local/zabbix.php?action=trigger.list&context=host&filter_state=-1&filter_status=-1&filter_value=-1&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_inherited=-1&filter_discovered=-1&filter_dependent=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_name=',
+		replace(replace(replace(replace(replace(replace(replace(t.description, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
+		) as triggerurl,
+    '' as '_'
+from functions f
+left join items i on f.itemid = i.itemid
+left join hosts ih on i.hostid = ih.hostid
+left join triggers t on f.triggerid = t.triggerid
+left join hosts it on i.hostid = it.hostid
+where f.functionid = 19757770\G
+
+https://zabbix.group.local/zabbix.php?action=item.list&filter_set=1&filter_hostids%5B0%5D=13106&context=host
+https://zabbix.group.local/zabbix.php?action=item.list&context=host&filter_hostids%5B%5D=20121&filter_name=&filter_key=vfs.file.time%5B%2Fopt%2Fsf-scripts%2Fzabbix-shared%2Fos.packages.security.available%5D&filter_type=-1&filter_value_type=-1&filter_history=&filter_trends=&filter_delay=&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_state=-1&filter_status=-1&filter_with_triggers=-1&filter_inherited=-1&filter_discovered=-1&filter_set=1
+vfs.file.time%5B%2Fopt%2Fsf-scripts%2Fzabbix-shared%2Fos.packages.security.available%5D
+https://zabbix.group.local/zabbix.php?action=trigger.list&context=host&filter_hostids%5B%5D=20121&filter_name=abcd%3A&filter_state=1&filter_status=-1&filter_value=-1&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_inherited=-1&filter_discovered=-1&filter_dependent=-1&filter_set=1
+
+CREATE TABLE `functions` (
+  `functionid` bigint(20) unsigned NOT NULL,
+  `itemid` bigint(20) unsigned NOT NULL,
+  `triggerid` bigint(20) unsigned NOT NULL,
+  `name` varchar(12) NOT NULL DEFAULT '',
+  `parameter` varchar(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`functionid`),
+  KEY `functions_1` (`triggerid`),
+  KEY `functions_2` (`itemid`,`name`,`parameter`),
+  CONSTRAINT `c_functions_1` FOREIGN KEY (`itemid`) REFERENCES `items` (`itemid`),
+  CONSTRAINT `c_functions_2` FOREIGN KEY (`triggerid`) REFERENCES `triggers` (`triggerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin |
+```

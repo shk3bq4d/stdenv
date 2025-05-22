@@ -687,3 +687,5 @@ merge b # Merge branch 'mybranchname'
 source <(curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/refs/heads/master/plugins/git/git.plugin.zsh) # glola glod
 
 git rebase --root -i # Start an interactive rebase from the very first commit
+git diff -U10 # --unified=10 more line of contexts in diff
+git diff --unified=10 --color-words

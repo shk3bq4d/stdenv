@@ -17,6 +17,8 @@ _script_id() {
 
 ! date -d "$1" &>/dev/null && echo "FATAL: not a valid time specification $1" && exit 1
 T="$1"
+TTS="$(date +"%s" -d "$T")"
+TH="$(date +"%Y.%m.%d-%H.%M.%S" -d "$T")"
 shift
 while [[ "$1" == "ap" ]] || [[ "$1" == "ansible-playbook" ]]; do
     shift
@@ -36,6 +38,8 @@ echo "flagfile is $flagfile"
 {
     date
     echo "T is $T"
+    echo "TTS is $TTS"
+    echo "TH is $TH"
     echo "args are $@"
 } > $flagfile
 
