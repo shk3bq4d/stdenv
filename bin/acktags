@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+
+filelist() {
+    if [[ $# -eq 0 ]]; then
+        ack -l tags: *yml roles/*/tasks/*yml
+    else
+        ack -l tags: *yml roles/*/tasks/*yml | grep -E "$(echo "$@" | tr ' ' '|')"
+    fi
+
+}
+
+cd $(ansdir)
+>&2 echo looking in
+>&2 filelist "$@"
+>&2 echo =======
+filelist "$@" | while read line; do
+    yq '[(.. | select(has("tags")) | select(.tags)).tags]|flatten' $line
+done | sed -r -e 's/^- //' | grep -xvE 'always' | sort -u

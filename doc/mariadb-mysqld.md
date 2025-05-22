@@ -1399,3 +1399,9 @@ git for-each-ref --sort=-creatordate --format '%(creatordate:iso) %(refname)' re
 2000-09-01 00:53:34 +0200 refs/tags/beta-3.23.23
 2000-08-02 03:48:07 +0200 refs/tags/mysql_4.0
 2000-07-31 21:51:36 -0600 refs/tags/mysql-3.23.22-beta
+
+
+```sql
+replace(replace(replace(replace(replace(replace(replace(t.description, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
+```
+

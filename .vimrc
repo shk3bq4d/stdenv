@@ -314,7 +314,15 @@ func! MrFixWhiteSpaceFunc()
     exec "silent !tac"
 endfunc
 command! -range=% MrFixWhiteSpace2 :<line1>,<line2>:call MrFixWhiteSpaceFunc()
-command! -range=% MrFixWhiteSpace exec ":<line1>,<line2>!fix-whitespaces.py --tab-stops " . &ts
+"command! -range=% MrFixWhiteSpace exec ":<line1>,<line2>!fix-whitespaces.py --tab-stops " . &ts
+"command! -range=% MrFixWhiteSpace execute "normal! m`" | execute ":<line1>,<line2>!fix-whitespaces.py --tab-stops " . &ts | execute "normal! ``"
+command! -range=% MrFixWhiteSpace call s:MrFixWhitespace3(<line1>, <line2>)
+
+function! s:MrFixWhitespace3(start, end) range
+  let l:view = winsaveview()
+  execute a:start . "," . a:end . "!fix-whitespaces.py --tab-stops " . &ts
+  call winrestview(l:view)
+endfunction
 
 :command! MrConfluence :TOhtml | :%!html2confluencewiki_bis.py
 :command! MrAlign0space :AlignCtrl "Ilp0P0=" '='
