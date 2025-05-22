@@ -645,6 +645,8 @@ set -u # crash if unbound variables => use [[ -n ${VAR+1} ]] to check for existe
 set -o pipefail # crash if programs in between pipes fail
 set -f # disable path expansion globbing *
 
+export PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]:-}: '; set -x
+
 set -o noclobber
 
 echo $RANDOM # is an internal Bash function (not a constant) that returns a pseudorandom integer in the range 0 - 32767. It should not be used to generate an encryption key.
