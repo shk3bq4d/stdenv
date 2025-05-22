@@ -396,3 +396,25 @@ apt-cache policy
 
 # opkg
 opkg install bind-dig
+
+# apt hooks
+```sh
+apt-config dump | grep Post-Invoke
+apt-config dump | grep -Ei 'invoke|upgrade'
+strace -f -e execve apt install --reinstall strace |& grep execve
+    DPkg::Pre-Invoke
+    DPkg::Post-Invoke
+    DPkg::Pre-Invoke-Success
+    DPkg::Post-Invoke-Success
+    APT::Update::Pre-Invoke
+    APT::Update::Post-Invoke
+    APT::Update::Pre-Invoke-Success
+    APT::Update::Post-Invoke-Success
+    Unattended-Upgrade::Pre-Invoke
+
+    Unattended-Upgrade::Post-Invoke
+
+    Unattended-Upgrade::Post-Invoke-Success
+
+    Unattended-Upgrade::MailOnlyOnError (not a hook but a config toggle)
+```
