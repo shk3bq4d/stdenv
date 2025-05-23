@@ -1255,6 +1255,7 @@ ansible all -bm yum -a "name=httpd state=present"                        # oneli
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ansible uat     -bm service -a "name=apt-daily-upgrade.timer state=restarted" # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
 ansible linux   -bm service -a "name=filebeat       state=restarted"     # oneliner one-liner adhoc ad-hoc
