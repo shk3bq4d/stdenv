@@ -5,7 +5,7 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
-source ~/bin/dot.bashcolors
+#source ~/bin/dot.bashcolors
 # https://stackoverflow.com/questions/30758424/starting-a-new-process-group-from-bash-script
 # difference between a session and a group
 ongoing_pgids() {
@@ -19,7 +19,7 @@ print_pgid() {
     #echo "pgid: $1"
     sleep=$(ps --no-headers -o pid,cmd $mpgid | grep -E "sleep [0-9]+$" | awk-print-last.sh)
     #ps --no-headers -o pid,cmd $mpgid | grep -E "sleep [0-9]+$"
-    sleep_pid=$(ps --no-headers -o pid,cmd $mpgid | grep -E "sleep [0-9]+$" | awk-print1.sh)
+    sleep_pid=$(ps --no-headers -o pid,cmd $mpgid | grep -E "sleep [0-9]+$" | ~/bin/awk-print1.sh)
     sleep_lmod_epoch=$(stat -c %Y /proc/$sleep_pid/stat)
     #echo "sleep is $sleep, sleep_pid is $sleep_pid"
     log_file=$(ps --no-headers -o ppid,cmd $mpgid  | grep ansible-playbook-delayed-color- | awk-print-last.sh)
@@ -27,7 +27,9 @@ print_pgid() {
 
     echo -n -e "\n========= PGID $pgid -- "
 
-    ps --no-headers -o ppid,cmd $mpgid | grep -E "^ *1 " | awk-print-shift.sh 3
+
+    #ps --no-headers -o ppid,cmd $mpgid | sed -r -n -e '/^ *1 / p' | awk-print-shift.sh 3
+    command ps --no-headers -o ppid,cmd $mpgid | sed -r -n -e '/^ *1 /s/^\s*(\S+)\s+(\S+)\s+(\S+)\s+(.+)/\4/ p' || true
     if [[ ! -f $flag_file ]]; then
         echo -n "${ERED}"
         echo "skipping as missing flag_file $flag_file. You can show which processes exist by executing"

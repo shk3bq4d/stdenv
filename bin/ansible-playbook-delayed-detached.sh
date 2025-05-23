@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+    >&2 echo here
+    >&2 whoami
+    >&2 echo $PATH
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
@@ -40,6 +43,7 @@ echo "flagfile is $flagfile"
     echo "T is $T"
     echo "TTS is $TTS"
     echo "TH is $TH"
+    echo "CWD is $PWD"
     echo "args are $@"
 } > $flagfile
 
@@ -47,7 +51,10 @@ echo "flagfile is $flagfile"
     set -euo pipefail;
     exec > >(stdbuf -o0 ts | tee $logfile2 | sed-remove-ansi-colors.sh ) #| tee $logfile1)
     exec 2>&1
-    trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+    if false; then
+        # 2025.05.23 no longer deleting flag file since adding restore mode
+        trap "rm $flagfile &>/dev/null || true" SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+    fi
 
     flagfile_lmod_before="$(date -r "$flagfile" "+%s")"
 
@@ -67,6 +74,7 @@ echo "flagfile is $flagfile"
     test "$flagfile_lmod_before" -ne "$flagfile_lmod_after" && echo "FATAL: flagfile last mod time changed $flagfile_lmod_before != $flagfile_lmod_after" && trap '' SIGHUP SIGINT SIGQUIT SIGTERM EXIT && exit 1
     export ANSIBLE_FORCE_COLOR=true
     export ANSIBLE_TIMEOUT=120
+    rm "$flagfile" &>/dev/null || true
     set +e
     echo "pwd is $PWD"
     echo ansible-playbook "$@"
@@ -74,7 +82,6 @@ echo "flagfile is $flagfile"
     exit_code="$?"
     echo "exit code is $exit_code"
     [[ $exit_code -ne 0 ]] && [[ -d /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ ]] && touch -d "1 year ago" /opt/sf-scripts/zabbix-shared/heartbeat/minutely/ansible-playbook-delayed-$ID
-    rm "$flagfile" &>/dev/null || true
     exit "$exit_code"
 } >/dev/null &
 
