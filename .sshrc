@@ -178,6 +178,8 @@ _z2() {
 /var/log
 /var/log/sf
 /opt/sf-scripts
+/opt/sf-scripts/zabbix-shared/filemetric/
+/opt/sf-scripts/zabbix-shared/filemetric/lmod
 /opt/sf-scripts/zabbix-shared/heartbeat/
 /opt/sf-scripts/zabbix-shared/heartbeat/weekly
 /opt/sf-scripts/zabbix-shared/heartbeat/monthly

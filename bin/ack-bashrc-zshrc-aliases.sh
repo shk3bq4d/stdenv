@@ -16,7 +16,6 @@ files() {
 ~/.profile
 ~/bin/dot.bashfunctions
 ~/bin/dot.gitfunctions
-~/.*aliases
 /etc/profile
 /etc/profile.d/*sh
 /etc/bash.bashrc
@@ -24,6 +23,7 @@ files() {
 /etc/inputrc
 /etc/screenrc
 EOF
+	ls -1 ~/.*aliases
 
 }
 
