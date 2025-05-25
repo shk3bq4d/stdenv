@@ -4,26 +4,45 @@
 set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+export PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]:-}: '
+
+_tempdir=$(mktemp -d); function cleanup() { [[ -n ${_tempdir:-} ]]  && [[ -d $_tempdir ]]  && rm -rf $_tempdir  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+
+ongoing=$_tempdir/ongoing
+ansible-playbook-delayed-ongoing.sh > $_tempdir/ongoing
 
 candidate_flag_files() {
     ls -1 $HOME/.tmp/ansible-playbook-delayed-*
 }
 
 process_file() {
-    local file args TH args
+    local file args TTS args
     file="$1"
     echo -e "\n\n=================== Processing $file"
 
-    if ansible-playbook-delayed-ongoing.sh | grep -qE " $file"'$'; then
+    if grep -aqE "command rm -f $file"'\s*$' $ongoing; then
         echo "Skipping $file as a matching ongoing process runs"
         return 0
     fi
 
-    TH="$(  grep -Po '(?<=TH is ).*'    $file || true)"
+    CWD="$( grep -Po '(?<=CWD is ).*'   $file || true)"
+    TTS="$( grep -Po '(?<=TTS is ).*'   $file || true)"
     args="$(grep -Po '(?<=args are ).*' $file || true)"
 
-    if [[ -z "$TH" ]]; then
-        echo "skipping file due to missing TH"
+    if [[ -z "$TTS" ]]; then
+        echo "skipping file due to missing TTS"
+        return 0
+    fi
+    echo "TTS is $TTS"
+
+    if [[ -z "$CWD" ]]; then
+        echo "skipping file due to missing CWD"
+        return 0
+    fi
+    echo "CWD is $CWD"
+
+    if [[ "$TTS" -lt "$(date +%s)" ]]; then
+        echo "skipping due to TTS in the past"
         return 0
     fi
 
@@ -31,9 +50,11 @@ process_file() {
         echo "skipping file due to missing args"
         return 0 # since I have a clean log message, I'm fine with returning zero
     fi
+    echo "args are $args"
 
+    cd $CWD
     rm "$file"
-    ansible-playbook-delayed-detached.sh "@$TH" $args
+    ansible-playbook-delayed-detached.sh "@$TTS" $args
 }
 
 
