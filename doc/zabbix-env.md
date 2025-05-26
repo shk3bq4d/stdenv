@@ -758,19 +758,19 @@ select
     it.name as triggerhost,
     t.description as triggerdescription,
     t.expression as triggerexpression,
-	concat('https://zabbix.group.local/zabbix.php?action=item.list&context=host&filter_name=&filter_type=-1&filter_value_type=-1&filter_history=&filter_trends=&filter_delay=&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_state=-1&filter_status=-1&filter_with_triggers=-1&filter_inherited=-1&filter_discovered=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_key=',
-		replace(replace(replace(replace(replace(replace(replace(i.key_, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
-		) as itemurl,
-	concat('https://zabbix.group.local/zabbix.php?action=trigger.list&context=host&filter_state=-1&filter_status=-1&filter_value=-1&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_inherited=-1&filter_discovered=-1&filter_dependent=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_name=',
-		replace(replace(replace(replace(replace(replace(replace(t.description, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
-		) as triggerurl,
+    concat('https://zabbix.group.local/zabbix.php?action=item.list&context=host&filter_name=&filter_type=-1&filter_value_type=-1&filter_history=&filter_trends=&filter_delay=&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_state=-1&filter_status=-1&filter_with_triggers=-1&filter_inherited=-1&filter_discovered=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_key=',
+        replace(replace(replace(replace(replace(replace(replace(i.key_, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
+        ) as itemurl,
+    concat('https://zabbix.group.local/zabbix.php?action=trigger.list&context=host&filter_state=-1&filter_status=-1&filter_value=-1&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_inherited=-1&filter_discovered=-1&filter_dependent=-1&filter_set=1&filter_hostids%5B%5D=', ih.hostid, '&filter_name=',
+        replace(replace(replace(replace(replace(replace(replace(t.description, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
+        ) as triggerurl,
     '' as '_'
 from functions f
 left join items i on f.itemid = i.itemid
 left join hosts ih on i.hostid = ih.hostid
 left join triggers t on f.triggerid = t.triggerid
 left join hosts it on i.hostid = it.hostid
-where f.functionid = 19757770\G
+where f.functionid = 19758478\G
 
 https://zabbix.group.local/zabbix.php?action=item.list&filter_set=1&filter_hostids%5B0%5D=13106&context=host
 https://zabbix.group.local/zabbix.php?action=item.list&context=host&filter_hostids%5B%5D=20121&filter_name=&filter_key=vfs.file.time%5B%2Fopt%2Fsf-scripts%2Fzabbix-shared%2Fos.packages.security.available%5D&filter_type=-1&filter_value_type=-1&filter_history=&filter_trends=&filter_delay=&filter_evaltype=0&filter_tags%5B0%5D%5Btag%5D=&filter_tags%5B0%5D%5Boperator%5D=0&filter_tags%5B0%5D%5Bvalue%5D=&filter_state=-1&filter_status=-1&filter_with_triggers=-1&filter_inherited=-1&filter_discovered=-1&filter_set=1

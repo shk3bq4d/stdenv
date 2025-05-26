@@ -101,3 +101,6 @@ convert -size 420x120 xc:transparent -fill "#006237" -gravity center -pointsize 
 # automatic crop
 convert image.svg           -trim +repage image.png
 convert image.svg -fuzz 10% -trim +repage image.png
+
+
+convert 48c11bcc99c36e9a41c8fe75226b83e2.jpg -level 20%,60% output.jpg # contrast 20% darker are converted to black, 40% brighter are converted to white

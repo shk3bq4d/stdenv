@@ -59,6 +59,7 @@ I forgot to tell that the new line is important after the filenames in the scrip
 
 
 sed -e '/^\s*$/ d' # remove emptylines
+sed -e 's/\s*#.*//' -e '/^\s*$/ d' # remove comments and emptylines
 
 rint between line 45 and 50
 sed -n '45,50p' filename
@@ -167,7 +168,7 @@ sed -r - e '/(import org.apache.logging.log4j.Logger;)/ a import append.this.con
 
 ```sh
 tail -f /var/log/squid/access.log | perl -p -e 's/^([0-9]*)/"[".localtime($1)."]"/e' # datetime
-perl -p -e 's/^([^()]+.)([0-9.]+)(.*)/localtime($2)." -- $1$2$3"/e' /var/log/audit/audit.log 
+perl -p -e 's/^([^()]+.)([0-9.]+)(.*)/localtime($2)." -- $1$2$3"/e' /var/log/audit/audit.log
 
 sed -r -e 's/\r//g' # dos2unix
 ```
