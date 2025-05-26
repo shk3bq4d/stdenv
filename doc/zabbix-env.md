@@ -590,6 +590,7 @@ tc qdisc change dev eth0 root netem loss 0%  # stop  simulate ping loss
 
 https://support.zabbix.com/browse/ZBX-16162 # Draw Graph line complete when Discarding values with Heartbeat, bug
 https://support.zabbix.com/browse/ZBX-24926 # opsgenie Sending failed: Error: cannot set cURL option CURLOPT_INTERFACE: A libcurl function was given a bad argument.
+https://support.zabbix.com/browse/ZBX-26477 # vfs.dir.get fails to list entries with unix timestamp set to zero
 
 # proxy
 docker exec -it zabbix-proxy zabbix_proxy -R log_level_increase
