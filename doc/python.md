@@ -918,7 +918,6 @@ export PYTHONUNBUFFERED=1
 # unbuffered
 import os,sys
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
->>>>>>> adf8934b9a3545a7b8ce5462b7a1b5ae194f5621
 
 import traceback; traceback.print_exc() # print stack trace
 
@@ -1322,3 +1321,5 @@ image:ppodgorsek/robot-framework:7.2.0 rpaversion:==30.0.0, result is success
 image:ppodgorsek/robot-framework:7.2.0 rpaversion:==29.0.0, result is success
 image:ppodgorsek/robot-framework:7.2.0 rpaversion:==28.6.3, result is FAILURE
 ```
+
+hex(16) -> 10 # from decimal to hexadecimal
