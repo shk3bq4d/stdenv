@@ -23,7 +23,7 @@ files() {
 /etc/inputrc
 /etc/screenrc
 EOF
-	ls -1 ~/.*aliases
+    ls -1 ~/.*aliases
 
 }
 
