@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+# date '+%a %b %d %H:%M' -d @1747872031
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+export PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]:-}: ';
+_tempfile=$(mktemp);   function cleanup() { [[ -n "${_tempfile:-}" ]] && [[ -f "$_tempfile" ]] && rm  -f "$_tempfile" || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+
+DIR="$(ansdir)"
+
+files() {
+    if [[ ! -s $_tempfile ]]; then
+        find \
+            $DIR/*vars \
+            $DIR/roles/*/{vars,defaults} \
+            -type f > $_tempfile
+    fi
+    cat $_tempfile
+}
+
+count=$(files | grep -c "$@" || true)
+
+if [[ "$count" -eq 0 ]]; then
+    echo "FATAL: no var files match your pattern $@"
+    exit 1
+fi
+if [[ "$count" -eq 1 ]]; then
+    vim $(files | grep "$@")
+    exit $?
+fi
+
+count2=$(files | xargs -rI@ basename @ .yml | grep -xc "$@" || true)
+#if [[ "$count2" -eq 0 ]]; then
+    #echo "UNEXPECTED count2: no var files match your pattern $@"
+    #exit 1
+#fi
+if [[ "$count2" -eq 1 ]]; then
+    vim $(files | grep -F "/$@.yml")
+    exit $?
+fi
+
+
+echo '>>>>>'
+files | grep "$@" | cat -n
+echo '====='
+files | xargs -rI@ basename @ .yml grep "$@" | cat -n
+echo '<<<<<'
+echo "There are $count files (count2 is $count2), would you like to open them all? (yN)"
+read _read </dev/tty # prompt for reading in loop
+echo # read prompt
+case "${_read,,}" in \
+y|yes) true ;; # read prompt
+*)   echo "ABORTING"; exit 1;; # read prompt
+esac # read prompt
+files | grep "$@" | xargs_vim

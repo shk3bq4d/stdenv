@@ -120,3 +120,7 @@ http://localhost:57155/tampermonkey/mr.py
 })();
 
 /* vim: set expandtab: */
+
+
+
+wget https://addons.mozilla.org/firefox/downloads/file/4379021/tampermonkey-5.3.3.xpi

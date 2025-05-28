@@ -11,6 +11,7 @@ You can also use the slim build, which excludes the ajax and effects modules:
 ```
 
 ```js
+$('a[href*="dashboards/"]'); // link whose url matches a pattern
 $('#pwd').css('color', 'white'); // style="
 $('#pwd').val('setvalue');
 $('#pwd').length > 0 // test if element worked

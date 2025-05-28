@@ -253,3 +253,9 @@ REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Sy
 REG ADD HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticetext /t REG_SZ /d "This computer is property of <company name> and is for authorized use only. Activities may be monitored and unauthorized access may result in criminal or civil prosecution. By signing into this device, you attest that you are an authorized user." /f
 
 ssh client through powershell seems to be happier with private key in %USERPROFILE%/.ssh/id_xxx instead of other place
+
+icacls "J:\me\.ssh\id_ed25519" /inheritance:r                               & REM openssh private key permissions
+icacls "J:\me\.ssh\id_ed25519" /grant:r "$($env:USERNAME):(R)"              & REM openssh private key permissions
+[-S program] [-X sftp_option] source ... target
+C:\Users\jmalone> C:\Windows\System32\OpenSSH\scp.exe -i J:\me\.ssh\id_ed25519 myuser@myhost:myfile j:\ & rem sss
+C:\Users\jmalone> C:\Windows\System32\OpenSSH\ssh.exe -i J:\me\.ssh\id_ed25519 myuser@myhost

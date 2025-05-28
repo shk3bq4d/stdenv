@@ -2,6 +2,7 @@
 https://searchfox.org/mozilla-release/source/modules/libpref/init/StaticPrefList.yaml
 https://mozilla.github.io/policy-templates/
 https://support.mozilla.org/en-US/kb/customizing-firefox-using-policiesjson
+wget https://addons.mozilla.org/firefox/downloads/file/4405733/tampermonkey-5.3.3.xpi
 
 # keyboard shorcuts
 <F6> shift between text entry
