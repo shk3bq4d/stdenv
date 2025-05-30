@@ -645,7 +645,7 @@ set -u # crash if unbound variables => use [[ -n ${VAR+1} ]] to check for existe
 set -o pipefail # crash if programs in between pipes fail
 set -f # disable path expansion globbing *
 
-export PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]:-}: '; set -x
+export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: '; set -x
 
 set -o noclobber
 
