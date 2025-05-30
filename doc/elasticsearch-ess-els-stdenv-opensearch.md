@@ -17,7 +17,8 @@ https://www.elastic.co/guide/en/elasticsearch/reference/7.13/modules-cluster.htm
 
 curl -s 'http://localhost:9200/_cluster/health?pretty'
 https://bip.bop.net/_snapshot/nfs_backups/
- curl -s 'http://localhost:9200/_cluster/settings?pretty'
+curl -s 'http://localhost:9200/_cluster/settings?pretty'
+curl -s 'http://localhost:9200/_cluster/settings?pretty&include_defaults=true'
 curl -s http://bip.po.net:9200/_snapshot
 curl -s http://bip.po.net:9200/_snapshot/nfs_backups/
 curl -s http://bip.po.net:9200/_snapshot/nfs_backups/_all

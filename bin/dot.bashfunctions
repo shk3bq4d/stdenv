@@ -1562,4 +1562,22 @@ a2a() {
     sudo cat "$a" | audit2allow -m bip
 }
 
+extract_begin_end_cert() {
+    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+        echo "Error: First argument must be a non-negative integer index."
+        return 1
+    fi
+    if [ ! -f "$2" ] || [ ! -r "$2" ]; then
+        echo "Error: '$2' is not a readable regular file."
+        return 1
+    fi
+    awk -v idx="$1" '
+    /-----BEGIN CERTIFICATE-----/ {in_cert=1; count++}
+    in_cert {if (count == idx+1) print}
+    /-----END CERTIFICATE-----/ && in_cert {
+        if (count == idx+1) exit
+        in_cert=0
+    }' "$2"
+}
+
 true # last statement must return true

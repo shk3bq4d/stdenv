@@ -165,11 +165,28 @@ alias digs='dig +short'
     test -t 1 && mrcolorsafe=1
     MRCOLORSAFE=$mrcolorsafe command kubectl-get-yaml.py "$@" | less
 }
+
+varsfrx() {
+    local rx arg1
+    rx="$1"
+    shift
+    arg1="$1"
+    shift
+    ansible-playbook varsfrx.yml -e sfrx="$rx" -l "$arg1"\* $@
+}
+
 complete_function() {
     local f=$1; shift
     compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
   }
+
+complete_function_skipone() {
+    local f=$1; shift
+    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 2 )); _normal" $f
+  }
+
 #complete_function ksd0                               kubectl get depl
+complete_function_skipone varsfrx                    ansible-playbook -l
 complete_function ksns                               kubectl get namespace
 complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
 complete_function kubectl-get-yaml.py                kubectl get

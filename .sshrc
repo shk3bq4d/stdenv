@@ -180,6 +180,7 @@ _z2() {
 /opt/sf-scripts
 /opt/sf-scripts/zabbix-shared/filemetric/
 /opt/sf-scripts/zabbix-shared/filemetric/lmod
+/opt/sf-scripts/zabbix-shared/filemetric/zerolmod
 /opt/sf-scripts/zabbix-shared/heartbeat/
 /opt/sf-scripts/zabbix-shared/heartbeat/weekly
 /opt/sf-scripts/zabbix-shared/heartbeat/monthly
