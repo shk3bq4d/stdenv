@@ -2949,3 +2949,5 @@ ansible.utils.validate # asserts validation
 
 ansible -m debug -a     var='q("varnames",".*ansible_hos.*")' localhost # q letter character
 ansible -m debug -a var='query("varnames",".*ansible_hos.*")' localhost # q letter character
+
+# ansible-console

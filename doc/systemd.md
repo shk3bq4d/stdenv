@@ -31,87 +31,87 @@ https://linuxconfig.org/how-to-automatically-execute-shell-script-at-startup-boo
 /usr/lib/systemd/system/zookeeper.service
 
 
-Sysvinit Command	          Systemd Command	                                              Notes
-service frobozz start	      systemctl start frobozz	                                      Used to start a service (not reboot persistent)
-service frobozz stop	      systemctl stop frobozz	                                      Used to stop a service (not reboot persistent)
-service frobozz restart	      systemctl restart frobozz	                                      Used to stop and then start a service
-service frobozz reload	      systemctl reload frobozz	                                      When supported, reloads the config file without interrupting pending operations.
-service frobozz condrestart	  systemctl condrestart frobozz	                                  Restarts if the service is already running.
-service frobozz status	      systemctl status frobozz	                                      Tells whether a service is currently running.
-ls /etc/rc.d/init.d/	      systemctl (or) systemctl list-unit-files --type=service (or)    Used to list the services that can be started or stopped 
+Sysvinit Command              Systemd Command                                                 Notes
+service frobozz start         systemctl start frobozz                                         Used to start a service (not reboot persistent)
+service frobozz stop          systemctl stop frobozz                                          Used to stop a service (not reboot persistent)
+service frobozz restart       systemctl restart frobozz                                       Used to stop and then start a service
+service frobozz reload        systemctl reload frobozz                                        When supported, reloads the config file without interrupting pending operations.
+service frobozz condrestart   systemctl condrestart frobozz                                   Restarts if the service is already running.
+service frobozz status        systemctl status frobozz                                        Tells whether a service is currently running.
+ls /etc/rc.d/init.d/          systemctl (or) systemctl list-unit-files --type=service (or)    Used to list the services that can be started or stopped
                               ls /lib/systemd/system/*.service /etc/systemd/system/*.service  Used to list all the services and other units
-chkconfig frobozz on	      systemctl enable frobozz	                                      Turn the service on, for start at next boot, or other trigger.
-chkconfig frobozz off	      systemctl disable frobozz	                                      Turn the service off for the next reboot, or any other trigger.
-chkconfig frobozz	          systemctl is-enabled frobozz	                                  Used to check whether a service is configured to start or not in the current environment.
-chkconfig --list	          systemctl list-unit-files --type=service (or)                   Print a table of services that lists which runlevels each is configured on or off
-                              ls /etc/systemd/system/*.wants/	
-chkconfig frobozz --list	  ls /etc/systemd/system/*.wants/frobozz.service	              Used to list what levels this service is configured on or off
-chkconfig frobozz --add	u     systemctl daemon-reload	                                      Used when you create a new service file or modify any configuration
+chkconfig frobozz on          systemctl enable frobozz                                        Turn the service on, for start at next boot, or other trigger.
+chkconfig frobozz off         systemctl disable frobozz                                       Turn the service off for the next reboot, or any other trigger.
+chkconfig frobozz             systemctl is-enabled frobozz                                    Used to check whether a service is configured to start or not in the current environment.
+chkconfig --list              systemctl list-unit-files --type=service (or)                   Print a table of services that lists which runlevels each is configured on or off
+                              ls /etc/systemd/system/*.wants/
+chkconfig frobozz --list      ls /etc/systemd/system/*.wants/frobozz.service                  Used to list what levels this service is configured on or off
+chkconfig frobozz --add u     systemctl daemon-reload                                         Used when you create a new service file or modify any configuration
 
 
 
-UNIT FILE                                     STATE   
+UNIT FILE                                     STATE
 arp-ethers.service                            disabled
-atd.service                                   enabled 
-auditd.service                                enabled 
-autovt@.service                               enabled 
+atd.service                                   enabled
+auditd.service                                enabled
+autovt@.service                               enabled
 blk-availability.service                      disabled
-brandbot.service                              static  
-chrony-dnssrv@.service                        static  
+brandbot.service                              static
+chrony-dnssrv@.service                        static
 chrony-wait.service                           disabled
-chronyd.service                               enabled 
+chronyd.service                               enabled
 console-getty.service                         disabled
 console-shell.service                         disabled
-container-getty@.service                      static  
+container-getty@.service                      static
 cpupower.service                              disabled
-crond.service                                 enabled 
-dbus-org.fedoraproject.FirewallD1.service     enabled 
-dbus-org.freedesktop.hostname1.service        static  
-dbus-org.freedesktop.import1.service          static  
-dbus-org.freedesktop.locale1.service          static  
-dbus-org.freedesktop.login1.service           static  
-dbus-org.freedesktop.machine1.service         static  
-dbus-org.freedesktop.network1.service         bad     
-dbus-org.freedesktop.timedate1.service        static  
-dbus.service                                  static  
+crond.service                                 enabled
+dbus-org.fedoraproject.FirewallD1.service     enabled
+dbus-org.freedesktop.hostname1.service        static
+dbus-org.freedesktop.import1.service          static
+dbus-org.freedesktop.locale1.service          static
+dbus-org.freedesktop.login1.service           static
+dbus-org.freedesktop.machine1.service         static
+dbus-org.freedesktop.network1.service         bad
+dbus-org.freedesktop.timedate1.service        static
+dbus.service                                  static
 debug-shell.service                           disabled
 dm-event.service                              disabled
 dnsmasq.service                               disabled
-dracut-cmdline.service                        static  
-dracut-initqueue.service                      static  
-dracut-mount.service                          static  
-dracut-pre-mount.service                      static  
-dracut-pre-pivot.service                      static  
-dracut-pre-trigger.service                    static  
-dracut-pre-udev.service                       static  
-dracut-shutdown.service                       static  
+dracut-cmdline.service                        static
+dracut-initqueue.service                      static
+dracut-mount.service                          static
+dracut-pre-mount.service                      static
+dracut-pre-pivot.service                      static
+dracut-pre-trigger.service                    static
+dracut-pre-udev.service                       static
+dracut-shutdown.service                       static
 ebtables.service                              disabled
-emergency.service                             static  
-fail2ban.service                              enabled 
-firewalld.service                             enabled 
-fstrim.service                                static  
-getty@.service                                enabled 
-goferd.service                                enabled 
-halt-local.service                            static  
-htcacheclean.service                          static  
+emergency.service                             static
+fail2ban.service                              enabled
+firewalld.service                             enabled
+fstrim.service                                static
+getty@.service                                enabled
+goferd.service                                enabled
+halt-local.service                            static
+htcacheclean.service                          static
 httpd.service                                 disabled
-initrd-cleanup.service                        static  
-initrd-parse-etc.service                      static  
-initrd-switch-root.service                    static  
-initrd-udevadm-cleanup-db.service             static  
+initrd-cleanup.service                        static
+initrd-parse-etc.service                      static
+initrd-switch-root.service                    static
+initrd-udevadm-cleanup-db.service             static
 iprdump.service                               disabled
 iprinit.service                               disabled
 iprupdate.service                             disabled
-irqbalance.service                            enabled 
-kdump.service                                 enabled 
-kmod-static-nodes.service                     static  
+irqbalance.service                            enabled
+kdump.service                                 enabled
+kmod-static-nodes.service                     static
 lvm2-lvmetad.service                          disabled
 lvm2-lvmpolld.service                         disabled
-lvm2-monitor.service                          enabled 
-lvm2-pvscan@.service                          static  
+lvm2-monitor.service                          enabled
+lvm2-pvscan@.service                          static
 mariadb.service                               disabled
-messagebus.service                            static  
-microcode.service                             enabled 
+messagebus.service                            static
+microcode.service                             enabled
 NetworkManager-dispatcher.service             disabled
 NetworkManager-wait-online.service            disabled
 NetworkManager.service                        disabled
@@ -125,96 +125,96 @@ plymouth-quit.service                         disabled
 plymouth-read-write.service                   disabled
 plymouth-reboot.service                       disabled
 plymouth-start.service                        disabled
-plymouth-switch-root.service                  static  
-polkit.service                                static  
-postfix.service                               enabled 
+plymouth-switch-root.service                  static
+polkit.service                                static
+postfix.service                               enabled
 puppet.service                                disabled
 puppetagent.service                           disabled
-quotaon.service                               static  
-rc-local.service                              static  
+quotaon.service                               static
+rc-local.service                              static
 rdisc.service                                 disabled
 rdma.service                                  disabled
-rescue.service                                static  
-rhel-autorelabel-mark.service                 static  
-rhel-autorelabel.service                      static  
-rhel-configure.service                        static  
+rescue.service                                static
+rhel-autorelabel-mark.service                 static
+rhel-autorelabel.service                      static
+rhel-configure.service                        static
 rhel-dmesg.service                            disabled
 rhel-domainname.service                       disabled
-rhel-import-state.service                     static  
-rhel-loadmodules.service                      static  
-rhel-readonly.service                         static  
-rhsmcertd.service                             enabled 
+rhel-import-state.service                     static
+rhel-loadmodules.service                      static
+rhel-readonly.service                         static
+rhsmcertd.service                             enabled
 rsyncd.service                                disabled
-rsyncd@.service                               static  
-rsyslog.service                               enabled 
-selinux-policy-migrate-local-changes@.service static  
+rsyncd@.service                               static
+rsyslog.service                               enabled
+selinux-policy-migrate-local-changes@.service static
 serial-getty@.service                         disabled
 shorewall.service                             disabled
-snmpd.service                                 enabled 
+snmpd.service                                 enabled
 snmptrapd.service                             disabled
-sshd-keygen.service                           static  
-sshd.service                                  enabled 
-sshd@.service                                 static  
-sysstat.service                               enabled 
-systemd-ask-password-console.service          static  
-systemd-ask-password-plymouth.service         static  
-systemd-ask-password-wall.service             static  
-systemd-backlight@.service                    static  
-systemd-binfmt.service                        static  
+sshd-keygen.service                           static
+sshd.service                                  enabled
+sshd@.service                                 static
+sysstat.service                               enabled
+systemd-ask-password-console.service          static
+systemd-ask-password-plymouth.service         static
+systemd-ask-password-wall.service             static
+systemd-backlight@.service                    static
+systemd-binfmt.service                        static
 systemd-bootchart.service                     disabled
-systemd-firstboot.service                     static  
-systemd-fsck-root.service                     static  
-systemd-fsck@.service                         static  
-systemd-halt.service                          static  
-systemd-hibernate-resume@.service             static  
-systemd-hibernate.service                     static  
-systemd-hostnamed.service                     static  
-systemd-hwdb-update.service                   static  
-systemd-hybrid-sleep.service                  static  
-systemd-importd.service                       static  
-systemd-initctl.service                       static  
-systemd-journal-catalog-update.service        static  
-systemd-journal-flush.service                 static  
-systemd-journald.service                      static  
-systemd-kexec.service                         static  
-systemd-localed.service                       static  
-systemd-logind.service                        static  
-systemd-machine-id-commit.service             static  
-systemd-machined.service                      static  
-systemd-modules-load.service                  static  
+systemd-firstboot.service                     static
+systemd-fsck-root.service                     static
+systemd-fsck@.service                         static
+systemd-halt.service                          static
+systemd-hibernate-resume@.service             static
+systemd-hibernate.service                     static
+systemd-hostnamed.service                     static
+systemd-hwdb-update.service                   static
+systemd-hybrid-sleep.service                  static
+systemd-importd.service                       static
+systemd-initctl.service                       static
+systemd-journal-catalog-update.service        static
+systemd-journal-flush.service                 static
+systemd-journald.service                      static
+systemd-kexec.service                         static
+systemd-localed.service                       static
+systemd-logind.service                        static
+systemd-machine-id-commit.service             static
+systemd-machined.service                      static
+systemd-modules-load.service                  static
 systemd-nspawn@.service                       disabled
-systemd-poweroff.service                      static  
-systemd-quotacheck.service                    static  
-systemd-random-seed.service                   static  
-systemd-readahead-collect.service             enabled 
+systemd-poweroff.service                      static
+systemd-quotacheck.service                    static
+systemd-random-seed.service                   static
+systemd-readahead-collect.service             enabled
 systemd-readahead-done.service                indirect
-systemd-readahead-drop.service                enabled 
-systemd-readahead-replay.service              enabled 
-systemd-reboot.service                        static  
-systemd-remount-fs.service                    static  
-systemd-rfkill@.service                       static  
-systemd-shutdownd.service                     static  
-systemd-suspend.service                       static  
-systemd-sysctl.service                        static  
-systemd-timedated.service                     static  
-systemd-tmpfiles-clean.service                static  
-systemd-tmpfiles-setup-dev.service            static  
-systemd-tmpfiles-setup.service                static  
-systemd-udev-settle.service                   static  
-systemd-udev-trigger.service                  static  
-systemd-udevd.service                         static  
-systemd-update-done.service                   static  
-systemd-update-utmp-runlevel.service          static  
-systemd-update-utmp.service                   static  
-systemd-user-sessions.service                 static  
-systemd-vconsole-setup.service                static  
+systemd-readahead-drop.service                enabled
+systemd-readahead-replay.service              enabled
+systemd-reboot.service                        static
+systemd-remount-fs.service                    static
+systemd-rfkill@.service                       static
+systemd-shutdownd.service                     static
+systemd-suspend.service                       static
+systemd-sysctl.service                        static
+systemd-timedated.service                     static
+systemd-tmpfiles-clean.service                static
+systemd-tmpfiles-setup-dev.service            static
+systemd-tmpfiles-setup.service                static
+systemd-udev-settle.service                   static
+systemd-udev-trigger.service                  static
+systemd-udevd.service                         static
+systemd-update-done.service                   static
+systemd-update-utmp-runlevel.service          static
+systemd-update-utmp.service                   static
+systemd-user-sessions.service                 static
+systemd-vconsole-setup.service                static
 tcsd.service                                  disabled
-teamd@.service                                static  
-tuned.service                                 enabled 
-vmtoolsd.service                              enabled 
+teamd@.service                                static
+tuned.service                                 enabled
+vmtoolsd.service                              enabled
 wpa_supplicant.service                        disabled
-yum-cron.service                              enabled 
-zabbix-agent.service                          enabled 
+yum-cron.service                              enabled
+zabbix-agent.service                          enabled
 
 164 unit files listed.
 
@@ -448,23 +448,23 @@ For system units these resource limits may be chosen freely. When these settings
 
 Table 1. Resource limit directives, their equivalent ulimit shell commands and the unit used
 
-Directive	ulimit equivalent	Unit
-LimitCPU=	ulimit -t	Seconds
-LimitFSIZE=	ulimit -f	Bytes
-LimitDATA=	ulimit -d	Bytes
-LimitSTACK=	ulimit -s	Bytes
-LimitCORE=	ulimit -c	Bytes
-LimitRSS=	ulimit -m	Bytes
-LimitNOFILE=	ulimit -n	Number of File Descriptors
-LimitAS=	ulimit -v	Bytes
-LimitNPROC=	ulimit -u	Number of Processes
-LimitMEMLOCK=	ulimit -l	Bytes
-LimitLOCKS=	ulimit -x	Number of Locks
-LimitSIGPENDING=	ulimit -i	Number of Queued Signals
-LimitMSGQUEUE=	ulimit -q	Bytes
-LimitNICE=	ulimit -e	Nice Level
-LimitRTPRIO=	ulimit -r	Realtime Priority
-LimitRTTIME=	No equivalent	Microseconds
+Directive   ulimit equivalent   Unit
+LimitCPU=   ulimit -t   Seconds
+LimitFSIZE= ulimit -f   Bytes
+LimitDATA=  ulimit -d   Bytes
+LimitSTACK= ulimit -s   Bytes
+LimitCORE=  ulimit -c   Bytes
+LimitRSS=   ulimit -m   Bytes
+LimitNOFILE=    ulimit -n   Number of File Descriptors
+LimitAS=    ulimit -v   Bytes
+LimitNPROC= ulimit -u   Number of Processes
+LimitMEMLOCK=   ulimit -l   Bytes
+LimitLOCKS= ulimit -x   Number of Locks
+LimitSIGPENDING=    ulimit -i   Number of Queued Signals
+LimitMSGQUEUE=  ulimit -q   Bytes
+LimitNICE=  ulimit -e   Nice Level
+LimitRTPRIO=    ulimit -r   Realtime Priority
+LimitRTTIME=    No equivalent   Microseconds
 
 UMask=
 Controls the file mode creation mask. Takes an access mode in octal notation. See umask(2) for details. Defaults to 0022 for system units. For user units the default value is inherited from the per-user service manager (whose default is in turn inherited from the system service manager, and thus typically also is 0022 — unless overridden by a PAM module). In order to change the per-user mask for all user services, consider setting the UMask= setting of the user's user@.service system service instance. The per-user umask may also be set via the umask field of a user's JSON User Record (for users managed by systemd-homed.service(8) this field may be controlled via homectl --umask=). It may also be set via a PAM module, such as pam_umask(8).
@@ -543,12 +543,12 @@ These options take a whitespace-separated list of directory names. The specified
 
 Table 2. Automatic directory creation and environment variables
 
-Directory	Below path for system units	Below path for user units	Environment variable set
-RuntimeDirectory=	/run/	$XDG_RUNTIME_DIR	$RUNTIME_DIRECTORY
-StateDirectory=	/var/lib/	$XDG_CONFIG_HOME	$STATE_DIRECTORY
-CacheDirectory=	/var/cache/	$XDG_CACHE_HOME	$CACHE_DIRECTORY
-LogsDirectory=	/var/log/	$XDG_CONFIG_HOME/log/	$LOGS_DIRECTORY
-ConfigurationDirectory=	/etc/	$XDG_CONFIG_HOME	$CONFIGURATION_DIRECTORY
+Directory   Below path for system units Below path for user units   Environment variable set
+RuntimeDirectory=   /run/   $XDG_RUNTIME_DIR    $RUNTIME_DIRECTORY
+StateDirectory= /var/lib/   $XDG_CONFIG_HOME    $STATE_DIRECTORY
+CacheDirectory= /var/cache/ $XDG_CACHE_HOME $CACHE_DIRECTORY
+LogsDirectory=  /var/log/   $XDG_CONFIG_HOME/log/   $LOGS_DIRECTORY
+ConfigurationDirectory= /etc/   $XDG_CONFIG_HOME    $CONFIGURATION_DIRECTORY
 
 In case of RuntimeDirectory= the innermost subdirectories are removed when the unit is stopped. It is possible to preserve the specified directories in this case if RuntimeDirectoryPreserve= is configured to restart or yes (see below). The directories specified with StateDirectory=, CacheDirectory=, LogsDirectory=, ConfigurationDirectory= are not removed when the unit is stopped.
 
@@ -739,15 +739,15 @@ As the number of possible filesystems is large, predefined sets of filesystems a
 
 Table 3. Currently predefined filesystem sets
 
-Set	Description
-@basic-api	Basic filesystem API.
-@auxiliary-api	Auxiliary filesystem API.
-@common-block	Common block device filesystems.
-@historical-block	Historical block device filesystems.
-@network	Well-known network filesystems.
-@privileged-api	Privileged filesystem API.
-@temporary	Temporary filesystems: tmpfs, ramfs.
-@known	All known filesystems defined by the kernel. This list is defined statically in systemd based on a kernel version that was available when this systemd version was released. It will become progressively more out-of-date as the kernel is updated.
+Set Description
+@basic-api  Basic filesystem API.
+@auxiliary-api  Auxiliary filesystem API.
+@common-block   Common block device filesystems.
+@historical-block   Historical block device filesystems.
+@network    Well-known network filesystems.
+@privileged-api Privileged filesystem API.
+@temporary  Temporary filesystems: tmpfs, ramfs.
+@known  All known filesystems defined by the kernel. This list is defined statically in systemd based on a kernel version that was available when this systemd version was released. It will become progressively more out-of-date as the kernel is updated.
 
 Use systemd-analyze(1)'s filesystems command to retrieve a list of filesystems defined on the local system.
 
@@ -821,34 +821,34 @@ As the number of possible system calls is large, predefined sets of system calls
 
 Table 4. Currently predefined system call sets
 
-Set	Description
-@aio	Asynchronous I/O (io_setup(2), io_submit(2), and related calls)
-@basic-io	System calls for basic I/O: reading, writing, seeking, file descriptor duplication and closing (read(2), write(2), and related calls)
-@chown	Changing file ownership (chown(2), fchownat(2), and related calls)
-@clock	System calls for changing the system clock (adjtimex(2), settimeofday(2), and related calls)
-@cpu-emulation	System calls for CPU emulation functionality (vm86(2) and related calls)
-@debug	Debugging, performance monitoring and tracing functionality (ptrace(2), perf_event_open(2) and related calls)
-@file-system	File system operations: opening, creating files and directories for read and write, renaming and removing them, reading file properties, or creating hard and symbolic links
-@io-event	Event loop system calls (poll(2), select(2), epoll(7), eventfd(2) and related calls)
-@ipc	Pipes, SysV IPC, POSIX Message Queues and other IPC (mq_overview(7), svipc(7))
-@keyring	Kernel keyring access (keyctl(2) and related calls)
-@memlock	Locking of memory in RAM (mlock(2), mlockall(2) and related calls)
-@module	Loading and unloading of kernel modules (init_module(2), delete_module(2) and related calls)
-@mount	Mounting and unmounting of file systems (mount(2), chroot(2), and related calls)
-@network-io	Socket I/O (including local AF_UNIX): socket(7), unix(7)
-@obsolete	Unusual, obsolete or unimplemented (create_module(2), gtty(2), …)
-@privileged	All system calls which need super-user capabilities (capabilities(7))
-@process	Process control, execution, namespacing operations (clone(2), kill(2), namespaces(7), …)
-@raw-io	Raw I/O port access (ioperm(2), iopl(2), pciconfig_read(), …)
-@reboot	System calls for rebooting and reboot preparation (reboot(2), kexec(), …)
-@resources	System calls for changing resource limits, memory and scheduling parameters (setrlimit(2), setpriority(2), …)
-@setuid	System calls for changing user ID and group ID credentials, (setuid(2), setgid(2), setresuid(2), …)
-@signal	System calls for manipulating and handling process signals (signal(2), sigprocmask(2), …)
-@swap	System calls for enabling/disabling swap devices (swapon(2), swapoff(2))
-@sync	Synchronizing files and memory to disk (fsync(2), msync(2), and related calls)
-@system-service	A reasonable set of system calls used by common system services, excluding any special purpose calls. This is the recommended starting point for allow-listing system calls for system services, as it contains what is typically needed by system services, but excludes overly specific interfaces. For example, the following APIs are excluded: "@clock", "@mount", "@swap", "@reboot".
-@timer	System calls for scheduling operations by time (alarm(2), timer_create(2), …)
-@known	All system calls defined by the kernel. This list is defined statically in systemd based on a kernel version that was available when this systemd version was released. It will become progressively more out-of-date as the kernel is updated.
+Set Description
+@aio    Asynchronous I/O (io_setup(2), io_submit(2), and related calls)
+@basic-io   System calls for basic I/O: reading, writing, seeking, file descriptor duplication and closing (read(2), write(2), and related calls)
+@chown  Changing file ownership (chown(2), fchownat(2), and related calls)
+@clock  System calls for changing the system clock (adjtimex(2), settimeofday(2), and related calls)
+@cpu-emulation  System calls for CPU emulation functionality (vm86(2) and related calls)
+@debug  Debugging, performance monitoring and tracing functionality (ptrace(2), perf_event_open(2) and related calls)
+@file-system    File system operations: opening, creating files and directories for read and write, renaming and removing them, reading file properties, or creating hard and symbolic links
+@io-event   Event loop system calls (poll(2), select(2), epoll(7), eventfd(2) and related calls)
+@ipc    Pipes, SysV IPC, POSIX Message Queues and other IPC (mq_overview(7), svipc(7))
+@keyring    Kernel keyring access (keyctl(2) and related calls)
+@memlock    Locking of memory in RAM (mlock(2), mlockall(2) and related calls)
+@module Loading and unloading of kernel modules (init_module(2), delete_module(2) and related calls)
+@mount  Mounting and unmounting of file systems (mount(2), chroot(2), and related calls)
+@network-io Socket I/O (including local AF_UNIX): socket(7), unix(7)
+@obsolete   Unusual, obsolete or unimplemented (create_module(2), gtty(2), …)
+@privileged All system calls which need super-user capabilities (capabilities(7))
+@process    Process control, execution, namespacing operations (clone(2), kill(2), namespaces(7), …)
+@raw-io Raw I/O port access (ioperm(2), iopl(2), pciconfig_read(), …)
+@reboot System calls for rebooting and reboot preparation (reboot(2), kexec(), …)
+@resources  System calls for changing resource limits, memory and scheduling parameters (setrlimit(2), setpriority(2), …)
+@setuid System calls for changing user ID and group ID credentials, (setuid(2), setgid(2), setresuid(2), …)
+@signal System calls for manipulating and handling process signals (signal(2), sigprocmask(2), …)
+@swap   System calls for enabling/disabling swap devices (swapon(2), swapoff(2))
+@sync   Synchronizing files and memory to disk (fsync(2), msync(2), and related calls)
+@system-service A reasonable set of system calls used by common system services, excluding any special purpose calls. This is the recommended starting point for allow-listing system calls for system services, as it contains what is typically needed by system services, but excludes overly specific interfaces. For example, the following APIs are excluded: "@clock", "@mount", "@swap", "@reboot".
+@timer  System calls for scheduling operations by time (alarm(2), timer_create(2), …)
+@known  All system calls defined by the kernel. This list is defined statically in systemd based on a kernel version that was available when this systemd version was released. It will become progressively more out-of-date as the kernel is updated.
 
 Note, that as new system calls are added to the kernel, additional system calls might be added to the groups above. Contents of the sets may also change between systemd versions. In addition, the list of system calls depends on the kernel version and architecture for which systemd was compiled. Use systemd-analyze syscall-filter to list the actual list of system calls in each filter.
 
@@ -1158,16 +1158,16 @@ Only defined for the service unit type, this environment variable is passed to a
 
 Table 5. Defined $SERVICE_RESULT values
 
-Value	Meaning
-"success"	The service ran successfully and exited cleanly.
-"protocol"	A protocol violation occurred: the service did not take the steps required by its unit configuration (specifically what is configured in its Type= setting).
-"timeout"	One of the steps timed out.
-"exit-code"	Service process exited with a non-zero exit code; see $EXIT_CODE below for the actual exit code returned.
-"signal"	A service process was terminated abnormally by a signal, without dumping core. See $EXIT_CODE below for the actual signal causing the termination.
-"core-dump"	A service process terminated abnormally with a signal and dumped core. See $EXIT_CODE below for the signal causing the termination.
-"watchdog"	Watchdog keep-alive ping was enabled for the service, but the deadline was missed.
-"start-limit-hit"	A start limit was defined for the unit and it was hit, causing the unit to fail to start. See systemd.unit(5)'s StartLimitIntervalSec= and StartLimitBurst= for details.
-"resources"	A catch-all condition in case a system operation failed.
+Value   Meaning
+"success"   The service ran successfully and exited cleanly.
+"protocol"  A protocol violation occurred: the service did not take the steps required by its unit configuration (specifically what is configured in its Type= setting).
+"timeout"   One of the steps timed out.
+"exit-code" Service process exited with a non-zero exit code; see $EXIT_CODE below for the actual exit code returned.
+"signal"    A service process was terminated abnormally by a signal, without dumping core. See $EXIT_CODE below for the actual signal causing the termination.
+"core-dump" A service process terminated abnormally with a signal and dumped core. See $EXIT_CODE below for the signal causing the termination.
+"watchdog"  Watchdog keep-alive ping was enabled for the service, but the deadline was missed.
+"start-limit-hit"   A start limit was defined for the unit and it was hit, causing the unit to fail to start. See systemd.unit(5)'s StartLimitIntervalSec= and StartLimitBurst= for details.
+"resources" A catch-all condition in case a system operation failed.
 
 This environment variable is useful to monitor failure or successful termination of a service. Even though this variable is available in both ExecStop= and ExecStopPost=, it is usually a better choice to place monitoring tools in the latter, as the former is only invoked for services that managed to start up correctly, and the latter covers both services that failed during their start-up and those which failed during their runtime.
 
@@ -1176,23 +1176,23 @@ Only defined for the service unit type, these environment variables are passed t
 
 Table 6. Summary of possible service result variable values
 
-$SERVICE_RESULT	$EXIT_CODE	$EXIT_STATUS
-"success"	"killed"	"HUP", "INT", "TERM", "PIPE"
-"exited"	"0"
-"protocol"	not set	not set
-"exited"	"0"
-"timeout"	"killed"	"TERM", "KILL"
-"exited"	"0", "1", "2", "3", …, "255"
-"exit-code"	"exited"	"1", "2", "3", …, "255"
-"signal"	"killed"	"HUP", "INT", "KILL", …
-"core-dump"	"dumped"	"ABRT", "SEGV", "QUIT", …
-"watchdog"	"dumped"	"ABRT"
-"killed"	"TERM", "KILL"
-"exited"	"0", "1", "2", "3", …, "255"
-"exec-condition"	"exited"	"1", "2", "3", "4", …, "254"
-"oom-kill"	"killed"	"TERM", "KILL"
-"start-limit-hit"	not set	not set
-"resources"	any of the above	any of the above
+$SERVICE_RESULT $EXIT_CODE  $EXIT_STATUS
+"success"   "killed"    "HUP", "INT", "TERM", "PIPE"
+"exited"    "0"
+"protocol"  not set not set
+"exited"    "0"
+"timeout"   "killed"    "TERM", "KILL"
+"exited"    "0", "1", "2", "3", …, "255"
+"exit-code" "exited"    "1", "2", "3", …, "255"
+"signal"    "killed"    "HUP", "INT", "KILL", …
+"core-dump" "dumped"    "ABRT", "SEGV", "QUIT", …
+"watchdog"  "dumped"    "ABRT"
+"killed"    "TERM", "KILL"
+"exited"    "0", "1", "2", "3", …, "255"
+"exec-condition"    "exited"    "1", "2", "3", "4", …, "254"
+"oom-kill"  "killed"    "TERM", "KILL"
+"start-limit-hit"   not set not set
+"resources" any of the above    any of the above
 Note: the process may be also terminated by a signal not sent by systemd. In particular the process may send an arbitrary signal to itself in a handler for any of the non-maskable signals. Nevertheless, in the "timeout" and "watchdog" rows above only the signals that systemd sends have been included. Moreover, using SuccessExitStatus= additional exit statuses may be declared to indicate clean termination, which is not reflected by this table.
 
 $PIDFILE
@@ -1207,91 +1207,91 @@ The following basic service exit codes are defined by the C library.
 
 Table 7. Basic C library exit codes
 
-Exit Code	Symbolic Name	Description
-0	EXIT_SUCCESS	Generic success code.
-1	EXIT_FAILURE	Generic failure or unspecified error.
+Exit Code   Symbolic Name   Description
+0   EXIT_SUCCESS    Generic success code.
+1   EXIT_FAILURE    Generic failure or unspecified error.
 
 The following service exit codes are defined by the LSB specification.
 
 Table 8. LSB service exit codes
 
-Exit Code	Symbolic Name	Description
-2	EXIT_INVALIDARGUMENT	Invalid or excess arguments.
-3	EXIT_NOTIMPLEMENTED	Unimplemented feature.
-4	EXIT_NOPERMISSION	The user has insufficient privileges.
-5	EXIT_NOTINSTALLED	The program is not installed.
-6	EXIT_NOTCONFIGURED	The program is not configured.
-7	EXIT_NOTRUNNING	The program is not running.
+Exit Code   Symbolic Name   Description
+2   EXIT_INVALIDARGUMENT    Invalid or excess arguments.
+3   EXIT_NOTIMPLEMENTED Unimplemented feature.
+4   EXIT_NOPERMISSION   The user has insufficient privileges.
+5   EXIT_NOTINSTALLED   The program is not installed.
+6   EXIT_NOTCONFIGURED  The program is not configured.
+7   EXIT_NOTRUNNING The program is not running.
 
 The LSB specification suggests that error codes 200 and above are reserved for implementations. Some of them are used by the service manager to indicate problems during process invocation:
 
 Table 9. systemd-specific exit codes
 
-Exit Code	Symbolic Name	Description
-200	EXIT_CHDIR	Changing to the requested working directory failed. See WorkingDirectory= above.
-201	EXIT_NICE	Failed to set up process scheduling priority (nice level). See Nice= above.
-202	EXIT_FDS	Failed to close unwanted file descriptors, or to adjust passed file descriptors.
-203	EXIT_EXEC	The actual process execution failed (specifically, the execve(2) system call). Most likely this is caused by a missing or non-accessible executable file.
-204	EXIT_MEMORY	Failed to perform an action due to memory shortage.
-205	EXIT_LIMITS	Failed to adjust resource limits. See LimitCPU= and related settings above.
-206	EXIT_OOM_ADJUST	Failed to adjust the OOM setting. See OOMScoreAdjust= above.
-207	EXIT_SIGNAL_MASK	Failed to set process signal mask.
-208	EXIT_STDIN	Failed to set up standard input. See StandardInput= above.
-209	EXIT_STDOUT	Failed to set up standard output. See StandardOutput= above.
-210	EXIT_CHROOT	Failed to change root directory (chroot(2)). See RootDirectory=/RootImage= above.
-211	EXIT_IOPRIO	Failed to set up IO scheduling priority. See IOSchedulingClass=/IOSchedulingPriority= above.
-212	EXIT_TIMERSLACK	Failed to set up timer slack. See TimerSlackNSec= above.
-213	EXIT_SECUREBITS	Failed to set process secure bits. See SecureBits= above.
-214	EXIT_SETSCHEDULER	Failed to set up CPU scheduling. See CPUSchedulingPolicy=/CPUSchedulingPriority= above.
-215	EXIT_CPUAFFINITY	Failed to set up CPU affinity. See CPUAffinity= above.
-216	EXIT_GROUP	Failed to determine or change group credentials. See Group=/SupplementaryGroups= above.
-217	EXIT_USER	Failed to determine or change user credentials, or to set up user namespacing. See User=/PrivateUsers= above.
-218	EXIT_CAPABILITIES	Failed to drop capabilities, or apply ambient capabilities. See CapabilityBoundingSet=/AmbientCapabilities= above.
-219	EXIT_CGROUP	Setting up the service control group failed.
-220	EXIT_SETSID	Failed to create new process session.
-221	EXIT_CONFIRM	Execution has been cancelled by the user. See the systemd.confirm_spawn= kernel command line setting on kernel-command-line(7) for details.
-222	EXIT_STDERR	Failed to set up standard error output. See StandardError= above.
-224	EXIT_PAM	Failed to set up PAM session. See PAMName= above.
-225	EXIT_NETWORK	Failed to set up network namespacing. See PrivateNetwork= above.
-226	EXIT_NAMESPACE	Failed to set up mount, UTS, or IPC namespacing. See ReadOnlyPaths=, ProtectHostname=, PrivateIPC=, and related settings above.
-227	EXIT_NO_NEW_PRIVILEGES	Failed to disable new privileges. See NoNewPrivileges=yes above.
-228	EXIT_SECCOMP	Failed to apply system call filters. See SystemCallFilter= and related settings above.
-229	EXIT_SELINUX_CONTEXT	Determining or changing SELinux context failed. See SELinuxContext= above.
-230	EXIT_PERSONALITY	Failed to set up an execution domain (personality). See Personality= above.
-231	EXIT_APPARMOR_PROFILE	Failed to prepare changing AppArmor profile. See AppArmorProfile= above.
-232	EXIT_ADDRESS_FAMILIES	Failed to restrict address families. See RestrictAddressFamilies= above.
-233	EXIT_RUNTIME_DIRECTORY	Setting up runtime directory failed. See RuntimeDirectory= and related settings above.
-235	EXIT_CHOWN	Failed to adjust socket ownership. Used for socket units only.
-236	EXIT_SMACK_PROCESS_LABEL	Failed to set SMACK label. See SmackProcessLabel= above.
-237	EXIT_KEYRING	Failed to set up kernel keyring.
-238	EXIT_STATE_DIRECTORY	Failed to set up unit's state directory. See StateDirectory= above.
-239	EXIT_CACHE_DIRECTORY	Failed to set up unit's cache directory. See CacheDirectory= above.
-240	EXIT_LOGS_DIRECTORY	Failed to set up unit's logging directory. See LogsDirectory= above.
-241	EXIT_CONFIGURATION_DIRECTORY	Failed to set up unit's configuration directory. See ConfigurationDirectory= above.
-242	EXIT_NUMA_POLICY	Failed to set up unit's NUMA memory policy. See NUMAPolicy= and NUMAMask= above.
-243	EXIT_CREDENTIALS	Failed to set up unit's credentials. See LoadCredential= and SetCredential= above.
-245	EXIT_BPF	Failed to apply BPF restrictions. See RestrictFileSystems= above.
+Exit Code   Symbolic Name   Description
+200 EXIT_CHDIR  Changing to the requested working directory failed. See WorkingDirectory= above.
+201 EXIT_NICE   Failed to set up process scheduling priority (nice level). See Nice= above.
+202 EXIT_FDS    Failed to close unwanted file descriptors, or to adjust passed file descriptors.
+203 EXIT_EXEC   The actual process execution failed (specifically, the execve(2) system call). Most likely this is caused by a missing or non-accessible executable file.
+204 EXIT_MEMORY Failed to perform an action due to memory shortage.
+205 EXIT_LIMITS Failed to adjust resource limits. See LimitCPU= and related settings above.
+206 EXIT_OOM_ADJUST Failed to adjust the OOM setting. See OOMScoreAdjust= above.
+207 EXIT_SIGNAL_MASK    Failed to set process signal mask.
+208 EXIT_STDIN  Failed to set up standard input. See StandardInput= above.
+209 EXIT_STDOUT Failed to set up standard output. See StandardOutput= above.
+210 EXIT_CHROOT Failed to change root directory (chroot(2)). See RootDirectory=/RootImage= above.
+211 EXIT_IOPRIO Failed to set up IO scheduling priority. See IOSchedulingClass=/IOSchedulingPriority= above.
+212 EXIT_TIMERSLACK Failed to set up timer slack. See TimerSlackNSec= above.
+213 EXIT_SECUREBITS Failed to set process secure bits. See SecureBits= above.
+214 EXIT_SETSCHEDULER   Failed to set up CPU scheduling. See CPUSchedulingPolicy=/CPUSchedulingPriority= above.
+215 EXIT_CPUAFFINITY    Failed to set up CPU affinity. See CPUAffinity= above.
+216 EXIT_GROUP  Failed to determine or change group credentials. See Group=/SupplementaryGroups= above.
+217 EXIT_USER   Failed to determine or change user credentials, or to set up user namespacing. See User=/PrivateUsers= above.
+218 EXIT_CAPABILITIES   Failed to drop capabilities, or apply ambient capabilities. See CapabilityBoundingSet=/AmbientCapabilities= above.
+219 EXIT_CGROUP Setting up the service control group failed.
+220 EXIT_SETSID Failed to create new process session.
+221 EXIT_CONFIRM    Execution has been cancelled by the user. See the systemd.confirm_spawn= kernel command line setting on kernel-command-line(7) for details.
+222 EXIT_STDERR Failed to set up standard error output. See StandardError= above.
+224 EXIT_PAM    Failed to set up PAM session. See PAMName= above.
+225 EXIT_NETWORK    Failed to set up network namespacing. See PrivateNetwork= above.
+226 EXIT_NAMESPACE  Failed to set up mount, UTS, or IPC namespacing. See ReadOnlyPaths=, ProtectHostname=, PrivateIPC=, and related settings above.
+227 EXIT_NO_NEW_PRIVILEGES  Failed to disable new privileges. See NoNewPrivileges=yes above.
+228 EXIT_SECCOMP    Failed to apply system call filters. See SystemCallFilter= and related settings above.
+229 EXIT_SELINUX_CONTEXT    Determining or changing SELinux context failed. See SELinuxContext= above.
+230 EXIT_PERSONALITY    Failed to set up an execution domain (personality). See Personality= above.
+231 EXIT_APPARMOR_PROFILE   Failed to prepare changing AppArmor profile. See AppArmorProfile= above.
+232 EXIT_ADDRESS_FAMILIES   Failed to restrict address families. See RestrictAddressFamilies= above.
+233 EXIT_RUNTIME_DIRECTORY  Setting up runtime directory failed. See RuntimeDirectory= and related settings above.
+235 EXIT_CHOWN  Failed to adjust socket ownership. Used for socket units only.
+236 EXIT_SMACK_PROCESS_LABEL    Failed to set SMACK label. See SmackProcessLabel= above.
+237 EXIT_KEYRING    Failed to set up kernel keyring.
+238 EXIT_STATE_DIRECTORY    Failed to set up unit's state directory. See StateDirectory= above.
+239 EXIT_CACHE_DIRECTORY    Failed to set up unit's cache directory. See CacheDirectory= above.
+240 EXIT_LOGS_DIRECTORY Failed to set up unit's logging directory. See LogsDirectory= above.
+241 EXIT_CONFIGURATION_DIRECTORY    Failed to set up unit's configuration directory. See ConfigurationDirectory= above.
+242 EXIT_NUMA_POLICY    Failed to set up unit's NUMA memory policy. See NUMAPolicy= and NUMAMask= above.
+243 EXIT_CREDENTIALS    Failed to set up unit's credentials. See LoadCredential= and SetCredential= above.
+245 EXIT_BPF    Failed to apply BPF restrictions. See RestrictFileSystems= above.
 
 Finally, the BSD operating systems define a set of exit codes, typically defined on Linux systems too:
 
 Table 10. BSD exit codes
 
-Exit Code	Symbolic Name	Description
-64	EX_USAGE	Command line usage error
-65	EX_DATAERR	Data format error
-66	EX_NOINPUT	Cannot open input
-67	EX_NOUSER	Addressee unknown
-68	EX_NOHOST	Host name unknown
-69	EX_UNAVAILABLE	Service unavailable
-70	EX_SOFTWARE	internal software error
-71	EX_OSERR	System error (e.g., can't fork)
-72	EX_OSFILE	Critical OS file missing
-73	EX_CANTCREAT	Can't create (user) output file
-74	EX_IOERR	Input/output error
-75	EX_TEMPFAIL	Temporary failure; user is invited to retry
-76	EX_PROTOCOL	Remote error in protocol
-77	EX_NOPERM	Permission denied
-78	EX_CONFIG	Configuration error
+Exit Code   Symbolic Name   Description
+64  EX_USAGE    Command line usage error
+65  EX_DATAERR  Data format error
+66  EX_NOINPUT  Cannot open input
+67  EX_NOUSER   Addressee unknown
+68  EX_NOHOST   Host name unknown
+69  EX_UNAVAILABLE  Service unavailable
+70  EX_SOFTWARE internal software error
+71  EX_OSERR    System error (e.g., can't fork)
+72  EX_OSFILE   Critical OS file missing
+73  EX_CANTCREAT    Can't create (user) output file
+74  EX_IOERR    Input/output error
+75  EX_TEMPFAIL Temporary failure; user is invited to retry
+76  EX_PROTOCOL Remote error in protocol
+77  EX_NOPERM   Permission denied
+78  EX_CONFIG   Configuration error
 
 See Also
 systemd(1), systemctl(1), systemd-analyze(1), journalctl(1), systemd-system.conf(5), systemd.unit(5), systemd.service(5), systemd.socket(5), systemd.swap(5), systemd.mount(5), systemd.kill(5), systemd.resource-control(5), systemd.time(7), systemd.directives(7), tmpfiles.d(5), exec(3), fork(2)
@@ -1338,9 +1338,11 @@ ln -s -f -v /lib/systemd/system/graphical.target /etc/systemd/system/default.tar
 systemctl list-dependencies --after  shutdown.target
 systemctl list-dependencies --before shutdown.target
 
-Restart= no	always	on-success	on-failure	on-abnormal	on-abort	on-watchdog https://www.freedesktop.org/software/systemd/man/systemd.service.html#
+Restart= no always  on-success  on-failure  on-abnormal on-abort    on-watchdog https://www.freedesktop.org/software/systemd/man/systemd.service.html#
 
 systemctl show         -p MainPID filebeat | cut -d = -f 2 # systemd 219
 systemctl show --value -p MainPID filebeat                 # systemd 249
 
 journalctl -xb # grub Welcome to emergency mode! After logging in, type "journactl -xb" to view system logs, "systemctl reboot" to reboot, "systemctl default" or ^D to try again to boot into default mode. Give root password for maintenance
+
+systemctl list-timers # show

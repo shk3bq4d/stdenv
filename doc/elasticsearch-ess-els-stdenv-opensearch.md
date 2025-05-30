@@ -261,3 +261,8 @@ PUT /_cluster/settings
 }
 ```
 https://hub.docker.com/r/graylog/graylog-datanode
+
+# direct search query ELS opensearch (google gooogling)
+```sh
+echo '{"query":{"match_all":{}},"size":100}' | curl-opensearch.sh gl-system-events_1/_search
+```

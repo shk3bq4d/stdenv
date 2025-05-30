@@ -160,3 +160,7 @@ from https://github.com/jacobalberty/unifi-docker/compare/master...deviantintegr
     # If the cache is too small, this may lead to higher CPU use.
     # https://www.mongodb.com/docs/manual/faq/storage/#to-what-size-should-i-set-the-wiredtiger-internal-cache-
     # command: --wiredTigerCacheSizeGB 0.25
+
+
+mongo.sh 'const c = db.index_failures.find().sort({ timestamp: -1 }).limit(3); while (c.hasNext()) {const d = c.next(); print(d.timestamp);}'
+'const c = db.index_failures.find().sort({ timestamp: -1 }).limit(3); while (c.hasNext()) {const d = c.next(); print(d.timestamp.toISOString() + " " +d.message);};'

@@ -602,7 +602,7 @@ if [[ ! -t 1 ]]; then exec > >(sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]/
 shopt -s nocaseglob
 
 
-# How to detect if my shell script is running through a pipe?
+# How to detect if my shell script hast its stdout being piped?
 if [ -t 1 ] ; then echo terminal; fi
 # returns "terminal", because the output is going straight to you, while
 (if [ -t 1 ] ; then echo terminal; fi) | cat
