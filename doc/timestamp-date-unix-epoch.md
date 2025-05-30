@@ -200,3 +200,33 @@ e.Get("@timestamp").Year()
 e.Get("@timestamp").YearDay()
 e.Get("@timestamp").Zone()
 e.Get("@timestamp").ZoneBounds()
+
+%a                   Fri                            Locale's abbreviated weekday name. dow
+%A                   Friday                         Locale's full weekday name. dow
+%b                   May                            Locale's abbreviated month name.
+%B                   May                            Locale's full month name.
+%c                   Fri May 30 15:46:12 2025       Locale's appropriate date and time representation.
+%d                   30                             Day of the month as a decimal number [01,31].
+%f                   117569                         Microsecond as a decimal number [0,999999], zero-padded on the left
+%H                   15                             Hour (24-hour clock) as a decimal number [00,23].
+%I                   03                             Hour (12-hour clock) as a decimal number [01,12].
+%j                   150                            Day of the year as a decimal number [001,366].
+%m                   05                             Month as a decimal number [01,12].
+%M                   46                             Minute as a decimal number [00,59].
+%p                   PM                             Locale's equivalent of either AM or PM.
+%s                   1748612772                     Unix timestamp 1685337841
+%S                   12                             Second as a decimal number [00,61].
+%U                   21                             Week number of the year (Sunday as the first day of the week)
+%w                   5                              Weekday as a decimal number [0(Sunday),6]. dow
+%W                   21                             Week number of the year (Monday as the first day of the week)
+%x                   05/30/25                       Locale's appropriate date representation.
+%X                   15:46:12                       Locale's appropriate time representation.
+%y                   25                             Year without century as a decimal number [00,99].
+%Y                   2025                           Year with century as a decimal number.
+%z                                                  UTC offset in the form +HHMM or -HHMM.
+%Z                                                  Time zone name (empty string if the object is naive).
+%%                   %                              A literal '%' character.
+%d/%b/%y %I:%M %p    30/May/25 03:46 PM
+%Y.%m.%d             2025.05.30
+%Y.%m.%d %H:%M:%S    2025.05.30 15:46:12
+%Y-%m-%dT%H:%M:%S.%f%z 2025-05-30T15:46:12.117569
