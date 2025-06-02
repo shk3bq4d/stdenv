@@ -32,6 +32,7 @@ push() // append, extend
 "hehe".replace(/h/g, function(matchstr, pos, fullstr) {return matchstr.toUpperCase();});
 
 toLowerCase
+myarray.sort(})
 
 try{
     // Try something wrong here
