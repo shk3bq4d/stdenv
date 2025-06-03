@@ -43,6 +43,7 @@ apt-get upgrade -s | grep -i security | awk '{print $2}' | xargs -o apt install
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
 sudo systemctl restart apt-daily-upgrade.timer # another way to reach unattended-upgrade
+
 ```
 
 # YUM
@@ -172,6 +173,7 @@ apt-cache madison docker-ce # list available version
 
 needs-restarting -r # yum reboot check if necessary
 test -f /var/run/reboot-required # apt check restart necessary
+needrestart -rl -klw # apt services to restart
 
 ```
 
