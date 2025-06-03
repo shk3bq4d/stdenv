@@ -32,6 +32,7 @@ push() // append, extend
 "hehe".replace(/h/g, function(matchstr, pos, fullstr) {return matchstr.toUpperCase();});
 
 toLowerCase
+myarray.sort(})
 
 try{
     // Try something wrong here
@@ -156,3 +157,4 @@ e.Get("@timestamp").ZoneBounds()
 
 
 /(?<year>\d{4})-\d{2}|\d{2}-(?<year>\d{4})/.exec("2024-12").groups["year"] // regex
+outerHTML
