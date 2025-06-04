@@ -22,4 +22,6 @@ rsync --chown $USER:$GROUP # won't work with --link-dest creating hardlinks if -
 
 rsync -nvr --stats --delete --include="MYFILENAME" --exclude='*' $(mktemp -d)/ myuser@myhost:MY/REMOTE/PATH # delete unique remote file or empty directory
 rsync -av  --stats --delete                                      $(mktemp -d)/ myuser@myhost:MY/REMOTE/PATH # delete content of remote directory, if you need to delete the directory itself, apply the command for the empty directory
+
+rsync --backup --suffix=.$(date +%Y.%m.%d-%H.%M.%S).yml
 ```
