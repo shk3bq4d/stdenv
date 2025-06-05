@@ -10,6 +10,7 @@ $1              ?    ?    ?    x
 
 
 POSIX	Description	ASCII	Unicode	Shorthand	Java
+```sh
 [:alnum:]	Alphanumeric characters	[a-zA-Z0-9]	[\p{L}\p{Nl}
  \p{Nd}]		\p{Alnum}
 [:alpha:]	Alphabetic characters	[a-zA-Z]	\p{L}\p{Nl}		\p{Alpha}
@@ -28,7 +29,7 @@ POSIX	Description	ASCII	Unicode	Shorthand	Java
 [:word:]	Word characters (letters, numbers and underscores)	[A-Za-z0-9_]	[\p{L}\p{Nl}
  \p{Nd}\p{Pc}]	\w	\p{IsWord}
 [:xdigit:]	Hexadecimal digits	[A-Fa-f0-9]	[A-Fa-f0-9]		\p{XDigit}
-
+```
 
 https://puppet.com/docs/puppet/5.0/lang_data_regexp.html
 puppet sucks balls, use \A instead of ^ and \z instead of $
@@ -41,6 +42,7 @@ ipv6: ^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$
 (([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
 (?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?:(?::[0-9a-fA-F]{1,4}){1,6})|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
 
+```sh
 if [[ "$line" =~ [a-zA-Z]+.$ ]] ; then echo "hello"; fi # regexp. Do not surrou
 bar=${foo/ /.} # pseudo-regexp pattern replacement
 bar=${foo// /.} # pseudo-regexp pattern replacement
@@ -49,7 +51,11 @@ grep -Po "(?<=syntaxHighlighterConfig\.)[a-zA-Z]+Color" file # look-beind zero
 (?!X)       X, via zero-width negative lookahead  regexp
 (?<=X)      X, via zero-width positive lookbehind regexp
 (?<!X)      X, via zero-width negative lookbehind regexp
+echo 'abracadabraici' | grep -Po '.*a\K(.*)' lookbehind lookahead zero-width regex
+\<
+\b
 ^((?!my string).)*$ # regexp not containt substring 'my string'
+```
 
 Construct     Matches
 
