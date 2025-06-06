@@ -172,7 +172,7 @@ varsfrx() {
     shift
     arg1="$1"
     shift
-    ansible-playbook varsfrx.yml -e sfrx="$rx" -l "$arg1"\* $@
+    ansible-playbook varsfrx.yml -ve sfrx="$rx" -l "$arg1"\* $@
 }
 
 complete_function() {
