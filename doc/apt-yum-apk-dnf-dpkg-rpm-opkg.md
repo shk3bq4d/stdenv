@@ -5,6 +5,7 @@ sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides in installed packages
 dpkg -S $(which tail) # whatprovides core-utils
+dpkg -S /usr/bin/nm-applet # whatprovides nm-applet -> network-manager-gnome
 dpkg -L python # list files that were installed per package
 dpkg -L nginx | grep logrotate
 apt install ncurses-term # 'rxvt-256color': unknown terminal type.
