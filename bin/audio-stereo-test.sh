@@ -12,4 +12,4 @@ if [[ ! -f $f ]]; then
     wget -O$f https://www.aoakley.com/articles/stereo-test.mp3
 fi
 
-mpv $f
+mpv --start=12 $f
