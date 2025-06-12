@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+umask 007
+
 case $(hostname -f) in \
     $WORK_PC1F)
         ROOT=/mnt/local/00-1to
@@ -20,6 +22,7 @@ done
 
 newdir="${ROOT}/.tmpp/$(date +'%Y%m%d')"
 [[ ! -d $newdir ]] && mkdir -p $newdir
+chmod 0700 $newdir
 target=~/tmp
 if [[ "$(readlink -f "$newdir")" == "$(readlink -f "$target")" ]] && [[ -L $target ]]; then
     exit 0
