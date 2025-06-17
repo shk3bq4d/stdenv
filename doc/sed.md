@@ -77,7 +77,7 @@ zcat bip.sql.gz | sed -n '/^COPY public.oc_activity /,/^\\.$/ p' # extracts tabl
 
 
 sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase
-sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace
+sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace replacement
 
 sed -e '/search/a append this text after  the line matching my /search/ pattern'
 sed -e '/search/i insert this text before the line matching my /search/ pattern'
