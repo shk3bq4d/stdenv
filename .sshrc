@@ -177,6 +177,7 @@ _z2() {
 /home
 /var/log
 /var/log/sf
+/opt/sf-ansible-passwords
 /opt/sf-scripts
 /opt/sf-scripts/zabbix-shared/filemetric/
 /opt/sf-scripts/zabbix-shared/filemetric/lmod
