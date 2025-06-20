@@ -554,13 +554,14 @@ date >>/dev/fd/4 # append to FD4
 declare -A my_array
 my_array[foo]=bar
 my_array[bar]=foo
-for i in "${!my_array[@]}"; do # iterate over an array
-    echo "key  : $i"
-    echo "value: ${my_array[$i]}"
+for key in "${!my_array[@]}"; do # iterate over an array
+    echo "key  : $key"
+    echo "value: ${my_array[$key]}"
 done
-${#my_array[@]} # array  length
+for key in "${!my_dict[@]}"; do echo "key:$key value:${mydict[$key]}"; done  # iterate/dump an dict
+${#my_array[@]} # array  or dict length
 ${#var}         # string length
-declare -p my_array # prints/debug content of array
+declare -p my_array # prints/debug/dump content of array dict
 
 #iterage over args arguments parameters
 for var in "$@" # iterate
@@ -645,7 +646,7 @@ set -u # crash if unbound variables => use [[ -n ${VAR+1} ]] to check for existe
 set -o pipefail # crash if programs in between pipes fail
 set -f # disable path expansion globbing *
 
-export PS4='+ ${BASH_SOURCE}:${LINENO}:${FUNCNAME[0]:-}: '; set -x
+export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: '; set -x
 
 set -o noclobber
 

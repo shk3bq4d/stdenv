@@ -87,6 +87,15 @@ ip route add 100.64.0.0/16 via 10.0.0.103
 ip route del 100.64.0.0/16 via 10.0.0.103 dev eth1
 sudo ip route flush default # removes default gw
 
+ip link set enxf4a80d235851 up
+ip address add 10.19.7.45/16 dev enxf4a80d235851
+ip route add default via 10.19.29.1
+
+nmcli connection show
+nmcli connection modify "Poupi" ipv4.ignore-auto-dns yes
+nmcli connection modify "MyWiFi" ipv4.dns "1.1.1.1 8.8.8.8"
+wlp0s20f3
+
 # capture short lived process excluding existing the pid that matches the same grep
 while :; do ps -eo pid,command | grep java | egrep -vw '542|562|651|21437|grep' >>mrlog; done
 

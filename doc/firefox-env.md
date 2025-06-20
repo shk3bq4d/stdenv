@@ -35,3 +35,5 @@ either go to about:restartrequired
 or go to about:profiles
 
 about:processes , about:performance CPU Memory tab Firefox Task Manager (Shift + Esc (though it doesn't work))
+
+* https://kb.mozillazine.org/About:config_entries

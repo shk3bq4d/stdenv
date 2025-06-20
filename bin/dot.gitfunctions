@@ -12,6 +12,14 @@ glod() {
     git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"' "$@"
 }
 
+git_current_rev() {
+    git rev-parse HEAD
+}
+
+git_current_rev_abbreviated() {
+    git rev-parse --abbrev-ref HEAD
+}
+
 git_current_checked_out_upstream_branch() {
     git rev-parse --abbrev-ref @{upstream}
 }

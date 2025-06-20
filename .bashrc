@@ -307,7 +307,7 @@ fi
 export VAGRANT_SERVER_URL=https://app.vagrantup.com
 #pathprepend ~/bin/$HOSTNAME
 #export LC_TIME=fr_CH
-hash tabs &>/dev/null && tabs 4
+hash tabs &>/dev/null && tabs 4 &>/dev/null
 #export PROMPT_DIRTRIM=2
 case $UNAME in \
 freebsd)

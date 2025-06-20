@@ -21,6 +21,9 @@ else
 fi
 HOME=$( eval echo ~$USER)
 >&2 echo HOME is $HOME, user is $USER
+if ansdir &>/dev/null; then
+    cd $(ansdir)
+fi
 vaults_args=""
 if [[ -d secrets ]]; then
     vaults_args="$(find secrets -maxdepth 1 -type f -name 'ansible-vault-*' |
@@ -37,9 +40,6 @@ if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; t
 fi
 >&2 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
-if ansdir &>/dev/null; then
-    cd $(ansdir)
-fi
 renice +1 $$ &>/dev/null
 source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \

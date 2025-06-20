@@ -5,6 +5,7 @@ sudo apt-get --only-upgrade install zabbix*
 dpkg -s docker-ce # test if package is installed
 dpkg -S /bin/ls # whatprovides in installed packages
 dpkg -S $(which tail) # whatprovides core-utils
+dpkg -S /usr/bin/nm-applet # whatprovides nm-applet -> network-manager-gnome
 dpkg -L python # list files that were installed per package
 dpkg -L nginx | grep logrotate
 apt install ncurses-term # 'rxvt-256color': unknown terminal type.
@@ -42,7 +43,8 @@ apt-get upgrade -s | grep -i security # list security updates
 apt-get upgrade -s | grep -i security | awk '{print $2}' | xargs -o apt install
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
-sudo systemctl restart apt-daily.timer # another way to reach unattended-upgrade
+sudo systemctl restart apt-daily-upgrade.timer # another way to reach unattended-upgrade
+
 ```
 
 # YUM
@@ -172,6 +174,7 @@ apt-cache madison docker-ce # list available version
 
 needs-restarting -r # yum reboot check if necessary
 test -f /var/run/reboot-required # apt check restart necessary
+needrestart -rl -klw # apt services to restart
 
 ```
 

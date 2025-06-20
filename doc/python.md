@@ -126,7 +126,7 @@ re.I re.IGNORECASE
 re.L re.LOCALE
 re.M re.MULTILINE
 re.U re.UNICODE
-re.X re.VERBOSE
+re.X re.VERBOSE This flag allows you to write regular expressions that look nicer and are more readable by allowing you to visually separate logical sections of the pattern and add comments. Whitespace within the pattern is ignored, except when in a character class, or when preceded by an unescaped backslash, or within tokens like *?, (?: or (?P<...>. When a line contains a # that is not in a character class and is not preceded by an unescaped backslash, all characters from the leftmost such # through the end of the line are ignored.
 re.search(r'\bis\b', your_string) # whole word words boundary boundaries
 https://docs.python.org/2/library/re.html
 (?iLmsux)
@@ -230,6 +230,8 @@ Replacing %x and %o and converting the value to different bases:
 >>> # with 0x, 0o, or 0b as prefix:
 >>> "int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}".format(42)
 'int: 42;  hex: 0x2a;  oct: 0o52;  bin: 0b101010'
+
+
 Using the comma as a thousands separator:
 
 f'{myvar:#x}' # int as hex with leading 0x
@@ -238,7 +240,7 @@ f'{myvar:x}'  # int as hex with no leading 0x
 f'{myvar:x}'  # int as hex with no leading 0x
 
 >>>
->>> '{:,}'.format(1234567890)
+>>> '{:,}'.format(1234567890) # using , as thousands separator: hint: use replace(',', "'") to change this
 '1,234,567,890'
 Expressing a percentage:
 

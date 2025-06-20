@@ -459,6 +459,7 @@ docker push registry.gitlab.com/gr/infra/fluent/fluentd-kubernetes-daemonset:gt2
 DinD docker ind docker
 
 docker logs --since=5m --timestamps
+docker logs --tail=100 --timestamps
 
 docker update --restart=no your-container # edit disable onreboot https://amalgjose.com/2018/04/18/disable-auto-restart-policy-of-docker-container/
 

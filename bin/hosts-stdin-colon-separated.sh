@@ -5,4 +5,4 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:~/bin
 
-hosts-stdin.sh | tr '\n' :
+hosts-stdin.sh | tr '\n' : | sed -r -e 's/:$//'

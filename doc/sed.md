@@ -77,7 +77,7 @@ zcat bip.sql.gz | sed -n '/^COPY public.oc_activity /,/^\\.$/ p' # extracts tabl
 
 
 sed -e 's/\(.*\)/\L\1/' input.txt > output.txt # uppercase
-sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace
+sed -e 's/\(.*\)/\1/' input.txt > output.txt # group backtrace replacement
 
 sed -e '/search/a append this text after  the line matching my /search/ pattern'
 sed -e '/search/i insert this text before the line matching my /search/ pattern'
@@ -174,7 +174,7 @@ sed -r -e 's/\r//g' # dos2unix
 ```
 
 ```sh
-_convert_rx() { sed -r -e 's/ +(#.*)?$//' <<<"$@" | tr -d '\n' } # sed emulate a sort of debug mode that allow to express a regular expression on multiple line and with comments
+_convert_rx() { sed -r -e 's/ +(#.*)?$//' <<<"$@" | tr -d '\n' } # with sed emulate a sort of debug mode that allow to express a regular expression on multiple line and with comments like in python re.X,re.VERBOSE mode
 # then you can do something like
       sed -u -r -e "
 s/$(_convert_rx '
