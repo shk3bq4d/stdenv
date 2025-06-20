@@ -6,7 +6,7 @@ if [[ -f ~/.stdenv_aliases ]]; then
         # retrieves and executes user shell
         exec $(getent passwd $(id -un) | awk -F : '{print $NF}')
     fi
-    echo .sshrc return
+    echo .sshrc return stdenv_aliases
     return
 fi
 #echo .sshrc2
@@ -14,7 +14,13 @@ if [[ -z $SSHHOME ]]; then
     export SSHHOME=$( dirname "${BASH_SOURCE[0]}" )
 fi
 export RCD=$SSHHOME/.sshrc.d
-source $RCD/.bashrc
+if hash zsh &>/dev/null; then
+    ZDOTDIR=$RCD HISTFILE=~/.zsh_history zsh -il
+    #echo .sshrc return zsh
+    exit
+else
+    source $RCD/.bashrc
+fi
 [[ "$HOSTNAME" == *kafka* ]] && kafka_mr
 [[ "$HOSTNAME" == *k8s-master* ]] && ks_k8s
 export VIMINIT='so $RCD/.vimrc'
