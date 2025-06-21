@@ -223,7 +223,6 @@ au BufNewFile,BufRead *.py set expandtab filetype=python
 au BufNewFile,BufRead *.json set cursorcolumn ts=2 sw=2 filetype=json
 au BufNewFile,BufRead *.java set filetype=java
 au BufNewFile,BufRead *.js set filetype=javascript
-au BufNewFile,BufRead *.js.j2 set filetype=javascript
 au BufNewFile,BufRead *.item set filetype=xml
 au BufNewFile,BufRead *.viz set filetype=dot
 au BufNewFile,BufRead *.wsdl set filetype=xml
@@ -231,6 +230,17 @@ au BufNewFile,BufRead *.log set filetype=messages
 au BufNewFile,BufRead *.tjp set filetype=tjp
 au BufNewFile,BufRead *.tji set filetype=tjp
 au BufNewFile,BufRead *.tf set expandtab cursorcolumn ts=2 sw=2
+autocmd BufRead,BufNewFile *.j2 call SetJ2Filetype()
+
+function! SetJ2Filetype()
+  " 2025.06.06.20 doesn't seem to work
+  let l:basename = expand('%:t:r') " Strip the .j2 extension
+  let l:ext = fnamemodify(l:basename, ':e')
+  if !empty(l:ext)
+    execute 'setfiletype' l:ext
+  endif
+endfunction
+
 :set cpo=aABceFs$
 "set directory=$RCD/.tmp/vim/directory,.
 set directory=$RCD/.tmp/vim/directory,.

@@ -2730,6 +2730,7 @@ fancy yaml construction
       with_items: "{{ mylist }}"                              # register iteration list
       loop_control:                                           # register iteration list
         index_var: my_idx                                     # register iteration list
+
     - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict
       register: myvardict                                     # register iteration dict
       with_dict: "{{ mydict }}"                               # register iteration dict
