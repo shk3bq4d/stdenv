@@ -16,6 +16,7 @@ fi
 export RCD=$SSHHOME/.sshrc.d
 if hash zsh &>/dev/null; then
     ZDOTDIR=$RCD HISTFILE=~/.zsh_history zsh -il
+    export VIMINIT='so $RCD/.vimrc'
     #echo .sshrc return zsh
     exit
 else

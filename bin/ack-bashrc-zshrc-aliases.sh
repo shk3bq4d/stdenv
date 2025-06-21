@@ -38,5 +38,5 @@ files_unique_sorted() {
 
 }
 
-ack "$@" -- $(files_unique_sorted)
+ack -i "$@" -- $(files_unique_sorted)
 exit 0
