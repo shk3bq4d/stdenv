@@ -458,7 +458,7 @@ reset_rprompt() {
 setopt no_share_history   # https://stackoverflow.com/questions/9502274/last-command-in-same-terminal
 setopt inc_append_history # https://stackoverflow.com/questions/842338/how-do-i-tell-zsh-to-write-the-current-shells-history-to-my-history-file/842366
 
-test "$UNAME" = freebsd && alias ll='ls -lhFa' || unalias ll
+test "$UNAME" = freebsd && alias ll='ls -lhFa' || { hash -v ll &>/dev/null && unalias ll; }
 
 if true; then
     # https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode
@@ -490,7 +490,7 @@ else
     bindkey "^V" edit-command-line
 fi
 
-fpath=(~/.zsh/completion ~/.zsh/completion/*/ $fpath)
+test -d ~/.zsh/completion && fpath=(~/.zsh/completion ~/.zsh/completion/*/ $fpath)
 kube-completion() {
     source <(kubectl completion zsh)
 }
