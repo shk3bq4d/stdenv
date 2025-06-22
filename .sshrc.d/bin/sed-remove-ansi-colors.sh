@@ -1,0 +1,1 @@
+../../bin/sed-remove-ansi-colors.sh
