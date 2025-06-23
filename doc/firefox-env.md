@@ -37,3 +37,7 @@ or go to about:profiles
 about:processes , about:performance CPU Memory tab Firefox Task Manager (Shift + Esc (though it doesn't work))
 
 * https://kb.mozillazine.org/About:config_entries
+
+
+```sh
+cp -p $(find ~/.mozilla/firefox* -maxdepth 2 -type f -name prefs.js | xargs ls -tr | tail -1) ~/tmp/$(date +%Y.%m.%d-%H.%M.%S)-firefex-prefs.js # export about:config
