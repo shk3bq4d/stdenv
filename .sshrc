@@ -179,37 +179,6 @@ if hash zsh &>/dev/null; then
     ZDOTDIR=$RCD HISTFILE=~/.zsh_history zsh
     exit
 fi
-_z2() {
-    cat << EOF
-/etc
-/etc/yum.repos.d
-/etc/nginx/sites-enabled
-/etc/wireguard
-/home
-/var/log
-/var/log/sf
-/opt/sf-ansible-passwords
-/opt/sf-scripts
-/opt/sf-scripts/zabbix-shared/filemetric/
-/opt/sf-scripts/zabbix-shared/filemetric/lmod
-/opt/sf-scripts/zabbix-shared/filemetric/zerolmod
-/opt/sf-scripts/zabbix-shared/heartbeat/
-/opt/sf-scripts/zabbix-shared/heartbeat/weekly
-/opt/sf-scripts/zabbix-shared/heartbeat/monthly
-/opt/sf-scripts/zabbix-shared/heartbeat/minutely
-/opt/sf-scripts/zabbix-shared/heartbeat/yearly
-/opt/sf-scripts/zabbix-shared/heartbeat/daily
-/opt/sf-scripts/zabbix-shared/heartbeat/workday
-/opt/sf-scripts/zabbix-shared/heartbeat/hourly
-/etc/logrotate.d
-/var/log/apt
-/etc/ssh/authorized_keys/
-/etc
-$SSHHOME
-
-EOF
-
-}
 _z1() {
     local c d
     if [[ "$#" -eq 0 ]]; then
@@ -217,7 +186,7 @@ _z1() {
         return 0
     fi
     d="$1"
-    _z2 | grep "$d" | while read c; do
+    _z_std_add | grep "$d" | while read c; do
         echo "$c"
         return 0
     done

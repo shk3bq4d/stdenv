@@ -12,7 +12,7 @@ https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono
 ~/.oh-my-zsh/custom/plugins/vi-mode-mr
 
 # z directory plugin
-https://github.com/agkozak/zsh-z
+* [z directory plugin](https://github.com/agkozak/zsh-z)
 
 # zsh-autosuggestions
 wrong color => check your TERM variable, for me rxvt-256color works well

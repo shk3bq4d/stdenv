@@ -511,6 +511,8 @@ compdef _path_commands viw catw lessw
 #    autoload -U +X bashcompinit && bashcompinit
 #    source $f
 #fi
+
+hash -v _z_std_add &>/dev/null && _z_std_add | while read i; do z --add $i; done
 alias z='nocorrect zshz 2>&1' # at the end is necessary as it is defined elsewhere
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' # apparently buggy in latest oh-my-zsh (grep complains about non-escaped dash characters)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
