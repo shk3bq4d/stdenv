@@ -41,7 +41,7 @@ may19*)
 	;;
 esac
 case "$(hostname -f)" in \
-may19*|shaz*)
+may19*|shaz*|nov20*|*)
 	~/bin/notinpath/i3lock-pixelate.sh
 	;;
 dec17*|may19*|nov20*|shaz*)
