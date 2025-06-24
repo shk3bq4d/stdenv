@@ -2255,6 +2255,7 @@ To get a sha512 password hash (random salt):
 {{ "My Special Case" | comment(decoration="! ") }}
 {{ "Custom style" | comment('plain', prefix='#######\n#', postfix='#\n#######\n   ###\n    #') }}
 {{ ansible_managed | comment }}
+{{ '/coucou/hehe' | split(slash) }} => ['', 'coucou', 'hehe']
 urlsplit # decodeuri url_decod urlparse
 urlsplit # query= "fragment" "hostname" "netloc" "password" "path" "port" "query" "scheme" "username"
 urlsplit # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/urlsplit_filter.html
