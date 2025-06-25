@@ -16,6 +16,8 @@ POWERLEVEL9K_HOST_REMOTE_BACKGROUND='cyan'
 #POWERLEVEL9K_COLOR_SCHEME="dark"
 POWERLEVEL9K_ALWAYS_SHOW_USER=false
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='teal'
+POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
 cd # it's important to change directory before sourcing zsh-z.plugin.zsh otherwise an error pops up
 for i in \
     /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
