@@ -40,6 +40,11 @@ bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
 bindkey '^a' vi-forward-blank-word # zsh-autosuggestions
 bindkey '^o' autosuggest-accept
+ENABLE_CORRECTION="true"
+HIST_STAMPS="dd.mm.yyyy"
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 
 if [[ -z "${HISTFILE:-}" ]]; then
     if [[ -n ${SUDO_USER:-} ]]; then
@@ -459,14 +464,15 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
-#autoload -Uz compinit && compinit -C
-#compinit
+autoload -Uz compinit && compinit -C
+compinit
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
 f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
 
 # show completion menu when number of options is at least 2
-zstyle ':completion:*' menu select=2
+#zstyle ':completion:*' menu select=2
+zstyle ':completion:*' matcher-list 'r:|=*'
 #source ~/.bash_completion
 compdef _path_commands viw catw lessw
 #f=~/.zsh/completion/std/bash.az.completion
