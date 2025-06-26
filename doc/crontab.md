@@ -27,6 +27,7 @@ SHELL="/bin/bash
 
 # m h   dom mon dow user command
 # m h   dom mon dow command
+# 59 23 31 jan-dec mon-sun command
 0   */2 *   *   *   mri3lock-shuffle-images.sh
 @reboot touch /tmp/cron.reboot
 
