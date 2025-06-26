@@ -380,3 +380,10 @@ Commands:
       s3cmd cfmodify cf://DIST_ID
   Display CloudFront invalidation request(s) status
       s3cmd cfinvalinfo cf://DIST_ID[/INVAL_ID]
+
+
+
+# s5cmd
+https://github.com/peak/s5cmd
+https://github.com/peak/s5cmd/releases/
+https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb
