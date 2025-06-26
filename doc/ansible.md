@@ -2214,6 +2214,9 @@ community.general.remove_keys - Remove specific keys from dictionaries in a list
 community.general.replace_keys - Replace specific keys in a list of dictionaries. filter
 community.general.reveal_ansible_type - Return input type. filter
 community.general.ansible_type - Validate input type. test
+converted_list: "{{ my_list | map('community.general.dict_kv', 'fruit') | list }}"
+converted_list: "{{ my_list | map('regex_replace', 'fruit') | list }}"
+converted_list: "{{ my_list | map('regex_replace', '^(.*)$', '{\"fruit\": \"\\1\"}') | map('from_json') | list }}"
 
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
 items: "^(?P<vlan_id>\\d+)\\s+(?P<name>\\w+)\\s+(?P<state>active|act/lshut|suspended)"
