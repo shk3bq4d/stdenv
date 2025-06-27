@@ -101,7 +101,7 @@ for f in \
 done
 unsetopt null_glob
 
-
+unalias ll
 source ~/.bashrc
 for c in \
     aliashelp \
