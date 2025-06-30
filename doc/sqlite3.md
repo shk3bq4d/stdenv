@@ -180,6 +180,8 @@ order by jour, ref
 select * from fec_ limit 1;
 
 DROP TABLE [IF EXISTS] [schema_name.] table_name;
+
+delete from mytable; -- NO TRUNCATE IN SQLITE
 ```
 ```bash
 sqlite3 some.db .schema > schema.sql

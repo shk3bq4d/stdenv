@@ -32,7 +32,50 @@ push() // append, extend
 "hehe".replace(/h/g, function(matchstr, pos, fullstr) {return matchstr.toUpperCase();});
 
 toLowerCase
-myarray.sort(})
+myarray.sort()
+myarray.shift() # removes and return first element of array
+myarray.pop()   # removes and return last  element of array
+myarray.at
+myarray.concat
+myarray.constructor
+myarray.copyWithin
+myarray.entries
+myarray.every
+myarray.fill
+myarray.filter
+myarray.find
+myarray.findIndex
+myarray.findLast
+myarray.findLastIndex
+myarray.flat
+myarray.flatMap
+myarray.forEach
+myarray.includes
+myarray.indexOf
+myarray.join
+myarray.keys
+myarray.lastIndexOf
+myarray.map
+myarray.pop
+myarray.push # append add
+myarray.reduce
+myarray.reduceRight
+myarray.reverse
+myarray.shift
+myarray.slice
+myarray.some
+myarray.sort
+myarray.splice
+myarray.toLocaleString
+myarray.toReversed
+myarray.toSorted
+myarray.toSpliced
+myarray.toString
+myarray.unshift
+myarray.values
+myarray.with
+
+myarray.length
 
 try{
     // Try something wrong here
@@ -78,6 +121,7 @@ JSON.stringify()
 
 # CLI docker node.js
 ```sh
+docker-nodejs-javascript.sh
 sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine
 .load /js/bip.js
 sudo docker run -it -v ~/tmp/js:/js --rm node:lts-alpine /js/bip.js # console.log
@@ -158,3 +202,27 @@ e.Get("@timestamp").ZoneBounds()
 
 /(?<year>\d{4})-\d{2}|\d{2}-(?<year>\d{4})/.exec("2024-12").groups["year"] // regex
 outerHTML
+
+
+function dictToQueryString(params) { return Object.entries(params) .map(([key, val]) => encodeURIComponent(key) + '=' + encodeURIComponent(val)).join('&'); } // { name: 'John Doe', age: 30, city: 'New York' }; -> "name=John%20Doe&age=30&city=New%20York"
+function repeatingDictQueryString(params) { return Object.entries(params) .flatMap(([key, val]) => Array.isArray(val) ? val.map(v => `${encodeURIComponent(key)}=${encodeURIComponent(v)}`) : `${encodeURIComponent(key)}=${encodeURIComponent(val)}`) .join('&'); } // { tag: ['js', 'web', 'node'], sort: 'asc' }; -> "tag=js&tag=web&tag=node&sort=asc"
+
+
+> bashExpansion("abc{1..5}e{_,+}")
+[ 'abc1e_', 'abc2e_', 'abc3e_', 'abc4e_', 'abc5e_', 'abc1e+', 'abc2e+', 'abc3e+', 'abc4e+', 'abc5e+' ]
+function bashExpansion(str) {
+  const match = str.match(/(.*)\{([^}]+)\}(.*)/);
+  if (!match) return [str];
+
+  const [_, prefix, body, suffix] = match;
+
+  let parts;
+  if (body.includes('..')) {
+    const [start, end] = body.split('..').map(Number);
+    parts = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  } else {
+    parts = body.split(',');
+  }
+
+  return parts.flatMap(part => bashExpansion(`${prefix}${part}${suffix}`));
+}

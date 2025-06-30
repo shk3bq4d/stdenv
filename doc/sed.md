@@ -174,7 +174,7 @@ sed -r -e 's/\r//g' # dos2unix
 ```
 
 ```sh
-_convert_rx() { sed -r -e 's/ +(#.*)?$//' <<<"$@" | tr -d '\n' } # with sed emulate a sort of debug mode that allow to express a regular expression on multiple line and with comments like in python re.X,re.VERBOSE mode
+_convert_rx() { sed -r -e 's/ +(#.*)?$//' <<<"$@" | tr -d '\n'; } # with sed emulate a sort of debug mode that allow to express a regular expression on multiple line and with comments like in python re.X,re.VERBOSE mode
 # then you can do something like
       sed -u -r -e "
 s/$(_convert_rx '
