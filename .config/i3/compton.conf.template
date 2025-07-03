@@ -66,7 +66,7 @@ opacity-rule = [
     , "0:_NET_WM_STATE@[0]:a = '_NET_WM_STATE_HIDDEN'"
     , "92:class_g = 'mrdmenu'"
     , "98:class_g = 'Dunst'"
-    , "80:class_g ~= '^firefox-esr.*' && !focused"
+#   , "80:class_g ~= '^firefox-esr.*' && !focused" # 2025.07.03 I removed that cause I wanted to have netflix and don't recall exactly why this was put in here
 ];
 
 # Fading
@@ -125,14 +125,13 @@ focus-exclude = [
     ,"name *= 'mrmagicstring_comptonopaque'"
     ,"class_g = 'mrmagicstring_comptonopaque'"
     ,"name ~= '^(https://play.typeracer.com/ )?TypeRacer - .* . (Chromium|Google Chrome|Mozilla Firefox)$'"
-    ,"name ~= ' - YouTube . (Chromium|Google Chrome|Mozilla Firefox)$'"
-    ,"name ~= ' - Netflix . (Chromium|Google Chrome|Mozilla Firefox)$'"
+    ,"name ~= 'YouTube . (Chromium|Google Chrome|Mozilla Firefox)$'"
     ,"name ~= '^Minecraft .*'"
     ,"name ~= 'RTS . - Direct - TV - Play RTS.*(Chromium|Mozilla Firefox)$'"
     ,"name ~= 'Infomaniak Meet . (Chromium|Mozilla Firefox)$'"
     ,"name ~= 'Meeting.{1,6}Microsoft Teams$'"
     ,"name ~= '^BlueJeans Network \\\\| Video Collaboration in the Cloud'"
-    ,"name ~= 'Netflix . (Chromium|Google  Chrome|Mozilla Firefox)'"
+    ,"name ~= 'Netflix[— -]+(Chromium|Google Chrome|Mozilla Firefox)$'" # 2025-07-03 please also take into account opacity-rulo
     ,"name ~= '^feh '"
     ,"name ~= 'Running. - Oracle VM VirtualBox$'"
     ,"class_g = 'Wfica'"
