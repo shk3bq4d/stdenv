@@ -422,3 +422,22 @@ strace -f -e execve apt install --reinstall strace |& grep execve
 
     Unattended-Upgrade::MailOnlyOnError (not a hook but a config toggle)
 ```
+
+# locks
+## unattended upgrade
+```sh
+flock -n /run/unattended-upgrades.lock -c 'sleep 3600'
+```
+```sh
+exec 9>/run/unattended-upgrades.lock   # open for writing
+flock -n 9 || exit 1                   # take exclusive lock
+```
+## dpkg
+```sh
+with-lock-ex /var/lib/dpkg/lock-frontend -- sleep 300 # apt dpkg lock, provided by the chiark-utils-bin package, https://packages.debian.org/bullseye/chiark-utils-bin
+python3 - <<'PY'
+import fcntl, time, pathlib
+fd = open('/var/lib/dpkg/lock-frontend', 'w')
+fcntl.lockf(fd, fcntl.LOCK_EX)  # blocks until it can lock
+time.sleep(300)                 # critical section
+PY

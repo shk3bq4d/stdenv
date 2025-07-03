@@ -1287,6 +1287,7 @@ ansible -i inventory.yml "green:&linux" -m shell -a "cat /proc/loadavg" # cpu us
 ansible -i inventory.yml "green:&linux" -m shell -a "netstat -tn | wc -l" # network connections number
 ansible -m shell -vba 'rpm -q kernel' 'azure:&uat:&linux' # list versions of installed kernel
 ansible -m shell -vba 'package-cleanup --oldkernels --count=2 --assumeyes' 'azure:&uat:&linux'
+ansible -bm file -a "path=/etc/systemd/system/docker.service.d mode=0755" linux
 
 - "{{ (not true) | ternary('a', 'b') }}"
 when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
