@@ -17,4 +17,13 @@ else
     set +x
     echo success
 fi
+g="nameserver 127.0.0.153"
+if grep -qE "^$g" $f; then
+    echo "noop"
+else
+    set -x
+    echo "$g" | sudo tee -a "$f"
+    set +x
+    echo success
+fi
 exit 0
