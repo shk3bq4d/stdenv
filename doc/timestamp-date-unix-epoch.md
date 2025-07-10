@@ -112,6 +112,7 @@ date -d "sat 5" # next saturday at 5 o'clock
 date -d "next saturday 8:00"
 date -d "tue"   # today (if today is tue) or next tue
 date -d "1 tue" # next tue (even if today is tue)
+date -d "2 fri" # friday in eight days (next friday, check yourself before relying on this)
 date -d "fortnight" # two weeks from now, same time
 date -d "fortnight tue" # two weeks from now, tue, but at midnight
 date -d "2 week" # two weeks from now
