@@ -379,3 +379,5 @@ import certifi; print(certifi.where()) # print certifi cert location /usr/local/
 ```
 
 "C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors && REM chromium edge
+
+nbseconds=0; openssl x509 -noout -checkend $nbseconds # check expiration with exit code
