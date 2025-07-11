@@ -550,13 +550,14 @@ date >/dev/fd/4 # append to FD4 (even though there is a single >)
 date >>/dev/fd/4 # append to FD4
 
 
+my_arraylist=()
 # hash key value hashtable hashmap
-declare -A my_array
-my_array[foo]=bar
-my_array[bar]=foo
-for key in "${!my_array[@]}"; do # iterate over an array
+declare -A my_associative_array_aka_dict
+my_associative_array_aka_dict[foo]=bar
+my_associative_array_aka_dict[bar]=foo
+for key in "${!my_associative_array_aka_dict[@]}"; do # iterate over an dict
     echo "key  : $key"
-    echo "value: ${my_array[$key]}"
+    echo "value: ${my_associative_array_aka_dict[$key]}"
 done
 for key in "${!my_dict[@]}"; do echo "key:$key value:${mydict[$key]}"; done  # iterate/dump an dict
 ${#my_array[@]} # array  or dict length

@@ -2171,6 +2171,7 @@ msg: "{{ [1,2,3] | zip_longest(['a','b','c','d','e','f'], [21, 22, 23], fillvalu
 {{ dict(keys_list | zip(values_list)) }}
 {{ users | subelements('groups', skip_missing=True) }}
 key: "{{ lookup('file', item.1) }}"
+key: "{{ lookup('fileglob', item.1) }}"
 loop: "{{ users | subelements('authorized') }}"
 "{{ '52:54:00' | random_mac }}"
 "{{ ['a','b','c'] | random }}"
