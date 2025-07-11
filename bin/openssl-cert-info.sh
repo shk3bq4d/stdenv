@@ -26,7 +26,7 @@ if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
     >&2 echo "reading from stdin"
     MODE=file
     NAME=$_tempdir/b
-    cat - | sed -r -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
+    cat - | sed -r -e 's/\\\\n/\n/g' -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
 else
     NAME="$1"
     if [[ $# -eq 1 && -f "$NAME" ]]; then
