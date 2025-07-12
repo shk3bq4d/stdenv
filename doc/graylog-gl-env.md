@@ -10,8 +10,8 @@ no need for graylog nodes to recognize each other
 mongodb needs to have a replicasetCreated on the masternode. That node will then contact the other ones.
 
 https://go2docs.graylog.org/5-0/changelogs/changelog.html
-https://www.graylog.org/releases # changelog
-https://docs.graylog.org/docs/changelog # releases
+* https://www.graylog.org/releases # changelog
+* https://go2docs.graylog.org/current/changelogs/changelog.html?tocpath=Changelogs%7C_____1 # releases
 https://github.com/Graylog2/graylog2-server/tree/4.3.10/changelog/4.3.10
 
 https://go2docs.graylog.org/4-x/what_is_graylog/what_is_graylog_operations.html
