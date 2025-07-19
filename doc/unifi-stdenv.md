@@ -38,6 +38,8 @@ jacobalberty/unifi:v8.6.9
 jacobalberty/unifi:v9.0.108
 jacobalberty/unifi:v9.0.114
 jacobalberty/unifi:v9.1.120
+jacobalberty/unifi:v9.2.87
+jacobalberty/unifi:v9.3.43
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest
@@ -59,6 +61,8 @@ https://community.ui.com/releases/r/network/8.5.6
 https://community.ui.com/releases/r/network/8.6.9
 https://community.ui.com/releases/r/network/9.0.108
 https://community.ui.com/releases/r/network/9.1.120
+https://community.ui.com/releases/r/network/9.2.87
+https://community.ui.com/releases/r/network/9.3.43
 https://community.ui.com/releases?q=unifi+network+application
 https://community.ui.com/releases/UniFi-Network-Application-7-1-61/06f67c89-c798-423f-91a2-4cb2bca7694d
 https://community.ui.com/releases/UniFi-Network-Application-7-1-65/6866da09-c506-42ec-abcf-1b7fcc0dddc7
