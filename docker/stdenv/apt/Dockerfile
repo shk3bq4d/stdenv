@@ -66,6 +66,9 @@ RUN \
         wget \
         yamllint \
         zsh \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
+        zsh-theme-powerlevel9k \
     && true
 
 COPY stdenv-image-build-time.sh /usr/local/bin
