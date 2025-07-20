@@ -42,10 +42,10 @@ git_root_dir () {
 
 list() {
     if [[ $# -eq 0 ]]; then
-        git diff-tree --no-commit-id --name-only -r HEAD
+        git diff-tree --no-commit-id --name-only -r HEAD --
     else
         for rev in "$@"; do
-            git diff-tree --no-commit-id --name-only -r "$rev"
+            git diff-tree --no-commit-id --name-only -r "$rev" --
         done | sort -u
     fi
 }
@@ -56,6 +56,10 @@ if [[ -z "$(list "$@")" ]]; then
     echo "no modified files in rev $@"
     exit 1
 fi
-cd $(git_root_dir)
+if [[ -n "${GIT_WORK_TREE:-}" ]]; then
+    cd "$GIT_WORK_TREE"
+else
+    cd $(git_root_dir)
+fi
 list "$@"
 vim $(list "$@")

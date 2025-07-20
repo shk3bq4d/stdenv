@@ -3,7 +3,7 @@
 set -e
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 cd "$DIR"
-cat subrepo-list.txt | while read dir url; do
+sed -e 's/\s*#.*//' -e '/^\s*$/ d' subrepo-list.txt | while read dir url; do
 	cd "$DIR"
 	[[ -d "$dir" ]] && continue
 	git clone $url "$dir"
