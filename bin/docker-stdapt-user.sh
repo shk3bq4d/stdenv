@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-docker run "$@" \
+docker ps &>/dev/null && SUDO="" || SUDO="sudo";
+$SUDO docker run "$@" \
 	-e STDENV_DEBUG= \
 	-e STDENV_USER_SUDOER=1 \
 	-e STDENV_USER_UID=$(id -u) \

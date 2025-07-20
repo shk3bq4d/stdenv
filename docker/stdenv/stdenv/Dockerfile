@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 FROM shk3bq4d/stdenv:py
 
 COPY dot.stdenv /tmp
