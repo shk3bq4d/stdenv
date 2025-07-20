@@ -8,14 +8,16 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
 f=/etc/resolv.conf
-g="nameserver 127.0.0.53"
-if grep -qE "^$g" $f; then
-    echo "noop"
-else
-    set -x
-    echo "$g" | sudo tee -a "$f"
-    set +x
-    echo success
+if false; then
+    g="nameserver 127.0.0.53"
+    if grep -qE "^$g" $f; then
+        echo "noop"
+    else
+        set -x
+        echo "$g" | sudo tee -a "$f"
+        set +x
+        echo success
+    fi
 fi
 g="nameserver 127.0.0.153"
 if grep -qE "^$g" $f; then
