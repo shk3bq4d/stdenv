@@ -3,10 +3,11 @@
 
 set -euo pipefail
 
-kubectl_version=1.30.10
-#https://storage.googleapis.com/kubernetes-release/release/stable.txt
+kubectl_version=1.31.11
+# https://storage.googleapis.com/kubernetes-release/release/stable.txt
+# https://cdn.dl.k8s.io/release/stable.txt
 
-BIN="/home/rumo/bin/kubectl-$kubectl_version"
+BIN="$HOME/bin/kubectl-$kubectl_version"
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 # curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 if [[ ! -f "$BIN" ]]; then

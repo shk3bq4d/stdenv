@@ -56,3 +56,7 @@ kubectl get certificates.cert-manager.io -A
 kubectl get certificaterequests.cert-manager.io -A
 kubectl get certificatesigningrequests.certificates.k8s.io -A
 kubectl cert-manager status certificate -n namespace certificates.cert-manager.io
+
+
+https://cert-manager.io/docs/releases/release-notes/release-notes-1.18/
+https://github.com/kubernetes/ingress-nginx/issues/11176
