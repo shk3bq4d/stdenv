@@ -1,6 +1,8 @@
 pip show requests # display version
 pip config debug
 
+python3 -m pip install --upgrade --user --break-system-packages pip
+
 pip install virtualenv virtualenvwrapper
 
 # ignore https validation
