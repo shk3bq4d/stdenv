@@ -226,3 +226,5 @@ function bashExpansion(str) {
 
   return parts.flatMap(part => bashExpansion(`${prefix}${part}${suffix}`));
 }
+
+new Function("return x;");
