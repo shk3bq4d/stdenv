@@ -164,3 +164,15 @@ Did you talk to other Service Desk people before escalading to level 3?
 Best regards,
 
 Marc
+
+
+# cold case
+I am writing to formally request that you cease all forms of communication with me immediately. I do not, and have never, consented to be contacted by your organization.
+
+Furthermore, I request that you permanently remove all of my personal details from your records, databases, and any third-party systems where you may have shared them.
+
+This request is made under applicable data protection and privacy laws. Any further contact from your side will be considered a violation of my rights and may be reported to the appropriate regulatory authorities.
+
+I expect written confirmation that my request has been processed and that my data has been fully removed.
+
+Sincerely
