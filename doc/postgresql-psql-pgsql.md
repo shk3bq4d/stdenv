@@ -314,7 +314,7 @@ are to be done by making a backup, trashing the data folder, restoring the backu
 
 
 
-* https://www.postgresql.org/support/versioning/ # end of life
+* https://www.postgresql.org/support/versioning/ # end of life EOL
 https://www.postgresql.org/developer/roadmap/
 https://www.postgresql.org/about/news/postgresql-172-166-1510-1415-1318-and-1222-released-2965/
 https://www.postgresql.org/about/news/out-of-cycle-release-scheduled-for-november-21-2024-2958/
