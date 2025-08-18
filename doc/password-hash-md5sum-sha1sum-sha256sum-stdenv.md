@@ -1,3 +1,8 @@
+rsZouSDdyLCn1uskRZUETw== # md5 base64 string -> echo rsZouSDdyLCn1uskRZUETw== | base64 -d | xxd -p -c 32 # md5
+aec668b920ddc8b0a7d6eb244595044f # md5 hexadecimal string
+b97b2b9a21645f8da762435e14a3050605160511 # sha1sum hexadecimal string
+a9c1e9686b0ced6d367954ecf14d13541c925cfb570866d4b459eab3dd730228 # sha256sum hexadecimal string
+
 
 $apr1$: Apache MD5-based   $apr1$xJZ8QPTb$O93/pwUz9b.YQ5raH88mZ
 $1$: MD5-based crypt ('md5crypt')
