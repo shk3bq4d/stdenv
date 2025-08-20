@@ -6,9 +6,23 @@ https://confluence.atlassian.com/bitbucketserver/bitbucket-server-security-advis
 https://confluence.atlassian.com/bitbucketserver/supported-platforms-776640981.html # postgresql database versions
 https://www.atlassian.com/trust/security/advisories
 
-https://hub.docker.com/r/atlassian/bitbucket-server
+https://hub.docker.com/r/atlassian/bitbucket
 
-8.9 should be LTS and planned for Q1 2023: https://community.atlassian.com/t5/Data-Center-articles/Announcing-the-next-Bitbucket-Data-Center-Long-Term-Support-LTS/ba-p/2122796
+9.6 (EOS date: 18 January 2027)
+9.5 (EOS date: 7 January 2027)
+9.4 (EOS date: 3 December 2026) LONG TERM SUPPORT
+9.3 (EOS date: 29 October 2026)
+9.2 (EOS date: 24 September 2026)
+9.1 (EOS date: 27 August 2026)
+9.0 (EOS date: 23 July 2026)
+8.19 (EOS date: 12 March 2026) LONG TERM SUPPORT
+8.18 (EOS date: 6 February 2026)
+8.17 (EOS date: 9 January 2026)
+8.16 (EOS date: 28 November 2025)
+8.15 (EOS date: 24 October 2025)
+8.14 (EOS date: 19 September 2025)
+8.13 (EOS date: 15 August 2025)
+8.9 (EOL date: 12 Apr 2026) should be LTS and planned for Q1 2023: https://community.atlassian.com/t5/Data-Center-articles/Announcing-the-next-Bitbucket-Data-Center-Long-Term-Support-LTS/ba-p/2122796
 8.8 (EOL date: 7 Feb 2025)
 8.7 (EOL date: 10 Jan 2025)
 8.6 (EOL date: 15 Nov 2024)
