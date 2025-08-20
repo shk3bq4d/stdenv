@@ -6,7 +6,7 @@ https://confluence.atlassian.com/bitbucketserver/bitbucket-server-security-advis
 https://confluence.atlassian.com/bitbucketserver/supported-platforms-776640981.html # postgresql database versions
 https://www.atlassian.com/trust/security/advisories
 
-https://hub.docker.com/r/atlassian/bitbucket-server
+https://hub.docker.com/r/atlassian/bitbucket
 
 9.6 (EOS date: 18 January 2027)
 9.5 (EOS date: 7 January 2027)
