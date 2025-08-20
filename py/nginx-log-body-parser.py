@@ -44,7 +44,7 @@ def logging_conf(
            },
        'handlers':{
            'stdout':   {'level':level,'formatter': 'standard','class':'logging.StreamHandler',         'stream': 'ext://sys.stdout'},
-           'file':     {'level':level,'formatter': 'standard','class':'logging.FileHandler',           'filename': filepath}, #
+#          'file':     {'level':level,'formatter': 'standard','class':'logging.FileHandler',           'filename': filepath}, #
            'syslog':   {'level':level,'formatter': 'syslogf', 'class':'logging.handlers.SysLogHandler','address': '/dev/log', 'facility': 'user'}, # (localhost, 514), local5, ...
            #'graylog': {'level':level,'formatter': 'graylogf','class':'pygelf.GelfTcpHandler',         'host': 'log.mydomain.local', 'port': 12201, 'include_extra_fields': True, 'debug': True, '_ide_script_name':script_name},
        }, 'loggers':{'':{'handlers': use.split(),'level': level,'propagate':True}}})
