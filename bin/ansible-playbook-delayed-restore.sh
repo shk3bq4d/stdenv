@@ -54,7 +54,7 @@ process_file() {
 
     cd $CWD
     rm "$file"
-    ansible-playbook-delayed-detached.sh "@$TTS" $args
+    setsid ansible-playbook-delayed-detached.sh "@$TTS" $args
 }
 
 
