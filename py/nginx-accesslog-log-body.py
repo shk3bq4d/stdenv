@@ -86,13 +86,9 @@ def get_data(ar):
             yield i
 
 def go(args) -> None:
-    # https://docs.python.org/2/library/argparse.html
-    # logger.info(__file__)
-    # logger.debug(__file__)
-    parser = argparse.ArgumentParser(description="Parses nginx logs with a specific format that contains the request body")
+    parser = argparse.ArgumentParser(description="Process nginx logs files or stdin, which adhere to a specific nginx log line template and pretty prints the HTTP client request body")
     parser.add_argument("FILENAME", type=str, nargs='?', help="file to process. Uses stdin otherwise")
     parser.add_argument("-b", "--include-requests-with-empty-body", action='store_true')
-    # print(script_txt)
     ar = parser.parse_args(args)
 
     for line in get_data(ar):
