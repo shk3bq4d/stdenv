@@ -822,7 +822,7 @@ function pwdc() {
     else
         mr="$(pwd)/$1"
     fi
-    if [[ -n "$SSH_CLIENT" ]]; then
+    if [[ -n "${SSH_CLIENT:-}${SSHHOME:-}" ]]; then
         echo "$(hostname -f):$mr"
     elif hash -v xclip &>/dev/null; then
         echo -n "$mr" | xclip -i -selection "clipboard"
