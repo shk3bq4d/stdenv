@@ -106,3 +106,13 @@ From (Select tblassets.AssetID,
           tblassets.Assettype) b
 Where b.short_name In ('apabc001p01')
 Order By b.lastseen
+
+GO
+drop table my_table;
+GO
+create table my_table ( col1 nvarchar(30), col2 nvarchar(60));
+GO
+insert into my_table (col1, col2) values (N's3-dremio-01', N'data_entry_portal/files/coucou'), (N's3-dremio-01', N'hr_data/files/hehe');
+GO
+select * from my_table;
+GO
