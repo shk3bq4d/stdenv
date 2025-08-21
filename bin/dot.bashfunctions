@@ -749,14 +749,22 @@ function mr_ssh_add {
 }
 
 function start_agent {
+    local d parentdir
+    parentdir=~/.ssh/agent/
     if [[ -d $(dirname $SSH_ENV) && ! -f /.dockerenv ]]; then
         echo "Initialising new SSH agent..."
+        test -d $parentdir || mkdir -p $parentdir
+        d="$(mktemp -dp $parentdir)"
         [[ -f ${SSH_ENV} ]] && rm -f ${SSH_ENV}
-        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > ${SSH_ENV}
+        /usr/bin/ssh-agent -a $d/agent.sock | sed 's/^echo/#echo/' > ${SSH_ENV}
         echo succeeded
         chmod 600 ${SSH_ENV}
         source ${SSH_ENV} > /dev/null
     fi
+}
+
+function agent_sock_cleanup {
+    find ~/.ssh/agent/ -mindepth 1 -delete
 }
 
 function start_agent_if_not_started {
@@ -765,28 +773,33 @@ function start_agent_if_not_started {
         source ${SSH_ENV} > /dev/null
         #ps ${SSH_AGENT_PID} doesn't work under cywgin
         if [[ -z "${SSH_AGENT_PID:-}" ]]; then
-             start_agent;
+            agent_sock_cleanup
+            start_agent;
         else
             case $UNAME in \
             cygwin*|msys*)
                 ps -p ${SSH_AGENT_PID} -s       | grep -qx ssh-agent || {
-                     start_agent;
+                    agent_sock_cleanup
+                    start_agent;
                 }
                 ;;
             freebsd*)
                 ps -p ${SSH_AGENT_PID} -o comm= | grep -qx ssh-agent || {
-                     start_agent;
+                    agent_sock_cleanup
+                    start_agent;
                 }
                 ;;
             *)
                 ps -q ${SSH_AGENT_PID} -o comm= | grep -qx ssh-agent || {
-                     start_agent;
+                    agent_sock_cleanup
+                    start_agent;
                 }
                 ;;
             esac
         fi
     else
-         start_agent;
+        agent_sock_cleanup
+        start_agent;
     fi
 }
 
