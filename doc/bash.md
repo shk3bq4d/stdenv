@@ -750,9 +750,9 @@ echo This message goes to stderr >&2
 set -u # equivalent to "set -o nounset" will die if using unitiliazed variable
 
 # which alternatives
-command -v foo >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; } # which
-type foo >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; } # which
-hash foo 2>/dev/null || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; } # which
+command -v foo >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; } # which hash function
+type foo >/dev/null 2>&1 || { echo >&2 "I require function foo but it's not declared.  Aborting."; exit 1; } # which hash command
+hash foo 2>/dev/null || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; } # which function command
 Where bash is your shell/hashbang, consistently use hash (for commands) or type (to consider built-ins & keywords).
 When writing a POSIX script, use command -v.
 
