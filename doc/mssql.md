@@ -106,3 +106,14 @@ From (Select tblassets.AssetID,
           tblassets.Assettype) b
 Where b.short_name In ('apabc001p01')
 Order By b.lastseen
+
+GO
+drop table my_table;
+GO
+create table my_table ( S3Bucket nvarchar(30), S3StoragePath nvarchar(60));
+GO
+insert into my_table (S3Bucket, S3StoragePath) values (N's3-dremio-01', N'data_entry_portal/files/coucou'), (N's3-dremio-01', N'hr_data/files/hehe');
+GO
+select * from my_table;
+GO
+update my_table set S3Bucket = case when S3StoragePath like 'data_entry_portal/files/%' then 'os-live-data-entry-portal' when S3StoragePath like 'hr_data/files/%' then 'os-live-hr-data' else S3Bucket end, S3StoragePath = case when S3StoragePath like 'data_entry_portal/files/%' then replace(S3StoragePath, 'data_entry_portal/files/', '') when S3StoragePath like 'hr_data/files/%' then replace(S3StoragePath, 'hr_data/files/', '') else S3StoragePath end;
