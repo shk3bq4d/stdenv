@@ -26,3 +26,9 @@ for i in $(seq 1 12); do
 		ffmpeg -i *ep\ $i\ *mp4 -i *ep\ $i\ *m4a -c copy $(printf 'miraculous-ladybug-season02-episode%02i.mkv' $i)
 	fi
 done
+
+# screenshot extraction
+```sh
+# Times can be SS[.ms] or HH:MM:SS[.ms].
+ffmpeg -hide_banner -loglevel error -ss 4:05 -i *mkv -frames:v 1 -vf "scale=iw:ih" output.png
+```
