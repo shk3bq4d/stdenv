@@ -4,7 +4,7 @@
 * [hub.docker.com](https://hub.docker.com/_/nextcloud)
 * https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html # database support
 
-https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
+* https://github.com/nextcloud/server/wiki/Maintenance-and-Release-Schedule # end of life
 
 Version code  Version name  Release date  End of life  Current version       Next version
 31            Hub 10        2025-02-25    2026-02-25

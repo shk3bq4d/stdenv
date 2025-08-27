@@ -17,6 +17,13 @@ docker pull atlassian/confluence:7.4.15
 
 # EOL
 https://confluence.atlassian.com/support/atlassian-support-end-of-life-policy-201851003.html
+10.0 (EOS date: 5 August 2027)
+9.5 (EOS date: 4 June 2027)
+9.4 (EOS date: 1 Apr 2027)
+9.3 (EOS date: 4 Feb 2027)
+9.2 (EOS date: 10 Dec 2026) LONG TERM SUPPORT
+9.1 (EOS date: 3 Oct 2026)
+9.0 (EOS date: 30 July 2026)
 8.9 (EOL date: 2 Apr 2026)
 8.8 (EOL date: 8 Feb 2026)
 8.7 (EOL date: 6 Dec 2025)
