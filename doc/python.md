@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs
 https://pypi.python.org/pypi/cx_Oracle/5.1.3
@@ -44,7 +43,7 @@ functools.partial # bind freeze some portion of a fuctions arguments or keywords
 from bs4 import BeautifulSoup as bs # type: ignore
 
 # UTF-8 IO
-@begin=python@
+```python
 #this is bad:
 import sys
 reload(sys)
@@ -57,9 +56,10 @@ sys.setdefaultencoding('utf-8')
 # or
 from io import open
 with open(fp, 'w', encoding='utf-8') as f:
-@end=python@
+```
 
 
+```python
 if sys.platform == "win32":
    import os, msvcrt
    msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
@@ -81,7 +81,7 @@ lxml.etree.tostring(doc, pretty_print=True) # outputs
 doc.xpath('/*')
 
 # process stdin line by line
-"""
+"""py
 import fileinput # stdin
 filepath = '-' # or empty, stdin
 for line in fileinput.input(filepath): # stdin
@@ -1152,6 +1152,9 @@ python3 -m http.server 8000 # SimpleHTTPServer httpd webserver
 pydoc mypackage
 pydoc requests
 pydoc requests.sessions
+
+https://pypac.readthedocs.io/en/latest/changelog.html
+https://github.com/carsonyl/pypac
 
 # reraise https://franklingu.github.io/programming/2016/06/30/properly-reraise-exception-in-python/
 ```python
