@@ -6,7 +6,7 @@ date
 
 #  http://www.imagemagick.org/Usage/canvas/#gradient
 
-set -x
+#set -x
 OUTDIR=~/.tmp/mrurxvt/
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
@@ -14,7 +14,7 @@ for i in \
     ~/.bash_aliases \
     ~/.${HOSTNAMEF}_aliases  \
     ~/.std*_aliases \
-	; do
+    ; do
     source $i
 done
 case $HOSTNAMEF in \
@@ -68,7 +68,7 @@ f=$OUTDIR/${method}-${a}-${b}-${c}.jpg
 case $method in \
 fullwhite)
     convert -size 100x100 xc:white $f
-	;;
+    ;;
 noise)
     a=$(( ( RANDOM % 2 ) ))
     convert -size 32x32 xc:   +noise Random -virtual-pixel tile  -blur 0x3 -auto-level \
@@ -257,18 +257,18 @@ set +e
 TSSH=""
 CD=""
 if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then
-	TSSH="$(mri3_focused_window_ssh_target.py)"
-	if [[ -z "$TSSH" ]]; then
-		TCD="$(mri3_focused_window_cwd.py)"
-		set -e
-		echo "cd is $TCD"
-		set +x
-		#test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
-		if [[ -d $TCD ]]; then
-			! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
-		fi
-		echo "cd now is $CD"
-	fi
+    TSSH="$(mri3_focused_window_ssh_target.py)"
+    if [[ -z "$TSSH" ]]; then
+        TCD="$(mri3_focused_window_cwd.py)"
+        set -e
+        echo "cd is $TCD"
+        set +x
+        #test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
+        if [[ -d $TCD ]]; then
+            ! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
+        fi
+        echo "cd now is $CD"
+    fi
 fi
 set -x
 ~/bin/notinpath/mrxmodmap.sh &
@@ -319,11 +319,11 @@ if [[ "$@" == *VT100.allowSendEvents* ]]; then
 elif [[ $# -eq 0 ]] && [[ -n "$TSSH" ]]; then
     MR_TERM=urxvt MR_BG=$f MR_URXVT_CMD="ssh $TSSH" $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }"
 else
-	if false && hash alacritty 2>/dev/null; then
-		MR_TERM=urxvt MR_BG=$f alacritty "$@"
-	else
-	    MR_TERM=urxvt MR_BG=$f $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
-	fi
+    if false && hash alacritty 2>/dev/null; then
+        MR_TERM=urxvt MR_BG=$f alacritty "$@"
+    else
+        MR_TERM=urxvt MR_BG=$f $BIN $CD -sl 65535 --background-expr "scale keep { load \"$f\" }" "$@"
+    fi
 fi
 
 exit 0
