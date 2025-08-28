@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 exec > >(ts | tee ~/.tmp/log/mrurxvt.log)
 exec 2>&1
-date
+#date
 #env | sort
 
 #  http://www.imagemagick.org/Usage/canvas/#gradient
@@ -261,13 +261,13 @@ if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then
     if [[ -z "$TSSH" ]]; then
         TCD="$(mri3_focused_window_cwd.py)"
         set -e
-        echo "cd is $TCD"
+        #echo "cd is $TCD"
         set +x
         #test -d "$CD" && ! findmnt --json --target "$CD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$CD") && CD="-cd $CD"
         if [[ -d $TCD ]]; then
             ! findmnt --json --target "$TCD" | jq -r '.filesystems[].fstype' | grep -xE 'fuse.sshfs' && $(cd "$TCD") && CD="-cd $TCD"
         fi
-        echo "cd now is $CD"
+        # echo "cd now is $CD"
     fi
 fi
 #set -x
