@@ -392,4 +392,4 @@ WARNING:  database "postgres" has a collation version mismatch
 DETAIL:  The database was created using collation version 2.36, but the operating system provides version 2.41.
 HINT:  Rebuild all objects in this database that use the default collation and run ALTER DATABASE postgres REFRESH COLLATION VERSION, or build PostgreSQL with the right library version.
 \c MYBASE;
-reindex database MYBASE; alter database MYBASE refresh collation version;
+reindex database :DBNAME; alter database :DBNAME refresh collation version;
