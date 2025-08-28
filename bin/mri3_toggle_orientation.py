@@ -11,9 +11,10 @@ import time
 
 try:
     with open(os.path.expanduser('~/.tmp/i3-new_window_border'), 'r') as f:
-        next_border = 'border {}'.format(f.read().strip())
+        next_border = 'border pixel {}'.format(f.read().strip())
 except:
     next_border = 'border {}'.format('none')
+
 
 def t(w, cmd):
     pid = str(os.getpid())

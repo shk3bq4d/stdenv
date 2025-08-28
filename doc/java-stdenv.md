@@ -322,7 +322,7 @@ System.getenv("JAVA_HOME"); // get environment variable
 
 # legacy log4j.properties line number in loge
 #log4j.appender.stdout.layout.ConversionPattern=%d{HH:mm:ss,SSS} %l %.1p %c %m%n
-
+```sh
 java -noverify -jar signed.jar
 
 docker run --rm -it mausch/docker-groovysh
@@ -338,7 +338,13 @@ docker run --rm -v $PWD:/myjar -it mausch/docker-groovysh bash bin/groovysh -cp 
 ~/java/stdenv/StdenvHttpConnection.java
 ~/java/stdenv/StdenvHttpsConnection.java
 ~/java/stdenv/StdenvSSLSocketConnection.java
+```
 
 # jks
+```sh
 KEYSTOREPASS=changeit # password java jks cacerts
 /etc/pki/ca-trust/extracted/java/cacerts # centos7 jks password= changme
+```
+
+# passing options via env var
+JAVA_TOOL_OPTIONS
