@@ -8,7 +8,7 @@ helm repo list
 helm repo update
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm inspect
-helm ls -A
+helm ls -A -a
 helm history  -n sfw-production sfw-web-app
 helm history  -n sfw-production sfw-server
 helm rollback -n sfw-production sfw-server 39
