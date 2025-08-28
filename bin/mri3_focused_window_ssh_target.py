@@ -12,6 +12,8 @@ from sh import xprop
 i3 = i3ipc.Connection()
 
 focused = i3.get_tree().find_focused()
+if not focused.window:
+    sys.exit(0)
 s = str(xprop('-id', focused.window))
 p = r'^_NET_WM_PID.CARDINAL. = (\d+)'
 m = re.search(p, s, flags=re.MULTILINE).group(1)
