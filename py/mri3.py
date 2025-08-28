@@ -187,7 +187,7 @@ def go(args):
 
     if 0:
         grid_layout()
-    if 1: pprint(list(map(lambda x: x.name, workspaces())))
+    if 0: pprint(list(map(lambda x: x.name, workspaces())))
     if 0:
         #debug(i3.get_tree())
         for w in workspaces():
@@ -205,7 +205,10 @@ def go(args):
 
 def debug(e, recursive=True, indent='', _rA=None, _print=True):
     #pprint(vars(e.props))
-    pprint(vars(e))
+    try:
+        pprint(vars(e))
+    except:
+        pprint(e)
     return
 
 def python_object_id(i):
@@ -333,7 +336,7 @@ def remove_single_child_containers(c=None):
         for n in traverse_all_elem(start_from=c, only_visible=True):
             if is_container(n) and len(n.nodes) == 1 and is_window(n.nodes[0]):
                 k = k + 1
-                debug(n.nodes[0], recursive=False, _print=True)
+                # debug(n.nodes[0], recursive=False, _print=True)
                 if is_workspace(n.parent):
                     i = n.parent.nodes.index(n)
                     if 0 and i == 0:
@@ -366,7 +369,7 @@ def remove_single_child_containers(c=None):
                             cont = True
                             continue
                     cmd = 'move {}'.format(direction)
-                    logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
+                    #logger.info('sending cmd %s to %s', cmd, debug(n.nodes[0], recursive=False))
                     n.nodes[0].command(cmd)
                     done = True
                 else:
@@ -588,9 +591,9 @@ def get_output(o):
     if o.type == 'output': return o
     if o.type == 'workspace' and o.parent is None:
         output_str = vars(o).get('ipc_data', {}).get('output', None)
-        pprint(vars(o))
-        pprint(vars(o).get('ipc_data', {}))
-        logger.info(f'output_str is {output_str}')
+        #pprint(vars(o))
+        #pprint(vars(o).get('ipc_data', {}))
+        #logger.info(f'output_str is {output_str}')
         if output_str is not None:
             logger.info('A')
             i3 = i3ipc.Connection()

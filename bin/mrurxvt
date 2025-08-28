@@ -15,7 +15,7 @@ for i in \
     ~/.${HOSTNAMEF}_aliases  \
     ~/.std*_aliases \
     ; do
-    source $i
+    test -r $i && source $i
 done
 case $HOSTNAMEF in \
 $WORK_PC1F)
@@ -270,7 +270,7 @@ if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then
         echo "cd now is $CD"
     fi
 fi
-set -x
+#set -x
 ~/bin/notinpath/mrxmodmap.sh &
 BIN=urxvt
 #MR_TERM=urxvt $BIN $CD -sl 65535 -bg white "$@"
