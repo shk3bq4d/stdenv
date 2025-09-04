@@ -13,6 +13,8 @@ mysqldump $MYSQL_HOST_OPTS $MYSQLDUMP_OPTIONS $MYSQLDUMP_DATABASE | gzip | aws s
 s3cmd sync s3://bip/AWSLogs/ bip/AWSLogs
 
 s3cmd du s3://bip/hehe | awk '{ printf "%.2f GB\t%s\t%s\n", $1/1024/1024/1024, $2, $3 }' # disk usage in gigabytes
+s3cmd du s3://bip/hehe | | while read a b c d; do printf "%-8s %-10s %-8s %s" $(numfmt --to=iec $a) $b $c $d; done
+
 
 ~/.s3cfg
 [default]
