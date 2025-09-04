@@ -34,9 +34,9 @@ a special meaning:
 grep -Po 'export\K.*' ~/.bashrc # with both P (perl) and o (only print matching part), \K discards what has been matched so far. Which allow positive look behind of variable size
 
 grep -Po '(?=zero-width positive lookahead).*'
+grep -Po '(?!zero-width negative lookahead).*'
 grep -Po '(?<=zero-width positive lookbehind).*'
-grep -Po '(?=zero-width positive lookahead).*'
-grep -Po '(?<=zero-width positive lookbehind).*'
+grep -Po '(?<!zero-width positive lookbehind).*'
 
 grep -Poz '<invoice:remark>[^<]*http[^<]*</invoice:remark>' log.txt
 
