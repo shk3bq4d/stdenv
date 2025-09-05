@@ -1,3 +1,5 @@
+# CVE-2025-8067 UDisks daemon allows privilege escalation
+https://cybersecuritynews.com/linux-udisks-daemon-vulnerability/ 
 # CVE-2024-45802 CVE-2024-37894 squid esi
 https://security-tracker.debian.org/tracker/CVE-2024-45802
 https://security-tracker.debian.org/tracker/CVE-2024-37894

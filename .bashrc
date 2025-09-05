@@ -615,6 +615,10 @@ alias cdreal="cd \$(realpath .)"
 alias sed="sed -u"
 alias find_files_root_directory='find $(find / -maxdepth 1 | grep -Evx "/(|lost+found|run|mnt|proc|sys)") -type f -o -path /var/lib/docker -prune '
 
+bytes() {
+    numfmt --to=iec "$@"
+}
+
 is_zsh && setopt null_glob
 #   /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh \
 #   /usr/bin/virtualenvwrapper_lazy.sh \
