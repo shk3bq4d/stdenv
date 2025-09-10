@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh :
+
+set -euo pipefail
+
+
+kubelogin_version=0.2.10
+sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
+
+BIN="$HOME/bin/kubelogin-$kubelogin_version"
+
+
+if [[ ! -f $BIN ]]; then
+    if [[ ! -t 0 ]]; then
+        echo "FATAL: $BIN doesn't exist and stdin is not a TTY"
+        exit 1
+    fi
+    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    read _read
+    echo # read
+    case "${_read,,}" in \
+    y|Y|yes)
+        true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+    #curl -Os https://releases.hashicorp.com/kubelogin/$kubelogin_version/kubelogin_"$kubelogin_version"_linux_amd64.zip
+    cd ~/tmp
+    test -d bin && echo FATAL: dir already exists $PWD/bin && exit 1
+    curl -OLs https://github.com/Azure/kubelogin/releases/download/v${kubelogin_version}/kubelogin-linux-amd64.zip
+    unzip kubelogin-linux-amd64.zip
+    mv bin/linux_amd64/kubelogin $BIN
+    rm -rf bin
+    #unzip -d ~/.tmp kubelogin_"$kubelogin_version"_linux_amd64.zip
+    #mv ~/.tmp/kubelogin ~/bin/kubelogin-$kubelogin_version
+    #rm kubelogin_"$kubelogin_version"_linux_amd64.zip || true
+fi
+
+~/bin/kubelogin-$kubelogin_version "$@"
+exit $?
