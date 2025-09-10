@@ -44,6 +44,7 @@ ship-to:  *id001
 
 # sequencer protocols for Laser eye surgery
 ---
+- step:  &id000 mystring value   # defines anchor label &id000
 - step:  &id001                  # defines anchor label &id001
     instrument:      Lasik 2000
     pulseEnergy:     5.4
