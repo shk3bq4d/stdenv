@@ -1,5 +1,6 @@
 
 https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video # how to speed up a video
+```sh
 ffmpeg -i input.mkv -filter:v "setpts=0.5*PTS" output.mkv
 
 
@@ -26,6 +27,7 @@ for i in $(seq 1 12); do
 		ffmpeg -i *ep\ $i\ *mp4 -i *ep\ $i\ *m4a -c copy $(printf 'miraculous-ladybug-season02-episode%02i.mkv' $i)
 	fi
 done
+```
 
 # screenshot extraction
 ```sh
