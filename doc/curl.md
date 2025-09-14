@@ -55,3 +55,5 @@ Unlike --fail, it will also print the response body in case of failure.
 --silent --dump-header - # print header to stdline
 
 --connect-timeout <fractional seconds>
+
+curl -L -k -o /dev/null --silent --show-error --fail -w "%{http_code}" https://google.com # http status code

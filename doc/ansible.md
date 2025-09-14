@@ -2788,9 +2788,13 @@ vimf6_ansible_args: -e ansible_connection=local
   vars: # connection local
     ansible_python_interpreter: "{{ ansible_playbook_python }}" # connection local
 
+  register: myprompt
   pause: # prompt user
     echo: no # prompt user, use echo: no for password entries
     prompt: prompt user. pause What would you like to do next ?
+
+  debug: # myprompt
+    var: myprompt.user_input
 
   pause: # sleeps waits noprompt
     minutes: 5 # pause noprompt sleeps waits
