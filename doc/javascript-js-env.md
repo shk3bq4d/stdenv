@@ -228,3 +228,5 @@ function bashExpansion(str) {
 }
 
 new Function("return x;");
+
+^ xor
