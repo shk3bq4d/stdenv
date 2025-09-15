@@ -224,3 +224,8 @@ Network #	IP Range	Broadcast
  AWS curl -s http://169.254.169.254/user-data/
  azure curl -s http://169.254.169.254/user-data/
  azure curl -s -H Metadata:true 'http://169.254.169.254/metadata/instance?api-version=2021-02-01' | python3 -m json.tool
+
+
+# tools
+ range2cidr.pl
+ iprange --optimize # combine merge cidrs, apt install iprange
