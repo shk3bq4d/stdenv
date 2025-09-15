@@ -4,6 +4,7 @@ curl -s http://localhost:8500/v1/catalog/service/download | jq  -e -r '.[].Servi
 python -m json.tool my_json.json # json prettifyer
 python -m json.tool
 
+jq -r '.["@message"]'
 jq -s -c  'sort_by(.total_size)' /tmp/c.json | jq '.[]' | jq --raw-output '[.created_at, .name, .destroy_path] | @tsv'
 jq -r '.modules[0].resources[] | select( .type == "openstack_networking_secgroup_rule_v2") | .primary.id' $TFSTATE
 jq -r '.[].ID' $SG
