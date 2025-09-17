@@ -1328,3 +1328,9 @@ image:ppodgorsek/robot-framework:7.2.0 rpaversion:==28.6.3, result is FAILURE
 ```
 
 hex(16) -> 10 # from decimal to hexadecimal
+
+# stacktrace https://github.com/benfred/py-spy
+```sh
+py-spy top  --pid 602619
+py-spy dump --pid 602619
+```
