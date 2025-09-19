@@ -416,3 +416,5 @@ path.data                                 | pd,dataPath                         
 path.state                                | ps,statsPath                                | shard state path
 docs.deleted                              | dd,docsDeleted                              | number of deleted docs in shard
 ```
+
+"Group By->Timestamp, Metrics->Function:Count, Visualization->Type:Bar Chart,Mode:Stack,Axis Type:linear # histogram
