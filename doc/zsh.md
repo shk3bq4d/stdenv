@@ -10,6 +10,12 @@ https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono
 ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ~/.oh-my-zsh/custom/plugins/vi-mode-mr
+## git plugin
+```sh
+git config oh-my-zsh.hide-info   1
+git config oh-my-zsh.hide-status 1
+git config oh-my-zsh.hide-dirty  1
+```
 
 # plugins
 * [z directory plugin](https://github.com/agkozak/zsh-z)

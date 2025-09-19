@@ -6,5 +6,6 @@ desktop-become-local.sh firefox_policies
 desktop-local.sh i3
 desktop-local.sh i3blocks
 desktop-local.sh i3cfg
+desktop-local.sh git_zsh # hide git status in prompt for oh-my-zsh git plugin
 
 ```

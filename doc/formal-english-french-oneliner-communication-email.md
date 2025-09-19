@@ -62,6 +62,8 @@ Cordialement,
 # vocabulary
 obfuscation obfuscated # incorrect greppable list: obuscated obfucated
 prioritize # priorize
+Prioritizing and prioritising are both English terms.
+prioritization
 discrepancies # discranpancies
 
 
