@@ -9,3 +9,5 @@ nc 4.ifcfg.me 23 | grep IPv4 | cut -d' ' -f4
 echo close | ftp 4.ifcfg.me | awk '{print $4; exit}'
 
 curl -s --resolve whatismyip.akamai.com:80:77.109.138.83 http://whatismyip.akamai.com/
+
+kubectl run -n default curl-pod --rm --stdin --tty --image=curlimages/curl --restart=Never -- curl -sA bip http://whatismyip.akamai.com/; echo
