@@ -990,3 +990,10 @@ sudo nerdctl --namespace k8s.io ps -a # docker ps
 
 gh --repo https://github.com/kubernetes/kubernetes release list --exclude-pre-releases --limit 50 # list all releases versions
 kubectl run -n default curl-pod --rm --stdin --tty --image=curlimages/curl --restart=Never -- curl -sA bip http://whatismyip.akamai.com/; echo
+
+
+# kubectl config clean
+CTX=myctx && \
+kubectl config unset clusters.$(kubectl config view -o jsonpath="{.contexts[?(@.name=='$CTX')].context.cluster}") && \
+kubectl config unset users.$(kubectl config view -o jsonpath="{.contexts[?(@.name=='$CTX')].context.user}") && \
+kubectl config unset contexts.$CTX
