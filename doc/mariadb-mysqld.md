@@ -7,24 +7,26 @@ show variables like 'tmpdir'; # see effective variables
 ```
 ```sql
 show databases;
-use DATABASENAME;
+use databasename;
 show tables;
 show tables like '%event%';
 show full tables where table_type like 'VIEW'; -- show views
 show full tables in database_name where table_type like 'VIEW'; -- show views
 desc mytable; -- show table schema
 create database bip;
-HOW GRANTS for someuser_dbuser@localhost;
+show grants for someuser_dbuser@localhost;
+select user, host from mysql.user order by user, host;
+select concat('\'', user, '\'@\'', host, '\'') from mysql.user order by user, host;
 select user, host, password from mysql.user order by user, host;
-CREATE USER 'donald'@'%' IDENTIFIED BY password('duck');
-CREATE USER 'donald'@'%' IDENTIFIED BY 'duck'; -- plain text value
-CREATE USER 'donald'@'%' IDENTIFIED BY passsword '*8656F71D1D5128F9BD83D4A2EB09241B71D2BE3B'; -- hash value
-CREATE USER 'donald' IDENTIFIED BY 'duck';
-drop USER 'donald'@'%';
-SET PASSWORD FOR 'donald'@'%' = PASSWORD('duck');
-GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';
-GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES; # if modified PRIVILEGES through an insert update or delete statement instead of a grant, revoke, set password or rename user
+create user 'donald'@'%' IDENTIFIED BY password('duck');
+create user 'donald'@'%' IDENTIFIED BY 'duck'; -- plain text value
+create user 'donald'@'%' IDENTIFIED BY passsword '*8656F71D1D5128F9BD83D4A2EB09241B71D2BE3B'; -- hash value
+create user 'donald' IDENTIFIED BY 'duck';
+drop user 'donald'@'%';
+set password FOR 'donald'@'%' = PASSWORD('duck');
+grant all privileges on mydb.* to 'myuser'@'%';
+grant all privileges on mydb.* to 'myuser'@'%' with grant option;
+flush privileges; # if modified privileges through an insert update or delete statement instead of a grant, revoke, set password or rename user
 
 begin; update low_priority problem set r_eventid=640652792 where  eventid=640652792 limit 5;
 
@@ -131,16 +133,16 @@ select now(); -- today date datetime
 select curdate(); -- today date datetime
 
 
-Alter table Empolyee disable constraint pk_EmpNumer;
-SHOW CREATE TABLE zabbix5.event_recovery; -- list constraints
+alter table empolyee disable constraint pk_empnumer;
+show create table zabbix5.event_recovery; -- list constraints
 
-CREATE TABLE bip (
-    Personid int NOT NULL AUTO_INCREMENT,
-    Age int,
-    PRIMARY KEY (Personid)
+create table bip (
+    personid int not null auto_increment,
+    age int,
+    primary key (personid)
 );
-timestamp(DATE_SUB(NOW(), INTERVAL 30 MINUTE))
-SELECT * FROM x WHERE ts BETWEEN NOW() - INTERVAL 30 MINUTE AND NOW();
+timestamp(date_sub(now(), interval 30 minute))
+select * from x where ts between now() - interval 30 minute and now();
 
 
 alter table `bip` partition by range (clock) (partition p0 values less than (0) engine = innodb); -- (re-)init partitioning for empty table. WARN: will destroy current partitions
