@@ -33,7 +33,7 @@ begin; update low_priority problem set r_eventid=640652792 where  eventid=640652
 select sleep(5);
 do sleep(5);
 
-select current_user() as authenticated_name, user() as tried_logon_name;  -- whoami
+select current_user(), user() as tried_logon_name;  -- whoami, current incoming ipv4/host
 
 select lower('UPPERCASE');
 select lcase('lowercase UPPERCASE');
@@ -51,9 +51,9 @@ create user ansible@127.0.0.1 identified by 'square-root-minus-one';
 
 select distinct(mt) from mt where cast(mt as signed integer) < 100;
 
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
-ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'MyNewPass';
-ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
+alter user 'root'@'localhost' identified by 'mynewpass';
+alter user 'root'@'127.0.0.1' identified by 'mynewpass';
+alter table tablename modify columnname varchar(20) ;
 ```
 
 
@@ -61,25 +61,25 @@ ALTER TABLE tablename MODIFY columnname VARCHAR(20) ;
 # https://dev.mysql.com/doc/refman/5.5/en/old-client.html
 Client does not support authentication protocol requested by server
 ```sql
-SET PASSWORD FOR 'some_user'@'some_host' = OLD_PASSWORD('new_password');
-ALTER USER 'fw'@'10.1.1.120' IDENTIFIED WITH mysql_native_password BY 'fwpass';
+set password for 'some_user'@'some_host' = old_password('new_password');
+alter user 'fw'@'10.1.1.120' identified with mysql_native_password by 'fwpass';
 ```
 
 mysql -U -h 127.0.0.1 -u root --password=mypasswordislongerasyours repository_sd2 <<<"select * from (select count(1) as co, formatbasic FROM SUBFIELD where \`release\` = '20171222' and formatbasic regexp '.*[0-9]{2,}.*' group by formatbasic) mralias where co > 35 order by formatbasic;"
 
 # two step procedure to get all tables counts
-```
-SELECT CONCAT(
-    'SELECT "',
+```sql
+select concat(
+    'select "',
     table_name,
-    '" AS table_name, COUNT(*) AS exact_row_count FROM `',
+    '" as table_name, count(*) as exact_row_count from `',
     table_schema,
     '`.`',
     table_name,
-    '` UNION '
+    '` union '
 )
-FROM INFORMATION_SCHEMA.TABLES
-WHERE table_schema = database();
+from information_schema.tables
+where table_schema = database();
 ```
 
 select database(); -- current schema
@@ -87,11 +87,11 @@ select database(); -- current schema
 ```sql
 
 -- disk usage by table
-SELECT table_schema as `Database`,
-     table_name AS `Table`,
-     round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB`
-FROM information_schema.TABLES
-ORDER BY (data_length + index_length) DESC;
+select table_schema as `database`,
+     table_name as `table`,
+     round(((data_length + index_length) / 1024 / 1024), 2) `size in mb`
+from information_schema.tables
+order by (data_length + index_length) desc;
 
 
 
@@ -99,8 +99,8 @@ concat_ws("concat with first arg as word separator", "first word", "second word"
 concat("first word", "second word")
 
 
-INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
-INSERT INTO table_name VALUES (value1, value2, value3, ...);
+insert into table_name (column1, column2, column3, ...) values (value1, value2, value3, ...);
+insert into table_name values (value1, value2, value3, ...);
 
 select * from mysql.user order by user, host \G -- vertical line alignement (the \G at the end of the query does the trick)
 
