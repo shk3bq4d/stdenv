@@ -10,6 +10,7 @@ vagrant_version=2.2.10
 vagrant_version=2.3.4
 vagrant_version=2.2.19
 vagrant_version=2.4.3
+vagrant_version=2.4.9
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 BIN="$HOME/bin/vagrant-$vagrant_version"
