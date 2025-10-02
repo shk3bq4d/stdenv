@@ -113,6 +113,7 @@ def go2(args=[], only_for_unnamed=True):
         'bg':None, #'~/bin/bg-start.sh',
         'downdogapp': '~/bin/notinpath/downdogapp.sh',
         'netflix': '~/bin/notinpath/netflix-nf.sh',
+        'attach': '~/bin/notinpath/workspace-attach.sh',
         'citrix': '~/bin/notinpath/workspace-citrix.sh',
         'zscaler': '~/bin/notinpath/workspace-zscaler.sh',
         'zsf': '~/bin/notinpath/workspace-zsf.sh',
