@@ -1,5 +1,8 @@
 # /* ex: set ft=sql: */
 
+sqlite3 .fullschema | grep TABLE
+sqlite3 .fullschema | db.sh devops$ .fullschema | awk '/^CREATE/{s=$0;next} /;/{s=s" "$0;print s; s="";next} {s=s" "$0}'
+
        .backup ?DB? FILE      Backup DB (default "main") to FILE
        .bail on|off           Stop after hitting an error.  Default OFF
        .clone NEWDB           Clone data into NEWDB from the existing database

@@ -1,7 +1,7 @@
 pip show requests # display version
 pip config debug
 
-python3 -m pip install --upgrade --user --break-system-packages pip
+python3 -m pip install --upgrade --user --break-system-packages pip # error: externally-managed-environment
 
 pip install virtualenv virtualenvwrapper
 

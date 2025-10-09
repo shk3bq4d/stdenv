@@ -16,7 +16,7 @@ shaz0140504)
 	;;
 nov20.ly.lan)
 	#ips --no-internet | grep -q 'wlp58s0.*172.28'
-	ip a show wlp0s20f3 | grep -qE "inet (10\.14\.2\.|192\.168\.168\.)" && exit 0
+	ip a show wlp0s20f3 | grep -qE "inet (10\.14\.(2|52)\.|192\.168\.168\.)" && exit 0
 	;;
 esac
 exit 1
