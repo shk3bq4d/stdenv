@@ -84,3 +84,8 @@ git config oh-my-zsh.hide-status 1
 ${myvar:l} # l lowercase lower-case
 ${myvar:u} # u uppercase upper-case
 ```
+
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir) # disables vcs git on debian12
+
+( print -l ${(k)parameters} ) | grep -E '^POWERLEVEL9K_' # print all variables

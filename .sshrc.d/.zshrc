@@ -116,8 +116,28 @@ alias add='ansible-playbook-delayed-detached.sh'
 alias adh='ansible-playbook-delayed-history.sh'
 alias adl='ansible-playbook-delayed-less.sh'
 alias ado='ansible-playbook-delayed-ongoing.sh'
+alias gst='git status'
+alias gc='git commit --verbose'
+alias gd='git diff'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcp='git cherry-pick'
+alias gds='git diff --staged'
+alias gfo='git fetch origin'
+alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias gl='git pull --rebase=true'
+alias gp='git push'
+alias gpf='git push --force-with-lease --force-if-includes'
+alias 'gpf!'='git push --force'
+alias glola='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
+alias glods='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
+alias glod='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
 alias glodac='git log --graph --date=format:"%Y.%m.%d %H:%M:%S" --pretty="%Cred%h%Creset %Cgreen%ad%Cblue %cd %C(bold blue)<%an>%Creset -%C(auto)%d%Creset %s"'
 alias glocb='glodac {,origin/}$(git_current_branch)'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' # apparently buggy in latest oh-my-zsh (grep complains about non-escaped dash characters)
 alias stdhome-commit.sh='stdhome-commit.sh $*; rehash'
 alias cp='nocorrect cp -ip'
 alias ksd0='kubectl scale deployments --replicas 0'
@@ -467,15 +487,13 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
-autoload -Uz compinit && compinit -C
-compinit
-alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 
 f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
 
 # show completion menu when number of options is at least 2
-#zstyle ':completion:*' menu select=2
-zstyle ':completion:*' matcher-list 'r:|=*'
+zstyle ':completion:*' menu select=2
+#zstyle ':completion:*' matcher-list 'r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' 'r:|=*'
 #source ~/.bash_completion
 compdef _path_commands viw catw lessw
 #f=~/.zsh/completion/std/bash.az.completion
@@ -486,7 +504,6 @@ compdef _path_commands viw catw lessw
 #fi
 type _z_std_add &>/dev/null && _z_std_add | while read i; do z --add $i; done
 alias z='nocorrect zshz 2>&1' # at the end is necessary as it is defined elsewhere
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' # apparently buggy in latest oh-my-zsh (grep complains about non-escaped dash characters)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 if [[ -n "${MR_URXVT_CMD:-}" ]]; then
@@ -496,4 +513,10 @@ if [[ -n "${MR_URXVT_CMD:-}" ]]; then
     # && echo success || echo failure
     # sshrc seems to always end with success
 fi
+
+ZSH_COMPDUMP="$HOME/.zcompdump-${USER}"
+autoload -Uz compinit
+compinit -d "$ZSH_COMPDUMP"
+alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 #zprof # https://stevenvanbael.com/profiling-zsh-startup
+true
