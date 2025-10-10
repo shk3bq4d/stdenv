@@ -51,9 +51,10 @@ for f in \
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
         export PATH="$PATH:$DIR" # iaac needs to have ~/bin in PATH that was removed with pathremove
-        set -x
         set +u
+        set -x
         "$BINNAME" "${vagrant_args[@]}" $vaults_args "$@"
+        set +x
         set -u
         exit $?
     fi
