@@ -6,19 +6,31 @@ vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 0 --
 vboxmanage storageattach kubuntu1404base --storagectl IDE --port 0 --device 1 --type dvddrive --medium /lvmr0/kubuntu-14.04.1-desktop-amd64.iso
 vboxmanage controlvm kubuntu1404base poweroff # stop
 vboxmanage modifyvm kubuntu1404base --memory 1024
-vboxmanage guestproperty get xpbase vrdeport
-vboxmanage guestproperty set xptest vrdeport 6040
-vboxmanage guestproperty set xptest vrdeport 6040
-vboxmanage modifyvm "xp1 Clone" --vrde on
-vboxmanage modifyvm "xp1 Clone" --vrdeport 6040
-vboxmanage modifyvm "xp1 Clone" --vrdeproperty VNCPassword=secret
-vboxmanage startvm "xp1 Clone" --type headless
+vboxmanage guestproperty get xpbase vrdeport       # rdp
+vboxmanage guestproperty set xptest vrdeport 6040       # rdp
+vboxmanage guestproperty set xptest vrdeport 6040       # rdp
+vboxmanage modifyvm "xp1 Clone" --vrde on       # rdp
+vboxmanage modifyvm "xp1 Clone" --vrdeport 6040       # rdp
+vboxmanage modifyvm "xp1 Clone" --vrdeaddress 0.0.0.0                   # rdp
+vboxmanage modifyvm "xp1 Clone" --vrdeproperty VNCPassword=secret       # rdp
+vboxmanage startvm "xp1 Clone" --type headless       # rdp
 vboxmanage controlvm "xp1 Clone" acpipowerbutton # poweroff shutdown turn off stop
 vboxmanage controlvm "xp1 Clone" poweroff        # noacpi poweroff shutdown turn off stop
 vboxmanage discardstate projectlibre
 vboxmanage showvminfo
 vboxmanage showvminfo minikube G ssh
 vboxmanage unregistervm vmname # destroy delete unprovision
+
+## extension packs
+vboxmanage list extpacks
+echo "vbox: $(vboxmanage --version); extpack: $(vboxmanage list extpacks | awk '/Version/ {print $2}')"
+
+## install
+export VBOX_VER=$(vboxmanage --version | cut -d'r' -f1)
+echo $VBOX_VER
+cd /tmp
+wget "https://download.virtualbox.org/virtualbox/$VBOX_VER/Oracle_VM_VirtualBox_Extension_Pack-$VBOX_VER.vbox-extpack"
+sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VBOX_VER.vbox-extpack
 
 
 vboxmanage list vms
@@ -127,6 +139,8 @@ vboxmanage clonemedium ~/ITO-BACKUPS-01_Ubuntu16044.vhdx ITO-BACKUPS-01_Ubuntu16
 vboxmanage controlvm citrix-viewer_citrixvboxlocal_1559721210265_34886 keyboardputstring setxkbmap -layout us -variant dvp -option -option caps:escape -option lv3:ralt_switch
 
 vboxmanage guestproperty enumerate VMID
+vboxmanage showvminfo "vm_name" --machinereadable | grep -i '^macaddress'
+vboxmanage showvminfo "vm_name" --machinereadable | grep -i '^macaddress' | sed -E 's/.*="([0-9A-Fa-f]{12})"/\1/' | sed 's/../&:/g; s/:$//' | tr '[:upper:]' '[:lower:]'
 ```
 
 # vram
