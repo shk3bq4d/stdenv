@@ -10,7 +10,7 @@ select to_timestamp(mycolumn::bigint);    -- postgresq psql from unixtime
 RFC3339: 2014-03-10T05:40:00+00:00
 
 Sep 28 2021 01:33:21      date +'%b %d %Y %H:%M:%S'
-Sep 28 2021 01:33:21      sed -r -e "s/^[A-Z][a-z]{2} [ 0-9]?[0-9].{14}/$(date +'%b %d %Y %H:%M:%S')/"
+Sep 28 2021 01:33:21      sed -r -e "s/\\<[A-Z][a-z]{2} [ 0-9]?[0-9].{14}/$(date +'%b %d %Y %H:%M:%S')/"
 
 %m/%b/%y %I:%M %p    09/Sep/21 09:33 AM
 
@@ -231,3 +231,4 @@ e.Get("@timestamp").ZoneBounds()
 %Y.%m.%d             2025.05.30
 %Y.%m.%d %H:%M:%S    2025.05.30 15:46:12
 %Y-%m-%dT%H:%M:%S.%f%z 2025-05-30T15:46:12.117569
+
