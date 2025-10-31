@@ -3,6 +3,13 @@
 * https://github.com/i3/i3
 * https://github.com/i3/i3/blob/next/RELEASE-NOTES-4.18.2
 
+# --no-startup-id
+tells i3 not to create a startup notification entry* for that command.
+
+Without it, i3 may track the command’s startup using X11’s startup notification protocol — which is useful for apps that report “starting…” or set window hints (like launching Firefox).
+
+When you use --no-startup-id, i3 just spawns the process silently and immediately continues without tracking it.
+
 # installation
 cd /tmp
 /usr/lib/apt/apt-helper download-file http://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2017.01.02_all.deb keyring.deb SHA256:4c3c6685b1181d83efe3a479c5ae38a2a44e23add55e16a328b8c8560bf05e5f
