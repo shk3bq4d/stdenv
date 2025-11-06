@@ -7,6 +7,7 @@ set -x
 wids=$(xdotool search --class "keepass")
 ~/bin/sshfs-keepass-apr16.sh || true
 ~/bin/sshfs-keepass-apr16-sf.sh || true
+sshfs-keepass-jpche201p01.ch.pro-sf.sh || true
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then
