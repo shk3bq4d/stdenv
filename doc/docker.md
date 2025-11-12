@@ -448,6 +448,8 @@ find ~/git/ksgitlab/cfc/ide-infra/docker/ -name tag.sh | while read i; do cd ~/g
 
 # registry
 docker login registry.gitlab.com
+sudo docker login -u USER -p PASS
+sudo docker login -u USER --password-stdin
 registry.gitlab.com/myteam/myproject:tag
 registry.gitlab.com/myteam/myproject/optional-image-name:tag
 registry.gitlab.com/myteam/myproject/optional-name/optional-image-name:tag
