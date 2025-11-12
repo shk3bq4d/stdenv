@@ -2962,6 +2962,8 @@ ansible -m debug -a     var='q("varnames",".*ansible_hos.*")' localhost # q lett
 ansible -m debug -a var='query("varnames",".*ansible_hos.*")' localhost # q letter character
 
 # ansible-console
+ansible-console MYHOST
+> debug var=MYVAR
 
 ansible-inventory -i inventory.yml --graph
 ansible-inventory -i inventory.yml --vars --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod --host apdco103p12\* --yaml
