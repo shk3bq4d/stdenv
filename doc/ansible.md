@@ -2246,6 +2246,7 @@ To get a sha512 password hash (random salt):
 {{ {'a':1, 'b':2} | combine({'b':3}) }}
 {{ {'a':{'foo':1, 'bar':2}, 'b':2} | combine({'a':{'bar':3, 'baz':4}}, recursive=True) }}
 {{ a | combine(b, c, d) }}
+https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/extract_filter.html
 {{ [0,2] | map('extract', ['x','y','z']) | list }}
 {{ ['x','y'] | map('extract', {'x': 42, 'y': 31}) | list }}
 {{ groups['x'] | map('extract', hostvars, 'ec2_ip_address') | list }}
