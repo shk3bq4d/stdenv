@@ -1581,6 +1581,14 @@ a2a() {
     sudo cat "$a" | audit2allow -m bip
 }
 
+halt()     { __unsafe halt; }
+poweroff() { __unsafe poweroff; }
+reboot()   { __unsafe reboot; }
+__unsafe() {
+    >&2 echo -e "FATAL: /dot.bashfunctions protection, you can't call $1 directly, use an absolute call such as\n$(command which -a $1 |& grep -v "${SUDO_USER:-willmatchnothing}")"
+    return 1
+}
+
 extract_begin_end_cert() {
     if ! [[ "$1" =~ ^[0-9]+$ ]]; then
         echo "Error: First argument must be a non-negative integer index."
