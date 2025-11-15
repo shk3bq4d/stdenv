@@ -4,6 +4,8 @@
 set -euo pipefail
 _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 
+set -x
+
 if [[ -n "${CITRIX_WINDOW_ID_OVERRIDE:-}" ]]; then
     echo "${CITRIX_WINDOW_ID_OVERRIDE:-}"
     exit 0
