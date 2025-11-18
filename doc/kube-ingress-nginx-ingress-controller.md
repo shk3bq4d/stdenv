@@ -34,3 +34,6 @@ https://acme-v02.api.letsencrypt.org/directory
 
 
 nginx.ingress.kubernetes.io/configuration-snippet: 'more_clear_headers "Server";' # https://stackoverflow.com/questions/64075170/how-to-remove-the-server-header-from-kubernetes-deployed-applications
+
+
+https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
