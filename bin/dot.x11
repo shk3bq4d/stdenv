@@ -16,7 +16,7 @@ if [[ -z "${DISPLAY:-}" ]]; then
         f="/proc/$pid/environ"
         if grep -qzE "^DISPLAY=" $f; then
             # leading caret doesn't work, probably because of -z
-            export DISPLAY="$(grep -zPo '(?<=DISPLAY=).*' $f)"
+            export DISPLAY="$(grep -zPo '(?<=DISPLAY=).*' $f | tr -d $'\\0')"
             echo "DISPLAY is $DISPLAY from pid $pid, pidns $pidns and fp $f and cmdline $cmd"
             break
         fi

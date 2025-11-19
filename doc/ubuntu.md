@@ -82,7 +82,7 @@ network:
 The first one is the GA (General Availability) kernel, which is the kernel version that is included with the initial release of the LTS. This kernel will receive security updates and critical bug fixes, but will generally not receive any major feature updates.
 The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel version that is introduced during the lifecycle of the LTS release. The HWE kernel is designed to provide updated support for newer hardware and to include additional features that were not available in the GA kernel.
 
-
+## https://en.wikipedia.org/wiki/Ubuntu_version_history
 04.04 Warty Warthog
 04.10 Hoary Hedgehog
 05.06 Breezy Badger
@@ -120,6 +120,13 @@ The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel 
 21.10 Impish Indri
 22.04 Jammy Jellyfish
 22.10 Kinetic Kudu
+23.04 Lunar Lobster
+23.10 Mantic Minotaur
+24.04 LTS Noble Numbat
+24.10 Oracular Oriole
+25.04 Plucky Puffin
+25.10 Questing Quokka
+26.04 LTS Resolute Raccoon
 
 sudo apt dist-upgrade # minor release upgrades between 22.04.{1,2}
 sudo do-release-upgrade # major dist upgrade
