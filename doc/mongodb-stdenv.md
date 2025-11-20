@@ -76,6 +76,7 @@ echo users.json roles.json streams* pipeline_processor_* lut* inputs.json dashbo
 db.COLLECTIONNAME.find().toArray().length
 db.index_sets.find().toArray().length
 db.index_sets.find().toArray()[0]["_id"]
+db.version()
 mongo -u admin -pMYPASSWORD --authenticationDatabase admin graylog --quiet --eval 'db.index_sets.find().toArray()[0]["_id"].valueOf();'
 ```
 

@@ -7,7 +7,7 @@ port TCP/5432
 ```sql
 \list or \l: list all databases
 \dt: list all tables in the current database
-\du list roles
+\du list roles /users
 \dn list schemas
 \dp list privileges for current user on current database
 \dp TABLENAME list privileges for current user on TABLENAME database
