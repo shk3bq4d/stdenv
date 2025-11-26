@@ -1,4 +1,5 @@
-github.com/user.key # ssh key
+curl -L https://github.com/user.keys # ssh key
+curl -L https://github.com/shk3bq4d.keys # ssh key
 
 Issue in the same repository	KEYWORD #ISSUE-NUMBER	Closes #10
 Issue in a different repository	KEYWORD OWNER/REPOSITORY#ISSUE-NUMBER	Fixes octo-org/octo-repo#100

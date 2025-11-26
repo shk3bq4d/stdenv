@@ -7,6 +7,7 @@ wget -mk -w 20 --load-cookies=cookies.txt https://www2.swift.com/uhbonline/books
 wget --user=USERNAME --password=PASS
 
 wget -O local-file-name.txt URL # --output-document
+wget -qO- URL # stdout, --quiet and --output-document stdout
 
 wget --no-check-certificate    # ssl certificates validation
 wget --certificate=FILEPATH    # ssl certificates validation
