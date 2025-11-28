@@ -826,6 +826,7 @@ kubectl get po --all-namespaces -o custom-columns=NAME:.metadata.name,NS:.metada
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
 kubectl get secret docker-registry                -o jsonpath="{ .data['\.dockerconfigjson'] }" | base64 -d
+kubectl get secret docker-registry                -o jsonpath="{ .data['\.dockerconfigjson'] }" | base64 -d | jq -c ".[]|.[]" | while read line; do echo "$line" | jq -r .auth | base64 -d; done
 kops get ig -o json | jq -r '.[]| .metadata.name + ": " + .spec.machineType'
 
 kubectl --kubeconfig ~root/admin.conf get namespaces # file config context
