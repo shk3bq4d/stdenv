@@ -260,7 +260,9 @@ if which vim  &>/dev/null; then # zsh hash does not work, I'm not sure why
                 # bash vi mode:
                 # 1) shouldn't have read-only mode
                 # 2) can work OK with vi only I guess
-                command vi "$@"
+                command vim "$@"
+            elif [[ "$@" == *"-- /tmp/zsh"*"zsh" ]]; then
+                command vim "$@"
             else
                 command vim -R "$@"
             fi
