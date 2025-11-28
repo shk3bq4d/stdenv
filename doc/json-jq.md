@@ -67,3 +67,8 @@ curl -s https://config.zscaler.com/api/zscaler.net/cenr/json | jq -r '[.[]|flatt
 curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties|keys'
 
 ```
+# bash loop of dict within list
+```sh
+az ad app list | jq -c '.[]' | while read app; do
+    read appid id name < <(echo "$app" | jq -r '[.appId, .id, .displayName] | join(" ")')
+```

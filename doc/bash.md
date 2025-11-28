@@ -1202,3 +1202,10 @@ done
 echo "${mydict[key1]}" # To access a value:
 echo "${!mydict[@]}" # To list all keys:
 echo "${mydict[@]}" # To list all values:
+# bash loop of dict within list
+
+# bash loop of jq list of dicts
+```sh
+az ad app list | jq -c '.[]' | while read app; do
+    read appid id name < <(echo "$app" | jq -r '[.appId, .id, .displayName] | join(" ")')
+```
