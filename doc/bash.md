@@ -875,6 +875,7 @@ shuf # shuffle randomize
 sort -R # pseudo-shuffle/randomize,  sort according to hash value
 
 
+echo -n "Enter the password for user $user: " && read -s pass && echo -e "\npassword successfully read"
 
 # http://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash
 read -r -d '' VAR <<'EOF'
