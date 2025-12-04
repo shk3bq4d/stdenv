@@ -71,3 +71,15 @@ sudo cat /etc/pve/.version
 }
 }
 ```
+
+pveum realm list --output-format yaml
+pveum realm list --output-format json
+pveum realm list --output-format json-pretty
+pveum realm list --output-format text
+pveum realm add azuread --type openid \
+  --issuer-url "https://login.microsoftonline.com/<TENANT_ID>/v2.0" \
+  --client-id "<CLIENT_ID>" \
+  --client-key "<CLIENT_SECRET>" \
+  --scope "openid profile email" \
+  --autocreate 1 \
+  --default 0
