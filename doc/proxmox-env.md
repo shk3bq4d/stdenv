@@ -83,3 +83,7 @@ pveum realm add azuread --type openid \
   --scope "openid profile email" \
   --autocreate 1 \
   --default 0
+
+https://galaxy.ansible.com/ui/repo/published/community/proxmox/docs/?
+https://github.com/ansible-collections/community.proxmox
+https://docs.ansible.com/projects/ansible/latest/collections/community/proxmox
