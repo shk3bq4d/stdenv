@@ -72,6 +72,7 @@ sudo cat /etc/pve/.version
 }
 ```
 
+https://pve.proxmox.com/pve-docs/pveum.1.html
 pveum realm list --output-format yaml
 pveum realm list --output-format json
 pveum realm list --output-format json-pretty
