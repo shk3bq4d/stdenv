@@ -365,3 +365,7 @@ vim.tiny, as the name implies, is a trimmed-down version of Vim (this question e
 # todo-sf
 :set cursorline
 :hi CursorLine   cterm=None ctermbg=yellow ctermfg=white guibg=yellow guifg=black
+
+
+vim -n FILE # does not prompt to reopen since been modified file
+vim -n -i NONE # does not prompt to reopen since been modified file + ignore existing SWAP file
