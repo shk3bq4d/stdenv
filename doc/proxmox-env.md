@@ -4,9 +4,87 @@ https://pve.proxmox.com/wiki/Secure_Boot_Setup for backend
 * go to guest bios
 * Device Manager
 * Secure Boot Configuration
-* Attempt Secure Boot 
+* Attempt Secure Boot
 * [ ]
 * Reset
 
 
 * New VM
+
+sudo pveversion
+
+sudo cat /etc/pve/.version
+```json
+{
+"starttime": 1763776943,
+"clinfo": 0,
+"vmlist": 1,
+"corosync.conf": 1,
+"corosync.conf.new": 1,
+"storage.cfg": 1,
+"user.cfg": 1,
+"domains.cfg": 1,
+"notifications.cfg": 1,
+"priv/notifications.cfg": 1,
+"priv/shadow.cfg": 1,
+"priv/acme/plugins.cfg": 1,
+"priv/tfa.cfg": 1,
+"priv/token.cfg": 1,
+"priv/ipam.db": 1,
+"priv/macs.db": 1,
+"datacenter.cfg": 1,
+"vzdump.cron": 1,
+"vzdump.conf": 1,
+"jobs.cfg": 1,
+"ha/crm_commands": 1,
+"ha/manager_status": 1,
+"ha/resources.cfg": 1,
+"ha/groups.cfg": 1,
+"ha/fence.cfg": 1,
+"status.cfg": 1,
+"replication.cfg": 1,
+"ceph.conf": 1,
+"sdn/vnets.cfg": 1,
+"sdn/zones.cfg": 1,
+"sdn/controllers.cfg": 1,
+"sdn/subnets.cfg": 1,
+"sdn/ipams.cfg": 1,
+"sdn/mac-cache.json": 1,
+"sdn/pve-ipam-state.json": 1,
+"sdn/dns.cfg": 1,
+"sdn/fabrics/openfabric.cfg": 1,
+"sdn/fabrics/ospf.cfg": 1,
+"sdn/.running-config": 1,
+"virtual-guest/cpu-models.conf": 1,
+"virtual-guest/profiles.cfg": 1,
+"firewall/cluster.fw": 1,
+"mapping/directory.cfg": 1,
+"mapping/pci.cfg": 1,
+"mapping/usb.cfg": 1,
+"kvstore": {
+"MACHINENAME": {
+"kv/static-info": 0,
+"tasklist": 55630,
+"kv/cpuflags-tcg": 0,
+"kv/cpuflags-kvm": 0,
+"kv/version-info": 0}
+}
+}
+```
+
+https://pve.proxmox.com/pve-docs/pveum.1.html
+pveum realm list --output-format yaml
+pveum realm list --output-format json
+pveum realm list --output-format json-pretty
+pveum realm list --output-format text
+pveum realm add azuread --type openid \
+  --issuer-url "https://login.microsoftonline.com/<TENANT_ID>/v2.0" \
+  --client-id "<CLIENT_ID>" \
+  --client-key "<CLIENT_SECRET>" \
+  --scope "openid profile email" \
+  --autocreate 1 \
+  --default 0
+
+https://galaxy.ansible.com/ui/repo/published/community/proxmox/docs/?
+https://github.com/ansible-collections/community.proxmox
+https://docs.ansible.com/projects/ansible/latest/collections/community/proxmox

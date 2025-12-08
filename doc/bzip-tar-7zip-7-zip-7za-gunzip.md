@@ -13,6 +13,7 @@ cd bash-4.3-mount
 ncdu
 
 zip file.zip filetocompress.txt
+zip -r file.zip FOLDER # --recurse-paths recursive
 
 7za x deskpro-backup.2021-10-18_07-29-34.zip database.sql # extract single file from archive
 

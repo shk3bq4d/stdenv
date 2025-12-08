@@ -875,6 +875,7 @@ shuf # shuffle randomize
 sort -R # pseudo-shuffle/randomize,  sort according to hash value
 
 
+echo -n "Enter the password for user $user: " && read -s pass && echo -e "\npassword successfully read"
 
 # http://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash
 read -r -d '' VAR <<'EOF'
@@ -1202,3 +1203,10 @@ done
 echo "${mydict[key1]}" # To access a value:
 echo "${!mydict[@]}" # To list all keys:
 echo "${mydict[@]}" # To list all values:
+# bash loop of dict within list
+
+# bash loop of jq list of dicts
+```sh
+az ad app list | jq -c '.[]' | while read app; do
+    read appid id name < <(echo "$app" | jq -r '[.appId, .id, .displayName] | join(" ")')
+```
