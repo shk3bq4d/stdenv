@@ -4,12 +4,11 @@
 set -euo pipefail
 
 kubectl_version=1.31.11
-# https://storage.googleapis.com/kubernetes-release/release/stable.txt
-# https://cdn.dl.k8s.io/release/stable.txt
+#https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
-BIN="$HOME/bin/kubectl-$kubectl_version"
+BIN="/home/rumo/bin/kubectl-$kubectl_version"
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
-# curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 if [[ ! -f "$BIN" ]]; then
     if [[ ! -t 1 ]]; then
         [[ $# -gt 1 ]] && [[ "$1" == "completion" ]] && exit 1
@@ -29,7 +28,6 @@ if [[ ! -f "$BIN" ]]; then
     esac
     test -d ~/.tmp || mkdir ~/.tmp
     cd ~/.tmp
-    #curl -sLO "https://storage.googleapis.com/kubernetes-release/release/v${kubectl_version}/bin/linux/amd64/kubectl"
     curl -sLO "https://dl.k8s.io/release/v${kubectl_version}/bin/linux/amd64/kubectl"
     mv -f ~/.tmp/kubectl $BIN
     chmod u+x $BIN
