@@ -96,3 +96,5 @@ i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
 i3-msg "append_layout ~/.config/i3/i3-save-tree-workspace-comm.json"
 echo "'$(mri3_current_workspace.py)'" XC
 ```
+
+mod+x mri3_lock (x->b)
