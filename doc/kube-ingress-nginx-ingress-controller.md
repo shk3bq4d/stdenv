@@ -37,3 +37,5 @@ nginx.ingress.kubernetes.io/configuration-snippet: 'more_clear_headers "Server";
 
 
 https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/
+
+k get HTTPRoute # API Gateway
