@@ -5,10 +5,14 @@ https://www.gva.ch/en/Site/Passagers/Vols/Departs/Info-vol-detaillee?id=31875283
 https://www.flightradar24.com/data/flights/ac884
 
 https://www.gva.ch/fr/Site/Passagers/Acces-Transports/Parkings/Calcul-des-tarifs-parkings?from=637932456000000000&to=637932564000000000
+https://www.geneva-arena.ch/fr/parking-a-proximite/
 
 P1 longue duree next to departure
 P2 courte duree
-P26 palexpo
+P12 en dessous palexpo
+P26 en dessous l'arena
+P32 à côté / sous-sol arena
+P31 à côté / sous-sol arena
 P51 after WTC II
 P20 secteur français
 
