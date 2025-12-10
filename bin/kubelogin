@@ -4,7 +4,7 @@
 set -euo pipefail
 
 
-kubelogin_version=0.2.10
+kubelogin_version=0.2.13
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/kubelogin-$kubelogin_version"
@@ -29,7 +29,7 @@ if [[ ! -f $BIN ]]; then
     #curl -Os https://releases.hashicorp.com/kubelogin/$kubelogin_version/kubelogin_"$kubelogin_version"_linux_amd64.zip
     cd ~/tmp
     test -d bin && echo FATAL: dir already exists $PWD/bin && exit 1
-    curl -OLs https://github.com/Azure/kubelogin/releases/download/v${kubelogin_version}/kubelogin-linux-amd64.zip
+    curl -OLs https://github.com/azure/kubelogin/releases/download/v${kubelogin_version}/kubelogin-linux-amd64.zip
     unzip kubelogin-linux-amd64.zip
     mv bin/linux_amd64/kubelogin $BIN
     rm -rf bin
