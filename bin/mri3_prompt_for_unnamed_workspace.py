@@ -115,6 +115,7 @@ def go2(args=[], only_for_unnamed=True):
         'netflix': '~/bin/notinpath/netflix-nf.sh',
         'attach': '~/bin/notinpath/workspace-attach.sh',
         'citrix': '~/bin/notinpath/workspace-citrix.sh',
+        'todo-sf': '~/bin/notinpath/workspace-todo-sf.sh',
         'zscaler': '~/bin/notinpath/workspace-zscaler.sh',
         'zsf': '~/bin/notinpath/workspace-zsf.sh',
         }
