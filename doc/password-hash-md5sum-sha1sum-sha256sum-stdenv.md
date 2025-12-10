@@ -18,6 +18,12 @@ $argon2id$
 
 cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 24
 openssl rand -base64 30
+openssl rand -base64 30 | tr '[:upper:]' '[:lower:]' # lowercase
+openssl rand -base64 80 | tr -cd '[a-z]' | head -c 32; echo # only lowercase letters
+openssl rand -base64 80 | tr -cd '[a-z0-9]' | head -c 30; echo # only lowercase alphanumerics
+openssl rand -base64 80 | tr -cd '[a-z0-9]' | sed -r -e 's/(....)/\1 /g' | head -c 29; echo # lowercase alphanumeric group by 4 letters joined by space
+openssl rand -base64 80 | tr -cd '[a-z]'    | tr -d '[aqwyz]' | sed -r -e 's/(....)/\1 /g' | head -c 29; echo # lowercase letters, excluding hard to type using various layouts group by 4 letters joined by space
+openssl rand -base64 80 | tr -cd '[a-z0-9]' | tr -d '[aqwyz]' | sed -r -e 's/(....)/\1 /g' | head -c 29; echo # lowercase alphanumeric, excluding hard to type using various layouts group by 4 letters joined by space
 
 openssl rand -base64 30 | openssl passwd -6 -stdin
 openssl rand -base64 30 | openssl passwd -6 -stdin | xargs -nI@ usermod -p @ zabbix
