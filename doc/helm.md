@@ -31,8 +31,10 @@ helm fetch && helm template ... | kubectl apply -f - # tiller less deployment
 mv bip.tgz ./repo/
 helm repo index ./repo/
 
-helm plugin install https://github.com/databus23/helm-diff # 
+helm plugin install https://github.com/databus23/helm-diff #
 helm diff revision -n kube-system blob-csi-driver 1
+helm diff revision -n kube-system blob-csi-driver --color 1 | less
+n=trino; c=trino; helm history -n $n $c | grep -vF REVISION | tail -n+2  | while read a b; do helm diff revision -n $n $c --color $(( a - 1 )) $a | less; done
 helm plugin list
 helm plugin update diff
 
@@ -100,21 +102,21 @@ or use the '--set' flag and pass configuration from the command line.  To force 
 values in '--set', use '--set-string' instead. In case a value is large and therefore
 you want not to use neither '--values' nor '--set', use '--set-file' to read the
 single large value from file.
-	$ helm install -f myvalues.yaml ./redis
+    $ helm install -f myvalues.yaml ./redis
 or
-	$ helm install --set name=prod ./redis
+    $ helm install --set name=prod ./redis
 or
-	$ helm install --set-string long_int=1234567890 ./redis
+    $ helm install --set-string long_int=1234567890 ./redis
 or
     $ helm install --set-file multiline_text=path/to/textfile
 You can specify the '--values'/'-f' flag multiple times. The priority will be given to the
 last (right-most) file specified. For example, if both myvalues.yaml and override.yaml
 contained a key called 'Test', the value set in override.yaml would take precedence:
-	$ helm install -f myvalues.yaml -f override.yaml ./redis
+    $ helm install -f myvalues.yaml -f override.yaml ./redis
 You can specify the '--set' flag multiple times. The priority will be given to the
 last (right-most) set specified. For example, if both 'bar' and 'newbar' values are
 set for a key called 'foo', the 'newbar' value would take precedence:
-	$ helm install --set foo=bar --set foo=newbar ./redis
+    $ helm install --set foo=bar --set foo=newbar ./redis
 To check the generated manifests of a release without installing the chart,
 the '--debug' and '--dry-run' flags can be combined. This will still require a
 round-trip to the Tiller server.
