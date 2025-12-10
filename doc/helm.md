@@ -1,4 +1,5 @@
 https://github.com/helm/helm/releases/
+gh --repo https://github.com/helm/helm release list --exclude-pre-releases --limit 50
 
 
 helm create MYPACKAGE
