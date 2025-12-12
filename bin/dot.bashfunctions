@@ -1585,7 +1585,7 @@ halt()     { __unsafe halt; }
 poweroff() { __unsafe poweroff; }
 reboot()   { __unsafe reboot; }
 __unsafe() {
-    >&2 echo -e "FATAL: /dot.bashfunctions protection, you can't call $1 directly, use an absolute call such as\n$(command which -a $1 |& grep -v "${SUDO_USER:-willmatchnothing}")"
+    >&2 echo -e "FATAL: $(hostname -f) /dot.bashfunctions protection, you can't call $1 directly, use an absolute call such as\n$(command which -a $1 |& grep -v "${SUDO_USER:-willmatchnothing}")"
     return 1
 }
 
