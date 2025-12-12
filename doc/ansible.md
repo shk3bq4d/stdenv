@@ -1450,6 +1450,9 @@ changed_when: "'already running' not in starthttpdout.stdout"
 failed_when: "'already running' not in starthttpdout.stdout"
 
 delegate_to: localhost
+vars: # delegate_to
+  ansible_python_interpreter: "{{ hostvars[delegate_to_host].ansible_python_interpreter }}"
+  ansible_python_interpreter: "{{ ansible_playbook_python }}" # delegate_to localhost
 
 
 create ad_hoc group to avoid multiple when: https://docs.ansible.com/ansible/latest/modules/group_by_module.html#group-by-module
