@@ -378,6 +378,10 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/kubernetes-dashboar
 PV   PersistentVolume
 PVC  PersistentVolumeClaim
 CRD  customer ressource definition
+kubectl get crds # customresourcedefinitions
+kubectl get customresourcedefinitions -o wide # crd
+kubectl get customresourcedefinitions -o yaml # crd
+kubectl describe crd customresourcedefinitions
 
 
 --all-namespaces to get all
