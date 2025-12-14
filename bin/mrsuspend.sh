@@ -76,7 +76,8 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
         date >> ~/.tmp/log/mrsuspend.sh.log
     } &
     # sudo systemctl hibernate # -> to disk
-    sudo systemctl hybrid-sleep # -> to disk + to RAM
+    mri3_lock &
+    ! sudo systemctl hybrid-sleep && sleep 1 && { pkill i3lock || true; } # -> to disk + to RAM
     # sudo systemctl suspend # -> to RAM
     exit 0
     ;;
