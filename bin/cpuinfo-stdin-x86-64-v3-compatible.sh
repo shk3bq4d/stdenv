@@ -24,7 +24,8 @@ EOF
 }
 
 file=$_tempdir/f
-grep flags "$@" | head -n 1 > $file
+grep flags "$@" | head -n 1 > $file || true
+#cat $file
 
 for f in $(flags); do
     echo -n "$f "
