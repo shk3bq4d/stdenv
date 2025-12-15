@@ -7,7 +7,7 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
-echo -n '('
+echo -n '\<('
 cat "$@" | tr '\n' '|' | sed -r -e 's/.$//'
-echo -n ')'
+echo -n ')\>'
 echo
