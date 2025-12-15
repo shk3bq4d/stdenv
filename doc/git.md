@@ -676,6 +676,8 @@ git@github.com:shk3bq4d/stdenv.git
 ~/.oh-my-zsh/plugins/git/README.md # aliases functions list
 
 
+git ls-files --others -i --exclude-standard # show unversioned files on disk
+
 # How to merge commit
 label a
 pick ABC
