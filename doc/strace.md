@@ -25,6 +25,7 @@ strace -tf -p $(systemctl show         -p MainPID docker | cut -d = -f 2) |& gre
 
 | sed -r 's|overlay2/[^/]{60,}/([^"]+).*|bip\1|'
 
+/sin_port=htons(53) # DNS requests search in vim
 
 rm -f /tmp/ssh.out.*
 strace -s 255 -ffttTo /tmp/ssh.out ssh corp-laptop
