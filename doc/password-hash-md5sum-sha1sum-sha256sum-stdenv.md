@@ -30,3 +30,7 @@ openssl rand -base64 30 | openssl passwd -6 -stdin | xargs -nI@ usermod -p @ zab
 openssl rand -base64 30 | ./encrypt-string.sh
 
 * cli password manager https://www.passwordstore.org/
+
+sudo apt-get install apache2-utils # htpasswd
+sudo yum install httpd-tools # htpasswd
+htpasswd -nbB alice 'secretpassword' # alice:$2y$05$if8f1bUs9/wJih1qu39Gju1hSTsB7lk/EeGRX8anr4UfnjE8VaY5u
