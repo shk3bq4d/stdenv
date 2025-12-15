@@ -35,7 +35,8 @@ python -m pip install burp
 
 pip install --user ldap3=2.5.1 # https://github.com/cannatag/ldap3/issues/639 File "/home/bip/.local/lib/python2.7/site-packages/ldap3/protocol/formatters/formatters.py", line 337, in format_ad_timedelta return format_ad_timestamp(raw_value * -1) - format_ad_timestamp(0) TypeError: unsupported operand type(s) for -: 'str' and 'datetime.datetime'
 
-pip #noop dry-run dryrun simulate noactions: TOUGH LUCK, NO SUCH THING https://stackoverflow.com/questions/29531094/how-to-make-pip-dry-run
+pip --dry-run #noop dry-run dryrun simulate noactions: since version 22.2
+
 
 # A command line utility to display dependency tree of the installed Python packages https://github.com/naiquevin/pipdeptree
 
