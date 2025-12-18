@@ -12,6 +12,7 @@ ${WORK_PC1F:-workpc1f-unset})
 	exit 0
 	;;
 shaz0140504)
+	exit 1 # 2025.12.18 temporary hack
 	ip a show wlp2s0 | grep -qE "inet (10\.14\.52\.)" && exit 0
 	;;
 nov20.ly.lan)
