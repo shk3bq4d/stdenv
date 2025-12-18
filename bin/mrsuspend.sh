@@ -77,6 +77,7 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
     } &
     # sudo systemctl hibernate # -> to disk
     mri3_lock &
+	sleep 0.3
     ! sudo systemctl hybrid-sleep && sleep 1 && { pkill i3lock || true; } # -> to disk + to RAM
     # sudo systemctl suspend # -> to RAM
     exit 0
