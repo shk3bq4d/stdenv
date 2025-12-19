@@ -21,7 +21,7 @@ iptables -t nat -I OUTPUT      1 -p udp --dport 161 -j LOG --log-prefix "grepme 
 sudo dmesg -w | grep "grepme output "
 
 # list
-sudo iptables -L
+sudo iptables -L --line-numbers
 sudo iptables -L -t nat #sshuttles
 sudo iptables -L -n -v -x # packet counters
 
