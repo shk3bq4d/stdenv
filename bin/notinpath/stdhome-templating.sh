@@ -36,7 +36,7 @@ fi
 cat ${FILENAME}.template | envsubst "$VARS" > ${FILENAME}
 chmod a-w ${FILENAME}
 case ${FILENAME} in \
-.Xdefaults)
+.Xresources)
 	hash xrdb 2>/dev/null && xrdb -merge ~/.Xdefaults
 	;;
 esac
