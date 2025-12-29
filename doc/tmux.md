@@ -154,3 +154,6 @@ e) fg
 0) Then, to save the buffer to a file, just use prefix + : again, and type in save-buffer filename.txt + return. (by default it'll save the file in ~/)
 
 <C-b> , rename current window
+<C-b> w list windows alt-tab bufexplorer like
+
+/proc/$(pgrep "tmux: server")/exe attach # reattach to a since upgrade server binary (see apt distribution upgrade)

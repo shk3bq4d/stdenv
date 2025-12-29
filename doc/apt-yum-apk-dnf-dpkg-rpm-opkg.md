@@ -441,3 +441,6 @@ fd = open('/var/lib/dpkg/lock-frontend', 'w')
 fcntl.lockf(fd, fcntl.LOCK_EX)  # blocks until it can lock
 time.sleep(300)                 # critical section
 PY
+
+
+apt update && apt full-upgrade -y && apt autoremove
