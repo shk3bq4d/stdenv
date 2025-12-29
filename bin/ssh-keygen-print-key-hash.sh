@@ -12,9 +12,12 @@ if [[ $# -eq 0 ]]; then
 else
     g="$@"
 fi
-! test -f "$g" && echo "FATAL: not a file $g" && exit 1
-for e in MD5 SHA256; do
-    ssh-keygen -lf "$g" -E $e 
+for g2 in $g; do
+    echo "file $g2"
+    ! test -f "$g2" && echo "FATAL: not a file $g2" && exit 1
+    for e in MD5 SHA256; do
+        ssh-keygen -lf "$g2" -E $e
+    done
 done
 cleanup
 exit 0
