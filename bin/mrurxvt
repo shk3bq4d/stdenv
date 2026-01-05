@@ -8,6 +8,8 @@ exec 2>&1
 
 #set -x
 OUTDIR=~/.tmp/mrurxvt/
+test -d ~/.tmp/ || mkdir ~/.tmp/
+test -d $OUTDIR || mkdir $OUTDIR
 test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
 for i in \
