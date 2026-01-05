@@ -381,3 +381,12 @@ import certifi; print(certifi.where()) # print certifi cert location /usr/local/
 "C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors && REM chromium edge
 
 nbseconds=0; openssl x509 -noout -checkend $nbseconds # check expiration with exit code
+
+https://en.wikipedia.org/wiki/Certificate_authority#Baseline_requirements
+1st July 2012 	60 Months 	v1.0 of the Baseline Requirements. §9.4
+1st April 2015 	39 Months 	v1.3.0 of the Baseline Requirements. §6.3.2
+1 March 2018 	825 Days 	v1.4.4 of the Baseline Requirements. §6.3.2
+1 September 2020 	398 Days 		1 year
+15 March 2026 	200 Days 	SC-081v3 	6 months
+15 March 2027 	100 Days 	SC-081v3 	3 months
+15 March 2029 	47 Days 	SC-081v3 	1 month
