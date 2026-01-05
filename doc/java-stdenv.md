@@ -347,8 +347,12 @@ KEYSTOREPASS=changeit # password java jks cacerts
 ```
 
 # passing options via env var
+```
+JAVA_OPTS The most widely used convention. Frequently consumed by startup scripts (Tomcat, Jetty, custom wrappers).
 JAVA_TOOL_OPTIONS https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/envvars002.html
 JDK_JAVA_OPTIONS (since jdk9) https://docs.oracle.com/en/java/javase/11/tools/java.html#GUID-3B1CE181-CD30-4178-9602-230B800D4FAE__USINGTHEJDK_JAVA_OPTIONSLAUNCHERENV-F3C0E3BA
+_JAVA_OPTIONS JVM-recognized. Similar to JAVA_TOOL_OPTIONS, but prints a warning banner when used.
+```
 
 # common args
 ```sh
@@ -359,4 +363,6 @@ JDK_JAVA_OPTIONS (since jdk9) https://docs.oracle.com/en/java/javase/11/tools/ja
 -Dhttps.proxyPort=
 -Dhttp.nonProxyHosts="localhost|127.0.0.1|10.*.*.*|*.mydomain.co|*.mydomain.local"
 -Dhttps.nonProxyHosts="localhost|127.0.0.1|10.*.*.*|*.mydomain.co|*.mydomain.local"
+-Djava.io.tmpdir=/dataexec/tmp
 ```
+
