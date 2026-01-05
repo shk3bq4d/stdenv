@@ -36,8 +36,9 @@ fi
 cat ${FILENAME}.template | envsubst "$VARS" > ${FILENAME}
 chmod a-w ${FILENAME}
 case ${FILENAME} in \
-.Xdefaults)
-	hash xrdb 2>/dev/null && xrdb -merge ~/.Xdefaults
+.Xresources)
+	test -f ~/bin/dot.x11 && source ~/bin/dot.x11
+	hash xrdb 2>/dev/null && xrdb -merge ~/.Xresources
 	;;
 esac
 echo "${STDHOME_BORDER:-5}" > ~/.tmp/i3-new_window_border

@@ -1,3 +1,27 @@
+```sh
+*.ics
+```
+* https://en.wikipedia.org/wiki/ICalendar
+
+
+
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:PM:UU0003792
+SUMMARY:PM:UU0003792 Myapp Prod
+DTSTART;TZID=Europe/London:20240129T060000
+DESCRIPTION:PM:UU0003792 - With Owner\All is roger
+CATEGORIES:Yellow Category
+BEGIN:VALARM
+X-WR-ALARMUID:alarm-PM:UU0003792-0
+UID:alarm-PM:UU0003792-0
+TRIGGER:-PT15M
+DESCRIPTION:Reminder
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR
 https://www.feiertagskalender.ch/index.php?geo=2283&jahr=2023&klasse=5&hl=fr
 Août 2023
 01.08.2023	Ma	Fête nationale Suisse	31	1
