@@ -390,3 +390,5 @@ https://en.wikipedia.org/wiki/Certificate_authority#Baseline_requirements
 15 March 2026 	200 Days 	SC-081v3 	6 months
 15 March 2027 	100 Days 	SC-081v3 	3 months
 15 March 2029 	47 Days 	SC-081v3 	1 month
+https://serverfault.com/questions/1185628/how-often-will-i-need-to-issue-myself-self-signed-certificates-for-an-internal-r
+I don't think that private PKI will be problematic
