@@ -56,10 +56,15 @@ fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
        IP="$NAME"
-    echo "$NAME -> $(dig -t a +short "$NAME" | tail -1)"
+    echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
 elif [[ $MODE = connect ]]; then
-    IP=$(dig -t a +short "$NAME" @$3 | tail -1)
-    echo "$NAME @$3 -> $IP"
+    if [[ "$3" == @* ]]; then
+        IP=$(dig -t a +short "$NAME" @$3 | tail -1)
+        echo "$NAME $3 -> $IP custom resolver"
+    else
+        IP="$3"
+        echo "$NAME -> $IP specified IP"
+    fi
 fi
 
 if uname | grep -qx FreeBSD; then
