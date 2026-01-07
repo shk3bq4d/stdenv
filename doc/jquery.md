@@ -37,7 +37,8 @@ jQuery.fn.jquery # show version
 $(t).children().eq(1);     # grab the second child:
 $(t).children('td').eq(1); # grab the second child <td>:
 
-$('p:contains("mytext")').click() # p element that contains my text
+$('p:contains("mytext")').click() # p element that contains my text in its whole descendants
+expression = 'div:contains("mytext")'; $(expression).filter(function() {$(this).find(expression)===0;}) // dev element that contains my text but no descendant with same criteria, handle nested case
 
 
 $(document).ready(function() { });
