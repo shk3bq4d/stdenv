@@ -28,6 +28,7 @@ fi
 false && UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 case $(hostname -f) in \
 nov20*) BIN=/bin/chromium ;;
+may19*) BIN=/bin/chromium ;;
 *)     BIN=/usr/bin/google-chrome ;;
 esac
 $BIN $ARGS --user-agent="$UA" "$@" </dev/null &>/dev/null &
