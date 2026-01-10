@@ -5,10 +5,6 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin
 
-if [[ -z "${TERM:-}" ]]; then
-    export TERM=xterm # needed for clear
-fi
-
 if tput civis &>/dev/null; then # ignores TERM and lack of stdin problems
     trap "tput cnorm; echo; exit" INT
 fi
@@ -39,7 +35,6 @@ while true; do
     clear_count=$(( clear_count + 1 ))
     if (( clear_count >= clear_count_threshold )); then
         clear_count=0
-        #clear
         printf '\033[H\033[J' # clear replacement, not complaining about missing TERM
         echo -ne "\r$time_str"
     elif (( len < prev_len )); then
