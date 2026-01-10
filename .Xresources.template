@@ -1,12 +1,15 @@
 ! $STDHOME_GENERATED_TIME
-! xrdb -merge ~/.Xdefaults
+! xrdb -merge ~/.Xresources
 ! https://wiki.archlinux.org/index.php/rxvt-unicode#Changing_font_size_on_the_fly
 ! https://wiki.archlinux.org/index.php/rxvt-unicode#Colors
 ! https://wiki.archlinux.org/index.php/rxvt-unicode#Cut_and_paste
 ! https://wiki.archlinux.org/index.php/rxvt-unicode#My_numerical_keypad_acts_weird_and_generates_differing_output.3F_.28e.g._in_vim.29
 
-URxvt.scrollBar: False
-!URxvt.audibleBell: False <-- does not seem to work, but I am trying "xset b off &" in .xinitrc
+URxvt.scrollBar: false
+URxvt.audibleBell: false
+XTerm*bellIsUrgent: false
+XTerm*visualBell: false
+XTerm*bellSuppressTime: 0
 !URxvt.font: xft:Monospace:pixelsize=18
 
 ! LiberationMono-Bold

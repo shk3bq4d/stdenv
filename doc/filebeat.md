@@ -416,3 +416,6 @@ e.Get("@timestamp").Zone()
 e.Get("@timestamp").ZoneBounds()
 
 
+
+https://www.elastic.co/docs/release-notes/beats # changelog
+https://www.elastic.co/guide/en/beats/libbeat/8.19/release-notes.html # changelog
