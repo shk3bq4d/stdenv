@@ -18,10 +18,10 @@ if [[ $# -gt 0 ]]; then
 fi
 
 prev_len=0
-clear_count=0
 clear_count_threshold=30
+clear_count=$(( clear_count_threshold + 1 ))
 title_count_threshold=60
-title_count="$(date +%S)"
+title_count="$(( title_count_threshold + 1 ))"
 _sleep=1
 
 while true; do
@@ -29,15 +29,18 @@ while true; do
     len=${#time_str}
 
     title_count=$(( title_count + 1 ))
-    if (( title_count > title_count_threshold )); then
-        title_count="$(( $(date +%S) - $_sleep ))"
-        echo -ne "\033]0;$time_str\007"
+    if (( title_count >= title_count_threshold )); then
+        time_str2="$(date +"%Y.%m.%d %H:%M") $host"
+        title_count="$(( $(date "+%S" | sed -r -e 's/^0//') - $_sleep ))"
+        #echo -ne "\033]0;${time_str:0:${#time_str}-3}\007"
+        echo -ne "\033]0;${time_str2}\007"
     fi
 
     clear_count=$(( clear_count + 1 ))
     if (( clear_count >= clear_count_threshold )); then
         clear_count=0
-        clear
+        #clear
+        printf '\033[H\033[J' # clear replacement, not complaining about missing TERM
         echo -ne "\r$time_str"
     elif (( len < prev_len )); then
         # Erase previous characters if the new string is shorter
