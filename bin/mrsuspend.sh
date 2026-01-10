@@ -2,6 +2,7 @@
 # ex: set filetype=sh :
 
 set -o pipefail
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 #exec > >(tee /tmp/logfile.txt)
 #exec 2>&1
 
