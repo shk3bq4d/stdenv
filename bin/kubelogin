@@ -4,11 +4,16 @@
 set -euo pipefail
 
 
+kubelogin_version=0.2.10
 kubelogin_version=0.2.13
+kubelogin_version=0.2.14
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/kubelogin-$kubelogin_version"
-
+f=~/.tmp/log/kubelogin
+date >> $f
+env >> $f
+echo "$0 $@" >> $f
 
 if [[ ! -f $BIN ]]; then
     if [[ ! -t 0 ]]; then
@@ -38,5 +43,9 @@ if [[ ! -f $BIN ]]; then
     #rm kubelogin_"$kubelogin_version"_linux_amd64.zip || true
 fi
 
+lastarg="${@: -1}"
+for i in ~/bin/kubelogin.std*; do
+    source $i
+done
 ~/bin/kubelogin-$kubelogin_version "$@"
 exit $?
