@@ -1,14 +1,14 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
 set -x
 if [[ $# -eq 0 ]]; then
-	BIN=xpra_target_app.sh
+    BIN=xpra_target_app.sh
 else
-	BIN=$1
+    BIN=$1
 fi
 if [[ ! -x $BIN || ! -f $BIN ]]; then
-	echo "FATAL: not an executable $BIN"
-	exit 1
+    echo "FATAL: not an executable $BIN"
+    exit 1
 fi
 
 NEWDISP=100
@@ -32,7 +32,7 @@ echo "EOF $ret"
 exit $ret
     --auth=allow \
     --exit-with-children \
-    --daemon=no 
+    --daemon=no
 
 
 
