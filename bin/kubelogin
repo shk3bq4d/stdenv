@@ -10,10 +10,16 @@ kubelogin_version=0.2.14
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/kubelogin-$kubelogin_version"
-f=~/.tmp/log/kubelogin
-date >> $f
-env >> $f
-echo "$0 $@" >> $f
+#f=~/.tmp/log/kubelogin
+#exec > >(tee $f)
+exec > >(tee -a ~/.tmp/log/"$(basename "$0" .sh).log")
+exec 2>&1
+if false; then
+	# activating this block will break kubectl integration but is nice for troubleshooting
+	>&2 date
+	>&2 env
+	>&2 echo "$0 $@"
+fi
 
 if [[ ! -f $BIN ]]; then
     if [[ ! -t 0 ]]; then
