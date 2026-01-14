@@ -94,6 +94,11 @@ ip route add default via 10.19.29.1
 nmcli connection show
 nmcli connection modify "Poupi" ipv4.ignore-auto-dns yes
 nmcli connection modify "MyWiFi" ipv4.dns "1.1.1.1 8.8.8.8"
+nmcli device modify wlp0s20f3 ipv4.method manual ipv4.addr "192.168.1.2/24, 10.10.1.5/8"
+nmcli device modify wlp0s20f3 ipv4.method auto
+nmcli dev mod em1 +ipv4.dns 8.8.4.4
+nmcli dev mod em1 -ipv4.dns 1
+nmcli dev mod em1 -ipv6.addr "abbe::cafe/56"
 wlp0s20f3
 
 # capture short lived process excluding existing the pid that matches the same grep
