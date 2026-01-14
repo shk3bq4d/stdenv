@@ -129,9 +129,9 @@ pathprepend $RCD/bin # needs dot.bashfunctions
 #pathappend /snap/bin
 if [[ -z "${HOSTNAMEF:-}" ]]; then
     if [[ -L /usr/bin/timeout ]] && [[ $(readlink -f /usr/bin/timeout) == *busybox ]]; then
-        export HOSTNAMEF=$(timeout -t 3 hostname -f | tr '[:upper:]' '[:lower:]')
+        export HOSTNAMEF=$({ timeout -t 3 hostname -f || cat /etc/hostname; } | tr '[:upper:]' '[:lower:]')
     else
-        export HOSTNAMEF=$(timeout 3 hostname -f | tr '[:upper:]' '[:lower:]')
+        export HOSTNAMEF=$({ timeout 3 hostname -f || cat /etc/hostname; } | tr '[:upper:]' '[:lower:]')
     fi
 fi
 [[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/}
