@@ -7,6 +7,7 @@ source ~/bin/dot.hostname
 for i in ~/.std*_aliases; do
 	source  $i
 done
+echo WORK_PC4 is $WORK_PC4
 case ${HOSTNAMEF:-hostnamef-unset} in \
 ${WORK_PC1F:-workpc1f-unset}) exit 0 ;;
 ${WORK_PC2:-workpc2f-unset}}) exit 0;;
