@@ -23,11 +23,12 @@ function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// 
 
 [[ -t 1 ]] && export ANSIBLE_FORCE_COLOR=true
 
+d=$HOME/git/sf/dcn/iaac-master
 _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
 fp="$(realpath "$1")"
 if grep -q macros.j2 $fp; then
     cp "$fp" "$_tempdir/in"
-    f=~/git/sf/dcn/iaac-master/ans/roles/sf-zabbix-template/templates/macros.j2
+    f=$d/ans/roles/sf-zabbix-template/templates/macros.j2
     test -f $f && cp "$f" "$_tempdir"
     in="$_tempdir/in"
 else
@@ -42,16 +43,18 @@ else
 fi
 
 
+cd $d
 #if ! ansible all -i "localhost," -m template -a "src='$_tempdir/in' dest=$_tempdir/out" --connection=local \
 if ! ansible all -i "localhost," -m template -a "src='$in' dest=$_tempdir/out" --connection=local \
     -e @$ev \
-    -e @~/git/sf/dcn/iaac-master/ans/group_vars/all.yml \
+    -e @$d/ans/group_vars/all.yml \
     -e zabbix_version=6.2.5 \
     -e group_template_uuid=abcd \
     -e _template_uuid=abcd \
     -e template_name=ansible-jinja-cli \
     -e kube_filebeat_namespace=filebeat \
     -e kube_filebeat_app_name=filebeat \
+    -e playbook_dir=$d/ans \
     -e sf_environment=uat \
     -e kube_filebeat_hosts='["hehe"]' \
     &>$_tempdir/err; then
