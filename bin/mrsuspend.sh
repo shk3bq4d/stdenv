@@ -43,7 +43,7 @@ apr16.ly.lan)
     ;;
 dec17.ly.lan|nov20.ly.lan|shaz*)
     if at-work.sh; then
-        mri3lock &
+        mri3_lock &
     fi
     wait_git
     if [[ -z "$SSH_CLIENT" ]]; then
