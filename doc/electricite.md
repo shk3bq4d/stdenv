@@ -31,9 +31,9 @@ R     Retour: section reliant un interrupteur (et donc, de façon intermittente,
    celle entre le retour et le neutre est de 230 V.
 
 
-BN Brown Marron
-BU Blue  bleu
-GN/YE Green/Yellow
+BN Brown Marron        Load1    Phase1
+BU Blue  bleu          Neutral  Neutre
+GN/YE Green/Yellow     Earth    Terre
 BK Black noir
 GY Gray gris
 

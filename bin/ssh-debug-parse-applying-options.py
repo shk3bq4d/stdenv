@@ -123,7 +123,7 @@ def process_config_file(applied_options, config_filelist, filename, linenumber, 
             logger.debug('Aborting at line %s', conf_linenumber)
             break
         #logger.info(conf_line)
-        option_name, option_value = re.split(r'\s+', conf_line, 1)
+        option_name, option_value = re.split(r'\s+', conf_line, max_split=1)
         option_name_lower = option_name.lower()
         if option_name_lower not in rH:
             # SshOption = namedtuple('SshOption', 'Name Value SourceFile LineNumber Criteria')

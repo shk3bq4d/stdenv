@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-xmllint --format -
+if [[ $# -eq 0 ]] || [[ ! -t 0 ]]; then
+	xmllint --format -
+else
+	xmllint --format "$@"
+fi
