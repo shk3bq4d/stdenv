@@ -2464,6 +2464,7 @@ pprint(value, verbose=False)
 random(seq)
 reject()
 {{ numbers|reject("odd") }}
+{{ numbers|reject("regex", '^coucou') }}
 rejectattr()
 {{ users|rejectattr("is_active") }}
 {{ users|rejectattr("email", "none") }}
