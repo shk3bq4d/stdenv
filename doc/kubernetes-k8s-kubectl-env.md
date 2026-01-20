@@ -857,7 +857,8 @@ kubectl create secret generic tls kubernetes-dashboard-certs \
   --from-file=tls.crt=/path/to/dashboard.crt \
   --from-file=tls.key=/path/to/dashboard.key --namespace kube-system
 
-kubectl wait --for=condition=Ready pod/busybox1 # experimental
+kubectl wait --for=condition=Ready pod/busybox1
+kubectl wait --for=condition=Ready node/kndre102p03.mfogroup.co
 kubectl wait --for=delete pod/busybox1 --timeout=60s
 
 
