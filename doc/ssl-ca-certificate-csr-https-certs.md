@@ -20,7 +20,7 @@ update-ca-trust extract                      # activate (and also takes care of 
 apk update && apk add ca-certificates
 cp yourca.crt /usr/local/share/ca-certificates/yourca.crt
 update-ca-certificates
-=> file /etc/ssl/certs/ca-certificates.cr has been updated
+=> file /etc/ssl/certs/ca-certificates.crt has been updated
 
 # alpine docker zabbix trouble shooting
 python -i

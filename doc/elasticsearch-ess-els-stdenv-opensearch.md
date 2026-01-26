@@ -266,3 +266,7 @@ https://hub.docker.com/r/graylog/graylog-datanode
 ```sh
 echo '{"query":{"match_all":{}},"size":100}' | curl-opensearch.sh gl-system-events_1/_search
 ```
+
+```sh
+curl http://localhost:9000/_plugins/_security/api/rolesmapping\?pretty
+```
