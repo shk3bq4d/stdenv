@@ -1406,6 +1406,8 @@ ansible_loop.nextitem      The item from the following iteration of the loop. Un
     validate: /usr/sbin/sshd -t -f %s
     backup: yes
 
+    validate: python3 -c "import sys, xml.etree.ElementTree as ET; ET.parse(sys.argv[1])" %s # validate an xml file
+
 - tasks:
    - name: Install Apache
      # https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
@@ -2975,3 +2977,5 @@ ansible-console MYHOST
 
 ansible-inventory -i inventory.yml --graph
 ansible-inventory -i inventory.yml --vars --vault-id dev@secrets/ansible-vault-dev --vault-id prod@secrets/ansible-vault-prod --host apdco103p12\* --yaml
+
+item.key is search(sfrx|default('.*'))
