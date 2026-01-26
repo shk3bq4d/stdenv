@@ -262,3 +262,19 @@ package awstats creates awstats: /etc/logrotate.d/httpd-prerotate/awstats
 allow 192.168.1.1;    # IP whitelisting
 allow 203.0.113.0/24; # IP whitelisting
 deny all;             # IP whitelisting
+
+
+            proxy_pass http://localhost:8080;
+            proxy_set_header host                 $host;
+            proxy_set_header x-forwarded-proto    $scheme;
+            #proxy_set_header x-forwarded-for     $proxy_add_x_forwarded_for;
+            #proxy_set_header x-forwarded-host    $host;
+            #proxy_set_header x-forwarded-port    $server_port;
+            #proxy_set_header x-forwarded-server  $host;
+            #proxy_set_header x-forwarded         "127.111.111.1";
+            #proxy_set_header x-client-ip         "127.111.111.2";
+            #proxy_set_header x-cluster-client-ip "127.111.111.3";
+            #proxy_set_header x-originating-ip    "127.111.111.4";
+            #proxy_set_header x-remote-ip         "127.111.111.5";
+            #proxy_set_header x-remote-addr       "127.111.111.6";
+            #proxy_set_header x-real-ip           $remote_addr;
