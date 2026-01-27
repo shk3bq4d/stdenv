@@ -112,8 +112,7 @@ export PS4='+ \${BASH_SOURCE:-}:\${LINENO:-}:\${FUNCNAME[0]:-}: ';
 #esac
 
 echo EOF
-exit 0
-" >> "$f"
+exit 0" >> "$f"
 
 chmod u+x "$f"
 
