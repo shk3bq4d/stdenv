@@ -543,7 +543,7 @@ if hash pip 2>/dev/null; then
        eval "$(pip completion --bash --disable-pip-version-check &>/dev/null)" #&>/dev/null
    fi
 fi
-[[ -f /var/run/reboot-required || -f /opt/sf-scripts/.sf-reboot-needed-custom ]] && echo "reboot needed .bashrc"
+[[ -f /var/run/reboot-required || -f /opt/sf-scripts/.sf-reboot-needed-custom ]] && echo "reboot needed .bashrc $(hostname -f)"
 #[[ -z $SSH_CLIENT && $EUID -ne 0 && -d ~/.tmp ]] && echo "$(date +'%Y.%m.%d %H:%M:%S') in" >> ~/.tmp/bashrc-events
 if [[ $EUID -ne 0 && -d ~/.tmp ]]; then
     test -f ~/.tmp/bashrc-events || touch ~/.tmp/bashrc-events
