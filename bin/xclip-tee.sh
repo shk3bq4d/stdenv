@@ -3,6 +3,7 @@
 
 set -euo pipefail
 _tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
+source ~/bin/dot.x11
 cat "$@" > $_tempfile
 cat $_tempfile | xclip
 cat $_tempfile
