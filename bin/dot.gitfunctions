@@ -124,8 +124,11 @@ git_env() {
 }
 
 git_root_dir () {
-    # equivalent of "git rev-parse --absolute-git-dir" without git binary
     local a
+    # equivalent of "git rev-parse --absolute-git-dir" without git binary, though this returs the .git
+    if command -v git &>/dev/null; then
+        readlink -f "$(git rev-parse -c safe.directory='*' --absolute-git-dir)/.."
+    fi
     if [[ -n ${GIT_DIR:+1} ]]
     then
         [[ -f ${GIT_DIR}/index ]] && echo "${GIT_DIR}" && return 0
