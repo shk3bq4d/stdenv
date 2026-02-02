@@ -9,6 +9,7 @@ desktop-local.sh git-crypt
 desktop-local.sh i3blocks
 desktop-local.sh i3cfg
 desktop-local.sh git_zsh # hide git status in prompt for oh-my-zsh git plugin
+desktop-local.sh azcli
 
 
 ap dockerhub-images.yml -e sfrx=dnsmasq
