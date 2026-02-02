@@ -1,4 +1,5 @@
 ```sh
+https://github.com/mongodb/helm-charts
 mongoexport -h MYHOST --port=33333 -u backup -p MYPASS --authenticationDatabase=config --db=graylog --collection=pipeline_processor_rules
 show databases     //Print a list of all available databases.
 show dbs   // Print a list of all databases on the server.
