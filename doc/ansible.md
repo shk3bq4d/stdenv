@@ -1315,6 +1315,9 @@ meta: end_play
 meta: reset_connection
 ```
 
+- meta: noop # yaml anchor
+  vars: # noop yaml anchor
+
 # loop
 with_list
 with_items
