@@ -239,6 +239,7 @@ git log -1
 
 https://stackoverflow.com/questions/16244969/how-to-tell-git-to-ignore-individual-lines-i-e-gitignore-for-specific-lines-of # part of file
 
+git check-ignore -v myfile # find out why file gets ignorerd
 
 # https://stackoverflow.com/questions/594757/how-do-i-do-a-git-status-so-it-doesnt-display-untracked-files-without-using git status ignore untracked
 git status -uno # which is equivalent to git status --untracked-files=no
