@@ -127,7 +127,8 @@ git_root_dir () {
     local a
     # equivalent of "git rev-parse --absolute-git-dir" without git binary, though this returs the .git
     if command -v git &>/dev/null; then
-        readlink -f "$(git -c safe.directory='*' rev-parse  --absolute-git-dir)/.."
+        readlink -f "$(git -c safe.directory='*' rev-parse  --show-toplevel)"
+        return
     fi
     if [[ -n ${GIT_DIR:+1} ]]
     then
