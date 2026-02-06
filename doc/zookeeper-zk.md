@@ -155,6 +155,7 @@ https://zookeeper.apache.org/releases.html#releasenotes
 https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.2.9/bk_rolling-upgrade/content/upgrade_zookeeper.html
 * ssh to all nodes, retrieve follower or leader status via either
 zkServer.sh status | grep Mode
+docker exec -it zookeeper zkServer.sh status | grep Mode
 echo stat | nc localhost 2181 | grep Mode
 * for each node, starting with followers, do
  * your upgrade
