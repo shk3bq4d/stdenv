@@ -233,12 +233,17 @@ blending)
     fi
     ;;
 esac
+# blacklist
 case $f in \
 */semiradial-a591fd-eda8a7-180.jpg) $0 "$@"; exit 0;; # too violet and poor contrast with green on violet
-*/noise*) $0 "$@"; exit 0;;
-*/plasma*) $0 "$@"; exit 0;;
-*/plasma-fbbf91-a591fd-183.jpg) $0 "$@"; exit 0;;
-*/noise-eda8a7-a7b8ee-fbbf91.jpg) $0 "$@"; exit 0;;
+*/noise*)                           $0 "$@"; exit 0;;
+*/plasma*)                          $0 "$@"; exit 0;;
+*/plasma-fbbf91-a591fd-183.jpg)     $0 "$@"; exit 0;;
+*/noise-eda8a7-a7b8ee-fbbf91.jpg)   $0 "$@"; exit 0;;
+*/mean-90fbc6-91d8fc-fc9392.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
+*/mean-a591fd-a6edac-e1fb8e.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
+*/mean-a7b8ee-fbbf91-a6ece6.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
+*/mean-e1fb8e-90fbc6-90fc99.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
 #*/plasma*) $0 "$@"; exit 0;;
 #*/blending*) $0 "$@"; exit 0;;
 #*/semiradial*) $0 "$@"; exit 0;;

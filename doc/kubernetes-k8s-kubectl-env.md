@@ -2,6 +2,7 @@
 
 https://github.com/kubernetes/kubectl
 https://github.com/kubernetes/kubectl/tags # versions
+https://kubernetes.io/releases/ # versions end of life
 
 # acronyms
 CNCF Cloud Native Computing Foundation
