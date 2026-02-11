@@ -419,3 +419,11 @@ e.Get("@timestamp").ZoneBounds()
 
 https://www.elastic.co/docs/release-notes/beats # changelog
 https://www.elastic.co/guide/en/beats/libbeat/8.19/release-notes.html # changelog
+
+kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat\.yml'] }"
+kubectl debug -it filebeat-ktwjx --image=busybox --target=filebeat-ktwjx # in alpha in version 1.22 https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod                                        --container=filebeat -- sh
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod                                        --container=filebeat -- cat /etc/filebeat.yml
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=busybox                 --container=filebeat -- sh
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=debian                  --container=filebeat -- bash
+kubectl debug filebeat-ktwjx -it --copy-to=mydebugpod --set-image=\*=shk3bq4d/stdenv:stdenv  --container=filebeat -- zsh
