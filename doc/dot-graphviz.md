@@ -5,7 +5,8 @@ layout:
 
  ```bash
 http://www.webgraphviz.com/
-https://graphviz.gitlab.io/_pages/doc/info/attrs.html
+https://graphviz.gitlab.io/doc/info/attrs.html
+https://gitlab.com/graphviz/graphviz.gitlab.io/-/tree/main
 https://www.tonyballantyne.com/graphs.html
 ```
 
@@ -23,6 +24,7 @@ digraph graphname {
      // [style=invis] hides a node.
    }
 }
+
 digraph graphname {
     rankdir=LR;
     compound=true; // needed to link to make think we're linking to cluster subgraph
