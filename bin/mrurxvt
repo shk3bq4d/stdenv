@@ -244,6 +244,8 @@ case $f in \
 */mean-a591fd-a6edac-e1fb8e.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
 */mean-a7b8ee-fbbf91-a6ece6.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
 */mean-e1fb8e-90fbc6-90fc99.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
+*/mean-fbea8f-90faf2-d191fd.jpg)    $0 "$@"; exit 0;; # 2026.02.12 part black
+*/mean-fbea8f-97f665-a7b8ee.jpg)    $0 "$@"; exit 0;; # 2026.02.12 too black
 #*/plasma*) $0 "$@"; exit 0;;
 #*/blending*) $0 "$@"; exit 0;;
 #*/semiradial*) $0 "$@"; exit 0;;
