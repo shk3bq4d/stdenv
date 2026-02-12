@@ -508,6 +508,13 @@ func! MrSyntaxRange()
         " deal with it
     endtry
     try
+        call SyntaxRange#Include('```jinja'       ,'```'           ,'jinja'    ,'NonText')
+    catch /^Vim\%((\a\+)\)\=:E117/
+        " deal with it
+    catch /^Vim\%((\a\+)\)\=:E484/
+        " deal with it
+    endtry
+    try
         call SyntaxRange#Include('```python'       ,'```'           ,'python'    ,'NonText')
     catch /^Vim\%((\a\+)\)\=:E117/
         " deal with it
