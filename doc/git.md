@@ -651,6 +651,7 @@ git log --date=format:'%Y.%m.%d %H:%M:%S'
 git filter-repo --replace-message ~/doc/stdsf-git-filter-repo-expressions.md --replace-text ~/doc/stdsf-git-filter-repo-expressions.md --mailmap ~/doc/stdsf-git-filter-repo-mailmap.md
 git-filter-repo --path ans/roles/sb-users --path sf/roles/sb-users
 git filter-repo --path README.md --path guides/ --path tools/releases --invert-paths # exclude specific files
+git filter-repo --path core.13 --invert-paths # exclude specific files
 
 less .git/logs/HEAD # ref tip head history
 git reflog          # ref tip head history
