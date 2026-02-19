@@ -653,6 +653,9 @@ git-filter-repo --path ans/roles/sb-users --path sf/roles/sb-users
 git filter-repo --path README.md --path guides/ --path tools/releases --invert-paths # exclude specific files
 git filter-repo --path core.13 --invert-paths # exclude specific files
 
+# have lmod time date last modification date of files be sync'ed with revision
+apt install git-restore-mtime # https://github.com/MestreLion/git-tools/blob/main/git-restore-mtime
+
 less .git/logs/HEAD # ref tip head history
 git reflog          # ref tip head history
 git reflog --date=relative --decorate --format='%C(auto)%h %C(blue)%<|(17)%gd%C(reset) %<|(110)%gs %C(green)%s%C(reset) %C(auto)%d%C(reset)'

@@ -29,10 +29,10 @@ def go(args):
         do(' '.join(ar.ts))
 
 def do(bip):
-    if re.match('^u\d+', bip): # $ timestamp.py u'1493354506'
+    if re.match(r'^u\d+', bip): # $ timestamp.py u'1493354506'
         print('unicode leading u')
         bip = bip[1:]
-    if re.match('\d{8,13}\.\d{3}:\d+', bip): # $ timestamp.py 1710318063.679:940914 # auditd
+    if re.match(r'\d{8,13}\.\d{3}:\d+', bip): # $ timestamp.py 1710318063.679:940914 # auditd
         bip = bip.split(':')[0]
         print('auditd ' + bip)
     try:

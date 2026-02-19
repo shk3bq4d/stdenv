@@ -248,6 +248,11 @@ case $f in \
 */mean-fbea8f-97f665-a7b8ee.jpg)    $0 "$@"; exit 0;; # 2026.02.12 too black
 */mean-91d8fc-eda8a7-a591fd.jpg)    $0 "$@"; exit 0;; # 2026.02.19 small black dot
 */mean-fc9392-97f665-fbea8f.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
+*/mean-a7b8ee-fbea8f-fbbf91.jpg)    $0 "$@"; exit 0;; # 2026.02.19 almost fully dark
+*/mean-fbbf91-bdeda5-90fc99.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
+*/mean-fc9392-fbea8f-a6edac.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
+*/mean-fbbf91-bdeda5-b3a6ee.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
+*/mean-90faf2-eda8a7-fbbf91.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
 */2spot-d0a6ee-d191fd-4375.jpg)     $0 "$@"; exit 0;; # 2026.02.19 too dark violet
 #*/plasma*) $0 "$@"; exit 0;;
 #*/blending*) $0 "$@"; exit 0;;
