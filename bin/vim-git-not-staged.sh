@@ -47,7 +47,7 @@ list() {
             -e 's/^...//' \
             -e 's/.* -> (.*)/\1/' | while read line; do
         if [[ -d "$line" ]]; then
-            find "$grd/$line" -not type d;
+            find "$grd/$line" -not -type d;
         else
             echo "$grd/$line"
         fi
