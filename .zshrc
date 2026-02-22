@@ -3,6 +3,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 #zmodload zsh/zprof # https://stevenvanbael.com/profiling-zsh-startup
+#set -x
 export GOPATH=~/go
 path=($path $GOPATH/bin) # otherwise kubectl doesn't work per SSH (likely have PATH exported from parent urxvt window when not using SSH)
 
@@ -515,7 +516,7 @@ compdef _path_commands viw catw lessw
 #fi
 alias z='nocorrect zshz 2>&1' # at the end is necessary as it is defined elsewhere
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' # apparently buggy in latest oh-my-zsh (grep complains about non-escaped dash characters)
-type _z_std_add &>/dev/null && _z_std_add | while read i; do z --add $i; done
+# type _z_std_add &>/dev/null && _z_std_add | while read i; do z --add $i; done # 2026.02.13 commenting out this line as I don't recall why and I'm stuck with flocked file while debugging infuriating zscaler ops
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=25
 if [[ -n "${MR_URXVT_CMD:-}" ]]; then

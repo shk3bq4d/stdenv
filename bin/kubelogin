@@ -23,12 +23,12 @@ fi
 
 if [[ ! -f $BIN ]]; then
     if [[ ! -t 0 ]]; then
-        echo "FATAL: $BIN doesn't exist and stdin is not a TTY"
+        >&2 echo "FATAL: $BIN doesn't exist and stdin is not a TTY"
         exit 1
     fi
-    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    >&2 echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
-    echo # read
+    >&2 echo # read
     case "${_read,,}" in \
     y|Y|yes)
         true
