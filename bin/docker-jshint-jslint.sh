@@ -9,9 +9,11 @@ export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 # https://github.com/vgist/dockerfiles/tree/master/speedtest-cli
 docker ps &>/dev/null && SUDO="" || SUDO=sudo
 if [[ $# -eq 0 ]]; then
+    echo "a $0"
+    exit 0
     $SUDO docker run -it --rm -v $PWD:/code eeacms/jshint
 else
-    $SUDO docker run -it --rm \
+    $SUDO docker run -t --rm \
         $(for i in "$@"; do echo "-v $(readlink -f "$i"):/code/$(basename "$i")"; done) \
         eeacms/jshint \
         jshint \

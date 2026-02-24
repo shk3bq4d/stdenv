@@ -960,6 +960,7 @@ import json; json.load(reader) # parse json reader
 import json; json.loads(str) # parse json string
 import json; json.dumps(dict)
 import json; json.dumps(dict, indent=2) # pretty-print prettyprint
+def print_json(foH): import json; print(json.dumps(foH, indent=2))
 
 import urllib; urllib.quote(      '/test', safe='') # escape uricomponent encode python2
 import urllib; urllib.parse.quote('/test', safe='') # escape uricomponent encode python3

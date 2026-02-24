@@ -723,14 +723,11 @@ function .() {
 SSH_ENV=$HOME/.ssh/environment
 
 function mr_ssh_add {
-    local f t e
-
-    # favor id_ed25519 over id_rsa if the former exists
-    e="$HOME/.ssh/id_ed25519"
-    test -f $e || e="${e//ed25519/rsa}"
+    local f t
 
     for f in \
-        $e \
+        $HOME/.ssh/id_ed25519 \
+        $HOME/.ssh/id_rsa \
         $HOME/.ssh/id_rsa_ansible \
         $HOME/.ssh/jexternalssh \
         ; do
