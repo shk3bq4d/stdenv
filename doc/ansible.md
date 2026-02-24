@@ -2254,6 +2254,7 @@ To get a sha512 password hash (random salt):
 {{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt') }}
 {{ 'secretpassword' | string | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}
 {{ 'secretpassword' | string | password_hash('sha256', 'mysecretsalt', rounds=10000) }}
+{{ ['a','b'] | product([0,1]) }} # [["a", 0], ["a", 1], ["b", 0], ["b", 1]]
 {{ {'a':1, 'b':2} | combine({'b':3}) }}
 {{ {'a':{'foo':1, 'bar':2}, 'b':2} | combine({'a':{'bar':3, 'baz':4}}, recursive=True) }}
 {{ a | combine(b, c, d) }}
