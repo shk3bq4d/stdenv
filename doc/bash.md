@@ -1161,10 +1161,12 @@ umask 027
 
 # pipebuffer
 tail -f /var/log/foo | stdbuf -o0 cut         # unbuffered pipe
+tail -f /var/log/foo | stdbuf -o0 awk         # unbuffered pipe
 tail -f /var/log/foo | grep --line-buffered   # unbuffered pipe
 tail -f /var/log/foo | sed -u                 # unbuffered pipe
-tail -f /var/log/foo | python -u              # unbuffered
-stdbuf -o0 tcpdump
+tail -f /var/log/foo | python -u              # unbuffered pipe
+tail -f /var/log/foo | ack --flush              # unbuffered pipe
+stdbuf -o0 tcpdump                            # unbuffered
 
 
 +test -t 0 && TTY_FLAG="-t"
