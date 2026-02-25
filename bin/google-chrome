@@ -27,8 +27,13 @@ if [[ -f $f ]] && grep -qEx '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' $f; then
 fi
 false && UA="Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 case $(hostname -f) in \
-nov20*) BIN=/bin/chromium ;;
-may19*) BIN=/bin/chromium ;;
-*)     BIN=/usr/bin/google-chrome ;;
+nov20*) UA=""; BIN=/bin/chromium ;;
+may19*) UA=""; BIN=/bin/chromium ;;
+*)      UA=""; BIN=/usr/bin/google-chrome;;
 esac
-$BIN $ARGS --user-agent="$UA" "$@" </dev/null &>/dev/null &
+if [[ -n "$UA" ]]; then
+	# 2026.02.24 new SF policies makes it impossible to login with windows UA
+	$BIN $ARGS --user-agent="$UA" "$@" </dev/null &>/dev/null &
+else
+	$BIN $ARGS                    "$@" </dev/null &>/dev/null &
+fi

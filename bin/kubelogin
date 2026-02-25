@@ -7,6 +7,7 @@ set -euo pipefail
 kubelogin_version=0.2.10
 kubelogin_version=0.2.13
 kubelogin_version=0.2.14
+kubelogin_version=0.2.15
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/kubelogin-$kubelogin_version"
@@ -15,10 +16,10 @@ BIN="$HOME/bin/kubelogin-$kubelogin_version"
 exec > >(tee -a ~/.tmp/log/"$(basename "$0" .sh).log")
 exec 2>&1
 if false; then
-	# activating this block will break kubectl integration but is nice for troubleshooting
-	>&2 date
-	>&2 env
-	>&2 echo "$0 $@"
+    # activating this block will break kubectl integration but is nice for troubleshooting
+    >&2 date
+    >&2 env
+    >&2 echo "$0 $@"
 fi
 
 if [[ ! -f $BIN ]]; then

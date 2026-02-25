@@ -220,3 +220,8 @@ re.X, re.VERBOSE python This flag allows you to write regular expressions that l
 
 10) “Any of” (hyphenated OR 32-hex OR braced OR URN)
 ^(?:[0-9a-fA-F]{32}|\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}|urn:uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$
+
+ \<[0-9A-Z]{20}\>      Amazon key ID netapp AWS_ACCESS_KEY_ID
+ack '\b[0-9A-Z]{20}\b' # ack Amazon key ID netapp AWS_ACCESS_KEY_ID
+ack '\b([0-9A-Z]{20}|AWS_ACCESS_KEY_ID|access_key)\b' # Amazon key ID netapp AWS_ACCESS_KEY_ID
+\<(AKIA|ASIA|AGPA|AIDA|ANPA|AROA|AIPA)[0-9A-Z]{16}\3 Amazon specific key ID AWS_ACCESS_KEY_ID
