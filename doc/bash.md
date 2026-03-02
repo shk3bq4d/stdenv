@@ -563,6 +563,16 @@ for key in "${!my_dict[@]}"; do echo "key:$key value:${mydict[$key]}"; done  # i
 ${#my_array[@]} # array  or dict length
 ${#var}         # string length
 declare -p my_array # prints/debug/dump content of array dict
+[[ ${myarray[mykey]+_} ]] # test key existence in associative array in  bash < 4.2
+[[ -v myarray[mykey] ]]   # test key existence in associative array in  bash >= 4.2
+declare -A myarray
+myarray[key1]=value1
+myarray[key2]=value2
+[[ -v myarray[key1] ]] && echo key1 exists || echo key1 does not exists
+[[ -v myarray[key1] ]] && echo key2 exists || echo key2 does not exists
+[[ -v myarray[key3] ]] && echo key3 exists || echo key3 does not exists
+i=key1; [[ -v myarray[$i] ]] && echo $i exists || echo $i does not exists
+i=key5; [[ -v myarray[$i] ]] && echo $i exists || echo $i does not exists
 
 #iterage over args arguments parameters
 for var in "$@" # iterate
