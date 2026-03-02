@@ -120,6 +120,7 @@ detach the tty without exiting the shell, use the escape sequence Ctrl+p + Ctrl+
 http://crosbymichael.com/advanced-docker-volumes.html
 docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}"
 docker image list --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.Size}}" | sort -h -k4
+sudo docker image list --format "table {{.Repository}}:{{.Tag}}"
 sudo docker image list --format "{{.Repository}}"
 sudo docker ps --format "{{.Names}}"
 sudo docker ps --format "{{.Image}}"
