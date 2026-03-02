@@ -234,36 +234,11 @@ blending)
     ;;
 esac
 # blacklist
-case $f in \
-*/semiradial-a591fd-eda8a7-180.jpg) $0 "$@"; exit 0;; # too violet and poor contrast with green on violet
-*/noise*)                           $0 "$@"; exit 0;;
-*/plasma*)                          $0 "$@"; exit 0;;
-*/plasma-fbbf91-a591fd-183.jpg)     $0 "$@"; exit 0;;
-*/noise-eda8a7-a7b8ee-fbbf91.jpg)   $0 "$@"; exit 0;;
-*/mean-90fbc6-91d8fc-fc9392.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
-*/mean-a591fd-a6edac-e1fb8e.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
-*/mean-a7b8ee-fbbf91-a6ece6.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
-*/mean-e1fb8e-90fbc6-90fc99.jpg)    $0 "$@"; exit 0;; # 2026.02.10 huge black dot
-*/mean-fbea8f-90faf2-d191fd.jpg)    $0 "$@"; exit 0;; # 2026.02.12 part black
-*/mean-fbea8f-97f665-a7b8ee.jpg)    $0 "$@"; exit 0;; # 2026.02.12 too black
-*/mean-91d8fc-eda8a7-a591fd.jpg)    $0 "$@"; exit 0;; # 2026.02.19 small black dot
-*/mean-fc9392-97f665-fbea8f.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
-*/mean-a7b8ee-fbea8f-fbbf91.jpg)    $0 "$@"; exit 0;; # 2026.02.19 almost fully dark
-*/mean-fbbf91-bdeda5-90fc99.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
-*/mean-fc9392-fbea8f-a6edac.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
-*/mean-fbbf91-bdeda5-b3a6ee.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
-*/mean-90faf2-eda8a7-fbbf91.jpg)    $0 "$@"; exit 0;; # 2026.02.19 too dark
-*/2spot-d0a6ee-d191fd-4375.jpg)     $0 "$@"; exit 0;; # 2026.02.19 too dark violet
-#*/plasma*) $0 "$@"; exit 0;;
-#*/blending*) $0 "$@"; exit 0;;
-#*/semiradial*) $0 "$@"; exit 0;;
-#*/2spot*) $0 "$@"; exit 0;;
-#*/triangleresize*) $0 "$@"; exit 0;;
-#*/swirl*) $0 "$@"; exit 0;;
-#*/Inverse*) $0 "$@"; exit 0;;
-#*/mean*) $0 "$@"; exit 0;;
-#*/Shepards*) $0 "$@"; exit 0;;
-esac
+if grep -qf ~/bin/mrurxvt.blacklist <<<"$f"; then
+    $0 "$@"
+    exit $?
+fi
+
 if [[ -n "${MRURXVT_EXIT_EARLY:-}" ]]; then
     # see ~/bin/mrurxvt-generate-cache.sh for reference
     exit 0

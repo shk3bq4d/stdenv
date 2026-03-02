@@ -8,6 +8,7 @@ sudomrenv() {
 }
 sudomr_hooks+=('sudomrenv')
 #STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
+[[ -z "${USER:-}" ]] && USER="$(id -un)"
 if [[ -d ~/git/$USER/stdhome ]]; then
 	STDHOME_DIRNAME="$HOME/git/$USER/stdhome"
 elif [[ -f ~/bin/stdhome-dirname.sh ]]; then
