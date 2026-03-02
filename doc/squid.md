@@ -1,5 +1,6 @@
 http://stafwag.github.io/blog/blog/2015/06/23/using-squid-to-cache-freebsd-packages/
 tail -f /var/log/squid/access.log
+tail -f /var/log/squid/access.log | perl -p -e 's/^([0-9]*)/"[".localtime($1)."]"/e'
 
 
 https://serverfault.com/questions/610232/how-to-setup-client-for-squid-transparent-proxy
