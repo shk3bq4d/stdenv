@@ -8,7 +8,9 @@ http://bip.bop.net:9200/_plugin/head/
 watch -n 14 -d=c curl -a -k -fs -XGET --user user:pass https://p-es-02.example.local:9200/_cluster/health?pretty
 watch "curl -s 'http://localhost:9200/_cat/shards?v&s=index,shard' | grep -v STARTED"
 watch "curl -s 'http://localhost:9200/_cluster/health?pretty'"
+curl-opensearch.sh
 curl -s http://localhost:9200/_cat/nodes
+curl -s http://localhost:9200/_nodes
 
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
