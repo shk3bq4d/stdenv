@@ -1,4 +1,8 @@
 # /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */#
+zshrc_log() {
+    echo "$(date) $@" >> /tmp/bip-$$.log
+
+}
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
@@ -69,7 +73,6 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=blue,underline,italic'
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -501,6 +504,8 @@ ZSH_COMPDUMP="$HOME/.zcompdump-${USER}"
 autoload -Uz compinit
 compinit -d "$ZSH_COMPDUMP"
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
+autoload -Uz _kubectl
+compdef _kubectl kubectl
 
 f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
 

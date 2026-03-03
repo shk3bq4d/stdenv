@@ -1335,3 +1335,6 @@ hex(16) -> 10 # from decimal to hexadecimal
 py-spy top  --pid 602619
 py-spy dump --pid 602619
 ```
+
+# compatible wheels
+python3 -m pip debug --verbose | sed -n '/Compatible tags/,$p'

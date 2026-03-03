@@ -125,6 +125,61 @@ sudo docker image list --format "{{.Repository}}"
 sudo docker ps --format "{{.Names}}"
 sudo docker ps --format "{{.Image}}"
 
+docker image inspect --format '{{.Id}}' IMAGE
+docker image inspect --format '{{     .RepoTags      }}' IMAGE
+docker image inspect --format '{{join .RepoTags ", " }}' IMAGE
+docker image inspect --format '{{.RepoDigests}}' IMAGE
+docker image inspect --format '{{.Parent}}' IMAGE
+docker image inspect --format '{{.Created}}' IMAGE
+docker image inspect --format '{{.Author}}' IMAGE
+docker image inspect --format '{{.Architecture}}' IMAGE
+docker image inspect --format '{{.Os}}' IMAGE
+docker image inspect --format '{{.OsVersion}}' IMAGE
+docker image inspect --format '{{.Variant}}' IMAGE
+docker image inspect --format '{{.Size}}' IMAGE
+docker image inspect --format '{{.VirtualSize}}' IMAGE
+docker image inspect --format '{{.DockerVersion}}' IMAGE
+
+docker image inspect --format '{{.RootFS.Type}}' IMAGE
+docker image inspect --format '{{.RootFS.Layers}}' IMAGE
+docker image inspect --format '{{.GraphDriver.Name}}' IMAGE
+docker image inspect --format '{{.GraphDriver.Data}}' IMAGE
+
+docker image inspect --format '{{.Config.Hostname}}' IMAGE
+docker image inspect --format '{{.Config.Domainname}}' IMAGE
+docker image inspect --format '{{.Config.User}}' IMAGE
+docker image inspect --format '{{.Config.AttachStdin}}' IMAGE
+docker image inspect --format '{{.Config.AttachStdout}}' IMAGE
+docker image inspect --format '{{.Config.AttachStderr}}' IMAGE
+docker image inspect --format '{{.Config.Tty}}' IMAGE
+docker image inspect --format '{{.Config.OpenStdin}}' IMAGE
+docker image inspect --format '{{.Config.StdinOnce}}' IMAGE
+docker image inspect --format '{{.Config.Env}}' IMAGE
+docker image inspect --format '{{.Config.Cmd}}' IMAGE
+docker image inspect --format '{{.Config.Entrypoint}}' IMAGE
+docker image inspect --format '{{.Config.Shell}}' IMAGE
+docker image inspect --format '{{.Config.WorkingDir}}' IMAGE
+docker image inspect --format '{{.Config.Volumes}}' IMAGE
+docker image inspect --format '{{.Config.ExposedPorts}}' IMAGE
+docker image inspect --format '{{.Config.Labels}}' IMAGE
+docker image inspect --format '{{.Config.OnBuild}}' IMAGE
+docker image inspect --format '{{.Config.StopSignal}}' IMAGE
+docker image inspect --format '{{.Config.ArgsEscaped}}' IMAGE
+docker image inspect --format '{{.Config.Image}}' IMAGE
+
+docker image inspect --format '{{.ContainerConfig.Env}}' IMAGE
+docker image inspect --format '{{.ContainerConfig.Cmd}}' IMAGE
+docker image inspect --format '{{.ContainerConfig.Entrypoint}}' IMAGE
+docker image inspect --format '{{.ContainerConfig.WorkingDir}}' IMAGE
+docker image inspect --format '{{.ContainerConfig.ExposedPorts}}' IMAGE
+docker image inspect --format '{{.ContainerConfig.Labels}}' IMAGE
+
+docker image inspect --format '{{.History}}' IMAGE
+
+
+docker image inspect --format '{{len .RootFS.Layers}}' IMAGE
+docker image inspect IMAGE | jq '.[0].RootFS.Layers | length'
+
 docker inspect zabbix-web --format '{{ .Id }}'
 docker inspect zabbix-web --format '{{ .Name }}'
 docker inspect zabbix-web --format '{{ .Created }}'
