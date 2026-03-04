@@ -4,6 +4,9 @@ is_zsh() { # reduntant with ~/.bashrc, but sometimes needed
     test -n "${ZSH_VERSION:-}"
 }
 
+#[[ -f ~/.oh-my-zsh/plugins/git/git.plugin.zsh ]] && source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+
+
 [ ${sudomr_hooks+x} ] && sudomr_hooks=()
 function sudomr() {
     local f user commands mrhome NEWRCD
