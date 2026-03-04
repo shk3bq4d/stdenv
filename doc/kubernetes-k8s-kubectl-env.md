@@ -791,6 +791,7 @@ kl -n $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace
 while :; do kl -fn $(kgp -Al app=sf-kube-okta-assist -o custom-columns=ns:.metadata.namespace,name:.metadata.name --no-headers); sleep 2; done # labels
 kgp -A -o jsonpath="{.items[*].metadata.labels.app}" | xargs -n1 echo
 keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- sh
+kubectl exec -n traefik deploy/traefik -- traefik version
 ETCDCTL_API=3 keti -n kube-system $(kgp -n kube-system -l tier=control-plane -l component=etcd -o name) -- etcdctl --key=/etc/kubernetes/pki/etcd/peer.key --cert=/etc/kubernetes/pki/etcd/peer.crt --endpoints=https://127.0.0.1:2379 snapshot save coucou3 # noluck
 ```
 
