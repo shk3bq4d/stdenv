@@ -29,17 +29,8 @@ pause_dunst
 if false; then
 	i3lock --debug -enf -c 0000ff  $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 fi
-unmute=1
 set -x
-case "$(hostname -f)" in \
-may19*)
-	unmute=1
-	if [[ $(pacmd list-sinks | awk '/muted/ { print $2 }') = "no" ]]; then
-		unmute=0
-		amixer -q -D pulse sset Master off     # mute
-	fi
-	;;
-esac
+mute.sh &
 case "$(hostname -f)" in \
 may19*|shaz*|nov20*|*)
 	~/bin/notinpath/i3lock-pixelate.sh
@@ -72,6 +63,4 @@ dec17*|may19*|nov20*|shaz*)
 	;;
 esac
 msg unlock
-if [[ $unmute -eq 0 ]]; then
-	amixer -q -D pulse sset Master on      # un-mute
-fi
+exit 0
