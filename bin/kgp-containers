@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+
+set -euo pipefail
+# date '+%a %b %d %H:%M' -d @1747872031
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
+
+#_tempdir=$(mktemp -d); function cleanup() { [[ -n ${_tempdir:-} ]]  && [[ -d $_tempdir ]]  && rm -rf $_tempdir  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+
+# Normalise: if it's a List wrap items[], if it's a single Pod wrap it in an array
+kubectl get pod -o json "$@" |
+  jq '
+      if .kind == "List" then .items
+      else [.]
+      end
+    ' | jq -c '.[]' | while read -r pod; do
+  POD_NAME=$(echo "$pod" | jq -r '.metadata.name')
+  NAMESPACE=$(echo "$pod" | jq -r '.metadata.namespace')
+
+  echo "ns:$NAMESPACE pod:$POD_NAME"
+
+  echo "$pod" | jq -c '.spec.containers[]' | while read -r container; do
+    CONTAINER_NAME=$(echo "$container" | jq -r '.name')
+    IMAGE=$(echo "$container" | jq -r '.image')
+
+    # --- Do your work here ---
+    #echo "namespace=$NAMESPACE  pod=$POD_NAME  container=$CONTAINER_NAME  image=$IMAGE"
+    printf '  %-30s %s\n' "$CONTAINER_NAME" "$IMAGE"
+  done
+done
