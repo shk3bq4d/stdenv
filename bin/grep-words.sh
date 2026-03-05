@@ -29,7 +29,7 @@ go() {
   done
   export GREP_COLORS='ms=01;32'
   #"$0" "$@" | grep --line-buffered --color=$color -aE $case_sensitive "$arg" --
-  "$0" "$@" | ack --flush $color $case_sensitive $args "$arg" --
+  "$0" "$@" | ack --nopager --flush $color $case_sensitive $args "$arg" --
 
 }
 
