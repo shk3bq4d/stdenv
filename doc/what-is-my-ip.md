@@ -1,5 +1,7 @@
 https://www.google.ch/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=what+is+my+ip
 
+wget -qO- http://whatismyip.akamai.com/; echo
+wget -qO- https://4.ifcfg.me; echo
 curl -s https://4.ifcfg.me/
 curl https://diagnostic.opendns.com/myip
 curl http://canhazip.com
