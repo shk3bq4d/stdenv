@@ -8,6 +8,7 @@ kubelogin_version=0.2.10
 kubelogin_version=0.2.13
 kubelogin_version=0.2.14
 kubelogin_version=0.2.15
+kubelogin_version=0.2.16
 sudo -n /bin/true 2>/dev/null && sudo -K # relinquish session kubectl, other untrusted binaries
 
 BIN="$HOME/bin/kubelogin-$kubelogin_version"
