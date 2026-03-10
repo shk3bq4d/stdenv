@@ -16,6 +16,10 @@ kgp -Al app.kubernetes.io/name=cainjector
 kgp -Al app.kubernetes.io/name=webhook,app.kubernetes.io/instance=cert-manager
 kgp -Al app=cert-manager
 
+klf -n cert-manager deployment/cert-manager
+klf -n cert-manager deployment/cert-manager-cainjector
+klf -n cert-manager deployment/cert-manager-webhook
+
 # cmctl
 https://cert-manager.io/docs/reference/cmctl/
 https://github.com/cert-manager/cmctl
