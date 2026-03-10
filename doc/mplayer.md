@@ -44,3 +44,7 @@ mplayer  -loop 0 -rootwin -ao null -vo x11 -noconsolecontrols ~/videos/myvideo.m
 
 # frame extract
 ffmpeg -i input_video.mp4 -ss 00:00:05.000 -vframes 1 output_image.png
+
+
+# blueray to mkv
+sudo docker run -it -v $PWD:/tmpp --rm jlesage/makemkv sh

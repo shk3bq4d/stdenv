@@ -21,6 +21,17 @@ kubectl get pod -o json "$@" |
 
   echo "ns:$NAMESPACE pod:$POD_NAME"
 
+  if echo "$pod" | jq -c '.spec.initContainers[]' &>/dev/null; then
+      echo "$pod" | jq -c '.spec.initContainers[]' | while read -r container; do
+        CONTAINER_NAME=$(echo "$container" | jq -r '.name')
+        IMAGE=$(echo "$container" | jq -r '.image')
+
+        # --- Do your work here ---
+        #echo "namespace=$NAMESPACE  pod=$POD_NAME  container=$CONTAINER_NAME  image=$IMAGE"
+        printf '  init: %-24s %s\n' "$CONTAINER_NAME" "$IMAGE"
+      done
+  fi
+
   echo "$pod" | jq -c '.spec.containers[]' | while read -r container; do
     CONTAINER_NAME=$(echo "$container" | jq -r '.name')
     IMAGE=$(echo "$container" | jq -r '.image')
