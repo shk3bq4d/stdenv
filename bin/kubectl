@@ -7,7 +7,16 @@ kubectl_version=1.31.11
 kubectl_version=1.33.5
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
-BIN="/home/rumo/bin/kubectl-$kubectl_version"
+if [[ -n "${SUDO_USER:-}" ]]; then
+    H=~"${SUDO_USER:-}"
+elif [[ -n "${HOME:-}" ]]; then
+    H="${HOME:-}"
+else
+    cd
+    H="${PWD}"
+fi
+
+BIN="$H/bin/kubectl-$kubectl_version"
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 if [[ ! -f "$BIN" ]]; then
@@ -32,7 +41,10 @@ if [[ ! -f "$BIN" ]]; then
     curl -sLO "https://dl.k8s.io/release/v${kubectl_version}/bin/linux/amd64/kubectl"
     mv -f ~/.tmp/kubectl $BIN
     chmod u+x $BIN
+    if [[ -n "${SUDO_USER:-}" ]]; then
+        chown "${SUDO_USER:-}": $BIN
+    fi
 fi
 
-~/bin/kubectl-$kubectl_version "$@"
+$BIN "$@"
 exit $?
