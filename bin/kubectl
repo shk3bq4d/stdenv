@@ -8,7 +8,7 @@ kubectl_version=1.33.5
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 if [[ -n "${SUDO_USER:-}" ]]; then
-    H=~"${SUDO_USER:-}"
+    H=$(eval echo ~"${SUDO_USER:-}")
 elif [[ -n "${HOME:-}" ]]; then
     H="${HOME:-}"
 else

@@ -180,7 +180,7 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
 ```
 
 # renew kubernetes (expired) ssl certificates
-as root
+as root, on the right machine ( the one that has /etc/kubernetes/pki/apiserver.key)
 ```sh
 kubeadm certs renew all
 KUBECONFIG=/etc/kubernetes/admin.conf kubectl get pod -A
