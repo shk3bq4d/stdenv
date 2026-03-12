@@ -1007,3 +1007,6 @@ CTX=myctx && \
 kubectl config unset clusters.$(kubectl config view -o jsonpath="{.contexts[?(@.name=='$CTX')].context.cluster}") && \
 kubectl config unset users.$(kubectl config view -o jsonpath="{.contexts[?(@.name=='$CTX')].context.user}") && \
 kubectl config unset contexts.$CTX
+
+
+https://gateway-api.sigs.k8s.io/api-types/httproute/
