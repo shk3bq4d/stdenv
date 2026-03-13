@@ -1607,4 +1607,11 @@ extract_begin_end_cert() {
     }' "$2"
 }
 
+MR_URXVT_FORCEWHITE=0
+toggle_urxt_force_white() {
+    local f
+    f=~/.$(hostname -f)_aliases
+    sed -i -r -e "s/^MR_URXVT_FORCEWHITE=.*/MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" $f
+}
+
 true # last statement must return true
