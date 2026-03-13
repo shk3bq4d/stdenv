@@ -14,7 +14,7 @@ test -z "${HOSTNAMEF:-}" && HOSTNAMEF=$(hostname -f)
 
 for i in \
     ~/.bash_aliases \
-    ~/.${HOSTNAMEF}_aliases  \
+    ~/.${HOSTNAMEF}*_aliases  \
     ~/.std*_aliases \
     ; do
     test -r $i && source $i
