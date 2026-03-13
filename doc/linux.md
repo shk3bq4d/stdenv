@@ -493,7 +493,7 @@ upstart sysv service init init.d update-rc.d # https://askubuntu.com/a/20347
 shutter   # screenshot
 flameshot # screenshot
 
-ssh -t myhost sudo date -us @$(date -u +%s) # set remote system time easily
+ssh -t myhost sudo date -us @$(date -u +%s.%N) # set remote system time easily, skips the %N if it is not gnu date, do twice or thrice in a row so you leverage controlmaster and possibly sudo ticket
 
 who -b # uptime last boot time
 
@@ -561,7 +561,7 @@ Kernel versions that have a dash in them are packaged by distributions and are o
 * https://cdn.kernel.org/pub/linux/kernel/v6.x/ChangeLog-6.1.135 # CVE
 * https://security-tracker.debian.org/tracker/source-package/linux # kernel cve
 
-du -ckshx --inodes * | sort -rh | head -11 # count files 
+du -ckshx --inodes * | sort -rh | head -11 # count files
 
 sudo brightnessctl set 2%- # apt install brightnessctl
 echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
