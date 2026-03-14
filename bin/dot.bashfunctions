@@ -1607,4 +1607,16 @@ extract_begin_end_cert() {
     }' "$2"
 }
 
+MR_URXVT_FORCEWHITE=0
+toggle_urxt_force_white() {
+    local f
+    f=~/.$(hostname -f)_nogit_aliases
+    if grep -q '^MR_URXVT_FORCEWHITE=' $f 2>/dev/null; then
+        sed -i -r -e "s/^MR_URXVT_FORCEWHITE=.*/MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" $f
+    else
+        touch $f
+        echo "MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" >> $f
+    fi
+}
+
 true # last statement must return true
