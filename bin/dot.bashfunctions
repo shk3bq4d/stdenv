@@ -1611,6 +1611,9 @@ MR_URXVT_FORCEWHITE=0
 toggle_urxt_force_white() {
     local f
     f=~/.$(hostname -f)_nogit_aliases
+
+    MR_URXVT_FORCEWHITE="$(echo "${MR_URXVT_FORCEWHITE:-}" | tr -cd '[0-9]')"
+    test -z "${MR_URXVT_FORCEWHITE:-}" && MR_URXVT_FORCEWHITE=0
     if grep -q '^MR_URXVT_FORCEWHITE=' $f 2>/dev/null; then
         sed -i -r -e "s/^MR_URXVT_FORCEWHITE=.*/MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" $f
     else
