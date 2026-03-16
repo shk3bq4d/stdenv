@@ -24,7 +24,7 @@ if false; then
 fi
 
 if [[ ! -f $BIN ]]; then
-    if [[ ! -t 0 ]]; then
+    if [[ ! -t 0 ]] || [[ ! -t 1 ]]; then
         >&2 echo "FATAL: $BIN doesn't exist and stdin is not a TTY"
         exit 1
     fi
