@@ -114,6 +114,7 @@ def go2(args=[], only_for_unnamed=True):
         'downdogapp': '~/bin/notinpath/downdogapp.sh',
         'netflix': '~/bin/notinpath/netflix-nf.sh',
         'attach': '~/bin/notinpath/workspace-attach.sh',
+        'ci':     '~/bin/notinpath/workspace-ci.sh',
         'citrix': '~/bin/notinpath/workspace-citrix.sh',
         'network': '~/bin/notinpath/workspace-network.sh',
         'todo-sf': '~/bin/notinpath/workspace-todo-sf.sh',
