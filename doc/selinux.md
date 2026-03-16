@@ -22,7 +22,9 @@ grep "denied.*zabbix_agent" /var/log/audit/audit.log | audit2allow -M zabbix_age
 semodule -i zabbix_agent.pp
 systemctl start zabbix-agent.service
 
-getsebool -a # list all options
+sudo setsebool    container_mounton_non_security=on #  set boolean until next reboot
+sudo setsebool -P container_mounton_non_security=on #  set boolean persistently
+getsebool -a # list all options for booleans
 
 
 semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
