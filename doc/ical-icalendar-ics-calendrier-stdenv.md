@@ -3,6 +3,10 @@
 ```
 * https://en.wikipedia.org/wiki/ICalendar
 
+STATUS:
+    TENTATIVE	Event is not yet confirmed
+    CONFIRMED	Event is confirmed
+    CANCELLED	Event has been cancelled
 
 
 BEGIN:VCALENDAR
