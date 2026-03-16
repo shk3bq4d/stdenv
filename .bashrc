@@ -626,7 +626,7 @@ is_zsh && setopt null_glob
 #   /usr/bin/virtualenvwrapper_lazy.sh \
 for f in \
     $RCD/.bash_aliases \
-    $RCD/.${HOSTNAMEF}_aliases  \
+    $RCD/.${HOSTNAMEF}*_aliases  \
     $RCD/.std*_aliases \
     ; do
         [[ -f $f ]] && source $f

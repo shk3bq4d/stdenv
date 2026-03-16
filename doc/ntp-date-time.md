@@ -12,6 +12,7 @@ sudo ntpd -gq
 sudo service ntp start
 sudo chronyc tracking # centos
 sudo chronyc sources  # centos
+ntpdig myserver
 
 # timedatectl
   status                   Show current time settings
