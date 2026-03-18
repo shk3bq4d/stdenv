@@ -696,3 +696,6 @@ source <(curl -s https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/refs/heads/ma
 git rebase --root -i # Start an interactive rebase from the very first commit
 git diff -U10 # --unified=10 more line of contexts in diff
 git diff --unified=10 --color-words
+
+
+git config --global core.longpaths true # windows NTFS, use longpath API instead of normal filesystem API to have more than 260 long paths on windows (up to 32'767)
