@@ -226,6 +226,7 @@ https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-
 replace(string text, from text, to text)
 regexp_replace # https://www.postgresql.org/docs/8.2/functions-matching.html
 regexp_replace('foobarbaz', 'b..', 'X', 'g') --> fooXX
+regexp_instr('foobarbaz', 'b..', 'X', 'g') --> indexOf equivalent, returns position within strig
 select (regexp_match('foobarbequebaz', 'bar.*que'))[1];
 regexp_match
 regexp_matches

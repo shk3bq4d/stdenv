@@ -46,6 +46,32 @@ processors:
 # https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/decode-json-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/processor-script.html # javascript js
+  - script:
+      lang: javascript
+      tag: my_filter
+      params:
+        threshold: 15
+      source: |
+        var p = {threshold: 42};
+        function register(q) { p = q; }
+        function process(event) {
+            if (event.Get("severity") < p.threshold) {
+                event.Cancel();
+            }
+        }
+  - script:
+      id: lowercase
+      lang: javascript
+      tag: my_filter
+      params:
+        fields:
+          - a
+          - b
+      source: |
+        var p = {"fields": ["message"]};
+        function register(q) { p = q; }
+        function process(e) { var k; for (k = p.fields.length - 1; k >= 0; --k) { if (e.Get(p.fields[k])) { e.Put( p.fields[k], e.Get(p.fields[k]).toString().toLowerCase()); } } }
+
 # https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-modules.html
 # processor conditions
 https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html#conditions
