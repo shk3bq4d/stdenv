@@ -1,4 +1,6 @@
 crictl  --runtime-endpoint=unix:///run/containerd/containerd.sock ps
+ctr image list
+crictl image list # kubernetes
 
 
 # LogLevel

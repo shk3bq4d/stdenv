@@ -42,6 +42,9 @@ jacobalberty/unifi:v9.2.87
 jacobalberty/unifi:v9.3.43
 jacobalberty/unifi:v9.3.45
 jacobalberty/unifi:v9.4.19
+jacobalberty/unifi:v9.5.21
+jacobalberty/unifi:v10.0.162
+https://github.com/jacobalberty/unifi-docker/releases/tag/v10.0.162
 
 https://fw-update.ubnt.com/api/firmware
 https://fw-update.ubnt.com/api/firmware-newest
@@ -89,6 +92,8 @@ https://community.ui.com/releases/UniFi-Network-Application-7-4-156/15ac6260-9cd
 * https://community.ui.com/releases/Security-Advisory-Bulletin-036-036/81367bc9-2a64-4435-95dc-bbe482457615
 * https://github.com/jacobalberty/unifi-docker/issues/696
 * https://github.com/jacobalberty/unifi-docker/pull/694
+
+https://community.ui.com/releases/Security-Advisory-Bulletin-062-062/c29719c0-405e-4d4a-8f26-e343e99f931b
 
 
 # docker alternative
