@@ -17,6 +17,8 @@ docker-search-tags.sh jacobalberty/unifi | grep -E '^v' | sort -nr | head -n 10
 ```
 
 https://hub.docker.com/r/jacobalberty/unifi/tags
+
+* [mongo](https://hub.docker.com/_/mongo/tags)
 https://github.com/jacobalberty/unifi-docker/releases
 jacobalberty/unifi:v7.0.25
 jacobalberty/unifi:v7.0.26 # does not exist as of 2022.05.01
