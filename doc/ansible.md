@@ -1410,6 +1410,9 @@ ansible_loop.nextitem      The item from the following iteration of the loop. Un
     backup: yes
 
     validate: python3 -c "import sys, xml.etree.ElementTree as ET; ET.parse(sys.argv[1])" %s # validate an xml file
+    validate: python3 -c "import sys, yaml; yaml.safe_load(open(sys.argv[1]))" %s # well you need python3-yaml for this which isn't default
+    validate: "{{ validate_xml }}" # validate an xml file
+    validate: "{{ validate_yaml }}" # validate a yaml file
 
 - tasks:
    - name: Install Apache
