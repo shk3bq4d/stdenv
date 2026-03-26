@@ -48,6 +48,8 @@ check https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/Tools/certut
 
 openssl x509 -inform pem -in "$F" -noout -text
 openssl x509 -inform pem -in mycert.crt -noout -text | grep -E 'Subject:|Issuer:'
+cat -- bip.crt | openssl x509 -noout -subject
+cat -- bip.crt | openssl x509 -noout -ext subjectAltName | sed -r -e '1d; s/^ +//'
 
 /usr/bin/openssl s_client -connect p-mon-zabbix-001:443 | head -n 20
 h=www.google.com; /usr/bin/openssl s_client -connect $h:443 -servername $h | head -n 20 # SNI Server Name Indication

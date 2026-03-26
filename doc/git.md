@@ -515,6 +515,7 @@ git diff -w --no-color [file names] | git apply --cached --ignore-whitespace # h
 git rev-parse --short HEAD # current revision
 git rev-parse         HEAD # current revision
 
+git clean -fd
 
 # git-crypt
 https://medium.com/faun/https-medium-com-mikhail-advani-secret-management-with-ansible-3bfdd92472ef

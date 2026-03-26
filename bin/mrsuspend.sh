@@ -74,11 +74,12 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
         done
         ~/bin/sshfs-keepass-apr16.sh || true
         ~/bin/sshfs-keepass-apr16-sf.sh || true
+        ~/bin/sshfs-keepass-jpche201p01.ch.pro-sf.sh || true
         date >> ~/.tmp/log/mrsuspend.sh.log
     } &
     # sudo systemctl hibernate # -> to disk
     mri3_lock &
-	sleep 0.3
+    sleep 0.3
     ! sudo systemctl hybrid-sleep && sleep 1 && { pkill i3lock || true; } # -> to disk + to RAM
     # sudo systemctl suspend # -> to RAM
     exit 0
