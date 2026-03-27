@@ -8,10 +8,10 @@ GRUB_CMDLINE_LINUX=""
 # ubuntu bash, also worked on centos
 select Ubuntu option
 e
-goto almost last line (one that starts with linux) and add init=/bin/bash
+goto almost last line (one that starts with linux) and add init=/bin/bash # that trick worked on debian12 with luks on 2026.03.26
 <F10> or C-X
 mount -o rw,remount /
-
+echo b > /proc/sysrq-trigger
 
 # CentOS 7
 Click [View Console] to access the console and click the send CTRL+ALT+DEL button on the top right. Alternatively, you can also click [RESTART] to restart the server.
