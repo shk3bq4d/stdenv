@@ -12,18 +12,18 @@ sudo virsh start pfsense0
 virsh shutdown altlinux3.0
 virsh destroy altlinux3.0
 
-# Mount the CD-ROM iso: 
+# Mount the CD-ROM iso:
 virsh attach-disk your_domain_name /path/to/your.iso hdc --type cdrom --mode readonly
 
-# Change the CD-ROM: 
+# Change the CD-ROM:
 virsh attach-disk your_domain_name /path/to/your/new.iso hdc --type cdrom --mode readonly
 
-# Remove the CD-ROM: 
+# Remove the CD-ROM:
 virsh attach-disk your_domain_name " " hdc --type cdrom --mode readonly
 
 # edit
 virsh # edit altlinux3.0
-<boot dev='cdrom'/> 
+<boot dev='cdrom'/>
 <disk type='file' device='cdrom'>
   <driver name='qemu' type='raw'/>
   <source file='/home/myuser/Downloads/alpine-3.2.3-x86_64.iso'/>
@@ -36,7 +36,7 @@ virsh # edit altlinux3.0
       <mac address='52:54:00:b6:58:85'/>
       <source dev='eno2' mode='passthrough'/>
       <model type='virtio'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>         
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
 </interface>
 
 
@@ -45,10 +45,10 @@ http://serverfault.com/questions/669421/using-a-pfsense-guest-to-firewall-route-
 http://www.geekempire.com/2013/07/virtual-security-onion-via-ubuntu-kvm.html
 
 <hostdev mode='subsystem' type='pci' managed='yes'>
-	<source>
-		<address domain='0x0000' bus='0x00' slot='0x1f' function='0x6'/>
-	</source>
-	<address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+    <source>
+        <address domain='0x0000' bus='0x00' slot='0x1f' function='0x6'/>
+    </source>
+    <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
 </hostdev>
 
 <hostdev mode='subsystem' type='pci' managed='yes'>
@@ -66,11 +66,11 @@ http://www.geekempire.com/2013/07/virtual-security-onion-via-ubuntu-kvm.html
 
 
 <network>
-		<name>passthrough</name>
-		<forward mode='hostdev' managed='yes'>
-			<pf dev='eno2'/>
-		</forward>
-	</network>
+        <name>passthrough</name>
+        <forward mode='hostdev' managed='yes'>
+            <pf dev='eno2'/>
+        </forward>
+    </network>
 
 
 #edit qcow2 filesystem when VM is not running
