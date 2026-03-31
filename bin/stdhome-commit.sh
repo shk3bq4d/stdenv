@@ -3,7 +3,7 @@
 set -e
 if [[ $# -gt 0 ]]; then
     case "$1" in \
-    feb22*|may19*|shaz*|apr16*|charlotte)
+    feb22*|shaz0140508|shaz*|apr16*|charlotte)
 		# not readay yet as I need to load the ssh-agent
         ssh "$1" bin/stdhome-commit.sh
         ;;
