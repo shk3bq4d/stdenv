@@ -72,9 +72,7 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
             fi
             sleep 1
         done
-        ~/bin/sshfs-keepass-apr16.sh || true
-        ~/bin/sshfs-keepass-apr16-sf.sh || true
-        ~/bin/sshfs-keepass-jpche201p01.ch.pro-sf.sh || true
+        run-parts ~/.std/resume-from-suspend/ || true
         date >> ~/.tmp/log/mrsuspend.sh.log
     } &
     # sudo systemctl hibernate # -> to disk
