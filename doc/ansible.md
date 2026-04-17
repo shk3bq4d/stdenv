@@ -2988,3 +2988,5 @@ ansible-inventory -i inventory.yml --vars --vault-id dev@secrets/ansible-vault-d
 item.key is search(sfrx|default('.*'))
 
 backup format: 'MYFILE.2848856.2026-02-09@17:53:37~'
+
+* [rolespec_validate meta/argument_specs.yml](https://steampunk.si/blog/ansible-role-argument-specification/)
