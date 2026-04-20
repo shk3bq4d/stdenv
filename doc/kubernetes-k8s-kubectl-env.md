@@ -1011,3 +1011,6 @@ kubectl config unset contexts.$CTX
 
 
 https://gateway-api.sigs.k8s.io/api-types/httproute/
+
+kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":true}}'
+kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":false}}'
