@@ -43,10 +43,8 @@ DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 renice +1 $$ &>/dev/null
 source $HOME/bin/dot.bashfunctions; pathremove "$DIR"
 for f in \
-    $HOME/.virtualenvs/ansible/bin/activate \
-    $HOME/.virtualenvs/ansible-2.10/bin/activate \
-    $DIR/../.virtualenvs/ansible/bin/activate \
-    $DIR/../.virtualenvs/ansible-2.10/bin/activate \
+    $HOME/.virtualenvs/${ANSIBLE_VENV_NAME:-ansible}/bin/activate \
+    $DIR/../.virtualenvs/${ANSIBLE_VENV_NAME:-ansible}/bin/activate \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
