@@ -19,7 +19,7 @@ except:
 def go(args):
     mri3.renumber_workspaces()
     i3 = i3ipc.Connection()
-    i3.get_tree().find_focused().workspace().parent.parent.workspace()
+    #i3.get_tree().find_focused().workspace().parent.parent.workspace()
     window = i3.get_tree().find_focused()
     name = i3.get_tree().find_focused().workspace().parent.parent.name
     workspaces = [x['num'] for x in json.loads(str(i3_msg('-t', 'get_workspaces')))]

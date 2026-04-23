@@ -2940,6 +2940,7 @@ template_uid:   myuserid
 template_path:   tpl.tpl
 template_fullpath:   /home/me/.tmpp/20240125/tpl.tpl
 template_destpath:
+# ansible managed {{ template_fullpath[git_root_dir|length+1:] }}
 :template_run_date:   2024-01-25 14:50:37.193923
 
 no_log: "{{ ansible_verbosity < 3 }}"
@@ -2988,3 +2989,6 @@ ansible-inventory -i inventory.yml --vars --vault-id dev@secrets/ansible-vault-d
 item.key is search(sfrx|default('.*'))
 
 backup format: 'MYFILE.2848856.2026-02-09@17:53:37~'
+
+* [rolespec_validate meta/argument_specs.yml](https://steampunk.si/blog/ansible-role-argument-specification/)
+https://oneuptime.com/blog/post/2026-02-21-ansible-strategies-large-scale-deployments/view

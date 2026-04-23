@@ -65,7 +65,7 @@ xwininfo
 * https://www.reddit.com/r/i3wm/comments/4twwi8/saving_and_restoring_layouts/
 i3-save-tree --workspace  0 > ~/tmp/2x2.json
 i3-save-tree > ~/.config/i3/i3-save-tree-workspace-coucou.json
-i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json"
+i3-msg "workspace 1; append_layout /home/michael/.i3/workspace-1.json" # restore
 
 i3-msg '[workspace="workspace_name"]' move workspace to output output_index # https://unix.stackexchange.com/questions/397269/i3wm-how-to-move-workspaces-between-monitors
 
@@ -99,3 +99,5 @@ echo "'$(mri3_current_workspace.py)'" XC
 ```
 
 mod+x mri3_lock (x->b)
+
+i3 '[class="Microsoft-identity-broker"] border pixel 30'

@@ -5,9 +5,13 @@
 #DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 set -x
 wids=$(xdotool search --class "keepass")
-~/bin/sshfs-keepass-apr16.sh || true
-~/bin/sshfs-keepass-apr16-sf.sh || true
-sshfs-keepass-jpche201p01.ch.pro-sf.sh || true
+if ! at-home.sh && ! at-work.sh.sh && ~/bin/sshtest-or-glob.sh $(hostname -f) shaz0140504; then
+	true
+else
+	~/bin/sshfs-keepass-apr16.sh || true
+	~/bin/sshfs-keepass-apr16-sf.sh || true
+	sshfs-keepass-jpche201p01.ch.pro-sf.sh || true
+fi
 for wid in $wids; do
     name=$(xdotool getwindowname $wid)
     if [[ $name == *"- KeePassXC" ]]; then

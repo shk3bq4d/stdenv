@@ -444,3 +444,50 @@ PY
 
 
 apt update && apt full-upgrade -y && apt autoremove
+
+apt install       --no-install-recommends
+apt install           Do not consider recommended packages as a dependency for installing.
+apt install           Configuration Item: APT::Install-Recommends.
+apt install 
+apt install       --install-suggests
+apt install           Consider suggested packages as a dependency for installing. Configuration
+apt install           Item: APT::Install-Suggests.
+apt install 
+apt install       -d, --download-only
+apt install           Download only; package files are only retrieved, not unpacked or installed.
+apt install           Configuration Item: APT::Get::Download-Only.
+apt install 
+apt install       -f, --fix-broken
+apt install           Fix; attempt to correct a system with broken dependencies in place. This
+apt install           option, when used with install/remove, can omit any packages to permit APT to
+apt install           deduce a likely solution. If packages are specified, these have to completely
+apt install           correct the problem. The option is sometimes necessary when running APT for
+apt install           the first time; APT itself does not allow broken package dependencies to exist
+apt install           on a system. It is possible that a system's dependency structure can be so
+apt install           corrupt as to require manual intervention (which usually means using dpkg
+apt install           --remove to eliminate some of the offending packages). Use of this option
+apt install           together with -m may produce an error in some situations. Configuration Item:
+apt install           APT::Get::Fix-Broken.
+apt install 
+apt install       -m, --ignore-missing, --fix-missing
+apt install           Ignore missing packages; if packages cannot be retrieved or fail the integrity
+apt install           check after retrieval (corrupted package files), hold back those packages and
+apt install           handle the result. Use of this option together with -f may produce an error in
+apt install           some situations. If a package is selected for installation (particularly if it
+apt install           is mentioned on the command line) and it could not be downloaded then it will
+apt install           be silently held back. Configuration Item: APT::Get::Fix-Missing.
+apt install 
+apt install       --no-download
+apt install           Disables downloading of packages. This is best used with --ignore-missing to
+apt install           force APT to use only the .debs it has already downloaded. Configuration Item:
+apt install           APT::Get::Download.
+apt install 
+apt install       -q, --quiet
+apt install           Quiet; produces output suitable for logging, omitting progress indicators.
+apt install           More q's will produce more quiet up to a maximum of 2. You can also use -q=#
+apt install           to set the quiet level, overriding the configuration file. Note that quiet
+apt install           level 2 implies -y; you should never use -qq without a no-action modifier such
+apt install           as -d, --print-uris or -s as APT may decide to do something you did not
+apt install           expect. Configuration Item: quiet.
+apt install 
+apt install       -s, --simulate, --just-print, --dry-run, --recon, --no-act

@@ -2456,3 +2456,13 @@ php occ files_antivirus:scan
 php occ files_antivirus:status
 php occ files_antivirus:test
 ```
+
+
+# custom app API
+apps.json is a fat 8Mb download
+```sh
+wget https://apps.nextcloud.com/api/v1/platform/32.0.7/apps.json
+jq '.[] | select(.id=="user_saml").releases|.[]|[.version, .created, .platformVersionSpec, .download, .signatureDigest]' apps.json
+jq '.[] | select(.id=="files_antivirus").releases|.[]|[.version, .created, .platformVersionSpec, .download, .signatureDigest]' apps.json
+jq '.[] | select(.id=="impersonate").releases|.[]|[.version, .created, .platformVersionSpec, .download, .signatureDigest]' apps.json
+```

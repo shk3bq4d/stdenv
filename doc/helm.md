@@ -56,41 +56,52 @@ Environment:
 Usage:
   helm [command]
 Available Commands:
-  completion  Generate autocompletions script for the specified shell (bash or zsh)
+  completion  generate autocompletion scripts for the specified shell
   create      create a new chart with the given name
-  delete      given a release name, delete the release from Kubernetes
   dependency  manage a chart's dependencies
-  fetch       download a chart from a repository and (optionally) unpack it in local directory
-  get         download a named release
+  diff        Preview helm upgrade changes as a diff
+  env         helm client environment information
+  get         download extended information of a named release
+  help        Help about any command
   history     fetch release history
-  home        displays the location of HELM_HOME
-  init        initialize Helm on both client and server
-  inspect     inspect a chart
-  install     install a chart archive
-  lint        examines a chart for possible issues
+  install     install a chart
+  lint        examine a chart for possible issues
   list        list releases
   package     package a chart directory into a chart archive
-  plugin      add, list, or remove Helm plugins
+  plugin      install, list, or uninstall Helm plugins
+  pull        download a chart from a repository and (optionally) unpack it in local directory
+  push        push a chart to remote
+  registry    login to or logout from a registry
   repo        add, list, remove, update, and index chart repositories
-  reset       uninstalls Tiller from a cluster
   rollback    roll back a release to a previous revision
   search      search for a keyword in charts
-  serve       start a local http web server
-  status      displays the status of the named release
+  show        show information of a chart
+  status      display the status of the named release
   template    locally render templates
-  test        test a release
+  test        run tests for a release
+  uninstall   uninstall a release
   upgrade     upgrade a release
   verify      verify that a chart at the given path has been signed and is valid
-  version     print the client/server version information
+  version     print the client version information
+
 Flags:
+      --burst-limit int                 client-side default throttling limit (default 100)
       --debug                           enable verbose output
   -h, --help                            help for helm
-      --home string                     location of your Helm config. Overrides $HELM_HOME (default "$HOME/.helm")
-      --host string                     address of Tiller. Overrides $HELM_HOST
+      --kube-apiserver string           the address and the port for the Kubernetes API server
+      --kube-as-group stringArray       group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --kube-as-user string             username to impersonate for the operation
+      --kube-ca-file string             the certificate authority file for the Kubernetes API server connection
       --kube-context string             name of the kubeconfig context to use
-      --kubeconfig string               absolute path to the kubeconfig file to use
-      --tiller-connection-timeout int   the duration (in seconds) Helm will wait to establish a connection to tiller (default 300)
-      --tiller-namespace string         namespace of Tiller (default "kube-system")
+      --kube-insecure-skip-tls-verify   if true, the Kubernetes API server's certificate will not be checked for validity. This will make your HTTPS connections insecure
+      --kube-tls-server-name string     server name to use for Kubernetes API server certificate validation. If it is not provided, the hostname used to contact the server is used
+      --kube-token string               bearer token used for authentication
+      --kubeconfig string               path to the kubeconfig file
+  -n, --namespace string                namespace scope for this request
+      --qps float32                     queries per second used when communicating with the Kubernetes API, not including bursting
+      --registry-config string          path to the registry config file (default "/home/rumo/.config/helm/registry/config.json")
+      --repository-cache string         path to the directory containing cached repository indexes (default "/home/rumo/.cache/helm/repository")
+      --repository-config string        path to the file containing repository names and URLs (default "/home/rumo/.config/helm/repositories.yaml")
 
 
 

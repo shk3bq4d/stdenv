@@ -11,4 +11,7 @@ else
     ARGS="$@"
 fi
 # hosts (1):
-ansible "$ARGS" --list-hosts | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | sort -u
+if [[ $(ansible "$ARGS" --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | wc -l) -eq 0 ]]; then
+    cd $(iaac-dir.sh)
+fi
+ansible "$ARGS" --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | sort -u

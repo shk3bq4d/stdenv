@@ -302,7 +302,7 @@ def traverse_all_elem(start_from=None, only_visible=False):
     k = 0
     while k < len(rA):
         yield rA[k]
-        rA.extend(rA[k].nodes)
+        rA.extend(rA[k].nodes + rA[k].floating_nodes)
         k = k + 1
 
 def set_border_all():
