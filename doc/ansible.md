@@ -2940,6 +2940,7 @@ template_uid:   myuserid
 template_path:   tpl.tpl
 template_fullpath:   /home/me/.tmpp/20240125/tpl.tpl
 template_destpath:
+# ansible managed {{ template_fullpath[git_root_dir|length+1:] }}
 :template_run_date:   2024-01-25 14:50:37.193923
 
 no_log: "{{ ansible_verbosity < 3 }}"

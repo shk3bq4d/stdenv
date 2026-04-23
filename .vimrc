@@ -754,7 +754,35 @@ if version >= 500
         silent redraw!
         return ""
     endfunc
+
 endif
+
+function! MrInsertAnsibleVarPrefix()
+  let l:filepath = expand('%:p')
+  let l:filename = expand('%:t:r')
+  let l:parent   = fnamemodify(l:filepath, ':h:t')
+
+  if l:parent ==# 'group_vars' || l:parent ==# 'host_vars'
+    let l:text = l:filename
+  else
+    let l:text = l:parent
+  endif
+
+  let l:text = tolower(l:text)
+  let l:text = substitute(l:text, '\.', '_', 'g')
+  let l:result = '_50_' . l:text . '_ __to_merge: '
+
+  execute "normal! o\<Esc>"
+  call setline('.', l:result)
+  execute "normal! 0"
+  execute "normal! E"
+  execute "normal! l"
+  execute "normal! x"
+  startinsert
+endfunction
+
+nnoremap <leader>ai :call MrInsertAnsibleVarPrefix()<CR>
+
 if &diff
     set t_Co=8
 endif
