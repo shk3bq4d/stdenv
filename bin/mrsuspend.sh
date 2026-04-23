@@ -3,8 +3,8 @@
 
 set -o pipefail
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
-#exec > >(tee /tmp/logfile.txt)
-#exec 2>&1
+exec > >(tee -a ~/.tmp/log/mrsuspend.sh.log)
+exec 2>&1
 
 _pgrep() {
     pgrep -f "git (fetch|pull|push)"
@@ -64,6 +64,9 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
     before=$(date +%s)
     after=$(( before + delay ))
     {
+        exec > >(tee -a ~/.tmp/log/mrsuspend.sh2.log)
+        exec 2>&1
+        date
         while :; do
             now=$(date +%s)
             if [[ $now -gt $after ]]; then
@@ -72,8 +75,9 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
             fi
             sleep 1
         done
+        set -x
         run-parts ~/.std/resume-from-suspend/ || true
-        date >> ~/.tmp/log/mrsuspend.sh.log
+        date
     } &
     # sudo systemctl hibernate # -> to disk
     mri3_lock &
