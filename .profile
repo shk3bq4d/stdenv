@@ -7,26 +7,12 @@
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
-LOG="$HOME/.tmp/log/dot.profile.log"
-test -f $LOG || touch $LOG
-echo "-----" >>$LOG
-date >> $LOG
-echo "Caller: $0" >>$LOG
-echo "DESKTOP_SESSION: $DESKTOP_SESSION" >>$LOG
-echo "GDMSESSION: $GDMSESSION" >>$LOG
-#while read line; # subshell avoidance
-#do
-#    eval $line
-#done < <(grep -hE "^export (WORK)" ~/.std*)
-
-export TERMINAL=mrurxvt
-#export WFICA_OPTS="-nosound -errno"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
+	. "$HOME/.bashrc"
     fi
 fi
 
@@ -34,11 +20,8 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-if [[ -z $HOSTNAMEF ]]; then
-    if [[ -L /usr/bin/timeout ]] && [[ $(readlink -f /usr/bin/timeout) == *busybox ]]; then
-        export HOSTNAMEF=$(timeout -t 3 hostname -f)
-    else
-        export HOSTNAMEF=$(timeout 3 hostname -f)
-    fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
-[[ -z $HOSTNAME ]] && export HOSTNAME=${HOSTNAMEF//\.*/}
