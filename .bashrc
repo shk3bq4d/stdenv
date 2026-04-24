@@ -71,6 +71,14 @@ is_zsh() { # redundant with ~/bin/dot.bashfunctions, but also needed here
     test -n "${ZSH_VERSION:-}"
 }
 export UNAME="$(uname)"
+export AZURE_CORE_ONLY_SHOW_ERRORS=TRUE
+export AZURE_CORE_ERROR_RECOMMENDATION=FALSE
+export AZURE_CORE_COLLECT_TELEMETRY=FALSE
+export AZURE_LOGGING_ENABLE_LOG_FILE=FALSE
+export AZURE_CORE_SURVEY_MESSAGE=FALSE
+#export "AZURE_AUTO-UPGRADE_ENABLE"=FALSE &>/dev/null
+export AZURE_CORE_NO_COLOR=TRUE
+export AZURE_EXTENSION_USE_DYNAMIC_INSTALL=FALSE
 if is_zsh; then
     UNAME="$UNAME:l"
 else
