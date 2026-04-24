@@ -75,9 +75,10 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
             fi
             sleep 1
         done
+		echo "$(date) A"
         set -x
-        run-parts ~/.std/resume-from-suspend/ || true
-        date
+        run-parts --verbose ~/.std/resume-from-suspend/ || true
+		echo "$(date) B"
     } &
     # sudo systemctl hibernate # -> to disk
     mri3_lock &
