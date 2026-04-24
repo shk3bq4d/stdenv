@@ -55,6 +55,11 @@ echo 'abracadabraici' | grep -Po '.*a\K(.*)' lookbehind lookahead zero-width reg
 \<
 \b
 ^((?!my string).)*$ # regexp not containt substring 'my string'
+
+    \@<= - vim positive lookbehind: foo\@<=bar matches "bar" preceded by "foo"
+    \@<! - vim negative lookbehind: foo\@<!bar matches "bar" not preceded by "foo"
+    \@= - vim positive lookahead: foo\@= matches if followed by... wait, this is actually a zero-width match ahead
+    \@! - vim negative lookahead: foo\@! — matches position where "foo" does not follow
 ```
 
 Construct     Matches

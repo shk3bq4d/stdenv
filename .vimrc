@@ -783,6 +783,17 @@ endfunction
 
 nnoremap <leader>ai :call MrInsertAnsibleVarPrefix()<CR>
 
+" Replace Jinja/Twig whitespace control markers within visual selection
+" {% -> {%-    %} -> -%}    {{ -> {{-    }} -> -}}
+function! AddWhitespaceControl() range
+	silent! execute a:firstline . ',' . a:lastline . 's/{%-\@!/{%-/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/-\@<!%}/-%}/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/{{-\@!/{{-/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/-\@<!}}/-}}/g'
+endfunction
+
+vnoremap <leader>jw :call AddWhitespaceControl()<CR>
+
 if &diff
     set t_Co=8
 endif
