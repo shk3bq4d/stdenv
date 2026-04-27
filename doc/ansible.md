@@ -2993,3 +2993,6 @@ backup format: 'MYFILE.2848856.2026-02-09@17:53:37~'
 * [rolespec_validate meta/argument_specs.yml](https://steampunk.si/blog/ansible-role-argument-specification/)
 https://oneuptime.com/blog/post/2026-02-21-ansible-strategies-large-scale-deployments/view
 export ANSIBLE_VENV_NAME=ansible-2.19; test -e ~/.virtualenvs/${ANSIBLE_VENV_NAME}/bin/activate || python3 -m venv ~/.virtualenvs/${ANSIBLE_VENV_NAME}
+
+
+find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' | grep -vxF '[]' | yq 'unique | sort'

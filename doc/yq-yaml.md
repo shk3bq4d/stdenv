@@ -1,3 +1,4 @@
+# /* ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 : */
 * https://github.com/mikefarah/yq/issues/462 # list indentation
 yq --version
 
@@ -75,3 +76,7 @@ yq -o json eval-all '[..|select(has("merged_var_name"))]' $(ack -l merged_var_na
 
 yq '(... | select(type == "!!seq")) |= sort' # sort list / array recursively, useful for ansible groups comparison
 ansible -m debug -a var=groups MYHOST 2>/dev/null | sed -n -e '/groups:/,/PLAY RECAP/ p' | head -n -1 | yq '(... | select(type == "!!seq")) |= sort'
+
+
+yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' main.yml
+find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' | grep -vxF '[]' | yq 'unique | sort'

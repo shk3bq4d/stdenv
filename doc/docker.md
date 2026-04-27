@@ -598,6 +598,9 @@ ENV DEBIAN_FRONTEND noninteractive # apt Dockerfile
 
 
 docker-compose up
+docker-compose stop
+docker-compose rm
+docker-compose build
 
 sudo nerdctl --namespace k8s.io ps -a # kubernetes k8s
 docker ps &>/dev/null && SUDO="" || SUDO="sudo"; $SUDO docker ps
