@@ -12,4 +12,6 @@ wget -qO- URL # stdout, --quiet and --output-document stdout
 wget --no-check-certificate    # ssl certificates validation
 wget --certificate=FILEPATH    # ssl certificates validation
 wget --ca-certificate=FILEPATH # ssl certificates validation
+
+for f in *\?*; do mv "$f" "${f%%\?*}"; done # post download filename query string removal
 ```

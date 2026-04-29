@@ -1,4 +1,12 @@
 # /* ex: set filetype=python fenc=utf-8 expandtab ts=4 sw=4 : */
+xmllint --xpath '//element/@attribute' file.xml
+xmlstarlet sel -t -v "//element/@attribute" file.xml
+xpath -q -e '//element/@attribute' file.xml
+xidel -se '//element/@attribute' file.xml
+saxon-lint --xpath '//element/@attribute' file.xml
+pup # for html files that are possibly not well formed
+
+xmlstarlet sel -t -m "//Variable" -v "concat(Name, '=', Value)" -n file.xml | while IFS='=' read -r name value; do export "$name"="$value"; done
 
 //*[@class='real-time']/text()']/text()
  @ 
