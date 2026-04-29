@@ -1222,3 +1222,4 @@ echo "${mydict[@]}" # To list all values:
 az ad app list | jq -c '.[]' | while read app; do
     read appid id name < <(echo "$app" | jq -r '[.appId, .id, .displayName] | join(" ")')
 ```
+#[[ -n ${VIMF6:-} ]] && echo running from vim-f6

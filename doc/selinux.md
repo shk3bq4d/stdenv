@@ -115,6 +115,8 @@ allow httpd_t http_port_t:udp_socket name_bind;
 
 ```sh
 semanage fcontext -l | grep -i postgres # list all types
+matchpathcon $PWD          # check what labels would be applied for specified path
+matchpathcon /var/www/html # check what labels would be applied for specified path
 
 echo "" | audit2allow -rm bip
 
