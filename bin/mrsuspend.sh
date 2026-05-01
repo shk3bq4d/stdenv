@@ -75,15 +75,21 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
             fi
             sleep 1
         done
-		echo "$(date) A"
+        echo "$(date) A"
         set -x
         run-parts --verbose ~/.std/resume-from-suspend/ || true
-		echo "$(date) B"
+        echo "$(date) B"
     } &
     # sudo systemctl hibernate # -> to disk
     mri3_lock &
     sleep 0.3
-    ! sudo systemctl hybrid-sleep && sleep 1 && { pkill i3lock || true; } # -> to disk + to RAM
+    if sudo systemctl hybrid-sleep; then
+        echo "success suspend"
+    else
+        echo "FAILURE suspend"
+        sleep 1
+        pkill i3lock || true
+    fi
     # sudo systemctl suspend # -> to RAM
     exit 0
     ;;
