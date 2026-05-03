@@ -344,6 +344,8 @@ kubectl get pod -n kafka my-kafka-0 -w # watch
 
 # julien debug EBS
 kubectl taint node ip-172-18-10-9.us-east-2.compute.internal NodeWithImpairedVolumes- # remove taint (notice the dash after NodeWithImpairedVolumes-)
+kubectl taint node ip-172-18-10-9.us-east-2.compute.internal NodeWithImpairedVolumes- # remove taint (notice the dash after NodeWithImpairedVolumes-)
+kubectl taint node aks-system-86446919-vmss000001 node.kubernetes.io/unschedulable:NoSchedule
 kubectl get node -o yaml | grep -C 10 taint
 
 export KUBECONFIG=$(echo ~/git/g*n/infra/K8s/kubectl_config) #* markdown sucks adding star in comment
