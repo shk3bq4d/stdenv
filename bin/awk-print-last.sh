@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-awk '{print $NF}'
+stdbuf -o0 awk '{print $NF}'
