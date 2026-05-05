@@ -81,11 +81,14 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
         echo "$(date) B"
     } &
     # sudo systemctl hibernate # -> to disk
-    mri3_lock &
+    mri3_lock &>/dev/null &
+	set -x
     sleep 0.3
     if sudo systemctl hybrid-sleep; then
+		set +x
         echo "success suspend"
     else
+		set +x
         echo "FAILURE suspend"
         sleep 1
         pkill i3lock || true
