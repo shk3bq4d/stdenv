@@ -36,3 +36,12 @@ LimitNOFILE=65536
 
 
 squid -k parse # validate test config
+squid -k parse && systemctl restart squid
+/sbin/squid -v | grep -i version
+Squid Cache: Version 6.13 # trixie debian13
+Squid Cache: Version 5.7  # bookworm debian12
+
+#keepalive
+
+systemctl stop squid
+ls -l /run/faillock/squidsync
