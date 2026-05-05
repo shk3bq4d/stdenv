@@ -120,6 +120,7 @@ kubectl get pv -o json | jq '.items[].metadata.annotations."http://gluster.kuber
 kubectl logs -f -n kafka --timestamps=true mrgolang
 kubectl logs -f -n kafka --timestamps=true podname --since=3h
 kubectl logs -f -n kafka --timestamps=true podname --since-time=2020-10-27T05:40:00+00:00 # RFC 3339
+kubectl logs -f -n kube-system --timestamps=true deployment.apps/coredns
 
 kubectl describe all --all-namespaces
 kubectl describe deployment
