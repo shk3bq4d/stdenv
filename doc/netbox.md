@@ -1,3 +1,4 @@
+* https://docs.netbox.dev/en/stable/release-notes/version-4.6/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.5/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.4/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.3/ # changelog

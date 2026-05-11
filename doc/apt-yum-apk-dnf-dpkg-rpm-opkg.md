@@ -44,6 +44,7 @@ apt-get upgrade -s | grep -i security | awk '{print $2}' | xargs -o apt install
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
 sudo systemctl restart apt-daily-upgrade.timer # another way to reach unattended-upgrade
+sudo systemctl disable apt-daily-upgrade.timer # block OS updates
 
 ```
 
