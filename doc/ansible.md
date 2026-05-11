@@ -1762,7 +1762,7 @@ ansible_persistent_connect_timeout        controls how long the persistent conne
 ansible_become_ask_pass                   to prompt for privilege escalation password.
 ansible_invalid_task_attribute_failed     ‘false’, invalid attributes for a task will result in warnings instead of errors
 ansible_persistent_command_timeout        controls the amount of time to wait for response from remote device before timing out presistent connection.
-ansible_inventory                         separated list of Ansible inventory sources
+ansible_inventory                         comma-separated list of Ansible inventory sources
 ansible_gather_timeout                    the timeout in seconds for the implicit fact gathering.It does not apply to user defined M(setup) tasks.
 ansible_library                           separated paths in which Ansible will search for Modules.
 ansible_module_args                       sets the default arguments to pass to the ansible adhoc binary if no -a is specified.
