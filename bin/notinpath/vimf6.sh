@@ -8,7 +8,10 @@ export VIMF6=1
 current_epoch=$(date +%s) # duration
 SCRIPT="$1"
 LOG="$2"
-test -d ~/.tmp/vim/output || mkdir -p ~/.tmp/vim/output
+if [[ -z "${RCD:-}" ]]; then
+    RCD="$HOME"
+fi
+test -d $RCD/.tmp/vim/output || mkdir -p $RCD/.tmp/vim/output
 #exec > >(tr -d '\r' | tee "$LOG")
 exec > >(tee "$LOG")
 exec 2>&1
@@ -23,9 +26,9 @@ function myexit() {
 
 # puppet module to capsule
 if [[ "$SCRIPT" = */puppet-envs/modules/* ]]; then
-    last_host_fp=~/.tmp/vimf6-last_host
-    last_capsule_fp=~/.tmp/vimf6-last_capsule
-    all_capsule_fp=~/.tmp/vimf6-all_capsule
+    last_host_fp=$RCD/.tmp/vimf6-last_host
+    last_capsule_fp=$RCD/.tmp/vimf6-last_capsule
+    all_capsule_fp=$RCD/.tmp/vimf6-all_capsule
 
     k=0
     if [[ -f $last_capsule_fp ]]; then

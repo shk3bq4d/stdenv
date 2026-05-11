@@ -1,0 +1,1 @@
+../../../bin/notinpath/vimf6.sh
