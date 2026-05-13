@@ -10,9 +10,9 @@ Section: misc
 Priority: optional
 Architecture: all
 Maintainer: Dummy <dummy@example.com>
-Provides: some-package
-Conflicts: some-package
-Replaces: some-package
+Provides: $i
+Conflicts:
+Replaces:
 Description: Dummy empty package
 EOF
 
