@@ -565,3 +565,5 @@ du -ckshx --inodes * | sort -rh | head -11 # count files
 
 sudo brightnessctl set 2%- # apt install brightnessctl
 echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
+
+sudo setcap cap_net_raw+ep $(which ping)
