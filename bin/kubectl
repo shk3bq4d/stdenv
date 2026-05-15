@@ -6,6 +6,7 @@ set -euo pipefail
 kubectl_version=1.31.11
 kubectl_version=1.33.5
 kubectl_version=1.35.3
+kubectl_version=1.35.4
 #https://storage.googleapis.com/kubernetes-release/release/stable.txt
 
 if [[ -n "${SUDO_USER:-}" ]]; then
@@ -26,24 +27,31 @@ if [[ ! -f "$BIN" ]]; then
         >&2 echo "FATAL: no tty and no such file $BIN when calling with args $@"
         exit 1
     fi
-    echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
+    >&2 echo -n "$BIN doesn't exist. Would you like to download it? (yN): "
     read _read
-    echo # read
+    >&2 echo # read
     case "${_read,,}" in \
     y|Y|yes)
         true
         ;;
     *)
-        exit 1
+        BIN="$(find "$H/bin" -maxdepth 1 -type f -name "kubectl-*" | { grep -E '/kubectl-[0-9]+\.[0-9]+\.[0-9]+$' || true; } | sort -V | tail -n 1)"
+        if [[ -f "$BIN" ]]; then
+            >&2 echo "Using $BIN instead"
+        else
+            exit 1
+        fi
         ;;
     esac
-    test -d ~/.tmp || mkdir ~/.tmp
-    cd ~/.tmp
-    curl -sLO "https://dl.k8s.io/release/v${kubectl_version}/bin/linux/amd64/kubectl"
-    mv -f ~/.tmp/kubectl $BIN
-    chmod u+x $BIN
-    if [[ -n "${SUDO_USER:-}" ]]; then
-        chown "${SUDO_USER:-}": $BIN
+    if [[ ! -f "$BIN" ]]; then
+        test -d ~/.tmp || mkdir ~/.tmp
+        cd ~/.tmp
+        curl -sLO "https://dl.k8s.io/release/v${kubectl_version}/bin/linux/amd64/kubectl"
+        mv -f ~/.tmp/kubectl $BIN
+        chmod u+x $BIN
+        if [[ -n "${SUDO_USER:-}" ]]; then
+            chown "${SUDO_USER:-}": $BIN
+        fi
     fi
 fi
 

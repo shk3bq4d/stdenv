@@ -1,3 +1,5 @@
+# CVE-2026-8053 FlatBSON Duplicate Field Index Drift
+
 # CVE-2026-42945 (NGINX Rewrite Module Vulnerability)
 * upstream: fixed in 1.30.1
 * https://security-tracker.debian.org/tracker/CVE-2026-42945

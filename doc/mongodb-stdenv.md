@@ -13,6 +13,7 @@ show roles  //Print a list of all roles, both user-defined and built-in, for the
 # upgrade
 ```sh
 docker exec -it mongo mongo --eval 'db.adminCommand({ setFeatureCompatibilityVersion: "4.0" })'
+docker exec -it mongo mongo --eval 'db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })'
 ```
 
 

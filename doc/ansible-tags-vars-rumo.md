@@ -8,6 +8,7 @@ desktop-become-local.sh firefox_prefs
 desktop-become-local.sh firefox_policies
 desktop-local.sh i3
 desktop-local.sh sf
+desktop-local.sh gitalternates # sf
 desktop-local.sh git-crypt
 desktop-local.sh i3blocks
 desktop-local.sh i3cfg
