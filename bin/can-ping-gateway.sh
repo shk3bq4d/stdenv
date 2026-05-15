@@ -9,5 +9,5 @@ gateway() {
     ip route </dev/null | grep default | awk '{print $3}'
 }
 
-!gateway &>/dev/null && exit 1
+! gateway &>/dev/null && exit 1
 ping -c 1 $(gateway) &>/dev/null && exit 0 || exit 2
