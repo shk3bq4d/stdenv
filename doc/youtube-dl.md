@@ -1,5 +1,7 @@
 ```sh
 rm -r ~/.local/lib/python3*/site-packages/youtube_dl* &&  pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
+mv ~/.local/lib/python3*/site-packages/youtube_dl* ~/.local/lib/python3*/site-packages/ydl-backup/;   pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
+pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
 ```
 $ youtube-dl 'https://www.youtube.com/watch?v=wQP9XZc2Y_c' --recode-video mp4 --postprocessor-args '-strict -2'
 
