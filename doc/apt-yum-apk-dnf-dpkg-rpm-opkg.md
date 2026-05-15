@@ -492,3 +492,5 @@ apt install           as -d, --print-uris or -s as APT may decide to do somethin
 apt install           expect. Configuration Item: quiet.
 apt install 
 apt install       -s, --simulate, --just-print, --dry-run, --recon, --no-act
+
+https://linuxcapable.com/how-to-manage-third-party-apt-repos-on-debian-with-extrepo/
