@@ -1,3 +1,31 @@
+# CVE-2026-8053 FlatBSON Duplicate Field Index Drift
+
+# CVE-2026-42945 (NGINX Rewrite Module Vulnerability)
+* upstream: fixed in 1.30.1
+* https://security-tracker.debian.org/tracker/CVE-2026-42945
+
+# CVE-2026-46300 Fragnesia 
+* https://security-tracker.debian.org/tracker/CVE-2026-46300
+* https://almalinux.org/blog/2026-05-13-fragnesia-cve-2026-46300/
+```sh
+sudo sh -c "printf 'install esp4 /bin/false\ninstall esp6 /bin/false\ninstall rxrpc /bin/false\n' > /etc/modprobe.d/fragnesia.conf; rmmod esp4 esp6 rxrpc 2>/dev/null; true"
+```
+
+# Dirty Frag (CVE-2026-43284, CVE-2026-43500)
+* https://security-tracker.debian.org/tracker/CVE-2026-43284
+* https://security-tracker.debian.org/tracker/CVE-2026-43500
+* https://almalinux.org/blog/2026-05-07-dirty-frag/
+```sh
+sudo sh -c "printf 'install esp4 /bin/false\ninstall esp6 /bin/false\ninstall rxrpc /bin/false\n' > /etc/modprobe.d/dirtyfrag.conf; rmmod esp4 esp6 rxrpc 2>/dev/null; true"
+```
+
+# CVE-2026-31431 Copy Fail
+```sh
+echo "install algif_aead /bin/false" > /etc/modprobe.d/disable-algif-aead.conf
+rmmod algif_aead 2>/dev/null || true
+```
+
+
 # CVE-2025-8067 UDisks daemon allows privilege escalation
 https://cybersecuritynews.com/linux-udisks-daemon-vulnerability/ 
 # CVE-2024-45802 CVE-2024-37894 squid esi
