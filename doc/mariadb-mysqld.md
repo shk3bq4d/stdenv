@@ -1407,3 +1407,4 @@ git for-each-ref --sort=-creatordate --format '%(creatordate:iso) %(refname)' re
 replace(replace(replace(replace(replace(replace(replace(t.description, '[', '%5B'), '/', '%2F'), ']', '%5D'), ':', '%3A'), '{', '%7B'), '}', '%7D'), ' ', '%20')
 ```
 
+36 from master when reading data from binary log: 'Error: connecting slave requested to start from GTID 0-1-2727085203, which is not in the master's binlog'

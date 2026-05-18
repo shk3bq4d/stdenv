@@ -32,12 +32,16 @@ if [[ -d secrets ]]; then
         )"
 fi
 
-vagrant_args=()
+extra_args=()
 if [[ -f .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory ]]; then
-    vagrant_args+=('--ssh-extra-arg="-o StrictHostKeyChecking=No"')
-    vagrant_args+=('-i')
-    vagrant_args+=('.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory')
+    extra_args+=('--ssh-extra-arg="-o StrictHostKeyChecking=No"')
+    extra_args+=('-i')
+    extra_args+=('.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory')
 fi
+
+extra_args+=('-e_strategy=linear')
+
+
 >&2 echo "vaults_args are $vaults_args"
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 renice +1 $$ &>/dev/null
@@ -51,7 +55,7 @@ for f in \
         export PATH="$PATH:$DIR" # iaac needs to have ~/bin in PATH that was removed with pathremove
         set +u
         set -x
-        "$BINNAME" "${vagrant_args[@]}" $vaults_args "$@"
+        "$BINNAME" "${extra_args[@]}" $vaults_args "$@"
         set +x
         set -u
         exit $?
@@ -64,4 +68,4 @@ if [[ -z "$BIN" ]]; then
     exit 1
 fi
 
-$BIN $( echo -n "${vagrant_args[@]}") $vaults_args "$@"
+$BIN $( echo -n "${extra_args[@]}") $vaults_args "$@"

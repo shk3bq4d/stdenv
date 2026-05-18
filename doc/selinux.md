@@ -95,6 +95,9 @@ semodule --build  --disable_dontaudit # show hidden denies nolog no log
 # temporary disable
 setenforce 0 # disable
 setenforce 1 # reenable
+# Put SELinux in permissive mode just for syslog-ng's domain
+semanage permissive -a syslogd_t
+semanage permissive -d syslogd_t # reset domain syslog-ng to enforcing
 
 ## loadable policy
 ```sh
