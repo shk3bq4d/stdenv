@@ -7,13 +7,10 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
-exec > >(tee -a ~/.tmp/log/std-resume-from-suspend-$(basename $0 .sh).log)
-exec 2>&1
-
-set -x
-tmpp
-for i in ~/.ssh/c/*
-ssh-reset-all-connection-masters.sh
-waiting-for-network.sh
-echo done
-exit 0
+set +e
+find ~/.ssh/c -mindepth 1 | xargs ls -1t | while read line; do
+    echo "$line"
+    ssh -S "$line" -O exit dummy </dev/null  && echo " ok" || echo " KO"
+    test -e "$line" && rm "$line"
+done
+pkill '^ssh$'
