@@ -96,6 +96,35 @@ elif [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source $ZSH/oh-my-zsh.sh
 else
     echo -e "oh-my-zsh absent\ninstall via sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\"\nor visit https://github.com/robbyrussell/oh-my-zsh"
+    POWERLEVEL9K_USER_FOREGROUND='white'
+    POWERLEVEL9K_USER_BACKGROUND='blue'
+    POWERLEVEL9K_HOST_FOREGROUND='white'
+    POWERLEVEL9K_HOST_BACKGROUND='cyan'
+    POWERLEVEL9K_USER_DEFAULT_FOREGROUND='white'
+    POWERLEVEL9K_USER_DEFAULT_BACKGROUND='green'
+    POWERLEVEL9K_USER_DEFAULT_FOREGROUND='28'
+    POWERLEVEL9K_USER_DEFAULT_BACKGROUND='250'
+    POWERLEVEL9K_USER_SUDO_FOREGROUND='28'
+    POWERLEVEL9K_USER_SUDO_BACKGROUND='250'
+    POWERLEVEL9K_USER_ROOT_FOREGROUND='28'
+    POWERLEVEL9K_USER_ROOT_BACKGROUND='250'
+    POWERLEVEL9K_HOST_REMOTE_FOREGROUND='white'
+    POWERLEVEL9K_HOST_REMOTE_BACKGROUND='cyan'
+    #POWERLEVEL9K_COLOR_SCHEME="dark"
+    POWERLEVEL9K_ALWAYS_SHOW_USER=false
+    POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+    POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='teal'
+    POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
+    POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+    for i in \
+        /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+        /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+        /usr/share/zsh-z/zsh-z.plugin.zsh \
+        /usr/share/powerlevel9k/powerlevel9k.zsh-theme \
+        ${RCD:-/nonexisting}/.bashrc
+        ; do
+        test -r $i && source $i
+    done
 fi
 setopt null_glob
 for f in \
