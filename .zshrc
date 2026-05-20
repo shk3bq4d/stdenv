@@ -121,7 +121,6 @@ else
         /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
         /usr/share/zsh-z/zsh-z.plugin.zsh \
         /usr/share/powerlevel9k/powerlevel9k.zsh-theme \
-        ${RCD:-/nonexisting}/.bashrc
         ; do
         test -r $i && source $i
     done
