@@ -529,6 +529,7 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
+umask 027
 ZSH_COMPDUMP="$HOME/.zcompdump-${USER}"
 autoload -Uz compinit
 compinit -d "$ZSH_COMPDUMP"
