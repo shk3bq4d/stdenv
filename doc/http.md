@@ -1,4 +1,8 @@
 
+http://one.one.one.one/ # plain-text http
+http://httpstat.us/ # plain-text http
+http://httpstat.us/500 # to return an HTTP 500
+
 100 Continue.  The server has received the request headers and the client should proceed to send the request body (in the case of a request for which a body needs to be sent; for example, a POST request). Sending a large request body to a server after a request has been rejected for inappropriate headers would be inefficient. To have a server check the request's headers, a client must send Expect: 100-continue as a header in its initial request and receive a 100 Continue status code in response before sending the body. The response 417 Expectation Failed indicates the request should not be continued.[2]
 101 Switching Protocols.  The requester has asked the server to switch protocols and the server has agreed to do so.[5]
 102 Processing (WebDAV; RFC 2518).  A WebDAV request may contain many sub-requests involving file operations, requiring a long time to complete the request. This code indicates that the server has received and is processing the request, but no response is available yet.[6] This prevents the client from timing out and assuming the request was lost.
@@ -199,9 +203,6 @@ location.replace('https://85.184.255.102');
 
 # common headers
 Content-Type: application/x-www-form-urlencoded
-
-http://httpstat.us/500 # to return an HTTP 500
-http://httpstat.us/ # http only
 
 http://http-various-codes.k.abc1.ch/code/500
 https://http-various-codes.k.abc1.ch/code/500/anything-still-works
