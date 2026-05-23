@@ -725,3 +725,7 @@ erlang-repl
 rust
 matlab
 r
+
+# to PDF
+sudo apt install pandoc texlive-xetex lmodern texlive-fonts-recommended
+pandoc New\ Note.md -o document.pdf --pdf-engine=xelatex
