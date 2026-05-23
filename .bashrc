@@ -383,7 +383,8 @@ elif hash ack &>/dev/null; then
     alias ackf='ack -f'
 fi
 #alias ducks='du -ckshx -- * | sort -rh | head -11'
-alias ducks='find . -mindepth 1 -maxdepth 1 -xdev -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
+#alias ducks='find . -mindepth 1 -maxdepth 1 -xdev -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
+alias ducks='find . -mindepth 1 -maxdepth 1 -xdev ! -exec mountpoint -q -- {} \; -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
 #alias tr_newline2null="tr '\\n' '\\0'"
 #alias ducks='stat -c "%d %n" $(find $PWD -mindepth 1 -maxdepth 1 -type d) | grep "^$(stat -c %d $PWD)" | sed -e "s/[^ ]* //" | sort | tr_newline2null | xargs -r0 du -ckshx -- | sort -rh | head -11'
 #alias ducks='find $PWD -mindepth 1 -maxdepth 1 -print0 | xargs -r0 stat -c "%d %n" | grep "^$(stat -c %d $PWD)" | sed -e "s/[^ ]* //" | sort | tr_newline2null | xargs -r0 du -ckshx -- | sort -rh | head -11'
