@@ -163,6 +163,8 @@ kubectl create namespace stdenv; kubectl run -n stdenv stdenv --image shk3bq4d/s
                                  kubectl run -n default stdenv --image shk3bq4d/stdenv:stdenv -o yaml --command -- tail -f /dev/null
 kubectl run kubectl --image bitnami/kubectl --command -- tail -f /dev/null
 kaf https://raw.githubusercontent.com/shk3bq4d/stdenv/stdenv/docker/stdenv/daemonset.yml
+kl jobs/mrmanual
+klf jobs/mrmanual
 keti -n stdenv daemonsets/stdenv -- zsh                                                           18:06:02  537ms
 kubectl exec -itn stdenv stdenv -- zsh
 kubectl get pod -n stdenv --no-headers | awk '{ print $1 }' | xargs -tn1 -I@ kubectl exec -n stdenv @ -- curl -s http://whatismyip.akamai.com/
