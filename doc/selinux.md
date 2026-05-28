@@ -28,6 +28,9 @@ getsebool -a # list all options for booleans
 
 
 semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
+semanage port -d -p tcp -t http_port_t 10050
+semanage port -d -l | grep zabbix
+semanage port -d -l | grep 10050
 
 semanage export #  print local deviation
 ```
