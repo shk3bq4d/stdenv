@@ -278,3 +278,6 @@ deny all;             # IP whitelisting
             #proxy_set_header x-remote-ip         "127.111.111.5";
             #proxy_set_header x-remote-addr       "127.111.111.6";
             #proxy_set_header x-real-ip           $remote_addr;
+
+# rate limit
+don't forget to set burst equal to your rate, otherwise you can get rate_limited with only 2 requests if they are received within too close of each other
