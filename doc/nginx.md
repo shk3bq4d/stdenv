@@ -281,3 +281,13 @@ deny all;             # IP whitelisting
 
 # rate limit
 don't forget to set burst equal to your rate, otherwise you can get rate_limited with only 2 requests if they are received within too close of each other
+
+test with
+```sh
+apt install hey
+hey -n 100 -c 45 -q 1 https://$(hostname -f)
+# hey  -n     Number of requests to run. Default is 200.
+# hey  -c     Number  of workers to run concurrently. Total number of requests cannot be smaller than the concurrency level. De‐
+# hey         fault is 50.
+# hey  -q     Rate limit, in queries per second (QPS) per worker. Default is no rate limit.
+```
