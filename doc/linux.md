@@ -567,3 +567,12 @@ sudo brightnessctl set 2%- # apt install brightnessctl
 echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
 
 sudo setcap cap_net_raw+ep $(which ping)
+
+
+# usb key max compatibility
+```sh
+sudo wipefs -a /dev/sda
+sudo parted /dev/sda --script mklabel msdos
+sudo parted /dev/sda --script mkpart primary exfat 1MiB 100% || sudo parted /dev/sda --script mkpart primary 1MiB 100%
+sudo mkfs.exfat -n USBKEY /dev/sda1 || { sudo apt install exfatprogs && sudo mkfs.exfat -n USBKEY /dev/sda1; }
+```
