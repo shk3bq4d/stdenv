@@ -25,6 +25,8 @@ if hostname == $WORK_PC1 || hostname == "bipbip"
 else
 endif
 
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
+
 " https://vi.stackexchange.com/questions/14622/how-can-i-close-the-netrw-buffer
 " https://github.com/tpope/vim-vinegar/issues/13
 "autocmd FileType netrw setl bufhidden=wipe " <-- still leaves one buffer open. I found this solution, which closes it after opening the file:
@@ -122,6 +124,8 @@ catch /^Vim\%((\a\+)\)\=:E117/
 endtry
 let main_syntax = '' " trying to solve a bug in /usr/local/share/vim/vim80/syntax/html.vim:183 FreeBSD 2017.02.11
 
+set runtimepath+=/usr/share/vim-youcompleteme/
+"runtime plugin/youcompleteme.vim
 
 syntax on
 endif
