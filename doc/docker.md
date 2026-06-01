@@ -649,3 +649,5 @@ https://production.cloudflare.docker.com Docker Pull/Push (Paid plans)
 https://docker-images-prod.6aa30f8b08e16409b46e0173d6de2f56.r2.cloudflarestorage.com Docker Pull/Push (Personal plan / Anonymous)
 https://docker-pinata-support.s3.amazonaws.com Troubleshooting
 https://api.dso.docker.com Docker Scout service
+
+XDG_RUNTIME_DIR=/run/user/$(id -u) systemctl status --user docker

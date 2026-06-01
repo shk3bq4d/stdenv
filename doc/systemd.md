@@ -1349,3 +1349,5 @@ systemctl show --value -p MainPID filebeat                 # systemd 249
 journalctl -xb # grub Welcome to emergency mode! After logging in, type "journactl -xb" to view system logs, "systemctl reboot" to reboot, "systemctl default" or ^D to try again to boot into default mode. Give root password for maintenance
 
 systemctl list-timers # show
+
+XDG_RUNTIME_DIR=/run/user/$(id -u) systemctl status --user docker
