@@ -2996,3 +2996,5 @@ export ANSIBLE_VENV_NAME=ansible-2.19; test -e ~/.virtualenvs/${ANSIBLE_VENV_NAM
 
 
 find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' | grep -vxF '[]' | yq 'unique | sort'
+
+ansible-debug-parser.py # ANSIBLE_DEBUG=1
