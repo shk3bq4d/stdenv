@@ -63,6 +63,7 @@ kubectl get pod
 curl $(minikube service hello-minikube --url)
 kubectl delete services hello-minikube
 kubectl delete deployment hello-minikube
+kubectl delete --wait=false namespace hello-minikube # noblocking
 minikube stop # stop VM
 minikube addons list
 minikube addons enable ingress
@@ -889,8 +890,9 @@ data:
 ```
 
 ```sh
-kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
-kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true # kubectl get all kinds
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
 
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
@@ -1019,3 +1021,5 @@ https://gateway-api.sigs.k8s.io/api-types/httproute/
 
 kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":true}}'
 kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":false}}'
+
+kubectl patch opensearchclusters.opensearch.dremio.io -n dremio opensearch-cluster --type=merge -p '{"metadata":{"finalizers":[]}}' # force delete
