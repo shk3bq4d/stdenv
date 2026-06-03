@@ -942,8 +942,8 @@ exit 0
 set -euo pipefail
 function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
 [[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
-[[ $# -lt 1 || $# -gt 2 ]] && echo "FATAL: incorrect number of args" && usage && exit 1
-for i in sed which grep; do ! command -v "$i" && echo "FATAL: unexisting dependency $i" && exit 1; done
+[[ $# -lt 1 || $# -gt 2 ]] && >&2 echo "FATAL: incorrect number of args" && usage && exit 1
+for i in sed which grep; do ! command -v "$i" && >&2 echo "FATAL: unexisting dependency $i" && exit 1; done
 REMOTEHOST=$1
 REMOTEPORT=${2:-12345}
 echo EOF
