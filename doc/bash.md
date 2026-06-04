@@ -1313,5 +1313,10 @@ export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 #*)   false;;
 #esac
 
+for ((i = 1; i <= ${#secret}; i++)); do
+while IFS= read -r project_name; do
+  true
+done < <(mage_projects)
+
 echo EOF
 exit 0
