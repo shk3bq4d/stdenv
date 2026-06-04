@@ -17,7 +17,11 @@ xprop -id "$(xdotool getactivewindow)" |
 if grep -F "$s" "$f"; then
     echo "duplicate $s!"
 else
-    echo "$s" >> "$f"
+    hf=$(hostname -f)
+    if ! grep -x $hf $f; then
+        echo "$hf" >> $f
+    fi
+    sed -i -e "/$hf/a $s" "$f"
     echo "ok $s!"
 fi
 exit 0

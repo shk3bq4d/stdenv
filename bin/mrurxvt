@@ -43,7 +43,7 @@ triangleresize
 2spot
 Shepards
 Inverse
-mean
+#mean
 #plasma
 #noise
 noisehue
