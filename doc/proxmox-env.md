@@ -88,3 +88,12 @@ pveum realm add azuread --type openid \
 https://galaxy.ansible.com/ui/repo/published/community/proxmox/docs/?
 https://github.com/ansible-collections/community.proxmox
 https://docs.ansible.com/projects/ansible/latest/collections/community/proxmox
+
+pveum user token list root@pam
+pveum user token list --output json root@pam
+pveum user token add root@pam zabbix -privsep 1
+pveum user token add --output json root@pam zabbix -privsep 1
+pveum user token remove root@pam zabbix
+pveum acl modify / -token 'root@pam!zabbix' -role PVEAuditor
+pveum user token permissions root@pam zabbix
+pveum user token permissions --output json root@pam zabbix

@@ -37,7 +37,7 @@ git_is_ref() {
 }
 
 git_is_current_repo_clean() {
-    ! git status --porcelain | grep -qE .
+    ! git status --porcelain | grep -E . >/dev/null
 }
 
 git_has_anything_been_staged() {
