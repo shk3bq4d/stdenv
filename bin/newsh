@@ -6,7 +6,8 @@
 ##    FILENAME: new script's filepath
 ##
 
-set -euo pipefail
+set -Eeuo pipefail
+shopt -s inherit_errexit
 umask 027
 
 function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
@@ -32,11 +33,13 @@ echo \
 ## Author: Jeff Malone, $(date +'%d %b %Y')
 ##
 
-set -euo pipefail
-# date '+%a %b %d %H:%M' -d @1747872031
+set -Eeuo pipefail
+shopt -s inherit_errexit
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ \${BASH_SOURCE:-}:\${LINENO:-}:\${FUNCNAME[0]:-}: ';
+
+# date '+%a %b %d %H:%M' -d @1747872031
 
 # function usage() { sed -r -n -e \"s/__SCRIPT__/\$(basename \$0)/\" -e '/^##/s/^..// p'   \$0 ; }
 
