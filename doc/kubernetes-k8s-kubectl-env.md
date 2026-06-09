@@ -166,7 +166,7 @@ kubectl run kubectl --image bitnami/kubectl --command -- tail -f /dev/null
 kaf https://raw.githubusercontent.com/shk3bq4d/stdenv/stdenv/docker/stdenv/daemonset.yml
 kl jobs/mrmanual
 klf jobs/mrmanual
-keti -n stdenv daemonsets/stdenv -- zsh                                                           18:06:02  537ms
+keti -n stdenv daemonsets/stdenv -- zsh
 kubectl exec -itn stdenv stdenv -- zsh
 kubectl get pod -n stdenv --no-headers | awk '{ print $1 }' | xargs -tn1 -I@ kubectl exec -n stdenv @ -- curl -s http://whatismyip.akamai.com/
 kubectl run mysql-client --image arey/mysql-client --command -- mysql -h
