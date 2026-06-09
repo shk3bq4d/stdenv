@@ -1,4 +1,5 @@
 ```sh
+curl -sS # --silent to always be paired with -S, --show-error unless you know what you are doing
 curl -u username
 curl -u username:password
 curl -X POST
@@ -23,13 +24,13 @@ UA="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/4
 curl -A "$UA" # user-agent useragent
 curl --user-agent "$UA" # useragent
 
-curl -s -o './#1.yaml' 'https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/helloWorld/{configMap,deployment,kustomization,service}.yaml' # multidownload
+curl -sS -o './#1.yaml' 'https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/examples/helloWorld/{configMap,deployment,kustomization,service}.yaml' # multidownload
 
 curl --resolve backoffice-ks.fabric-ci-74.hehee.k8s.haha.com:443:10.0.2.15 https://backoffice-ks.fabric-ci-74.hehe.k8s.haha.com # SNI cheat, custom name DNS resolution
-curl -D - -s -o /dev/null # only response headers
-command ssh myhost curl -s https://download.through/other/machine.html | tee machine.html > /dev/null
+curl -D - -sS -o /dev/null # only response headers
+command ssh myhost curl -sS https://download.through/other/machine.html | tee machine.html > /dev/null
 
-curl -s -o /dev/null -w "%{http_code}" # print only http response status code
+curl -sS -o /dev/null -w "%{http_code}" # print only http response status code
 
 curl -c store-cookies-here.txt -b read-cookies-there.txt https://example
 .com
