@@ -30,6 +30,7 @@ rpm2cpio moxapi-7.10.5-1.x86_64.rpm|cpio -idmv
 unzip -j                       # junk part,     removes intermediate sub directory directories
 unzip --transform 's/^.*\///'  # not on centos7 removes intermediate sub directory directories
 --strip-components=1           #                removes intermediate sub directory directories
+unzip myzipfile -d outputdir
 
 
 xz myfile # compresses myfile

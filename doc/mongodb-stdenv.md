@@ -1,3 +1,30 @@
+* https://www.mongodb.com/legal/support-policy/lifecycles # LTS EOL
+
+```nosyntax
+    MongoDB 8.3	May 2026	TBD, no sooner than October 2026
+    MongoDB 8.2 	September 2025	July 31, 2026
+    MongoDB 8.1	June 2025	September 30, 2025
+    MongoDB 8.0	October 2024	June 20, 2025
+*   MongoDB 8.0	October 2024	October 31, 2029                  ATLAS
+    MongoDB 7.3	March 2024	October 2, 2024
+    MongoDB 7.2	January 2024	March 27, 2024
+    MongoDB 7.1	October 2023	January 23, 2024
+    MongoDB 7.0	August 2023	October 18, 2023
+*   MongoDB 7.0	August 2023	August 31, 2027                       ATLAS
+    MongoDB 6.3	April 2023	August 31, 2023
+    MongoDB 6.2	February 2023	April 24, 2023
+    MongoDB 6.1	October 2022	February 9, 2023
+    MongoDB 6.0	July 2022	October 12, 2022
+*   MongoDB 6.0	July 2022	July 31, 2025                         ATLAS
+    MongoDB 5.3	March 2022	July 19, 2022
+    MongoDB 5.2	January 2022	March 23, 2022
+    MongoDB 5.1	November 2021	January 19, 2022
+    MongoDB 5.0	July 2021	November 9, 2021
+*   MongoDB 5.0	July 2021	October 31, 2024                      ATLAS
+```
+
+* [dockerhub](https://hub.docker.com/_/mongo/tags)
+
 ```sh
 https://github.com/mongodb/helm-charts
 mongoexport -h MYHOST --port=33333 -u backup -p MYPASS --authenticationDatabase=config --db=graylog --collection=pipeline_processor_rules
@@ -12,10 +39,17 @@ show roles  //Print a list of all roles, both user-defined and built-in, for the
 ```
 # upgrade
 ```sh
-docker exec -it mongo mongo --eval 'db.adminCommand({ setFeatureCompatibilityVersion: "4.0" })'
-docker exec -it mongo mongo --eval 'db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })'
+docker exec -it mongodb mongosh --eval 'db.adminCommand({ setFeatureCompatibilityVersion: "8.0" })'
+docker exec -it mongodb mongosh --eval 'db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })'
 ```
 
+# run
+```sh
+i=/tmp/mongodbdata; sudo mkdir -p $i; sudo chown 999:999 $i; sudo docker run --rm -d -v $i:/data/db --name mongodb mongo:6
+i=/tmp/mongodbdata; sudo mkdir -p $i; sudo chown 999:999 $i; sudo docker run --rm -d -v $i:/data/db --name mongodb mongo:7.0.35-jammy
+sudo docker run --rm -d --name mongodb mongo:7.0.35-jammy
+sudo docker exec -it mongodb mongosh
+sudo docker stop mongodb
 
 # check is master / primary
   roles:
@@ -159,6 +193,13 @@ upgrade all the secondary nodes, one by one, ensure service was restarted
 rs.stepDown(600); on the master, to relinquish its master status
 upgrade the last node
 db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } ); # to the new, upgrade version
+db.adminCommand({ setFeatureCompatibilityVersion: "7.0", confirm: true })
+
+db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 })
+db.adminCommand({ setFeatureCompatibilityVersion: "6.0", confirm: true })
+db.adminCommand({ setFeatureCompatibilityVersion: "6.3", confirm: true })
+db.adminCommand({ setFeatureCompatibilityVersion: "7.0", confirm: true })
+db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 }).featureCompatibilityVersion.version
 
 
 # memory limit RAM
