@@ -435,7 +435,7 @@ os.getenv(key, default=None) # Get an environment variable, return None if it do
 # list files #1
 from os import listdir
 from os.path import isfile, join
-onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+onlyfiles = [ f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath,f)) ]
 
 # list files #2
 from os import walk
