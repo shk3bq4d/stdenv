@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+set -Eeuo pipefail
+shopt -s inherit_errexit
 umask 007
 
+exec > >(tee -a ~/.tmp/log/"$(basename "$0" .sh).log")
+exec 2>&1
+set -x
+
 case $(hostname -f) in \
-    $WORK_PC1F)
+    "${WORK_PC1F:-workpc1funset}")
         ROOT=/mnt/local/00-1to
         ROOT=$HOME
         ;;
@@ -31,3 +37,5 @@ fi
 [[ -d $target ]] && rmdir $target
 [[ -e $target ]] && echo "FATAL: can't get rid of existing $target" && exit 1
 ln -s $newdir $target
+echo EOF
+exit 0

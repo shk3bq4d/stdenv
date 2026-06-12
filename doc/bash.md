@@ -939,7 +939,9 @@ exit 0
 ##    REMOTEPORT: JMX port (default: 12345)
 ## Author: Donald Duck, 2017 Jun 24th
 ##
-set -euo pipefail
+set -Eeuo pipefail
+shopt -s inherit_errexit
+umask 027
 function usage() { sed -r -n -e "s/__SCRIPT__/$(basename $0)/" -e '/^##/s/^..// p'   $0 ; }
 [[ $# -eq 1 && ( "$1" == -h || "$1" == --help ) ]] && usage && exit 0
 [[ $# -lt 1 || $# -gt 2 ]] && >&2 echo "FATAL: incorrect number of args" && usage && exit 1
@@ -1235,7 +1237,8 @@ az ad app list | jq -c '.[]' | while read app; do
 ## Author: Jeff Malone, 22 May 2026
 ##
 
-set -euo pipefail
+set -Eeuo pipefail
+shopt -s inherit_errexit
 # date '+%a %b %d %H:%M' -d @1747872031
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
