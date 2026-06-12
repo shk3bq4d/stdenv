@@ -7,6 +7,8 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
+source ~/bin/dot.gitfunctions
+
 f=~/bin/mrurxvt.blacklist
 s=$(
 xprop -id "$(xdotool getactivewindow)" |
@@ -22,6 +24,9 @@ else
         echo "$hf" >> $f
     fi
     sed -i -e "/$hf/a $s" "$f"
+    cd "$HOME/git/$(id -un)/stdenv"
+    git commit -m "mrurxvt.blacklist" $f
+    git_is_current_repo_clean && git pull --rebase=true && git push
     echo "ok $s!"
 fi
 exit 0
