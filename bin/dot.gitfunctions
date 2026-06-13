@@ -4,12 +4,13 @@
 unalias git  &>/dev/null || true # allow proper sourcing in shell
 unalias glol &>/dev/null || true # allow proper sourcing in shell
 unalias glod &>/dev/null || true # allow proper sourcing in shell
+unalias gitenv &>/dev/null || true # allow proper sourcing in shell
 glol() {
     git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' "$@"
 }
 
 gitenv() {
-    git --git-dir=$HOME/stdhome/../stdenv/.git --work-tree=$HOME
+    git --git-dir="$HOME/stdhome/../stdenv/.git" --work-tree="$HOME"
 }
 
 glod() {
