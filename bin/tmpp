@@ -6,7 +6,6 @@ umask 007
 
 exec > >(tee -a ~/.tmp/log/"$(basename "$0" .sh).log")
 exec 2>&1
-set -x
 
 case $(hostname -f) in \
     "${WORK_PC1F:-workpc1funset}")

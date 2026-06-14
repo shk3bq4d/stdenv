@@ -237,7 +237,7 @@ compdef zabbix-maintenance=ssh
 compdef zabbix-maintenance-off=ssh
 #complete_function ssh-no-host-checking ssh
 
-alias -g NC='|sed-remove-ansi-colors.sh' # no colors
+alias -g NC='|sed_remove_ansi_colors'
 case "$UNAME" in \
 freebsd)
     alias grep='nocorrect grep --line-buffered -a --color=auto'

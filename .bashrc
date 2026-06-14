@@ -207,6 +207,11 @@ alias wcl='wc -l'
 alias mysql='mysql --i-am-a-dummy'
 # some more ls aliases
 #alias ll='ls -lhFa --group-directories-first'
+
+function sed_remove_ansi_colors() {
+    sed -u -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2}){0,2})?[mGK]//g" "$@"
+}
+
 function lr() {
     if [[ -z "$1" ]]; then
         ls -lhAFtr
