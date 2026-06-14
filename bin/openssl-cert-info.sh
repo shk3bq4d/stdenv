@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
-set -euo pipefail
+set -Eeuo pipefail
+shopt -s inherit_errexit
+[[ "${PS4:-}" == "+ " ]] && export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ' # "set -x" prompt/template
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 
 
@@ -83,8 +86,8 @@ fi
     fi
 } | tee $_tempfile |
     sed -rne '/-BEGIN (TRUSTED )?CERTIFICATE-/,/-END (TRUSTED )?CERTIFICATE-/p' | \
-    openssl x509 -noout -fingerprint -sha256 -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1| \
-    grep -EA1 '^[^ ]|Fingerprint|Subject Alternative Name|ublic..ey:' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
+    { openssl x509 -noout -fingerprint -sha256 -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1 || true; } | \
+    { grep -EA1 '^[^ ]|Fingerprint|Subject Alternative Name|ublic..ey:' || true; } | { grep -vE '^--$|^Certificate:$|^Data: *$' || true; } | sed -r -e 's/^ +//g' | \
     sed -r \
         -e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
         -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/" \

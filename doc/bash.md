@@ -1239,6 +1239,7 @@ az ad app list | jq -c '.[]' | while read app; do
 
 set -Eeuo pipefail
 shopt -s inherit_errexit
+[[ "${PS4:-}" == "+ " ]] && export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ' # "set -x" prompt/template
 # date '+%a %b %d %H:%M' -d @1747872031
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
