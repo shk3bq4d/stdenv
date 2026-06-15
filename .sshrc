@@ -132,11 +132,19 @@ if [[ $EUID -ne 0 ]] && [[ -f $SSHHOME/sshrc.bashrc ]] && hash last &>/dev/null;
             sudo netstat -tlnp
             echo ""
             # last -w display full username, but automation username is too long so I am not using it and truncating user instead
-            hash last &>/dev/null && sudo last -axFn 20 | grep -vE "^${USER:0:8} .*logged in" | sed -r -e "/logged in/s/^(.+)/"$'\033[41m'$'\033[37m'"\\1"$'\033[0m'"/"
+            if false; then
+                echo a 
+                which -a last
+                command hash last && echo yep2 || echo nop2
+                command -v last
+                command -v last && echo yep3 || echo nop3
+                hash last && echo yep || echo nop
+                hash last &>/dev/null && sudo last -axFn 20 | grep -vE "^${USER:0:8} .*logged in" | sed -r -e "/logged in/s/^(.+)/"$'\033[41m'$'\033[37m'"\\1"$'\033[0m'"/"
+                echo b
+            fi
             sudomr
         else
             netstat -tln
-            echo ""
             hash last &>/dev/null && command last -axFn 20 | grep -vE "^${USER:0:8} .*logged in" | sed -r -e "/logged in/s/^(.+)/"$'\033[41m'$'\033[37m'"\\1"$'\033[0m'"/"
         fi
         bash ips

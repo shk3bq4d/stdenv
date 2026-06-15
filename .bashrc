@@ -2,6 +2,8 @@
 [ -z "$PS1" ] && return
 [[ -z "$HOME" ]] && export HOME="$(cd && pwd)"
 [ -z "$RCD" ] && export RCD=$HOME
+#[ -n "${_BASHRC_EVALUATED:-}" ] && return
+#export _BASHRC_EVALUATED=1
 umask 027
 # handles urxvt resize bug
 # https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing and,
@@ -295,7 +297,8 @@ elif which vi  &>/dev/null; then # zsh hash does not work, I'm not sure why
 else
     echo "bashrc no vi(m)"
 fi
-if [[ $EUID -eq 0 ]]; then # vim readonly for root
+if [[ $EUID -eq 0 ]]; then
+    hash systemctl &>/dev/null && echo -n "systemd global status: " && systemctl is-failed --quiet && systemctl list-units --state=failed
     function _rootgit() {
         local git_root_dir git_owner
         git_root_dir="$(command git rev-parse --absolute-git-dir 2>/dev/null || true)"

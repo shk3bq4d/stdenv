@@ -44,6 +44,11 @@ for unit in $(enabled_units); do
     sudo systemctl is-enabled "$unit" >/dev/null && echo "ok" || echo "KO"
 done
 
+for unit in $(enabled_units); do
+    printf "is-failed %-30s" "$unit"
+    sudo systemctl is-failed "$unit" >/dev/null && echo "ok" || echo "KO"
+done
+
 sudo needrestart -b
 [[ -f /var/run/reboot-required || -f /opt/sf-scripts/.sf-reboot-needed-custom ]] && echo "reboot needed .bashrc $(hostname -f)"
 
