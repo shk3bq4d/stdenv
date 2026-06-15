@@ -20,13 +20,17 @@ export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 #
 # Requires: openssl, awk, grep, find, sort
 
-CA_PATHS=(
-  /etc/ssl/certs
-  /etc/pki/tls/certs
-  /etc/pki/ca-trust/extracted/pem
-  /usr/local/share/ca-certificates
-  /etc/ca-certificates
-)
+if [[ $# -eq 0 ]]; then
+    CA_PATHS=(
+      /etc/ssl/certs
+      /etc/pki/tls/certs
+      /etc/pki/ca-trust/extracted/pem
+      /usr/local/share/ca-certificates
+      /etc/ca-certificates
+    )
+else
+    CA_PATHS=("$@")
+fi
 
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
