@@ -140,6 +140,153 @@ kubectl explain pods.spec
 kubectl explain pods.spec.containers
 kubectl explain pods.spec.containers.workingDir
 
+NODE=mynodename; k get --raw "/api/v1/nodes/${NODE}/proxy/configz" | jq . # kubelet config, imageGCHighThresholdPercent, imageGCLowThresholdPercent, imagefs.available
+NODE=mynodename; k get --raw "/api/v1/nodes/${NODE}/proxy/configz" | jq . | grep -C5 -iE 'imageGCHighThresholdPercent|imageGCLowThresholdPercent|imagefs.available'
+{
+  "kubeletconfig": {
+    "enableServer": true,
+    "staticPodPath": "/etc/kubernetes/manifests",
+    "podLogsDir": "/var/log/pods",
+    "syncFrequency": "1m0s",
+    "fileCheckFrequency": "20s",
+    "httpCheckFrequency": "20s",
+    "address": "10.103.24.213",
+    "port": 10250,
+    "tlsCertFile": "/var/lib/kubelet/pki/kubelet.crt",
+    "tlsPrivateKeyFile": "/var/lib/kubelet/pki/kubelet.key",
+    "rotateCertificates": true,
+    "authentication": {
+      "x509": {
+        "clientCAFile": "/etc/kubernetes/ssl/ca.crt"
+      },
+      "webhook": {
+        "enabled": true,
+        "cacheTTL": "2m0s"
+      },
+      "anonymous": {
+        "enabled": false
+      }
+    },
+    "authorization": {
+      "mode": "Webhook",
+      "webhook": {
+        "cacheAuthorizedTTL": "5m0s",
+        "cacheUnauthorizedTTL": "30s"
+      }
+    },
+    "registryPullQPS": 5,
+    "registryBurst": 10,
+    "imagePullCredentialsVerificationPolicy": "NeverVerifyPreloadedImages",
+    "eventRecordQPS": 50,
+    "eventBurst": 100,
+    "enableDebuggingHandlers": true,
+    "healthzPort": 10248,
+    "healthzBindAddress": "127.0.0.1",
+    "oomScoreAdj": -999,
+    "clusterDomain": "cluster.local",
+    "clusterDNS": [
+      "10.233.0.3"
+    ],
+    "streamingConnectionIdleTimeout": "4h0m0s",
+    "nodeStatusUpdateFrequency": "10s",
+    "nodeStatusReportFrequency": "10s",
+    "nodeLeaseDurationSeconds": 40,
+    "imageMinimumGCAge": "2m0s",
+    "imageMaximumGCAge": "0s",
+    "imageGCHighThresholdPercent": 85,
+    "imageGCLowThresholdPercent": 80,
+    "volumeStatsAggPeriod": "1m0s",
+    "kubeletCgroups": "/system.slice/kubelet.service",
+    "cgroupsPerQOS": true,
+    "cgroupDriver": "systemd",
+    "cpuManagerPolicy": "none",
+    "cpuManagerReconcilePeriod": "10s",
+    "memoryManagerPolicy": "None",
+    "topologyManagerPolicy": "none",
+    "topologyManagerScope": "container",
+    "runtimeRequestTimeout": "2m0s",
+    "hairpinMode": "promiscuous-bridge",
+    "maxPods": 110,
+    "podPidsLimit": -1,
+    "resolvConf": "/etc/resolv.conf",
+    "cpuCFSQuota": true,
+    "cpuCFSQuotaPeriod": "100ms",
+    "nodeStatusMaxImages": 50,
+    "maxOpenFiles": 1000000,
+    "contentType": "application/vnd.kubernetes.protobuf",
+    "kubeAPIQPS": 50,
+    "kubeAPIBurst": 100,
+    "serializeImagePulls": true,
+    "maxParallelImagePulls": 1,
+    "evictionHard": {
+      "imagefs.available": "15%",
+      "imagefs.inodesFree": "5%",
+      "memory.available": "100Mi",
+      "nodefs.available": "10%",
+      "nodefs.inodesFree": "5%"
+    },
+    "evictionPressureTransitionPeriod": "5m0s",
+    "mergeDefaultEvictionSettings": false,
+    "enableControllerAttachDetach": true,
+    "protectKernelDefaults": true,
+    "makeIPTablesUtilChains": true,
+    "iptablesMasqueradeBit": 14,
+    "iptablesDropBit": 15,
+    "failSwapOn": false,
+    "memorySwap": {
+      "swapBehavior": "LimitedSwap"
+    },
+    "containerLogMaxSize": "10Mi",
+    "containerLogMaxFiles": 5,
+    "containerLogMaxWorkers": 1,
+    "containerLogMonitorInterval": "10s",
+    "configMapAndSecretChangeDetectionStrategy": "Watch",
+    "systemReserved": {
+      "cpu": "500m",
+      "ephemeral-storage": "500Mi",
+      "memory": "512Mi",
+      "pid": "1000"
+    },
+    "kubeReserved": {
+      "cpu": "100m",
+      "ephemeral-storage": "500Mi",
+      "memory": "256Mi",
+      "pid": "1000"
+    },
+    "enforceNodeAllocatable": [
+      "pods"
+    ],
+    "volumePluginDir": "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/",
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 2,
+      "options": {
+        "text": {
+          "infoBufferSize": "0"
+        },
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "enableSystemLogHandler": true,
+    "enableSystemLogQuery": false,
+    "shutdownGracePeriod": "1m0s",
+    "shutdownGracePeriodCriticalPods": "20s",
+    "crashLoopBackOff": {
+      "maxContainerRestartPeriod": "5m0s"
+    },
+    "enableProfilingHandler": true,
+    "enableDebugFlagsHandler": true,
+    "seccompDefault": false,
+    "memoryThrottlingFactor": 0.9,
+    "registerNode": true,
+    "localStorageCapacityIsolation": true,
+    "containerRuntimeEndpoint": "unix:///var/run/containerd/containerd.sock",
+    "failCgroupV1": true
+  }
+}
 
 kubectl create configmap myname --from-file file.txt
 kubectl create configmap myname --from-literal=key=value
@@ -868,7 +1015,7 @@ kubectl create secret generic tls kubernetes-dashboard-certs \
   --from-file=tls.key=/path/to/dashboard.key --namespace kube-system
 
 kubectl wait --for=condition=Ready pod/busybox1
-kubectl wait --for=condition=Ready node/kndre102p03.mfogroup.co
+kubectl wait --for=condition=Ready node/mynode
 kubectl wait --for=delete pod/busybox1 --timeout=60s
 
 
