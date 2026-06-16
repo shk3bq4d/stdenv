@@ -80,6 +80,9 @@ doc = lxml.etree.fromstring(string) # parses parser
 lxml.etree.tostring(doc, pretty_print=True) # outputs
 doc.xpath('/*')
 
+echo "print(1.25**2)" | python3 # executes stdin script
+python3 < ~/py/myscript.py      # executes stdin script
+
 # process stdin line by line
 """py
 import fileinput # stdin
