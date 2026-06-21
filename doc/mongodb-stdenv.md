@@ -496,3 +496,6 @@ ClientEncryption.encrypt() Encrypts a field using a specified data encryption ke
 ClientEncryption.encryptExpression() Encrypts a query expression using a specified data encryption key and encryption options.
 ClientEncryption.decrypt()
 ```
+
+echo 'print(db.dashboards.find().toArray())' | mongo.sh | tee a
+db.searches.findOne({ _id: ObjectId("6a353e0cf25657461bb541d3") })
