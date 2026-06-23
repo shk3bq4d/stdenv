@@ -60,3 +60,8 @@ c	Activate closed captions and subtitles if available. To hide captions and subt
 Shift+N	Move to the next video (If you're using a playlist, will go to the next video of the playlist. If not using a playlist, it will move to the next YouTube suggested video).
 Shift+P	Move to the previous video. Note that this shortcut only works when you're using a playlist.
 i	Open the Miniplayer.
+
+```sh
+cat | while read i; do youtube-dl https://${domain}$i; done
+:%!sed -r -n -e 's,.*href="(/watch/[^"]+).*,\1, p' | sort -u
+```
