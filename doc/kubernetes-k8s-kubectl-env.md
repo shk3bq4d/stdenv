@@ -105,6 +105,8 @@ kubectl get pod -o name
 kubectl get namespace
 kubectl get service
 kubectl get deployment
+kubectl get pod -o jsonpath='{.status.podIP}'
+kubectl get pod -o jsonpath='{.status.podIP}{"\n"}'
 kubectl get secret -o jsonpath='{.data.admin-password}' -n monitoring grafana  | base64 -d | xclip
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}"
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}" | base64 -d | openssl-cert-info.sh
