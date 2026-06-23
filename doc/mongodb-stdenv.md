@@ -1,3 +1,4 @@
+* https://www.mongodb.com/docs/manual/release-notes/8.0/ # changelog releases
 * https://www.mongodb.com/legal/support-policy/lifecycles # LTS EOL
 
 ```nosyntax

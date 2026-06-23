@@ -7,6 +7,9 @@ journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
 journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMPANY-GLOBAL' | less
 journalctl --since -30m
+journalctl -x --since -900m
+journalctl -xS-900m
+journalctl -xS-1d
 
 systemd-cgls /system.slice/mdatp.service
 
