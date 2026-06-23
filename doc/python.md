@@ -290,9 +290,9 @@ Nesting arguments and more complex examples:
 
 
 import types # isinstance ~instanceof~
-if type(a) is types.DictType: # isinstance ~instanceof~
+if type(a) is types.DictType: # python2 isinstance ~instanceof~
     do_something()
-if type(b) in types.StringTypes: # isinstance ~instanceof~
+if type(b) in types.StringTypes: # python2 isinstance ~instanceof~
     do_something_else()
 
 if isinstance(a, dict): # types ~instanceof~
