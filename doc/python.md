@@ -83,6 +83,8 @@ doc.xpath('/*')
 echo "print(1.25**2)" | python3 # executes stdin script
 python3 < ~/py/myscript.py      # executes stdin script
 
+from pathlib import Path; Path('/') / 'root'
+
 # process stdin line by line
 """py
 import fileinput # stdin
