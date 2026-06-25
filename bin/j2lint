@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
+##
+##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
+##configures whatever action with whatever config
+##    REMOTEHOST: remote host where to ssh
+##    REMOTEPORT: JMX port (default: 12345)
+##
+## Author: Jeff Malone, 25 Jun 2026
+##
+
+set -Eeuo pipefail
+shopt -s inherit_errexit
+umask 027
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
+export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
+
+dummy() {
+cat <<EOF
+# https://github.com/aristanetworks/j2lint
+# Syntax and code style issues
+
+| Code | Short Description | Description |
+|------|-------------------|-------------|
+| S0   | `jinja-syntax-error`            | Jinja2 syntax should be correct |
+| S1   | `single-space-decorator`        | A single space should be added between Jinja2 curly brackets and a variable's name |
+| S2   | `operator-enclosed-by-spaces`   | When variables are used in combination with an operator, the operator shall be enclosed by space |
+| S3   | `jinja-statements-indentation`  | Nested jinja code block should follow next rules:<br>- All J2 statements must be enclosed by 1 space<br>- All J2 statements must be indented by 4 more spaces within jinja delimiter<br>- To close a control, end tag must have same indentation level |
+| S4   | `jinja-statements-single-space` | Jinja statement should have at least a single space after '{%' and a single space before '%}' |
+| S5   | `jinja-statements-no-tabs`      | Indentation should not use tabulation but 4 spaces |
+| S6   | `jinja-statements-delimiter`    | Jinja statements should not have {%- or {%+ or -%} as delimiters |
+| S7   | `single-statement-per-line`     | Jinja statements should be on separate lines, ignoring raw block contents |
+| V1   | `jinja-variable-lower-case`     | All variables should use lower case |
+| V2   | `jinja-variable-format`         | If variable is multi-words, underscore `_` should be used as a separator |
+EOF
+}
+
+
+venv=j2lint
+venvdir=$HOME/.virtualenvs/$venv
+if [[ $# -eq 0 ]]; then
+    _tempdir=$(mktemp -d); function cleanup() { [[ -n "${_tempdir:-}" ]]  && [[ -d "$_tempdir" ]]  && rm -rf "$_tempdir"  || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM EXIT
+    g=$_tempdir/a.j2
+    >&2 echo "paste your template on stdin"
+    cat > $g
+else
+    g="$@"
+fi
+f=$venvdir/bin/activate
+if [[ -f $f ]]; then
+    source $f </dev/null
+else
+    python3 -m venv $venvdir
+    source $f
+    pip install j2lint
+    sed -r -i -e 's/^INDENT_SHIFT = .*/INDENT_SHIFT = 2/' $(find $venvdir -name node.py)
+fi
+set -x
+$venvdir/bin/j2lint  \
+    -v \
+    --debug \
+    --log \
+    --ignore=S6 \
+    -- \
+    "$g"
