@@ -35,3 +35,6 @@ xrandr --delmode DisplayPort-8 3944x2160_30.00
 xrandr --delmode DisplayPort-8 3944x2160_60.00
 xrandr --rmmode 3944x2160_60.00
 xrandr --rmmode 3944x2160_30.00
+
+
+--rate 60 # refresh herz
