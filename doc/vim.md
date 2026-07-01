@@ -44,7 +44,7 @@ C-W C-k go up
 
 :{range}sort u
 
-sort i # sort case insensitively 
+sort i # sort case insensitively
 
 automatic syntax highlighting to a new file extension:
 syntax on
@@ -256,7 +256,7 @@ git mergetool
 
 
 
-:AnsiEsc # https://vi.stackexchange.com/questions/485/can-vim-interpret-terminal-color-escape-codes
+:AnsiEsc # https://vi.stackexchange.com/questions/485/can-vim-interpret-terminal-color-escape-codes ansi
 
 
 
@@ -369,3 +369,4 @@ vim.tiny, as the name implies, is a trimmed-down version of Vim (this question e
 
 vim -n FILE # does not prompt to reopen since been modified file
 vim -n -i NONE # does not prompt to reopen since been modified file + ignore existing SWAP file
+
