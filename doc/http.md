@@ -218,3 +218,6 @@ https://http-various-codes.k.abc1.ch/code/465/code/205 # switches between 465 an
 
 https_proxy == 'socks5h://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved on proxy
 https_proxy ==  'socks5://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved locally
+
+apt install hey # rate limit load tester http 429
+hey -n 100 -c 45 -q 1 https://$(hostname -f) # rate limit load tester http 429

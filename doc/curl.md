@@ -15,6 +15,7 @@ curl  -d    "name=curl"  -d    "tool=cmdline" https://example.com # POST is impl
 curl -H "Content-Type: application/json"     --data-raw '{"key1":"value"}' # raw json, POST is implicit
 curl -H "Content-Type: application/json"     --data-binary '{"key1":"value"}' # raw json --data-raw not in centos. Beware that data-binary has special handling of @, POST is implicit
 curl -H "Content-Type: application/json"     --data-binary @filename.json
+curl -H "Content-Type: application/json"     --data-binary @-  # pass data as stdin
 curl -H "Content-Type: multipart/form-data;" --form "key1=val1"        # raw form
 curl -T filename.txt # PUT --upload-file
 curl --upload-file filename.txt # PUT --upload-file

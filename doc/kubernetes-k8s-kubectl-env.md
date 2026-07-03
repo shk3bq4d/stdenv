@@ -1172,3 +1172,6 @@ kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":true}}'
 kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":false}}'
 
 kubectl patch opensearchclusters.opensearch.dremio.io -n dremio opensearch-cluster --type=merge -p '{"metadata":{"finalizers":[]}}' # force delete
+
+kubectl describe nodes | egrep -A8 "Name:|Allocatable:|Allocated resources:" # allocation limits
+k get sts dremio-executor-client-valuation -o jsonpath='{ .spec.template.spec.containers[0].resources.requests }' | jq .

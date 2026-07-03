@@ -72,3 +72,5 @@ curl -s http://localhost:9200/graylog_43 | jq '.[].mappings.properties|keys'
 az ad app list | jq -c '.[]' | while read app; do
     read appid id name < <(echo "$app" | jq -r '[.appId, .id, .displayName] | join(" ")')
 ```
+
+klf engine-operator-6cc6b75845-988wk | grep -v "No update needed" | while read line; do echo "$line" | jq -r '"\(.timestamp) \(.level) \(.message)"'; done # concatenate/format elements with space
