@@ -17,6 +17,7 @@ zip -r file.zip FOLDER # --recurse-paths recursive
 
 7za x deskpro-backup.2021-10-18_07-29-34.zip database.sql # extract single file from archive
 
+apt install   zip
 apt install unzip
 
 docker cp $(which zip) my_container:/bin/

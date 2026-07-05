@@ -2194,6 +2194,7 @@ loop: "{{ users | subelements('authorized') }}"
 {{ 101 | random(1, 10) }}
 {{ 101 | random(start=1, step=10) }}
 "{{ 60 | random(seed=inventory_hostname) }} * * * * root /script/from/cron"
+minute:  "{{ 60 | random(seed=inventory_hostname + 'nextcloud-upload-file') }}"
 {{ ['a','b','c'] | shuffle }} # randomize list
 {{ ['a','b','c'] | shuffle }} # randomize list
 {{ ['a','b','c'] | shuffle(seed=inventory_hostname) }} # randomize list
