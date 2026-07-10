@@ -1,5 +1,6 @@
 # https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud # recommended by @aviolat
 git init
+git init && git commit --allow-empty -m "git init"
 git add
 .hignore
 git branch BRANCHNAME
