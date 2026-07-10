@@ -36,7 +36,7 @@ helm diff revision -n kube-system blob-csi-driver 1
 helm diff revision -n kube-system blob-csi-driver --color 1 | less
 n=trino; c=trino; helm history -n $n $c | grep -vF REVISION | tail -n+2  | while read a b; do helm diff revision -n $n $c --color $(( a - 1 )) $a | less; done
 helm plugin list
-helm plugin update diff
+helm plugin update diff # upgrade release version
 
 # security tiller
 remove clusterIP
