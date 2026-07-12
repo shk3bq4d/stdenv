@@ -30,6 +30,7 @@ if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
     MODE=file
     NAME=$_tempdir/b
     cat - | sed -r -e 's/\\\\n/\n/g' -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
+    >&2 echo "/reading"
 else
     NAME="$1"
     if [[ $# -eq 1 && -f "$NAME" ]]; then
@@ -59,10 +60,14 @@ fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
        IP="$NAME"
+    >&2 echo "digging"
     echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
+    >&2 echo "/digging"
 elif [[ $MODE = connect ]]; then
     if [[ "$3" == @* ]]; then
+        >&2 echo "digging"
         IP=$(dig -t a +short "$NAME" @$3 | tail -1)
+        >&2 echo "/digging"
         echo "$NAME $3 -> $IP custom resolver"
     else
         IP="$3"
