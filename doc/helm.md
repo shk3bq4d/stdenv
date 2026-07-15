@@ -200,3 +200,9 @@ https://helm.sh/docs/topics/kubernetes_apis/ # UPGRADE FAILED: current release m
 ~/.cache/helm/repository/mojo2600-charts.txt
 ~/.cache/helm/repository/mojo2600-index.yaml
 ~/.cache/helm/repository/pihole-2.9.2.tgz
+
+
+timestamp: {{ now | date "2006-01-02T15:04:05Z07:00" | quote }}
+date: {{ now | date "2006-01-02" | quote }}
+unixTimestamp: {{ now | unixEpoch | quote }}
+utcTimestamp: {{ dateInZone "2006-01-02T15:04:05Z" (now) "UTC" | quote }}

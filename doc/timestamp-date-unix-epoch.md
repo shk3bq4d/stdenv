@@ -234,3 +234,8 @@ e.Get("@timestamp").ZoneBounds()
 %Y.%m.%d %H:%M:%S    2025.05.30 15:46:12
 %Y-%m-%dT%H:%M:%S.%f%z 2025-05-30T15:46:12.117569
 
+
+helmTimestamp: {{ now | date "2006-01-02T15:04:05Z07:00" | quote }}
+helmDate: {{ now | date "2006-01-02" | quote }}
+helmUnixTimestamp: {{ now | unixEpoch | quote }}
+helmUtcTimestamp: {{ dateInZone "2006-01-02T15:04:05Z" (now) "UTC" | quote }}

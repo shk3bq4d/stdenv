@@ -1046,6 +1046,7 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl ge
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
 kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job
+kubectl -n dca-kube-resources delete job mrmanual &>/dev/null; kubectl -n dca-kube-resources create job --from=cronjob/main mrmanual; kubectl -n dca-kube-resources logs -f --timestamps job/mrmanual
 kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
 
 kubectl describe node # nice summary cpu memory requests
@@ -1175,3 +1176,7 @@ kubectl patch opensearchclusters.opensearch.dremio.io -n dremio opensearch-clust
 
 kubectl describe nodes | egrep -A8 "Name:|Allocatable:|Allocated resources:" # allocation limits
 k get sts dremio-executor-client-valuation -o jsonpath='{ .spec.template.spec.containers[0].resources.requests }' | jq .
+
+kubectl cordon <node-name> # unschedulable
+kubectl uncordon <node-name> # unschedulable
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data # unschedulable
