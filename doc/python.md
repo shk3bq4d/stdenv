@@ -927,7 +927,7 @@ x.update(y) # merges dict http://stackoverflow.com/questions/38987/how-to-merge-
 export PYTHONUNBUFFERED=1
 # unbuffered
 import os,sys
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0) # unbuffered output
 
 import traceback; traceback.print_exc() # print stack trace
 
