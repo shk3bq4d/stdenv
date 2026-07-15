@@ -84,6 +84,8 @@ echo "print(1.25**2)" | python3 # executes stdin script
 python3 < ~/py/myscript.py      # executes stdin script
 
 from pathlib import Path; Path('/') / 'root'
+import pathlib
+filepath = pathlib.Path(os.path.expanduser('~/.tmp/log')) / f'{os.path.splitext(script_name)[0]}.log'
 
 # process stdin line by line
 """py
