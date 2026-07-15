@@ -38,6 +38,7 @@ with open(fp, 'wb') as f:
 # /* ex: set filetype=python ts=4 sw=4 expandtab: */
 
 import os
+import pathlib
 import sys
 import re
 import unittest
@@ -87,7 +88,7 @@ def logging_conf(
     script_directory, script_name = os.path.split(__file__)
     # logging.getLogger('sh.command').setLevel(logging.WARN)
     if filepath is None:
-        filepath = os.path.expanduser('~/.tmp/log/{}.log'.format(os.path.splitext(script_name)[0]))
+        filepath = pathlib.Path(os.path.expanduser('~/.tmp/log')) / f'{os.path.splitext(script_name)[0]}.log'
     logging.config.dictConfig({'version':1,'disable_existing_loggers':False,
        'formatters':{
            'standard':{'format':'%(asctime)s %(levelname)-5s %(filename)s-%(funcName)s(): %(message)s'},

@@ -33,10 +33,10 @@ Windows Registry Editor Version 5.00
 "ProductDir"="C:\\Users\\MyUser\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0"
 """
 import hashlib
-hashlib.sha512("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.md5("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.sha1("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha512("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.md5("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha1("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha256("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
 
 functools.partial # bind freeze some portion of a fuctions arguments or keywords.
 
