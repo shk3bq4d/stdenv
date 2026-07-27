@@ -1,4 +1,6 @@
 ```sh
+youtube-dl --no-overwrites --download-archive downloaded.txt URL
+
 rm -r ~/.local/lib/python3*/site-packages/youtube_dl* &&  pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
 mv ~/.local/lib/python3*/site-packages/youtube_dl* ~/.local/lib/python3*/site-packages/ydl-backup/;   pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
 pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
