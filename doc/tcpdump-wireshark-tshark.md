@@ -183,3 +183,4 @@ tshark -Y http.request.uri -r FILENAME
 tshark -qz conv,tcp -r FILENAME
 
 opkg update && opkg install tcpdump # openwrt
+apk  update && apk add tcpdump # openwrt
