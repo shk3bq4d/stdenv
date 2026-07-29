@@ -8,7 +8,7 @@ exec  > >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-e
 exec 2> >(tee >(sed -e "s/^/$(hostname -f) $(basename "$0") /" | logger --skip-empty --id=$$ -p user.error --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null ))
 echo hahabip | sed -e "s/^/$(hostname -f) testsyslog /" | logger --skip-empty --id=$$ -p user.error --rfc5424=notq --no-act --stderr 2>&1 | openssl s_client -connect $SSL_SYSLOG_SERVER &>/dev/null
 
-echo bip > /dev/tcp/graylog-internal.greypay.net/1514
+echo bip > /dev/tcp/graylog-internal.greypay.net/1514 # netcat replacement when you have bash
 
 echo hehe | logger -p emerg # write to every console, with default config on Ubuntu xenial 16.04
 echo hehe | logger

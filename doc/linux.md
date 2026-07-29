@@ -355,7 +355,15 @@ dd if=/dev/zero of=file.txt count=1024 bs=1048576 # create One 1Gb gigabyte file
 
 date -d @1532532080
 
-echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement
+echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement when you have bash
+# docker healthcheck to verify that port 8443 is being listen'ed from
+awk -v port="$(awk 'BEGIN{printf "%04X", 8443}')" '
+ NR>1 {
+   split($2, loc, ":")
+   if (loc[2] == port && $4 == "0A") found=1
+ }
+ END { exit (found ? 0 : 1) }
+ ' /proc/net/tcp
 
 
 kill -SIGQUIT $(pgrep ping) # ping status statistics withou quitting
