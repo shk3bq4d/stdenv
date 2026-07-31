@@ -329,9 +329,10 @@ kubectl patch configmaps -n kube-system kube-dns --patch '{"data":{"upstreamName
 
 # use multiple kubeconfig files at the same time and view merged config
 ```sh
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --raw
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
+KUBECONFIG=~/.kube/config:~/.kube/kubeconfig2 kubectl config view --raw     # merge two kubeconfig
+KUBECONFIG=~/.kube/config:~/.kube/kubeconfig2 kubectl config view --flatten # merge two kubeconfig
 ```
+kubectl config view --context MYCONTEXT --minify --flatten --raw > kube-config-subset-unique-context.yml
 
 # renew kubernetes (expired) ssl certificates
 as root, on the right machine ( the one that has /etc/kubernetes/pki/apiserver.key)
