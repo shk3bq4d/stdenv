@@ -28,6 +28,6 @@ s/[^a-zA-Z0-9._-]+/-/g
 s/^[^a-zA-Z0-9._-]+|[^a-zA-Z0-9._-]+$//g
 ")"
 
-echo "~/tmp/$(date +%Y.%m.%d-%H.%M.%S)-$c"
+echo ~/tmp/$(date +%Y.%m.%d-%H.%M.%S)-$c
 
 
