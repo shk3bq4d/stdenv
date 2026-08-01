@@ -252,7 +252,7 @@ export WORK_PC3F=vmhabon.muc.com
 export WORK_PC3=vmhabon
 
 alias ssh-no-host-checking='ssh -o ControlMaster=No -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=No $@'
-alias ssh-password-auth='ssh -o ControlMaster=No -o NumberOfPasswordPrompts=1000 -o PubkeyAuthentication=no -o HostbasedAuthentication=no -o KbdInteractiveAuthentication=no -o StrictHostKeyChecking=ask -o ChallengeResponseAuthentication=no $@'
+alias ssh-password-auth='ssh -o PasswordAuthentication=Yes -o ControlMaster=No -o NumberOfPasswordPrompts=1000 -o PubkeyAuthentication=no -o HostbasedAuthentication=no -o KbdInteractiveAuthentication=no -o StrictHostKeyChecking=ask -o ChallengeResponseAuthentication=no $@'
 alias scp='scp -p'
 alias rsync='rsync -vh --progress'
 alias curllo='curl -s http://127.0.0.1'
