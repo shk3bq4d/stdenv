@@ -1150,6 +1150,9 @@ https://dl.k8s.io/v1.22.16/bin/linux/amd64/kubeadm
 https://dl.k8s.io/v1.21.14/bin/linux/amd64/kubeadm
 https://dl.k8s.io/v1.20.15/bin/linux/amd64/kubeadm
 
+https://github.com/kubernetes-sigs/kube-scheduler-simulator
+https://kubernetes.io/blog/2025/04/07/introducing-kube-scheduler-simulator/
+
 ## download kubeadm 1.20 latest version
 ```sh
 for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/linux/amd64/kubeadm || break; done
