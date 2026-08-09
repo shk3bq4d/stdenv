@@ -1184,3 +1184,4 @@ k get sts dremio-executor-client-valuation -o jsonpath='{ .spec.template.spec.co
 kubectl cordon <node-name> # unschedulable
 kubectl uncordon <node-name> # unschedulable
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data # unschedulable
+kubectl run mypodname --image=my.com/private-image --restart=Never --overrides='{"spec":{"imagePullSecrets":[{"name":"docker-registry"}]}}' -- /bin/true
