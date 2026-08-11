@@ -32,20 +32,22 @@ fi
 set -x
 mute.sh &
 case "$(hostname -f)" in \
-shaz0140508|shaz*|nov20*|*)
+nov20*)
 	~/bin/notinpath/i3lock-pixelate.sh
 	;;
 dec17*|shaz0140508|nov20*|shaz*)
 	case "$(hostname -f)" in \
-		shaz0140508) f="$HOME/images/sf.png";;
-		*)      f="$HOME/Pictures/i3lock/boreal3-$(current-resolution.sh).png";;
+		shaz*)  f="$HOME/Pictures/i3lock/corient-black.png";;
+		*)      f="$HOME/Pictures/i3lock/boreal3.png";;
 	esac
-	if [[ ! -f "$f" ]]; then
-		convert -resize $(current-resolution.sh) \
-			-annotate 0 "$(hostname -f)" \
-			"$f"
+	g="$(dirname "$f")/$(basename "$f" .png)-$(current-resolution.sh).png"
+	if [[ ! -f "$g" ]]; then
+		#convert -resize "$(current-resolution.sh)!" -annotate 0 "$(hostname)" "$f" "$g" # stretch
+		convert -resize "$(current-resolution.sh)^" -gravity center -extent "$(current-resolution.sh)^" -gravity Undefined -fill white -annotate 0 "$(hostname)" "$f" "$g" # stretch
+		#convert -resize "$(current-resolution.sh)^" -gravity center -extent "$(current-resolution.sh)^" \( +clone -fill white -colorize 100 -fill black -gravity Undefined -pointsize 40 -annotate 0 "my text" \) -compose Difference -composite "$g" # 
 	fi
-	i3lock --debug -enf -i "$f" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+	#i3lock --debug -enf -i "$g" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
+	i3lock -enf -i "$g" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 	;;
 *)
 	if [[ "$(hostname -f)" == shaz0140508 ]]; then

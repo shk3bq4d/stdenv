@@ -59,10 +59,12 @@ else
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
+   if [[ $MODE != file ]]; then
        IP="$NAME"
-    >&2 echo "digging"
-    echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
-    >&2 echo "/digging"
+        >&2 echo "digging"
+        echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
+        >&2 echo "/digging"
+   fi
 elif [[ $MODE = connect ]]; then
     if [[ "$3" == @* ]]; then
         >&2 echo "digging"
@@ -78,10 +80,14 @@ fi
 if uname | grep -qx FreeBSD; then
     OPENSSL_OPTIONS=
 else
-    OPENSSL_OPTIONS="-checkhost $NAME"
+    if [[ $MODE == file ]]; then
+        OPENSSL_OPTIONS=""
+    else
+        OPENSSL_OPTIONS="-checkhost \"$NAME\""
+    fi
 fi
 {   if [[ $MODE = file ]]; then
-        echo "cat $NAME" >&2
+        echo "cat \"$NAME\"" >&2
         cat "$NAME"
     else
         echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -showcerts                2>&1 | less"  >&2

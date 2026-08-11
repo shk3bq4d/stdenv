@@ -6,6 +6,10 @@ case $(hostname -f) in \
 feb22*)
     exit 0
     ;;
+shaz*)
+    nohup feh --bg-scale ~/Pictures/i3lock/corient-black-$(current-resolution.sh).png </dev/null &>/dev/null &
+    exit 0
+    ;;
 esac
 nohup feh --bg-scale ~/Pictures/i3lock/boreal3.png </dev/null &>/dev/null &
 #feh --bg-scale ~/Pictures/i3lock/boreal3.png
