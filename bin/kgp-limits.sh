@@ -15,6 +15,7 @@ fi
 
 # Fetch once, reuse for all three views
 PODS_JSON=$(kubectl get pods $ARGS -o json)
+#echo $PODS_JSON
 
 # --- jq helper functions (shared via a jq module string) ---
 JQ_CONV='
@@ -42,7 +43,7 @@ echo "### Per-container detail ###"
 echo "$PODS_JSON" | jq -r "
 $JQ_CONV
 [\"NAMESPACE\",\"PODNAME\",\"CONTAINER\",\"NODE\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\"],
-(.items[]
+((if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
   | .metadata.namespace as \$ns
   | .metadata.name as \$pod
   | .spec.nodeName as \$node
@@ -58,7 +59,7 @@ echo
 echo "### Per-node totals ###"
 echo "$PODS_JSON" | jq -r "
 $JQ_CONV
-[.items[]
+[(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
   | .spec.nodeName as \$node
   | .spec.containers[]
   | {
@@ -85,7 +86,8 @@ echo
 echo "### Cluster total ###"
 echo "$PODS_JSON" | jq -r "
 $JQ_CONV
-[.items[] | .spec.containers[] | {
+[(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
+| .spec.containers[] | {
   cpu_req: (.resources.requests.cpu | cpu_to_m),
   cpu_lim: (.resources.limits.cpu | cpu_to_m),
   mem_req: (.resources.requests.memory | mem_to_b),

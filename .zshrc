@@ -223,6 +223,7 @@ complete_function ksns                               kubectl get namespace
 complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
 complete_function kubectl-get-yaml.py                kubectl get
 complete_function kubectl-watch-pods.sh              kubectl get pods
+complete_function kgp-limits.sh                      kubectl get pods
 complete_function kgp-containers                     kubectl get pods
 complete_function kubectl-watch-events.sh            kubectl get events
 complete_function kubectl-get-events-sort.sh         kubectl get events
