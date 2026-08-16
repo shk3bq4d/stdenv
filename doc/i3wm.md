@@ -103,3 +103,5 @@ mod+x mri3_lock (x->b)
 i3 '[class="Microsoft-identity-broker"] border pixel 30'
 
 echo skipcolumns # mri3_server_bip
+
+xmodmap -pke | grep '^keycode *56' # keycode conversion
