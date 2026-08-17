@@ -236,6 +236,7 @@ compdef "ssh-no-host-checking"=ssh
 compdef ssh-vagrant=ssh
 compdef zabbix-maintenance=ssh
 compdef zabbix-maintenance-off=ssh
+compdef "dca-hosts.sh"=ssh
 #complete_function ssh-no-host-checking ssh
 
 alias -g NC='|sed_remove_ansi_colors'
