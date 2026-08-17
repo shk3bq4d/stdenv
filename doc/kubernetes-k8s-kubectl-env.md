@@ -974,6 +974,7 @@ kubectl get events --sort-by=.metadata.creationTimestamp -A
 kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace -w
 kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
 kgp --field-selector=status.phase==Running
+kgp --field-selector=spec.nodeName=mynodename --all-namespaces
 keti daemonset/kube-proxy sh
 keti -n ingress-nginx deployment/ingress-nginx-controller sh
 

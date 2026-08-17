@@ -7,6 +7,11 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
+TMPDIR=$(mktemp -d)
+trap 'rm -rf "$TMPDIR"' EXIT
+
+# --field-selector=spec.nodeName=NODENAME -A
+
 if [[ $# -eq 0 ]]; then
     ARGS="--all-namespaces"
 else
@@ -14,10 +19,39 @@ else
 fi
 
 # Fetch once, reuse for all three views
-PODS_JSON=$(kubectl get pods $ARGS -o json)
-#echo $PODS_JSON
+kubectl get pods $ARGS -o json > "$TMPDIR/pods.json"
+kubectl get nodes -o json > "$TMPDIR/nodes.json"
 
-# --- jq helper functions (shared via a jq module string) ---
+# Usage: <tsv on stdin> | print_table "<comma-separated 1-based column indices to right-align>"
+print_table() {
+  awk -F'\t' -v rjust="$1" '
+    BEGIN {
+      n = split(rjust, r, ",")
+      for (i = 1; i <= n; i++) rmap[r[i]] = 1
+    }
+    {
+      for (i = 1; i <= NF; i++) {
+        data[NR, i] = $i
+        if (length($i) > w[i]) w[i] = length($i)
+      }
+      if (NF > maxnf) maxnf = NF
+      nr = NR
+    }
+    END {
+      for (row = 1; row <= nr; row++) {
+        line = ""
+        for (i = 1; i <= maxnf; i++) {
+          cell = data[row, i]
+          pad = w[i] - length(cell)
+          if (rmap[i]) { for (j = 0; j < pad; j++) cell = " " cell }
+          else         { for (j = 0; j < pad; j++) cell = cell " " }
+          line = line (i > 1 ? "  " : "") cell
+        }
+        print line
+      }
+    }'
+}
+
 JQ_CONV='
 def cpu_to_m:
   if . == null then 0
@@ -37,10 +71,13 @@ def mem_to_b:
   elif test("T$")  then (rtrimstr("T")|tonumber)*1000000000000
   else tonumber
   end;
+
+def fmt_cpu_m: "\(.)m";
+def fmt_mem_mi: "\((./1048576)|floor)Mi";
 '
 
 echo "### Per-container detail ###"
-echo "$PODS_JSON" | jq -r "
+jq -r "
 $JQ_CONV
 [\"NAMESPACE\",\"PODNAME\",\"CONTAINER\",\"NODE\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\"],
 ((if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
@@ -53,56 +90,98 @@ $JQ_CONV
      (.resources.limits.cpu // \"-\"),
      (.resources.requests.memory // \"-\"),
      (.resources.limits.memory // \"-\")]
-) | @tsv" | column -t
+) | @tsv" "$TMPDIR/pods.json" | print_table "5,6,7,8"
+
 
 echo
 echo "### Per-node totals ###"
-echo "$PODS_JSON" | jq -r "
+jq -r --slurpfile nodes "$TMPDIR/nodes.json" "
 $JQ_CONV
-[(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
-  | .spec.nodeName as \$node
-  | .spec.containers[]
-  | {
-      node: (\$node // \"-\"),
-      cpu_req: (.resources.requests.cpu | cpu_to_m),
-      cpu_lim: (.resources.limits.cpu | cpu_to_m),
-      mem_req: (.resources.requests.memory | mem_to_b),
-      mem_lim: (.resources.limits.memory | mem_to_b)
-    }]
-| group_by(.node)
-| map({
-    node: .[0].node,
-    cpu_req: (map(.cpu_req) | add),
-    cpu_lim: (map(.cpu_lim) | add),
-    mem_req: (map(.mem_req) | add),
-    mem_lim: (map(.mem_lim) | add)
-  })
-| ([\"NODE\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\"]),
-  (.[] | [.node, \"\(.cpu_req)m\", \"\(.cpu_lim)m\",
-          \"\((.mem_req/1048576)|floor)Mi\", \"\((.mem_lim/1048576)|floor)Mi\"])
-| @tsv" | column -t
+(\$nodes[0].items | map({
+    key: .metadata.name,
+    value: {
+      alloc_cpu: (.status.allocatable.cpu | cpu_to_m),
+      alloc_mem: (.status.allocatable.memory | mem_to_b),
+      cap_cpu:   (.status.capacity.cpu | cpu_to_m),
+      cap_mem:   (.status.capacity.memory | mem_to_b)
+    }
+  }) | from_entries) as \$nodemap
+| [(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
+    | .metadata.name as \$pod
+    | .spec.nodeName as \$node
+    | .spec.containers[]
+    | {
+        node: (\$node // \"-\"),
+        pod: \$pod,
+        cpu_req: (.resources.requests.cpu | cpu_to_m),
+        cpu_lim: (.resources.limits.cpu | cpu_to_m),
+        mem_req: (.resources.requests.memory | mem_to_b),
+        mem_lim: (.resources.limits.memory | mem_to_b)
+      }]
+  | group_by(.node)
+  | map({
+      node: .[0].node,
+      pods: (map(.pod) | unique | length),
+      containers: length,
+      cpu_req: (map(.cpu_req) | add),
+      cpu_lim: (map(.cpu_lim) | add),
+      mem_req: (map(.mem_req) | add),
+      mem_lim: (map(.mem_lim) | add),
+      alloc_cpu: (\$nodemap[.[0].node].alloc_cpu // 0),
+      alloc_mem: (\$nodemap[.[0].node].alloc_mem // 0),
+      cap_cpu:   (\$nodemap[.[0].node].cap_cpu // 0),
+      cap_mem:   (\$nodemap[.[0].node].cap_mem // 0)
+    })
+  | ([\"NODE\",\"PODS\",\"CONTAINERS\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\",\"ALLOC_CPU\",\"ALLOC_MEM\",\"CAP_CPU\",\"CAP_MEM\"]),
+    (.[] | [.node, (.pods|tostring), (.containers|tostring),
+            (.cpu_req|fmt_cpu_m), (.cpu_lim|fmt_cpu_m),
+            (.mem_req|fmt_mem_mi), (.mem_lim|fmt_mem_mi),
+            (.alloc_cpu|fmt_cpu_m), (.alloc_mem|fmt_mem_mi),
+            (.cap_cpu|fmt_cpu_m), (.cap_mem|fmt_mem_mi)])
+  | @tsv" "$TMPDIR/pods.json" | print_table "2,3,4,5,6,7,8,9,10,11"
 
 echo
 echo "### Cluster total ###"
-echo "$PODS_JSON" | jq -r "
+jq -r --slurpfile nodes "$TMPDIR/nodes.json" "
 $JQ_CONV
-[(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
-| .spec.containers[] | {
-  cpu_req: (.resources.requests.cpu | cpu_to_m),
-  cpu_lim: (.resources.limits.cpu | cpu_to_m),
-  mem_req: (.resources.requests.memory | mem_to_b),
-  mem_lim: (.resources.limits.memory | mem_to_b)
-}]
+([\$nodes[0].items[] | {
+    alloc_cpu: (.status.allocatable.cpu | cpu_to_m),
+    alloc_mem: (.status.allocatable.memory | mem_to_b),
+    cap_cpu:   (.status.capacity.cpu | cpu_to_m),
+    cap_mem:   (.status.capacity.memory | mem_to_b)
+  }]) as \$nodetotals
+| [(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
+    | .metadata.name as \$pod
+    | .spec.containers[]
+    | {
+        pod: \$pod,
+        cpu_req: (.resources.requests.cpu | cpu_to_m),
+        cpu_lim: (.resources.limits.cpu | cpu_to_m),
+        mem_req: (.resources.requests.memory | mem_to_b),
+        mem_lim: (.resources.limits.memory | mem_to_b)
+      }] as \$c
 | {
-    cpu_req: (map(.cpu_req) | add),
-    cpu_lim: (map(.cpu_lim) | add),
-    mem_req: (map(.mem_req) | add),
-    mem_lim: (map(.mem_lim) | add)
+    pods: (\$c | map(.pod) | unique | length),
+    containers: (\$c | length),
+    cpu_req: (\$c | map(.cpu_req) | add),
+    cpu_lim: (\$c | map(.cpu_lim) | add),
+    mem_req: (\$c | map(.mem_req) | add),
+    mem_lim: (\$c | map(.mem_lim) | add),
+    alloc_cpu: (\$nodetotals | map(.alloc_cpu) | add),
+    alloc_mem: (\$nodetotals | map(.alloc_mem) | add),
+    cap_cpu:   (\$nodetotals | map(.cap_cpu) | add),
+    cap_mem:   (\$nodetotals | map(.cap_mem) | add)
   }
-| ([\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\"]),
-  ([\"\(.cpu_req)m\", \"\(.cpu_lim)m\",
-    \"\((.mem_req/1048576)|floor)Mi\", \"\((.mem_lim/1048576)|floor)Mi\"])
-| @tsv" | column -t
+| ([\"PODS\",\"CONTAINERS\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\",\"ALLOC_CPU\",\"ALLOC_MEM\",\"CAP_CPU\",\"CAP_MEM\"]),
+  ([(.pods|tostring), (.containers|tostring),
+    (.cpu_req|fmt_cpu_m), (.cpu_lim|fmt_cpu_m),
+    (.mem_req|fmt_mem_mi), (.mem_lim|fmt_mem_mi),
+    (.alloc_cpu|fmt_cpu_m), (.alloc_mem|fmt_mem_mi),
+    (.cap_cpu|fmt_cpu_m), (.cap_mem|fmt_mem_mi)])
+| @tsv" "$TMPDIR/pods.json" | print_table "1,2,3,4,5,6,7,8,9,10"
+
+
+
 exit $?
 
 set -Eeuo pipefail
