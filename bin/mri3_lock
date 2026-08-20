@@ -44,7 +44,7 @@ dec17*|shaz0140508|nov20*|shaz*)
 	if [[ ! -f "$g" ]]; then
 		#convert -resize "$(current-resolution.sh)!" -annotate 0 "$(hostname)" "$f" "$g" # stretch
 		convert -resize "$(current-resolution.sh)^" -gravity center -extent "$(current-resolution.sh)^" -gravity Undefined -fill white -annotate 0 "$(hostname)" "$f" "$g" # stretch
-		#convert -resize "$(current-resolution.sh)^" -gravity center -extent "$(current-resolution.sh)^" \( +clone -fill white -colorize 100 -fill black -gravity Undefined -pointsize 40 -annotate 0 "my text" \) -compose Difference -composite "$g" # 
+		#convert -resize "$(current-resolution.sh)^" -gravity center -extent "$(current-resolution.sh)^" \( +clone -fill white -colorize 100 -fill black -gravity Undefined -pointsize 40 -annotate 0 "my text" \) -compose Difference -composite "$g" #
 	fi
 	#i3lock --debug -enf -i "$g" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
 	i3lock -enf -i "$g" >> $LOGDIR/debug/$(date +'%Y.%m.%d-%H.%M.%S')
