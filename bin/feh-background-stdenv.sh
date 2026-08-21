@@ -7,7 +7,7 @@ feb22*)
     exit 0
     ;;
 shaz*)
-    nohup feh --bg-scale ~/Pictures/i3lock/corient-black-$(current-resolution.sh).png </dev/null &>/dev/null &
+    nohup feh --bg-fill ~/Pictures/i3lock/corient-black-$(current-resolution-bigger-screen.sh).png </dev/null &>/dev/null &
     exit 0
     ;;
 esac
