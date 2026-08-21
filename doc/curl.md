@@ -47,8 +47,8 @@ curl -k                # SSL certificates validation
 curl --insecure # -k     SSL certificates validation
 curl --cert FILEPATH   # SSL certificates validation
 
-curl --output FILEPATH url # save document filename filepath
-curl -O FILEPATH  url      # save document filename filepath
+curl --output FILEPATH url # save document filename filepath vanilla wget
+curl -O FILEPATH  url      # save document filename filepath vanilla wget
 ```
 
 --fail-with-body: Exits with a non-zero code for non-2xx responses.
