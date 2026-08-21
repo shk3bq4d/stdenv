@@ -56,7 +56,7 @@ git commit -m "add README"
 git push -u origin master
 git push --force origin HEAD:$(id -un) # push current branch onto remote unique reference corresponding to my username
 
-git difftool --tool=vimdiff --no-prompt
+git difftool --tool=vimdiff --no-prompt # vi vim
 
 git diff --stat --cached origin/master     # http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git
 git diff --stat --cached origin/production # http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git

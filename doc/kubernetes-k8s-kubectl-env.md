@@ -1186,3 +1186,14 @@ kubectl cordon <node-name> # unschedulable
 kubectl uncordon <node-name> # unschedulable
 kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data # unschedulable
 kubectl run mypodname --image=my.com/private-image --restart=Never --overrides='{"spec":{"imagePullSecrets":[{"name":"docker-registry"}]}}' -- /bin/true
+
+
+```yaml
+    resources: # resources limits requests cpu memory
+      limits: # resources limits requests cpu memory
+        cpu: 300m # resources limits requests cpu memory
+        memory: 500Mi # resources limits requests cpu memory
+      requests: # resources limits requests cpu memory
+        cpu: 20m # resources limits requests cpu memory
+        memory: 300Mi # resources limits requests cpu memory
+```
