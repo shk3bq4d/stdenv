@@ -622,10 +622,10 @@ map <ScrollWheelRight> <nop>
 map <S-ScrollWheelRight> <nop>
 map <C-ScrollWheelRight> <nop>
 " terminal see tab as C-i
-map <C-i> <Esc>:bnext<CR>
+"map <C-i> <Esc>:bnext<CR>
 
 " vertical blockwise visual mod
-map <C-u> <C-q>
+map <C-i> <C-q>
 
 :nnoremap <Space>   <C-d>
 :inoremap <C-u> <Esc>>>i
