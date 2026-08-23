@@ -579,8 +579,14 @@ sudo setcap cap_net_raw+ep $(which ping)
 
 # usb key max compatibility
 ```sh
-sudo wipefs -a /dev/sda
-sudo parted /dev/sda --script mklabel msdos
-sudo parted /dev/sda --script mkpart primary exfat 1MiB 100% || sudo parted /dev/sda --script mkpart primary 1MiB 100%
-sudo mkfs.exfat -n USBKEY /dev/sda1 || { sudo apt install exfatprogs && sudo mkfs.exfat -n USBKEY /dev/sda1; }
+drive=/dev/sda
+drive=/dev/sdb
+sudo which mkfs.exfat || sudo apt install exfatprogs
+sudo wipefs -a $drive
+sudo parted $drive --script mklabel msdos
+sudo parted "$drive" --script mkpart primary ntfs 1MiB 100%
+sudo partprobe "$drive"
+sudo mkfs.exfat -n USBKEY ${drive}1
+sudo fdisk -l "$drive"
+sudo lsblk -f "$drive"
 ```
