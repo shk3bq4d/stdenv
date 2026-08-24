@@ -33,6 +33,7 @@ fi
 #ZSH_THEME="agnoster"
 #echo theme is $ZSH_THEME
 
+typeset -ga ZSHZ_EXCLUDE_DIRS
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
