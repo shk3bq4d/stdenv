@@ -54,7 +54,6 @@ if &diff
         let g:loaded_youcompleteme = 1
         let g:syntastic_check_on_open = 0
         let g:mrdiffmode = "yes you are in mrdiffmode" " :echo g:mrdiffmode
-        call add(g:pathogen_disabled, 'vim-gitgutter')
         call add(g:pathogen_disabled, 'syntastic')
         call add(g:pathogen_disabled, 'SyntaxRange')
         call add(g:pathogen_disabled, 'tabular')
@@ -66,7 +65,6 @@ if &diff
         call add(g:pathogen_disabled, 'ingo-library')
         call add(g:pathogen_disabled, 'syntastic')
         call add(g:pathogen_disabled, 'SyntaxRange')
-        call add(g:pathogen_disabled, 'tabular')
         call add(g:pathogen_disabled, 'vim-airline')
         call add(g:pathogen_disabled, 'vim-airline-themes')
         call add(g:pathogen_disabled, 'vim-fugitive')
@@ -621,11 +619,12 @@ map <C-ScrollWheelLeft> <nop>
 map <ScrollWheelRight> <nop>
 map <S-ScrollWheelRight> <nop>
 map <C-ScrollWheelRight> <nop>
-" terminal see tab as C-i
-"map <C-i> <Esc>:bnext<CR>
+
+" switching to next buffer with Control-Tab: WARNING C-i and C-Tab are the same on my setup
+map <C-i> <Esc>:bnext<CR>
 
 " vertical blockwise visual mod
-map <C-i> <C-q>
+map <C-w> <C-q>
 
 :nnoremap <Space>   <C-d>
 :inoremap <C-u> <Esc>>>i

@@ -560,7 +560,9 @@ if hash pip 2>/dev/null; then
        eval "$(pip completion --bash --disable-pip-version-check &>/dev/null)" #&>/dev/null
    fi
 fi
-[[ -f /var/run/reboot-required || -f /opt/sf-scripts/.sf-reboot-needed-custom ]] && echo "reboot needed .bashrc $(hostname -f)"
+for i in /var/run/reboot-required /opt/sf-scripts/.sf-reboot-needed-custom; do
+    [[ -f $i ]] && echo "reboot needed .bashrc $(hostname -f) $(ls -l --time-style +"%Y.%m.%d %H:%M:%S" $i)"
+done
 #[[ -z $SSH_CLIENT && $EUID -ne 0 && -d ~/.tmp ]] && echo "$(date +'%Y.%m.%d %H:%M:%S') in" >> ~/.tmp/bashrc-events
 if [[ $EUID -ne 0 && -d ~/.tmp ]]; then
     test -f ~/.tmp/bashrc-events || touch ~/.tmp/bashrc-events
