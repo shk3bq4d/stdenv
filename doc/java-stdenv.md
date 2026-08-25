@@ -366,3 +366,18 @@ _JAVA_OPTIONS JVM-recognized. Similar to JAVA_TOOL_OPTIONS, but prints a warning
 -Djava.io.tmpdir=/dataexec/tmp
 ```
 
+```sh
+# curl wget CLI replacement
+jshell --feedback concise <<'EOF'
+import java.net.URI;
+import java.net.http.*;
+
+var r = HttpClient.newHttpClient().send(
+    HttpRequest.newBuilder(URI.create("https://example.com")).GET().build(),
+    HttpResponse.BodyHandlers.ofString()
+);
+
+System.out.println(r.body());
+/exit
+EOF
+```

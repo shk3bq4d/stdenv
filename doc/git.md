@@ -320,6 +320,8 @@ see parent commit message for more info about this tag
 git fetch --tags
 git tag
 git tag -l PATTERN
+git tag -d LOCALTAG # remove rm local tag delete
+git push origin --delete REMOTETAG # remove rm remote tag delete
 
 # work-tree
 $ git worktree add -b emergency-fix ../temp master
