@@ -1,3 +1,5 @@
+
+
 " ex: set expandtab ts=4 sw=4:
 if version >= 500
 let g:pathogen_disabled = []
@@ -624,7 +626,7 @@ map <C-ScrollWheelRight> <nop>
 map <C-i> <Esc>:bnext<CR>
 
 " vertical blockwise visual mod
-map <C-w> <C-q>
+map <C-t> <C-q>
 
 :nnoremap <Space>   <C-d>
 :inoremap <C-u> <Esc>>>i
