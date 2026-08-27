@@ -95,24 +95,54 @@ $JQ_CONV
 
 echo
 echo "### Per-node totals ###"
-jq -r --slurpfile nodes "$TMPDIR/nodes.json" "
+# Optional: regexes to exclude taints/labels by key (leave empty to disable)
+TAINT_EXCLUDE_REGEX="${TAINT_EXCLUDE_REGEX:-}"
+LABEL_EXCLUDE_REGEX="${LABEL_EXCLUDE_REGEX:-}"
+
+jq -r --slurpfile nodes "$TMPDIR/nodes.json" \
+      --arg taint_exclude "$TAINT_EXCLUDE_REGEX" \
+      --arg label_exclude "$LABEL_EXCLUDE_REGEX" "
 $JQ_CONV
+
+def key_excluded(re):
+  (re != \"\") and (.key | test(re));
+
+def fmt_taints:
+  map(select(key_excluded(\$taint_exclude) | not))
+  | map(if (.value // \"\") != \"\"
+        then \"\(.key)=\(.value):\(.effect)\"
+        else \"\(.key):\(.effect)\"
+        end)
+  | join(\",\")
+  | if . == \"\" then \"-\" else . end;
+
+def fmt_labels:
+  to_entries
+  | map(select(key_excluded(\$label_exclude) | not))
+  | map(\"\(.key)=\(.value)\")
+  | join(\",\")
+  | if . == \"\" then \"-\" else . end;
+
 (\$nodes[0].items | map({
     key: .metadata.name,
     value: {
       alloc_cpu: (.status.allocatable.cpu | cpu_to_m),
       alloc_mem: (.status.allocatable.memory | mem_to_b),
       cap_cpu:   (.status.capacity.cpu | cpu_to_m),
-      cap_mem:   (.status.capacity.memory | mem_to_b)
+      cap_mem:   (.status.capacity.memory | mem_to_b),
+      taints:    (.spec.taints // [] | fmt_taints),
+      labels:    (.metadata.labels // {} | fmt_labels)
     }
   }) | from_entries) as \$nodemap
 | [(if .kind == \"List\" or .kind == \"PodList\" then .items else [.] end)[]
     | .metadata.name as \$pod
+    | (.metadata.namespace // \"default\") as \$ns
     | .spec.nodeName as \$node
     | .spec.containers[]
     | {
-        node: (\$node // \"-\"),
+        node: (\$node // \"PendingPods\"),
         pod: \$pod,
+        ns: \$ns,
         cpu_req: (.resources.requests.cpu | cpu_to_m),
         cpu_lim: (.resources.limits.cpu | cpu_to_m),
         mem_req: (.resources.requests.memory | mem_to_b),
@@ -130,15 +160,26 @@ $JQ_CONV
       alloc_cpu: (\$nodemap[.[0].node].alloc_cpu // 0),
       alloc_mem: (\$nodemap[.[0].node].alloc_mem // 0),
       cap_cpu:   (\$nodemap[.[0].node].cap_cpu // 0),
-      cap_mem:   (\$nodemap[.[0].node].cap_mem // 0)
+      cap_mem:   (\$nodemap[.[0].node].cap_mem // 0),
+      taints: (if .[0].node == \"PendingPods\"
+               then \"-\"
+               else (\$nodemap[.[0].node].taints // \"-\") end),
+      labels: (if .[0].node == \"PendingPods\"
+               then (map(.ns + \"/\" + .pod) | unique | join(\",\"))
+               else (\$nodemap[.[0].node].labels // \"-\") end)
     })
-  | ([\"NODE\",\"PODS\",\"CONTAINERS\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\",\"ALLOC_CPU\",\"ALLOC_MEM\",\"CAP_CPU\",\"CAP_MEM\"]),
+  | ([\"NODE\",\"PODS\",\"CONTAINERS\",\"CPU_REQ\",\"CPU_LIM\",\"MEM_REQ\",\"MEM_LIM\",\"ALLOC_CPU\",\"ALLOC_MEM\",\"CAP_CPU\",\"CAP_MEM\",\"TAINTS\",\"LABELS\"]),
     (.[] | [.node, (.pods|tostring), (.containers|tostring),
             (.cpu_req|fmt_cpu_m), (.cpu_lim|fmt_cpu_m),
             (.mem_req|fmt_mem_mi), (.mem_lim|fmt_mem_mi),
             (.alloc_cpu|fmt_cpu_m), (.alloc_mem|fmt_mem_mi),
-            (.cap_cpu|fmt_cpu_m), (.cap_mem|fmt_mem_mi)])
-  | @tsv" "$TMPDIR/pods.json" | print_table "2,3,4,5,6,7,8,9,10,11"
+            (.cap_cpu|fmt_cpu_m), (.cap_mem|fmt_mem_mi),
+            .taints, .labels])
+  | @tsv" "$TMPDIR/pods.json" | print_table "2,3,4,5,6,7,8,9,10,11" |
+      sed -E '
+/^PendingPods/ s/^(PendingPods(\s+\S+){6}\s+)(\S+\s+){5}/\1/
+s/ +$//
+'
 
 echo
 echo "### Cluster total ###"
