@@ -95,9 +95,10 @@ $JQ_CONV
 
 echo
 echo "### Per-node totals ###"
-# Optional: regexes to exclude taints/labels by key (leave empty to disable)
-TAINT_EXCLUDE_REGEX="${TAINT_EXCLUDE_REGEX:-}"
-LABEL_EXCLUDE_REGEX="${LABEL_EXCLUDE_REGEX:-}"
+#TAINT_EXCLUDE_REGEX="${TAINT_EXCLUDE_REGEX:-}"
+#LABEL_EXCLUDE_REGEX="${LABEL_EXCLUDE_REGEX:-}"
+TAINT_EXCLUDE_REGEX='kubernetes\.io'
+LABEL_EXCLUDE_REGEX='kubernetes\.io'
 
 jq -r --slurpfile nodes "$TMPDIR/nodes.json" \
       --arg taint_exclude "$TAINT_EXCLUDE_REGEX" \
