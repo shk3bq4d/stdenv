@@ -625,8 +625,8 @@ map <C-ScrollWheelRight> <nop>
 " switching to next buffer with Control-Tab: WARNING C-i and C-Tab are the same on my setup
 map <C-i> <Esc>:bnext<CR>
 
-" vertical blockwise visual mod
-map <C-t> <C-q>
+" vertical blockwise visual mod, default is <C-q>
+"map <C-t> <C-q>
 
 :nnoremap <Space>   <C-d>
 :inoremap <C-u> <Esc>>>i
