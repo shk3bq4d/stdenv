@@ -208,37 +208,12 @@ varsfrx() {
     ansible-playbook varsfrx.yml -ve sfrx="${rx//:}" -l "${arg1//:}"\* $@
 }
 
-complete_function() {
-    local f=$1; shift
-    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
-  }
 
-complete_function_skipone() {
-    local f=$1; shift
-    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 2 )); _normal" $f
-  }
+#complete_function_skipone() {
+#    local f=$1; shift
+#    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 2 )); _normal" $f
+#  }
 
-#complete_function ksd0                               kubectl get depl
-complete_function_skipone varsfrx                    ansible-playbook -l
-complete_function ksns                               kubectl get namespace
-complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
-complete_function kubectl-get-yaml.py                kubectl get
-complete_function kubectl-watch-pods.sh              kubectl get pods
-complete_function kgp-limits.sh                      kubectl get pods
-complete_function kgp-containers                     kubectl get pods
-complete_function kubectl-watch-events.sh            kubectl get events
-complete_function kubectl-get-events-sort.sh         kubectl get events
-complete_function kubectl-debug-tail-pod.sh          kubectl get pods
-complete_function kubectl-get-confimaps-data.sh       kubectl get configmaps
-complete_function kubectl-get-secrets-data.sh        kubectl get secrets
-complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
-complete_function varsfrx ansible -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml -i inventory.yml -l
-compdef "ssh-no-host-checking"=ssh
-compdef ssh-vagrant=ssh
-compdef zabbix-maintenance=ssh
-compdef zabbix-maintenance-off=ssh
-compdef "dca-hosts.sh"=ssh
-#complete_function ssh-no-host-checking ssh
 
 alias -g NC='|sed_remove_ansi_colors'
 case "$UNAME" in \
@@ -539,6 +514,33 @@ compinit -d "$ZSH_COMPDUMP"
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 autoload -Uz _kubectl
 compdef _kubectl kubectl
+setopt complete_aliases
+complete_function() {
+    local f=$1; shift
+    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
+  }
+
+#this complete_function block should be put after compinit
+complete_function ksns                               kubectl get namespace
+complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
+complete_function kubectl-get-yaml.py                kubectl get
+complete_function kubectl-watch-pods.sh              kubectl get pods
+complete_function kgp-limits.sh                      kubectl get pods
+complete_function kgp-containers                     kubectl get pods
+complete_function kgno-taints-labels.sh              kubectl get nodes
+complete_function kubectl-watch-events.sh            kubectl get events
+complete_function kubectl-get-events-sort.sh         kubectl get events
+complete_function kubectl-debug-tail-pod.sh          kubectl get pods
+complete_function kubectl-get-configmaps-data.sh       kubectl get configmaps
+complete_function kubectl-get-secrets-data.sh        kubectl get secrets
+complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
+complete_function varsfrx ansible -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml -i inventory.yml -l
+compdef "ssh-no-host-checking"=ssh
+compdef ssh-vagrant=ssh
+compdef zabbix-maintenance=ssh
+compdef zabbix-maintenance-off=ssh
+compdef "dca-hosts.sh"=ssh
+#complete_function ssh-no-host-checking ssh
 
 f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
 

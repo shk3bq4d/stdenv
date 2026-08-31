@@ -13,14 +13,60 @@ trap 'rm -rf "$TMPDIR"' EXIT
 # --field-selector=spec.nodeName=NODENAME -A
 
 if [[ $# -eq 0 ]]; then
-    ARGS="--all-namespaces"
+    ARGS=( "--all-namespaces" )
 else
-    ARGS="$@"
+    ARGS=( "$@" )
 fi
 
+kube_global_args() {
+  local -A takes_value=(
+    [--context]=1 [--kubeconfig]=1 [--cluster]=1 [--user]=1 [--as]=1
+    [--as-group]=1 [--as-uid]=1 [--server]=1 [-s]=1 [--token]=1
+    [--request-timeout]=1 [--certificate-authority]=1 [--tls-server-name]=1
+    [--client-certificate]=1 [--client-key]=1 [--cache-dir]=1
+  )
+  local -A boolean=( [--insecure-skip-tls-verify]=1 [--disable-compression]=1 )
+  local a name
+
+  KUBE_GLOBAL=()
+  while (( $# )); do
+    a=$1; name=${a%%=*}
+    if [[ -n ${takes_value[$name]:-} ]]; then
+      if [[ $a == *=* ]]; then KUBE_GLOBAL+=("$a")
+      else KUBE_GLOBAL+=("$a" "$2"); shift
+      fi
+    elif [[ -n ${boolean[$name]:-} ]]; then
+      KUBE_GLOBAL+=("$a")
+    fi
+    shift
+  done
+}
+kube_global_args "${ARGS[@]}"
+
+# true if the caller already pinned a namespace scope
+has_namespace_flag() {
+  local a
+  for a in "$@"; do
+    case $a in
+      -n|--namespace|-n=*|--namespace=*|-A|--all-namespaces|--all-namespaces=*)
+        return 0 ;;
+    esac
+  done
+  return 1
+}
+
 # Fetch once, reuse for all three views
-kubectl get pods $ARGS -o json > "$TMPDIR/pods.json"
-kubectl get nodes -o json > "$TMPDIR/nodes.json"
+kubectl get pods  "${ARGS[@]}"        -o json > "$TMPDIR/pods.json"
+if ! has_namespace_flag "${ARGS[@]}" &&
+   [[ $(jq '.items | length' "$TMPDIR/pods.json") -eq 0 ]]; then
+  ARGS+=( --all-namespaces )
+  kubectl get pods "${ARGS[@]}" -o json > "$TMPDIR/pods.json"
+fi
+kubectl get nodes "${KUBE_GLOBAL[@]}" -o json > "$TMPDIR/nodes.json"
+
+#cat $TMPDIR/pods.json
+#cat $TMPDIR/nodes.json
+#exit 0
 
 # Usage: <tsv on stdin> | print_table "<comma-separated 1-based column indices to right-align>"
 print_table() {

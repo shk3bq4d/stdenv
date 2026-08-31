@@ -399,6 +399,13 @@ inoremap <F11> <C-o>:syntax sync fromstart<CR>:autocmd BufEnter <buffer> syntax 
 nnoremap <silent> <F12>      :BufExplorer<CR>
 imap     <silent> <F12> <Esc>:BufExplorer<CR>
 set nocp
+if !has('gui_running')
+	" XOFF/XON flow control is an old terminal mechanism for pausing and resuming output.
+    silent !stty -ixon
+endif
+nnoremap <C-s> :write<CR>
+inoremap <C-s> <C-o>:write<CR>
+vnoremap <C-s> <Esc>:write<CR>gv
 
 "let g:dbext_default_profile_ORA         = 'type=ORA:user=myusername:passwd=mypassword:host=myhost:dbname=mydb.mydomain.local'
 

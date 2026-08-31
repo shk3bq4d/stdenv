@@ -15,7 +15,7 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ';
 
-kubectl get nodes -o json | jq -r '
+kubectl get nodes -o json "$@" | jq -r '
     (["NAME","TAINTS","LABELS"] | @tsv),
   (.items[] | [
     .metadata.name,
