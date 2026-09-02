@@ -380,4 +380,34 @@ var r = HttpClient.newHttpClient().send(
 System.out.println(r.body());
 /exit
 EOF
+
+pseudocurl () {
+    local url
+    url="${1:?usage: $0 <url>}" jshell -J--add-modules=java.net.http --execution local --feedback concise - <<'EOF'
+        import java.net.URI;
+        import java.net.http.*;
+
+        void run() throws Exception {
+            var client = HttpClient.newBuilder()
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+            var req = HttpRequest.newBuilder(URI.create(System.getenv("url"))).GET().build();
+            var r = client.send(req, HttpResponse.BodyHandlers.ofString());
+            int sc = r.statusCode();
+            if (sc < 200 || sc >= 400) {
+                System.err.println("error: HTTP " + sc + " <" + r.uri() + ">");
+                System.exit(1);
+            }
+            System.out.println(r.body());
+        }
+
+        try {
+            run();
+        } catch (Throwable e) {
+            System.err.println("error: " + e);
+            System.exit(2);
+        }
+        /exit
+EOF
+}
 ```
