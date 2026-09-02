@@ -514,7 +514,7 @@ compinit -d "$ZSH_COMPDUMP"
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 autoload -Uz _kubectl
 compdef _kubectl kubectl
-setopt complete_aliases
+#setopt complete_aliases
 complete_function() {
     local f=$1; shift
     compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
@@ -533,7 +533,9 @@ complete_function kubectl-get-events-sort.sh         kubectl get events
 complete_function kubectl-debug-tail-pod.sh          kubectl get pods
 complete_function kubectl-get-configmaps-data.sh       kubectl get configmaps
 complete_function kubectl-get-secrets-data.sh        kubectl get secrets
-complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
+#complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
+#complete_function klf kubectl logs
+#complete_function kl kubectl logs
 complete_function varsfrx ansible -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml -i inventory.yml -l
 compdef "ssh-no-host-checking"=ssh
 compdef ssh-vagrant=ssh

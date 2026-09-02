@@ -55,5 +55,9 @@ if [[ ! -f "$BIN" ]]; then
     fi
 fi
 
-$BIN "$@"
+if [[ -n "${STDENV_KUBE_CONTEXT:-}" && "$@" != *"--context"* ]]; then
+    $BIN --context "${STDENV_KUBE_CONTEXT:-}" "$@"
+else
+    $BIN "$@"
+fi
 exit $?
