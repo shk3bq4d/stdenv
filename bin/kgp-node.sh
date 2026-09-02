@@ -16,5 +16,5 @@ fi
 kubectl get nodes --no-headers -o custom-columns=name:.metadata.name | grep -E -- "$ARG" | while read node; do
     echo
     echo "=== $node"
-    kgp --field-selector=spec.nodeName=$node --all-namespaces
+    kubectl get pod --field-selector=spec.nodeName=$node --all-namespaces
 done
