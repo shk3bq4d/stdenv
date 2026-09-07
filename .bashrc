@@ -679,4 +679,5 @@ alias dc=cd
 alias vgr=vim-git-rev.sh
 alias vgns=vim-git-not-staged.sh
 alias vhv=vim-hostvar.sh
+alias mri3_skip_columns="echo skipcolumns"
 true # so prompt is green
