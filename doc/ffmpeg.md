@@ -34,3 +34,5 @@ done
 # Times can be SS[.ms] or HH:MM:SS[.ms].
 ffmpeg -hide_banner -loglevel error -ss 4:05 -i *mkv -frames:v 1 -vf "scale=iw:ih" output.png
 ```
+
+~/bin/screen-capture.sh

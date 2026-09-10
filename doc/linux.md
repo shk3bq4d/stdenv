@@ -386,7 +386,7 @@ ssh blabla sudo shutdown -r 04:10 # reboot reset remote overnight business hours
 date -d "@$( awk -F '=' '/USEC/{ $2=substr($2,1,10); print $2 }' /run/systemd/shutdown/scheduled )"
 systemctl status systemd-shutdownd.service
 
-kazam # screen capture video -- record
+kazam # screen capture video -- record, but you should probably look at ~/bin/screen-capture.sh for a pure ffmpeg implementation
 
 https://www.osetc.com/en/centos-7-rhel-7-how-to-change-the-system-keyboard-layout.html
 localectl list-keymaps | grep us
