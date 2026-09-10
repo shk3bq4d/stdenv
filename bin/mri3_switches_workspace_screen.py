@@ -40,18 +40,35 @@ def auto(
 
 def go(args=[]):
     logger.info('go()')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--current", help="if set, then only consider currently focused workspace", action="store_true")
+    ar = parser.parse_args(args)
 
     i3 = i3ipc.Connection()
     focused_object = mri3.focused()
-    focused_workspace = mri3.focused().workspace()
+    focused_workspace = focused_object.workspace()
+
     output_names = mri3.output_names()
     excluded_outputs = []
     if mri3.gethostname() == 'feb22':
         excluded_outputs = ['DP-4']
+    elif len(output_names) > 2:
+        # eDP and eDP-1 are common display names for laptops
+        # when you have 2 screens + the laptop screen, you probably don't want
+        # to switch to laptop screen anymore
+        # Just rewrite the condition so that this heuristic is evaluated last
+        # and possibly check that eDP or eDP-1 are part of the output_names
+        # at the time of the writing this basic logic works perfectly for me
+        excluded_outputs = ['eDP', 'eDP-1']
     output_names = list(set(output_names) - set(excluded_outputs))
     to_focus = []
 
     for workspace in mri3.workspaces():
+        if ar.current:
+            # apparently, comparing objects fails, hence comparing the name
+            if workspace.name != focused_workspace.name or mri3.get_output_name(workspace) != mri3.get_output_name(focused_workspace):
+                print(f"--current: skipping workspace: {workspace.name} != focused_workspace {focused_workspace.name}")
+                continue
         workspace_output_name = mri3.get_output_name(workspace)
         if workspace_output_name in excluded_outputs: continue
         following_output_name = output_names[(output_names.index(workspace_output_name) + 1) % len(output_names)]
