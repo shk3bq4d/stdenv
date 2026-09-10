@@ -1197,3 +1197,6 @@ kubectl run mypodname --image=my.com/private-image --restart=Never --overrides='
         cpu: 20m # resources limits requests cpu memory
         memory: 300Mi # resources limits requests cpu memory
 ```
+
+
+kubectl patch pod dremio-master-0 --subresource resize --patch '{"spec": {"containers": [{"name": "dremio-master-coordinator", "resources": {"limits": {"cpu":"20"}}}]}}' # patch limit without restarting pod
