@@ -47,7 +47,7 @@ def go(args=[]):
     i3 = i3ipc.Connection()
     focused_object = mri3.focused()
     focused_workspace = focused_object.workspace()
-
+    focused_workspace_output = mri3.get_output_name(focused_workspace)
     output_names = mri3.output_names()
     excluded_outputs = []
     if mri3.gethostname() == 'feb22':
@@ -60,13 +60,17 @@ def go(args=[]):
         # and possibly check that eDP or eDP-1 are part of the output_names
         # at the time of the writing this basic logic works perfectly for me
         excluded_outputs = ['eDP', 'eDP-1']
+
+    if focused_workspace_output in excluded_outputs:
+        excluded_outputs.remove(focused_workspace_output)
+
     output_names = list(set(output_names) - set(excluded_outputs))
     to_focus = []
 
     for workspace in mri3.workspaces():
         if ar.current:
             # apparently, comparing objects fails, hence comparing the name
-            if workspace.name != focused_workspace.name or mri3.get_output_name(workspace) != mri3.get_output_name(focused_workspace):
+            if workspace.name != focused_workspace.name or mri3.get_output_name(workspace) != focused_workspace_output:
                 print(f"--current: skipping workspace: {workspace.name} != focused_workspace {focused_workspace.name}")
                 continue
         workspace_output_name = mri3.get_output_name(workspace)
