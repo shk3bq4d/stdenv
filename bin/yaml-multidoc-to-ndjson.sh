@@ -5,5 +5,5 @@ set -euo pipefail
 umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
-yq e -I 0 -No json '.' "$@"
+yq e -I 0 -No json 'sort_keys(..)' "$@"
 exit 0

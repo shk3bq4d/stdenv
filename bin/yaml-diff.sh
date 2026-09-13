@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
-##
-##Usage:  __SCRIPT__ FILE1 FILE2 [FILES]
-##produces a diff of yaml files
-##
-## Author: Jeff Malone, 12 Oct 2021
-##
 
 set -euo pipefail
 umask 027

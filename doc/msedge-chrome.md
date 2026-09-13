@@ -12,6 +12,7 @@ deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main
 "C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors
 
 
+```sh
 chattr +i /etc/apt/sources.list.d/microsoft-edge.list # lock file to prevent modification
 
 cat <<EOF | sudo tee /etc/apt/sources.list.d/90-manual-microsoft-edge.sources && sudo apt update && sudo apt install microsoft-edge-stable
@@ -46,3 +47,10 @@ Trusted: yes
 Types: deb
 URIs: https://packages.microsoft.com/repos/edge
 EOF
+```
+
+
+# hardware acceleration
+HardwareAccelerationModeEnabled: false #  /etc/opt/edge/policies/managed/managed.json
+microsoft-edge --disable-gpu
+edge://gpu
