@@ -1258,6 +1258,7 @@ ansible all -bm yum -a "name=httpd state=present"                        # oneli
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ANSIBLE_ANY_ERRORS_FATAL=true ansible uat     -bm service -a "name=kubelet.service state=restarted" --forks=1 # oneliner one-liner adhoc ad-hoc
 ansible uat     -bm service -a "name=apt-daily-upgrade.timer state=restarted" # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
@@ -3000,3 +3001,8 @@ find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select
 
 ansible-debug-parser.py # ANSIBLE_DEBUG=1
 source ~/bin/ansible-tracing/dot.sourceme # ANSIBLE_DEBUG=1
+
+strategy: linear
+strategy: free
+strategy: host_pinned # Like free, but a worker stays assigned to a host until that host finishes
+strategy: debug

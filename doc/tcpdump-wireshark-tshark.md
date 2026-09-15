@@ -18,7 +18,7 @@ wireshark -i enp0s25 -k -f "tcp port 389 and host 10.3.28.13"
 wireshark -i lo -k -f "tcp port 65389" # 1) Right click on line, decode AS "LDAP", 2) display filter: "ldap" , 3) profit!
 a=5; for i in $(seq 90000); do ssh myrouter tcpdump -i eth1 -nn -w - 'ip and not net 10.1.1.0/24 and not net 10.1.2.0/24' >wrt-$a-$i.cap; done
 
-tcpdump host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
+tcpdump -i br-lan host 10.0.0.218 | grep -iE '> .*\.53:' DNS queries on openwrt
 sudo tcpdump -s0 -n port 53  # DNS queries and answer
 sudo tcpdump -s0 -n port 123 # NTP queries and answer
 ```

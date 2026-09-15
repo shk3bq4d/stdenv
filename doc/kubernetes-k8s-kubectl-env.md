@@ -1115,6 +1115,7 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 
 /var/lib/kubelet/config.yaml # cgroupDriver, kind: KubeletConfiguration, https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/ containerLogMaxSize containerLogMaxFiles
 /etc/kubernetes/kubelet.conf
+/etc/kubernetes/kubelet-config.yaml
 /etc/kubernetes/bootstrap-kubelet.conf
 /lib/systemd/system/kubelet.service
 /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
