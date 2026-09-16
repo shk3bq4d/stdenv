@@ -288,6 +288,8 @@ alias -g V='2>&1 NC |vim -R -'
 alias -g V1='2>/dev/null|V'
 alias -g V2='2>&1 >/dev/null|V'
 
+alias -g NAMES=" --no-headers -o jsonpath='{range .items[*]}{.metadata.name}{\"\\n\"}{end}'" -- kubectl
+
 alias -g N='&>/dev/null'
 alias -g N1='>/dev/null'
 alias -g N2='2>/dev/null'

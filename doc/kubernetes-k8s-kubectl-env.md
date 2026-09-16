@@ -111,6 +111,7 @@ kubectl get secret -o jsonpath='{.data.admin-password}' -n monitoring grafana  |
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}"
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}" | base64 -d | openssl-cert-info.sh
 kubectl get secret -n traefik traefik-tls -o jsonpath="{.data['tls\.crt']}" | base64 -d | openssl-cert-info.sh
+kubectl get secret -n traefik traefik-tls -o go-template='{{index .data "tls.crt" | base64decode}}'
 kubectl options
 kubectl exec zookeeper-d8f95899d-z5b5c -it /bin/sh
 kubectl exec -n monitoring kube-prometheus-exporter-node-wchkz -i -t -- /bin/sh

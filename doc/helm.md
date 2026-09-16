@@ -34,6 +34,7 @@ helm repo index ./repo/
 helm plugin install https://github.com/databus23/helm-diff #
 helm diff revision -n kube-system blob-csi-driver 1
 helm diff revision -n kube-system blob-csi-driver --color 1 | less
+ls -l .local/share/helm/plugins/helm-diff/bin/diff
 n=trino; c=trino; helm history -n $n $c | grep -vF REVISION | tail -n+2  | while read a b; do helm diff revision -n $n $c --color $(( a - 1 )) $a | less; done
 helm plugin list
 helm plugin update diff # upgrade release version
