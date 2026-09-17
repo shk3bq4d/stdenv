@@ -17,6 +17,8 @@ systemd-cgls /system.slice/mdatp.service
 
 systemctl show MYSERVICE --property ActiveState
 systemctl show MYSERVICE --property SubState
+systemctl show MYSERVICE --property SubState --value
+systemctl show MYSERVICE --property ActiveEnterTimestamp --value # since when service is up
 systemctl show MYSERVICE | grep -i state
 
 systemd_mr_unitfiles
