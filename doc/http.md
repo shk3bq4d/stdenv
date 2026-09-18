@@ -221,3 +221,9 @@ https_proxy ==  'socks5://127.0.0.1:29842' # httpproxy http_proxy DNS gets resol
 
 apt install hey # rate limit load tester http 429
 hey -n 100 -c 45 -q 1 https://$(hostname -f) # rate limit load tester http 429
+
+
+# cached
+Cache-Control: no-store, no-cache, must-revalidate, max-age=0 
+Pragma: no-cache
+Expires: 0 # cache
