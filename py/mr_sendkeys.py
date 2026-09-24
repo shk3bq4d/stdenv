@@ -85,7 +85,7 @@ def go(args):
         if ar.focus:
             xdotool('windowfocus', '--sync', window_id)
         for i in args:
-            bA = 'type --clearmodifiers --window {}'.format(window_id).split()
+            bA = 'type --delay 80 --clearmodifiers --window {}'.format(window_id).split()
             bA.append(i)
             xdotool(*bA)
 

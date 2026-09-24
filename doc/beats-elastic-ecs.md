@@ -1,4 +1,6 @@
 
+https://www.elastic.co/docs/reference/ecs
+https://www.elastic.co/docs/reference/ecs/ecs-field-reference
 https://raw.githubusercontent.com/elastic/ecs/8.6/generated/csv/fields.csv
 https://raw.githubusercontent.com/elastic/ecs/8.6/generated/csv/fields.csv
 ECS_Version,Indexed,Field_Set,Field,Type,Level,Normalization,Example,Description
