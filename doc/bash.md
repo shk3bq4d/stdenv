@@ -1181,7 +1181,9 @@ tail -f /var/log/foo | ack --flush              # unbuffered pipe
 stdbuf -o0 tcpdump                            # unbuffered
 
 
-+test -t 0 && TTY_FLAG="-t"
+test -t 0 && TTY_FLAG="-t" || TTY_FLAG=""
+test -t 1 && TTY_FLAG="-t" || TTY_FLAG=""
+{ test -t 0 && test -t 1; } && TTY_FLAG="-t" || TTY_FLAG=""
 ```
 ulimit -f 40 # will limit generate files by current bash session and subshells to 40kb (think files generated with redirections >)
 ulimit -f 1000 # will limit generate files by current bash session and subshells to 1mb (think files generated with redirections >)
