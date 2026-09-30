@@ -462,6 +462,8 @@ function precmd() {
 }
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+setopt HIST_IGNORE_ALL_DUPS
+#setopt HIST_FIND_NO_DUPS.
 bindkey '^r' history-incremental-search-backward
 reset_rprompt() {
     echo "MR_REST=$MR_REST, timer is $timer"
