@@ -36,3 +36,7 @@ ffmpeg -hide_banner -loglevel error -ss 4:05 -i *mkv -frames:v 1 -vf "scale=iw:i
 ```
 
 ~/bin/screen-capture.sh
+
+ffprobe -hide_banner MVI_3459.MOV
+ffmpeg -i DSCF0516.MOV -c:v libx264 -crf 22 -preset slow -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart ~/tmp/DSCF0516.mp4
+ffmpeg -i MVI_3459.MOV -c:v libx264 -crf 20 -preset slow -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart MVI_3459.mp4
