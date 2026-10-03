@@ -30,6 +30,13 @@ apt-daily-upgrade.timer
 EOF
 }
 
+timer_units() {
+    cat << EOF
+apt-daily.timer
+apt-daily-upgrade.timer
+EOF
+}
+
 #{ sudo systemctl status apt-daily.service || true; } | cat
 #{ sudo systemctl status apt-daily.timer || true; } | cat
 #{ sudo systemctl status apt-daily-upgrade.service || true; } | cat
@@ -47,6 +54,11 @@ done
 for unit in $(enabled_units); do
     printf "is-failed %-30s" "$unit"
     sudo systemctl is-failed "$unit" >/dev/null && echo "ok" || echo "KO"
+done
+
+for unit in $(timer_units); do
+    printf "%-30s" "$unit"
+    sudo systemctl show -p TimersCalendar "$unit" | cat
 done
 
 sudo needrestart -b
