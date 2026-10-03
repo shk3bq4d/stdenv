@@ -13,6 +13,7 @@
 #
 # Requires: exiftool (https://exiftool.org), awk
 #
+# 48.264614 7.721475 europa park
 set -euo pipefail
 
 # ---- Configuration ---------------------------------------------------------
