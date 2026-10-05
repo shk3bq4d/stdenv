@@ -1618,7 +1618,7 @@ toggle_urxt_force_white() {
         sed -i -r -e "s/^MR_URXVT_FORCEWHITE=.*/MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" $f
     else
         touch $f
-        echo "MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))/" >> $f
+        echo "MR_URXVT_FORCEWHITE=$(( 1 - MR_URXVT_FORCEWHITE ))" >> $f
     fi
 }
 
