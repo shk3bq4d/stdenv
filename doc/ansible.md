@@ -2747,23 +2747,23 @@ fancy yaml construction
       keyA: ahah
       keyB: bhbh
   tasks:
-    - shell: "echo {{ item }} | tr [:lower:] [:upper:]"       # register iteration list
-      register: myvar                                         # register iteration list
-      with_items: "{{ mylist }}"                              # register iteration list
-    - debug:                                                  # register iteration list
-        msg: "{{ myvar.results[my_idx].stdout }}"             # register iteration list
-      with_items: "{{ mylist }}"                              # register iteration list
-      loop_control:                                           # register iteration list
-        index_var: my_idx                                     # register iteration list
+    - shell: "echo {{ item }} | tr [:lower:] [:upper:]"       # register iteration list loop changed
+      register: myvar                                         # register iteration list loop changed
+      with_items: "{{ mylist }}"                              # register iteration list loop changed
+    - debug:                                                  # register iteration list loop changed
+        msg: "{{ myvar.results[my_idx].stdout }}"             # register iteration list loop changed
+      with_items: "{{ mylist }}"                              # register iteration list loop changed
+      loop_control:                                           # register iteration list loop changed
+        index_var: my_idx                                     # register iteration list loop changed
 
-    - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict
-      register: myvardict                                     # register iteration dict
-      with_dict: "{{ mydict }}"                               # register iteration dict
-    - debug:                                                  # register iteration dict
-        msg: "{{ myvardict.results[my_idx2].stdout }}"        # register iteration dict
-      with_items: "{{ mydict }}"                              # register iteration dict
-      loop_control:                                           # register iteration dict
-        index_var: my_idx2                                    # register iteration dict
+    - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict loop changed
+      register: myvardict                                     # register iteration dict loop changed
+      with_dict: "{{ mydict }}"                               # register iteration dict loop changed
+    - debug:                                                  # register iteration dict loop changed
+        msg: "{{ myvardict.results[my_idx2].stdout }}"        # register iteration dict loop changed
+      with_items: "{{ mydict }}"                              # register iteration dict loop changed
+      loop_control:                                           # register iteration dict loop changed
+        index_var: my_idx2                                    # register iteration dict loop changed
 
 
 serial:      # serial throttle parrallel at play          level
