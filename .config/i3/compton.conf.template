@@ -143,8 +143,8 @@ focus-exclude = [
     ,"class_i = 'mrclusterssh'"
     , "class_g = 'spotify'"
     ];
-detect-transient = true;
-detect-client-leader = true;
+detect-transient = false;
+detect-client-leader = false;
 invert-color-include = [  ];
 #invert-color-include = [ "class_g != 'Cairo-clock'" ];
 #invert-color-include = [ "focused != 1" ];
