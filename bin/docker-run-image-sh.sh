@@ -29,6 +29,7 @@ docker ps &>/dev/null && SUDO= || SUDO=sudo
 
 IMAGE="$1"
 NAME="$(echo "$IMAGE" | sed -r -e 's#[:/]+#-#g')"
+NAME="${NAME:0:64}"
 
 $SUDO docker pull "$IMAGE"
 
