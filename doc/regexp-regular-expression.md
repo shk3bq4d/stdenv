@@ -230,3 +230,27 @@ re.X, re.VERBOSE python This flag allows you to write regular expressions that l
 ack '\b[0-9A-Z]{20}\b' # ack Amazon key ID netapp AWS_ACCESS_KEY_ID
 ack '\b([0-9A-Z]{20}|AWS_ACCESS_KEY_ID|access_key)\b' # Amazon key ID netapp AWS_ACCESS_KEY_ID
 \<(AKIA|ASIA|AGPA|AIDA|ANPA|AROA|AIPA)[0-9A-Z]{16}\3 Amazon specific key ID AWS_ACCESS_KEY_ID
+
+
+  sed 's/\x1b\[[0-9;]*m//g' # ansicolors
+
+  Parts of the regex:
+  - \x1b is the ESC character. GNU sed also accepts \o033 or \d027.
+  - \[ is a literal [.
+  - [0-9;]* matches the parameters, for example 1;32 or 38;5;208. This is the character class part.
+  - m ends an SGR (color/style) code.
+
+  Portable version (BSD/macOS sed) has no \x1b, so put a real ESC character into the command through the shell:
+
+  esc=$(printf '\033')
+  sed "s/${esc}\[[0-9;]*m//g" # ansicolors
+
+  In bash or zsh you can also write sed $'s/\e\\[[0-9;]*m//g'.
+
+  Other escape sequences: the regex above strips colors only. Output that also has cursor movement or erase
+  codes (for example \e[K, which grep and git sometimes add) needs a pattern for any CSI sequence:
+
+  sed 's/\x1b\[[0-9;?]*[A-Za-z]//g' #ansicolors complete
+
+  If you want the class for reuse inside a larger pattern, [0-9;] is it. You still need \x1b\[ before it and m
+  after it to match a whole color code.
