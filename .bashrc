@@ -635,6 +635,9 @@ alias head100="head -n 100"
 alias cdreal="cd \$(realpath .)"
 alias sed="sed -u"
 alias find_files_root_directory='find $(find / -maxdepth 1 | grep -Evx "/(|lost+found|run|mnt|proc|sys)") -type f -o -path /var/lib/docker -prune '
+docker_images_sorted_by_size() {
+    { docker images --format '{{.Size}}\t{{.Repository}}:{{.Tag}}' 2>/dev/null || sudo docker images --format '{{.Size}}\t{{.Repository}}:{{.Tag}}'; } | sort -h
+}
 
 bytes() {
     numfmt --to=iec "$@"
