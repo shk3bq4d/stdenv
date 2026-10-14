@@ -246,6 +246,8 @@ fi
 ;;
 esac
 set +e
+# fixed path, same on every host: mrurxvt-rebg loads it over SSH (urxvt resolves OSC 20 paths locally)
+test -s /tmp/mrurxvt-white.jpg || convert -size 8x8 xc:white /tmp/mrurxvt-white.jpg
 TSSH=""
 CD=""
 if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then

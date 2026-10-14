@@ -2,8 +2,8 @@
 # mrurxvt-rebg: change the background of an already running urxvt.
 #
 # Locally: generate a random background image the same way mrurxvt does and
-# load it with OSC 20. Over SSH the image would only exist on the remote host
-# (urxvt resolves the path on its own side), so just switch to white (OSC 11).
+# load it with OSC 20. Over SSH a generated image would only exist on the
+# remote host (urxvt resolves the path on its own side), so switch to white.
 # Works inside tmux and screen.
 #
 # Usage: mrurxvt-rebg [-w] [-f image] [-t tty]
@@ -13,11 +13,14 @@
 #
 # Env: MRURXVT_MUX=tmux|screen|none overrides multiplexer detection, e.g. when
 #      running on a remote host from inside a local tmux.
+#      MRURXVT_WHITE: white image path on the urxvt host (default
+#      /tmp/mrurxvt-white.jpg, created by mrurxvt).
 
 OUTDIR=~/.tmp/mrurxvt
 BLACKLIST=~/bin/mrurxvt.blacklist
+WHITE=${MRURXVT_WHITE:-/tmp/mrurxvt-white.jpg}
 
-usage() { sed -n '9,16s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
+usage() { sed -n '9,18s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
 
 white=0
 file=""
@@ -137,9 +140,10 @@ generate() {
 }
 
 if (( white )) || { [[ -z $file ]] && is_ssh; }; then
-    # Note: if urxvt already shows an image (--background-expr), it is drawn
-    # over this colour; use -f with a white image path local to urxvt instead.
     emit $'\e]11;#ffffff\a'
+    # The -pixmap image covers the colour, so also load a white image.
+    # urxvt resolves this path on the local host, where mrurxvt creates it.
+    emit $'\e]20;'"$WHITE"$';100x100\a'
     exit 0
 fi
 
