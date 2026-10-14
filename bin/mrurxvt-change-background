@@ -1,0 +1,167 @@
+#!/usr/bin/env bash
+# mrurxvt-rebg: change the background of an already running urxvt.
+#
+# Locally: generate a random background image the same way mrurxvt does and
+# load it with OSC 20. Over SSH the image would only exist on the remote host
+# (urxvt resolves the path on its own side), so just switch to white (OSC 11).
+# Works inside tmux and screen.
+#
+# Usage: mrurxvt-rebg [-w] [-f image] [-t tty]
+#   -w        force a white background
+#   -f image  load this image instead of generating one (path as seen by urxvt)
+#   -t tty    write to this tty instead of the current terminal
+#
+# Env: MRURXVT_MUX=tmux|screen|none overrides multiplexer detection, e.g. when
+#      running on a remote host from inside a local tmux.
+
+OUTDIR=~/.tmp/mrurxvt
+BLACKLIST=~/bin/mrurxvt.blacklist
+
+usage() { sed -n '9,16s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
+
+white=0
+file=""
+tty=""
+while getopts "wf:t:h" opt; do
+    case $opt in
+    w) white=1 ;;
+    f) file=$(realpath -- "$OPTARG") || exit 1 ;;
+    t) tty=$OPTARG ;;
+    h) usage 0 ;;
+    *) usage 1 ;;
+    esac
+done
+
+is_ssh() {
+    # In tmux the pane environment is stale (it is from when the pane was
+    # created); the session environment is refreshed on every attach.
+    if [[ -n ${TMUX:-} ]]; then
+        tmux show-environment SSH_CONNECTION 2>/dev/null | grep -q '^SSH_CONNECTION='
+        return
+    fi
+    [[ -n ${SSH_CONNECTION:-}${SSH_CLIENT:-}${SSH_TTY:-} ]]
+}
+
+mux() {
+    if [[ -n ${MRURXVT_MUX:-} ]]; then echo "$MRURXVT_MUX"
+    elif [[ -n ${TMUX:-} || ${TERM:-} == tmux* ]]; then echo tmux
+    elif [[ -n ${STY:-} || ${TERM:-} == screen* ]]; then echo screen
+    else echo none
+    fi
+}
+
+# Send an escape sequence to urxvt, through tmux/screen if needed.
+emit() {
+    local seq=$1 out=${tty:-/dev/tty} client
+    if [[ -z $tty ]]; then
+        case $(mux) in
+        tmux)
+            # Writing straight to the tmux client's tty skips tmux entirely and
+            # needs no allow-passthrough. Fall back to DCS passthrough when the
+            # client tty is not ours (or tmux runs outside this host's view).
+            client=$(tmux display-message -p '#{client_tty}' 2>/dev/null)
+            if [[ -n ${TMUX:-} && -w $client ]]; then
+                out=$client
+            else
+                seq=$'\ePtmux;'"${seq//$'\e'/$'\e\e'}"$'\e\\'
+            fi
+            ;;
+        screen)
+            seq=$'\eP'"$seq"$'\e\\'
+            ;;
+        esac
+    fi
+    printf '%s' "$seq" >> "$out"
+}
+
+if command -v magick >/dev/null 2>&1; then IM=(magick); else IM=(convert); fi
+
+PALETTE=(a591fd d191fd fc9392 b3a6ee eda8a7 d0a6ee 93acfd a7b8ee fbbf91 91d8fc
+         97f665 90fc99 a6edac e1fb8e a6ece6 fbea8f bdeda5 90faf2 90fbc6)
+[[ -r ~/bin/mrurxvt-colors ]] && source ~/bin/mrurxvt-colors
+if ! declare -F randomcolor >/dev/null; then
+    randomcolor() { _MRCOLOR=${PALETTE[RANDOM % ${#PALETTE[@]}]}; }
+fi
+
+# Same methods and file names as mrurxvt, so its blacklist applies.
+# noisehue is left out: the "noise" blacklist entry matches all of it.
+generate() {
+    local a b c d m p
+    randomcolor; a=$_MRCOLOR
+    randomcolor; b=$_MRCOLOR
+    randomcolor; c=$_MRCOLOR
+    randomcolor; d=$_MRCOLOR
+    local methods=(swirl blending semiradial triangleresize 2spot Shepards Inverse)
+    m=${methods[RANDOM % ${#methods[@]}]}
+    case $m in
+    swirl)
+        p=$(( RANDOM % 1000 - 500 ))
+        f=$OUTDIR/$m-$a-$b-$p.jpg
+        [[ -f $f ]] || "${IM[@]}" -size 32x32 gradient:"#$a-#$b" -swirl $p "$f"
+        ;;
+    blending)
+        f=$OUTDIR/$m-$a-$b-$c-$d.jpg
+        [[ -f $f ]] || "${IM[@]}" -size 100x100 gradient:"#$a-#$b" \
+            \( gradient:"#$c-#$d" -rotate -90 \) \
+            -compose Multiply -composite -modulate 130% "$f"
+        ;;
+    semiradial)
+        p=$(( RANDOM % 4 * 90 ))
+        f=$OUTDIR/$m-$a-$b-$p.jpg
+        [[ -f $f ]] || "${IM[@]}" -size 32x32 gradient:"#$a-#$b" -distort Arc "180 $p 16 0" "$f"
+        ;;
+    triangleresize)
+        f=$OUTDIR/$m-$a-$b-$c-$d.jpg
+        [[ -f $f ]] || "${IM[@]}" \( "xc:#$a" "xc:#$b" +append \) \
+            \( "xc:#$c" "xc:#$d" +append \) -append \
+            -filter triangle -resize '32x32!' -modulate 110% "$f"
+        ;;
+    2spot)
+        local p1=$((RANDOM % 10)) p2=$((RANDOM % 10)) p3=$((RANDOM % 10)) p4=$((RANDOM % 10))
+        f=$OUTDIR/$m-$a-$b-$p1$p2$p3$p4.jpg
+        [[ -f $f ]] || "${IM[@]}" -size 32x32 xc: +size "xc:#$a" "xc:#$b" -colorspace RGB \
+            -fx "ar=hypot( i/w-.$p1, j/h-.$p2 )*4;
+                 br=hypot( i/w-.$p3, j/h-.$p4 )*4;
+                 u[1]*br/(ar+br) + u[2]*ar/(ar+br)" \
+            -colorspace sRGB "$f"
+        ;;
+    Shepards|Inverse)
+        p=$(printf '%d' $((RANDOM % 10)) $((RANDOM % 10)) $((RANDOM % 10)) \
+                        $((RANDOM % 10)) $((RANDOM % 10)) $((RANDOM % 10)))
+        f=$OUTDIR/$m-$a-$b-$c-$p.jpg
+        [[ -f $f ]] || "${IM[@]}" -size 100x100 xc: -colorspace RGB \
+            -sparse-color "$m" "${p:0:1}0,${p:1:1}0 #$a  ${p:2:1}0,${p:3:1}0 #$b  ${p:4:1}0,${p:5:1}0 #$c" \
+            -colorspace sRGB "$f"
+        ;;
+    esac
+}
+
+if (( white )) || { [[ -z $file ]] && is_ssh; }; then
+    # Note: if urxvt already shows an image (--background-expr), it is drawn
+    # over this colour; use -f with a white image path local to urxvt instead.
+    emit $'\e]11;#ffffff\a'
+    exit 0
+fi
+
+if [[ -z $file ]]; then
+    mkdir -p "$OUTDIR"
+    for _ in {1..10}; do
+        f=""
+        generate || continue
+        [[ -s $f ]] || continue
+        [[ -r $BLACKLIST ]] && grep -qf "$BLACKLIST" <<<"$f" && continue
+        break
+    done
+    file=$f
+fi
+if [[ ! -s $file ]]; then
+    echo "mrurxvt-rebg: no image to load" >&2
+    exit 1
+fi
+
+# Set the image's average colour first, so something visibly changes even
+# if this urxvt was built without image support.
+hex=$("${IM[@]}" "$file" -alpha off -resize '1x1!' -format '%[hex:u.p{0,0}]' info: 2>/dev/null)
+[[ $hex =~ ^[0-9A-Fa-f]{6} ]] && emit $'\e]11;#'"${hex:0:6}"$'\a'
+emit $'\e]20;'"$file"$';100x100+0+0\a'
+echo "$file"
