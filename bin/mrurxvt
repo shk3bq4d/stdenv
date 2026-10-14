@@ -246,8 +246,18 @@ fi
 ;;
 esac
 set +e
-# fixed path, same on every host: mrurxvt-rebg loads it over SSH (urxvt resolves OSC 20 paths locally)
+# fixed paths, same on every host: mrurxvt-rebg loads them over SSH (urxvt resolves OSC 20 paths locally)
 test -s /tmp/mrurxvt-white.jpg || convert -size 8x8 xc:white /tmp/mrurxvt-white.jpg
+# /tmp/mrurxvt-pool/{0..19}.jpg -> random non-blacklisted cache images, refreshed on each launch
+(
+    POOL=/tmp/mrurxvt-pool
+    mkdir -p $POOL
+    i=0
+    find "$OUTDIR" -maxdepth 1 -type f -name '*.jpg' -size +0 |
+        grep -vf ~/bin/mrurxvt.blacklist |
+        shuf -r -n 20 |
+        while read -r p; do ln -sf "$p" "$POOL/$i.jpg"; i=$((i + 1)); done
+) &
 TSSH=""
 CD=""
 if [[ -z "${MRURXVT_SHIFT_RETURN:-}" ]]; then

@@ -3,7 +3,8 @@
 #
 # Locally: generate a random background image the same way mrurxvt does and
 # load it with OSC 20. Over SSH a generated image would only exist on the
-# remote host (urxvt resolves the path on its own side), so switch to white.
+# remote host (urxvt resolves the path on its own side), so load one of the
+# /tmp/mrurxvt-pool/N.jpg symlinks to the local cache that mrurxvt maintains.
 # Works inside tmux and screen.
 #
 # Usage: mrurxvt-rebg [-w] [-f image] [-t tty]
@@ -19,8 +20,10 @@
 OUTDIR=~/.tmp/mrurxvt
 BLACKLIST=~/bin/mrurxvt.blacklist
 WHITE=${MRURXVT_WHITE:-/tmp/mrurxvt-white.jpg}
+POOL=/tmp/mrurxvt-pool
+POOL_SIZE=20
 
-usage() { sed -n '9,18s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
+usage() { sed -n '10,18s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
 
 white=0
 file=""
@@ -139,11 +142,17 @@ generate() {
     esac
 }
 
-if (( white )) || { [[ -z $file ]] && is_ssh; }; then
+if (( white )); then
     emit $'\e]11;#ffffff\a'
     # The -pixmap image covers the colour, so also load a white image.
     # urxvt resolves this path on the local host, where mrurxvt creates it.
     emit $'\e]20;'"$WHITE"$';100x100\a'
+    exit 0
+fi
+if [[ -z $file ]] && is_ssh; then
+    # The local cache is not visible from here, but mrurxvt keeps symlinks to
+    # random cache images at fixed local paths; urxvt resolves them locally.
+    emit $'\e]20;'"$POOL/$(( RANDOM % POOL_SIZE )).jpg"$';100x100\a'
     exit 0
 fi
 
