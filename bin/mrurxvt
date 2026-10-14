@@ -186,7 +186,7 @@ Shepards|Inverse)
               -fx "ar=hypot( i/w-.$c, j/h-.$d )*4;
                    br=hypot( i/w-.$e, j/h-.$g )*4;
                    u[1]*br/(ar+br) + u[2]*ar/(ar+br)" \
-              -colorspace RGB $f && break
+              -colorspace sRGB $f && break
         done
     fi
     ;;

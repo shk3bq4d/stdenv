@@ -33,8 +33,7 @@ command ssh myhost curl -sS https://download.through/other/machine.html | tee ma
 
 curl -sS -o /dev/null -w "%{http_code}" # print only http response status code
 
-curl -c store-cookies-here.txt -b read-cookies-there.txt https://example
-.com
+curl -c store-cookies-here.txt -b read-cookies-there.txt https://example.com # read and store cookies for session, just use the same flags
 
 https_proxy == 'socks5h://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved on proxy
 https_proxy ==  'socks5://127.0.0.1:29842' # httpproxy http_proxy DNS gets resolved locally
