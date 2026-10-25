@@ -23,6 +23,8 @@ WHITE=${MRURXVT_WHITE:-/tmp/mrurxvt-white.jpg}
 POOL=/tmp/mrurxvt-pool
 POOL_SIZE=20
 
+echo "$(date) hehe $@" >> ~/.tmp/log/mrurxvt-change-background.log
+
 usage() { sed -n '10,18s/^# \{0,1\}//p' "$0"; exit "${1:-0}"; }
 
 white=0
