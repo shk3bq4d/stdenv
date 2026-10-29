@@ -54,3 +54,30 @@ EOF
 HardwareAccelerationModeEnabled: false #  /etc/opt/edge/policies/managed/managed.json
 microsoft-edge --disable-gpu
 edge://gpu
+
+
+# hangs
+since recently, my linux microsoft edge browser's tab hangs on both outlook.com and azure devops, when editing the email subject or editing a discussion message. I can type one of two words and suddenly it hangs, eventually leading to an "SIGILL" Error code.
+
+I have disabled extension with no change
+
+what could be the reason?
+Searched the web
+
+Typing a word or two and then hanging points to something that runs on the text you type. On Linux, a SIGILL crash in Edge almost always means the browser deliberately crashed its own tab after hitting an internal error. It’s not a hardware or CPU problem. So this is most likely a bug in a recent Edge update, set off by a feature that kicks in while you type in rich text editors like Outlook’s and Azure DevOps’.
+
+The usual suspects, roughly in order of likelihood:
+
+    Microsoft Editor spell/grammar check. It checks words as you finish them, which matches the “one or two words, then hang” pattern. Go to edge://settings/languages and switch “Grammar and spelling assistance” from Microsoft Editor to Basic, or turn it off, then test.
+    Text prediction and writing assistance. On the same settings page, turn off text prediction. Also turn off any Copilot “compose” or rewrite suggestions under edge://settings/sidebar or edge://settings/privacy, depending on your version.
+    Input method (IBus/Fcitx), especially on Wayland. Edge talks to your input method on every keystroke, and Wayland IME support in Chromium has had crash bugs. Test by starting Edge under X11: microsoft-edge --ozone-platform=x11. You can also temporarily switch your input method to plain keyboard.
+    GPU acceleration. This is less likely given the typing trigger, but quick to rule out: microsoft-edge --disable-gpu.
+
+Two quick checks will narrow it down:
+
+    Try an InPrivate window, or a fresh profile or Guest. If the problem goes away, it’s a profile setting or corrupted data, not Edge itself.
+    Launch Edge from a terminal and reproduce the crash. The last lines printed before the crash often name the component, such as spellcheck, IME or GPU. edge://crashes also keeps crash IDs you can attach to a report.
+
+If none of the settings changes help, it’s probably a regression in your current Edge version. Edge on Linux has had SIGILL crashes like this before, and they were fixed in the next update. Check your version at edge://version and update if one is available. You could also install Edge Beta alongside it to see whether the newer build is fixed. Either way, send feedback with Alt+Shift+I right after a crash so Microsoft gets the crash ID.
+
+If you tell me your distro, whether you’re on Wayland or X11, and your Edge version, I can narrow it down further.
