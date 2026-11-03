@@ -371,3 +371,12 @@ vim -n FILE # does not prompt to reopen since been modified file
 vim -n -i NONE # does not prompt to reopen since been modified file + ignore existing SWAP file
 
 git difftool --tool=vimdiff --no-prompt # vi vim
+
+# rightalign
+a) set textwidth=200
+b) select your block
+c) :right
+
+
+vip visual mode , inside paragraph, selects paragraph, excluding blank lines
+vap                                 selects paragraph, including blank lines

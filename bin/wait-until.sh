@@ -19,17 +19,23 @@ function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'
 
 for i in date sleep; do ! command -v touch &>/dev/null && echo FATAL: unexisting dependency touch && exit 1; done
 
+ARG="$1"
+ARG="$( echo "$ARG" | sed -r -e '
+# replaces 2026.01.01 -> 2026-01-01
+s/\./-/g
+')"
+
 current_epoch=$(date +%s)
-target_epoch=$(date -d "$1" +%s)
+target_epoch=$(date -d "$ARG" +%s)
 
 sleep_seconds=$(( $target_epoch - $current_epoch ))
 
 echo "" # forces new line before (as the display can be scrambled in my current screen (tmux) setting
 if [[ $sleep_seconds -lt 0 ]] && [[ $sleep_seconds -ge -86400 ]]; then
 	sleep_seconds=$(( $sleep_seconds + 86400 ))
-	echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$sleep_seconds second")"
+	echo "Sleeping $sleep_seconds seconds until $ARG / $(date -d "$sleep_seconds second")"
 else
-	echo "Sleeping $sleep_seconds seconds until $1 / $(date -d "$1")"
+	echo "Sleeping $sleep_seconds seconds until $ARG / $(date -d "$ARG")"
 fi
 shift
 
@@ -37,4 +43,3 @@ set -x
 sleep $sleep_seconds
 bash -c "$(echo "$@")"
 exit 0
-

@@ -10,5 +10,5 @@
 ##
 
 set -x
-xdotool key --clearmodifiers Caps Lock  # toggles caps lock (not disable) by issuing the capslock key when on X
+xdotool key Caps_Lock  # toggles caps lock (not disable) by issuing the capslock key when on X
 setleds -D -caps                        # when on console
