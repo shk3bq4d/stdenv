@@ -47,6 +47,8 @@ select c.relname from pg_class c where c.relkind = 'S'; # list sequences
 ```sql
 create schema coucou;
 select datname from pg_database where datistemplate = false; -- list databases
+select datname, pg_size_pretty(pg_database_size(datname)) as size from pg_database order by pg_database_size(datname) desc; -- database space usage disk free disk
+select schemaname || '.' || relname as table_name, pg_size_pretty(pg_total_relation_size(relid)) as total, pg_size_pretty(pg_relation_size(relid)) as table_data, pg_size_pretty(pg_indexes_size(relid)) as indexes, pg_size_pretty(pg_total_relation_size(relid) - pg_relation_size(relid) - pg_indexes_size(relid)) as toast_and_other from pg_stat_user_tables order by pg_total_relation_size(relid) desc limit 20; -- top table space usage disk free
 select table_schema,table_name from information_schema.tables order by table_schema,table_name; -- list tables in current database
 create user tom with password 'myPassword';
 create database jerry;
@@ -287,7 +289,7 @@ select name, json_extract_path_text(configuration::json, 'idp-x509cert') from oc
 select uid, json_extract_path_text(data::json, 'displayname', 'value') from oc_accounts limit 2;
 select name, jsonb_set(configuration::jsonb, '{idp-entityId}', '"___________________________"', false) from oc_user_saml_configurations;
 
-psql -At # batch mode --tuples-only --no-align skip headers column namse
+psql -At # batch mode --tuples-only --no-align skip headers column names
 
 # sessions
 ```
