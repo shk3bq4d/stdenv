@@ -66,3 +66,12 @@ for version 3 of the ISC DHCP server (the isc-dhcp-server Debian package).
               given as a domain name which is looked up in /etc/hosts. This name can be associ‐
               ated  in /etc/hosts with multiple IP addresses, which are used round-robin.  This
               facility can be used to load balance the tftp load among a set of servers.
+
+# kernel 7.x on trixie
+## activates
+```sh
+echo 'deb http://deb.debian.org/debian trixie-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
+sudo apt update
+apt-cache search --names-only '^linux-image-7.*amd64$'
+sudo apt install -t trixie-backports <package-name> firmware-amd-graphics
+```

@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
-##
-##Usage:  __SCRIPT__ REMOTEHOST [REMOTEPORT]
-##configures whatever action with whatever config
-##    REMOTEHOST: remote host where to ssh
-##    REMOTEPORT: JMX port (default: 12345)
-##
-## Author: Jeff Malone, 20 Jan 2021
-##
 
 set -x
 xdotool key Caps_Lock  # toggles caps lock (not disable) by issuing the capslock key when on X
-setleds -D -caps                        # when on console
+xdotool keyup Shift_L Shift_R Control_L Control_R \
+    Alt_L Alt_R Super_L Super_R Meta_L Meta_R \
+    Hyper_L Hyper_R ISO_Level3_Shift
+
+setleds -D -caps 2>/dev/null                        # when on console
+true

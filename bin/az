@@ -25,6 +25,10 @@ case $0 in \
     #TENANT=d7ef61ac-0d19-436a-9159-13ff8a3408a2;;
     should_add_subscription "$@" && POSTARG="$POSTARG --subscription ba7dcad5-11f6-400a-897c-856f33bb9637"
     ;;
+*corient)
+    #should_add_subscription "$@" && POSTARG="$POSTARG --subscription ba7dcad5-11f6-400a-897c-856f33bb9637"
+    true
+    ;;
 *) true ;;
 esac
 
