@@ -97,3 +97,6 @@ pveum user token remove root@pam zabbix
 pveum acl modify / -token 'root@pam!zabbix' -role PVEAuditor
 pveum user token permissions root@pam zabbix
 pveum user token permissions --output json root@pam zabbix
+
+
+pvesubscription get # license check
