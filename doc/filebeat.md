@@ -45,6 +45,7 @@ processors:
 # https://www.elastic.co/guide/en/beats/filebeat/current/add-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/decode-json-fields.html
+# https://www.elastic.co/docs/reference/beats/filebeat/replace-fields
 # https://www.elastic.co/guide/en/beats/filebeat/current/processor-script.html # javascript js
   - script:
       lang: javascript
