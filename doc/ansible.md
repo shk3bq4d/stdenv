@@ -2172,7 +2172,7 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ [3, [4, 2] ] | flatten }}
 {{ [3, [4, [2]] ] | flatten(levels=1) }}
 {{ list1 | unique }}
-{{ list1 | union(list2) }} # concat, plus add
+{{ list1 | union(list2) }} # concat, plus, add, combine, merge list
 {{ list1 | intersect(list2) }}
 {{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2), minus, list
 {{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
@@ -3006,3 +3006,66 @@ strategy: linear
 strategy: free
 strategy: host_pinned # Like free, but a worker stays assigned to a host until that host finishes
 strategy: debug
+
+is failed (alias failure) task result
+is succeeded (aliases success, successful) task result
+is changed (alias change) task result
+is skipped (alias skip) task result
+is reachable, unreachable task result
+is timedout task result
+is started, finished (async tasks) task result
+
+Strings and regex
+
+is match (regex anchored at the start of the string) strings
+is search (regex anywhere in the string) strings
+is regex (configurable via match_type, ignorecase, multiline) strings
+is lower, upper strings
+is url, uri, urn strings
+
+Paths (evaluated on the controller, not the remote host)
+
+is file, directory, link, mount , Paths (evaluated on the controller, not the remote host)
+is exists, link_exists , Paths (evaluated on the controller, not the remote host)
+is abs , Paths (evaluated on the controller, not the remote host)
+is same_file , Paths (evaluated on the controller, not the remote host)
+
+Existence and type
+
+is defined, undefined
+is none
+is boolean, true, false
+is string, number, integer, float
+is mapping (dict), sequence, iterable
+is callable
+is sameas (same object)
+
+Truthiness
+
+is truthy, falsy (with optional convert_bool)
+
+Numbers and comparisons
+
+is even, odd, divisibleby
+is nan
+is eq / equalto, ne
+is gt / greaterthan, ge
+is lt / lessthan, le
+is version (alias version_compare), e.g. ansible_facts['distribution_version'] is version('12', '>=')
+
+Collections
+
+is in
+is contains
+is subset (alias issubset), superset (alias issuperset)
+is any, all
+
+Vault
+
+is vault_encrypted (variable)
+is vaulted_file (file)
+
+Jinja internals (rarely needed)
+
+is filter, test (check that a filter or test of that name exists)
+is escaped
