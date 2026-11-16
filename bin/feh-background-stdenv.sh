@@ -7,9 +7,11 @@ feb22*)
     exit 0
     ;;
 shaz*)
+    if false; then
     if hash at-work.sh 2>/dev/null && at-work.sh; then
         nohup feh --bg-fill ~/Pictures/i3lock/corient-black-$(current-resolution-bigger-screen.sh).png </dev/null &>/dev/null &
         exit 0
+    fi
     fi
     ;;
 esac
