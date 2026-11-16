@@ -32,9 +32,8 @@ fi
 set -x
 mute.sh &
 case "$(hostname -f)" in \
-nov20*)
-	~/bin/notinpath/i3lock-pixelate.sh
-	;;
+nov20*) ~/bin/notinpath/i3lock-pixelate.sh ;;
+shaz*) ~/bin/notinpath/i3lock-pixelate.sh ;;
 dec17*|shaz0140508|nov20*|shaz*)
 	case "$(hostname -f)" in \
 		shaz*)  f="$HOME/Pictures/i3lock/corient-black.png";;
