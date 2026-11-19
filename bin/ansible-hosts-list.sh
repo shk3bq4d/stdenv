@@ -19,7 +19,7 @@ else
     ARGS="$@"
 fi
 # hosts (1):
-if [[ $(ansible "$ARGS" -i inventory-proxmox.yml -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml   --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | wc -l) -eq 0 ]]; then
+if [[ $(ansible "$ARGS" -i inventory.yml -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml   --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | wc -l) -eq 0 ]]; then
     cd $(iaac-dir.sh)
 fi
-ansible "$ARGS" -i inventory-proxmox.yml -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | sort -u
+ansible "$ARGS" -i inventory.yml -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml --list-hosts 2>/dev/null | sed -r -e '/^\s*hosts[ ()[0-9:]+$/ d' -e 's/^\s+|\s+$//g' | sort -u
