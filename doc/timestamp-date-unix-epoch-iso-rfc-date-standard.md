@@ -20,6 +20,10 @@ email.utils.parsedate_to_datetime(r.headers['Date']) # 'Wed, 23 Sep 2009 22:15:2
 date -d @1465016400 # from unix epoch timestamp
 date +%s            # to unix epoch timestamp
 date +%s -d "2004-02-29 16:21:42" # to unix epoch timestamp => 1078068102
+sudo shutdown -r "01:00"
+systemd-run --unit=onetimereboot --on-calendar="$(date -d 'sat 01:00' '+%Y-%m-%d %H:%M:%S')" shutdown now -r
+systemdctl    stop onetimereboot.timer
+systemdctl    show onetimereboot.timer
 python3 -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch timestamp
 python3 -c "import datetime; print(datetime.datetime.now().strftime('%s'))" # unix epoch timestamp
 python3 -c "import datetime; print(datetime.datetime.fromisoformat('2025-12-07T12:43:11.230327808Z'))"

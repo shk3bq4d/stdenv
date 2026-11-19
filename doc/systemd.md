@@ -1356,3 +1356,6 @@ journalctl -xb # grub Welcome to emergency mode! After logging in, type "journac
 systemctl list-timers # show
 
 XDG_RUNTIME_DIR=/run/user/$(id -u) systemctl status --user docker
+systemd-run --unit=onetimereboot --on-calendar="$(date -d 'sat 01:00' '+%Y-%m-%d %H:%M:%S')" shutdown now -r
+systemd-run   stop onetimereboot.timer
+systemdctl    show onetimereboot.timer
