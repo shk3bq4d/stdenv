@@ -10,6 +10,8 @@ git merge BRANCHNAME
 git branch -d BRANCHNAME
 git log
 
+git repack
+
 git help -a
 git help -g
 
