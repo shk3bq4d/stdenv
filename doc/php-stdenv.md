@@ -1,3 +1,7 @@
+* https://www.php.net/ChangeLog-8.php#PHP_8_5
+* https://www.php.net/ChangeLog-8.php#PHP_8_4
+* https://www.php.net/ChangeLog-8.php#PHP_8_3
+* https://www.php.net/ChangeLog-8.php#PHP_8_2
 * https://www.php.net/ChangeLog-8.php#8.1.25 release changelog version
 * https://www.php.net/downloads.php
 * Unsupported Historical Releases https://www.php.net/releases/index.php
