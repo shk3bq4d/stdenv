@@ -1,6 +1,7 @@
 systemd-analyze verify myunit # <-- debug troubleshooting error
 systemd-analyze blame # timing analysis
 systemctl enable nginx.service   # Start nginx as system boot
+systemctl reset-failed nginx.service
 sudo systemctl restart systemd-resolved # dns
 journalctl --no-tail -f -u nginx.service
 journalctl --since "2017-10-07 10:00:00"
