@@ -1,10 +1,15 @@
 ```sh
+find -type f -name '*.yml'  | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort'
+find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' | grep -vxF '[]' | yq 'unique | sort'
+
 desktop-become-local.sh dnsmasq
 desktop-become-local.sh firefox_cfg
 desktop-become-local.sh firefox_prefs
 desktop-become-local.sh firefox_policies
+desktop-become-local.sh edge,msedge
 desktop-local.sh i3
 desktop-local.sh sf
+desktop-local.sh gitalternates # sf
 desktop-local.sh git-crypt
 desktop-local.sh i3blocks
 desktop-local.sh i3cfg

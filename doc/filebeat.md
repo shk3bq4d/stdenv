@@ -45,6 +45,7 @@ processors:
 # https://www.elastic.co/guide/en/beats/filebeat/current/add-fields.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/dissect.html
 # https://www.elastic.co/guide/en/beats/filebeat/current/decode-json-fields.html
+# https://www.elastic.co/docs/reference/beats/filebeat/replace-fields
 # https://www.elastic.co/guide/en/beats/filebeat/current/processor-script.html # javascript js
   - script:
       lang: javascript
@@ -396,7 +397,7 @@ kubectl get configmap -n filebeat filebeat-config -o jsonpath="{ .data['filebeat
 # log_file_inode
 ls -ila grep MYINODE
 find $(find / -maxdepth 1 | grep -Evx '/(|lost+found|run|mnt|proc|sys)') -inum 9387 -o -path /var/lib/docker -prune
-/var/lib/filebeat/registry/filebeat/log.json # internal tracking state
+/var/lib/filebeat/registry/filebeat/log.json # internal tracking state debug
 
 # filebeat javascript timestamp
 e.Get("@timestamp").Add()

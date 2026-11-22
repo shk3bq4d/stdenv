@@ -34,9 +34,10 @@ helm repo index ./repo/
 helm plugin install https://github.com/databus23/helm-diff #
 helm diff revision -n kube-system blob-csi-driver 1
 helm diff revision -n kube-system blob-csi-driver --color 1 | less
+ls -l .local/share/helm/plugins/helm-diff/bin/diff
 n=trino; c=trino; helm history -n $n $c | grep -vF REVISION | tail -n+2  | while read a b; do helm diff revision -n $n $c --color $(( a - 1 )) $a | less; done
 helm plugin list
-helm plugin update diff
+helm plugin update diff # upgrade release version
 
 # security tiller
 remove clusterIP
@@ -200,3 +201,9 @@ https://helm.sh/docs/topics/kubernetes_apis/ # UPGRADE FAILED: current release m
 ~/.cache/helm/repository/mojo2600-charts.txt
 ~/.cache/helm/repository/mojo2600-index.yaml
 ~/.cache/helm/repository/pihole-2.9.2.tgz
+
+
+timestamp: {{ now | date "2006-01-02T15:04:05Z07:00" | quote }}
+date: {{ now | date "2006-01-02" | quote }}
+unixTimestamp: {{ now | unixEpoch | quote }}
+utcTimestamp: {{ dateInZone "2006-01-02T15:04:05Z" (now) "UTC" | quote }}

@@ -1,3 +1,5 @@
+
+
 " ex: set expandtab ts=4 sw=4:
 if version >= 500
 let g:pathogen_disabled = []
@@ -24,6 +26,8 @@ if hostname == $WORK_PC1 || hostname == "bipbip"
     "set completeopt=menu,preview
 else
 endif
+
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
 
 " https://vi.stackexchange.com/questions/14622/how-can-i-close-the-netrw-buffer
 " https://github.com/tpope/vim-vinegar/issues/13
@@ -52,7 +56,6 @@ if &diff
         let g:loaded_youcompleteme = 1
         let g:syntastic_check_on_open = 0
         let g:mrdiffmode = "yes you are in mrdiffmode" " :echo g:mrdiffmode
-        call add(g:pathogen_disabled, 'vim-gitgutter')
         call add(g:pathogen_disabled, 'syntastic')
         call add(g:pathogen_disabled, 'SyntaxRange')
         call add(g:pathogen_disabled, 'tabular')
@@ -64,7 +67,6 @@ if &diff
         call add(g:pathogen_disabled, 'ingo-library')
         call add(g:pathogen_disabled, 'syntastic')
         call add(g:pathogen_disabled, 'SyntaxRange')
-        call add(g:pathogen_disabled, 'tabular')
         call add(g:pathogen_disabled, 'vim-airline')
         call add(g:pathogen_disabled, 'vim-airline-themes')
         call add(g:pathogen_disabled, 'vim-fugitive')
@@ -122,6 +124,8 @@ catch /^Vim\%((\a\+)\)\=:E117/
 endtry
 let main_syntax = '' " trying to solve a bug in /usr/local/share/vim/vim80/syntax/html.vim:183 FreeBSD 2017.02.11
 
+set runtimepath+=/usr/share/vim-youcompleteme/
+"runtime plugin/youcompleteme.vim
 
 syntax on
 endif
@@ -395,6 +399,13 @@ inoremap <F11> <C-o>:syntax sync fromstart<CR>:autocmd BufEnter <buffer> syntax 
 nnoremap <silent> <F12>      :BufExplorer<CR>
 imap     <silent> <F12> <Esc>:BufExplorer<CR>
 set nocp
+if !has('gui_running')
+	" XOFF/XON flow control is an old terminal mechanism for pausing and resuming output.
+    silent !stty -ixon
+endif
+nnoremap <C-s> :write<CR>
+inoremap <C-s> <C-o>:write<CR>
+vnoremap <C-s> <Esc>:write<CR>gv
 
 "let g:dbext_default_profile_ORA         = 'type=ORA:user=myusername:passwd=mypassword:host=myhost:dbname=mydb.mydomain.local'
 
@@ -617,8 +628,12 @@ map <C-ScrollWheelLeft> <nop>
 map <ScrollWheelRight> <nop>
 map <S-ScrollWheelRight> <nop>
 map <C-ScrollWheelRight> <nop>
-" terminal see tab as C-i
+
+" switching to next buffer with Control-Tab: WARNING C-i and C-Tab are the same on my setup
 map <C-i> <Esc>:bnext<CR>
+
+" vertical blockwise visual mod, default is <C-q>
+"map <C-t> <C-q>
 
 :nnoremap <Space>   <C-d>
 :inoremap <C-u> <Esc>>>i
@@ -782,6 +797,17 @@ function! MrInsertAnsibleVarPrefix()
 endfunction
 
 nnoremap <leader>ai :call MrInsertAnsibleVarPrefix()<CR>
+
+" Replace Jinja/Twig whitespace control markers within visual selection
+" {% -> {%-    %} -> -%}    {{ -> {{-    }} -> -}}
+function! AddWhitespaceControl() range
+	silent! execute a:firstline . ',' . a:lastline . 's/{%-\@!/{%-/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/-\@<!%}/-%}/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/{{-\@!/{{-/g'
+	silent! execute a:firstline . ',' . a:lastline . 's/-\@<!}}/-}}/g'
+endfunction
+
+vnoremap <leader>jw :call AddWhitespaceControl()<CR>
 
 if &diff
     set t_Co=8

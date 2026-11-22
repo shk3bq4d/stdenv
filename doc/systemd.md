@@ -7,6 +7,9 @@ journalctl --since "2017-10-07 10:00:00"
 journalctl --since "2017-10-07 10:00:00"  -u kafka.service
 journalctl --since "-3 hour" -u slapd | grep --color=always -E '^|=TEST-INT-COMPANY-GLOBAL' | less
 journalctl --since -30m
+journalctl -x --since -900m
+journalctl -xS-900m
+journalctl -xS-1d
 
 systemd-cgls /system.slice/mdatp.service
 
@@ -14,6 +17,8 @@ systemd-cgls /system.slice/mdatp.service
 
 systemctl show MYSERVICE --property ActiveState
 systemctl show MYSERVICE --property SubState
+systemctl show MYSERVICE --property SubState --value
+systemctl show MYSERVICE --property ActiveEnterTimestamp --value # since when service is up
 systemctl show MYSERVICE | grep -i state
 
 systemd_mr_unitfiles
@@ -1349,3 +1354,8 @@ systemctl show --value -p MainPID filebeat                 # systemd 249
 journalctl -xb # grub Welcome to emergency mode! After logging in, type "journactl -xb" to view system logs, "systemctl reboot" to reboot, "systemctl default" or ^D to try again to boot into default mode. Give root password for maintenance
 
 systemctl list-timers # show
+
+XDG_RUNTIME_DIR=/run/user/$(id -u) systemctl status --user docker
+systemd-run --unit=onetimereboot --on-calendar="$(date -d 'sat 01:00' '+%Y-%m-%d %H:%M:%S')" shutdown now -r
+systemd-run   stop onetimereboot.timer
+systemdctl    show onetimereboot.timer

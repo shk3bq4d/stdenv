@@ -38,3 +38,17 @@ BK Black noir
 GY Gray gris
 
 https://worldstandards.eu/electricite.htm
+
+
+https://en.wikipedia.org/wiki/SN_441011?utm_source=chatgpt.com
+En Suisse/Liechtenstein, la norme domestique est SN 441011; à l’international on parle souvent de prise type J.
+Nom courant	Nom technique	Usage typique
+Petite fiche plate 2 pôles	Europlug CEE 7/16	chargeurs téléphone, petits appareils sans terre; compatible avec les prises suisses
+Fiche suisse 2 pôles sans terre	Type 11 / T11	petits appareils, 10 A
+Fiche suisse 3 pôles avec terre	Type 12 / T12	ancien/encore fréquent côté fiche, 10 A
+Prise murale suisse encastrée avec terre	Type 13 / T13	prise domestique moderne la plus courante, 10 A
+Variante triphasée/3P+N+T 10 A	Type 15 / T15	ateliers, buanderies, appareils spéciaux
+Variante 16 A 1 phase	Type 23 / T23	appareils plus puissants, circuits 16 A
+Variante 16 A triphasée	Type 25 / T25	équipements triphasés plus puissants
+
+Point important: les anciennes prises T12 ne sont plus autorisées à la vente/installation en neuf; les T13 encastrées sont la référence domestique moderne. Les fiches T11/T12 modernes ont des broches partiellement isolées.

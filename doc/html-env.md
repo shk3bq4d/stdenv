@@ -95,3 +95,5 @@ Uuml	00DC	  	=capital U, dieresis or umlaut mark
 yacute	00FD	  	=small y, acute accent
 Yacute	00DD	  	=capital Y, acute accent
 yuml	00FF	  	=small y, dieresis or umlaut mark
+
+pup 'img attr{src}' # xpath for not xml-well-formed files

@@ -3,8 +3,8 @@
 
 set -o pipefail
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
-#exec > >(tee /tmp/logfile.txt)
-#exec 2>&1
+exec > >(tee -a ~/.tmp/log/mrsuspend.sh.log)
+exec 2>&1
 
 _pgrep() {
     pgrep -f "git (fetch|pull|push)"
@@ -64,6 +64,9 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
     before=$(date +%s)
     after=$(( before + delay ))
     {
+        exec > >(tee -a ~/.tmp/log/mrsuspend.sh2.log)
+        exec 2>&1
+        date
         while :; do
             now=$(date +%s)
             if [[ $now -gt $after ]]; then
@@ -72,13 +75,24 @@ dec17.ly.lan|nov20.ly.lan|shaz*)
             fi
             sleep 1
         done
-        run-parts ~/.std/resume-from-suspend/ || true
-        date >> ~/.tmp/log/mrsuspend.sh.log
+        echo "$(date) A"
+        set -x
+        run-parts --verbose ~/.std/resume-from-suspend/ || true
+        echo "$(date) B"
     } &
     # sudo systemctl hibernate # -> to disk
-    mri3_lock &
+    mri3_lock &>/dev/null &
+	set -x
     sleep 0.3
-    ! sudo systemctl hybrid-sleep && sleep 1 && { pkill i3lock || true; } # -> to disk + to RAM
+    if sudo systemctl hybrid-sleep; then
+		set +x
+        echo "success suspend"
+    else
+		set +x
+        echo "FAILURE suspend"
+        sleep 1
+        pkill i3lock || true
+    fi
     # sudo systemctl suspend # -> to RAM
     exit 0
     ;;

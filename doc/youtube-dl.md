@@ -1,5 +1,9 @@
 ```sh
+youtube-dl --no-overwrites --download-archive downloaded.txt URL
+
 rm -r ~/.local/lib/python3*/site-packages/youtube_dl* &&  pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
+mv ~/.local/lib/python3*/site-packages/youtube_dl* ~/.local/lib/python3*/site-packages/ydl-backup/;   pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
+pip install --user git+https://github.com/ytdl-org/youtube-dl.git@master
 ```
 $ youtube-dl 'https://www.youtube.com/watch?v=wQP9XZc2Y_c' --recode-video mp4 --postprocessor-args '-strict -2'
 
@@ -58,3 +62,8 @@ c	Activate closed captions and subtitles if available. To hide captions and subt
 Shift+N	Move to the next video (If you're using a playlist, will go to the next video of the playlist. If not using a playlist, it will move to the next YouTube suggested video).
 Shift+P	Move to the previous video. Note that this shortcut only works when you're using a playlist.
 i	Open the Miniplayer.
+
+```sh
+cat | while read i; do youtube-dl https://${domain}$i; done
+:%!sed -r -n -e 's,.*href="(/watch/[^"]+).*,\1, p' | sort -u
+```

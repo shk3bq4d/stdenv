@@ -104,3 +104,7 @@ convert image.svg -fuzz 10% -trim +repage image.png
 
 
 convert 48c11bcc99c36e9a41c8fe75226b83e2.jpg -level 20%,60% output.jpg # contrast 20% darker are converted to black, 40% brighter are converted to white
+
+
+
+convert -size 400x400 xc:none -fill '#4F46E5' -draw "circle 200,200 200,80" -fill '#F50E0B' -draw "rectangle 50,150 350,250" -resize 105x70 logo.png && feh logo.png

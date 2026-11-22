@@ -15,7 +15,7 @@ elif [[ -f ~/bin/stdhome-dirname.sh ]]; then
 	STDHOME_DIRNAME=$(~/bin/stdhome-dirname.sh)
 fi
 if [[ -d "${STDHOME_DIRNAME:-}" ]]; then
-	stdenvdir="$STDHOME_DIRNAME/../stdenv"
+	stdenvdir="$(readlink -f "$STDHOME_DIRNAME/../stdenv")"
 	alias gitenv="git --git-dir=$stdenvdir/.git --work-tree=$HOME"
 	alias gitenvworkon="export GIT_DIR=$stdenvdir/.git; export GIT_WORK_TREE=$HOME"
 	alias cdstdenv="cd $stdenvdir"

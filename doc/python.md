@@ -33,10 +33,10 @@ Windows Registry Editor Version 5.00
 "ProductDir"="C:\\Users\\MyUser\\AppData\\Local\\Programs\\Common\\Microsoft\\Visual C++ for Python\\9.0"
 """
 import hashlib
-hashlib.sha512("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.md5("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.sha1("Nobody inspects the spammish repetition".encode()).hexdigest()
-hashlib.sha256("Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha512("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.md5("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha1("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
+hashlib.sha256("checksum Nobody inspects the spammish repetition".encode()).hexdigest()
 
 functools.partial # bind freeze some portion of a fuctions arguments or keywords.
 
@@ -79,6 +79,13 @@ doc = lxml.etree.parse(filepath) # parses parser
 doc = lxml.etree.fromstring(string) # parses parser
 lxml.etree.tostring(doc, pretty_print=True) # outputs
 doc.xpath('/*')
+
+echo "print(1.25**2)" | python3 # executes stdin script
+python3 < ~/py/myscript.py      # executes stdin script
+
+from pathlib import Path; Path('/') / 'root'
+import pathlib
+filepath = pathlib.Path(os.path.expanduser('~/.tmp/log')) / f'{os.path.splitext(script_name)[0]}.log'
 
 # process stdin line by line
 """py
@@ -124,7 +131,7 @@ re.sub(r'(foo)', r'\1hi', 'foobar')
 re.DOTALL
 re.I re.IGNORECASE
 re.L re.LOCALE
-re.M re.MULTILINE
+re.M re.MULTILINE ^ $ not only match beginning and end of input
 re.U re.UNICODE
 re.X re.VERBOSE This flag allows you to write regular expressions that look nicer and are more readable by allowing you to visually separate logical sections of the pattern and add comments. Whitespace within the pattern is ignored, except when in a character class, or when preceded by an unescaped backslash, or within tokens like *?, (?: or (?P<...>. When a line contains a # that is not in a character class and is not preceded by an unescaped backslash, all characters from the leftmost such # through the end of the line are ignored.
 re.search(r'\bis\b', your_string) # whole word words boundary boundaries
@@ -253,6 +260,7 @@ Using type-specific formatting:
 
 '{:%Y-%m-%d %H:%M:%S} printf with strftime formatting'.format(datetime.datetime(2010, 7, 4, 12, 15, 58))
 f'{datetime.datetime.now():%Y.%m.%d %H:%M:%S}' printf with strftime formatting
+datetime.datetime(2026, 5, 9, 4, 5, tzinfo=datetime.timezone.utc)
 
 Nesting arguments and more complex examples:
 
@@ -286,9 +294,9 @@ Nesting arguments and more complex examples:
 
 
 import types # isinstance ~instanceof~
-if type(a) is types.DictType: # isinstance ~instanceof~
+if type(a) is types.DictType: # python2 isinstance ~instanceof~
     do_something()
-if type(b) in types.StringTypes: # isinstance ~instanceof~
+if type(b) in types.StringTypes: # python2 isinstance ~instanceof~
     do_something_else()
 
 if isinstance(a, dict): # types ~instanceof~
@@ -434,7 +442,7 @@ os.getenv(key, default=None) # Get an environment variable, return None if it do
 # list files #1
 from os import listdir
 from os.path import isfile, join
-onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+onlyfiles = [ f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath,f)) ]
 
 # list files #2
 from os import walk
@@ -919,7 +927,7 @@ x.update(y) # merges dict http://stackoverflow.com/questions/38987/how-to-merge-
 export PYTHONUNBUFFERED=1
 # unbuffered
 import os,sys
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0) # unbuffered output
 
 import traceback; traceback.print_exc() # print stack trace
 
@@ -956,6 +964,7 @@ with open('/tmp/_mr2.pickle', 'rb') as f:
 with open('/tmp/_mr2.pickle', 'wb') as f:
         pickle.dump(_cache, f)
 
+import json; json.load(sys.stdin) # parse json
 import json; json.load(reader) # parse json reader
 import json; json.loads(str) # parse json string
 import json; json.dumps(dict)

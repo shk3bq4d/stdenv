@@ -155,5 +155,6 @@ e) fg
 
 <C-b> , rename current window
 <C-b> w list windows alt-tab bufexplorer like
+<C-b> & kill the current window
 
 /proc/$(pgrep "tmux: server")/exe attach # reattach to a since upgrade server binary (see apt distribution upgrade)

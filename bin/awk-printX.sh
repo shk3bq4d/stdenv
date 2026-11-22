@@ -4,4 +4,4 @@
 NAME=$(basename $0 .sh)
 NUM=${NAME##awk-print}
 
-awk "{ print \$$NUM }"
+stdbuf -o0 awk "{ print \$$NUM }"

@@ -41,3 +41,5 @@ about:processes , about:performance CPU Memory tab Firefox Task Manager (Shift +
 
 ```sh
 cp -p $(find ~/.mozilla/firefox* -maxdepth 2 -type f -name prefs.js | xargs ls -tr | tail -1) ~/tmp/$(date +%Y.%m.%d-%H.%M.%S)-firefex-prefs.js # export about:config
+
+Windows/Linux: Ctrl + Shift + Delete # clear recent history

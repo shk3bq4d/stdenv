@@ -63,6 +63,7 @@ kubectl get pod
 curl $(minikube service hello-minikube --url)
 kubectl delete services hello-minikube
 kubectl delete deployment hello-minikube
+kubectl delete --wait=false namespace hello-minikube # noblocking
 minikube stop # stop VM
 minikube addons list
 minikube addons enable ingress
@@ -104,10 +105,13 @@ kubectl get pod -o name
 kubectl get namespace
 kubectl get service
 kubectl get deployment
+kubectl get pod -o jsonpath='{.status.podIP}'
+kubectl get pod -o jsonpath='{.status.podIP}{"\n"}'
 kubectl get secret -o jsonpath='{.data.admin-password}' -n monitoring grafana  | base64 -d | xclip
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}"
 kubectl get secret -n cert-manager cert-manager-webhook-ca -o jsonpath="{.data['ca\.crt']}" | base64 -d | openssl-cert-info.sh
 kubectl get secret -n traefik traefik-tls -o jsonpath="{.data['tls\.crt']}" | base64 -d | openssl-cert-info.sh
+kubectl get secret -n traefik traefik-tls -o go-template='{{index .data "tls.crt" | base64decode}}'
 kubectl options
 kubectl exec zookeeper-d8f95899d-z5b5c -it /bin/sh
 kubectl exec -n monitoring kube-prometheus-exporter-node-wchkz -i -t -- /bin/sh
@@ -120,6 +124,7 @@ kubectl get pv -o json | jq '.items[].metadata.annotations."http://gluster.kuber
 kubectl logs -f -n kafka --timestamps=true mrgolang
 kubectl logs -f -n kafka --timestamps=true podname --since=3h
 kubectl logs -f -n kafka --timestamps=true podname --since-time=2020-10-27T05:40:00+00:00 # RFC 3339
+kubectl logs -f -n kube-system --timestamps=true deployment.apps/coredns
 
 kubectl describe all --all-namespaces
 kubectl describe deployment
@@ -138,6 +143,153 @@ kubectl explain pods.spec
 kubectl explain pods.spec.containers
 kubectl explain pods.spec.containers.workingDir
 
+NODE=mynodename; k get --raw "/api/v1/nodes/${NODE}/proxy/configz" | jq . # kubelet config, imageGCHighThresholdPercent, imageGCLowThresholdPercent, imagefs.available
+NODE=mynodename; k get --raw "/api/v1/nodes/${NODE}/proxy/configz" | jq . | grep -C5 -iE 'imageGCHighThresholdPercent|imageGCLowThresholdPercent|imagefs.available'
+{
+  "kubeletconfig": {
+    "enableServer": true,
+    "staticPodPath": "/etc/kubernetes/manifests",
+    "podLogsDir": "/var/log/pods",
+    "syncFrequency": "1m0s",
+    "fileCheckFrequency": "20s",
+    "httpCheckFrequency": "20s",
+    "address": "10.103.24.213",
+    "port": 10250,
+    "tlsCertFile": "/var/lib/kubelet/pki/kubelet.crt",
+    "tlsPrivateKeyFile": "/var/lib/kubelet/pki/kubelet.key",
+    "rotateCertificates": true,
+    "authentication": {
+      "x509": {
+        "clientCAFile": "/etc/kubernetes/ssl/ca.crt"
+      },
+      "webhook": {
+        "enabled": true,
+        "cacheTTL": "2m0s"
+      },
+      "anonymous": {
+        "enabled": false
+      }
+    },
+    "authorization": {
+      "mode": "Webhook",
+      "webhook": {
+        "cacheAuthorizedTTL": "5m0s",
+        "cacheUnauthorizedTTL": "30s"
+      }
+    },
+    "registryPullQPS": 5,
+    "registryBurst": 10,
+    "imagePullCredentialsVerificationPolicy": "NeverVerifyPreloadedImages",
+    "eventRecordQPS": 50,
+    "eventBurst": 100,
+    "enableDebuggingHandlers": true,
+    "healthzPort": 10248,
+    "healthzBindAddress": "127.0.0.1",
+    "oomScoreAdj": -999,
+    "clusterDomain": "cluster.local",
+    "clusterDNS": [
+      "10.233.0.3"
+    ],
+    "streamingConnectionIdleTimeout": "4h0m0s",
+    "nodeStatusUpdateFrequency": "10s",
+    "nodeStatusReportFrequency": "10s",
+    "nodeLeaseDurationSeconds": 40,
+    "imageMinimumGCAge": "2m0s",
+    "imageMaximumGCAge": "0s",
+    "imageGCHighThresholdPercent": 85,
+    "imageGCLowThresholdPercent": 80,
+    "volumeStatsAggPeriod": "1m0s",
+    "kubeletCgroups": "/system.slice/kubelet.service",
+    "cgroupsPerQOS": true,
+    "cgroupDriver": "systemd",
+    "cpuManagerPolicy": "none",
+    "cpuManagerReconcilePeriod": "10s",
+    "memoryManagerPolicy": "None",
+    "topologyManagerPolicy": "none",
+    "topologyManagerScope": "container",
+    "runtimeRequestTimeout": "2m0s",
+    "hairpinMode": "promiscuous-bridge",
+    "maxPods": 110,
+    "podPidsLimit": -1,
+    "resolvConf": "/etc/resolv.conf",
+    "cpuCFSQuota": true,
+    "cpuCFSQuotaPeriod": "100ms",
+    "nodeStatusMaxImages": 50,
+    "maxOpenFiles": 1000000,
+    "contentType": "application/vnd.kubernetes.protobuf",
+    "kubeAPIQPS": 50,
+    "kubeAPIBurst": 100,
+    "serializeImagePulls": true,
+    "maxParallelImagePulls": 1,
+    "evictionHard": {
+      "imagefs.available": "15%",
+      "imagefs.inodesFree": "5%",
+      "memory.available": "100Mi",
+      "nodefs.available": "10%",
+      "nodefs.inodesFree": "5%"
+    },
+    "evictionPressureTransitionPeriod": "5m0s",
+    "mergeDefaultEvictionSettings": false,
+    "enableControllerAttachDetach": true,
+    "protectKernelDefaults": true,
+    "makeIPTablesUtilChains": true,
+    "iptablesMasqueradeBit": 14,
+    "iptablesDropBit": 15,
+    "failSwapOn": false,
+    "memorySwap": {
+      "swapBehavior": "LimitedSwap"
+    },
+    "containerLogMaxSize": "10Mi",
+    "containerLogMaxFiles": 5,
+    "containerLogMaxWorkers": 1,
+    "containerLogMonitorInterval": "10s",
+    "configMapAndSecretChangeDetectionStrategy": "Watch",
+    "systemReserved": {
+      "cpu": "500m",
+      "ephemeral-storage": "500Mi",
+      "memory": "512Mi",
+      "pid": "1000"
+    },
+    "kubeReserved": {
+      "cpu": "100m",
+      "ephemeral-storage": "500Mi",
+      "memory": "256Mi",
+      "pid": "1000"
+    },
+    "enforceNodeAllocatable": [
+      "pods"
+    ],
+    "volumePluginDir": "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/",
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 2,
+      "options": {
+        "text": {
+          "infoBufferSize": "0"
+        },
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "enableSystemLogHandler": true,
+    "enableSystemLogQuery": false,
+    "shutdownGracePeriod": "1m0s",
+    "shutdownGracePeriodCriticalPods": "20s",
+    "crashLoopBackOff": {
+      "maxContainerRestartPeriod": "5m0s"
+    },
+    "enableProfilingHandler": true,
+    "enableDebugFlagsHandler": true,
+    "seccompDefault": false,
+    "memoryThrottlingFactor": 0.9,
+    "registerNode": true,
+    "localStorageCapacityIsolation": true,
+    "containerRuntimeEndpoint": "unix:///var/run/containerd/containerd.sock",
+    "failCgroupV1": true
+  }
+}
 
 kubectl create configmap myname --from-file file.txt
 kubectl create configmap myname --from-literal=key=value
@@ -162,7 +314,9 @@ kubectl create namespace stdenv; kubectl run -n stdenv stdenv --image shk3bq4d/s
                                  kubectl run -n default stdenv --image shk3bq4d/stdenv:stdenv -o yaml --command -- tail -f /dev/null
 kubectl run kubectl --image bitnami/kubectl --command -- tail -f /dev/null
 kaf https://raw.githubusercontent.com/shk3bq4d/stdenv/stdenv/docker/stdenv/daemonset.yml
-keti -n stdenv daemonsets/stdenv -- zsh                                                           18:06:02  537ms
+kl jobs/mrmanual
+klf jobs/mrmanual
+keti -n stdenv daemonsets/stdenv -- zsh
 kubectl exec -itn stdenv stdenv -- zsh
 kubectl get pod -n stdenv --no-headers | awk '{ print $1 }' | xargs -tn1 -I@ kubectl exec -n stdenv @ -- curl -s http://whatismyip.akamai.com/
 kubectl run mysql-client --image arey/mysql-client --command -- mysql -h
@@ -176,9 +330,10 @@ kubectl patch configmaps -n kube-system kube-dns --patch '{"data":{"upstreamName
 
 # use multiple kubeconfig files at the same time and view merged config
 ```sh
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --raw
-KUBECONFIG=~/.kube/config:~/.kube/kubconfig2 kubectl config view --flatten
+KUBECONFIG=~/.kube/config:~/.kube/kubeconfig2 kubectl config view --raw     # merge two kubeconfig
+KUBECONFIG=~/.kube/config:~/.kube/kubeconfig2 kubectl config view --flatten # merge two kubeconfig
 ```
+kubectl config view --context MYCONTEXT --minify --flatten --raw > kube-config-subset-unique-context.yml
 
 # renew kubernetes (expired) ssl certificates
 as root, on the right machine ( the one that has /etc/kubernetes/pki/apiserver.key)
@@ -344,6 +499,8 @@ kubectl get pod -n kafka my-kafka-0 -w # watch
 
 # julien debug EBS
 kubectl taint node ip-172-18-10-9.us-east-2.compute.internal NodeWithImpairedVolumes- # remove taint (notice the dash after NodeWithImpairedVolumes-)
+kubectl taint node ip-172-18-10-9.us-east-2.compute.internal NodeWithImpairedVolumes- # remove taint (notice the dash after NodeWithImpairedVolumes-)
+kubectl taint node aks-system-86446919-vmss000001 node.kubernetes.io/unschedulable:NoSchedule
 kubectl get node -o yaml | grep -C 10 taint
 
 export KUBECONFIG=$(echo ~/git/g*n/infra/K8s/kubectl_config) #* markdown sucks adding star in comment
@@ -818,6 +975,7 @@ kubectl get events --sort-by=.metadata.creationTimestamp -A
 kubectl get events --sort-by=.metadata.creationTimestamp -n mynamespace -w
 kubectl get events --sort-by=.metadata.creationTimestamp --namespace abc-namespace --field-selector involvedObject.name=my-pod-zl6m6
 kgp --field-selector=status.phase==Running
+kgp --field-selector=spec.nodeName=mynodename --all-namespaces
 keti daemonset/kube-proxy sh
 keti -n ingress-nginx deployment/ingress-nginx-controller sh
 
@@ -862,7 +1020,7 @@ kubectl create secret generic tls kubernetes-dashboard-certs \
   --from-file=tls.key=/path/to/dashboard.key --namespace kube-system
 
 kubectl wait --for=condition=Ready pod/busybox1
-kubectl wait --for=condition=Ready node/kndre102p03.mfogroup.co
+kubectl wait --for=condition=Ready node/mynode
 kubectl wait --for=delete pod/busybox1 --timeout=60s
 
 
@@ -884,12 +1042,14 @@ data:
 ```
 
 ```sh
-kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
-kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true # kubectl get all kinds
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A
+kubectl api-resources --verbs=list --namespaced -o name | xargs -tn 1 kubectl get --show-kind --no-headers --ignore-not-found=true -A G -E 'nginx|ingress' | awk '{ print $1 " " $2 }' | while read a b; do kubectl delete -n $a $b; done
 
 az aks get-credentials --resource-group RG --name CLUSTERNAME # azure azcli az-cli context
 
 kubectl -n ns create job --from=cronjob/cronjob mymanualjob # force manual job
+kubectl -n dca-kube-resources delete job mrmanual &>/dev/null; kubectl -n dca-kube-resources create job --from=cronjob/main mrmanual; kubectl -n dca-kube-resources logs -f --timestamps job/mrmanual
 kubectl patch cronjobs <job-name> -p '{"spec" : {"suspend" : true }}' # disables cronjob
 
 kubectl describe node # nice summary cpu memory requests
@@ -904,7 +1064,7 @@ kubectl describe node # nice summary cpu memory requests
 kubernetes.default.svc # API server reachability hosname/
 /var/run/secrets/kubernetes.io/serviceaccount
 ```sh
-curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/api/v1/namespaces/stdenv/pods
+curl --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token )" https://kubernetes.default.svc/api/v1/namespaces/$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)/pods
 https://stackoverflow.com/questions/52995962/kubernetes-namespace-default-service-account
 kubectl --certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt --token /var/run/secrets/kubernetes.io/serviceaccount/token --server=https://kubernetes.default.svc/ --namespace=$(</var/run/secrets/kubernetes.io/serviceaccount/namespace) get pod # probably not yet correct
 
@@ -956,6 +1116,7 @@ vi /etc/kubernetes/manifests/*                    # restart all, etcd, apiserver
 
 /var/lib/kubelet/config.yaml # cgroupDriver, kind: KubeletConfiguration, https://kubernetes.io/docs/reference/config-api/kubelet-config.v1beta1/ containerLogMaxSize containerLogMaxFiles
 /etc/kubernetes/kubelet.conf
+/etc/kubernetes/kubelet-config.yaml
 /etc/kubernetes/bootstrap-kubelet.conf
 /lib/systemd/system/kubelet.service
 /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
@@ -992,6 +1153,9 @@ https://dl.k8s.io/v1.22.16/bin/linux/amd64/kubeadm
 https://dl.k8s.io/v1.21.14/bin/linux/amd64/kubeadm
 https://dl.k8s.io/v1.20.15/bin/linux/amd64/kubeadm
 
+https://github.com/kubernetes-sigs/kube-scheduler-simulator
+https://kubernetes.io/blog/2025/04/07/introducing-kube-scheduler-simulator/
+
 ## download kubeadm 1.20 latest version
 ```sh
 for i in {15..21}; do wget -Okubeadm-1.20.${i} https://dl.k8s.io/v1.20.$i/bin/linux/amd64/kubeadm || break; done
@@ -1014,3 +1178,27 @@ https://gateway-api.sigs.k8s.io/api-types/httproute/
 
 kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":true}}'
 kubectl patch cronjob <cronjob-name> -p '{"spec":{"suspend":false}}'
+
+kubectl patch opensearchclusters.opensearch.dremio.io -n dremio opensearch-cluster --type=merge -p '{"metadata":{"finalizers":[]}}' # force delete
+
+kubectl describe nodes | egrep -A8 "Name:|Allocatable:|Allocated resources:" # allocation limits
+k get sts dremio-executor-client-valuation -o jsonpath='{ .spec.template.spec.containers[0].resources.requests }' | jq .
+
+kubectl cordon <node-name> # unschedulable
+kubectl uncordon <node-name> # unschedulable
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data # unschedulable
+kubectl run mypodname --image=my.com/private-image --restart=Never --overrides='{"spec":{"imagePullSecrets":[{"name":"docker-registry"}]}}' -- /bin/true
+
+
+```yaml
+    resources: # resources limits requests cpu memory
+      limits: # resources limits requests cpu memory
+        cpu: 300m # resources limits requests cpu memory
+        memory: 500Mi # resources limits requests cpu memory
+      requests: # resources limits requests cpu memory
+        cpu: 20m # resources limits requests cpu memory
+        memory: 300Mi # resources limits requests cpu memory
+```
+
+
+kubectl patch pod dremio-master-0 --subresource resize --patch '{"spec": {"containers": [{"name": "dremio-master-coordinator", "resources": {"limits": {"cpu":"20"}}}]}}' # patch limit without restarting pod

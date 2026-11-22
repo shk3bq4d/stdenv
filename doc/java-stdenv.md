@@ -366,3 +366,48 @@ _JAVA_OPTIONS JVM-recognized. Similar to JAVA_TOOL_OPTIONS, but prints a warning
 -Djava.io.tmpdir=/dataexec/tmp
 ```
 
+```sh
+# curl wget CLI replacement
+jshell --feedback concise <<'EOF'
+import java.net.URI;
+import java.net.http.*;
+
+var r = HttpClient.newHttpClient().send(
+    HttpRequest.newBuilder(URI.create("https://example.com")).GET().build(),
+    HttpResponse.BodyHandlers.ofString()
+);
+
+System.out.println(r.body());
+/exit
+EOF
+
+pseudocurl () {
+    local url
+    url="${1:?usage: $0 <url>}" jshell -J--add-modules=java.net.http --execution local --feedback concise - <<'EOF'
+        import java.net.URI;
+        import java.net.http.*;
+
+        void run() throws Exception {
+            var client = HttpClient.newBuilder()
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+            var req = HttpRequest.newBuilder(URI.create(System.getenv("url"))).GET().build();
+            var r = client.send(req, HttpResponse.BodyHandlers.ofString());
+            int sc = r.statusCode();
+            if (sc < 200 || sc >= 400) {
+                System.err.println("error: HTTP " + sc + " <" + r.uri() + ">");
+                System.exit(1);
+            }
+            System.out.println(r.body());
+        }
+
+        try {
+            run();
+        } catch (Throwable e) {
+            System.err.println("error: " + e);
+            System.exit(2);
+        }
+        /exit
+EOF
+}
+```

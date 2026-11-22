@@ -5,7 +5,7 @@
 #DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 set -x
 wids=$(xdotool search --class "keepass")
-if ! at-home.sh && ! at-work.sh.sh && ~/bin/sshtest-or-glob.sh $(hostname -f) shaz0140504; then
+if ! at-home.sh && ! at-work.sh && ~/bin/sshtest-or-glob.sh $(hostname -f) shaz0140504; then
 	true
 else
 	~/bin/sshfs-keepass-apr16.sh || true

@@ -28,6 +28,9 @@ getsebool -a # list all options for booleans
 
 
 semanage port -a -t syslogd_port_t -p tcp 10514 # rsyslog
+semanage port -d -p tcp -t http_port_t 10050
+semanage port -d -l | grep zabbix
+semanage port -d -l | grep 10050
 
 semanage export #  print local deviation
 ```
@@ -95,6 +98,9 @@ semodule --build  --disable_dontaudit # show hidden denies nolog no log
 # temporary disable
 setenforce 0 # disable
 setenforce 1 # reenable
+# Put SELinux in permissive mode just for syslog-ng's domain
+semanage permissive -a syslogd_t
+semanage permissive -d syslogd_t # reset domain syslog-ng to enforcing
 
 ## loadable policy
 ```sh
@@ -115,6 +121,8 @@ allow httpd_t http_port_t:udp_socket name_bind;
 
 ```sh
 semanage fcontext -l | grep -i postgres # list all types
+matchpathcon $PWD          # check what labels would be applied for specified path
+matchpathcon /var/www/html # check what labels would be applied for specified path
 
 echo "" | audit2allow -rm bip
 

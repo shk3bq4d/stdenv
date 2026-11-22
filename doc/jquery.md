@@ -13,6 +13,7 @@ You can also use the slim build, which excludes the ajax and effects modules:
 ```js
 $('a[href*="dashboards/"]'); // link whose url matches a pattern
 $('#pwd').css('color', 'white'); // style="
+$('#pwd').each(function() {this.style.setProperty('background-color', 'red', 'important');}); // dealing with important
 $('#pwd').val('setvalue');
 $('#pwd').length > 0 // test if element worked
 $('#id_password').is(":visible") // sometimes not enough

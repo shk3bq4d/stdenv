@@ -69,3 +69,8 @@ cd /var/db/emby-server/logs
 2019-02-08_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
 2019-02-09_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
 2019-02-10_01.00.00--7d/usr/local/share/licenses/emby-server-3.5.2.0
+
+
+# helm chart
+https://github.com/pmoscode-helm/emby
+https://artifacthub.io/packages/helm/emby/emby

@@ -44,7 +44,7 @@ C-W C-k go up
 
 :{range}sort u
 
-sort i # sort case insensitively 
+sort i # sort case insensitively
 
 automatic syntax highlighting to a new file extension:
 syntax on
@@ -81,7 +81,7 @@ blockwise visual mode
 usually it's <C-v> (which doesn't work since y used it for system paste)
         or   <C-q> (which doesn't work for me in cygwin for reasons I can't understand)
 set virtualedit=all
-so in .vimrc i used :map <C-i> <C-q> # vertical blockwise visual mod
+so in .vimrc i used :map <C-u> <C-q> # vertical blockwise visual mod
 
 
 filter external command on every lines
@@ -256,7 +256,7 @@ git mergetool
 
 
 
-:AnsiEsc # https://vi.stackexchange.com/questions/485/can-vim-interpret-terminal-color-escape-codes
+:AnsiEsc # https://vi.stackexchange.com/questions/485/can-vim-interpret-terminal-color-escape-codes ansi
 
 
 
@@ -369,3 +369,14 @@ vim.tiny, as the name implies, is a trimmed-down version of Vim (this question e
 
 vim -n FILE # does not prompt to reopen since been modified file
 vim -n -i NONE # does not prompt to reopen since been modified file + ignore existing SWAP file
+
+git difftool --tool=vimdiff --no-prompt # vi vim
+
+# rightalign
+a) set textwidth=200
+b) select your block
+c) :right
+
+
+vip visual mode , inside paragraph, selects paragraph, excluding blank lines
+vap                                 selects paragraph, including blank lines

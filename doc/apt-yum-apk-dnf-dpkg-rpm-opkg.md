@@ -44,6 +44,7 @@ apt-get upgrade -s | grep -i security | awk '{print $2}' | xargs -o apt install
 /usr/lib/update-notifier/apt-check --human-readable # count security updates
 sudo unattended-upgrade # apt implicitely applies security updates
 sudo systemctl restart apt-daily-upgrade.timer # another way to reach unattended-upgrade
+sudo systemctl disable apt-daily-upgrade.timer # block OS updates
 
 ```
 
@@ -491,3 +492,5 @@ apt install           as -d, --print-uris or -s as APT may decide to do somethin
 apt install           expect. Configuration Item: quiet.
 apt install 
 apt install       -s, --simulate, --just-print, --dry-run, --recon, --no-act
+
+https://linuxcapable.com/how-to-manage-third-party-apt-repos-on-debian-with-extrepo/

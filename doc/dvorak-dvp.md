@@ -145,10 +145,10 @@ compose:ralt: uses right alt for successive keys accentuated
 
 
 # accent simultaneous mode
-é altgr-u                            # aigu cute
+é altgr-u                            # aigu cute / on windows instead of altgr, use control+alt
 é altgr-' e                          # aigu cute
 è altgr-` e  or altgr-# e            # grave
-ê altgr-^ e  or altgr-@ e            # 
+ê altgr-^ e  or altgr-@ e            #
 ë altgr-: e  or altgr-; e
 ẽ altgr-~ e  or altgr-$ e
 ç altgr-c
@@ -189,7 +189,7 @@ It is called 'keyboard auto repeat rate' and you can set it with kbdrate Mine is
 
 $ sudo kbdrate
 Typematic Rate set to 10.9 cps (delay = 250 ms)
-	You can set same with:
+    You can set same with:
 
 sudo kbdrate -r 10.9 -d 250
 xset r rate 250 60
@@ -197,7 +197,9 @@ xset r rate 250 60
 
 https://www.kaufmann.no/downloads/linux/ckbcomp.gz # scripts
 https://www.kaufmann.no/roland/dvorak/linux.html
+https://www.kaufmann.no/roland/dvorak/win11.html # windows
 http://www.kaufmann.no/downloads/winnt/kbddvp-1_2_7-i386.exe
+https://www.kaufmann.no/downloads/winnt/kbddvp-1.2.9-x64.msi
 
 loadkeys -d # restore keyboard to default
 loadkeys us-dvp

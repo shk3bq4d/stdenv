@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
-set -euo pipefail
+set -Eeuo pipefail
+shopt -s inherit_errexit
+[[ "${PS4:-}" == "+ " ]] && export PS4='+ ${BASH_SOURCE:-}:${LINENO:-}:${FUNCNAME[0]:-}: ' # "set -x" prompt/template
+export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 
 
@@ -27,6 +30,7 @@ if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$1" == "-" ]]; then
     MODE=file
     NAME=$_tempdir/b
     cat - | sed -r -e 's/\\\\n/\n/g' -e 's/^\s+|\s+$//g'  -e '/^\s*$/ d' > $NAME
+    >&2 echo "/reading"
 else
     NAME="$1"
     if [[ $# -eq 1 && -f "$NAME" ]]; then
@@ -55,11 +59,17 @@ else
 fi
 [[ $# -lt 2 ]] && PORT=$PORT || PORT=$2
 if [[ $# -lt 3 ]]; then
+   if [[ $MODE != file ]]; then
        IP="$NAME"
-    echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
+        >&2 echo "digging"
+        echo "$NAME -> $(dig -t a +short "$NAME" | tail -1) default resolution"
+        >&2 echo "/digging"
+   fi
 elif [[ $MODE = connect ]]; then
     if [[ "$3" == @* ]]; then
+        >&2 echo "digging"
         IP=$(dig -t a +short "$NAME" @$3 | tail -1)
+        >&2 echo "/digging"
         echo "$NAME $3 -> $IP custom resolver"
     else
         IP="$3"
@@ -70,10 +80,14 @@ fi
 if uname | grep -qx FreeBSD; then
     OPENSSL_OPTIONS=
 else
-    OPENSSL_OPTIONS="-checkhost $NAME"
+    if [[ $MODE == file ]]; then
+        OPENSSL_OPTIONS=""
+    else
+        OPENSSL_OPTIONS="-checkhost \"$NAME\""
+    fi
 fi
 {   if [[ $MODE = file ]]; then
-        echo "cat $NAME" >&2
+        echo "cat \"$NAME\"" >&2
         cat "$NAME"
     else
         echo "echo | /usr/bin/openssl s_client -connect $IP:$PORT -servername '$NAME' -showcerts                2>&1 | less"  >&2
@@ -83,8 +97,8 @@ fi
     fi
 } | tee $_tempfile |
     sed -rne '/-BEGIN (TRUSTED )?CERTIFICATE-/,/-END (TRUSTED )?CERTIFICATE-/p' | \
-    openssl x509 -noout -fingerprint -sha256 -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1| \
-    grep -EA1 '^[^ ]|Fingerprint|Subject Alternative Name|ublic..ey:' | grep -vE '^--$|^Certificate:$|^Data: *$' | sed -r -e 's/^ +//g' | \
+    { openssl x509 -noout -fingerprint -sha256 -text -extensions SAN -issuer -subject -alias -dates -email $OPENSSL_OPTIONS 2>&1 || true; } | \
+    { grep -EA1 '^[^ ]|Fingerprint|Subject Alternative Name|ublic..ey:' || true; } | { grep -vE '^--$|^Certificate:$|^Data: *$' || true; } | sed -r -e 's/^ +//g' | \
     sed -r \
         -e "/^Hostname \\S+ does match certificate$/s/(.*)/${GREEN}\\0${OFF}/" \
         -e "/^Hostname \\S+ does NOT match certificate$/s/(.*)/${RED}\\0${OFF}/" \

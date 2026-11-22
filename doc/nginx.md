@@ -278,3 +278,18 @@ deny all;             # IP whitelisting
             #proxy_set_header x-remote-ip         "127.111.111.5";
             #proxy_set_header x-remote-addr       "127.111.111.6";
             #proxy_set_header x-real-ip           $remote_addr;
+
+# rate limit
+don't forget to set burst equal to your rate, otherwise you can get rate_limited with only 2 requests if they are received within too close of each other
+
+test with
+```sh
+apt install hey # rate limit load tester http 429
+hey -n 100 -c 45 -q 1 https://$(hostname -f) # rate limit load tester http 429
+# hey  -n     Number of requests to run. Default is 200.
+# hey  -c     Number  of workers to run concurrently. Total number of requests cannot be smaller than the concurrency level. De‐
+# hey         fault is 50.
+# hey  -q     Rate limit, in queries per second (QPS) per worker. Default is no rate limit.
+```
+
+* [dockerhub](https://hub.docker.com/_/nginx/tags)

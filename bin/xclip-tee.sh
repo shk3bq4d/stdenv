@@ -2,10 +2,16 @@
 # ex: set filetype=sh fenc=utf-8 expandtab ts=4 sw=4 :
 
 set -euo pipefail
-_tempfile=$(mktemp); function cleanup() { [[ -n "${_tempfile:-}" && -f "$_tempfile" ]] && rm -f $_tempfile || true; }; trap 'cleanup' SIGHUP SIGINT SIGQUIT SIGTERM
 source ~/bin/dot.x11
-cat "$@" > $_tempfile
-cat $_tempfile | xclip
-cat $_tempfile
-cleanup
+xclip_tee() {
+    if hash xclip &>/dev/null; then
+#       >&2 echo tee0
+        tee >(xclip -i)
+    else
+#       >&2 echo tee1
+        cat
+    fi
+}
+
+cat "$@" | xclip_tee
 exit 0

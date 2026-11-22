@@ -15,6 +15,14 @@ function usage() { sed -r -n -e s/__SCRIPT__/$(basename $0)/ -e '/^##/s/^..// p'
 
 [[ $# -ne 1 ]] && echo FATAL: incorrect number of args && usage && exit 1
 
+if ! hash ts 2>/dev/null; then
+	ts() {
+		while read line; do
+			echo "$(date +"%Y.%m.%d %H:%M:%S") $line"
+		done
+	}
+fi
+
 host="$1"
 
 while :; do

@@ -128,6 +128,63 @@ The second one is the HWE (Hardware Enablement) kernel, which is a newer kernel 
 25.10 Questing Quokka
 26.04 LTS Resolute Raccoon
 
+3.13 -> 14.04
+3.16 -> 14.04, 14.10
+3.19 -> 14.04, 15.04
+4.2  -> 14.04, 15.10
+4.4  -> 14.04, 16.04
+4.8  -> 16.04, 16.10
+4.10 -> 16.04, 17.04
+4.13 -> 16.04, 17.10
+4.15 -> 16.04, 18.04
+4.18 -> 18.04, 18.10
+5.0  -> 18.04, 19.04
+5.3  -> 18.04, 19.10
+5.4  -> 18.04, 20.04
+5.8  -> 20.04, 20.10
+5.11 -> 20.04, 21.04
+5.13 -> 20.04, 21.10
+5.15 -> 20.04, 22.04
+5.19 -> 22.04, 22.10
+6.2  -> 22.04, 23.04
+6.5  -> 22.04, 23.10
+6.8  -> 22.04, 24.04
+6.11 -> 24.04, 24.10
+6.14 -> 24.04, 25.04
+6.17 -> 24.04, 25.10
+7.0  -> 24.04*, 26.04
+
+14.04 LTS Trusty Tahr       3.13, 3.16, 3.19, 4.2, 4.4
+14.10     Utopic Unicorn    3.16
+15.04     Vivid Vervet      3.19
+15.10     Wily Werewolf     4.2
+
+16.04 LTS Xenial Xerus      4.4, 4.8, 4.10, 4.13, 4.15
+16.10     Yakkety Yak       4.8
+17.04     Zesty Zapus       4.10
+17.10     Artful Aardvark   4.13
+
+18.04 LTS Bionic Beaver     4.15, 4.18, 5.0, 5.3, 5.4
+18.10     Cosmic Cuttlefish 4.18
+19.04     Disco Dingo       5.0
+19.10     Eoan Ermine       5.3
+
+20.04 LTS Focal Fossa       5.4, 5.8, 5.11, 5.13, 5.15
+20.10     Groovy Gorilla    5.8
+21.04     Hirsute Hippo     5.11
+21.10     Impish Indri      5.13
+
+22.04 LTS Jammy Jellyfish   5.15, 5.19, 6.2, 6.5, 6.8
+22.10     Kinetic Kudu      5.19
+23.04     Lunar Lobster     6.2
+23.10     Mantic Minotaur   6.5
+
+24.04 LTS Noble Numbat      6.8, 6.11, 6.14, 6.17, 7.0*
+24.10     Oracular Oriole   6.11
+25.04     Plucky Puffin     6.14
+25.10     Questing Quokka   6.17
+26.04 LTS Resolute Raccoon  7.0
+
 sudo apt dist-upgrade # minor release upgrades between 22.04.{1,2}
 sudo do-release-upgrade # major dist upgrade
 
@@ -137,6 +194,10 @@ systemctl status apt-daily-upgrade.timer
 journalctl -eu apt-daily-upgrade.timer
 /etc/apt/apt.conf.d/50unattended-upgrades
 
+ubuntu/jammy 	pushed by rapid7 10 months ago
+ubuntu/focal 	pushed by rapid7 10 months ago
+bionic 	pushed by rapid7 10 months ago
+xenial
 # apt repository
 ## 22.04 jammy
 deb http://ch.archive.ubuntu.com/ubuntu/ jammy main restricted

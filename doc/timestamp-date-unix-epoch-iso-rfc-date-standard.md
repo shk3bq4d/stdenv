@@ -1,8 +1,42 @@
+# ISO-8601
+ISO 8601 format, [HH[:MM[:SS[.mmm[uuu]]]]][+HH:MM]
+20:min:            "iso8601": "2019-12-20T07:05:55Z",
+21:min:            "iso8601_basic": "20191220T080555373702",
+22:min:            "iso8601_basic_short": "20191220T080555",
+23:min:            "iso8601_micro": "2019-12-20T07:05:55.373754Z",
+
+# RFC-2822
+RFC 2822 Tue, 13 Oct 2020 13:05:27 GMT
+```python
+import email.utils
+email.utils.parsedate('Wed, 23 Sep 2009 22:15:29 GMT')
+datetime.datetime(*email.utils.parsedate('Wed, 23 Sep 2009 22:15:29 GMT')[:6])
+datetime.datetime(*email.utils.parsedate(requests.get(url).headers['Date'])[:6]) # 'Wed, 23 Sep 2009 22:15:29 GMT'
+email.utils.parsedate_to_datetime(requests.get(url).headers['Date']) # 'Wed, 23 Sep 2009 22:15:29 GMT'
+email.utils.parsedate_to_datetime(r.headers['Date']) # 'Wed, 23 Sep 2009 22:15:29 GMT'
+```
+
+# other
 date -d @1465016400 # from unix epoch timestamp
 date +%s            # to unix epoch timestamp
 date +%s -d "2004-02-29 16:21:42" # to unix epoch timestamp => 1078068102
+
+date +%s -d "2004-02-29 16:21:42 UTC" # to unix epoch timestamp => 1078068102
+date +%s -d "2004-02-29 16:21:42 CET" # to unix epoch timestamp => 1078068102
+date +%s -d "2004-02-29 16:21:42 CEST" # to unix epoch timestamp => date: invalid date ‘2004-02-29 16:21:42 CEST’
+date +%s -d "2004-06-29 16:21:42 CEST" # to unix epoch timestamp => 1088518902
+date -d "02:00 UTC"
+1078071702
+
+sudo shutdown -r "01:00"
+systemd-run --unit=onetimereboot --on-calendar="$(date -d 'sat 01:00' '+%Y-%m-%d %H:%M:%S')" shutdown now -r
+systemdctl    stop onetimereboot.timer
+systemdctl    show onetimereboot.timer
+
 python3 -c "import datetime; print(datetime.datetime.fromtimestamp(1532532080))" # unix epoch timestamp
 python3 -c "import datetime; print(datetime.datetime.now().strftime('%s'))" # unix epoch timestamp
+python3 -c "import datetime; print(datetime.datetime.fromisoformat('2025-12-07T12:43:11.230327808Z'))"
+python3 -c "import datetime; print(datetime.datetime.strptime('2025-12-07', '%Y-%m-%d'))"
 
 select extract(epoch from now()); -- postgresql psql  to unixtime
 select to_timestamp(mycolumn::bigint);    -- postgresq psql from unixtime
@@ -232,3 +266,8 @@ e.Get("@timestamp").ZoneBounds()
 %Y.%m.%d %H:%M:%S    2025.05.30 15:46:12
 %Y-%m-%dT%H:%M:%S.%f%z 2025-05-30T15:46:12.117569
 
+
+helmTimestamp: {{ now | date "2006-01-02T15:04:05Z07:00" | quote }}
+helmDate: {{ now | date "2006-01-02" | quote }}
+helmUnixTimestamp: {{ now | unixEpoch | quote }}
+helmUtcTimestamp: {{ dateInZone "2006-01-02T15:04:05Z" (now) "UTC" | quote }}

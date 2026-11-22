@@ -1,3 +1,4 @@
+* https://docs.netbox.dev/en/stable/release-notes/version-4.6/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.5/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.4/ # changelog
 * https://docs.netbox.dev/en/stable/release-notes/version-4.3/ # changelog
@@ -22,6 +23,7 @@ https://demo.netbox.dev/static/docs/configuration/required-settings/
 
 ~/git/github/netbox-community/netbox-docker/docker/docker-entrypoint.sh
 https://github.com/netbox-community/netbox-docker/commits/release/docker/docker-entrypoint.sh
+https://github.com/netbox-community/netbox-docker/releases
 
 
 

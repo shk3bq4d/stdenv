@@ -33,6 +33,7 @@ fi
 #ZSH_THEME="agnoster"
 #echo theme is $ZSH_THEME
 
+typeset -ga ZSHZ_EXCLUDE_DIRS
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -96,6 +97,34 @@ elif [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source $ZSH/oh-my-zsh.sh
 else
     echo -e "oh-my-zsh absent\ninstall via sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)\"\nor visit https://github.com/robbyrussell/oh-my-zsh"
+    POWERLEVEL9K_USER_FOREGROUND='white'
+    POWERLEVEL9K_USER_BACKGROUND='blue'
+    POWERLEVEL9K_HOST_FOREGROUND='white'
+    POWERLEVEL9K_HOST_BACKGROUND='cyan'
+    POWERLEVEL9K_USER_DEFAULT_FOREGROUND='white'
+    POWERLEVEL9K_USER_DEFAULT_BACKGROUND='green'
+    POWERLEVEL9K_USER_DEFAULT_FOREGROUND='28'
+    POWERLEVEL9K_USER_DEFAULT_BACKGROUND='250'
+    POWERLEVEL9K_USER_SUDO_FOREGROUND='28'
+    POWERLEVEL9K_USER_SUDO_BACKGROUND='250'
+    POWERLEVEL9K_USER_ROOT_FOREGROUND='28'
+    POWERLEVEL9K_USER_ROOT_BACKGROUND='250'
+    POWERLEVEL9K_HOST_REMOTE_FOREGROUND='white'
+    POWERLEVEL9K_HOST_REMOTE_BACKGROUND='cyan'
+    #POWERLEVEL9K_COLOR_SCHEME="dark"
+    POWERLEVEL9K_ALWAYS_SHOW_USER=false
+    POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+    POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='teal'
+    POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
+    POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+    for i in \
+        /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+        /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+        /usr/share/zsh-z/zsh-z.plugin.zsh \
+        /usr/share/powerlevel9k/powerlevel9k.zsh-theme \
+        ; do
+        test -r $i && source $i
+    done
 fi
 setopt null_glob
 for f in \
@@ -179,37 +208,14 @@ varsfrx() {
     ansible-playbook varsfrx.yml -ve sfrx="${rx//:}" -l "${arg1//:}"\* $@
 }
 
-complete_function() {
-    local f=$1; shift
-    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
-  }
 
-complete_function_skipone() {
-    local f=$1; shift
-    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 2 )); _normal" $f
-  }
+#complete_function_skipone() {
+#    local f=$1; shift
+#    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 2 )); _normal" $f
+#  }
 
-#complete_function ksd0                               kubectl get depl
-complete_function_skipone varsfrx                    ansible-playbook -l
-complete_function ksns                               kubectl get namespace
-complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
-complete_function kubectl-get-yaml.py                kubectl get
-complete_function kubectl-watch-pods.sh              kubectl get pods
-complete_function kgp-containers                     kubectl get pods
-complete_function kubectl-watch-events.sh            kubectl get events
-complete_function kubectl-get-events-sort.sh         kubectl get events
-complete_function kubectl-debug-tail-pod.sh          kubectl get pods
-complete_function kubectl-get-confimaps-data.sh       kubectl get configmaps
-complete_function kubectl-get-secrets-data.sh        kubectl get secrets
-complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
-complete_function varsfrx ansible -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml -i inventory.yml -l
-compdef "ssh-no-host-checking"=ssh
-compdef ssh-vagrant=ssh
-compdef zabbix-maintenance=ssh
-compdef zabbix-maintenance-off=ssh
-#complete_function ssh-no-host-checking ssh
 
-alias -g NC='|sed-remove-ansi-colors.sh' # no colors
+alias -g NC='|sed_remove_ansi_colors'
 case "$UNAME" in \
 freebsd)
     alias grep='nocorrect grep --line-buffered -a --color=auto'
@@ -281,6 +287,8 @@ done
 alias -g V='2>&1 NC |vim -R -'
 alias -g V1='2>/dev/null|V'
 alias -g V2='2>&1 >/dev/null|V'
+
+alias -g NAMES=" --no-headers -o jsonpath='{range .items[*]}{.metadata.name}{\"\\n\"}{end}'" -- kubectl
 
 alias -g N='&>/dev/null'
 alias -g N1='>/dev/null'
@@ -454,6 +462,8 @@ function precmd() {
 }
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
+setopt HIST_IGNORE_ALL_DUPS
+#setopt HIST_FIND_NO_DUPS.
 bindkey '^r' history-incremental-search-backward
 reset_rprompt() {
     echo "MR_REST=$MR_REST, timer is $timer"
@@ -501,12 +511,42 @@ kube-completion() {
     source <(kubectl completion zsh)
 }
 #is_antigen && hash kubectl &>/dev/null && echo youpi && source <(kubectl completion zsh) # https://github.com/zsh-users/antigen/issues/603
+umask 027
 ZSH_COMPDUMP="$HOME/.zcompdump-${USER}"
 autoload -Uz compinit
 compinit -d "$ZSH_COMPDUMP"
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 autoload -Uz _kubectl
 compdef _kubectl kubectl
+#setopt complete_aliases
+complete_function() {
+    local f=$1; shift
+    compdef -e "words[1]=( ${${(qq)@}} ); (( CURRENT += $# - 1 )); _normal" $f
+  }
+
+#this complete_function block should be put after compinit
+complete_function ksns                               kubectl get namespace
+complete_function kubectl-create-job-from-cronjob    kubectl get cronjob
+complete_function kubectl-get-yaml.py                kubectl get
+complete_function kubectl-watch-pods.sh              kubectl get pods
+complete_function kgp-limits.sh                      kubectl get pods
+complete_function kgp-containers                     kubectl get pods
+complete_function kgno-taints-labels.sh              kubectl get nodes
+complete_function kubectl-watch-events.sh            kubectl get events
+complete_function kubectl-get-events-sort.sh         kubectl get events
+complete_function kubectl-debug-tail-pod.sh          kubectl get pods
+complete_function kubectl-get-configmaps-data.sh       kubectl get configmaps
+complete_function kubectl-get-secrets-data.sh        kubectl get secrets
+#complete_function klf kubectl get pods --field-selector=status.phase=Running,status.phase=Pending,status.phase=Succeeded
+#complete_function klf kubectl logs
+#complete_function kl kubectl logs
+complete_function varsfrx ansible -i inventory-proxmox-node-one.yml -i inventory-proxmox-node-two.yml -i inventory.yml -l
+compdef "ssh-no-host-checking"=ssh
+compdef ssh-vagrant=ssh
+compdef zabbix-maintenance=ssh
+compdef zabbix-maintenance-off=ssh
+compdef "dca-hosts.sh"=ssh
+#complete_function ssh-no-host-checking ssh
 
 f=~/.tmp/error-zshrc-monitoring; test -f $f && echo $f && cat $f
 

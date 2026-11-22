@@ -3,4 +3,4 @@
 
 set -euo pipefail
 
-command ssh -oControlMaster=no -oControlPath=none -oControlPersist=no "$@"
+command ssh -oControlMaster=no -oControlPath=none -oControlPersist=no -oStrictHostKeyChecking=ask "$@"

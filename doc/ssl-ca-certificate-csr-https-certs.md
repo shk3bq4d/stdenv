@@ -128,8 +128,9 @@ echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_2
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -tls1_3
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -showcerts # save certificate as file
-echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp -showcerts # -starttls for upgraded connection
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME} -crlf -starttls smtp     -showcerts # -starttls for upgraded connection
 echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME}       -starttls postgres -showcerts # -starttls for upgraded connection
+echo QUIT | openssl s_client -connect ${HOSTNAME}:${PORT} -servername ${HOSTNAME}       -starttls mysql     -showcerts # -starttls for upgraded connection
 printf 'quit\n' | openssl s_client -connect 192.168.182.21:25 -crlf -starttls smtp | openssl x509 -enddate -noout
 python -c "import ssl; print(ssl.get_server_certificate(('atlassian.hq.k.grp', 443)))"
 ```

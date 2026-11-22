@@ -12,6 +12,6 @@ nc -p 22 -l -s 127.0.0.1 # bind to local source address
 
 
 
-echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement
+echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement when you have bash
 
 tnc MYHOST -port MYPORT # powershell windows

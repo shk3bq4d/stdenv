@@ -355,7 +355,15 @@ dd if=/dev/zero of=file.txt count=1024 bs=1048576 # create One 1Gb gigabyte file
 
 date -d @1532532080
 
-echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement
+echo bip > /dev/tcp/172.18.13.142/1514 # netcat replacement when you have bash
+# docker healthcheck to verify that port 8443 is being listen'ed from
+awk -v port="$(awk 'BEGIN{printf "%04X", 8443}')" '
+ NR>1 {
+   split($2, loc, ":")
+   if (loc[2] == port && $4 == "0A") found=1
+ }
+ END { exit (found ? 0 : 1) }
+ ' /proc/net/tcp
 
 
 kill -SIGQUIT $(pgrep ping) # ping status statistics withou quitting
@@ -378,7 +386,7 @@ ssh blabla sudo shutdown -r 04:10 # reboot reset remote overnight business hours
 date -d "@$( awk -F '=' '/USEC/{ $2=substr($2,1,10); print $2 }' /run/systemd/shutdown/scheduled )"
 systemctl status systemd-shutdownd.service
 
-kazam # screen capture video -- record
+kazam # screen capture video -- record, but you should probably look at ~/bin/screen-capture.sh for a pure ffmpeg implementation
 
 https://www.osetc.com/en/centos-7-rhel-7-how-to-change-the-system-keyboard-layout.html
 localectl list-keymaps | grep us
@@ -565,3 +573,20 @@ du -ckshx --inodes * | sort -rh | head -11 # count files
 
 sudo brightnessctl set 2%- # apt install brightnessctl
 echo 100 | sudo tee /sys/class/backlight/intel_backlight/brightness
+
+sudo setcap cap_net_raw+ep $(which ping)
+
+
+# usb key max compatibility
+```sh
+drive=/dev/sda
+drive=/dev/sdb
+sudo which mkfs.exfat || sudo apt install exfatprogs
+sudo wipefs -a $drive
+sudo parted $drive --script mklabel msdos
+sudo parted "$drive" --script mkpart primary ntfs 1MiB 100%
+sudo partprobe "$drive"
+sudo mkfs.exfat -n USBKEY ${drive}1
+sudo fdisk -l "$drive"
+sudo lsblk -f "$drive"
+```

@@ -2,6 +2,11 @@
 ## vi
 \<[a-z0-9A-Z]\{8\}-[a-z0-9A-Z]\{4\}-[a-z0-9A-Z]\{4\}-[a-z0-9A-Z]\{4\}-[a-z0-9A-Z]\{12\}
 
+70f4873d-120d-40d8-9b4b-8b51ca318253
+bbfe7d4e-1ce2-41ec-94d3-2f893bfdb83c
+3cf87be2-b0f6-43a2-ac98-b94d4ffe34a3 # length 36
+3cf87be2b0f643a2ac98b94d4ffe34a3     # length 32 with hyphens
+
 
 ```bash
 uuidgen
@@ -45,6 +50,9 @@ id = str(uuid.uuid5(uuid_namespace, value)),
 
 7) UUID (32 hex, no hyphens)
 ^[0-9a-fA-F]{32}$
+
+7b) UUID (36 hex&hyphens)
+^[0-9a-fA-F-]{36}$
 
 8) Microsoft GUID with braces
 ^\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\}$

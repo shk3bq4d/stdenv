@@ -2,6 +2,8 @@
 [ -z "$PS1" ] && return
 [[ -z "$HOME" ]] && export HOME="$(cd && pwd)"
 [ -z "$RCD" ] && export RCD=$HOME
+#[ -n "${_BASHRC_EVALUATED:-}" ] && return
+#export _BASHRC_EVALUATED=1
 umask 027
 # handles urxvt resize bug
 # https://superuser.com/questions/442589/xmonad-urxvt-issue-text-disappears-after-resizing and,
@@ -71,6 +73,14 @@ is_zsh() { # redundant with ~/bin/dot.bashfunctions, but also needed here
     test -n "${ZSH_VERSION:-}"
 }
 export UNAME="$(uname)"
+export AZURE_CORE_ONLY_SHOW_ERRORS=TRUE
+export AZURE_CORE_ERROR_RECOMMENDATION=FALSE
+export AZURE_CORE_COLLECT_TELEMETRY=FALSE
+export AZURE_LOGGING_ENABLE_LOG_FILE=FALSE
+export AZURE_CORE_SURVEY_MESSAGE=FALSE
+#export "AZURE_AUTO-UPGRADE_ENABLE"=FALSE &>/dev/null
+export AZURE_CORE_NO_COLOR=TRUE
+export AZURE_EXTENSION_USE_DYNAMIC_INSTALL=FALSE
 if is_zsh; then
     UNAME="$UNAME:l"
 else
@@ -199,6 +209,11 @@ alias wcl='wc -l'
 alias mysql='mysql --i-am-a-dummy'
 # some more ls aliases
 #alias ll='ls -lhFa --group-directories-first'
+
+function sed_remove_ansi_colors() {
+    sed -u -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2}){0,2})?[mGK]//g" "$@"
+}
+
 function lr() {
     if [[ -z "$1" ]]; then
         ls -lhAFtr
@@ -237,7 +252,7 @@ export WORK_PC3F=vmhabon.muc.com
 export WORK_PC3=vmhabon
 
 alias ssh-no-host-checking='ssh -o ControlMaster=No -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=No $@'
-alias ssh-password-auth='ssh -o ControlMaster=No -o NumberOfPasswordPrompts=1000 -o PubkeyAuthentication=no -o HostbasedAuthentication=no -o KbdInteractiveAuthentication=no -o RhostsRSAAuthentication=no -o RSAAuthentication=no -o ChallengeResponseAuthentication=no $@'
+alias ssh-password-auth='ssh -o PasswordAuthentication=Yes -o ControlMaster=No -o NumberOfPasswordPrompts=1000 -o PubkeyAuthentication=no -o HostbasedAuthentication=no -o KbdInteractiveAuthentication=no -o StrictHostKeyChecking=ask -o ChallengeResponseAuthentication=no $@'
 alias scp='scp -p'
 alias rsync='rsync -vh --progress'
 alias curllo='curl -s http://127.0.0.1'
@@ -282,7 +297,8 @@ elif which vi  &>/dev/null; then # zsh hash does not work, I'm not sure why
 else
     echo "bashrc no vi(m)"
 fi
-if [[ $EUID -eq 0 ]]; then # vim readonly for root
+if [[ $EUID -eq 0 ]]; then
+    hash systemctl &>/dev/null && echo -n "systemd global status: " && systemctl is-failed --quiet && systemctl list-units --state=failed
     function _rootgit() {
         local git_root_dir git_owner
         git_root_dir="$(command git rev-parse --absolute-git-dir 2>/dev/null || true)"
@@ -375,7 +391,8 @@ elif hash ack &>/dev/null; then
     alias ackf='ack -f'
 fi
 #alias ducks='du -ckshx -- * | sort -rh | head -11'
-alias ducks='find . -mindepth 1 -maxdepth 1 -xdev -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
+#alias ducks='find . -mindepth 1 -maxdepth 1 -xdev -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
+alias ducks='find . -mindepth 1 -maxdepth 1 -xdev ! -exec mountpoint -q -- {} \; -print0 | xargs -r0 du -ckshx -- | sort -rh | head -11'
 #alias tr_newline2null="tr '\\n' '\\0'"
 #alias ducks='stat -c "%d %n" $(find $PWD -mindepth 1 -maxdepth 1 -type d) | grep "^$(stat -c %d $PWD)" | sed -e "s/[^ ]* //" | sort | tr_newline2null | xargs -r0 du -ckshx -- | sort -rh | head -11'
 #alias ducks='find $PWD -mindepth 1 -maxdepth 1 -print0 | xargs -r0 stat -c "%d %n" | grep "^$(stat -c %d $PWD)" | sed -e "s/[^ ]* //" | sort | tr_newline2null | xargs -r0 du -ckshx -- | sort -rh | head -11'
@@ -543,7 +560,9 @@ if hash pip 2>/dev/null; then
        eval "$(pip completion --bash --disable-pip-version-check &>/dev/null)" #&>/dev/null
    fi
 fi
-[[ -f /var/run/reboot-required || -f /opt/sf-scripts/.sf-reboot-needed-custom ]] && echo "reboot needed .bashrc $(hostname -f)"
+for i in /var/run/reboot-required /opt/sf-scripts/.sf-reboot-needed-custom; do
+    [[ -f $i ]] && echo "reboot needed .bashrc $(hostname -f) $(ls -l --time-style +"%Y.%m.%d %H:%M:%S" $i)"
+done
 #[[ -z $SSH_CLIENT && $EUID -ne 0 && -d ~/.tmp ]] && echo "$(date +'%Y.%m.%d %H:%M:%S') in" >> ~/.tmp/bashrc-events
 if [[ $EUID -ne 0 && -d ~/.tmp ]]; then
     test -f ~/.tmp/bashrc-events || touch ~/.tmp/bashrc-events
@@ -616,6 +635,9 @@ alias head100="head -n 100"
 alias cdreal="cd \$(realpath .)"
 alias sed="sed -u"
 alias find_files_root_directory='find $(find / -maxdepth 1 | grep -Evx "/(|lost+found|run|mnt|proc|sys)") -type f -o -path /var/lib/docker -prune '
+docker_images_sorted_by_size() {
+    { docker images --format '{{.Size}}\t{{.Repository}}:{{.Tag}}' 2>/dev/null || sudo docker images --format '{{.Size}}\t{{.Repository}}:{{.Tag}}'; } | sort -h
+}
 
 bytes() {
     numfmt --to=iec "$@"
@@ -626,8 +648,8 @@ is_zsh && setopt null_glob
 #   /usr/bin/virtualenvwrapper_lazy.sh \
 for f in \
     $RCD/.bash_aliases \
-    $RCD/.${HOSTNAMEF}*_aliases  \
     $RCD/.std*_aliases \
+    $RCD/.${HOSTNAMEF}*_aliases  \
     ; do
         [[ -f $f ]] && source $f
 done
@@ -660,4 +682,5 @@ alias dc=cd
 alias vgr=vim-git-rev.sh
 alias vgns=vim-git-not-staged.sh
 alias vhv=vim-hostvar.sh
+alias mri3_skip_columns="echo skipcolumns"
 true # so prompt is green

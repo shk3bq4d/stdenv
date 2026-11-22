@@ -8,9 +8,9 @@ if [[ $# -eq 0 ]]; then
     # I keep getting
     # Error: bad file '-': yaml: found unknown escape character
     # otherwise
-    prettify-json | yq e -P --output-format=yaml
+    prettify-json | yq e -P --output-format=yaml 'sort_keys(..)'
 
 else
-    yq e --output-format=yaml -P "$@"
+    yq e --output-format=yaml -P 'sort_keys(..)' "$@"
 fi
 #| yq-kislyuk -y --indentless-lists

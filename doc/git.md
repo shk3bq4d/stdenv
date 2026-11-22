@@ -1,5 +1,6 @@
 # https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud # recommended by @aviolat
 git init
+git init && git commit --allow-empty -m "git init"
 git add
 .hignore
 git branch BRANCHNAME
@@ -8,6 +9,8 @@ git checkout master
 git merge BRANCHNAME
 git branch -d BRANCHNAME
 git log
+
+git repack
 
 git help -a
 git help -g
@@ -55,7 +58,7 @@ git commit -m "add README"
 git push -u origin master
 git push --force origin HEAD:$(id -un) # push current branch onto remote unique reference corresponding to my username
 
-git difftool --tool=vimdiff --no-prompt
+git difftool --tool=vimdiff --no-prompt # vi vim
 
 git diff --stat --cached origin/master     # http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git
 git diff --stat --cached origin/production # http://stackoverflow.com/questions/3636914/how-can-i-see-what-i-am-about-to-push-with-git
@@ -259,6 +262,7 @@ GIT_WORK_TREE=/store/other/directory GIT_DIR=$GIT_WORK_TREE/.git git status --po
 
 GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=tmp/id_rsa"
 export GIT_TRACE=1 # to work with GIT_SSH and GIT_SSH_COMMAND
+export GIT_TRACE=1 # debug mode
 export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o IdentityFile=$HOME/.ssh/id_rsa"
 
 GIT_SSH_COMMAND # was added in Git version 2.3.0, which was released on February 9th, 2015.
@@ -318,6 +322,8 @@ see parent commit message for more info about this tag
 git fetch --tags
 git tag
 git tag -l PATTERN
+git tag -d LOCALTAG # remove rm local tag delete
+git push origin --delete REMOTETAG # remove rm remote tag delete
 
 # work-tree
 $ git worktree add -b emergency-fix ../temp master

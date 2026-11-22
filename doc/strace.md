@@ -4,6 +4,7 @@ strace $(pgrep zabbix_server | sed -e 's/^/ -p /' | tr -d '\n') 2>&1
 
 strace-log-merge /tmp/strace.out | vi -
 strace-log-merge /tmp/strace.out | grep -vE 'FUTEX|resuming interrupted read|epoll_wait' | vi -
+strace-log-merge-process-tree.py
 
 strace -s 99999 -ffttTo /tmp/strace.out CMD
 strace -s 99999 -ffttTo /tmp/strace.out -u MYUSER CMD

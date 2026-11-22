@@ -1,0 +1,33 @@
+#! perl
+# rebg: new random background for this urxvt, via mrurxvt-rebg.
+#
+# Runs on the urxvt side, so a locally generated image is used even when the
+# terminal shows an SSH session.
+#
+# ~/.Xresources:
+#   URxvt.perl-ext-common: ...,rebg
+#   URxvt.keysym.M-m: rebg:run          (urxvt >= 9.21)
+#   URxvt.keysym.M-m: perl:rebg:run     (older urxvt)
+#   URxvt.rebg.command: mrurxvt-rebg    (optional, e.g. a full path)
+
+sub run {
+    my ($self) = @_;
+    my $cmd = $self->x_resource('%.command') // 'mrurxvt-change-background';
+    # -t /dev/stdout: emit plain sequences (no tmux/screen wrapping) to us
+    my $out = `$cmd -t /dev/stdout 2>/dev/null`;
+    $out =~ s/[^\a]*\z//;    # drop the image path printed after the last sequence
+    $self->cmd_parse($out) if length $out;
+    ()
+}
+
+sub on_action {
+    my ($self, $action) = @_;
+    $self->run if $action eq 'run';
+    ()
+}
+
+sub on_user_command {
+    my ($self, $cmd) = @_;
+    $self->run if $cmd eq 'rebg:run';
+    ()
+}

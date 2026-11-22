@@ -5,6 +5,6 @@ set -euo pipefail
 
 DIR="$( cd -P "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" && pwd )"
 export PATH=$PATH:$DIR
-~/py/mr_sendkeys.py --focus --id $(whatsapp-window-id.sh) "$@"
+~/py/mr_sendkeys.py --focus --id $(whatsapp-window-id.sh) -- "$@"
 
 exit 0

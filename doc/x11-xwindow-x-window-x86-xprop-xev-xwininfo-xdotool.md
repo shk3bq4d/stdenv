@@ -13,3 +13,6 @@ active_window_pid=$(xdotool getwindowpid "$active_window_id")
 
 xprop -id $(xdotool getwindowfocus) WM_CLASS
 xprop -id $(xdotool getwindowfocus) WM_CLASS | grep Chromium-browser;
+
+
+xdotool type --clearmodifiers --window $(xdotool selectwindow) "$(echo whoami | ~/bin/notinpath/convert-string-us-to-dvp.py)"

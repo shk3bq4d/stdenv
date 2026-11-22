@@ -6,7 +6,7 @@ umask 027
 export PATH=/usr/local/sbin:/sbin:/usr/local/bin:/bin:/usr/sbin:/usr/bin:~/bin
 
 if [[ $# -eq 0 ]]; then
-    yq --output-format=json e .
+    yq --output-format=json e 'sort_keys(..)'
 else
-    yq --output-format=json e . "$@"
+    yq --output-format=json e 'sort_keys(..)' "$@"
 fi

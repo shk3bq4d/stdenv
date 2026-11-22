@@ -11,5 +11,5 @@ if [[ $# -ge 1 ]] && [[ $1 =~ ^[0-9]+$ ]]; then
     shift
 fi
 # https://stackoverflow.com/questions/4198138/printing-everything-except-the-first-field-with-awk
-awk '{for (i='$n'; i<NF; i++) printf $i " "; print $NF}' "$@" |sed 's/ $//'
+stdbuf -o0 awk '{for (i='$n'; i<NF; i++) printf $i " "; print $NF}' "$@" |sed 's/ $//'
 exit 0

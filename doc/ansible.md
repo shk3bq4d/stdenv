@@ -1258,6 +1258,7 @@ ansible all -bm yum -a "name=httpd state=present"                        # oneli
 ansible uat -bm yum -a "name=* state=latest"                             # oneliner one-liner adhoc ad-hoc
 ansible uat -bm yum -a "name=* state=latest update_cache=no"             # oneliner one-liner adhoc ad-hoc
 ansible all -bm apt -a "name=httpd state=present"                        # oneliner one-liner adhoc ad-hoc
+ANSIBLE_ANY_ERRORS_FATAL=true ansible uat     -bm service -a "name=kubelet.service state=restarted" --forks=1 # oneliner one-liner adhoc ad-hoc
 ansible uat     -bm service -a "name=apt-daily-upgrade.timer state=restarted" # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=started"       # oneliner one-liner adhoc ad-hoc
 ansible web     -bm service -a "name=httpd          state=restarted"     # oneliner one-liner adhoc ad-hoc
@@ -1762,7 +1763,7 @@ ansible_persistent_connect_timeout        controls how long the persistent conne
 ansible_become_ask_pass                   to prompt for privilege escalation password.
 ansible_invalid_task_attribute_failed     ‘false’, invalid attributes for a task will result in warnings instead of errors
 ansible_persistent_command_timeout        controls the amount of time to wait for response from remote device before timing out presistent connection.
-ansible_inventory                         separated list of Ansible inventory sources
+ansible_inventory                         comma-separated list of Ansible inventory sources
 ansible_gather_timeout                    the timeout in seconds for the implicit fact gathering.It does not apply to user defined M(setup) tasks.
 ansible_library                           separated paths in which Ansible will search for Modules.
 ansible_module_args                       sets the default arguments to pass to the ansible adhoc binary if no -a is specified.
@@ -2171,7 +2172,7 @@ file: dest={{ item.path }} state=touch mode={{ item.mode | default(omit) }}
 {{ [3, [4, 2] ] | flatten }}
 {{ [3, [4, [2]] ] | flatten(levels=1) }}
 {{ list1 | unique }}
-{{ list1 | union(list2) }} # concat, plus add
+{{ list1 | union(list2) }} # concat, plus, add, combine, merge list
 {{ list1 | intersect(list2) }}
 {{ list1 | difference(list2) }} # substract (items in 1 that don’t exist in 2), minus, list
 {{ list1 | symmetric_difference(list2) }} # xor (items exclusive to each list):
@@ -2194,6 +2195,7 @@ loop: "{{ users | subelements('authorized') }}"
 {{ 101 | random(1, 10) }}
 {{ 101 | random(start=1, step=10) }}
 "{{ 60 | random(seed=inventory_hostname) }} * * * * root /script/from/cron"
+minute:  "{{ 60 | random(seed=inventory_hostname + 'nextcloud-upload-file') }}"
 {{ ['a','b','c'] | shuffle }} # randomize list
 {{ ['a','b','c'] | shuffle }} # randomize list
 {{ ['a','b','c'] | shuffle(seed=inventory_hostname) }} # randomize list
@@ -2745,23 +2747,23 @@ fancy yaml construction
       keyA: ahah
       keyB: bhbh
   tasks:
-    - shell: "echo {{ item }} | tr [:lower:] [:upper:]"       # register iteration list
-      register: myvar                                         # register iteration list
-      with_items: "{{ mylist }}"                              # register iteration list
-    - debug:                                                  # register iteration list
-        msg: "{{ myvar.results[my_idx].stdout }}"             # register iteration list
-      with_items: "{{ mylist }}"                              # register iteration list
-      loop_control:                                           # register iteration list
-        index_var: my_idx                                     # register iteration list
+    - shell: "echo {{ item }} | tr [:lower:] [:upper:]"       # register iteration list loop changed
+      register: myvar                                         # register iteration list loop changed
+      with_items: "{{ mylist }}"                              # register iteration list loop changed
+    - debug:                                                  # register iteration list loop changed
+        msg: "{{ myvar.results[my_idx].stdout }}"             # register iteration list loop changed
+      with_items: "{{ mylist }}"                              # register iteration list loop changed
+      loop_control:                                           # register iteration list loop changed
+        index_var: my_idx                                     # register iteration list loop changed
 
-    - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict
-      register: myvardict                                     # register iteration dict
-      with_dict: "{{ mydict }}"                               # register iteration dict
-    - debug:                                                  # register iteration dict
-        msg: "{{ myvardict.results[my_idx2].stdout }}"        # register iteration dict
-      with_items: "{{ mydict }}"                              # register iteration dict
-      loop_control:                                           # register iteration dict
-        index_var: my_idx2                                    # register iteration dict
+    - shell: "echo {{ item.value }} | tr [:lower:] [:upper:]" # register iteration dict loop changed
+      register: myvardict                                     # register iteration dict loop changed
+      with_dict: "{{ mydict }}"                               # register iteration dict loop changed
+    - debug:                                                  # register iteration dict loop changed
+        msg: "{{ myvardict.results[my_idx2].stdout }}"        # register iteration dict loop changed
+      with_items: "{{ mydict }}"                              # register iteration dict loop changed
+      loop_control:                                           # register iteration dict loop changed
+        index_var: my_idx2                                    # register iteration dict loop changed
 
 
 serial:      # serial throttle parrallel at play          level
@@ -2992,3 +2994,78 @@ backup format: 'MYFILE.2848856.2026-02-09@17:53:37~'
 
 * [rolespec_validate meta/argument_specs.yml](https://steampunk.si/blog/ansible-role-argument-specification/)
 https://oneuptime.com/blog/post/2026-02-21-ansible-strategies-large-scale-deployments/view
+export ANSIBLE_VENV_NAME=ansible-2.19; test -e ~/.virtualenvs/${ANSIBLE_VENV_NAME}/bin/activate || python3 -m venv ~/.virtualenvs/${ANSIBLE_VENV_NAME}
+
+
+find roles -type f -name '*.yml'  -ipath '*/tasks/*' | xargs yq -r '[.. | select(has("tags")) | .tags | explode(.)] | flatten | unique | sort' | grep -vxF '[]' | yq 'unique | sort'
+
+ansible-debug-parser.py # ANSIBLE_DEBUG=1
+source ~/bin/ansible-tracing/dot.sourceme # ANSIBLE_DEBUG=1
+
+strategy: linear
+strategy: free
+strategy: host_pinned # Like free, but a worker stays assigned to a host until that host finishes
+strategy: debug
+
+is failed (alias failure) task result
+is succeeded (aliases success, successful) task result
+is changed (alias change) task result
+is skipped (alias skip) task result
+is reachable, unreachable task result
+is timedout task result
+is started, finished (async tasks) task result
+
+Strings and regex
+
+is match (regex anchored at the start of the string) strings
+is search (regex anywhere in the string) strings
+is regex (configurable via match_type, ignorecase, multiline) strings
+is lower, upper strings
+is url, uri, urn strings
+
+Paths (evaluated on the controller, not the remote host)
+
+is file, directory, link, mount , Paths (evaluated on the controller, not the remote host)
+is exists, link_exists , Paths (evaluated on the controller, not the remote host)
+is abs , Paths (evaluated on the controller, not the remote host)
+is same_file , Paths (evaluated on the controller, not the remote host)
+
+Existence and type
+
+is defined, undefined
+is none
+is boolean, true, false
+is string, number, integer, float
+is mapping (dict), sequence, iterable
+is callable
+is sameas (same object)
+
+Truthiness
+
+is truthy, falsy (with optional convert_bool)
+
+Numbers and comparisons
+
+is even, odd, divisibleby
+is nan
+is eq / equalto, ne
+is gt / greaterthan, ge
+is lt / lessthan, le
+is version (alias version_compare), e.g. ansible_facts['distribution_version'] is version('12', '>=')
+
+Collections
+
+is in
+is contains
+is subset (alias issubset), superset (alias issuperset)
+is any, all
+
+Vault
+
+is vault_encrypted (variable)
+is vaulted_file (file)
+
+Jinja internals (rarely needed)
+
+is filter, test (check that a filter or test of that name exists)
+is escaped

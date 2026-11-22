@@ -1,3 +1,4 @@
+syntax check, linter ~/bin/j2lint 
 # reserved vames
 Jan 25 14:50:38 +ansible_managed: Ansible managed
 Jan 25 14:50:38 +template_host:   mypy.lan

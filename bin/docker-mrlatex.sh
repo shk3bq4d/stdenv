@@ -19,6 +19,7 @@ fi
 image=mrlatex
 docker ps &>/dev/null && SUDO= || SUDO=sudo
 if ! $SUDO docker images $image | grep -wqE "^${image}"; then
+    set +x
     echo "Image not found $image, execute the following:"
     echo "  git clone https://github.com/shk3bq4d/docker-latex/ ~/git/$(id -un)/docker-latex/ && \\"
     echo "    cd ~/git/$(id -un)/docker-latex/ && ./build.sh"

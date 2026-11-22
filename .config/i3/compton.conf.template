@@ -1,3 +1,8 @@
+# 2026.10.05 R4P toggling detect-transient and detect-client-leader from true
+#                to false and this solved the problem where all firefox
+#                instances were shown bright at the same time, losing the
+#                capacity to find which one had focus
+
 # Shadow
 shadow = true;
 #no-dnd-shadow = true;  # Option `no-dnd-shadow` is deprecated, and will be removed. Please use the wintype option `shadow` of `dnd` instead.
@@ -138,8 +143,8 @@ focus-exclude = [
     ,"class_i = 'mrclusterssh'"
     , "class_g = 'spotify'"
     ];
-detect-transient = true;
-detect-client-leader = true;
+detect-transient = false;
+detect-client-leader = false;
 invert-color-include = [  ];
 #invert-color-include = [ "class_g != 'Cairo-clock'" ];
 #invert-color-include = [ "focused != 1" ];
