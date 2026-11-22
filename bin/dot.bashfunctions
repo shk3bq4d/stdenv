@@ -734,6 +734,7 @@ function mr_ssh_add {
         $HOME/.ssh/jexternalssh \
         ; do
         test -f $f || continue
+        [[ "$(basename "$f")" == *.* ]] && continue
         /usr/bin/ssh-add -l | grep -qF "$(ssh-keygen -l -f "$f" | awk '{print $2}')" &>/dev/null && continue
         #t="-t 43200" # removed half a day length on March 10th as it leads to problems for night scripting which I don't yet how to resolve properly
         case $f in \

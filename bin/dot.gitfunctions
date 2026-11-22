@@ -10,7 +10,7 @@ glol() {
 }
 
 gitenv() {
-    git --git-dir="$HOME/stdhome/../stdenv/.git" --work-tree="$HOME"
+    git --git-dir="$(readlink -f "$HOME/git/$USER/stdhome/../stdenv/.git")" --work-tree="$HOME" "$@"
 }
 
 glod() {
