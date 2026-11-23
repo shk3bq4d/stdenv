@@ -1,3 +1,5 @@
+# CVE-2026-114938 Java4Shell
+
 # CVE-2026-109618 PHP2Shell PHP 9.2
 # CVE-2026-109619 PHP2Shell PHP 9.2
 patched in
