@@ -515,6 +515,7 @@ umask 027
 ZSH_COMPDUMP="$HOME/.zcompdump-${USER}"
 autoload -Uz compinit
 compinit -d "$ZSH_COMPDUMP"
+chmod go-rwx ~/.zcompdump* &>/dev/null
 alias ecs="test -f ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml && vim -R ~/git/github/elastic/ecs/generated/ecs/ecs_nested.yml || echo 'git-clone-mr.py https://github.com/elastic/ecs'"
 autoload -Uz _kubectl
 compdef _kubectl kubectl

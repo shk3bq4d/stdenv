@@ -10,6 +10,7 @@ deb [arch=amd64] https://packages.microsoft.com/repos/edge/ stable main
 
 
 "C:\Program Files\Google\Chrome\Application\chrome" --ignore-certificate-errors
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --ignore-certificate-errors
 
 
 ```sh
