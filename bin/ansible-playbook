@@ -52,6 +52,7 @@ for f in \
     ; do
     if [[ -f $f  ]]; then
         set +u; source $f; set -u; # set -u sometimes fail in venv activation https://stackoverflow.com/questions/42997258/virtualenv-activate-script-wont-run-in-bash-script-with-set-euo
+        >&2 echo "venv filename $f" 
         export PATH="$PATH:$DIR" # iaac needs to have ~/bin in PATH that was removed with pathremove
         set +u
         set -x
