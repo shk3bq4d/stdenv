@@ -3069,3 +3069,8 @@ Jinja internals (rarely needed)
 
 is filter, test (check that a filter or test of that name exists)
 is escaped
+
+
+a=2.19; sed -r -i -e "s/^ansible-core .*/ansible-core == $a/" iaac-setup-bootstrap-requirements.txt; ANSIBLE_VENV_NAME=ansible-$a ../sh/iaac-setup-destroy-and-recreate.sh
+a=2.20; sed -r -i -e "s/^ansible-core .*/ansible-core == $a/" iaac-setup-bootstrap-requirements.txt; ANSIBLE_VENV_NAME=ansible-$a ../sh/iaac-setup-destroy-and-recreate.sh
+ANSIBLE_VENV_NAME=ansible-2.19 varsfrx _01_rapid7_collectors_all__etc_hosts__to_merge ncans102p02
