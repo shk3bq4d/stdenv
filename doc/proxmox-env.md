@@ -100,3 +100,5 @@ pveum user token permissions --output json root@pam zabbix
 
 
 pvesubscription get # license check
+
+*  [proxmox offline mirror](https://pom.proxmox.com/introduction.html)
