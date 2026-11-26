@@ -3070,6 +3070,12 @@ Jinja internals (rarely needed)
 is filter, test (check that a filter or test of that name exists)
 is escaped
 
+ansible_version:
+  full: 2.19.15
+  major: 2
+  minor: 19
+  revision: 15
+  string: 2.19.15
 
 a=2.19; sed -r -i -e "s/^ansible-core .*/ansible-core == $a/" iaac-setup-bootstrap-requirements.txt; ANSIBLE_VENV_NAME=ansible-$a ../sh/iaac-setup-destroy-and-recreate.sh
 a=2.20; sed -r -i -e "s/^ansible-core .*/ansible-core == $a/" iaac-setup-bootstrap-requirements.txt; ANSIBLE_VENV_NAME=ansible-$a ../sh/iaac-setup-destroy-and-recreate.sh
