@@ -132,6 +132,7 @@ def go(args):
     parser.add_argument("-f", "--from", default=os.getenv("STDENV_FROM", None))
     parser.add_argument("-c", "--cc", default=os.getenv("STDENV_CC", None))
     parser.add_argument("-b", "--bcc", default=os.getenv("STDENV_BCC", None))
+    parser.add_argument("-d", "--debug", default=os.getenv("STDENV_DEBUG", None))
     parser.add_argument("-a", "--attachments", type=str, action='append')
     #parser.add_argument("-r", "--html", action="store_true")
     parser.add_argument("-o", "--smtp-host", action="store_true", default=os.getenv("STDENV_SMTP_HOST", None))
@@ -141,6 +142,9 @@ def go(args):
     parser.add_argument("-m", "--smtp-mode", default=os.getenv("STDENV_SMTP_MODE", 'tls'))
     ar = parser.parse_args(args)
     body = "\n".join(map(str.rstrip, fileinput.input(files="-")))
+    if ar.debug:
+        import smtplib
+        smtplib.SMTP.debuglevel = 2   # 1 = commands/replies, 2 = same plus timestamps
     sendmail(ar.to, ar.subject, body, fr=vars(ar)['from'], cc=ar.cc, bcc=ar.bcc, attachments=ar.attachments, html=None, smtp_host=ar.smtp_host, smtp_port=ar.smtp_port, smtp_password=ar.smtp_password, smtp_login=ar.smtp_login, smtp_mode=ar.smtp_mode)
 
 
